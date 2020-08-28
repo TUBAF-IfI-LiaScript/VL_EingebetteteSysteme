@@ -8,19 +8,26 @@ narrator: Deutsch Female
 
 import: https://raw.githubusercontent.com/LiaTemplates/NetSwarm-Simulator/master/README.md
 
-script: https://cdn.jsdelivr.net/gh/liaTemplates/DigiSim/js/parser.min.js
-        https://tilk.github.io/digitaljs/main.js
-        https://s.plantuml.com/synchro2.min.js
-
 -->
 
-# 00 - Einführung
+# 01 - Historischer Überblick
 
 **TU Bergakademie Freiberg - Wintersemester 2020 / 21**
 
 Link auf die aktuelle Vorlesung im Versionsmanagementsystem GitHub
 
-[https://github.com/SebastianZug/CsharpCourse/blob/SoSe2020/00_Einfuehrung.md](https://github.com/SebastianZug/CsharpCourse/blob/SoSe2020/00_Einfuehrung.md)
+[https://github.com/TUBAF-IfI-LiaScript/VL_EingebetteteSysteme/blob/00_Einfuehrung](https://github.com/TUBAF-IfI-LiaScript/VL_EingebetteteSysteme/blob/dev/00_Einfuehrung)
 
 Die interaktive Form ist unter diese Link zu finden ->
-[LiaScript Vorlesung 00](https://liascript.github.io/course/?https://raw.githubusercontent.com/SebastianZug/CsharpCourse/SoSe2020/00_Einfuehrung.md#1)
+[TODO]( )
+
+---------------------------------------------------------------------
+
+**Fragen an die Veranstaltung**
+
++ Welchen Zahlenwert zeigt der Abakus auf Folie 5?
++ Worin lag der „große Wurf“ des Intel 4004?
++ Was bedeutet die Angabe 8bit, 16bit usw. ?
++ Was ist eine Staffelwalze?
++ Erklären Sie die Schichten der Rechnerstruktur.
++ Welche Realisierungsvarianten wurden im Lauf der Geschichte für die verschiedenen Ebenen entwickelt?
