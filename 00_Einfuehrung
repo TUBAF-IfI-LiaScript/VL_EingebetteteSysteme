@@ -8,10 +8,6 @@ narrator: Deutsch Female
 
 import: https://raw.githubusercontent.com/LiaTemplates/NetSwarm-Simulator/master/README.md
 
-script: https://cdn.jsdelivr.net/gh/liaTemplates/DigiSim/js/parser.min.js
-        https://tilk.github.io/digitaljs/main.js
-        https://s.plantuml.com/synchro2.min.js
-
 -->
 
 # 00 - Einführung
@@ -20,10 +16,10 @@ script: https://cdn.jsdelivr.net/gh/liaTemplates/DigiSim/js/parser.min.js
 
 Link auf die aktuelle Vorlesung im Versionsmanagementsystem GitHub
 
-[https://github.com/SebastianZug/CsharpCourse/blob/SoSe2020/00_Einfuehrung.md](https://github.com/SebastianZug/CsharpCourse/blob/SoSe2020/00_Einfuehrung.md)
+[https://github.com/TUBAF-IfI-LiaScript/VL_EingebetteteSysteme/blob/00_Einfuehrung](https://github.com/TUBAF-IfI-LiaScript/VL_EingebetteteSysteme/blob/dev/00_Einfuehrung)
 
 Die interaktive Form ist unter diese Link zu finden ->
-[LiaScript Vorlesung 00](https://liascript.github.io/course/?https://raw.githubusercontent.com/SebastianZug/CsharpCourse/SoSe2020/00_Einfuehrung.md#1)
+[TODO]( )
 
 ---------------------------------------------------------------------
 
@@ -48,10 +44,20 @@ void loop() {
 }
 ```
 
+                                    {{1-2}}
+*******************************************************************************
 
-## Organisatorisches
+| Name                 | Email                                      |
+|:---------------------|:-------------------------------------------|
+| Sebastian Zug        | sebastian.zug@informatik.tu-freiberg.de    |
+| Dr. Martin Reinhardt | martin.reinhardt@informatik.tu-freiberg.de |
 
-                                    {{0-1}}
+
+*******************************************************************************
+
+## Zielstellung
+
+                                    {{0-2}}
 *******************************************************************************
 
 **Worum geht's?**
@@ -64,22 +70,54 @@ void loop() {
 + Hardwarenahe Programmierung
 + Grundlagen eingebetteter Systeme
 
-
-**Dozenten**
-
-| Name             | Email                                      |
-|:-----------------|:-------------------------------------------|
-| Sebastian Zug    | sebastian.zug@informatik.tu-freiberg.de    |
-|  Dr. Martin Reinhardt | martin.reinhardt@informatik.tu-freiberg.de     |
-
-
 *******************************************************************************
-
 
                                     {{1-2}}
 *******************************************************************************
 
-**Konzept der Veranstaltung**
+<!--
+style="width: 80%; min-width: 420px; max-width: 720px;"
+-->
+```ascii
+
+                Abstraktionsebenen
+
+           +----------------------------+ -.
+  Ebene 6  | Problemorientierte Sprache |  |
+           +----------------------------+  |
+                                            > Anwendungssoftware
+           +----------------------------+  |
+  Ebene 5  | Assemblersprache           |  |
+           +----------------------------+ -.
+
+           +----------------------------+
+  Ebene 4  | Betriebssystem             |     Systemsoftware
+           +----------------------------+
+
+           +----------------------------+
+  Ebene 3  | Istruktionsset             |     Maschinensprache
+           +----------------------------+
+
+           +----------------------------+  -.
+  Ebene 2  | Mikroarchitektur           |   |
+           +----------------------------+   |
+                                             >Automaten, Speicher, Logik
+           +----------------------------+   |
+  Ebene 1  | Digitale Logik             |   |
+           +----------------------------+  -.
+
+           +----------------------------+
+  Ebene 0  | E-Technik, Physik          |     Analoge Phänomene
+           +----------------------------+                                      .
+```
+
+*******************************************************************************
+
+
+### Konzept der Veranstaltung
+
+                                    {{0-1}}
+*******************************************************************************
 
 Als Plattform für die Online Vorlesung nutzen wir eine lokale Instanz von BigBlueButton. Den zugehörigen Link finden Sie auf der OPAL Webseite des Kurses.
 
@@ -121,14 +159,14 @@ Die Übungen beginnen in der Woche zum XXX. April! Dafür werden wir Aufgaben vo
 *******************************************************************************
 
 
-                                    {{2-3}}
+                                    {{3-4}}
 *******************************************************************************
 
 **Zeitaufwand und Engagement**
 
-Mit der Veranstaltung verdienen Sie sich 9CP. Eine Hochrechnung mit der von der
+Mit der Veranstaltung verdienen Sie sich 6CP. Eine Hochrechnung mit der von der
 Kultusministerkonferenz vorgegebenen Formel 1CP = 30 Zeitstunden bedeutet,
-dass Sie dem Fach im Mittel über dem Semester __270 Stunden__ widmen sollten ...
+dass Sie dem Fach im Mittel über dem Semester __180 Stunden__ widmen sollten ...
 entsprechend bleibt neben den Vorlesungen und Übungen genügend Zeit für die
 Vor- und Nachbereitung der
 Lehrveranstaltungen, die eigenständige Lösung von Übungsaufgaben sowie die
@@ -144,11 +182,14 @@ Prüfungsvorbereitung.
 * Organisieren Sie sich in Arbeitsgruppen!
 * Experimentieren Sie mit verschiedenen Entwicklungsumgebung um "Ihren Editor"
   zu finden
+* Bringen Sie sich in studentischen Teams ein!
+
+FOTO RCAP einfügen!
 
 *******************************************************************************
 
 
-                                    {{3-4}}
+                                    {{4-5}}
 *******************************************************************************
 
 **Literaturhinweise**
@@ -165,13 +206,12 @@ sondern erfordert eine individuelle Suche nach spezifischen Inhalten.
 | Online Kurse   |   | |
 |                |   | |
 |                |   | |
-| Videotutorials |   | |
+| Videotutorials | How computers works?   | [Link](https://www.youtube.com/watch?v=cNN_tTXABUA) |
 |                |   | |
-| Bücher         |   | |
-|                |   | |
+| Bücher         | B. Becker, R. Drechsler, P. Molitor: Technische Informatik - Eine Einführung, Pearson Studium, 2005    | |
+|                | David A. Patterson, John L. Hennessy: Computer Organization & Design    | |
 
 *******************************************************************************
-
 
 ## Werkzeuge der Veranstaltung
 
