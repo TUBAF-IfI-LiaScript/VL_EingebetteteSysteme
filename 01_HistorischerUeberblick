@@ -1,0 +1,26 @@
+<!--
+
+author:   Sebastian Zug & André Dietrich & Fabian Bär
+email:    sebastian.zug@informatik.tu-freiberg.de & andre.dietrich@informatik.tu-freiberg.de & fabian.baer@student.tu-freiberg.de
+version:  0.0.1
+language: de
+narrator: Deutsch Female
+
+import: https://raw.githubusercontent.com/LiaTemplates/NetSwarm-Simulator/master/README.md
+
+script: https://cdn.jsdelivr.net/gh/liaTemplates/DigiSim/js/parser.min.js
+        https://tilk.github.io/digitaljs/main.js
+        https://s.plantuml.com/synchro2.min.js
+
+-->
+
+# 00 - Einführung
+
+**TU Bergakademie Freiberg - Wintersemester 2020 / 21**
+
+Link auf die aktuelle Vorlesung im Versionsmanagementsystem GitHub
+
+[https://github.com/SebastianZug/CsharpCourse/blob/SoSe2020/00_Einfuehrung.md](https://github.com/SebastianZug/CsharpCourse/blob/SoSe2020/00_Einfuehrung.md)
+
+Die interaktive Form ist unter diese Link zu finden ->
+[LiaScript Vorlesung 00](https://liascript.github.io/course/?https://raw.githubusercontent.com/SebastianZug/CsharpCourse/SoSe2020/00_Einfuehrung.md#1)
