@@ -1,0 +1,65 @@
+{
+  "devices": {
+    "a": {
+      "label": "a",
+      "type": "Button",
+      "propagation": 0,
+      "position": {
+        "x": 0,
+        "y": 0
+      }
+    },
+    "y": {
+      "label": "not a",
+      "type": "Lamp",
+      "propagation": 0,
+      "position": {
+        "x": 305,
+        "y": 0
+      }
+    },
+    "nand1": {
+      "label": "NAND Gate",
+      "type": "Nand",
+      "propagation": 0,
+      "bits": 1,
+      "position": {
+        "x": 155,
+        "y": -5
+      }
+    }
+  },
+  "connectors": [
+    {
+      "from": {
+        "id": "a",
+        "port": "out"
+      },
+      "to": {
+        "id": "nand1",
+        "port": "in1"
+      }
+    },
+    {
+      "from": {
+        "id": "a",
+        "port": "out"
+      },
+      "to": {
+        "id": "nand1",
+        "port": "in2"
+      }
+    },
+    {
+      "from": {
+        "id": "nand1",
+        "port": "out"
+      },
+      "to": {
+        "id": "y",
+        "port": "in"
+      }
+    }
+  ],
+  "subcircuits": {}
+}
