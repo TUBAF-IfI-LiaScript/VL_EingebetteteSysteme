@@ -2,7 +2,7 @@
 
 author:   Sebastian Zug & André Dietrich & Fabian Bär
 email:    sebastian.zug@informatik.tu-freiberg.de & andre.dietrich@informatik.tu-freiberg.de & fabian.baer@student.tu-freiberg.de
-version:  0.0.3
+version:  0.0.4
 language: de
 narrator: Deutsch Female
 
@@ -85,8 +85,8 @@ Gatterfunktionen können zudem einen negierten Ausgang abbilden: NAND-Gatter (Ni
 | $\begin{aligned} NO&T \\ Y &= \overline{A} \\ Y&=A\end{aligned}$                                                   | ![Bild](./images/04_Schaltnetze/188px-IEC_NOT_label.svg.png)  | ![Bild](./images/04_Schaltnetze/188px-Not-gate-en.svg.png)       |
 | $\begin{aligned} NA&ND \\ Y &= \overline{A\cdot B} \\ Y&=A\overline{\wedge} B = \overline{A\wedge B}\end{aligned}$ | ![Bild](./images/04_Schaltnetze/188px-IEC_NAND_label.svg.png) | ![Bild](./images/04_Schaltnetze/188px-Nand-gate-en.svg.png)      |
 | $\begin{aligned} NO&R \\ Y &= \overline{A + B} \\ Y&=A\overline{\vee} B = \overline{A\vee B} \end{aligned}$        | ![Bild](./images/04_Schaltnetze/188px-IEC_NOR_label.svg.png)  | ![Bild](./images/04_Schaltnetze/188px-Nor-gate-en.svg.png)       |
-| $\begin{aligned} NO&R \\ Y &= A \oplus B \\ Y&=A\underline{\vee} B\end{aligned}$                                   | ![Bild](./images/04_Schaltnetze/188px-IEC_XOR_label.svg.png)  | ![Bild](./images/04_Schaltnetze/188px-Xor-gate-en.svg.png)       |
-| $\begin{aligned} NO&R \\ Y &= A \odot B \\ Y&=A\underline{\vee} B =\overline{A\underline{\vee}B}\end{aligned}$                                                                 | ![Bild](./images/04_Schaltnetze/188px-IEC_XNOR_label.svg.png)  | ![Bild](./images/04_Schaltnetze/188px-Xnor-gate-en.svg.png)       |
+| $\begin{aligned} XO&R \\ Y &= A \oplus B \\ Y&=A\underline{\vee} B\end{aligned}$                                   | ![Bild](./images/04_Schaltnetze/188px-IEC_XOR_label.svg.png)  | ![Bild](./images/04_Schaltnetze/188px-Xor-gate-en.svg.png)       |
+| $\begin{aligned} XN&OR \\ Y &= A \odot B \\ Y&=A\overline{\underline{\vee}} B =\overline{A\underline{\vee}B}\end{aligned}$                                                                 | ![Bild](./images/04_Schaltnetze/188px-IEC_XNOR_label.svg.png)  | ![Bild](./images/04_Schaltnetze/188px-Xnor-gate-en.svg.png)       |
 
 Im englischen Sprachraum waren und sind die amerikanischen Symbole (rechte Spalte) üblich. Die IEC-Symbole sind international auf beschränkte Akzeptanz gestoßen und werden in der amerikanischen Literatur (fast) durchgängig ignoriert.
 
