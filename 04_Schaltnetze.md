@@ -2,7 +2,7 @@
 
 author:   Sebastian Zug & André Dietrich & Fabian Bär
 email:    sebastian.zug@informatik.tu-freiberg.de & andre.dietrich@informatik.tu-freiberg.de & fabian.baer@student.tu-freiberg.de
-version:  0.0.4
+version:  0.0.5
 language: de
 narrator: Deutsch Female
 
@@ -189,3 +189,10 @@ $ y_2 = x_4 + x_5 + x_6 + x_7 $
 
 
 #### Demultiplexer
+
+
+
+
+#### BCD Decodierer
+
+![Bild](./images/04_Schaltnetze/bcd_animation.gif)
