@@ -60,7 +60,6 @@
     <a name="clabel" val=""/>
     <a name="clabelup" val="east"/>
     <a name="clabelfont" val="SansSerif plain 12"/>
-    <wire from="(970,570)" to="(1020,570)"/>
     <wire from="(1020,570)" to="(1070,570)"/>
     <wire from="(480,430)" to="(540,430)"/>
     <wire from="(480,580)" to="(540,580)"/>
@@ -69,6 +68,7 @@
     <wire from="(650,570)" to="(700,570)"/>
     <wire from="(600,570)" to="(650,570)"/>
     <wire from="(870,460)" to="(870,490)"/>
+    <wire from="(980,570)" to="(1020,570)"/>
     <wire from="(500,460)" to="(500,490)"/>
     <wire from="(500,520)" to="(500,550)"/>
     <wire from="(630,440)" to="(630,520)"/>
@@ -77,10 +77,10 @@
     <wire from="(500,550)" to="(540,550)"/>
     <wire from="(1000,440)" to="(1000,520)"/>
     <wire from="(1020,490)" to="(1020,570)"/>
+    <wire from="(980,440)" to="(1000,440)"/>
     <wire from="(870,520)" to="(870,560)"/>
     <wire from="(870,490)" to="(1020,490)"/>
     <wire from="(600,440)" to="(630,440)"/>
-    <wire from="(970,440)" to="(1000,440)"/>
     <wire from="(500,490)" to="(650,490)"/>
     <wire from="(630,440)" to="(700,440)"/>
     <wire from="(870,520)" to="(1000,520)"/>
@@ -109,12 +109,12 @@
       <a name="text" val="Q"/>
       <a name="font" val="SansSerif plain 22"/>
     </comp>
+    <comp lib="1" loc="(980,440)" name="NAND Gate"/>
     <comp lib="1" loc="(600,440)" name="NOR Gate"/>
     <comp lib="6" loc="(868,608)" name="Text">
       <a name="text" val="R"/>
       <a name="font" val="SansSerif plain 22"/>
     </comp>
-    <comp lib="1" loc="(970,440)" name="AND Gate"/>
     <comp lib="6" loc="(502,415)" name="Text">
       <a name="text" val="S"/>
       <a name="font" val="SansSerif plain 22"/>
@@ -123,6 +123,6 @@
       <a name="text" val="S"/>
       <a name="font" val="SansSerif plain 22"/>
     </comp>
-    <comp lib="1" loc="(970,570)" name="AND Gate"/>
+    <comp lib="1" loc="(980,570)" name="NAND Gate"/>
   </circuit>
 </project>
