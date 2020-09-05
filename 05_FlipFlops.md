@@ -2,7 +2,7 @@
 
 author:   Sebastian Zug & André Dietrich & Fabian Bär
 email:    sebastian.zug@informatik.tu-freiberg.de & andre.dietrich@informatik.tu-freiberg.de & fabian.baer@student.tu-freiberg.de
-version:  0.0.3
+version:  0.0.4
 language: de
 narrator: Deutsch Female
 
@@ -90,7 +90,9 @@ Frage: Können wir die bisherigen Konzepte und Techniken der logischen Schaltung
 
 Was geschieht in einer digitalen Schaltung bei der Rückkopplung eines Gatterausganges ?
 
-__Erster Ansatz: Verwendung eines rückgekoppelten AND-Bausteins.__
+### Erster Ansatz
+
+__Verwendung eines rückgekoppelten AND-Bausteins.__
 
 ![Bild](./images/05_FlipFlops/UND_gate_feedback.png)
 
@@ -108,7 +110,9 @@ __Erster Ansatz: Verwendung eines rückgekoppelten AND-Bausteins.__
 
 Offenbar behalten wir bei der Eingabe von 1 den aktuellen Zustand bei. Aus der Eingabe einer 0 folgt das "Löschen" des Zustandes.
 
-__Zweiter Ansatz: Verwendung eines rückgekoppelten OR-Bausteins.__
+### Zweiter Ansatz
+
+__Verwendung eines rückgekoppelten OR-Bausteins.__
 
 ![Bild](./images/05_FlipFlops/OR_gate_feedback.png)
 
@@ -130,7 +134,8 @@ __Zweiter Ansatz: Verwendung eines rückgekoppelten OR-Bausteins.__
 {"devices":{"a":{"label":"A","type":"Button","propagation":0,"position":{"x":-85,"y":55}},"y":{"label":"Y","type":"Lamp","propagation":0,"position":{"x":275,"y":60}},"or":{"label":"or","type":"Or","propagation":0,"bits":1,"position":{"x":85,"y":70}}},"connectors":[{"from":{"id":"or","port":"out"},"to":{"id":"y","port":"in"}},{"from":{"id":"a","port":"out"},"to":{"id":"or","port":"in2"}},{"from":{"id":"or","port":"out"},"to":{"id":"or","port":"in1"},"vertices":[{"x":40,"y":50}]}],"subcircuits":{}}
 ```
 
-__Dritter Ansatz: Gesteuerte Rückkopplung über OR-Baustein.__
+### Dritter Ansatz (SR-Latch)
+__Gesteuerte Rückkopplung über OR-Baustein.__
 
 Wir fügen eine weitere Eingangsgröße hinzu, die die Logik des Speichers auf der Basis des rückgekoppelten OR vervollständigt. Durch die Einbettung des AND Gatters können wir die Rückkopplung kontrollieren! Die Rückkopplung einer 1 erfolgt nur dann, wenn unser `R` Eingang nicht selbst eine 1 abbildet. Sobald wir an S eine 1 anlegen, wird diese auf Y sichtbar und gespeichert.
 
@@ -234,7 +239,31 @@ __synchrone Schaltwerke__
 + einfacher, systematischer Entwurf (Zeit ist „Taktzeit“)
 + langsamste Komponente bestimmt maximale Taktfrequenz
 
+### Syncrones SR-Latch
 
+...
+
+### D-Latch
+
+...
+
+``` json @DigiSim.evalJson
+{"devices":{"d":{"label":"D","type":"Button","propagation":0,"position":{"x":-110,"y":110}},"e":{"label":"E","type":"Button","propagation":0,"position":{"x":-110,"y":210}},"q":{"label":"Q","type":"Lamp","propagation":0,"position":{"x":395,"y":130}},"notq":{"label":"~Q","type":"Lamp","propagation":0,"position":{"x":395,"y":230}},"nand1":{"label":"nand","type":"Nand","propagation":0,"bits":1,"position":{"x":235,"y":225}},"nand2":{"label":"nand","type":"Nand","propagation":0,"bits":1,"position":{"x":230,"y":125}},"nand3":{"label":"nand","type":"Nand","propagation":0,"bits":1,"position":{"x":55,"y":120}},"nand4":{"label":"nand","type":"Nand","propagation":0,"bits":1,"position":{"x":85,"y":215}}},"connectors":[{"from":{"id":"nand2","port":"out"},"to":{"id":"nand1","port":"in1"}},{"from":{"id":"nand1","port":"out"},"to":{"id":"nand2","port":"in2"}},{"from":{"id":"nand1","port":"out"},"to":{"id":"notq","port":"in"}},{"from":{"id":"nand2","port":"out"},"to":{"id":"q","port":"in"}},{"from":{"id":"e","port":"out"},"to":{"id":"nand4","port":"in2"}},{"from":{"id":"e","port":"out"},"to":{"id":"nand3","port":"in2"}},{"from":{"id":"d","port":"out"},"to":{"id":"nand3","port":"in1"}},{"from":{"id":"nand3","port":"out"},"to":{"id":"nand4","port":"in1"}},{"from":{"id":"nand3","port":"out"},"to":{"id":"nand2","port":"in1"}},{"from":{"id":"nand4","port":"out"},"to":{"id":"nand1","port":"in2"}}],"subcircuits":{}}
+```
+
+**Praktisches Beispiel**
+
+Schaltung basierend auf 74HC00 IC (4x NAND)
+
+![74HC00](./images/05_FlipFlops/nand_ic2_small.jpg)
+
+Schaltung planen:
+
+![Bauplan](./images/05_FlipFlops/dlatch_plan.png)
+
+Aufbauen:
+
+![Schaltung gebaut](./images/05_FlipFlops/dlatch_board.jpg)
 ## Übungsaufgaben
 
 + Weisen Sie nach, dass der zweite Ausgang P am RS-Flip-Flop den invertierten Wert von Q realisiert.
