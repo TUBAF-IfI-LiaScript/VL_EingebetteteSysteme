@@ -196,13 +196,30 @@ Diese Kombination wird in einem eignen Symbol abstrahiert. Dabei wird unser Ausg
 
 __Anwendungsbeispiel 1__
 
-motivation_cycles.circ
-<e-charts
-option='{
-"xAxis":{"type":"category","data":[0,1,2,3,4,5,6,7,8,9,10,11,12,13,14]},"yAxis":{"type":"value","show":false},"series":[{"name":"R","type":"line","step":"start","data":[15,15,15,15,15,15,15,15,15,15,15,15,20,20,20,15],"markLine":{"data":[[{"name":"2 * Delta t","xAxis":11,"yAxis":3},{"name":"2 * Delta t","xAxis":13,"yAxis":3}]]}},{"name":"S","type":"line","step":"start","data":[7.5,7.5,12.5,12.5,12.5,7.5,7.5,7.5,7.5,7.5,7.5,7.5,7.5,7.5,7.5,7.5],"markLine":{"data":[[{"name":"2 * Delta t","xAxis":1,"yAxis":3},{"name":"2 * Delta t","xAxis":3,"yAxis":3}]]}},{"name":"Q","type":"line","step":"start","data":[0,0,0,0,5,5,5,5,5,5,5,5,5,5,0,0]}]
-}'></e-charts>
+![Bild](./images/05_FlipFlops/latch_temperature_monitoring.png)
 
-<div id="functionPlot" style="width: 55%; max-width: 500px"></div>
+Das nachfolgende Diagramm muss noch angepasst werden!!!
+
+<!--
+style="width: 80%; min-width: 420px; max-width: 720px;"
+-->
+```ascii
+
+    |       +------+      +------+      +------+      +------+
+Clk |       |      |      |      |      |      |      |      |
+    | ------+      +------+      +------+      +------+      +------
+    |     +------+                        +--+    +--+
+T   |     | :    |                        |  |    |  |
+    | ----+ :    +------------------------+  +----+  +--------------
+    |       :        +--+   +---+         :   +----+
+R   |       :        |  |   |   |         :   |    |
+    | ------:--------+  +---+   +---------:---+    +----------------
+    |       :  +---------------+          :  +---+                    1
+A   |       :  |            :  |          :  |:  |
+    |-------:--+            :  +----------:--+:  +------------------- 0
+    +-------:--:------------:--:----------:--::--:-------------------->        .
+             2t              2t            2t  2t
+```
 
 
 
@@ -241,7 +258,47 @@ __synchrone Schaltwerke__
 
 ### Syncrones SR-Latch
 
-...
+Für die Realisierung eines synchronisierten Flankenwechsels wird der Eingang unseres Flip-Flops um einen Takt `Clk` erweitert. Die Signale an R und S werden nur übernommen, wenn Taktsignal Clk aktiv ist:
+
++ bei Clk = 0 sind R und S irrelevant (d = „don't care“)
++ bei Clk = 1 stellt sich der neue Folgezustand Q ́ ein
+
+| $R(t)$                                | $S(t)$                                | $Clk(t)$ | $Q'(t)$       |
+| ------------------------------------- | ------------------------------------- | -------- | ------------- |
+| <span style="color: #ff0000">d</span> | <span style="color: #ff0000">d</span> | 0        | $Q$        |
+| 0                                     | 0                                     | 1        | $Q$              |
+| 1                                     | 1                                     | 1        | 1             |
+| 1                                     | 0                                     | 1        | 0              |
+| 1                                     | 1                                     | 1        | nicht erlaubt |
+
+Beachten Sie, dass sich mit dem <span style="color: #ff0000">d</span> Zustand die Wertetabelle deutlich verkürzt.
+
+![Bild](./images/05_FlipFlops/synchronizedRS_NOR.png)
+
+Welches Verhalten des Flip-Flops folgt daraus in der zeitlichen Abfolge.
+
+<!--
+style="width: 80%; min-width: 420px; max-width: 720px;"
+-->
+```ascii
+
+    |       +------+      +------+      +------+      +------+
+Clk |       |      |      |      |      |      |      |      |
+    | ------+      +------+      +------+      +------+      +------
+    |     +------+                        +--+    +--+
+S   |     | :    |                        |  |    |  |
+    | ----+ :    +------------------------+  +----+  +--------------
+    |       :        +--+   +---+         :   +----+
+R   |       :        |  |   |   |         :   |    |
+    | ------:--------+  +---+   +---------:---+    +----------------
+    |       :  +---------------+          :  +---+                    1
+Q   |       :  |            :  |          :  |:  |
+    |-------:--+            :  +----------:--+:  +------------------- 0
+    +-------:--:------------:--:----------:--::--:-------------------->        .
+             2t              2t            2t  2t
+```
+
+
 
 ### D-Latch
 
