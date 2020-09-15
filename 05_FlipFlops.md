@@ -198,27 +198,24 @@ __Anwendungsbeispiel 1__
 
 ![Bild](./images/05_FlipFlops/latch_temperature_monitoring.png)
 
-Das nachfolgende Diagramm muss noch angepasst werden!!!
+Der Temperatursensor hat einen digitalen Ausgang, der mit dem Überschreiten einen High-Pegel annimmt. Dieser wird in unserem Flip-Flop gespeichert `Q` bis der Zustand mit `R` wieder auf einen Low-Pegel geführt wird.
 
 <!--
 style="width: 80%; min-width: 420px; max-width: 720px;"
 -->
 ```ascii
-
-    |       +------+      +------+      +------+      +------+
-Clk |       |      |      |      |      |      |      |      |
-    | ------+      +------+      +------+      +------+      +------
-    |     +------+                        +--+    +--+
-T   |     | :    |                        |  |    |  |
-    | ----+ :    +------------------------+  +----+  +--------------
-    |       :        +--+   +---+         :   +----+
-R   |       :        |  |   |   |         :   |    |
-    | ------:--------+  +---+   +---------:---+    +----------------
-    |       :  +---------------+          :  +---+                    1
-A   |       :  |            :  |          :  |:  |
-    |-------:--+            :  +----------:--+:  +------------------- 0
-    +-------:--:------------:--:----------:--::--:-------------------->        .
-             2t              2t            2t  2t
+    ^
+    |       +------+      +------+      +------+
+T   |       |      |      |      |      |      |
+    | ------+      +------+      +------+      +-----------------
+    |                                               +------+
+R   |                                               |      |
+    | ----------------------------------------------+      +------
+    |         +---------------------------------------+
+Q   |         |                                       |
+    | --------+                                       +-----------
+    +----------------------------------------------------------------->        .
+                                                                 Zeit
 ```
 
 
@@ -234,7 +231,7 @@ __Anwendungsbeispiel 3__
 
 Rechts Links Lauf eines Motors
 
-## Asynchrone und synchrone Schaltwerke
+## Taktung von Schaltwerken
 
 ![Bild](./images/05_FlipFlops/motivation_cycles.png)
 
@@ -256,9 +253,9 @@ __synchrone Schaltwerke__
 + einfacher, systematischer Entwurf (Zeit ist „Taktzeit“)
 + langsamste Komponente bestimmt maximale Taktfrequenz
 
-### Syncrones SR-Latch
+### Synchrones SR-Latch
 
-Für die Realisierung eines synchronisierten Flankenwechsels wird der Eingang unseres Flip-Flops um einen Takt `Clk` erweitert. Die Signale an R und S werden nur übernommen, wenn Taktsignal Clk aktiv ist:
+Für die Realisierung eines synchronisierten Zustandswechsels wird der Eingang unseres Flip-Flops um einen Takt `Clk` erweitert. Die Signale an R und S werden nur übernommen, wenn Taktsignal Clk aktiv ist:
 
 + bei Clk = 0 sind R und S irrelevant (d = „don't care“)
 + bei Clk = 1 stellt sich der neue Folgezustand Q ́ ein
@@ -272,10 +269,6 @@ Für die Realisierung eines synchronisierten Flankenwechsels wird der Eingang un
 | 1                                     | 1                                     | 1        | nicht erlaubt |
 
 Beachten Sie, dass sich mit dem <span style="color: #ff0000">d</span> Zustand die Wertetabelle deutlich verkürzt.
-
-![Bild](./images/05_FlipFlops/synchronizedRS_NOR.png)
-
-Welches Verhalten des Flip-Flops folgt daraus in der zeitlichen Abfolge.
 
 <!--
 style="width: 80%; min-width: 420px; max-width: 720px;"
@@ -298,7 +291,7 @@ Q   |       :  |            :  |          :  |:  |
              2t              2t            2t  2t
 ```
 
-
+![Bild](./images/05_FlipFlops/synchronizedRS_NOR.png)
 
 ### D-Latch
 
@@ -321,6 +314,30 @@ Schaltung planen:
 Aufbauen:
 
 ![Schaltung gebaut](./images/05_FlipFlops/dlatch_board.jpg)
+
+
+### Herausforderungen
+
+Durch die Möglichkeit mehrerer Zustandsänderungen in einer Taktphase ist das getaktete RS Flip-Flop für viele Anwendungen ungeeignet.
+
+HINWEIS auf Folie 20
+
+
+### Master-Slave Flip-Flops
+
+
+### Flankengesteuerte Flip-Flops
+
+JK
+
+### Anwendungen
+
+Asynchroner 3-Bit Zähler
+
+### Zusammenfassung
+
+Grafik Folie 29
+
 ## Übungsaufgaben
 
 + Weisen Sie nach, dass der zweite Ausgang P am RS-Flip-Flop den invertierten Wert von Q realisiert.
