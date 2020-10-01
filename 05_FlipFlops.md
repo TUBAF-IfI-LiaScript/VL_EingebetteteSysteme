@@ -301,20 +301,6 @@ Q   |       :  |            :  |          :  |:  |
 {"devices":{"d":{"label":"D","type":"Button","propagation":0,"position":{"x":-110,"y":110}},"e":{"label":"E","type":"Button","propagation":0,"position":{"x":-110,"y":210}},"q":{"label":"Q","type":"Lamp","propagation":0,"position":{"x":395,"y":130}},"notq":{"label":"~Q","type":"Lamp","propagation":0,"position":{"x":395,"y":230}},"nand1":{"label":"nand","type":"Nand","propagation":0,"bits":1,"position":{"x":235,"y":225}},"nand2":{"label":"nand","type":"Nand","propagation":0,"bits":1,"position":{"x":230,"y":125}},"nand3":{"label":"nand","type":"Nand","propagation":0,"bits":1,"position":{"x":55,"y":120}},"nand4":{"label":"nand","type":"Nand","propagation":0,"bits":1,"position":{"x":85,"y":215}}},"connectors":[{"from":{"id":"nand2","port":"out"},"to":{"id":"nand1","port":"in1"}},{"from":{"id":"nand1","port":"out"},"to":{"id":"nand2","port":"in2"}},{"from":{"id":"nand1","port":"out"},"to":{"id":"notq","port":"in"}},{"from":{"id":"nand2","port":"out"},"to":{"id":"q","port":"in"}},{"from":{"id":"e","port":"out"},"to":{"id":"nand4","port":"in2"}},{"from":{"id":"e","port":"out"},"to":{"id":"nand3","port":"in2"}},{"from":{"id":"d","port":"out"},"to":{"id":"nand3","port":"in1"}},{"from":{"id":"nand3","port":"out"},"to":{"id":"nand4","port":"in1"}},{"from":{"id":"nand3","port":"out"},"to":{"id":"nand2","port":"in1"}},{"from":{"id":"nand4","port":"out"},"to":{"id":"nand1","port":"in2"}}],"subcircuits":{}}
 ```
 
-**Praktisches Beispiel**
-
-Schaltung basierend auf 74HC00 IC (4x NAND)
-
-![74HC00](./images/05_FlipFlops/nand_ic2_small.jpg)
-
-Schaltung planen:
-
-![Bauplan](./images/05_FlipFlops/dlatch_plan.png)
-
-Aufbauen:
-
-![Schaltung gebaut](./images/05_FlipFlops/dlatch_board.jpg)
-
 
 ### Herausforderungen
 
@@ -330,13 +316,43 @@ HINWEIS auf Folie 20
 
 JK
 
+T Flip-Flop
+
 ### Anwendungen
 
 Asynchroner 3-Bit Zähler
 
+Frequenzteiler
+
+4 Bit-Speicher Array
+
 ### Zusammenfassung
 
 Grafik Folie 29
+
+| Parameter                     | Latch                        | Flip-Flop                                    |
+| ----------------------------- | ---------------------------- | -------------------------------------------- |
+| Eingangssignal                | `Enable`                     | `Clock`                                      |
+| Trigger                       | Pegelgetrieben               | Flankengesteuert                             |
+| Reaktionszeit `R`             | kleiner oder gleich dem Takt | entspricht Implementierung der Periodendauer |
+| Komplexität                   | einfach                      | aufwändigere Flankenerkennung                |
+| Robustheit gegenüber Rauschen | kann Probleme generieren     |                                              |
+| Anwendungen                   | Speichern einzelner Bytes    | Register, Counter, Frequenzteiler Register   |
+
+
+## Realisierungsbeispiel
+
+Schaltung basierend auf 74HC00 IC (4x NAND)
+
+![74HC00](./images/05_FlipFlops/nand_ic2_small.jpg)
+
+Schaltung planen:
+
+![Bauplan](./images/05_FlipFlops/dlatch_plan.png)
+
+Aufbauen:
+
+![Schaltung gebaut](./images/05_FlipFlops/dlatch_board.jpg)
 
 ## Übungsaufgaben
 
