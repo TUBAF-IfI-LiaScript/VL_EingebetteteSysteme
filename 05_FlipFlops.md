@@ -339,6 +339,20 @@ Grafik Folie 29
 | Robustheit gegenüber Rauschen | kann Probleme generieren     |                                              |
 | Anwendungen                   | Speichern einzelner Bytes    | Register, Counter, Frequenzteiler Register   |
 
+## Einsatzbeispiel
+
+![Bild](./images/05_FlipFlops/CopyRegisters.png)
+
+Transfer
+
+
+
+
+Transfer und Copy
+
+
+Rechts - Links Schieberegister mit paralleler Ladeoperation
+
 
 ## Realisierungsbeispiel
 

@@ -68,6 +68,55 @@ style="width: 80%; min-width: 420px; max-width: 720px;"
 
 ---------------------------------------------------------------------
 
+## Motivation
+
+**In der kombinatorischen Logik:**
+
++ werden Gatter als verzögerungsfrei angenommen (Idealisierung, die oft zu Problemen führt !)
++ sind keine Rückkopplungen gestattet
++ werden Schaltungen als Schaltnetze bezeichnet
++ können Schaltungen als gerichteter azyklischer Graph dargestellt werden
+
+<!--
+style="width: 80%; min-width: 420px; max-width: 720px;"
+-->
+```ascii
+
+Eingaben       +------------------+
+  ------------>| Schaltnetz       |            Ausgaben
+  ------------>|                  |------------>
+  ------------>| kombinatorische  |------------>
+  ------------>| Logik            |
+               +------------------+                                            .
+```
+
+
+**In der sequentiellen Logik:**
+
++ sind Rückkopplungen gestattet
++ werden Schaltungen werden Schaltwerke bezeichnet
++ können Schaltungen als gerichteter zyklischer Graph dargestellt werden
+
+<!--
+style="width: 80%; min-width: 420px; max-width: 720px;"
+-->
+```ascii
+
+Eingaben       +------------------+           Ausgaben
+  ------------>| Schaltnetz       |------------>
+  ------------>|                  |------------>
+  ------------>| kombinatorische  |------+
+          +--->| Logik            |----+ |
+          |    +------------------+    | |
+          |                            | |
+          |    +------------------+    | |
+          +----| Zustandsspeicher |<---+ |
+               |                  |<-----+
+               +------------------+                                        .
+```
+
+> Und wo brauche ich sequentielle Logik? Die Abarbeitung von Befehlen im Rechner basiert darauf. In diesem Fall wird über die Eingabesteuerleitungen ein Befehl codiert und der Zustandspeicher beinhaltet den erreichten Realisierungsschritt. **Damit wird jeder Rechner zu einem Schaltwerk!**
+
 
 ### Wiederholung: Beschreibung von Flip-Flops
 
@@ -92,11 +141,6 @@ __Invertierte Wahrheitstafel__ zeigt die Eingaben, die notwendig sind, um eine b
 > Merke: Die invertierte Wahrheitstafel beantwortet die Frage, wie die Eingänge beschaltet werden müssen, um einen bestimmten Zustand zu realsieren.
 
 Stellen Sie die invertierten Wahrheitstafeln für den JK und den D Flip-Flop auf!
-
-## Motivation
-
-Wie fügen
-
 
 ### Grundkonzept
 
@@ -168,7 +212,7 @@ digraph finite_state_machine {
     qi -> A;
     A  -> A  [ label = "E != 7" ];
     A  -> B  [ label = "E == 7" ];
-    B  -> B  [ label = "E != 0" ];
+    B  -> A  [ label = "E != 0" ];
     B  -> C  [ label = "E == 0" ];
     C  -> D  [ label = "E == 2" ];
     C  -> A  [ label = "E != 2" ];
@@ -182,10 +226,10 @@ digraph finite_state_machine {
 
 Welche Beschränkungen sehen Sie in diesem Entwurf? Was passiert bei der Sequenzfolge `707022`?
 
-Unterschiedliche Formate!!!
 
+**Wie realisieren wir nun aber das theoretische Modell des endlichen Automaten mit realen Bauteilen?**
 
-## Entwurfsprozess
+### Beispiel
 
 Binärsequenzdetektor der drei aufeinander folgende `1` erkennt. Dabei gehen wir davon aus, dass die Übernahme der Werte mit den steigenden Flanken des Taktsignales erfolgt.
 
@@ -202,7 +246,7 @@ E     | | 1    | 0      | 1    |  0     | 1       1       1       1     | 0
       |-+      +--------+      +--------+                               +-------
       |
       |                                                 +---------------+
-A     |                                                 | 1       1     | 0
+Y     |                                                 | 1       1     | 0
       |-------------------------------------------------+               +-------
       +-------------------------------------------------------------------------->
 ```
@@ -215,20 +259,20 @@ digraph finite_state_machine {
 
     node [shape = point ]; qi
     node[shape=circle]
-    A[label="A"];
-    B[label="B"];
-    C[label="C"];
-    D[label="D"];
+    A[label="A \n Y=0"];
+    B[label="B \n Y=0"];
+    C[label="C \n Y=0"];
+    D[label="D \n Y=1"];
 
     qi -> A;
-    A  -> A  [ label = "E=0 \n A=0" ];
-    A  -> B  [ label = "E=1 \n A=0" ];
-    B  -> A  [ label = "E=0 \n A=0" ];
-    B  -> C  [ label = "E=1 \n A=0" ];
-    C  -> A  [ label = "E=0 \n A=0" ];
-    C  -> D  [ label = "E=1 \n A=1", fontcolor=blue ];
-    D  -> D  [ label = "E=1 \n A=1", fontcolor=blue ];
-    D  -> A  [ label = "E=0 \n A=0" ];
+    A  -> A  [ label = "E=0" ];
+    A  -> B  [ label = "E=1" ];
+    B  -> A  [ label = "E=0" ];
+    B  -> C  [ label = "E=1" ];
+    C  -> A  [ label = "E=0" ];
+    C  -> D  [ label = "E=1", fontcolor=blue ];
+    D  -> D  [ label = "E=1", fontcolor=blue ];
+    D  -> A  [ label = "E=0" ];
 }
 @enduml
 ```
@@ -375,63 +419,12 @@ $$
 
 1. Schritt: Spezifikation des Zustandsdiagramms
 2. Schritt: Transformation in eine Zustandstabelle
-3. Schritt: Zuordnung von Zuständen zu Flip-Flop Belegungen (Assignment)
+3. Schritt: Zuordnung von Zuständen zu Flip-Flop Belegungen
 4. Schritt: Erstellung der Wahrheitstafel für Zustände und Ausgaben
 5. Schritt: Ableitung einer KNF oder DNF
 6. Schritt: Minimierung
 
 ## Automaten Typen
-
-**Mealy-Automat**
-
-George H. Mealy (1927 – 2010, IBM)
-
-<!--
-style="width: 80%; min-width: 420px; max-width: 720px;"
--->
-```ascii
-  +------------------------------------------+
-  |   +--------------+     +--------------+  |
-  +-->|              |     |              |  |   +--------------+
-      | Eingabelogik |---->| Speicher     |--+-->|              |    Y
----+->| (Schaltnetz) |     | (Flip-Flops) |      | Ausgabelogik |---->
- E |  +--------------+     +--------------+      | (Schaltnetz) |
-   +-------------------------------------------->|              |
-                                                 +--------------+
-
-                                                                               .
-```
-
-
-
-```text @plantUML
-@startuml
-digraph finite_state_machine {
-    rankdir=LR;
-
-    node [shape = point ]; qi
-    node[shape=circle]
-    A[label="A"];
-    B[label="B"];
-    C[label="C"];
-    D[label="D"];
-
-    qi -> A;
-    A  -> A  [ label = "E=0 \n A=0" ];
-    A  -> B  [ label = "E=1 \n A=0" ];
-    B  -> A  [ label = "E=0 \n A=0" ];
-    B  -> C  [ label = "E=1 \n A=0" ];
-    C  -> A  [ label = "E=0 \n A=0" ];
-    C  -> D  [ label = "E=1 \n A=1", fontcolor=blue ];
-    D  -> D  [ label = "E=1 \n A=1", fontcolor=blue ];
-    D  -> A  [ label = "E=0 \n A=0" ];
-}
-@enduml
-```
-@plantUML
-
-**Die Ausgabe Y hängt jedoch die Ausgabelogik vom aktuellen Zustand und vom Eingabesignal E ab**
-
 
 **Moor-Automat**
 
@@ -478,8 +471,85 @@ digraph finite_state_machine {
 
 **Die Ausgabelogik bestimmt Ausgabe Y hängt nur vom aktuellen Zustand ab.**
 
-Der Mealy-Automat ist die generellere Form. Der Moore-Automat unterbindet den Einfluss des Einganges. Eine weitere Spezialisierung ist der sogenannte Medwedew-Automat, bei dem ganz auf die Ausgabelogik verzichtet wird.
+**Mealy-Automat**
 
+George H. Mealy (1927 – 2010, IBM)
+
+<!--
+style="width: 80%; min-width: 420px; max-width: 720px;"
+-->
+```ascii
+  +------------------------------------------+
+  |   +--------------+     +--------------+  |
+  +-->|              |     |              |  |   +--------------+
+      | Eingabelogik |---->| Speicher     |--+-->|              |    Y
+---+->| (Schaltnetz) |     | (Flip-Flops) |      | Ausgabelogik |---->
+ E |  +--------------+     +--------------+      | (Schaltnetz) |
+   +-------------------------------------------->|              |
+                                                 +--------------+
+
+                                                                               .
+```
+
+```text @plantUML
+@startuml
+digraph finite_state_machine {
+    rankdir=LR;
+
+    node [shape = point ]; qi
+    node [shape = point ]; qi1
+    node[shape=circle]
+    A[label="A"];
+    B[label="B"];
+    C[label="C"];
+    D[label="D"];
+
+    qi -> A;
+    A  -> A  [ label = "E=0 \n A=0" ];
+    A  -> B  [ label = "E=1 \n A=0" ];
+    B  -> A  [ label = "E=0 \n A=0" ];
+    B  -> C  [ label = "E=1 \n A=0" ];
+    C  -> A  [ label = "E=0 \n A=0" ];
+    C  -> D  [ label = "E=1 \n A=1", fontcolor=blue ];
+    D  -> D  [ label = "E=1 \n A=1", fontcolor=blue ];
+    D  -> A  [ label = "E=0 \n A=0" ];
+}
+
+@enduml
+```
+@plantUML
+
+**Die Ausgabe Y hängt jedoch die Ausgabelogik vom aktuellen Zustand und vom Eingabesignal E ab**
+
+Welche Vereinfachungsmöglichkeiten sehen Sie?
+
+```text @plantUML
+@startuml
+digraph finite_state_machine {
+    rankdir=LR;
+
+    node [shape = point ]; qi1
+    node[shape=circle]
+    A1[label="A"];
+    B1[label="B"];
+    C1[label="C"];
+
+    qi1 -> A1;
+    A1  -> A1  [ label = "E=0 \n A=0" ];
+    A1  -> B1  [ label = "E=1 \n A=0" ];
+    B1  -> A1  [ label = "E=0 \n A=0" ];
+    B1  -> C1  [ label = "E=1 \n A=0" ];
+    C1  -> A1  [ label = "E=0 \n A=0" ];
+    C1  -> C1  [ label = "E=1 \n A=1", fontcolor=blue ];
+}
+
+@enduml
+```
+@plantUML
+
+Welche Bedeutung hat dies für den technischen Entwurf des Schaltwerkes?
+
+Der Mealy-Automat ist die generellere Form. Der Moore-Automat unterbindet den Einfluss des Einganges. Eine weitere Spezialisierung ist der sogenannte Medwedew-Automat, bei dem ganz auf die Ausgabelogik verzichtet wird.
 
 
 |          | Mealy-Automat                                            | Moore-Automat                                                                                           |
@@ -487,6 +557,94 @@ Der Mealy-Automat ist die generellere Form. Der Moore-Automat unterbindet den Ei
 | Vorteile | schnellere Reaktion auf Veränderung der Eingabesignale E | taktsynchrone Ausgabe A, asynchron auftretende Störungen der Eingabesignale wirken sich nicht auf A aus |
 |          | Realisierung ist mit einer kleineren Anzahl an Zuständen möglich, wenn mehrere Zustandsübergänge zu einem Zustand verschiedene Ausgaben erfordern                                                          |  geringerer Schaltungsaufwand für Ausgabelogik, wenn Ausgabe A eigentlich nur vom Zustand abhängt                                                                                                       |
 
+## Bedeutung des Flip-Flop Typs
+
+Nehmen wir an, dass die Realisierung nicht mit einem D sondern einen JK-Flip-Flop erfolgen soll.
+
+| $J$ | $K$ | $Q(t+1)$          |
+| --- | --- | ----------------- |
+| 0   | 0   | $Q(t)$            |
+| 0   | 1   | 0                 |
+| 1   | 0   | 1                 |
+| 1   | 1   | $\overline{Q(t)}$ |
+
+Der JK-Flip-Flop wechselt beim setzen von $J$ in einen 1 Zustand und kann mit K resetet werden. Eine gleichzeitige Aktivierung beider Eingäng führt zu einem Togglen des Zustandes.
+
+| $Q(t)$ | $Q(t+1)$ | $J$ | $K$ |
+| ------ | -------- | --- | --- |
+| 0      | 0        | 0   | $d$ |
+| 0      | 1        | 1   | $d$ |
+| 1      | 0        | $d$ | 1   |
+| 1      | 1        | $d$ | 0   |
+
+Der Wechsel von $Q(t)=0$ nach $Q(t+1)=1$ kann entweder über ein Setzen ($J=1$) oder ein Togglen ($J=K=1$) umgesetzt werden. Daher spielt der Zustand des Einganges $K$ keine Rolle.
+
+Zwar haben wir es nun mit jeweils zwei Eingängen für den Flip-Flop zu tuen (im Unterschied zum D-Flip-Flop). Dies äußert sich in einer zusätzlichen Spalte der Zustandsübergangstabelle. Die _don't care_ Konfigurationen ermöglichen aber eine höhere Flexibilität beim Entwurf.
+
+Wie muss also die Beschaltung vorgenommen werden, um die bereits bekannte Zustandsübergangstabelle mit dem JK-Flip-Flop umzusetzen? Beginnen wir zunächst mit unserem ersten Flip-Flop F und seinen Eingängen JF und KF.
+
+| F                                     | G   | E   | F'                                    | G'  | JF  | KF  | JG  | KG  |
+| ------------------------------------- | --- | --- | ------------------------------------- | --- | --- | --- | --- | --- |
+| <span style="color: #ff0000">0</span> | 0   | 0   | <span style="color: #00ff00">0</span> | 0   | 0   | d   |     |     |
+| <span style="color: #ff0000">0</span> | 1   | 0   | <span style="color: #00ff00">0</span> | 0   | 0   | d   |     |     |
+| <span style="color: #ff0000">1</span> | 0   | 0   | <span style="color: #00ff00">0</span> | 0   | d   | 1   |     |     |
+| <span style="color: #ff0000">1</span> | 1   | 0   | <span style="color: #00ff00">0</span> | 0   | d   | 1   |     |     |
+| <span style="color: #ff0000">0</span> | 0   | 1   | <span style="color: #00ff00">0</span> | 1   | 0   | d   |     |     |
+| <span style="color: #ff0000">0</span> | 1   | 1   | <span style="color: #00ff00">1</span> | 0   | 1   | d   |     |     |
+| <span style="color: #ff0000">1</span> | 0   | 1   | <span style="color: #00ff00">1</span> | 1   | d   | 0   |     |     |
+| <span style="color: #ff0000">1</span> | 1   | 1   | <span style="color: #00ff00">1</span> | 1   | d   | 0   |     |     |
+
+Analog wird die Zustandsübergangstabelle für JG und KG befüllt.
+
+| F   | G                                     | E   | F'  | G'                                    | JF  | KF  | JG  | KG  |
+| --- | ------------------------------------- | --- | --- | ------------------------------------- | --- | --- | --- | --- |
+| 0   | <span style="color: #ff0000">0</span> | 0   | 0   | <span style="color: #00ff00">0</span> | 0   | d   | 0   | d   |
+| 0   | <span style="color: #ff0000">1</span> | 0   | 0   | <span style="color: #00ff00">0</span> | 0   | d   | d   | 1   |
+| 1   | <span style="color: #ff0000">0</span> | 0   | 0   | <span style="color: #00ff00">0</span> | d   | 1   | 0   | d   |
+| 1   | <span style="color: #ff0000">1</span> | 0   | 0   | <span style="color: #00ff00">0</span> | d   | 1   | d   | 1   |
+| 0   | <span style="color: #ff0000">0</span> | 1   | 0   | <span style="color: #00ff00">1</span> | 0   | d   | 1   | d   |
+| 0   | <span style="color: #ff0000">1</span> | 1   | 0   | <span style="color: #00ff00">0</span> | 1   | d   | d   | 1   |
+| 1   | <span style="color: #ff0000">0</span> | 1   | 0   | <span style="color: #00ff00">1</span> | d   | 0   | 1   | d   |
+| 1   | <span style="color: #ff0000">1</span> | 1   | 0   | <span style="color: #00ff00">1</span> | d   | 0   | d   | 0   |
+
+<!--
+style="width: 80%; min-width: 420px; max-width: 720px;"
+-->
+```ascii
+         __   _          _                        __   _          _
+JF       FG   FG   FG   FG                JG      FG   FG   FG   FG
+     _  +----+----+----+----+                 _  +----+----+----+----+
+     E  |    |    | d  | d  |                 E  |    | d  | d  |    |
+        +----+----+----+----+                    +----+----+----+----+
+     E  |    | 1  | d  | d  |                 E  | 1  | d  | d  | 1  |
+        +----+----+----+----+                    +----+----+----+----+
+
+         __   _          _                        __   _          _
+KF       FG   FG   FG   FG                KG      FG   FG   FG   FG
+     _  +----+----+----+----+                 _  +----+----+----+----+
+     E  | d  | d  | 1  | 1  |                 E  | d  | 1  | 1  | d  |
+        +----+----+----+----+                    +----+----+----+----+
+     E  | d  | d  |    |    |                 E  | d  | 1  |    |    |
+        +----+----+----+----+                    +----+----+----+----+         .
+```
+
+Damit lassen sich folgende Funktionen ablesen:
+
+$$
+JF &= GE \\
+KF &= \overline{E} \\
+JG &= E \\
+KG &= \overline{E} + \overline{F}
+$$
+
+Und die Ausgabe? Die bleibt ja unabhängig von der konkreten Umsetzung mit Flip-Flops. Entsprechend gilt $A = EF$
+
+Damit ergibt sich folgendes Simulationsbild:
+
+Simulator
+
+
+Welche Unterschiede sehen Sie gegenüber der Realisierung mit D-Flip-Flops?
 
 ## Übungsaufgaben
 
