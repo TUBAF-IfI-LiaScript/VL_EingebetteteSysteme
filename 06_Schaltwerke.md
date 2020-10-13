@@ -294,19 +294,19 @@ Zustandsübergänge
 
 Kodierung
 
-Für unsere digitalen Bauteile müssen wir die Zustände aber mit `1` und `0` kodieren.
+Für unsere digitalen Bauteile müssen wir diese Zustände aber mit `1` und `0` kodieren.
 
-| Zustände | Flip-Flops | Mögliche Zustände |
-| -------- | ---------- | ----------------- |
-| 1        | 1          | 2                 |
-| 2        | 1          | 2                 |
-| 3        | 2          | 4                 |
-| 4        | 2          | 4                 |
-| 5        | 3          | 8                 |
-| ...      |            |                   |
-| 8        | 3          | 8                 |
-| 9        | 4          | 16                |
-| ...      |            |                   |
+| Zustände | Flip-Flops | Mögliche Zustände | Ungenutzte Zustände |
+| -------- | ---------- | ----------------- | ------------------- |
+| 1        | 1          | 2                 | 1                   |
+| 2        | 1          | 2                 | 0                   |
+| 3        | 2          | 4                 | 1                   |
+| 4        | 2          | 4                 | 0                   |
+| 5        | 3          | 8                 | 3                   |
+| ...      |            |                   |                     |
+| 8        | 3          | 8                 | 0                   |
+| 9        | 4          | 16                | 7                   |
+| ...      |            |                   |                     |
 
 Da wir insgesamt 4 Zustände haben braucht es $\lceil log_2(4)\rceil = 2$ Speicherelemente, also Flip-Flops.
 Die zwei Flip-Flops werden im folgenden als `F` und `G` bezeichnet. Die Ausgabe bezeichnen wir mit `X`.
@@ -322,10 +322,6 @@ Mit unserem Schaltwerk wollen wir also eine Funktion abbilden, die die Ausgabe `
 
 Damit ergibt sich dann eine neue Zustandstabelle
 
-<table><tr>
-<td>
-Zustandstabelle
-
 | Zustand | F   | G   | E   | Zustand' | F'  | G'  |
 | ------- | --- | --- | --- | -------- | --- | --- |
 | A       | 0   | 0   | 0   | A        | 0   | 0   |
@@ -336,22 +332,6 @@ Zustandstabelle
 | B       | 0   | 1   | 1   | C        | 1   | 0   |
 | C       | 1   | 0   | 1   | D        | 1   | 1   |
 | D       | 1   | 1   | 1   | D        | 1   | 1   |
-</td>
-<td>
-Ausgaben
-
-| F   | G   | E   | A   |
-| --- | --- | --- | --- |
-| 0   | 0   | 0   | 0   |
-| 0   | 1   | 0   | 0   |
-| 1   | 0   | 0   | 0   |
-| 1   | 1   | 0   | 0   |
-| 0   | 0   | 1   | 0   |
-| 0   | 1   | 1   | 0   |
-| 1   | 0   | 1   | 1   |
-| 1   | 1   | 1   | 1   |
-</td>
-</tr></table>
 
 Realisierung der Schaltfunktion
 
@@ -380,16 +360,13 @@ Zustandstabelle
 <td>
 Ausgaben
 
-| F   | G   | E   | A   |
-| --- | --- | --- | --- |
-| 0   | 0   | 0   | 0   |
-| 0   | 1   | 0   | 0   |
-| 1   | 0   | 0   | 0   |
-| 1   | 1   | 0   | 0   |
-| 0   | 0   | 1   | 0   |
-| 0   | 1   | 1   | 0   |
-| 1   | 0   | 1   | <span style="color: #ff0000">1</span>   |
-| 1   | 1   | 1   | <span style="color: #ff0000">1</span>   |
+| F   | G   | A                                     |
+| --- | --- | ------------------------------------- |
+| 0   | 0   | 0                                     |
+| 0   | 1   | 0                                     |
+| 1   | 0   | 0                                     |
+| 1   | 1   | <span style="color: #ff0000">1</span> |
+
 </td>
 </tr>
 <tr>
@@ -406,19 +383,19 @@ $$
 <td>
 $$
 \begin{aligned}
-A = F\overline{G}E + FGE = FE
+A = FG
 \end{aligned}
 $$
 </td>
 </tr>
 </table>
 
-### Simulation Einzenerkenner
+Simulation
 
-Bitte mit Eingabe 0 starten, um Flipflops zurück zu setzen!
+Bitte mit Eingabe 0 starten, um Startzustand korrekt zu setzen!
 
 ```json @DigiSim.evalJson
-{"devices":{"e":{"label":"E","type":"Button","propagation":0,"position":{"x":-160,"y":10}},"clk":{"label":"Clk","type":"Button","propagation":0,"position":{"x":-160,"y":-50}},"not":{"label":"~G","type":"Not","propagation":0,"bits":1,"position":{"x":-135,"y":110}},"and1":{"label":"FE","type":"And","propagation":0,"bits":1,"position":{"x":30,"y":190}},"and2":{"label":"GE","type":"And","propagation":0,"bits":1,"position":{"x":10,"y":20}},"and3":{"label":"(~G)E","type":"And","propagation":0,"bits":1,"position":{"x":20,"y":100}},"or1":{"label":"GE + FE","type":"Or","propagation":0,"bits":1,"position":{"x":165,"y":15}},"or2":{"label":"(~G)E + FE","type":"Or","propagation":0,"bits":1,"position":{"x":175,"y":90}},"fff":{"label":"F FlipFlop","type":"Dff","propagation":0,"polarity":{"clock":true},"bits":1,"initial":"x","position":{"x":335,"y":30}},"ffg":{"label":"G FlipFlop","type":"Dff","propagation":0,"polarity":{"clock":true},"bits":1,"initial":"x","position":{"x":340,"y":95}},"a":{"label":"A","type":"Lamp","propagation":0,"position":{"x":340,"y":180}}},"connectors":[{"from":{"id":"or1","port":"out"},"to":{"id":"fff","port":"in"}},{"from":{"id":"or2","port":"out"},"to":{"id":"ffg","port":"in"}},{"from":{"id":"not","port":"out"},"to":{"id":"and3","port":"in2"}},{"from":{"id":"e","port":"out"},"to":{"id":"and2","port":"in1"}},{"from":{"id":"e","port":"out"},"to":{"id":"and3","port":"in1"}},{"from":{"id":"and2","port":"out"},"to":{"id":"or1","port":"in1"}},{"from":{"id":"and3","port":"out"},"to":{"id":"or2","port":"in1"}},{"from":{"id":"and1","port":"out"},"to":{"id":"or2","port":"in2"}},{"from":{"id":"and1","port":"out"},"to":{"id":"or1","port":"in2"}},{"from":{"id":"e","port":"out"},"to":{"id":"and1","port":"in1"}},{"from":{"id":"ffg","port":"out"},"to":{"id":"not","port":"in"},"vertices":[{"x":325,"y":240}]},{"from":{"id":"ffg","port":"out"},"to":{"id":"and2","port":"in2"},"vertices":[{"x":440,"y":210},{"x":405,"y":240},{"x":-90,"y":195},{"x":-145,"y":140},{"x":-120,"y":85}]},{"from":{"id":"and1","port":"out"},"to":{"id":"a","port":"in"}},{"from":{"id":"fff","port":"out"},"to":{"id":"and1","port":"in2"},"vertices":[{"x":460,"y":255}]},{"from":{"id":"clk","port":"out"},"to":{"id":"fff","port":"clk"},"vertices":[{"x":270,"y":-35}]},{"from":{"id":"clk","port":"out"},"to":{"id":"ffg","port":"clk"},"vertices":[{"x":275,"y":-35}]}],"subcircuits":{}}
+{"devices":{"e":{"label":"E","type":"Button","propagation":0,"position":{"x":-160,"y":10}},"clk":{"label":"Clk","type":"Button","propagation":0,"position":{"x":-160,"y":-50}},"not":{"label":"~G","type":"Not","propagation":0,"bits":1,"position":{"x":-135,"y":110}},"and1":{"label":"FE","type":"And","propagation":0,"bits":1,"position":{"x":30,"y":190}},"and2":{"label":"GE","type":"And","propagation":0,"bits":1,"position":{"x":10,"y":20}},"and3":{"label":"(~G)E","type":"And","propagation":0,"bits":1,"position":{"x":20,"y":100}},"and4":{"label":"FG","type":"And","propagation":0,"bits":1,"position":{"x":245,"y":175}},"or1":{"label":"GE + FE","type":"Or","propagation":0,"bits":1,"position":{"x":165,"y":15}},"or2":{"label":"(~G)E + FE","type":"Or","propagation":0,"bits":1,"position":{"x":175,"y":90}},"fff":{"label":"F FlipFlop","type":"Dff","propagation":0,"polarity":{"clock":true},"bits":1,"initial":"x","position":{"x":335,"y":30}},"ffg":{"label":"G FlipFlop","type":"Dff","propagation":0,"polarity":{"clock":true},"bits":1,"initial":"x","position":{"x":340,"y":95}},"a":{"label":"A","type":"Lamp","propagation":0,"position":{"x":395,"y":180}}},"connectors":[{"from":{"id":"or1","port":"out"},"to":{"id":"fff","port":"in"}},{"from":{"id":"or2","port":"out"},"to":{"id":"ffg","port":"in"}},{"from":{"id":"not","port":"out"},"to":{"id":"and3","port":"in2"}},{"from":{"id":"e","port":"out"},"to":{"id":"and2","port":"in1"}},{"from":{"id":"e","port":"out"},"to":{"id":"and3","port":"in1"}},{"from":{"id":"and2","port":"out"},"to":{"id":"or1","port":"in1"}},{"from":{"id":"and3","port":"out"},"to":{"id":"or2","port":"in1"}},{"from":{"id":"and1","port":"out"},"to":{"id":"or2","port":"in2"}},{"from":{"id":"and1","port":"out"},"to":{"id":"or1","port":"in2"}},{"from":{"id":"e","port":"out"},"to":{"id":"and1","port":"in1"}},{"from":{"id":"ffg","port":"out"},"to":{"id":"not","port":"in"},"vertices":[{"x":410.95,"y":240},{"x":325,"y":240}]},{"from":{"id":"ffg","port":"out"},"to":{"id":"and2","port":"in2"},"vertices":[{"x":440,"y":210},{"x":405,"y":240},{"x":-90,"y":195},{"x":-145,"y":140},{"x":-120,"y":85}]},{"from":{"id":"fff","port":"out"},"to":{"id":"and1","port":"in2"},"vertices":[{"x":460,"y":255}]},{"from":{"id":"clk","port":"out"},"to":{"id":"fff","port":"clk"},"vertices":[{"x":270,"y":-35}]},{"from":{"id":"clk","port":"out"},"to":{"id":"ffg","port":"clk"},"vertices":[{"x":275,"y":-35}]},{"from":{"id":"and4","port":"out"},"to":{"id":"a","port":"in"}},{"from":{"id":"fff","port":"out"},"to":{"id":"and4","port":"in1"},"vertices":[{"x":460,"y":165}]},{"from":{"id":"ffg","port":"out"},"to":{"id":"and4","port":"in2"},"vertices":[{"x":390,"y":240},{"x":225,"y":240}]}],"subcircuits":{}}
 ```
 
 ## Allgemeines Vorgehen
@@ -557,19 +534,133 @@ Welche Bedeutung hat dies für den technischen Entwurf des Schaltwerkes?
 
 Der Mealy-Automat ist die generellere Form. Der Moore-Automat unterbindet den Einfluss des Einganges. Eine weitere Spezialisierung ist der sogenannte Medwedew-Automat, bei dem ganz auf die Ausgabelogik verzichtet wird.
 
-
-### Simulation Einzenerkenner Moore
-
-Bitte mit Eingabe 0 starten, um Startzustand korrekt zu setzen.
-```json @DigiSim.evalJson
-{"devices":{"e":{"label":"E","type":"Button","propagation":0,"position":{"x":-160,"y":10}},"clk":{"label":"Clk","type":"Button","propagation":0,"position":{"x":-160,"y":-50}},"not":{"label":"~G","type":"Not","propagation":0,"bits":1,"position":{"x":-135,"y":110}},"and1":{"label":"FE","type":"And","propagation":0,"bits":1,"position":{"x":30,"y":190}},"and2":{"label":"GE","type":"And","propagation":0,"bits":1,"position":{"x":10,"y":20}},"and3":{"label":"(~G)E","type":"And","propagation":0,"bits":1,"position":{"x":20,"y":100}},"and4":{"label":"FG","type":"And","propagation":0,"bits":1,"position":{"x":245,"y":175}},"or1":{"label":"GE + FE","type":"Or","propagation":0,"bits":1,"position":{"x":165,"y":15}},"or2":{"label":"(~G)E + FE","type":"Or","propagation":0,"bits":1,"position":{"x":175,"y":90}},"fff":{"label":"F FlipFlop","type":"Dff","propagation":0,"polarity":{"clock":true},"bits":1,"initial":"x","position":{"x":335,"y":30}},"ffg":{"label":"G FlipFlop","type":"Dff","propagation":0,"polarity":{"clock":true},"bits":1,"initial":"x","position":{"x":340,"y":95}},"a":{"label":"A","type":"Lamp","propagation":0,"position":{"x":395,"y":180}}},"connectors":[{"from":{"id":"or1","port":"out"},"to":{"id":"fff","port":"in"}},{"from":{"id":"or2","port":"out"},"to":{"id":"ffg","port":"in"}},{"from":{"id":"not","port":"out"},"to":{"id":"and3","port":"in2"}},{"from":{"id":"e","port":"out"},"to":{"id":"and2","port":"in1"}},{"from":{"id":"e","port":"out"},"to":{"id":"and3","port":"in1"}},{"from":{"id":"and2","port":"out"},"to":{"id":"or1","port":"in1"}},{"from":{"id":"and3","port":"out"},"to":{"id":"or2","port":"in1"}},{"from":{"id":"and1","port":"out"},"to":{"id":"or2","port":"in2"}},{"from":{"id":"and1","port":"out"},"to":{"id":"or1","port":"in2"}},{"from":{"id":"e","port":"out"},"to":{"id":"and1","port":"in1"}},{"from":{"id":"ffg","port":"out"},"to":{"id":"not","port":"in"},"vertices":[{"x":410.95,"y":240},{"x":325,"y":240}]},{"from":{"id":"ffg","port":"out"},"to":{"id":"and2","port":"in2"},"vertices":[{"x":440,"y":210},{"x":405,"y":240},{"x":-90,"y":195},{"x":-145,"y":140},{"x":-120,"y":85}]},{"from":{"id":"fff","port":"out"},"to":{"id":"and1","port":"in2"},"vertices":[{"x":460,"y":255}]},{"from":{"id":"clk","port":"out"},"to":{"id":"fff","port":"clk"},"vertices":[{"x":270,"y":-35}]},{"from":{"id":"clk","port":"out"},"to":{"id":"ffg","port":"clk"},"vertices":[{"x":275,"y":-35}]},{"from":{"id":"and4","port":"out"},"to":{"id":"a","port":"in"}},{"from":{"id":"fff","port":"out"},"to":{"id":"and4","port":"in1"},"vertices":[{"x":460,"y":165}]},{"from":{"id":"ffg","port":"out"},"to":{"id":"and4","port":"in2"},"vertices":[{"x":390,"y":240},{"x":225,"y":240}]}],"subcircuits":{}}
-```
-
-
 |          | Mealy-Automat                                            | Moore-Automat                                                                                           |
 | -------- | -------------------------------------------------------- | ------------------------------------------------------------------------------------------------------- |
 | Vorteile | schnellere Reaktion auf Veränderung der Eingabesignale E | taktsynchrone Ausgabe A, asynchron auftretende Störungen der Eingabesignale wirken sich nicht auf A aus |
 |          | Realisierung ist mit einer kleineren Anzahl an Zuständen möglich, wenn mehrere Zustandsübergänge zu einem Zustand verschiedene Ausgaben erfordern                                                          |  geringerer Schaltungsaufwand für Ausgabelogik, wenn Ausgabe A eigentlich nur vom Zustand abhängt                                                                                                       |
+
+Noch mal zurück zum Beispiel des Binärsequenzdetektors. Welche Konsequenzen hätte die Umsetzung als Mealy-Automat?
+
+
+```text @plantUML
+@startuml
+digraph finite_state_machine {
+    rankdir=LR;
+
+    node [shape = point ]; qi1
+    node[shape=circle]
+    A1[label="A"];
+    B1[label="B"];
+    C1[label="C"];
+
+    qi1 -> A1;
+    A1  -> A1  [ label = "E=0 \n A=0" ];
+    A1  -> B1  [ label = "E=1 \n A=0" ];
+    B1  -> A1  [ label = "E=0 \n A=0" ];
+    B1  -> C1  [ label = "E=1 \n A=0" ];
+    C1  -> A1  [ label = "E=0 \n A=0" ];
+    C1  -> C1  [ label = "E=1 \n A=1", fontcolor=blue ];
+}
+
+@enduml
+```
+@plantUML
+
+<table>
+<tr>
+<td>
+Zustandstabelle
+
+| Zustand | F   | G   | E   | Zustand'  | F'  | G'  |
+| ------- | --- | --- | --- | --------- | --- | --- |
+| A       | 0   | 0   | 0   | A         | 0   | 0   |
+| B       | 0   | 1   | 0   | A         | 0   | 0   |
+| C       | 1   | 0   | 0   | A         | 0   | 0   |
+| D       | 1   | 1   | 0   | dont care | d   | d   |
+| A       | 0   | 0   | 1   | B         | 0   | 1   |
+| B       | 0   | 1   | 1   | C         | 1   | 0   |
+| C       | 1   | 0   | 1   | D         | 1   | 0   |
+| D       | 1   | 1   | 1   | dont care | d   | d   |
+</td>
+<td>
+Ausgaben
+
+| F   | G   | E   | A   |
+| --- | --- | --- | --- |
+| 0   | 0   | 0   | 0   |
+| 0   | 1   | 0   | 0   |
+| 1   | 0   | 0   | 0   |
+| 1   | 1   | 0   | d   |
+| 0   | 0   | 1   | 0   |
+| 0   | 1   | 1   | 0   |
+| 1   | 0   | 1   | 1   |
+| 1   | 1   | 1   | d   |
+</td>
+</tr>
+<tr>
+<td>
+$$
+\begin{aligned}
+F` &= \overline{F}GE + F\overline{G}E \\
+G` &= \overline{F}\overline{G}E \\
+\end{aligned}
+$$
+
+</td>
+<td>
+
+$$
+\begin{aligned}
+A = F\overline{G}E
+\end{aligned}
+$$
+
+</td>
+</tr>
+</table>
+
+Wir nutzen die `dont care` Zustände noch weiter aus und ermöglichen eine zuätzliche Vereinfachung.
+
+<!--
+style="width: 80%; min-width: 420px; max-width: 720px;"
+-->
+```ascii
+         __   _          _                        __   _          _
+ F'      FG   FG   FG   FG                A       FG   FG   FG   FG
+     _  +----+----+----+----+                 _  +----+----+----+----+
+     E  |    |    | d  |    |                 E  |    |    | d  |    |
+        +----+----+----+----+                    +----+----+----+----+
+     E  |    | 1  | d  | 1  |                 E  |    |    | d  | 1  |
+        +----+----+----+----+                    +----+----+----+----+
+         __   _          _
+ G'      FG   FG   FG   FG
+     _  +----+----+----+----+
+     E  |    |    | d  |    |
+        +----+----+----+----+
+     E  | 1  |    | d  |    |
+        +----+----+----+----+                                                  .
+```
+
+$$
+\begin{aligned}
+F` &= \overline{F}GE + F\overline{G}E \\
+   &= GE + FE \\
+G` &= \overline{F}\overline{G}E + FG\overline{E} + FGE  \\
+   &= FE \\
+A  &= F\overline{G}E + FGE = FE
+\end{aligned}
+$$
+
+Damit ergibt sich eine alternative Realisierung unseres Schaltwerkes.
+
+Bitte mit Eingabe 0 starten, um Flipflops zurück zu setzen!
+
+```json @DigiSim.evalJson
+{"devices":{"e":{"label":"E","type":"Button","propagation":0,"position":{"x":-160,"y":10}},"clk":{"label":"Clk","type":"Button","propagation":0,"position":{"x":-160,"y":-50}},"not":{"label":"~G","type":"Not","propagation":0,"bits":1,"position":{"x":-135,"y":110}},"and1":{"label":"FE","type":"And","propagation":0,"bits":1,"position":{"x":30,"y":190}},"and2":{"label":"GE","type":"And","propagation":0,"bits":1,"position":{"x":10,"y":20}},"and3":{"label":"(~G)E","type":"And","propagation":0,"bits":1,"position":{"x":20,"y":100}},"or1":{"label":"GE + FE","type":"Or","propagation":0,"bits":1,"position":{"x":165,"y":15}},"or2":{"label":"(~G)E + FE","type":"Or","propagation":0,"bits":1,"position":{"x":175,"y":90}},"fff":{"label":"F FlipFlop","type":"Dff","propagation":0,"polarity":{"clock":true},"bits":1,"initial":"x","position":{"x":335,"y":30}},"ffg":{"label":"G FlipFlop","type":"Dff","propagation":0,"polarity":{"clock":true},"bits":1,"initial":"x","position":{"x":340,"y":95}},"a":{"label":"A","type":"Lamp","propagation":0,"position":{"x":340,"y":180}}},"connectors":[{"from":{"id":"or1","port":"out"},"to":{"id":"fff","port":"in"}},{"from":{"id":"or2","port":"out"},"to":{"id":"ffg","port":"in"}},{"from":{"id":"not","port":"out"},"to":{"id":"and3","port":"in2"}},{"from":{"id":"e","port":"out"},"to":{"id":"and2","port":"in1"}},{"from":{"id":"e","port":"out"},"to":{"id":"and3","port":"in1"}},{"from":{"id":"and2","port":"out"},"to":{"id":"or1","port":"in1"}},{"from":{"id":"and3","port":"out"},"to":{"id":"or2","port":"in1"}},{"from":{"id":"and1","port":"out"},"to":{"id":"or2","port":"in2"}},{"from":{"id":"and1","port":"out"},"to":{"id":"or1","port":"in2"}},{"from":{"id":"e","port":"out"},"to":{"id":"and1","port":"in1"}},{"from":{"id":"ffg","port":"out"},"to":{"id":"not","port":"in"},"vertices":[{"x":325,"y":240}]},{"from":{"id":"ffg","port":"out"},"to":{"id":"and2","port":"in2"},"vertices":[{"x":440,"y":210},{"x":405,"y":240},{"x":-90,"y":195},{"x":-145,"y":140},{"x":-120,"y":85}]},{"from":{"id":"and1","port":"out"},"to":{"id":"a","port":"in"}},{"from":{"id":"fff","port":"out"},"to":{"id":"and1","port":"in2"},"vertices":[{"x":460,"y":255}]},{"from":{"id":"clk","port":"out"},"to":{"id":"fff","port":"clk"},"vertices":[{"x":270,"y":-35}]},{"from":{"id":"clk","port":"out"},"to":{"id":"ffg","port":"clk"},"vertices":[{"x":275,"y":-35}]}],"subcircuits":{}}
+```
+
+In der Simulation sehen Sie dass wir gegenüber dem Moore-Automaten ...
+
 
 ## Bedeutung des Flip-Flop Typs
 
@@ -645,17 +736,17 @@ KF       FG   FG   FG   FG                KG      FG   FG   FG   FG
 Damit lassen sich folgende Funktionen ablesen:
 
 $$
+\begin{aligned}
 JF &= GE \\
 KF &= \overline{E} \\
 JG &= E \\
 KG &= \overline{E} + \overline{F}
+\end{aligned}
 $$
 
 Und die Ausgabe? Die bleibt ja unabhängig von der konkreten Umsetzung mit Flip-Flops. Entsprechend gilt $A = EF$
 
 Damit ergibt sich folgendes Simulationsbild:
-
-### Simmulation mit JK Flipflop
 
 Bitte am Anfang `start` auf AN, dann `clk` puls, dann `start` auf AUS, um JK Flipflops in den Startzustand zu versetzen.
 
