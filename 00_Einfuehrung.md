@@ -16,7 +16,7 @@ import:   https://raw.githubusercontent.com/liascript-templates/plantUML/master/
 
 **TU Bergakademie Freiberg - Wintersemester 2020 / 21**
 
-Link auf die aktuelle Vorlesung im Versionsmanagementsystem GitHub
+Hier findet ihr den Link auf die aktuelle Vorlesung im Versionsmanagementsystem GitHub
 
 [https://github.com/TUBAF-IfI-LiaScript/VL_EingebetteteSysteme/blob/master/00_Einfuehrung.md](https://github.com/TUBAF-IfI-LiaScript/VL_EingebetteteSysteme/blob/master/00_Einfuehrung.md)
 
