@@ -106,7 +106,7 @@ Am Ende des Compiliervorganges entsteht daraus der sogenannte Maschinencode. Die
 
 **Was heißt das denn nun der Rechner?**
 
-![Diagramme](./images/00_Einfuehrung/IOpin.png)<!-- width="70%" -->
+![Diagramme](./images/00_Einfuehrung/IOpin.png)<!-- width="60%" -->
 
 **Auf welche konkreten Systeme schauen wir dabei insbesondere?**
 
@@ -377,3 +377,7 @@ Dann wartet das TUFbots-Team auf Sie ...
 style="width: 80%; display: block; margin-left: auto; margin-right: auto;" -->
 
 Quelle: _Team RobOTTO_, OVGU Magdeburg
+
+## Hausaufgabe 
+
++ Legen Sie sich einen GitHub Account an ... und seien Sie der erste, der einen Typo in den Unterlagen findet und diesen als _Contributer_ korrigiert :-)
