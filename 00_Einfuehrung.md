@@ -299,7 +299,7 @@ für die Anwendbarkeit in der (Informatik-)Lehre sprechen:
 * Quizze Tests und Aufgaben
 * spezifische Tools für die Modellierung Simulation etc.
 
-```cpp
+```cpp     ArduinoSimulator.ino
 void setup() {
   Serial.println("Hello stuff.");
 }
@@ -319,6 +319,31 @@ void loop() {
 }
 ```
 @NetSwarm.loop
+
+```js
+// Init components
+AND(["and1", "and2"], ["and3"], "AND1");
+OR(["or1", "or2"], ["or3"], "OR1");
+XOR(["xor1", "xor2"], ["xor3"], "XOR1");
+Button("btn1", "BUTTON1");
+Button("btn2", "BUTTON2");
+Button("btn3", "BUTTON3");
+Button("btn4", "BUTTON4");
+Lamp("lmp1", "LAMP1");
+
+// IO IN
+wire("btn1", "and1");
+wire("btn2", "and2");
+wire("btn3", "or1");
+wire("btn4", "or2");
+
+// AND, OR -> XOR
+wire("and3", "xor1");
+wire("or3", "xor2");
+
+// IO OUT
+wire("xor3", "lmp1", "Main Output");
+```
 
 ``` js @DigiSim.eval
 // Init components
