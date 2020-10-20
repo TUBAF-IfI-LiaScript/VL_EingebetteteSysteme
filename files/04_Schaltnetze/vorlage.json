@@ -1,0 +1,25 @@
+
+{
+  "devices": {
+    "myButton": {
+      "label": "a",
+      "type": "Button",
+      "propagation": 0,
+      "position": {
+        "x": 0,
+        "y": 0
+      }
+    },
+    "superlamp": {
+      "label": "b",
+      "type": "Lamp",
+      "propagation": 0,
+      "position": {
+        "x": 0,
+        "y": 0
+      }
+    }
+  },
+  "connectors": [],
+  "subcircuits": {}
+}
