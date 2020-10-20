@@ -6,11 +6,13 @@ version:  0.0.1
 language: de
 narrator: Deutsch Female
 
-import: https://raw.githubusercontent.com/LiaTemplates/NetSwarm-Simulator/master/README.md
+import:   https://raw.githubusercontent.com/liascript-templates/plantUML/master/README.md
+          https://raw.githubusercontent.com/LiaTemplates/NetSwarm-Simulator/master/README.md
+          https://raw.githubusercontent.com/liaTemplates/DigiSim/master/README.md
 
 -->
 
-# 00 - Einführung
+# Organisation und Motivation
 
 **TU Bergakademie Freiberg - Wintersemester 2020 / 21**
 
@@ -44,36 +46,114 @@ void loop() {
 }
 ```
 
-                                    {{1-2}}
-*******************************************************************************
-
-| Name                 | Email                                      |
-|:---------------------|:-------------------------------------------|
-| Sebastian Zug        | sebastian.zug@informatik.tu-freiberg.de    |
-| Dr. Martin Reinhardt | martin.reinhardt@informatik.tu-freiberg.de |
-
-
-*******************************************************************************
 
 ## Zielstellung
 
-                                    {{0-2}}
+Was steht im Modulhandbuch über diesen Kurs?
+
+**Qualifikationsziele /Kompetenzen:**
+
+_Mit der erfolgreichen Teilnahme an der Veranstaltung sollen die Studierenden in der Lage sein:_
+
++ _die Teilkomponenten eines Rechners ausgehend von der Boolschen Algebra sowie kombinatorischen und sequentiellen Schaltungen zu beschreiben und ausschnitthafte Teilelemente selbstständig entwerfen zu können._
++ _die Integration der Elemente und die Abläufe bei der Programmabarbeitung in verschiedenen Modellrechnern zu beherrschen und die Vor- und Nachteile verschiedener Konfigurationen bewerten zu können,_
++ _Architekturentwürfe auf reale Controller zu übertragen, die resultierenden Programmierkonzepte zu verstehen und anzuwenden_
++ _die konkrete Realisierung von eingebetteten Systemen in entsprechenden Anwendungen aus den Schaltplänen zu erfassen und die softwareseitigen Realisierungen daraus abzuleiten_
+
+**Inhalte**
+
+_Grundlegende Prinzipien der Modellierung digitaler Systeme: Boolsche Algebren und Funktionen, kombinatorische und sequentielle Schaltungen, Herleitung eines Modellrechners und Abbildung von dessen Funktionsweise, Einführung in die Entwicklung eingebetteter Systeme(Sensoren, Aktoren, elektrische Peripherie, Programmierkonzepte), Anwendungsfelder_
+
+{{1}}
+**Und was heißt das nun konkret? Worum geht es?**
+
+{{1}}
+Nehmen wir an, Sie realisieren ein Arduino Beispielprogramm wie dieses:
+
+{{1}}
+```c
+void setup() {
+  pinMode(13, OUTPUT);
+}
+void loop() {
+  digitalWrite(13, HIGH);
+  delay(1000);
+  digitalWrite(13, LOW);
+  delay(1000);
+}
+```
+
+{{2}}
+Am Ende des Compiliervorganges entsteht daraus der sogenannte Maschinencode. Dieses ist die Sprache, die der Rechner originär versteht und die entsprechend ausgeführt werden kann.
+
+{{2}}
+```
+:100000000C9472000C947E000C947E000C947E0084
+:100010000C947E000C947E000C947E000C947E0068
+:100020000C947E000C947E000C947E000C947E0058
+…
+:1000A0000C947E000C947E000C947E000C947E00D8
+:1000B0000C947E000C947E000C947E000C947E00C8
+:1000C0000C947E000C947E000C947E000C947E00B8
+:1000D0000C947E000C947E000C947E000C947E00A8
+:1000E0000C947E0011241FBECFEFD1E2DEBFCDBF46
+:1000F00000E00CBF0E9480000C9483000C94000070
+:0A010000279A2F98FFCFF894FFCF            45
+:00000001FF
+```
+
+                                  {{3}}
 *******************************************************************************
 
-**Worum geht's?**
+**Was heißt das denn nun der Rechner?**
 
-**... alles was Sie schon immer über Computer wissen wollten (und nicht zu fragen wagten) ...**
+![Diagramme](./images/00_Einfuehrung/IOpin.png)<!-- width="70%" -->
 
+**Auf welche konkreten Systeme schauen wir dabei insbesondere?**
 
-+ Digitale Grundlagen der Arbeitsweise von Computerhardware
-+ Vermittlung von Grundwissen für den Entwurf von Hardware
-+ Hardwarenahe Programmierung
-+ Grundlagen eingebetteter Systeme
++ ATmega4808/4809
++ ATmega32
 
 *******************************************************************************
 
-                                    {{1-2}}
+                                 {{4}}
 *******************************************************************************
+
+**Und wie nützt mir das?**
+
+![Diagramme](./images/00_Einfuehrung/Wetterstation.png)<!-- width="70%" -->
+
+Wenn wir noch einen Schritt weitergehen können wir die Daten auch an einen Server übergeben. Dieser übernimmt die Aufbereitung und Visualisierung.
+
+<iframe width="450" height="260" style="border: 1px solid #cccccc;" src="https://thingspeak.com/channels/856893/charts/7?bgcolor=%23ffffff&color=%23d62020&days=3&dynamic=true&type=line"></iframe>
+
+Hier lassen sich dann die eigentlichen "Untersuchungen" realisieren und zum Beispiel die Frage beantworten, ob die Sonne am Wochenende häufiger scheint.
+
+![Diagramme](./images/00_Einfuehrung/AlleWetter.png)<!-- width="70%" -->
+
+Die roten Punkte stellen die Verteilung der Wochenendmessungen der vergangenen Woche dar, während die blauen Kreuze die Wochentage illustrieren. Dunkelheit wird durch einen Wert nahe 1023 ausgedrückt, während helle Messituationen durch kleine Werte dargestellt werden.
+*******************************************************************************
+
+## Organisation
+
+| Name                    | Email                                      |
+|:----------------------- |:------------------------------------------ |
+| Prof. Dr. Sebastian Zug | sebastian.zug@informatik.tu-freiberg.de    |
+| Dr. Martin Reinhardt    | martin.reinhardt@informatik.tu-freiberg.de |
+
+> Bitte melden Sie sich im OPAL unter [Eingebettete Systeme](https://bildungsportal.sachsen.de/opal/auth/RepositoryEntry/26860322818/CourseNode/102563572218999) für die Veranstaltung an. Dies ist im Kontext der Pandemiesituation Teil des Hygienekonzepts der Hochschule.
+
+### Zeitplan
+
+Die Veranstaltung wird sowohl für die Vorlesung als auch die Übung in Präsenz durchgeführt.
+
+| Veranstaltungen | Tag        | Zeitslot      | Ort      | Bemerkung       |
+| --------------- | ---------- | ------------- | -------- | --------------- |
+| Vorlesung I     | Dienstag   | 14:00 - 15:30 | WIN-1005 | wöchentlich     |
+| Vorlesung II    | Donnerstag | 14:00 - 15:30 | WIN-1005 | ungerade Wochen |
+| Übungen         | Dienstag   | 18:00 - 19:30 | KKB-2097 | ab Dezember     |
+
+Wir gehen gegenwärtig noch davon aus, dass die Übungen auch in Präsenz stattfinden. Dort haben Sie dann insbesondere ab Januar Gelegenheit anhand spezifischer Mikrocontrollerschaltungen Ihre Fähigkeiten zu vertiefen.
 
 <!--
 style="width: 80%; min-width: 420px; max-width: 720px;"
@@ -85,7 +165,7 @@ style="width: 80%; min-width: 420px; max-width: 720px;"
            +----------------------------+ -.
   Ebene 6  | Problemorientierte Sprache |  |
            +----------------------------+  |
-                                            > Anwendungssoftware
+                                           ⎬ Anwendungssoftware
            +----------------------------+  |
   Ebene 5  | Assemblersprache           |  |
            +----------------------------+ -.
@@ -101,132 +181,72 @@ style="width: 80%; min-width: 420px; max-width: 720px;"
            +----------------------------+  -.
   Ebene 2  | Mikroarchitektur           |   |
            +----------------------------+   |
-                                             >Automaten, Speicher, Logik
-           +----------------------------+   |
-  Ebene 1  | Digitale Logik             |   |
-           +----------------------------+  -.
+                                            ⎬ Automaten, Speicher, Logik
+           +----------------------------+   |       ╔══════════════════╗
+  Ebene 1  | Digitale Logik             |   |    ◀══║ HIER STARTEN WIR!║
+           +----------------------------+  -.       ╚══════════════════╝
 
            +----------------------------+
   Ebene 0  | E-Technik, Physik          |     Analoge Phänomene
            +----------------------------+                                      .
 ```
 
-*******************************************************************************
+
+### Prüfungsmodalitäten
+
+> *Credit-Points:* 6
 
 
-### Konzept der Veranstaltung
-
-                                    {{0-1}}
-*******************************************************************************
-
-Als Plattform für die Online Vorlesung nutzen wir eine lokale Instanz von BigBlueButton. Den zugehörigen Link finden Sie auf der OPAL Webseite des Kurses.
-
-Die Vorlesung wird in der präsenzfreien Zeit auf folgendem zeitlichen Muster basieren:
-
-<!--
-style="width: 80%; min-width: 420px; max-width: 720px;"
--->
-```ascii
-               | Mittwoch   |     +-------------------------------------------+
-vorangegangene | Donnerstag | <-- | Bis Donnerstag sind die Materialien       |
-Woche          | Freitag    |     | der kommenden Woche auf github hinterlegt |
-               | ...        |     +-------------------------------------------+
-               |------------|
-aktuelle       | Montag     |
-Woche          | Dienstag   | <---- Einreichen der 7 Fragen mit Antworten
-               | Mittwoch   | <-+   Rückmeldungen und Fragen via Issues
-               |            |   |  +------------------------------------------+
-                                +--| Online Vorlesung, die die Inhalte der    |
-                                   | anhand Ihrer Rückmeldungen diskutiert    |
-                                   +------------------------------------------+
-```
-
-Hierfür kombinieren wir:
-
-* __asynchronen / synchrone Online-Vorlesungen__ - Im Rahmen der synchronen Vorlesungen werden die zentralen Elemente vorgestellt. Da es aber in der großen Runde an der Möglichkeit der Interaktion wie in einer echte Vorlesung fehlt, fokussieren wir uns auf den Termin am __Mittwoch um 7:30__.
-* __offline Diskussionen und Fragen__ - Die Fragen zu den praktischen Lehrinhalten erörtern wir über das Softwareentwicklungstool github. Damit haben Sie die Möglichkeit Fragen von allgemeinem Interesse in einer großen Runde zu besprechen.
-* __asynchronen Übungen / synchronen Übungen__ - Die Übungen bestehen aus selbständig zu bearbeitenden Aufgaben, wobei einzelne Lösungen in Videokonferenzen besprochen werden.
-
-Wie bringen Sie sich ein?:
-
-* __Sieben Minuten für sieben Fragen__ ... Einbettung einer studentischen Zusammenfassung in jeden Foliensatz. Wir organisieren Sie in Gruppen von 2 Studenten, die zu Beginn jeder Veranstaltung die zentralen Aspekte der  vorangegangen Vorlesung komprimiert darstellt. __10 dieser Fragestellungen werden Eingang in die Klausur finden.__
-* __Allgemeine Fragen/Antworten__ ... Dabei können Sie sich über github in die Diskussion einbringen.
-* __Rückmeldungen/Verbesserungsvorschläge zu den Vorlesungsmaterialien__ ... *"Das versteht doch keine Mensch!"* ... dann korrigieren Sie uns. Alle Materialien sind Open Source. Senden Sie mir einen Pull-Request und werden Sie Mitautor.
-* __Praktischen Übungsaufgaben__ ... Wir werden die Übungsaufgaben über die Plattform GitHub abwickeln und einzelne Aspekte dann in der Vorlesung/ Übungen besprechen.
-
-Die Übungen beginnen in der Woche zum XXX. April! Dafür werden wir Aufgaben vorbereiten, mit denen die Inhalte der Vorlesung vertieft werden. Wir motivieren Sie sich dafür ein Gruppen von 2 oder 3 Studierenden zu organisieren. Die genauen Modalitäten werden noch bekannt gegeben.
-
-*******************************************************************************
+> *Arbeitsaufwand:* Der Zeitaufwand beträgt 180h und setzt sich zusammen aus 60h Präsenzzeit und 120h Selbststudium. Letzteres umfasst die Vor- undNachbereitung der Lehrveranstaltung, die eigenständige Lösung von Übungsaufgaben sowie die Prüfungsvorbereitung.
 
 
-                                    {{3-4}}
-*******************************************************************************
-
-**Zeitaufwand und Engagement**
-
-Mit der Veranstaltung verdienen Sie sich 6CP. Eine Hochrechnung mit der von der
-Kultusministerkonferenz vorgegebenen Formel 1CP = 30 Zeitstunden bedeutet,
-dass Sie dem Fach im Mittel über dem Semester __180 Stunden__ widmen sollten ...
-entsprechend bleibt neben den Vorlesungen und Übungen genügend Zeit für die
-Vor- und Nachbereitung der
-Lehrveranstaltungen, die eigenständige Lösung von Übungsaufgaben sowie die
-Prüfungsvorbereitung.
-
-*"Erzähle mir und ich vergesse. Zeige mir und ich erinnere. Lass es mich tun und ich verstehe."*
-
-(Konfuzius, chin. Phiolsoph 551-479 v. Chr.)
-
-**Wie können Sie zum Gelingen der Veranstaltung beitragen**
-
-* Stellen Sie Fragen, seinen Sie kommunikativ!
-* Organisieren Sie sich in Arbeitsgruppen!
-* Experimentieren Sie mit verschiedenen Entwicklungsumgebung um "Ihren Editor"
-  zu finden
-* Bringen Sie sich in studentischen Teams ein!
-
-FOTO RCAP einfügen!
-
-*******************************************************************************
+> *Prüfungsform:* Die Veranstaltung wird mit einer schriftlichen Prüfung abgeschlossen.
 
 
-                                    {{4-5}}
-*******************************************************************************
+> *5 Fragen in 5 Minuten:* Teilnehmer stellen mit Blick auf die vergangen Lehrveranstaltung weitere Aufgaben vor und besprechen die Lösung kurz. Die Fragen gehen dann in Teilen in die Klausur ein.
 
-**Literaturhinweise**
+## ... und wozu brauche ich das überhaupt?
 
-Literaturhinweise werden zu verschiedenen Themen als Links oder Referenzen
-in die Unterlagen integriert.
+**Antwort A:**
+Das Studium vermittelt ein Weltbild und keine eng zugeschnittene Sicht.
 
-Es existiert eine Vielzahl kommerzielle Angebote, die aber einzelne Aspekte
-in freien Tutorial vorstellen. In der Regel gibt es keinen geschlossenen Kurs
-sondern erfordert eine individuelle Suche nach spezifischen Inhalten.
+**Antwort B:**
+Die Fähigkeit in Algorithmen zu denken, ist eine Grundlage wissenschaftlichen
+Arbeitens.
 
-| Medium         | Bemerkung                                                       | Links                                                                              |
-| -------------- | --------------------------------------------------------------- | ---------------------------------------------------------------------------------- |
-| Online Kurse   |   | |
-|                |   | |
-|                |   | |
-| Videotutorials | How computers works?   | [Link](https://www.youtube.com/watch?v=cNN_tTXABUA) |
-|                |   | |
-| Bücher         | B. Becker, R. Drechsler, P. Molitor: Technische Informatik - Eine Einführung, Pearson Studium, 2005    | |
-|                | David A. Patterson, John L. Hennessy: Computer Organization & Design    | |
+**Antwort C:**
+Am Ende steht Ihnen das Rüstzeug zur Verfügung kleine eingebettete C-Projekte
+selbst anzugehen.
 
-*******************************************************************************
 
-## Werkzeuge der Veranstaltung
+## Literaturempfehlungen
 
-Was sind die zentralen Tools unserer Veranstaltung?
+1. Umfassende Lehrbücher
 
-* _???? Vorlesungstool_ -> BigBlueButton [Introduction](https://www.youtube.com/watch?v=uYYnryIM0Uw)
-* _Entwicklungsplattform [GitHub](https://github.com/)_
-* _Beschreibungssprache für Lerninhalte_ [LiaScript](https://liascript.github.io/)
-* _Entwicklungsumgebung / Editor + Kompiler_
+   + David A. Patterson, John L. Hennessy: Computer Organization & Design
+   + B. Becker, R. Drechsler, P. Molitor: Technische Informatik - Eine Einführung, Pearson Studium, 2005
+   + Hoffmann, D. W.: Grundlagen der technischen Informatik, Hanser Verlag
 
-*******************************************************************************
+2. Videos
 
-### Markdown und LiaScript
+   + Youtube – „How computers works“ https://www.youtube.com/watch?v=cNN_tTXABUA
 
-                                 {{0-1}}
+Bei den jeweiligen Vorlesungsinhalten werden zusätzliche Materialien angegeben.
+
+## Schreiben Sie an den Materialien mit!
+
+                              {{0-1}}
+****************************************************************************
+
+Die Lehrmaterialien finden Sie unter GitHub, einer Webseite für das Versionsmanagement und die Projektverwaltung.
+
+https://github.com/TUBAF-IfI-LiaScript/VL_EingebetteteSysteme/blob/dev/01_HistorischerUeberblick.md
+
+Die Unterlagen selbst sind in der Auszeichnungsprache LiaScipt verfasst und öffentlich verfügbar.
+
+****************************************************************************
+
+                         {{1-2}}
 ****************************************************************************
 
 Markdown ist eine Auszeichnungssprache für die Gliederung und Formatierung von Texten und anderen Daten. Analog zu HTML oder LaTex werden die Eigenschaften und Organisation von Textelementen (Zeichen, Wörtern, Absätzen) beschrieben. Dazu werden entsprechende "Schlüsselworte", die sogenannten Tags verwandt.
@@ -269,7 +289,7 @@ Mit einem entsprechenden Editor und einigen Paketen macht das Ganze dann auch Sp
 ****************************************************************************
 
 
-                                 {{1-2}}
+                                 {{2-3}}
 ****************************************************************************
 
 Allerdings vermisst Markdown trotz seiner Einfachheit einige Features, die
@@ -280,51 +300,81 @@ für die Anwendbarkeit in der (Informatik-)Lehre sprechen:
 * Quizze Tests und Aufgaben
 * spezifische Tools für die Modellierung Simulation etc.
 
-```
-@startuml
-
-abstract class AbstractList
-abstract AbstractCollection
-interface List
-interface Collection
-
-List <|-- AbstractList
-Collection <|-- AbstractCollection
-
-Collection <|- List
-AbstractCollection <|- AbstractList
-AbstractList <|-- ArrayList
-
-class ArrayList {
-  Object[] elementData
-  size()
+```cpp
+void setup() {
+  Serial.println("Hello stuff.");
 }
 
-enum TimeUnit {
-  DAYS
-  HOURS
-  MINUTES
+void thing(char i) {
+  switch(i) {
+  case 0: Serial.println("a pear"); break;
+  case 1: Serial.println("an apple"); break;
+  case 2: Serial.println("an elephant"); break;
+  case 3: Serial.println("an arduino"); break;
+  }
 }
 
-annotation SuppressWarnings
-
-@enduml
+void loop() {
+  Serial.print("here's ");
+  thing(random(4));
+}
 ```
-@plantUML.eval
+@NetSwarm.loop
+
+``` js @DigiSim.eval
+// Init components
+AND(["and1", "and2"], ["and3"], "AND1");
+OR(["or1", "or2"], ["or3"], "OR1");
+XOR(["xor1", "xor2"], ["xor3"], "XOR1");
+Button("btn1", "BUTTON1");
+Button("btn2", "BUTTON2");
+Button("btn3", "BUTTON3");
+Button("btn4", "BUTTON4");
+Lamp("lmp1", "LAMP1");
+
+// IO IN
+wire("btn1", "and1");
+wire("btn2", "and2");
+wire("btn3", "or1");
+wire("btn4", "or2");
+
+// AND, OR -> XOR
+wire("and3", "xor1");
+wire("or3", "xor2");
+
+// IO OUT
+wire("xor3", "lmp1", "Main Output");
+```
 
 Eine Reihe von Einführungsvideos findet sich unter [Youtube](https://www.youtube.com/channel/UCyiTe2GkW_u05HSdvUblGYg). Die Dokumentation von LiaScript ist hier [verlinkt](https://liascript.github.io/course/?https://raw.githubusercontent.com/liaScript/docs/master/README.md#1)
 
-Für den [Atom](https://atom.io/)-Editor von GitHub sind zwei LiaScript Plugins verfügbar, die die Arbeit signifikant vereinfachen.
+***************************************************************************
 
-****************************************************************************
+## Trotz Simulation und Virtuellem ...
 
-### Github
+... braucht es aber auch immer etwas zum anfassen.
 
-Link zum GitHub des Kurses
+> Blick hinter eine Arduino-Anwendung
 
-[https://github.com/TUBAF-IfI-LiaScript/VL_EingebetteteSysteme](https://github.com/TUBAF-IfI-LiaScript/VL_EingebetteteSysteme)
+## Wie können Sie zum Gelingen der Veranstaltung beitragen?
 
+* Stellen Sie Fragen, seinen Sie kommunikativ!
 
-## Aufgaben
+> Hinweis auf OPAL Forum!
 
-1. Legen Sie sich einen GitHub Account an und experimentieren Sie damit.
+* Organisieren Sie sich in Arbeitsgruppen!
+
+> Hinweis auf Repl.it
+
+> Hinweis auf ThinkerCAD
+
+* Bringen Sie sich mit Implementierungen in die Veranstaltung ein.
+
+## Und wenn Sie dann immer noch programmieren wollen ...
+
+Dann wartet das TUFbots-Team auf Sie ...
+
+![WALL-E](./images/00_Einfuehrung/RoboCup.jpeg)<!--
+style="width: 80%; display: block; margin-left: auto; margin-right: auto;" -->
+
+Quelle: _Team RobOTTO_, OVGU Magdeburg
