@@ -122,6 +122,14 @@ _Es ist unwürdig, die Zeit von hervorragenden Leuten mit knechtischen Rechenarb
 
 Bisher stand die Berechnung von einzelnen Ergebnissen auf der Basis einer Sequenz von Eingaben im Vordergrund. Ende des 18. Jahrhunderts entwarfen Visionäre neue Konzepte, die allgemeingültige Lösungen integrierten.
 
+Diesen Aspekt kann man auf technischer und theoretischer Ebene betrachten.
+
+Die Grundlagen moderner Rechner legten die Arbeiten von Georg Boole (1815 - 1864), der eine boolesche Algebra (oder ein boolescher Verband) definierte, die die Eigenschaften der logischen Operatoren UND, ODER, NICHT sowie die Eigenschaften der mengentheoretischen Verknüpfungen Durchschnitt, Vereinigung, Komplement verallgemeinert. Gleichwertig zu booleschen Algebren sind boolesche Ringe, die von UND und ENTWEDER-ODER (exklusiv-ODER) beziehungsweise Durchschnitt und symmetrischer Differenz ausgehen.
+
+![Boole](https://upload.wikimedia.org/wikipedia/commons/c/ce/George_Boole_color.jpg)<!-- width="40%" --> [^14]
+
+[^14]: Autor unbekannt, George Boole, https://commons.wikimedia.org/wiki/File:George_Boole_color.jpg
+
 ### Joseph-Marie Jacquard (1752 - 1834) - Automatischer Webstuhl
 
 Jacquards "Musterwebstuhl" realisierte die Ansteuerung der Webmechanik durch eine Lochkartensteuerung. Im Jahr 1805 wurde das Verfahren erstmals vorgestellt. Dadurch konnten endlose Muster von beliebiger Komplexität mechanisch hergestellt werden.
@@ -227,6 +235,8 @@ Bereits Vorwegname der Kernelemente moderner Architekturen:
 
 ### Eniac
 
+Electronic Numerical Integrator and Computer (ENIAC)
+
 + 18000 Röhren, 1500 Relais
 + 130 m2, 30 Tonnen, 140 kW
 + dezimale Kodierung
@@ -235,6 +245,10 @@ Bereits Vorwegname der Kernelemente moderner Architekturen:
 + programmiert durch Kabel-Verbindungen
 + E/A mittels Lochkarten
 + gebaut für ballistische Berechnungen
+
+![ENIAC](https://upload.wikimedia.org/wikipedia/commons/4/4e/Eniac.jpg)<!-- width="60%" --> [^15]
+
+[^15]: Autor unbekannt, ENIAC in Philadelphia, Pennsylvania. Glen Beck (background) and Betty Snyder (foreground) program the ENIAC in building 328 at the Ballistic Research Laboratory , https://commons.wikimedia.org/wiki/File:Eniac.jpg
 
 ### Konzeptionelle Entwürfe
 
