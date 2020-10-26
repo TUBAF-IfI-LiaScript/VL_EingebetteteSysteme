@@ -9,9 +9,9 @@ der Relevanz dieses Wissens bei der hardwarenahen Codeentwicklung.
 |:----- | --- | ----------- |:-------------------------------- |
 | 1     | 1   | 20. Oktober | Einführung und Motivation        |
 |       | 2   | 22. Oktober | Geschichte                       |
-| 2     | 3   |             | Boolsche Algebra                 |
-| 3     | 4   |             | Minimierung von Schaltfunktionen |
-|       | 5   |             | Schaltnetze                      |
+| 2     | 3   | 27. Oktober | Boolsche Algebra                 |
+| 3     | 4   | 03. November| Minimierung von Schaltfunktionen |
+|       | 5   | 05. November| Schaltnetze                      |
 | 4     | 6   |             | Schaltwerke                      |
 | 5     | 7   |             | Schaltwerke                      |
 |       | 8   |             | Rechnerarithmetik                |
