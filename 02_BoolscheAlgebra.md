@@ -18,7 +18,7 @@ Link auf die aktuelle Vorlesung im Versionsmanagementsystem GitHub
 
 [https://github.com/TUBAF-IfI-LiaScript/VL_EingebetteteSysteme/blob/00_Einfuehrung](https://github.com/TUBAF-IfI-LiaScript/VL_EingebetteteSysteme/blob/dev/00_Einfuehrung)
 
-Die interaktive Form ist unter diese Link zu finden ->
+Die interaktive Form ist unter diesem Link zu finden ->
 [TODO]( )
 
 ---------------------------------------------------------------------
