@@ -387,9 +387,10 @@ $$
 
 + Es gibt $2^{2^n}$ verschieden $n$-stellige Boolesche Funktionen (also 16 zweistellige, 256 dreistellige, 65536 vierstellige, ...)
 
-
+{{1}}
 > Stellen Sie eine Wahrheitstafel für folgende Schaltfunktion auf:
 
+{{1}}
 $$
 \begin{aligned}
   f(x_1, x_2, x_3) &= \overline{x}_1\cdot \overline{x}_2 \cdot \overline{x}_3 + \\
@@ -400,10 +401,11 @@ $$
 \end{aligned}
 $$
 
+{{1}}
 + Wie groß muss die Wahrheitstafel sein?
 + Wie stellen Sie sicher, dass alle Einträge enthalten sind?
 
-{{1}}
+{{2}}
 | $x_1$ | $x_2$ | $x_3$ | f   | Term                                                      |
 | ----- | ----- | ----- | --- | --------------------------------------------------------- |
 | 0     | 0     | 0     | 1   | $\overline{x}_1\cdot \overline{x}_2 \cdot \overline{x}_3$ |
@@ -415,6 +417,7 @@ $$
 | 1     | 1     | 0     | 1   | $x_1\cdot x_2 \cdot \overline{x}_3$                       |
 | 1     | 1     | 1     | 0   |                                                           |
 
+{{3}}
 > Und die Schaltfunktionen?
 
 ### Schaltfunktionen mit einem Eingang
