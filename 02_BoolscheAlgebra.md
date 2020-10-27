@@ -77,7 +77,6 @@ style="width: 80%; min-width: 420px; max-width: 720px;"
 
 ## Digital vs. Analog
 
-                              --{{0}}--
 Was bedeutet der Übergang von der Ebene der physikalischen Phänomene (0) auf die
 Ebene der digitalen Logik (2)?
 
@@ -134,19 +133,10 @@ option='{
 
 Die Abtastung und Bildung des Digitalsignals erfolgt üblicherweise in konstanten Zeitintervallen, allerdings ist dies nicht zwingend notwendig.
 
-**Beispiel**
-
-Messung verschiedener Witterungsdaten für den Standort Freiberg im vergangenen Jahr.
-
- <iframe src="https://thingspeak.com/channels/856893/charts/1?bgcolor=%23ffffff&color=%23d62020&days=15&dynamic=true&type=line
-" width="500" height="250"></iframe>
-
-Der Datensatz besteht aus über 300.000 Datenpunkten, die minütlich erfasst wurden. Dies ist mit Blick auf die Dynamik der Witterung sicher etwas übertrieben.
-[https://thingspeak.com/channels/856893](https://thingspeak.com/channels/856893)
 
 ### Kontrastprogramm - Analoge Rechner
 
-![Meda42](https://upload.wikimedia.org/wikipedia/commons/c/c7/Analogrechner_MEDA_42TA-DSC4445.jpg)<!-- width="60%" --> [^1]
+![Meda42](https://upload.wikimedia.org/wikipedia/commons/c/c7/Analogrechner_MEDA_42TA-DSC4445.jpg)<!-- width="50%" --> [^1]
 
 [^1]: Wuselig, Deutsch: Analogrechner MEDA 42TA Aritma Prag, Tschechoslowakei, um 1970, https://commons.wikimedia.org/wiki/File:Analogrechner_MEDA_42TA-DSC4445.jpg
 
@@ -223,7 +213,10 @@ Für zwei Schalter (Inputs) lassen sich darauf aufbauen zwei grundlegende Schalt
 | ![Meda42](./images/02_BoolscheAlgebra/CircutSerial.png) <!-- width="80%" -->            | ![Meda42](./images/02_BoolscheAlgebra/CircutParallel.png) <!-- width="80%" -->                    |
 | Die Lampe leuchtet, wenn der erste und der zweite Schalter geschlossen werden               | Lampe leuchtet, wenn der erste oder der zweite Schalter geschlossen wird            |
 
-![Meda42](./images/02_BoolscheAlgebra/CircutComplex.png) <!-- width="80%" -->
+                      {{1}}
+****************************************************************
+
+![Schalter](./images/02_BoolscheAlgebra/CircutComplex.png) <!-- width="80%" -->
 
 > Es gibt verschiedene Lösungen, um die Lampe mit drei geschlossenen Schaltern zum Leuchten zu bringen. Wie viele? Wieviele Kombinationen von Schalterbelegungen sind möglich?
 
@@ -242,6 +235,8 @@ Dazu beschreiben wir die Wirkung des elektrischen Stromes
 + 0 / 1
 
 > Wie aber können logische Grundverknüpfungen identifiziert werden? Auf welchem Wege lassen diese sich praktisch realsieren?
+
+****************************************************************
 
 ## Boolsche Algebra
 
@@ -264,8 +259,7 @@ Historische Entwicklung:
 >
 > + um minimale Schaltungen zu entwerfen ?
 
-Lösung: Boolesche Algebra basierend auf den Vorarbeiten von G. Boole aus
-dem Jahre 1854
+__Lösung:__ Boolesche Algebra basierend auf den Vorarbeiten von G. Boole aus dem Jahre 1854
 
 + zwei Werte: 0 und 1
 + drei Boolesche Operationen: + , $\cdot$ sowie „not"
@@ -279,7 +273,7 @@ $B \{0,1\}$ (Zuständen) mit zwei Verknüpfungen auf $B$ für deren Element $a\i
 | Kommuntativität                   | $\begin{aligned} a + b &= b + a \\ a \cdot b &= b \cdot a\end{aligned}$            |
 | Distributivität                   | $\begin{aligned} a \cdot (b + c) &= (a \cdot b) + (a \cdot c) \\ a + (b \cdot c) &= (a + b) \cdot (a+c)) \end{aligned}$            |
 | Existenz eines neutralen Elements | $\begin{aligned}  0 + a &= a \\ 1\cdot a &= a\end{aligned}$           |
-| Exisitenz von Komplementen        |  $\begin{aligned}  a + \overline{a} &= 1 \\ a \cdot \overline{a} &= 0     |
+| Exisitenz von Komplementen        |  $\begin{aligned}  a + \overline{a} &= 1 \\ a \cdot \overline{a} &= 0   \end{aligned}$      |
 
 Aus dieser Definition lassen sich die zugehörigen Gesetze der boolschen Algebra ableiten:
 
@@ -334,15 +328,17 @@ f(x_1, x_2, x_3) &= x_1 \cdot x_2 \cdot \overline{x_3} + x_1 \cdot x_2 \cdot x_3
 \end{aligned}
 $$
 
+{{1}}
 **Anwendungsbeispiel 2**
 
+{{1}}
 $$
 \begin{aligned}
 f(x_1, x_2, x_3) &=\overline{w}x\overline{y}\,\overline{z}+\overline{w}x\overline{y}z+w\overline{x}y\overline{z}+wx\overline{y}\,\overline{z}+wx\overline{y}z \\
 \end{aligned}
 $$
 
-{{1}}
+{{2}}
 $$
 \begin{aligned}
 f(x_1, x_2, x_3) &=\overline{w}x\overline{y}\,\overline{z}+\overline{w}x\overline{y}z+w\overline{x}y\overline{z}+wx\overline{y}\,\overline{z}+wx\overline{y}z \\
@@ -356,14 +352,17 @@ f(x_1, x_2, x_3) &=\overline{w}x\overline{y}\,\overline{z}+\overline{w}x\overlin
 \end{aligned}
 $$
 
+{{3}}
 **Anwendungsbeispiel 3**
 
+{{3}}
 $$
 \begin{aligned}
 f(x_1, x_2) &=\overline{\overline{\overline{x}_1 x_2(x_1 +\overline{x}_1)}}  + x_1\overline{x_2x_1} \\
 \end{aligned}
 $$
 
+{{4}}
 $$
 \begin{aligned}
 f(x_1, x_2) &=\overline{\overline{\overline{x}_1 x_2(x_1 +\overline{x}_1)}}  + x_1\overline{x_2x_1} \\
@@ -404,6 +403,7 @@ $$
 + Wie groß muss die Wahrheitstafel sein?
 + Wie stellen Sie sicher, dass alle Einträge enthalten sind?
 
+{{1}}
 | $x_1$ | $x_2$ | $x_3$ | f   | Term                                                      |
 | ----- | ----- | ----- | --- | --------------------------------------------------------- |
 | 0     | 0     | 0     | 1   | $\overline{x}_1\cdot \overline{x}_2 \cdot \overline{x}_3$ |
