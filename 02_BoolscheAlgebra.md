@@ -341,7 +341,7 @@ $$
 {{2}}
 $$
 \begin{aligned}
-f(x_1, x_2, x_3) &=\overline{w}x\overline{y}\,\overline{z}+\overline{w}x\overline{y}z+w\overline{x}y\overline{z}+wx\overline{y}\,\overline{z}+wx\overline{y}z \\
+f(w,x,y,z) &=\overline{w}x\overline{y}\,\overline{z}+\overline{w}x\overline{y}z+w\overline{x}y\overline{z}+wx\overline{y}\,\overline{z}+wx\overline{y}z \\
 &  =\overline{w}x\overline{y}\left(\overline{z}+z\right)+wx\overline{y}\left(\overline{z}+z\right)+w\overline{x}y\overline{z} & {Kommut., 2xDistr.}\\
  & =\overline{w}x\overline{y}1+wx\overline{y}1+w\overline{x}y\overline{z} & {Komplement.}\\
  & =\overline{w}x\overline{y}+wx\overline{y}+w\overline{x}y\overline{z} & {Neutralitäts.}\\
@@ -393,11 +393,11 @@ $$
 {{1}}
 $$
 \begin{aligned}
-  f(x_1, x_2, x_3) &= \overline{x}_1\cdot \overline{x}_2 \cdot \overline{x}_3 + \\
-                   &= \overline{x}_1\cdot \overline{x}_2 \cdot x_3 + \\
-                   &=  x_1\cdot \overline{x}_2 \cdot x_3 + \\
-                   &=  x_1\cdot x_2 \cdot \overline{x}_3 + \\
-                   &=  x_1\cdot \overline{x}_2 \cdot \overline{x}_3 \\
+  f(x_1 , x_2, x_3) =&\overline{x}_1\cdot \overline{x}_2 \cdot \overline{x}_3 + \\
+                     &\overline{x}_1\cdot \overline{x}_2 \cdot x_3 + \\
+                     &x_1\cdot \overline{x}_2 \cdot x_3 + \\
+                     &x_1\cdot x_2 \cdot \overline{x}_3 + \\
+                     &x_1\cdot \overline{x}_2 \cdot \overline{x}_3 \\
 \end{aligned}
 $$
 
