@@ -279,7 +279,7 @@ Aus dieser Definition lassen sich die zugehörigen Gesetze der boolschen Algebra
 
 | Gesetz               | Definition                                                                                                                                 |
 | -------------------- | ------------------------------------------------------------------------------------------------------------------------------------------ |
-| Assoziativität       | $\begin{aligned} a + (b + c) &= (a + b) + c = a + b + c \\ a \cdot (b \cdot c) &= (a \cdot b) \cdot a = a \cdot b \cdot c\end{aligned}$    |
+| Assoziativität       | $\begin{aligned} a + (b + c) &= (a + b) + c = a + b + c \\ a \cdot (b \cdot c) &= (a \cdot b) \cdot c = a \cdot b \cdot c\end{aligned}$    |
 | Idempotenzgesetze    | $\begin{aligned} a + a &= a \\ a \cdot a &= a\end{aligned}$                                                                                |
 | Absorptionsgesetz    | $\begin{aligned} a + (a \cdot b) &= a \\ a \cdot (a + b) &= a\end{aligned}$                                                                |
 | Doppelnegation       | $\begin{aligned} a = \overline{\overline{a}}\end{aligned}$                                                                                 |
