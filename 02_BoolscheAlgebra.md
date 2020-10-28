@@ -279,7 +279,7 @@ Aus dieser Definition lassen sich die zugehörigen Gesetze der boolschen Algebra
 
 | Gesetz               | Definition                                                                                                                                 |
 | -------------------- | ------------------------------------------------------------------------------------------------------------------------------------------ |
-| Assoziativität       | $\begin{aligned} a + (b + c) &= (a + b) + a = a + b + c \\ a \cdot (b \cdot c) &= (a \cdot b) \cdot a = a \cdot b \cdot c\end{aligned}$    |
+| Assoziativität       | $\begin{aligned} a + (b + c) &= (a + b) + c = a + b + c \\ a \cdot (b \cdot c) &= (a \cdot b) \cdot a = a \cdot b \cdot c\end{aligned}$    |
 | Idempotenzgesetze    | $\begin{aligned} a + a &= a \\ a \cdot a &= a\end{aligned}$                                                                                |
 | Absorptionsgesetz    | $\begin{aligned} a + (a \cdot b) &= a \\ a \cdot (a + b) &= a\end{aligned}$                                                                |
 | Doppelnegation       | $\begin{aligned} a = \overline{\overline{a}}\end{aligned}$                                                                                 |
@@ -449,20 +449,20 @@ Antivalenz == exklusives OR == XOR == $\oplus$
 
 | Eingang x | Eingang y |                              |             | Antivalenz                                         | Disjunktion  |
 | --------- | --------- | ---------------------------- | ----------- | -------------------------------------------------- | ------------ |
-| $x = 0$   | $x = 0$   | 0                            | 0           | 0                                                  | 0            |
-| $x = 0$   | $x = 1$   | 1                            | 1           | 1                                                  | 1            |
-| $x = 1$   | $x = 0$   | 0                            | 0           | 1                                                  | 1            |
-| $x = 1$   | $x = 1$   | 0                            | 1           | 0                                                  | 1            |
+| $x = 0$   | $y = 0$   | 0                            | 0           | 0                                                  | 0            |
+| $x = 0$   | $y = 1$   | 1                            | 1           | 1                                                  | 1            |
+| $x = 1$   | $y = 0$   | 0                            | 0           | 1                                                  | 1            |
+| $x = 1$   | $y = 1$   | 0                            | 1           | 0                                                  | 1            |
 |           |           | $f(x,y)=\overline{x}\cdot y$ | $f(x,y)= y$ | $f(x,y)=x\cdot \overline{y} + \overline{x}\cdot y$ | $f(x,y)=x+y$ |
 
 negiertes ODER == NOR == Peirce-Funktion
 
 | Eingang x | Eingang y | negiertes ODER           | Äquivalenz                                           |                        |                         |
 | --------- | --------- | ------------------------ | ---------------------------------------------------- | ---------------------- | ----------------------- |
-| $x = 0$   | $x = 0$   | 1                        | 1                                                    | 1                      | 1                       |
-| $x = 0$   | $x = 1$   | 0                        | 0                                                    | 0                      | 0                       |
-| $x = 1$   | $x = 0$   | 0                        | 0                                                    | 1                      | 1                       |
-| $x = 1$   | $x = 1$   | 0                        | 1                                                    | 0                      | 1                       |
+| $x = 0$   | $y = 0$   | 1                        | 1                                                    | 1                      | 1                       |
+| $x = 0$   | $y = 1$   | 0                        | 0                                                    | 0                      | 0                       |
+| $x = 1$   | $y = 0$   | 0                        | 0                                                    | 1                      | 1                       |
+| $x = 1$   | $y = 1$   | 0                        | 1                                                    | 0                      | 1                       |
 |           |           | $f(x,y)=\overline{x+ y}$ | $f(x,y)= x\cdot y + \overline{x} \cdot \overline{y}$ | $f(x,y)=\overline{y} $ | $f(x,y)=x+\overline{y}$ |
 
 negiertes UND == NAND == Sheffer-Funktion genannt
