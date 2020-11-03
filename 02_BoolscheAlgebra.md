@@ -134,7 +134,7 @@ option='{
 Die Abtastung und Bildung des Digitalsignals erfolgt üblicherweise in konstanten Zeitintervallen, allerdings ist dies nicht zwingend notwendig.
 
 
-### Kontrastprogramm - Analoge Rechner
+### Exkurs: Kontrastprogramm - Analoge Rechner
 
 ![Meda42](https://upload.wikimedia.org/wikipedia/commons/c/c7/Analogrechner_MEDA_42TA-DSC4445.jpg)<!-- width="50%" --> [^1]
 
@@ -475,7 +475,7 @@ negiertes UND == NAND == Sheffer-Funktion genannt
 | $x = 1$   | $x = 1$   | 0                     | 1                          | 0                              | 1            |
 |           |           | $f(x,y)=\overline{x}$ | $f(x,y)= \overline{x} + y$ | $f(x,y)=\overline{x \cdot y} $ | $f(x,y)=1$   |
 
-### Technische Realisierung
+### Exkurs: Technische Realisierung
 
 Ein Gatter ist eine (elektrotechnische) „Black Box“ mit einem, zwei oder
 mehreren Eingängen $A,B,C,... \in {0,1}$ und genau einem Ausgang $Y\in {0,1}$
@@ -497,6 +497,8 @@ zur Realisierung einer Funktion $Y = f (A,B,C,...)$
 
 {{2}}
 ![instruction-set](./images/02_BoolscheAlgebra/SchaltwerkXORLoesung.png)<!-- width="65%" -->
+
+Wir gehen bei der Frage der Schaltnetze in Vorlesung 04 nochmals auf die technische Realsierung ein.
 
 ## Hausaufgaben
 
