@@ -506,9 +506,9 @@ zur Realisierung einer Funktion $Y = f (A,B,C,...)$
 
 2. Studieren Sie das Datenblatt eines AND Gates, welches Sie unter [Link](https://www.ti.com/lit/ds/symlink/sn74lvc2g08-ep.pdf?ts=1603723493940&ref_url=https%253A%252F%252Fwww.google.com%252F) finden und beantworten Sie folgende Fragen:
 
-   + Wie groß ist die maximale Verzögerung, mit der der Ausgang dem Eingang nachfolgt.
+   + Wie groß ist die maximale Verzögerung, mit der der Ausgang dem Eingang nachfolgt?
    + Was bedeuten die Kreuze in der Wahrheitstafel (_Function table_)?
-   + Können Sie mit dem Gater auch eine Negation des Eingangssignals realsieren?
+   + Können Sie mit dem Gater auch eine Negation des Eingangssignals realisieren?
 
 3. Entwerfen Sie unter ausschließlicher Verwendung der Gatter UND, ODER und NICHT Schaltnetze, die die Ausgaben $P$ und $Q$ aus den Eingängen $X$, $Y$ und $Z$ generieren. Dabei ist
 
