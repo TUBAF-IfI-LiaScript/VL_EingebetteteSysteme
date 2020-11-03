@@ -16,7 +16,7 @@ import: https://raw.githubusercontent.com/LiaTemplates/NetSwarm-Simulator/master
 
 Link auf die aktuelle Vorlesung im Versionsmanagementsystem GitHub
 
-[https://github.com/TUBAF-IfI-LiaScript/VL_EingebetteteSysteme/blob/00_Einfuehrung](https://github.com/TUBAF-IfI-LiaScript/VL_EingebetteteSysteme/blob/dev/00_Einfuehrung)
+[https://github.com/TUBAF-IfI-LiaScript/VL_EingebetteteSysteme/blob/master/02_BoolscheAlgebra.md](https://github.com/TUBAF-IfI-LiaScript/VL_EingebetteteSysteme/blob/master/02_BoolscheAlgebra.md)
 
 Die interaktive Form ist unter diesem  zu finden [Link](https://liascript.github.io/course/?https://raw.githubusercontent.com/TUBAF-IfI-LiaScript/VL_EingebetteteSysteme/master/02_BoolscheAlgebra.md#1).
 
@@ -279,7 +279,7 @@ Aus dieser Definition lassen sich die zugehörigen Gesetze der boolschen Algebra
 
 | Gesetz               | Definition                                                                                                                                 |
 | -------------------- | ------------------------------------------------------------------------------------------------------------------------------------------ |
-| Assoziativität       | $\begin{aligned} a + (b + c) &= (a + b) + a = a + b + c \\ a \cdot (b \cdot c) &= (a \cdot b) \cdot a = a \cdot b \cdot c\end{aligned}$    |
+| Assoziativität       | $\begin{aligned} a + (b + c) &= (a + b) + c = a + b + c \\ a \cdot (b \cdot c) &= (a \cdot b) \cdot c = a \cdot b \cdot c\end{aligned}$    |
 | Idempotenzgesetze    | $\begin{aligned} a + a &= a \\ a \cdot a &= a\end{aligned}$                                                                                |
 | Absorptionsgesetz    | $\begin{aligned} a + (a \cdot b) &= a \\ a \cdot (a + b) &= a\end{aligned}$                                                                |
 | Doppelnegation       | $\begin{aligned} a = \overline{\overline{a}}\end{aligned}$                                                                                 |
@@ -318,10 +318,10 @@ Regeln zur Umformung Boolscher Gleichungen
 
 $$
 \begin{aligned}
-f(x_1, x_2, x_3) &= x_1 \cdot x_2 \cdot \overline{x_3} + x_1 \cdot x_2 \cdot x_3 + x_1 \cdot \overline{x_2} \cdot _3 \\
-&= x_1 \cdot x_2 \cdot \overline{x_3} +\textcolor{red}{x_1 \cdot x_2 \cdot x_3}  + x_1 \cdot x_2 \cdot x_3 + x_1 \cdot \overline{x_2} \cdot _3 & (Idempotenzgesetz) \\
-&= \textcolor{red}{x_1 \cdot x_2 \cdot ( \overline{x_3} + x_3)}  + x_1 \cdot x_2 \cdot x_3 + x_1 \cdot \overline{x_2} \cdot _3 & (Distributivgesetz) \\
-&= x_1 \cdot x_2 \cdot ( \overline{x_3} + x_3)  + \textcolor{red}{x_1 \cdot x_3 \cdot x_2  + x_1  \cdot _3 \cdot \overline{x_2}} & (Kommuativgesetz) \\
+f(x_1, x_2, x_3) &= x_1 \cdot x_2 \cdot \overline{x_3} + x_1 \cdot x_2 \cdot x_3 + x_1 \cdot \overline{x_2} \cdot x_3 \\
+&= x_1 \cdot x_2 \cdot \overline{x_3} +\textcolor{red}{x_1 \cdot x_2 \cdot x_3}  + x_1 \cdot x_2 \cdot x_3 + x_1 \cdot \overline{x_2} \cdot x_3 & (Idempotenzgesetz) \\
+&= \textcolor{red}{x_1 \cdot x_2 \cdot ( \overline{x_3} + x_3)}  + x_1 \cdot x_2 \cdot x_3 + x_1 \cdot \overline{x_2} \cdot x_3 & (Distributivgesetz) \\
+&= x_1 \cdot x_2 \cdot ( \overline{x_3} + x_3)  + \textcolor{red}{x_1 \cdot x_3 \cdot x_2  + x_1  \cdot x_3 \cdot \overline{x_2}} & (Kommuativgesetz) \\
 &= x_1 \cdot x_2 \cdot ( \overline{x_3} + x_3)  + \textcolor{red}{x_1 \cdot x_3 \cdot (x_2  + \overline{x_2})} & (Distributivgesetz) \\
 &= x_1 \cdot x_2 \cdot \textcolor{red}{(1)}  + x_1 \cdot x_3 \cdot \textcolor{red}{(1)}  & (Komplementäres Element) \\
 &= x_1 \cdot x_2 \cdot \textcolor{red}{(1)}  + x_1 \cdot x_3 \cdot \textcolor{red}{(1)} & (Neutrales Element) \\
@@ -334,14 +334,14 @@ $$
 {{1}}
 $$
 \begin{aligned}
-f(x_1, x_2, x_3) &=\overline{w}x\overline{y}\,\overline{z}+\overline{w}x\overline{y}z+w\overline{x}y\overline{z}+wx\overline{y}\,\overline{z}+wx\overline{y}z \\
+f(w,x,y,z) &=\overline{w}x\overline{y}\,\overline{z}+\overline{w}x\overline{y}z+w\overline{x}y\overline{z}+wx\overline{y}\,\overline{z}+wx\overline{y}z \\
 \end{aligned}
 $$
 
 {{2}}
 $$
 \begin{aligned}
-f(x_1, x_2, x_3) &=\overline{w}x\overline{y}\,\overline{z}+\overline{w}x\overline{y}z+w\overline{x}y\overline{z}+wx\overline{y}\,\overline{z}+wx\overline{y}z \\
+f(w,x,y,z) &=\overline{w}x\overline{y}\,\overline{z}+\overline{w}x\overline{y}z+w\overline{x}y\overline{z}+wx\overline{y}\,\overline{z}+wx\overline{y}z \\
 &  =\overline{w}x\overline{y}\left(\overline{z}+z\right)+wx\overline{y}\left(\overline{z}+z\right)+w\overline{x}y\overline{z} & {Kommut., 2xDistr.}\\
  & =\overline{w}x\overline{y}1+wx\overline{y}1+w\overline{x}y\overline{z} & {Komplement.}\\
  & =\overline{w}x\overline{y}+wx\overline{y}+w\overline{x}y\overline{z} & {Neutralitäts.}\\
@@ -393,11 +393,11 @@ $$
 {{1}}
 $$
 \begin{aligned}
-  f(x_1, x_2, x_3) &= \overline{x}_1\cdot \overline{x}_2 \cdot \overline{x}_3 + \\
-                   &= \overline{x}_1\cdot \overline{x}_2 \cdot x_3 + \\
-                   &=  x_1\cdot \overline{x}_2 \cdot x_3 + \\
-                   &=  x_1\cdot x_2 \cdot \overline{x}_3 + \\
-                   &=  x_1\cdot \overline{x}_2 \cdot \overline{x}_3 \\
+  f(x_1 , x_2, x_3) =&\overline{x}_1\cdot \overline{x}_2 \cdot \overline{x}_3 + \\
+                     &\overline{x}_1\cdot \overline{x}_2 \cdot x_3 + \\
+                     &x_1\cdot \overline{x}_2 \cdot x_3 + \\
+                     &x_1\cdot x_2 \cdot \overline{x}_3 + \\
+                     &x_1\cdot \overline{x}_2 \cdot \overline{x}_3 \\
 \end{aligned}
 $$
 
@@ -449,20 +449,20 @@ Antivalenz == exklusives OR == XOR == $\oplus$
 
 | Eingang x | Eingang y |                              |             | Antivalenz                                         | Disjunktion  |
 | --------- | --------- | ---------------------------- | ----------- | -------------------------------------------------- | ------------ |
-| $x = 0$   | $x = 0$   | 0                            | 0           | 0                                                  | 0            |
-| $x = 0$   | $x = 1$   | 1                            | 1           | 1                                                  | 1            |
-| $x = 1$   | $x = 0$   | 0                            | 0           | 1                                                  | 1            |
-| $x = 1$   | $x = 1$   | 0                            | 1           | 0                                                  | 1            |
+| $x = 0$   | $y = 0$   | 0                            | 0           | 0                                                  | 0            |
+| $x = 0$   | $y = 1$   | 1                            | 1           | 1                                                  | 1            |
+| $x = 1$   | $y = 0$   | 0                            | 0           | 1                                                  | 1            |
+| $x = 1$   | $y = 1$   | 0                            | 1           | 0                                                  | 1            |
 |           |           | $f(x,y)=\overline{x}\cdot y$ | $f(x,y)= y$ | $f(x,y)=x\cdot \overline{y} + \overline{x}\cdot y$ | $f(x,y)=x+y$ |
 
 negiertes ODER == NOR == Peirce-Funktion
 
 | Eingang x | Eingang y | negiertes ODER           | Äquivalenz                                           |                        |                         |
 | --------- | --------- | ------------------------ | ---------------------------------------------------- | ---------------------- | ----------------------- |
-| $x = 0$   | $x = 0$   | 1                        | 1                                                    | 1                      | 1                       |
-| $x = 0$   | $x = 1$   | 0                        | 0                                                    | 0                      | 0                       |
-| $x = 1$   | $x = 0$   | 0                        | 0                                                    | 1                      | 1                       |
-| $x = 1$   | $x = 1$   | 0                        | 1                                                    | 0                      | 1                       |
+| $x = 0$   | $y = 0$   | 1                        | 1                                                    | 1                      | 1                       |
+| $x = 0$   | $y = 1$   | 0                        | 0                                                    | 0                      | 0                       |
+| $x = 1$   | $y = 0$   | 0                        | 0                                                    | 1                      | 1                       |
+| $x = 1$   | $y = 1$   | 0                        | 1                                                    | 0                      | 1                       |
 |           |           | $f(x,y)=\overline{x+ y}$ | $f(x,y)= x\cdot y + \overline{x} \cdot \overline{y}$ | $f(x,y)=\overline{y} $ | $f(x,y)=x+\overline{y}$ |
 
 negiertes UND == NAND == Sheffer-Funktion genannt
@@ -508,9 +508,9 @@ Wir gehen bei der Frage der Schaltnetze in Vorlesung 04 nochmals auf die technis
 
 2. Studieren Sie das Datenblatt eines AND Gates, welches Sie unter [Link](https://www.ti.com/lit/ds/symlink/sn74lvc2g08-ep.pdf?ts=1603723493940&ref_url=https%253A%252F%252Fwww.google.com%252F) finden und beantworten Sie folgende Fragen:
 
-   + Wie groß ist die maximale Verzögerung, mit der der Ausgang dem Eingang nachfolgt.
+   + Wie groß ist die maximale Verzögerung, mit der der Ausgang dem Eingang nachfolgt?
    + Was bedeuten die Kreuze in der Wahrheitstafel (_Function table_)?
-   + Können Sie mit dem Gater auch eine Negation des Eingangssignals realsieren?
+   + Können Sie mit dem Gater auch eine Negation des Eingangssignals realisieren?
 
 3. Entwerfen Sie unter ausschließlicher Verwendung der Gatter UND, ODER und NICHT Schaltnetze, die die Ausgaben $P$ und $Q$ aus den Eingängen $X$, $Y$ und $Z$ generieren. Dabei ist
 
