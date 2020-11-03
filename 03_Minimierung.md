@@ -7,7 +7,7 @@ language: de
 narrator: Deutsch Female
 
 import: https://raw.githubusercontent.com/LiaTemplates/NetSwarm-Simulator/master/README.md
-
+        https://github.com/LiaTemplates/Pyodide
 -->
 
 # 03 - Minimierung boolscher Ausdrücke
@@ -811,3 +811,27 @@ Regeln zur Bildung der Schleifen:
 + Suche die Schleifen mit der größten Überdeckung von Zellen. Die Schleifen umfassen jeweils $2^n$ mit $(n= 0,1,2,...)$ benachbarte Zellen. Starten Sie mit den kleinsten Schleifen an.
 + Überlappungen führen nur dann zu minimaleren Ausdrücken, wenn dadurch größere Schleifen gebildet werden können.
 + Die minimale Funktion besteht aus der kleinsten Schleifenmenge, die alle individuell möglichst groß sind.
+
+
+**Und wie geht es weiter?**
+
+```python   Optimization.py
+from sympy.logic import SOPform
+from sympy import symbols
+x3, x2, x1, x0 = symbols('x3 x2 x1 x0')
+
+minterms = [[0, 1, 1, 0],
+[0, 1, 1, 1],
+[1, 0, 0, 0],
+[1, 0, 0, 1],
+[1, 0, 1, 0],
+[1, 0, 1, 1],
+[1, 1, 0, 0],
+[1, 1, 0, 1],
+[1, 1, 1, 0]]
+result = SOPform([x3, x2, x1, x0], minterms)
+print(result)
+
+sys.version
+```
+@Pyodide.eval
