@@ -519,7 +519,7 @@ Wählen Sie immer die größtmöglichen Schleifen und vermeiden Sie "Einzeleleme
 Falsch - $f =\overline{w}\,\overline{y} + \overline{w}xyz$
 </td>
 <td>
-Richtig - $f = \overline{w}xz + \overline{w}xz$
+Richtig - $f = \overline{w}\,\overline{y} + \overline{w}xz$
 </td>
 </tr>
 </table>
@@ -577,12 +577,12 @@ $f = z$
 | $y z$                       | 0                                                | 0               | 0    | 0               |
 | $y \overline{z}$            | <span style="background-color: #ff0000">1</span> | 0               | 0    | <span style="background-color: #ff0000">1</span>               |
 
- $f = \overline{x}\,\overline{z}$
 
  ********************************************************************************
 
       {{4-5}}
  ********************************************************************************
+ $f = \overline{x}\,\overline{z}$
 
 |                             | $\overline{w}\,\overline{x}$ | $\overline{w}x$ | $wx$ | $w\overline{x}$ |
 | --------------------------- | --------------------------- | --------------- | ---- | --------------- |
