@@ -31,9 +31,9 @@ jobs:
       - name: Run pandoc markdown to tex
         run: |
           pandoc --toc --top-level-division=chapter -V linkcolor:blue --pdf-engine=xelatex --listings --include-in-header=.github/workflows/listings.tex -f markdown -t latex -o output/script.tex *.mdx
-      - name: Run pandoc markdown to pdf
-        run: |
-          pandoc --toc --top-level-division=chapter -V linkcolor:blue --pdf-engine=xelatex --listings --include-in-header=.github/workflows/listings.tex -o output/script.pdf *.mdx
+      #- name: Run pandoc markdown to pdf
+      #  run: |
+      #    pandoc --toc --top-level-division=chapter -V linkcolor:blue --pdf-engine=xelatex --listings --include-in-header=.github/workflows/listings.tex -o output/script.pdf *.mdx
       # Speichern als Artifact
       - uses: actions/upload-artifact@master
         with:
