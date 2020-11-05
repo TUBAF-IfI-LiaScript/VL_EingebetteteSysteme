@@ -413,7 +413,7 @@ $$
 | 0     | 1     | 0     | 0   |                                                           |
 | 0     | 1     | 1     | 0   |                                                           |
 | 1     | 0     | 0     | 1   | $x_1\cdot \overline{x}_2 \cdot \overline{x}_3$            |
-| 1     | 0     | 1     | 1   | $ x_1\cdot \overline{x}_2 \cdot x_3$                      |
+| 1     | 0     | 1     | 1   | $x_1\cdot \overline{x}_2 \cdot x_3$                       | 
 | 1     | 1     | 0     | 1   | $x_1\cdot x_2 \cdot \overline{x}_3$                       |
 | 1     | 1     | 1     | 0   |                                                           |
 
