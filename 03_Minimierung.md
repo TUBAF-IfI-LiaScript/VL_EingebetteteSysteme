@@ -10,7 +10,7 @@ import: https://raw.githubusercontent.com/LiaTemplates/NetSwarm-Simulator/master
         https://github.com/LiaTemplates/Pyodide
 -->
 
-# 03 - Minimierung boolscher Ausdrücke
+# 03 - Minimierung von boolschen Funktionen I
 
 **TU Bergakademie Freiberg - Wintersemester 2020 / 21**
 
@@ -214,7 +214,7 @@ Und nun in der Kombination ....
 **Kanonische Konjunktive Normalform (KKNF)**
 
 + eindeutige Darstellung einer booleschen Funktion f als Konjunktion von Maxtermen
-+  Beispiel: $( x + y ) \cdot ( x + y ) \cdot ( x + y )$ ist KKNF von $f(x,y)$
++ Beispiel: $( x + y ) \cdot ( x + y ) \cdot ( x + y )$ ist KKNF von $f(x,y)$
 ********************************************************************************
 
        {{3-4}}
@@ -775,7 +775,7 @@ Folglich ergeben sich 6 Eingangskombinationen, die für unsere Ausgabe irrelevan
 | 0   | 1   | 1   | 0   | 1                                     |
 | 0   | 1   | 1   | 1   | 0                                     |
 | 1   | 0   | 0   | 0   | 1                                     |
-| 1   | 0   | 0   | 1   | 0                                     |
+| 1   | 0   | 0   | 1   | 1                                     |
 | 1   | 0   | 1   | 0   | <span style="color: #ff0000">D</span> |
 | 1   | 0   | 1   | 1   | <span style="color: #ff0000">D</span> |
 | 1   | 1   | 0   | 0   | <span style="color: #ff0000">D</span> |
@@ -791,7 +791,7 @@ Folglich ergeben sich 6 Eingangskombinationen, die für unsere Ausgabe irrelevan
 |                              | $\overline{w}\,\overline{x}$ | $\overline{w}x$ | $wx$ | $w\overline{x}$ |
 | ---------------------------- | ---------------------------- | --------------- | ---- | --------------- |
 | $\overline{y}\,\overline{z}$ | 1                            | 0               | D    | 1               |
-| $\overline{y} z$             | 0                            | 1               | D    | 0               |
+| $\overline{y} z$             | 0                            | 1               | D    | 1               |
 | $y z$                        | 1                            | 0               | D    | D               |
 | $y \overline{z}$             | 1                            | 1               | D    | D               |
 
@@ -800,7 +800,7 @@ Welche Gleichung für `d` lesen Sie draus ab?
 ********************************************************************************
 
 {{3}}
-$d = \overline{x}\,\overline{z} + y\overline{z} + \overline{x}y + x\overline{y}z$
+$d = w + y\overline{z} + \overline{x}y +  x\overline{y}z + \overline{x}\,\overline{z}$
 
 ## Zusammenfassung
 
@@ -835,3 +835,10 @@ print(result)
 sys.version
 ```
 @Pyodide.eval
+
+
+## Hausaufgaben
+
++ Lösen Sie das Minimierungsproblem der Einstiegsaufgabe mit dem Karnaugh-Veitch Diagramm.
++ Stellen Sie die Wahrheitstafel für ein weiteres Element der Sieben-Segmentanzeige auf. Minimieren Sie den Ausdruck.
++ Erstellen Sie mit dem Python-Beispiel eine eigene (willkürliche) Wahrheitstafel und vereinfachen Sie diese mit dem Karnaugh-Veit Diagramm und auf analytischem Wege.
