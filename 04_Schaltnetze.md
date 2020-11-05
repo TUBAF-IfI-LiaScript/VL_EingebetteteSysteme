@@ -7,11 +7,22 @@ language: de
 narrator: Deutsch Female
 
 import: https://raw.githubusercontent.com/LiaTemplates/NetSwarm-Simulator/master/README.md
-import:   https://raw.githubusercontent.com/LiaTemplates/DigiSim/master/README.md
+        https://raw.githubusercontent.com/LiaTemplates/DigiSim/master/README.md
+        https://github.com/LiaTemplates/Pyodide
 
+mark: <span style="background-color: @0;
+                           display: flex;
+                           width: calc(100% + 32px);
+                           margin: -16px;
+                           padding: 6px 16px 6px 16px;
+                           ">@1</span>
+
+red:  @mark(#FF888888,@0)
+blue: @mark(lightblue,@0)
+gray: @mark(gray,@0)
 -->
 
-# 04 - Schaltnetze
+## 04 - Minimierung von boolschen Funktionen / Schaltnetze
 
 **TU Bergakademie Freiberg - Wintersemester 2020 / 21**
 
@@ -24,14 +35,29 @@ Die interaktive Form ist unter diese Link zu finden ->
 
 ---------------------------------------------------------------------
 
+** Zielstellung der Veranstaltung**
+
+An dieser Stelle setzen wir unsere Diskussion der Minimierung von Schaltfunktionen fort und fragen dann nach deren Realsierbarkeit mittels Schaltnetzen.
+
+---------------------------------------------------------------------
+
 ** Fragen an die Veranstaltung**
 
-+ Grenzen Sie die Begriffe Schaltnetz und Schaltfunktion voneinander ab.
++ Erläutern Sie das Verfahren von Quine-McCluskey
++ Grenzen Sie die Begriffe Schaltnetz und Schaltfunktion voneinander
+ab.
 + Erklären Sie die Idee von Multiplexern und Kodierern.
-+ Welche Besonderheit besteht bei der Ableitung der Schaltfunktionen für einen Dekodierer? Was ist ein SLPD und welche Ausprägungen kennen Sie davon.
-+ Wie lassen sich mit einem Multiplexer beliebige Wahrheitstafeln abbilden. Welche Grenzen hat dieser Ansatz?
-+ Welche Gatterkombinationen sind geeignet um beliebige Schaltfunktionen damit umzusetzen?
++ Welche Besonderheit besteht bei der Ableitung der Schaltfunktionen
+für einen Dekodierer? Was ist ein SLPD und welche Ausprägungen
+kennen Sie davon.
++ Wie lassen sich mit einem Multiplexer beliebige Wahrheitstafeln
+abbilden. Welche Grenzen hat dieser Ansatz?
++ Welche Gatterkombinationen sind geeignet um beliebige
+Schaltfunktionen damit umzusetzen?
 
+---------------------------------------------------------------------
+
+** Einordung**
 
 <!--
 style="width: 80%; min-width: 420px; max-width: 720px;"
@@ -71,34 +97,618 @@ style="width: 80%; min-width: 420px; max-width: 720px;"
 
 ---------------------------------------------------------------------
 
-## Gatter
 
-Ein Logikgatter, auch nur Gatter ist die technische Realisierung einer booleschen Funktion, die binäre Eingangssignale zu einem binären Ausgangssignal verarbeitet. Die Eingangssignale werden durch Implementierung logischer Operatoren, wie der Konjunktion (Und-Gatter), der Disjunktion (Oder-Gatter), der Kontravalenz (Exklusiv-Oder-Gatter) oder der Negation (Nicht-Gatter) zu einem einzigen logischen Ergebnis umgewandelt und auf das Ausgangssignal abgebildet.
+## Beispielanwendung
 
-Gatterfunktionen können zudem einen negierten Ausgang abbilden: NAND-Gatter (Nicht-Und), NOR-Gatter (Nicht-Oder), XNOR-Gatter (Nicht-Exklusiv-Oder).
+Nehmen wir an, dass wir die Logik einer Kaffeemaschine umsetzen wollen. Diese
+verfügt über verschiedene Eingänge wie Sensoren an der Heizplatte, einem
+Füllstandsmesser, Drucksensorik usw. Wir gehen davon aus, dass diese lediglich
+digitale Ausgaben generiert.
+
+Die Variable $y$ gibt entsprechend einen Fehlerzustand wieder und ist zum
+Beispiel mit einer LED verknüpft. Ab Zustand 6 bis 14 soll diese Leuchten.
+
+<table>
+<tr>
+<td>
+| $x_3$ | $x_2$ | $x_1$ | $x_0$ | $y$ | Zustand                  |
+| ----- | ----- | ----- | ----- | --- | ------------------------ |
+| 0     | 0     | 0     | 0     | 0   | 0  - Initialisierung     |
+| 0     | 0     | 0     | 1     | 0   | 1  - Heizplatte erwärmen |
+| 0     | 0     | 1     | 0     | 0   | 2  - Wasserkocher an     |
+| 0     | 0     | 1     | 1     | 0   | 3  -                     |
+| 0     | 1     | 0     | 0     | 0   | 4  -                     |
+| 0     | 1     | 0     | 1     | 0   | 5  -                     |
+| 0     | 1     | 1     | 0     | 1   | 6  - Wasser fehlt        |
+| 0     | 1     | 1     | 1     | 1   | 7  - Kaffeefach geöffnet |
+| 1     | 0     | 0     | 0     | 1   | 8  - Druckabfall         |
+| 1     | 0     | 0     | 1     | 1   | 9  - ...                 |
+| 1     | 0     | 1     | 0     | 1   | 10  -                    |
+| 1     | 0     | 1     | 1     | 1   | 11  -                    |
+| 1     | 1     | 0     | 0     | 1   | 12  -                    |
+| 1     | 1     | 0     | 1     | 1   | 13  -                    |
+| 1     | 1     | 1     | 0     | 1   | 14  -  Wartung fällig    |
+| 1     | 1     | 1     | 1     | 0   | 15  -  Kaffee fertig     |
+</td>
+<td>
+![Bild](./images/04_Schaltnetze/Kaffeemaschine.jpg) <!--style="width: 50%; max-width:700px"-->
+</td>
+</tr>
+</table>
 
 
-| Funktion                                                                                                           | IEC 60617-12 : 1997                                           | ANSI/IEEE Std 91/91a-1991                                        |
-| ------------------------------------------------------------------------------------------------------------------ | ------------------------------------------------------------- | ---------------------------------------------------------------- |
-| $\begin{aligned} UN&D \\ Y &= A\cdot B \\ Y&=A\wedge B\end{aligned}$                                               | ![Bild](./images/04_Schaltnetze/188px-IEC_AND_label.svg.png)  | ![Bild](./images/04_Schaltnetze/188px-Logic-gate-and-us.svg.png) |
-| $\begin{aligned} OR  & \\ Y &= A+ B \\ Y&=A\vee B\end{aligned}$                                                    | ![Bild](./images/04_Schaltnetze/188px-IEC_OR_label.svg.png)   | ![Bild](./images/04_Schaltnetze/188px-Or-gate-en.svg.png)        |
-| $\begin{aligned} NO&T \\ Y &= \overline{A} \\ Y&=A\end{aligned}$                                                   | ![Bild](./images/04_Schaltnetze/188px-IEC_NOT_label.svg.png)  | ![Bild](./images/04_Schaltnetze/188px-Not-gate-en.svg.png)       |
-| $\begin{aligned} NA&ND \\ Y &= \overline{A\cdot B} \\ Y&=A\overline{\wedge} B = \overline{A\wedge B}\end{aligned}$ | ![Bild](./images/04_Schaltnetze/188px-IEC_NAND_label.svg.png) | ![Bild](./images/04_Schaltnetze/188px-Nand-gate-en.svg.png)      |
-| $\begin{aligned} NO&R \\ Y &= \overline{A + B} \\ Y&=A\overline{\vee} B = \overline{A\vee B} \end{aligned}$        | ![Bild](./images/04_Schaltnetze/188px-IEC_NOR_label.svg.png)  | ![Bild](./images/04_Schaltnetze/188px-Nor-gate-en.svg.png)       |
-| $\begin{aligned} XO&R \\ Y &= A \oplus B \\ Y&=A\underline{\vee} B\end{aligned}$                                   | ![Bild](./images/04_Schaltnetze/188px-IEC_XOR_label.svg.png)  | ![Bild](./images/04_Schaltnetze/188px-Xor-gate-en.svg.png)       |
-| $\begin{aligned} XN&OR \\ Y &= A \odot B \\ Y&=A\overline{\underline{\vee}} B =\overline{A\underline{\vee}B}\end{aligned}$                                                                 | ![Bild](./images/04_Schaltnetze/188px-IEC_XNOR_label.svg.png)  | ![Bild](./images/04_Schaltnetze/188px-Xnor-gate-en.svg.png)       |
+Wie muss also die Schaltung für diese Aufgabe umgesetzt werden?
 
-Im englischen Sprachraum waren und sind die amerikanischen Symbole (rechte Spalte) üblich. Die IEC-Symbole sind international auf beschränkte Akzeptanz gestoßen und werden in der amerikanischen Literatur (fast) durchgängig ignoriert.
+### Schritt 1: Aufstellen der Gleichungen
 
-_Frage:_ Wie viele Schaltfunktionen lassen sich mit zwei Eingängen umsetzen? Ist obige Aufzählung also vollständig?
+**Kanonische Disjunktive Normalform (KDNF)**
 
-[[ ]] 2
-[[ ]] 6 wie oben gezeigt
-[[ ]] 8
-[[X]] 16
-[[?]] Überlegen Sie, wie viele Kombinationen die Ausgangswerte $y$ abbilden können
++ eindeutige Darstellung einer booleschen Funktion f als Disjunktion von Mintermen
++ Beispiel: $( x \cdot y \cdot z ) + ( x \cdot y \cdot z ) + ( x \cdot y \cdot z )$ ist KDNF von $f(x,y,z)$
 
-## Schaltnetze
+**Kanonische Konjunktive Normalform (KKNF)**
+
++ eindeutige Darstellung einer booleschen Funktion f als Konjunktion von Maxtermen
++ Beispiel: $( x + y ) \cdot ( x + y ) \cdot ( x + y )$ ist KKNF von $f(x,y)$
+
+{{0-1}}
+| $x_3$ | $x_2$ | $x_1$ | $x_0$ | $y$ | Minterme | Maxterme |
+| ----- | ----- | ----- | ----- | --- | -------- | -------- |
+| 0     | 0     | 0     | 0     | 0   | ???      | ???      |
+| 0     | 0     | 0     | 1     | 0   |          |          |
+| 0     | 0     | 1     | 0     | 0   |          |          |
+| 0     | 0     | 1     | 1     | 0   |          |          |
+| 0     | 1     | 0     | 0     | 0   |          |          |
+| 0     | 1     | 0     | 1     | 0   |          |          |
+| 0     | 1     | 1     | 0     | 1   |          |          |
+| 0     | 1     | 1     | 1     | 1   |          |          |
+| 1     | 0     | 0     | 0     | 1   |          |          |
+| 1     | 0     | 0     | 1     | 1   |          |          |
+| 1     | 0     | 1     | 0     | 1   |          |          |
+| 1     | 0     | 1     | 1     | 1   |          |          |
+| 1     | 1     | 0     | 0     | 1   |          |          |
+| 1     | 1     | 0     | 1     | 1   |          |          |
+| 1     | 1     | 1     | 0     | 1   |          |          |
+| 1     | 1     | 1     | 1     | 0   |          |          |
+
+{{1}}
+| $x_3$ | $x_2$ | $x_1$ | $x_0$ | $y$ | Minterme                                                             | Maxterme                                                            |
+| ----- | ----- | ----- | ----- | --- | -------------------------------------------------------------------- | ------------------------------------------------------------------- |
+| 0     | 0     | 0     | 0     | 0   |                                                                      | $x_3 + x_2 + x_1 + x_0$                                             |
+| 0     | 0     | 0     | 1     | 0   |                                                                      | $x_3 + x_2 + x_1 + \overline{x_0}$                                  |
+| 0     | 0     | 1     | 0     | 0   |                                                                      | $x_3 + x_2 + \overline{x_1} + x_0$                                  |
+| 0     | 0     | 1     | 1     | 0   |                                                                      | $x_3 + x_2 + \overline{x_1} + \overline{x_0}$                       |
+| 0     | 1     | 0     | 0     | 0   |                                                                      | $x_3 + \overline{x_2} + x_1 + x_0$                                  |
+| 0     | 1     | 0     | 1     | 0   |                                                                      | $x_3 + \overline{x_2} + x_1 + \overline{x_0}$                       |
+| 0     | 1     | 1     | 0     | 1   | $\overline{x_3} \cdot x_2 \cdot x_1 \cdot \overline{x_0}$            |                                                                     |
+| 0     | 1     | 1     | 1     | 1   | $\overline{x_3} \cdot x_2 \cdot x_1 \cdot x_0$                       |                                                                     |
+| 1     | 0     | 0     | 0     | 1   | $x_3 \cdot \overline{x_2} \cdot \overline{x_1} \cdot \overline{x_0}$ |                                                                     |
+| 1     | 0     | 0     | 1     | 1   | $x_3 \cdot \overline{x_2} \cdot \overline{x_1} \cdot x_0$            |                                                                     |
+| 1     | 0     | 1     | 0     | 1   | $x_3 \cdot \overline{x_2} \cdot \overline{x_1} \cdot x_0$            |                                                                     |
+| 1     | 0     | 1     | 1     | 1   | $x_3 \cdot \overline{x_2} \cdot x_1 \cdot x_0$                       |                                                                     |
+| 1     | 1     | 0     | 0     | 1   | $x_3 \cdot x_2 \cdot \overline{x_1} \cdot \overline{x_0}$            |                                                                     |
+| 1     | 1     | 0     | 1     | 1   | $x_3 \cdot x_2 \cdot \overline{x_1} \cdot x_0$                       |                                                                     |
+| 1     | 1     | 1     | 0     | 1   | $x_3 \cdot x_2 \cdot x_1 \cdot \overline{x_0}$                       |                                                                     |
+| 1     | 1     | 1     | 1     | 0   |                                                                      | $\overline{x_3} + \overline{x_2} + \overline{x_1} + \overline{x_0}$ |
+
+### Schritt 2: Vereinfachen der Minterme - Analytische Lösung
+
+{{0-1}}
+$$
+\begin{aligned}
+y =&  \overline{x_3}   x_2   x_1   \overline{x_0} +  \overline{x_3}   x_2   x_1   x_0 +\\
+  &   x_3   \overline{x_2 }\,\overline{x_1 }\,\overline{x_0} +  x_3   \overline{x_2 }\,\overline{x_1}   x_0 +\\
+  &  x_3   \overline{x_2}   x_1   \overline{x_0} + x_3   \overline{x_2}   x_1   x_0 +\\
+  & x_3   x_2   \overline{x_1 }\,\overline{x_0} +  x_3   x_2   \overline{x_1}   x_0 + \\
+  &  x_3   x_2   x_1   \overline{x_0}
+\end{aligned}
+$$
+
+{{0-1}}
+Wie gehen Sie vor? Wir suchen Paare von Mintermen, die sich lediglich in einer Variablen unterscheiden und fassen diese entsprech dem Distributivgesetz und Idempotenzgesetz zusammen.
+
+{{0-1}}
+$$
+\begin{aligned}
+\overline{x_3}   x_2   x_1   \overline{x_0} +  \overline{x_3}   x_2   x_1   x_0 &= \overline{x_3}   x_2   x_1   (\overline{x_0} + x_0) \\
+                                                                                                        &= \overline{x_3}   x_2   x_1   (1) \\
+                                                                                                        &= \overline{x_3}   x_2   x_1 \\
+\end{aligned}
+$$
+
+       {{1-3}}
+********************************************************************************
+**Erste Stufe der Vereinfachung**
+
+Zunächst erweitern wir unseren KDNF um einen der Minterme, so dass die möglichen Minimierungen pro Zeile offensichtlich sind.
+
+$$
+\begin{aligned}
+y =&  \overline{x_3}   x_2   x_1   \overline{x_0} +  \overline{x_3}   x_2   x_1   x_0 +\\
+  &   x_3   \overline{x_2 }\,\overline{x_1 }\,\overline{x_0} +  x_3   \overline{x_2 }\,\overline{x_1}   x_0 +\\
+  &  \textcolor{red}{ x_3 \overline{x_2}   x_1   \overline{x_0}}+ x_3   \overline{x_2}   x_1   x_0 +\\
+  & x_3   x_2   \overline{x_1 }\,\overline{x_0} +  x_3   x_2   \overline{x_1}   x_0 + \\
+  & \textcolor{red}{ x_3 \overline{x_2}   x_1   \overline{x_0}} + x_3   x_2   x_1   \overline{x_0}
+\end{aligned}
+$$
+
+Damit ergibt sich die oben genannten Gleichung in der ersten Vereinfachungsstufe zu
+
+********************************************************************************
+
+{{2-3}}
+$$
+\begin{aligned}
+y =& \overline{x}_3 x_2 x_1 + x_3 \overline{x}_2\, \overline{x}_1  + x_3 \overline{x}_2 x_1 + x_3 x_2\overline{x}_1 +  x_3 x_1\overline{x}_0
+\end{aligned}
+$$
+
+      {{3-5}}
+********************************************************************************
+
+**Zweite Stufe der Vereinfachung**
+
+$$
+\begin{aligned}
+y =& \overline{x}_3 x_2 x_1 + \\
+   & x_3 \overline{x}_2\, \overline{x}_1  + \\
+   & x_3 \overline{x}_2 x_1 + \\
+   &x_3 x_2\overline{x}_1 + \\
+   &x_3 x_1\overline{x}_0
+\end{aligned}
+$$
+
+********************************************************************************
+
+{{4}}
+$$
+\begin{aligned}
+y = \overline{x}_3 x_2 x_1 +  x_3\,\overline{x}_2 +  x_3 \overline{x}_1 + x_3 x_1\overline{x}_0
+\end{aligned}
+$$
+
+
+      {{5-6}}
+********************************************************************************
+
+**Gegenprobe I**
+
+
+```python   Optimization.py
+from sympy.logic import SOPform
+from sympy import symbols
+x3, x2, x1, x0 = symbols('x3 x2 x1 x0')
+
+minterms = [[0, 1, 1, 0],
+            [0, 1, 1, 1],
+            [1, 0, 0, 0],
+            [1, 0, 0, 1],
+            [1, 0, 1, 0],
+            [1, 0, 1, 1],
+            [1, 1, 0, 0],
+            [1, 1, 0, 1],
+            [1, 1, 1, 0]]
+result = SOPform([x3, x2, x1, x0], minterms)
+print(result)
+
+sys.version
+```
+@Pyodide.eval
+
+Überrascht? Offenbar gelingt es dem Minimierungsansatz von _sympy_ eine kompaktere Form zu finden.
+
+Schauen wir uns die Funktion im Karnaugh-Diagramm an!
+
+<table>
+<tr>
+<td>
+
+| $x_3$ | $x_2$ | $x_1$ | $x_0$ | $y$ |
+| ----- | ----- | ----- | ----- | --- |
+| 0     | 0     | 0     | 0     | 0   |
+| 0     | 0     | 0     | 1     | 0   |
+| 0     | 0     | 1     | 0     | 0   |
+| 0     | 0     | 1     | 1     | 0   |
+| 0     | 1     | 0     | 0     | 0   |
+| 0     | 1     | 0     | 1     | 0   |
+| 0     | 1     | 1     | 0     | 1   |
+| 0     | 1     | 1     | 1     | 1   |
+| 1     | 0     | 0     | 0     | 1   |
+| 1     | 0     | 0     | 1     | 1   |
+| 1     | 0     | 1     | 0     | 1   |
+| 1     | 0     | 1     | 1     | 1   |
+| 1     | 1     | 0     | 0     | 1   |
+| 1     | 1     | 0     | 1     | 1   |
+| 1     | 1     | 1     | 0     | 1   |
+| 1     | 1     | 1     | 1     | 0   |
+</td>
+<td>
+
+</td>
+<td>
+
+|                              | $\overline{x}_1\,\overline{x}_0$ | $\overline{x}_1x_0$ | $x_1x_0$ | $x_1\overline{x}_0$ |
+| ---------------------------- | -------------------------------- | ------------------- | -------- | ------------------- |
+| $\overline{x}_3\,\overline{x}_2$ | 0                                | 0                   | 0        | 0                   |
+| $\overline{x}_3 x_2$             | 0                                | 0                   | 1        | 1                   |
+| $x_3 x_2$                        | 1                               | 1                   | 0        | 1                   |
+| $x_3 \overline{x}_2$             | 1                                | 1                   | 1        | 1                   |
+
+$$
+\begin{aligned}
+y_{Karnaugh} &= \overline{x}_3 x_2 x_1 +  x_3\,\overline{x}_2 +  x_3 \overline{x}_1 + x_3 \overline{x}_0 \\
+y_{Analytic} &= \overline{x}_3 x_2 x_1 +  x_3\,\overline{x}_2 +  x_3 \overline{x}_1 + x_3 x_1\overline{x}_0
+\end{aligned}
+$$
+
+</td>
+</tr>
+</table>
+
+Warum "übersieht" unsere analytische Lösung die mögliche Minimierung im letzten Term?
+
+> Weil wir uns in der Vereinfachung der ersten Stufe mit einem Teilergebnis zufriedengegeben haben, das uns in der zweiten Stufe für eine weiteren Aggregation fehlt.
+
+Welche Kombinationen sind zusätzlich möglich?
+
+$$
+\begin{aligned}
+y =&  \overline{x_3}   x_2   x_1   \overline{x_0} +  \overline{x_3}   x_2   x_1   x_0 +\\
+  &  \textcolor{green}{ x_3   \overline{x_2 }\,\overline{x_1 }\,\overline{x_0}} +  x_3   \overline{x_2 }\,\overline{x_1}   x_0 +\\
+  &  \textcolor{green}{  x_3 \overline{x_2}   x_1   \overline{x_0}} + x_3   \overline{x_2}   x_1   x_0 +\\
+  & x_3   x_2   \overline{x_1 }\,\overline{x_0} +  x_3   x_2   \overline{x_1}   x_0 + \\
+  & x_3 \overline{x_2}   x_1   \overline{x_0} + x_3   x_2   x_1   \overline{x_0}
+\end{aligned}
+$$
+
+$$
+\begin{aligned}
+y =& \overline{x}_3 x_2 x_1 + x_3 \overline{x}_2\, \overline{x}_1  + x_3 \overline{x}_2 x_1 + x_3 x_2\overline{x}_1 +  x_3 x_1\overline{x}_0 + \textcolor{green}{x_3 \overline{x}_1\,\overline{x}_0 }
+\end{aligned}
+$$
+
+Daraus ergibt sich dann auf der zweiten Stufe die "zusätzliche" Minimierungsoption, die die beiden letzten Minterme zusammenfasst.
+
+$$
+\begin{aligned}
+y =& \overline{x}_3 x_2 x_1 + x_3 \overline{x}_2\, \overline{x}_1  + x_3 \overline{x}_2 x_1 + x_3 x_2\overline{x}_1 +  \underbrace{x_3 x_1\overline{x}_0 + \textcolor{green}{x_3 \overline{x}_1\,\overline{x}_0 }}_\textrm{} \\
+y =& \overline{x}_3 x_2 x_1 +  x_3\,\overline{x}_2 +  x_3 \overline{x}_1 + x_3 \overline{x}_0
+\end{aligned}
+$$
+
+> Erkenntnisse:
+
+> + Das Karnaugh-Veitch Diagramm zeigt mögliche Minimierungspotentiale auf, hinsichtlich der Bildung der Schleifen können unterschiedliche Strategien zum tragen kommen.
+> + Offenkundig brauchen wir ein systematischeres Vorgehen bei der Vereinfachung, dass alle Kombinationen möglicher Terme berücksichtigt.
+
+********************************************************************************
+
+## Verfahren nach Quine-McCluskey
+
+Das Verfahren bezieht sich zunächst nur auf Funktionsdarstellungen in kanonischer disjunktiver Normalform (KDNF) und zielt darauf ab eine systematische Minimierung der Minterme durchzuführen.
+
+### Ermittlung der Primterme
+
+<table>
+<tr>
+<td>
+|          | $x_3$ | $x_2$ | $x_1$ | $x_0$ | $y$ |
+| -------- | ----- | ----- | ----- | ----- | --- |
+|          | 0     | 0     | 0     | 0     | 0   |
+|          | 0     | 0     | 0     | 1     | 0   |
+|          | 0     | 0     | 1     | 0     | 0   |
+|          | 0     | 0     | 1     | 1     | 0   |
+|          | 0     | 1     | 0     | 0     | 0   |
+|          | 0     | 1     | 0     | 1     | 0   |
+| $m_6$    | 0     | 1     | 1     | 0     | 1   |
+| $m_7$    | 0     | 1     | 1     | 1     | 1   |
+| $m_8$    | 1     | 0     | 0     | 0     | 1   |
+| $m_9$    | 1     | 0     | 0     | 1     | 1   |
+| $m_{10}$ | 1     | 0     | 1     | 0     | 1   |
+| $m_{11}$ | 1     | 0     | 1     | 1     | 1   |
+| $m_{12}$ | 1     | 1     | 0     | 0     | 1   |
+| $m_{13}$ | 1     | 1     | 0     | 1     | 1   |
+| $m_{14}$ | 1     | 1     | 1     | 0     | 1   |
+|          | 1     | 1     | 1     | 1     | 0   |
+</td>
+<td>
+
+</td>
+<td>
+
+Die Minterme werden in tabellarischer Form entsprechend der Zahl der "1"en sortiert. Es gibt 1 eintrag mit einer eins und jeweils 4 mit 2 oder 3 Einsen.
+
+| $m_x$           | $x_3$      | $x_2$      | $x_1$      | $x_0$      | OK  |
+| --------------- | ---------- | ---------- | ---------- | ---------- | --- |
+| @blue($m_8$)    | @blue($1$) | @blue($0$) | @blue($0$) | @blue($0$) |.   |
+| $m_6$           | $0$        | 1          | 1          | 0          |.   |
+| $m_9$           | 1          | 0          | 0          | 1          |.   |
+| $m_{10}$        | 1          | 0          | 1          | 0          |.   |
+| $m_{12}$        | 1          | 1          | 0          | 0          |.   |
+| @gray($m_7$)    | @gray($0$) | @gray($1$) | @gray($1$) | @gray($1$) |.   |
+| @gray($m_{11}$) | @gray($1$) | @gray($0$) | @gray($1$) | @gray($1$) |.   |
+| @gray($m_{13}$) | @gray($1$) | @gray($1$) | @gray($0$) | @gray($1$) |.   |
+| @gray($m_{14}$) | @gray($1$) | @gray($1$) | @gray($1$) | @gray($0$) |.   |
+</td>
+</tr>
+</table>
+
+In einem zweiten Schritt werden die
+
+<table>
+<tr>
+<td>
+| $m_x$           | $x_3$      | $x_2$      | $x_1$      | $x_0$      | OK  |
+| --------------- | ---------- | ---------- | ---------- | ---------- | --- |
+| @blue($m_8$)    | @blue($1$) | @blue($0$) | @blue($0$) | @blue($0$) | $*$   |
+| $m_6$           | $0$        | 1          | 1          | 0          | $*$   |
+| $m_9$           | 1          | 0          | 0          | 1          | $*$   |
+| $m_{10}$        | 1          | 0          | 1          | 0          | $*$   |
+| $m_{12}$        | 1          | 1          | 0          | 0          | $*$   |
+| @gray($m_7$)    | @gray($0$) | @gray($1$) | @gray($1$) | @gray($1$) | $*$   |
+| @gray($m_{11}$) | @gray($1$) | @gray($0$) | @gray($1$) | @gray($1$) | $*$   |
+| @gray($m_{13}$) | @gray($1$) | @gray($1$) | @gray($0$) | @gray($1$) | $*$   |
+| @gray($m_{14}$) | @gray($1$) | @gray($1$) | @gray($1$) | @gray($0$) | $*$   |
+</td>
+<td>
+
+</td>
+<td>
+
+
+|                              | $x_3$      | $x_2$      | $x_1$      | $x_0$      | OK  |
+| ---------------------------- | ---------- | ---------- | ---------- | ---------- | --- |
+| $m_8\cdot m_6$               | 1          | 0          | 0          | -          | .   |
+| $m_8\cdot m_{10}$            | 1          | 0          | -          | 0          | .   |
+| $m_8\cdot m_{12}$            | 1          | -          | 0          | 0          | .   |
+| @gray($m_6 ⋅ m_{7}$)     | @gray($0$) | @gray($1$) | @gray($1$) | @gray($-$) | .   |
+| @gray($m_6 ⋅ m_{14}$)    | @gray($-$) | @gray($1$) | @gray($1$) | @gray($0$) | .   |
+| @gray($m_9 ⋅ m_{11}$)    | @gray($1$) | @gray($0$) | @gray($-$) | @gray($1$) | .   |
+| @gray($m_9 ⋅ m_{13}$)    | @gray($1$) | @gray($-$) | @gray($0$) | @gray($1$) | .   |
+| @gray($m_{10} ⋅ m_{11}$) | @gray($1$) | @gray($0$) | @gray($1$) | @gray($-$) | .   |
+| @gray($m_{10} ⋅ m_{14}$) | @gray($1$) | @gray($-$) | @gray($1$) | @gray($0$) | .   |
+| @gray($m_{12} ⋅ m_{13}$) | @gray($1$) | @gray($1$) | @gray($0$) | @gray($-$) | .   |
+| @gray($m_{12} ⋅ m_{14}$) | @gray($1$) | @gray($1$) | @gray($-$) | @gray($0$) | .   |
+</td>
+</tr>
+</table>
+
+```python   Optimization.py
+import numpy as np
+minterms = [[0, 1, 1, 0],
+            [0, 1, 1, 1],
+            [1, 0, 0, 0],
+            [1, 0, 0, 1],
+            [1, 0, 1, 0],
+            [1, 0, 1, 1],
+            [1, 1, 0, 0],
+            [1, 1, 0, 1],
+            [1, 1, 1, 0]]
+distances = np.zeros([len(minterms),
+len(minterms)]).astype('float')
+for i in range(0, len(minterms)):
+    for k in range(0, i):
+        diff = np.subtract(minterms[i], minterms[k])
+        dist = np.sum(np.abs(diff))
+        distances[i,k] = dist
+
+for j in range(0, len(distances)):
+    print(distances[j])
+print("Kombinationen mit Distanz 1: {}".format(np.count_nonzero(distances == 1)))
+
+sys.version
+```
+@Pyodide.eval
+
+Zweite Stufe
+
+<table>
+<tr>
+<td>
+|                          | $x_3$      | $x_2$      | $x_1$      | $x_0$      | OK  |
+| ------------------------ | ---------- | ---------- | ---------- | ---------- | --- |
+| $m_8\cdot m_6$           | 1          | 0          | 0          | -          | $*$ |
+| $m_8\cdot m_{10}$        | 1          | 0          | -          | 0          | $*$ |
+| $m_8\cdot m_{12}$        | 1          | -          | 0          | 0          | $*$ |
+| @gray($m_6 ⋅ m_{7}$)     | @gray($0$) | @gray($1$) | @gray($1$) | @gray($-$) | .   |
+| @gray($m_6 ⋅ m_{14}$)    | @gray($-$) | @gray($1$) | @gray($1$) | @gray($0$) | .   |
+| @gray($m_9 ⋅ m_{11}$)    | @gray($1$) | @gray($0$) | @gray($-$) | @gray($1$) | $*$ |
+| @gray($m_9 ⋅ m_{13}$)    | @gray($1$) | @gray($-$) | @gray($0$) | @gray($1$) | $*$ |
+| @gray($m_{10} ⋅ m_{11}$) | @gray($1$) | @gray($0$) | @gray($1$) | @gray($-$) | $*$ |
+| @gray($m_{10} ⋅ m_{14}$) | @gray($1$) | @gray($-$) | @gray($1$) | @gray($0$) | $*$ |
+| @gray($m_{12} ⋅ m_{13}$) | @gray($1$) | @gray($1$) | @gray($0$) | @gray($-$) | $*$ |
+| @gray($m_{12} ⋅ m_{14}$) | @gray($1$) | @gray($1$) | @gray($-$) | @gray($0$) | $*$ |
+
+</td>
+<td>
+
+</td>
+<td>
+|                                             | $x_3$ | $x_2$ | $x_1$ | $x_0$ | OK  |
+| ------------------------------------------- | ----- | ----- | ----- | ----- | --- |
+| $m_8\cdot m_6 \cdot m_{10} \cdot m_{11}$    | 1     | 0     | -     | -     | .   |
+| $m_8\cdot m_9 \cdot m_{12} \cdot m_{13}$    | 1     | -     | -     | 0     | .   |
+| $m_8\cdot m_{10} \cdot m_{12} \cdot m_{14}$ | 1     | -     | -     | 0     | .   |
+Eine weitere Minimierung ist offenbar nicht möglich.
+</td>
+</tr>
+</table>
+
+Offenbar können 3 Minterme der ersten Stufe nicht weiter zusammengefasst werden. Mit den übrigen Ergebnissen der zweiten Stufe ergeben sich draus insgesamt 5 Primimplikanten.
+
+
+<table>
+<tr>
+<td>
+|          | $x_3$ | $x_2$ | $x_1$ | $x_0$ | $y$ |
+| -------- | ----- | ----- | ----- | ----- | --- |
+|          | 0     | 0     | 0     | 0     | 0   |
+|          | 0     | 0     | 0     | 1     | 0   |
+|          | 0     | 0     | 1     | 0     | 0   |
+|          | 0     | 0     | 1     | 1     | 0   |
+|          | 0     | 1     | 0     | 0     | 0   |
+|          | 0     | 1     | 0     | 1     | 0   |
+| $m_6$    | 0     | 1     | 1     | 0     | 1   |
+| $m_7$    | 0     | 1     | 1     | 1     | 1   |
+| $m_8$    | 1     | 0     | 0     | 0     | 1   |
+| $m_9$    | 1     | 0     | 0     | 1     | 1   |
+| $m_{10}$ | 1     | 0     | 1     | 0     | 1   |
+| $m_{11}$ | 1     | 0     | 1     | 1     | 1   |
+| $m_{12}$ | 1     | 1     | 0     | 0     | 1   |
+| $m_{13}$ | 1     | 1     | 0     | 1     | 1   |
+| $m_{14}$ | 1     | 1     | 1     | 0     | 1   |
+|          | 1     | 1     | 1     | 1     | 0   |
+</td>
+<td>
+
+</td>
+<td>
+Primimplikanten
+
+$$
+\begin{aligned}
+P_1=& m_8∙m_9∙m_{10}∙m_{11} \\
+P_2=& m_8∙m_9∙m_{12}∙m_{13}\\
+P_3=& m_8∙m_{10}∙m_{12}∙m_{14} \\
+P_4=& m_6∙m_7 \\
+P_5=& m_6∙m_{14} \\
+\end{aligned}
+$$
+
+### Darstellung der Minterme im Karnaugh-Diagramm
+
+$$
+\begin{aligned}
+P_1=& m_8∙m_9∙m_{10}∙m_{11} \\
+P_2=& m_8∙m_9∙m_{12}∙m_{13}\\
+P_3=& m_8∙m_{10}∙m_{12}∙m_{14} \\
+P_4=& m_6∙m_7 \\
+P_5=& m_6∙m_{14} \\
+\end{aligned}
+$$
+
+|                                  | $\overline{x}_1\,\overline{x}_0$ | $\overline{x}_1x_0$ | $x_1x_0$  | $x_1\overline{x}_0$ |
+| -------------------------------- | -------------------------------- | ------------------- | --------- | ------------------- |
+| $\overline{x}_3\,\overline{x}_2$ | 0                                | 0                   | 0         | 0                   |
+| $\overline{x}_3 x_2$             | 0                                | 0                   | 1 ($m_7$) | 1 ($m_6$) |
+| $x_3 x_2$                        | 1 ($m_{12}$)              | 1 ($m_{13}$)            | 0         | 1 ($m_{14}$)    |
+| $x_3 \overline{x}_2$             | 1 ($m_{8}$)       | 1  ($m_{9}$)    | 1 ($m_{11}$)  | 1 ($m_{10}$)    |
+
+
+Visualisierung der generierten Primimplikanten
+
+|                                  | $\overline{x}_1\,\overline{x}_0$ | $\overline{x}_1x_0$ | $x_1x_0$  | $x_1\overline{x}_0$ |
+| -------------------------------- | -------------------------------- | ------------------- | --------- | ------------------- |
+| $\overline{x}_3\,\overline{x}_2$ | 0                                | 0                   | 0         | 0                   |
+| $\overline{x}_3 x_2$             | 0                                | 0                   | 1 ($P_4$) | 1    ($P_4$, $P_5$) |
+| $x_3 x_2$                        | 1 ($P_2$, , $P_3$)               | 1 ($P_2$)           | 0         | 1 ($P_3$, $P_5$)    |
+| $x_3 \overline{x}_2$             | 1 ($P_1$, $P_2$, $P_3$)        | 1  ($P_1$, $P_2$)   | 1 ($P_1$) | 1 ($P_1$, $P_3$)    |
+
+Offenbar werden die Minterme bis auf zwei Ausnahmen mehrfach durch die Primimplikaten abgedeckt. Hier ist eine weitere Minimierung notwendig.
+
+### Primimplikatentafel und minimale Überdeckung
+
+Die als zweite Quine'sche Tabelle bezeichnete Primimplikatentafel fasst die Primimplikanten und die zugehörigen Minterme zusammen.
+
+|       | $m_{14}$ | $m_{13}$ | $m_{12}$ | $m_{11}$ | $m_{10}$ | $m_{9}$ | $m_{8}$ | $m_{7}$ | $m_{6}$ |
+| ----- | -------- | -------- | -------- | -------- | -------- | ------- | ------- | ------- | ------- |
+| $P_1$ |          |          |          | x        | x        | x       | x       |         |         |
+| $P_2$ |          | x        | x        |          |          | x       | x       |         |         |
+| $P_3$ | x        |          | x        |          | x        |         | x       |         |         |
+| $P_4$ |          |          |          |          |          |         |         | x       | x       |
+| $P_5$ | x        |          |          |          |          |         |         |         | x       |
+
+Zielstellung ist nun die Generierung einer minimalen Überlappung.
+
+**Spaltendominanzprüfung**
+
+Die Spalten werden paarweise darauf verglichen, ob nicht eine Spalte existiert, in der die markierten Primterme eine Teilmenge der markierten Primterme der anderen Spalte sind. Ist dies der Fall, so kann die Spalte mit der Obermenge gestrichen werden, denn es müssen alle Konjunktionen erfasst werden und daher ist die Konjunktion mit der Obermenge durch Auswahl der Konjunktion mit der Teilmenge ebenfalls erfasst.
+
+|       | $m_{14}$ | $m_{13}$ | $m_{12}$ | $m_{11}$ | $m_{10}$ | $m_{9}$  | $m_{8}$  | $m_{7}$ | $m_{6}$ |
+| ----- | -------- | -------- | -------- | -------- | -------- | -------- | -------- | ------- | ------- |
+| $P_1$ |          |          |          | x        | x        | @blue(x) | @blue(x) |         |         |
+| $P_2$ |          | @gray(x) | @blue(x) |          |          | @blue(x) | @blue(x) |         |         |
+| $P_3$ | x        |          | @blue(x) |          | x        |          | @blue(x) |         |         |
+| $P_4$ |          |          |          |          |          |          |          | x       | x       |
+| $P_5$ | x        |          |          |          |          |          |          |         | x       |
+
+
+|       | $m_{14}$ | $m_{13}$ | $m_{11}$ | $m_{10}$ | $m_{7}$  | $m_{6}$  |
+| ----- | -------- | -------- | -------- | -------- | -------- | -------- |
+| $P_1$ |          |          | @gray(x) | @blue(x) |          |          |
+| $P_2$ |          | x        |          |          |          |          |
+| $P_3$ | x        |          |          | @blue(x) |          |          |
+| $P_4$ |          |          |          |          | @gray(x) | @blue(x) |
+| $P_5$ | x        |          |          |          |          | @blue(x) |
+
+**Zeilendominanzprüfung**
+
+Jetzt vergleicht man die Zeilen (Primterme) der Tabelle paarweise, ob nicht eine Zeile existiert, in denen die markierten Minterme eine Teilmenge der markierten Minterme der anderen Zeile sind. Ist dies der Fall, so kann der Primterm mit der Teilmenge gestrichen werden, denn man kann für jede Markierung des gestrichenen Primterms den anderen Primterm als Ersatz nehmen. Die Relation ist hier also genau umgekehrt wie bei der Spaltendominanz.
+
+Keine dominanten Zeilen aber Dopplung eines  Minterms, Streichung des kürzeren.
+
+
+|       | $m_{14}$ | $m_{13}$ | $m_{11}$ | $m_{7}$ |
+| ----- | -------- | -------- | -------- | ------- |
+| $P_1$ |          |          | x        |         |
+| $P_2$ |          | x        |          |         |
+| $P_3$ | @gray(x) |          |          |         |
+| $P_4$ |          |          |          | x       |
+| $P_5$ | @gray(x) |          |          |         |
+
+Ergebnis: Unsere relevanten Primimplikanten sind $y = P_1 + P_2 + P_3 + P_4 = \overline{x}_3 x_2 x_1 +  x_3\,\overline{x}_2 +  x_3 \overline{x}_1 + x_3 \overline{x}_0$.
+
+
+> Für das Verfahren von Quine-McCluskey exisitieren webbasierte Lösungen [Link Uni Marburg](https://www.mathematik.uni-marburg.de/~thormae/lectures/ti1/code/qmc/), die zum Ausprobieren einladen.
+
+## Schaltungssynthese
+
+> Schaltungssynthese beschreibt die Umsetzung einer boolschen Funktion in eine Hardware-Schaltung. Grundlage sind Logikgatter, die als spezifische Schaltnetze industriell gefertigt werden.
+
+Beispiel
+
+<table>
+<tr>
+<td>
+
+$y=f(x_0,x_1,x_2)$
+
+| $x_2$ | $x_1$ | $x_0$ | $y$ |
+| ----- | ----- | ----- | --- |
+| 0     | 0     | 0     | 0   |
+| 0     | 0     | 1     | 1   |
+| 0     | 1     | 0     | 1   |
+| 0     | 1     | 1     | 0   |
+| 1     | 0     | 0     | 1   |
+| 1     | 0     | 1     | 0   |
+| 1     | 1     | 0     | 0   |
+| 1     | 1     | 1     | 1   |
+
+</td>
+<td>
+
+</td>
+<td>
+![Bild](./images/04_Schaltnetze/SchaltwerkParitaet.png) <!--style="width: 90%;"
+-->
+
+</td>
+</tr>
+</table>
+
+> Ein Schaltnetz ist eine schaltungstechnische Realisierung einer Schaltfunktion $f:\{0,1\}^n \rightarrow \{0,1\}^m$ mit $n, m \geq 1$. $f$ ist zerlegbar in $m$ Boolesche Funktionen mit den gleichen n Eingangsvariablen: $f_1(x_1, x_2, ..., x_n), f_2(x_1, x_2, ..., x_n), ... , f_m(x_1, x_2, ..., x_n)$
+
+Jedes Schaltnetz ist als gerichteter, azyklischer Graph darstellbar:
+
+ + Gatter, Ein- und Ausgänge sind die Knoten
+ + Verbindungsleitungen entsprechen den gerichteten Kanten
+ + Zyklen (Rückkopplungen) sind nicht zulässig!
+
+Aus der Darstellung als kanonische Normalform resultiert, dass jede Schaltfunktion durch ein zweistufiges Schaltnetz realisierbar ist, wenn
+
+ + alle Eingangssignale sowohl einfach als auch negiert vorliegen
+ + Gatter mit einer ausreichenden Größe (d.h. Anzahl an Eingängen)
+zur Verfügung stehen
 
 > __Merke:__
 >
@@ -108,7 +718,6 @@ _Frage:_ Wie viele Schaltfunktionen lassen sich mit zwei Eingängen umsetzen? Is
 >
 > + Jedes Schaltnetz kann nur mit NOR Gattern aufgebaut werden.
 
-### Beispiel: nur mit NAND
 
 **NOT**
 
@@ -135,85 +744,209 @@ $ a + b = \overline{\overline{a} \cdot \overline{b}} $
 ```
 
 
-### Weitere Schaltnetze
+### Logikgatter als Grundlage der Schaltnetze
 
-#### n-zu-k Dekodierer
+Ein Logikgatter, auch nur Gatter ist die technische Realisierung einer booleschen Funktion, die binäre Eingangssignale zu einem binären Ausgangssignal verarbeitet. Die Eingangssignale werden durch Implementierung logischer Operatoren, wie der Konjunktion (Und-Gatter), der Disjunktion (Oder-Gatter), der Kontravalenz (Exklusiv-Oder-Gatter) oder der Negation (Nicht-Gatter) zu einem einzigen logischen Ergebnis umgewandelt und auf das Ausgangssignal abgebildet.
 
-Dekodiert n Eingänge zu k Ausgängen.
+Gatterfunktionen können zudem einen negierten Ausgang abbilden: NAND-Gatter (Nicht-Und), NOR-Gatter (Nicht-Oder), XNOR-Gatter (Nicht-Exklusiv-Oder).
 
-n: Anzahl Eingänge
+| Funktion                                                                                                           | IEC 60617-12 : 1997                                           | ANSI/IEEE Std 91/91a-1991                                        |
+| ------------------------------------------------------------------------------------------------------------------ | ------------------------------------------------------------- | ---------------------------------------------------------------- |
+| $\begin{aligned} UN&D \\ Y &= A\cdot B \\ Y&=A\wedge B\end{aligned}$                                               | ![Bild](./images/04_Schaltnetze/188px-IEC_AND_label.svg.png)  | ![Bild](./images/04_Schaltnetze/188px-Logic-gate-and-us.svg.png) |
+| $\begin{aligned} OR  & \\ Y &= A+ B \\ Y&=A\vee B\end{aligned}$                                                    | ![Bild](./images/04_Schaltnetze/188px-IEC_OR_label.svg.png)   | ![Bild](./images/04_Schaltnetze/188px-Or-gate-en.svg.png)        |
+| $\begin{aligned} NO&T \\ Y &= \overline{A} \\ Y&=A\end{aligned}$                                                   | ![Bild](./images/04_Schaltnetze/188px-IEC_NOT_label.svg.png)  | ![Bild](./images/04_Schaltnetze/188px-Not-gate-en.svg.png)       |
+| $\begin{aligned} NA&ND \\ Y &= \overline{A\cdot B} \\ Y&=A\overline{\wedge} B = \overline{A\wedge B}\end{aligned}$ | ![Bild](./images/04_Schaltnetze/188px-IEC_NAND_label.svg.png) | ![Bild](./images/04_Schaltnetze/188px-Nand-gate-en.svg.png)      |
+| $\begin{aligned} NO&R \\ Y &= \overline{A + B} \\ Y&=A\overline{\vee} B = \overline{A\vee B} \end{aligned}$        | ![Bild](./images/04_Schaltnetze/188px-IEC_NOR_label.svg.png)  | ![Bild](./images/04_Schaltnetze/188px-Nor-gate-en.svg.png)       |
+| $\begin{aligned} XO&R \\ Y &= A \oplus B \\ Y&=A\underline{\vee} B\end{aligned}$                                   | ![Bild](./images/04_Schaltnetze/188px-IEC_XOR_label.svg.png)  | ![Bild](./images/04_Schaltnetze/188px-Xor-gate-en.svg.png)       |
+| $\begin{aligned} XN&OR \\ Y &= A \odot B \\ Y&=A\overline{\underline{\vee}} B =\overline{A\underline{\vee}B}\end{aligned}$                                                                 | ![Bild](./images/04_Schaltnetze/188px-IEC_XNOR_label.svg.png)  | ![Bild](./images/04_Schaltnetze/188px-Xnor-gate-en.svg.png)       |
 
-k: Anzahl Ausgänge
+Im englischen Sprachraum waren und sind die amerikanischen Symbole (rechte Spalte) üblich. Die IEC-Symbole sind international auf beschränkte Akzeptanz gestoßen und werden in der amerikanischen Literatur (fast) durchgängig ignoriert.
 
-$ k = 2^n $
+### Zweistufige Schaltungssynthese
 
-**3-8 Dekodierer**
+Dazu werden für eine KDNF je Minterm ein UND-Gatter und ein ODER-Gatter zur Disjunktion aller Minterme benötigt. Für die KKNF sind es entsprechend Maxterm ein ODER-Gatter ind  ein UND-Gatter zur Konjunktion aller Maxterme.
 
-$ y_0 = \overline{A} \cdot \overline{B} \cdot \overline{C} $
+Die Anzahl der benötigten Gatter zur Realisierung der KDNF (bzw.
+KKNF) einer n-stelligen Schaltfunktion:
 
-$ y_1 = \overline{A} \cdot \overline{B} \cdot C $
++ je Boolescher Funktion max. $2^n$ UND-Gatter (bzw. ODER-Gatter) mit jeweils max. $n$ Eingängen
++ je Boolescher Funktion ein ODER-Gatter (bzw. UND-Gatter) mit max. $2^n$ Eingängen
 
-$ y_2 = \overline{A} \cdot B \cdot \overline{C} $
+Beispiel:
 
-$ y_3 = \overline{A} \cdot B \cdot C $
-
-...
-
-``` json @DigiSim.evalJson
-{"devices":{"a":{"label":"A","type":"Button","propagation":0,"position":{"x":-90,"y":65}},"b":{"label":"B","type":"Button","propagation":0,"position":{"x":-90,"y":115}},"c":{"label":"C","type":"Button","propagation":0,"position":{"x":-100,"y":210}},"y0":{"label":"y0","type":"Lamp","propagation":0,"position":{"x":590,"y":45}},"y1":{"label":"y1","type":"Lamp","propagation":0,"position":{"x":590,"y":105}},"y2":{"label":"y2","type":"Lamp","propagation":0,"position":{"x":595,"y":175}},"y3":{"label":"y3","type":"Lamp","propagation":0,"position":{"x":590,"y":230}},"y4":{"label":"y4","type":"Lamp","propagation":0,"position":{"x":595,"y":285}},"y5":{"label":"y5","type":"Lamp","propagation":0,"position":{"x":590,"y":345}},"y6":{"label":"y6","type":"Lamp","propagation":0,"position":{"x":595,"y":415}},"y7":{"label":"y7","type":"Lamp","propagation":0,"position":{"x":595,"y":480}},"notA":{"label":"NOT a","type":"Not","propagation":0,"bits":1,"position":{"x":55,"y":90}},"notB":{"label":"NOT b","type":"Not","propagation":0,"bits":1,"position":{"x":40,"y":165}},"notC":{"label":"NOT c","type":"Not","propagation":0,"bits":1,"position":{"x":35,"y":375}},"and1":{"label":"~A and ~B","type":"And","propagation":0,"bits":1,"position":{"x":230,"y":95}},"and2":{"label":"~A and B","type":"And","propagation":0,"bits":1,"position":{"x":230,"y":195}},"and3":{"label":"A and ~B","type":"And","propagation":0,"bits":1,"position":{"x":235,"y":290}},"and4":{"label":"A and B","type":"And","propagation":0,"bits":1,"position":{"x":230,"y":410}},"and5":{"label":"~A and ~B and ~C","type":"And","propagation":0,"bits":1,"position":{"x":420,"y":40}},"and6":{"label":"~A and ~B and C","type":"And","propagation":0,"bits":1,"position":{"x":430,"y":100}},"and7":{"label":"~A and B and ~C","type":"And","propagation":0,"bits":1,"position":{"x":435,"y":170}},"and8":{"label":"~A and B and C","type":"And","propagation":0,"bits":1,"position":{"x":440,"y":225}},"and9":{"label":"A and ~B and ~C","type":"And","propagation":0,"bits":1,"position":{"x":430,"y":280}},"and10":{"label":"A and ~B and C","type":"And","propagation":0,"bits":1,"position":{"x":430,"y":340}},"and11":{"label":"A and B and ~C","type":"And","propagation":0,"bits":1,"position":{"x":435,"y":410}},"and12":{"label":"A and B and C","type":"And","propagation":0,"bits":1,"position":{"x":445,"y":475}}},"connectors":[{"from":{"id":"a","port":"out"},"to":{"id":"notA","port":"in"}},{"from":{"id":"b","port":"out"},"to":{"id":"notB","port":"in"}},{"from":{"id":"c","port":"out"},"to":{"id":"notC","port":"in"}},{"from":{"id":"and1","port":"out"},"to":{"id":"and5","port":"in1"}},{"from":{"id":"and1","port":"out"},"to":{"id":"and6","port":"in1"}},{"from":{"id":"and2","port":"out"},"to":{"id":"and7","port":"in1"}},{"from":{"id":"and2","port":"out"},"to":{"id":"and8","port":"in1"}},{"from":{"id":"and3","port":"out"},"to":{"id":"and9","port":"in1"}},{"from":{"id":"and3","port":"out"},"to":{"id":"and10","port":"in1"}},{"from":{"id":"and4","port":"out"},"to":{"id":"and11","port":"in1"}},{"from":{"id":"and4","port":"out"},"to":{"id":"and12","port":"in1"}},{"from":{"id":"notA","port":"out"},"to":{"id":"and1","port":"in1"}},{"from":{"id":"notB","port":"out"},"to":{"id":"and1","port":"in2"}},{"from":{"id":"notA","port":"out"},"to":{"id":"and2","port":"in1"}},{"from":{"id":"b","port":"out"},"to":{"id":"and2","port":"in2"},"vertices":[{"x":130,"y":160}]},{"from":{"id":"a","port":"out"},"to":{"id":"and3","port":"in1"},"vertices":[{"x":10,"y":215}]},{"from":{"id":"notB","port":"out"},"to":{"id":"and3","port":"in2"}},{"from":{"id":"a","port":"out"},"to":{"id":"and4","port":"in1"},"vertices":[{"x":10,"y":225},{"x":155,"y":395}]},{"from":{"id":"b","port":"out"},"to":{"id":"and4","port":"in2"},"vertices":[{"x":130,"y":160}]},{"from":{"id":"c","port":"out"},"to":{"id":"and6","port":"in2"},"vertices":[{"x":295,"y":265}]},{"from":{"id":"notC","port":"out"},"to":{"id":"and5","port":"in2"},"vertices":[{"x":330,"y":335}]},{"from":{"id":"c","port":"out"},"to":{"id":"and8","port":"in2"},"vertices":[{"x":310,"y":275}]},{"from":{"id":"notC","port":"out"},"to":{"id":"and7","port":"in2"},"vertices":[{"x":330,"y":335},{"x":370,"y":295}]},{"from":{"id":"notC","port":"out"},"to":{"id":"and9","port":"in2"},"vertices":[{"x":335,"y":335}]},{"from":{"id":"notC","port":"out"},"to":{"id":"and11","port":"in2"},"vertices":[{"x":320,"y":345}]},{"from":{"id":"c","port":"out"},"to":{"id":"and10","port":"in2"}},{"from":{"id":"c","port":"out"},"to":{"id":"and12","port":"in2"},"vertices":[{"x":360,"y":370}]},{"from":{"id":"and5","port":"out"},"to":{"id":"y0","port":"in"}},{"from":{"id":"and6","port":"out"},"to":{"id":"y1","port":"in"}},{"from":{"id":"and7","port":"out"},"to":{"id":"y2","port":"in"}},{"from":{"id":"and8","port":"out"},"to":{"id":"y3","port":"in"}},{"from":{"id":"and9","port":"out"},"to":{"id":"y4","port":"in"}},{"from":{"id":"and10","port":"out"},"to":{"id":"y5","port":"in"}},{"from":{"id":"and11","port":"out"},"to":{"id":"y6","port":"in"}},{"from":{"id":"and12","port":"out"},"to":{"id":"y7","port":"in"}}],"subcircuits":{}}
-```
-
-
-#### n-zu-k Kodierer**
-
-Kodiert n Eingänge zu k Ausgängen
-
-Genau einer der Eingänge muss 1 sein.
-
-**8-3 Kodierer**
-
-$ y_0 = x_1 + x_3 + x_5 + x_7 $
-
-$ y_1 = x_2 + x_3 + x_6 + x_7 $
-
-$ y_2 = x_4 + x_5 + x_6 + x_7 $
-
+| A   | B   | C   | Y   |
+| --- | --- | --- | --- |
+| 0   | 0   | 0   | 1   |
+| 0   | 0   | 1   | 0   |
+| 0   | 1   | 0   | 0   |
+| 0   | 1   | 1   | 0   |
+| 1   | 1   | 0   | 1   |
+| 1   | 0   | 1   | 0   |
+| 1   | 0   | 1   | 1   |
+| 1   | 1   | 1   | 0   |
 
 ``` json @DigiSim.evalJson
-{"devices":{"x0":{"label":"x0","type":"Button","propagation":0,"position":{"x":0,"y":0}},"x1":{"label":"x1","type":"Button","propagation":0,"position":{"x":0,"y":50}},"x2":{"label":"x2","type":"Button","propagation":0,"position":{"x":0,"y":105}},"x3":{"label":"x3","type":"Button","propagation":0,"position":{"x":0,"y":160}},"x4":{"label":"x4","type":"Button","propagation":0,"position":{"x":0,"y":215}},"x5":{"label":"x5","type":"Button","propagation":0,"position":{"x":0,"y":265}},"x6":{"label":"x6","type":"Button","propagation":0,"position":{"x":0,"y":320}},"x7":{"label":"x7","type":"Button","propagation":0,"position":{"x":0,"y":375}},"y0":{"label":"y0","type":"Lamp","propagation":0,"position":{"x":570,"y":185}},"y1":{"label":"y1","type":"Lamp","propagation":0,"position":{"x":530,"y":210}},"y2":{"label":"y2","type":"Lamp","propagation":0,"position":{"x":485,"y":240}},"or1":{"label":"x1 or x3","type":"Or","propagation":0,"bits":1,"position":{"x":190,"y":80}},"or2":{"label":"x5 or x7","type":"Or","propagation":0,"bits":1,"position":{"x":195,"y":140}},"or3":{"label":"x1 or x3 or x5 or x7","type":"Or","propagation":0,"bits":1,"position":{"x":345,"y":120}},"or4":{"label":"x2 or x3","type":"Or","propagation":0,"bits":1,"position":{"x":200,"y":200}},"or5":{"label":"x6 or x7","type":"Or","propagation":0,"bits":1,"position":{"x":205,"y":290}},"or6":{"label":"x2 or x3 or x6 or x7","type":"Or","propagation":0,"bits":1,"position":{"x":350,"y":225}},"or7":{"label":"x4 or x5","type":"Or","propagation":0,"bits":1,"position":{"x":200,"y":360}},"or8":{"label":"x4 or x5 or x6 or x7","type":"Or","propagation":0,"bits":1,"position":{"x":360,"y":320}}},"connectors":[{"from":{"id":"x1","port":"out"},"to":{"id":"or1","port":"in1"}},{"from":{"id":"x3","port":"out"},"to":{"id":"or1","port":"in2"}},{"from":{"id":"x5","port":"out"},"to":{"id":"or2","port":"in1"},"vertices":[{"x":135,"y":170}]},{"from":{"id":"x7","port":"out"},"to":{"id":"or2","port":"in2"},"vertices":[{"x":145,"y":310}]},{"from":{"id":"x2","port":"out"},"to":{"id":"or4","port":"in1"}},{"from":{"id":"x3","port":"out"},"to":{"id":"or4","port":"in2"}},{"from":{"id":"x6","port":"out"},"to":{"id":"or5","port":"in1"},"vertices":[{"x":90,"y":335}]},{"from":{"id":"x7","port":"out"},"to":{"id":"or5","port":"in2"}},{"from":{"id":"x4","port":"out"},"to":{"id":"or7","port":"in1"},"vertices":[{"x":95,"y":290}]},{"from":{"id":"x5","port":"out"},"to":{"id":"or7","port":"in2"}},{"from":{"id":"or1","port":"out"},"to":{"id":"or3","port":"in1"}},{"from":{"id":"or2","port":"out"},"to":{"id":"or3","port":"in2"}},{"from":{"id":"or4","port":"out"},"to":{"id":"or6","port":"in1"}},{"from":{"id":"or5","port":"out"},"to":{"id":"or6","port":"in2"}},{"from":{"id":"or5","port":"out"},"to":{"id":"or8","port":"in1"}},{"from":{"id":"or7","port":"out"},"to":{"id":"or8","port":"in2"}},{"from":{"id":"or3","port":"out"},"to":{"id":"y0","port":"in"}},{"from":{"id":"or6","port":"out"},"to":{"id":"y1","port":"in"}},{"from":{"id":"or8","port":"out"},"to":{"id":"y2","port":"in"}}],"subcircuits":{}}
+{"devices":{"a":{"label":"A","type":"Button","propagation":0,"position":{"x":15,"y":0}},"b":{"label":"B","type":"Button","propagation":0,"position":{"x":15,"y":80}},"c":{"label":"C","type":"Button","propagation":0,"position":{"x":15,"y":155}},"y":{"label":"Y","type":"Lamp","propagation":1,"position":{"x":610,"y":90}},"not1":{"label":"~A","type":"Not","propagation":1,"bits":1,"position":{"x":145,"y":15}},"not2":{"label":"~B","type":"Not","propagation":1,"bits":1,"position":{"x":145,"y":80}},"not3":{"label":"~C","type":"Not","propagation":1,"bits":1,"position":{"x":145,"y":160}},"and1":{"label":"~A and ~B","type":"And","propagation":1,"bits":1,"position":{"x":315,"y":40}},"and2":{"label":"(~A and ~B) and ~C","type":"And","propagation":1,"bits":1,"position":{"x":380,"y":105}},"and3":{"label":"~A and B","type":"And","propagation":1,"bits":1,"position":{"x":350,"y":200}},"and4":{"label":"(~A and B) and C","type":"And","propagation":1,"bits":1,"position":{"x":415,"y":260}},"and5":{"label":"A and B","type":"And","propagation":1,"bits":1,"position":{"x":330,"y":315}},"and6":{"label":"(A and B) and ~C","type":"And","propagation":1,"bits":1,"position":{"x":410,"y":365}},"or1":{"label":"~A~B~C or ~ABC","type":"Or","propagation":1,"bits":1,"position":{"x":525,"y":165}},"or2":{"label":"(~A~B~C or ~ABC) or (AB~C)","type":"Or","propagation":1,"bits":1,"position":{"x":575,"y":255}}},"connectors":[{"from":{"id":"a","port":"out"},"to":{"id":"not1","port":"in"}},{"from":{"id":"b","port":"out"},"to":{"id":"not2","port":"in"}},{"from":{"id":"c","port":"out"},"to":{"id":"not3","port":"in"}},{"from":{"id":"not1","port":"out"},"to":{"id":"and1","port":"in1"}},{"from":{"id":"not2","port":"out"},"to":{"id":"and1","port":"in2"}},{"from":{"id":"and1","port":"out"},"to":{"id":"and2","port":"in1"}},{"from":{"id":"not3","port":"out"},"to":{"id":"and2","port":"in2"}},{"from":{"id":"not1","port":"out"},"to":{"id":"and3","port":"in1"}},{"from":{"id":"b","port":"out"},"to":{"id":"and3","port":"in2"},"vertices":[{"x":200,"y":135},{"x":220,"y":135},{"x":260,"y":210}]},{"from":{"id":"and3","port":"out"},"to":{"id":"and4","port":"in1"}},{"from":{"id":"c","port":"out"},"to":{"id":"and4","port":"in2"},"vertices":[{"x":100,"y":195}]},{"from":{"id":"a","port":"out"},"to":{"id":"and5","port":"in1"},"vertices":[{"x":150,"y":65},{"x":240,"y":65},{"x":295,"y":215}]},{"from":{"id":"b","port":"out"},"to":{"id":"and5","port":"in2"},"vertices":[{"x":225,"y":135},{"x":265,"y":215}]},{"from":{"id":"and5","port":"out"},"to":{"id":"and6","port":"in1"}},{"from":{"id":"not3","port":"out"},"to":{"id":"and6","port":"in2"},"vertices":[{"x":225,"y":315}]},{"from":{"id":"and2","port":"out"},"to":{"id":"or1","port":"in1"}},{"from":{"id":"and4","port":"out"},"to":{"id":"or1","port":"in2"}},{"from":{"id":"and6","port":"out"},"to":{"id":"or2","port":"in2"}},{"from":{"id":"or1","port":"out"},"to":{"id":"or2","port":"in1"}},{"from":{"id":"or2","port":"out"},"to":{"id":"y","port":"in"}}],"subcircuits":{}}
 ```
 
-#### Multiplexer
+### Zurück zum Beispiel - Schritt 3 Umsetzung
 
-...
+Für unser Kaffeemaschinenbeispiel kann eine Lösung also zum Beispiel folgendermaßen aussehen.
 
-**Beispiel: 2 Bit Adresse -> 4 Eingänge**
+<table>
+<tr>
+<td>
 
-$ y = \overline{a_1} \cdot \overline {a_0} \cdot x_0 + \overline{a_1} \cdot a_0 \cdot x_1 + a_1 \cdot \overline {a_0} \cdot x_2 + a_1 \cdot a_0 \cdot x_3 $
+| $x_3$ | $x_2$ | $x_1$ | $x_0$ | $y$ |
+| ----- | ----- | ----- | ----- | --- |
+| 0     | 0     | 0     | 0     | 0   |
+| 0     | 0     | 0     | 1     | 0   |
+| 0     | 0     | 1     | 0     | 0   |
+| 0     | 0     | 1     | 1     | 0   |
+| 0     | 1     | 0     | 0     | 0   |
+| 0     | 1     | 0     | 1     | 0   |
+| 0     | 1     | 1     | 0     | 1   |
+| 0     | 1     | 1     | 1     | 1   |
+| 1     | 0     | 0     | 0     | 1   |
+| 1     | 0     | 0     | 1     | 1   |
+| 1     | 0     | 1     | 0     | 1   |
+| 1     | 0     | 1     | 1     | 1   |
+| 1     | 1     | 0     | 0     | 1   |
+| 1     | 1     | 0     | 1     | 1   |
+| 1     | 1     | 1     | 0     | 1   |
+| 1     | 1     | 1     | 1     | 0   |
+</td>
+<td>
 
+</td>
+<td>
+
+$$
+y = \overline{x}_3 x_2 x_1 +  x_3\,\overline{x}_2 +  x_3 \overline{x}_1 + x_3 \overline{x}_0
+$$
 
 ``` json @DigiSim.evalJson
-{"devices":{"a0":{"label":"a0","type":"Button","propagation":0,"position":{"x":-185,"y":10}},"a1":{"label":"a1","type":"Button","propagation":0,"position":{"x":-180,"y":-55}},"x0":{"label":"x0","type":"Button","propagation":0,"position":{"x":-185,"y":80}},"x1":{"label":"x1","type":"Button","propagation":0,"position":{"x":-185,"y":125}},"x2":{"label":"x2","type":"Button","propagation":0,"position":{"x":-185,"y":180}},"x3":{"label":"x3","type":"Button","propagation":0,"position":{"x":-185,"y":240}},"y":{"label":"y","type":"Lamp","propagation":0,"position":{"x":560,"y":180}},"not1":{"label":"~a0","type":"Not","propagation":0,"bits":1,"position":{"x":-95,"y":40}},"not2":{"label":"~a1","type":"Not","propagation":0,"bits":1,"position":{"x":-95,"y":-25}},"and1":{"label":"~a1 and ~a0","type":"And","propagation":0,"bits":1,"position":{"x":65,"y":40}},"and2":{"label":"~a1 and a0","type":"And","propagation":0,"bits":1,"position":{"x":55,"y":120}},"and3":{"label":"a1 and ~a0","type":"And","propagation":0,"bits":1,"position":{"x":65,"y":190}},"and4":{"label":"a1 and a0","type":"And","propagation":0,"bits":1,"position":{"x":70,"y":270}},"and5":{"label":"~a1 and ~a0 and x0","type":"And","propagation":0,"bits":1,"position":{"x":210,"y":55}},"and6":{"label":"~a1 and a0 and x1","type":"And","propagation":0,"bits":1,"position":{"x":210,"y":130}},"and7":{"label":"a1 and ~a0 and x2","type":"And","propagation":0,"bits":1,"position":{"x":210,"y":205}},"and8":{"label":"a1 and a0 and x3","type":"And","propagation":0,"bits":1,"position":{"x":210,"y":280}},"or1":{"label":"or","type":"Or","propagation":0,"bits":1,"position":{"x":420,"y":175}},"or2":{"label":"or","type":"Or","propagation":0,"bits":1,"position":{"x":360,"y":110}},"or3":{"label":"or","type":"Or","propagation":0,"bits":1,"position":{"x":360,"y":225}}},"connectors":[{"from":{"id":"a1","port":"out"},"to":{"id":"not2","port":"in"}},{"from":{"id":"a0","port":"out"},"to":{"id":"not1","port":"in"}},{"from":{"id":"not2","port":"out"},"to":{"id":"and1","port":"in1"}},{"from":{"id":"not1","port":"out"},"to":{"id":"and1","port":"in2"}},{"from":{"id":"a0","port":"out"},"to":{"id":"and2","port":"in2"},"vertices":[{"x":-75,"y":100}]},{"from":{"id":"a0","port":"out"},"to":{"id":"and4","port":"in2"},"vertices":[{"x":-15,"y":160}]},{"from":{"id":"not2","port":"out"},"to":{"id":"and2","port":"in1"},"vertices":[{"x":5,"y":85}]},{"from":{"id":"a1","port":"out"},"to":{"id":"and3","port":"in1"},"vertices":[{"x":-105,"y":10}]},{"from":{"id":"a1","port":"out"},"to":{"id":"and4","port":"in1"},"vertices":[{"x":-100,"y":25},{"x":-100,"y":55},{"x":30,"y":185}]},{"from":{"id":"not1","port":"out"},"to":{"id":"and3","port":"in2"},"vertices":[{"x":20,"y":100}]},{"from":{"id":"x0","port":"out"},"to":{"id":"and5","port":"in2"}},{"from":{"id":"and1","port":"out"},"to":{"id":"and5","port":"in1"}},{"from":{"id":"and2","port":"out"},"to":{"id":"and6","port":"in1"}},{"from":{"id":"and3","port":"out"},"to":{"id":"and7","port":"in1"}},{"from":{"id":"and4","port":"out"},"to":{"id":"and8","port":"in1"}},{"from":{"id":"x1","port":"out"},"to":{"id":"and6","port":"in2"},"vertices":[{"x":-45,"y":180},{"x":75,"y":180}]},{"from":{"id":"x2","port":"out"},"to":{"id":"and7","port":"in2"}},{"from":{"id":"x3","port":"out"},"to":{"id":"and8","port":"in2"},"vertices":[{"x":-20,"y":310}]},{"from":{"id":"and5","port":"out"},"to":{"id":"or2","port":"in1"}},{"from":{"id":"and6","port":"out"},"to":{"id":"or2","port":"in2"}},{"from":{"id":"and7","port":"out"},"to":{"id":"or3","port":"in1"}},{"from":{"id":"and8","port":"out"},"to":{"id":"or3","port":"in2"}},{"from":{"id":"or2","port":"out"},"to":{"id":"or1","port":"in1"}},{"from":{"id":"or3","port":"out"},"to":{"id":"or1","port":"in2"},"vertices":[{"x":420,"y":205}]},{"from":{"id":"or1","port":"out"},"to":{"id":"y","port":"in"}}],"subcircuits":{}}
+{"devices":{"x3":{"label":"x3","type":"Button","propagation":0,"position":{"x":5,"y":-20}},"x2":{"label":"x2","type":"Button","propagation":0,"position":{"x":15,"y":65}},"x1":{"label":"x1","type":"Button","propagation":0,"position":{"x":15,"y":145}},"x0":{"label":"x0","type":"Button","propagation":0,"position":{"x":10,"y":230}},"y":{"label":"y","type":"Lamp","propagation":1,"position":{"x":560,"y":85}},"not1":{"label":"~x3","type":"Not","propagation":1,"bits":1,"position":{"x":135,"y":-40}},"not2":{"label":"~x2","type":"Not","propagation":1,"bits":1,"position":{"x":140,"y":60}},"not3":{"label":"~x1","type":"Not","propagation":1,"bits":1,"position":{"x":145,"y":140}},"not4":{"label":"~x0","type":"Not","propagation":1,"bits":1,"position":{"x":140,"y":225}},"and1":{"label":"~x3 and x2","type":"And","propagation":1,"bits":1,"position":{"x":300,"y":5}},"and2":{"label":"(~x3 and x2) and x1","type":"And","propagation":1,"bits":1,"position":{"x":350,"y":90}},"and3":{"label":"x3 and ~x2","type":"And","propagation":1,"bits":1,"position":{"x":365,"y":170}},"and4":{"label":"x3 and ~x1","type":"And","propagation":1,"bits":1,"position":{"x":360,"y":235}},"and5":{"label":"x3 and ~x0","type":"And","propagation":1,"bits":1,"position":{"x":365,"y":295}},"or1":{"label":"~x3*x2*x1 or x3*~x2","type":"Or","propagation":1,"bits":1,"position":{"x":470,"y":135}},"or2":{"label":"x3*~x1 or x3*~x0","type":"Or","propagation":1,"bits":1,"position":{"x":490,"y":260}},"or3":{"label":"","type":"Or","propagation":1,"bits":1,"position":{"x":530,"y":200}}},"connectors":[{"from":{"id":"not1","port":"out"},"to":{"id":"and1","port":"in1"}},{"from":{"id":"x3","port":"out"},"to":{"id":"not1","port":"in"}},{"from":{"id":"x2","port":"out"},"to":{"id":"not2","port":"in"}},{"from":{"id":"x2","port":"out"},"to":{"id":"and1","port":"in2"}},{"from":{"id":"x1","port":"out"},"to":{"id":"not3","port":"in"}},{"from":{"id":"x0","port":"out"},"to":{"id":"not4","port":"in"}},{"from":{"id":"x1","port":"out"},"to":{"id":"and2","port":"in2"}},{"from":{"id":"and1","port":"out"},"to":{"id":"and2","port":"in1"}},{"from":{"id":"x3","port":"out"},"to":{"id":"and3","port":"in1"},"vertices":[{"x":210,"y":15},{"x":310,"y":160}]},{"from":{"id":"not2","port":"out"},"to":{"id":"and3","port":"in2"},"vertices":[{"x":290,"y":160}]},{"from":{"id":"x3","port":"out"},"to":{"id":"and4","port":"in1"},"vertices":[{"x":110,"y":20},{"x":210,"y":20}]},{"from":{"id":"not3","port":"out"},"to":{"id":"and4","port":"in2"},"vertices":[{"x":275,"y":220}]},{"from":{"id":"not4","port":"out"},"to":{"id":"and5","port":"in2"}},{"from":{"id":"x3","port":"out"},"to":{"id":"and5","port":"in1"},"vertices":[{"x":80,"y":-5},{"x":210,"y":20},{"x":295,"y":100}]},{"from":{"id":"and2","port":"out"},"to":{"id":"or1","port":"in1"}},{"from":{"id":"and3","port":"out"},"to":{"id":"or1","port":"in2"}},{"from":{"id":"and4","port":"out"},"to":{"id":"or2","port":"in1"}},{"from":{"id":"and5","port":"out"},"to":{"id":"or2","port":"in2"}},{"from":{"id":"or2","port":"out"},"to":{"id":"or3","port":"in2"},"vertices":[{"x":545,"y":250}]},{"from":{"id":"or1","port":"out"},"to":{"id":"or3","port":"in1"}},{"from":{"id":"or3","port":"out"},"to":{"id":"y","port":"in"}}],"subcircuits":{}}
 ```
 
-#### Demultiplexer
+</td>
+</tr>
+</table>
 
-...
 
-**Beispiel: 2 Bit Adresse -> 4 Ausgänge**
+### Umsetzung
 
-$ y_0 = x \cdot \overline{a_1} \cdot \overline{a_0} $
+Prinzipiell lassen sich alle logischen Verknüpfungen als Gatter realisieren. Die 74xx Reihe umfasst dabei die Basisbausteine und darüber hinaus integrierte Schaltnetze, die höhere Funktionen bereitstellen (Addierwerk, Multiplexer, Decoder)
 
-$ y_1 = x \cdot \overline{a_1} \cdot a_0 $
+https://de.wikipedia.org/wiki/Liste_von_integrierten_Schaltkreisen_der_74xx-Familie
 
-$ y_2 = x \cdot a_1 \cdot \overline{a_0} $
+![Bild](./images/04_Schaltnetze/ICs.png) <!--style="width: 90%;"
+-->
 
-$ y_3 = x \cdot a_1 \cdot a_0 $
+Aufwändigere Schaltnetze greifen auf ICs zurück, die
 
-``` json @DigiSim.evalJson
-{"devices":{"x":{"label":"x","type":"Button","propagation":0,"position":{"x":-50,"y":0}},"a0":{"label":"a0","type":"Button","propagation":0,"position":{"x":-45,"y":185}},"a1":{"label":"a1","type":"Button","propagation":0,"position":{"x":-50,"y":100}},"y0":{"label":"y0","type":"Lamp","propagation":0,"position":{"x":495,"y":15}},"y1":{"label":"y1","type":"Lamp","propagation":0,"position":{"x":495,"y":75}},"y2":{"label":"y2","type":"Lamp","propagation":0,"position":{"x":495,"y":130}},"y3":{"label":"y3","type":"Lamp","propagation":0,"position":{"x":500,"y":185}},"not1":{"label":"~a0","type":"Not","propagation":0,"bits":1,"position":{"x":85,"y":225}},"not2":{"label":"~a1","type":"Not","propagation":0,"bits":1,"position":{"x":45,"y":110}},"and1":{"label":"x and ~a1","type":"And","propagation":0,"bits":1,"position":{"x":150,"y":55}},"and2":{"label":"x and a1","type":"And","propagation":0,"bits":1,"position":{"x":160,"y":155}},"and3":{"label":"x and ~a1 and ~a0","type":"And","propagation":0,"bits":1,"position":{"x":345,"y":10}},"and4":{"label":"x and ~a1 and a0","type":"And","propagation":0,"bits":1,"position":{"x":345,"y":70}},"and5":{"label":"x and a1 and ~a0","type":"And","propagation":0,"bits":1,"position":{"x":345,"y":125}},"and6":{"label":"x and a1 and a0","type":"And","propagation":0,"bits":1,"position":{"x":350,"y":180}}},"connectors":[{"from":{"id":"not2","port":"out"},"to":{"id":"and1","port":"in2"}},{"from":{"id":"x","port":"out"},"to":{"id":"and1","port":"in1"}},{"from":{"id":"x","port":"out"},"to":{"id":"and2","port":"in1"},"vertices":[{"x":85,"y":75},{"x":110,"y":115}]},{"from":{"id":"and1","port":"out"},"to":{"id":"and3","port":"in1"}},{"from":{"id":"and1","port":"out"},"to":{"id":"and4","port":"in1"}},{"from":{"id":"and2","port":"out"},"to":{"id":"and5","port":"in1"},"vertices":[{"x":285,"y":135}]},{"from":{"id":"and2","port":"out"},"to":{"id":"and6","port":"in1"}},{"from":{"id":"not1","port":"out"},"to":{"id":"and3","port":"in2"},"vertices":[{"x":290,"y":225},{"x":290,"y":155}]},{"from":{"id":"not1","port":"out"},"to":{"id":"and5","port":"in2"},"vertices":[{"x":285,"y":200}]},{"from":{"id":"and3","port":"out"},"to":{"id":"y0","port":"in"}},{"from":{"id":"and4","port":"out"},"to":{"id":"y1","port":"in"}},{"from":{"id":"and5","port":"out"},"to":{"id":"y2","port":"in"}},{"from":{"id":"and6","port":"out"},"to":{"id":"y3","port":"in"}},{"from":{"id":"a1","port":"out"},"to":{"id":"not2","port":"in"}},{"from":{"id":"a1","port":"out"},"to":{"id":"and2","port":"in2"},"vertices":[{"x":35,"y":145},{"x":65,"y":185}]},{"from":{"id":"a0","port":"out"},"to":{"id":"not1","port":"in"}},{"from":{"id":"a0","port":"out"},"to":{"id":"and4","port":"in2"},"vertices":[{"x":305,"y":200}]},{"from":{"id":"a0","port":"out"},"to":{"id":"and6","port":"in2"}}],"subcircuits":{}}
+
+
+Schematische Darstellung (hier ein PROM („Programmable Read-Only Memory“) mit 16 Worten zu 4 Bit):
+
++ Adressdekoder entspricht einer festen UND-Matrix
++ Koppelelemente bilden eine programmierbare ODER-Matrix
+
+PROM realisiert unmittelbar die Wahrheitstabelle in Hardware!Ein PROM mit $2^m$ $n$-Bit Worten  kann jede beliebige Schaltfunktion   $f:\{0,1\}^n \rightarrow \{0,1\}^m$  ohne Minimierung implementieren.
+
+![Bild](./images/04_Schaltnetze/PROM.png) <!--style="width: 90%;"
+-->
+
+Realisierung mit PAL / GAL („Programmable / Generic Array Logic“)
+Schematische Darstellung eines  PAL-Bausteins (hier mit 4 Ein- und Ausgängen und 4 Produkttermen je Ausgang):
+
++ programmierbare UND-Matrix
++ Produktterme werden mit fester ODER-Matrix verknüpft
++ GAL ist wiederprogrammierbar
++ kann jede (ggf. minimierte) DNF realisieren, wenn Zahl der Produktterme je ODER ausreicht
+
+![Bild](./images/04_Schaltnetze/PAL.png) <!--style="width: 90%;"
+-->
+
+![Bild](./images/04_Schaltnetze/PAL16L8.png) <!--style="width: 90%;"
+-->
+
+http://www.applelogic.org/files/PAL16R8.pdf
+
+
+
+PAL wird eingesetzt:
+
++ wenn viele Variablen und relative wenige Terme vorkommen.
++ viele Eingangsbelegungen werden auf dieselbe Ausgangsbelegung abgebildet.
+
+PROM wird eingesetzt:
+
++ wenn jede Eingangsbelegung auf eine individuelle Ausgangsbelegung abgebildet werden muss.
+
+### Herausforderungen
+
+In der Elektronik bezeichnet man mit Glitch eine kurzzeitige Falschaussage in logischen Schaltungen und temporäre Verfälschung einer booleschen Funktion. Diese tritt auf, weil die Signallaufzeiten in den einzelnen Gattern niemals vollkommen gleich sind.
+
+**Ausgangspunkt**
+
+Zeitverhalten realer Logikbauteile
+
+https://www.ti.com/lit/ds/symlink/sn74lvc2g08-ep.pdf?ts=1603723493940&ref_url=https%253A%252F%252Fwww.google.com%252F
+
+**Konsequenz**
+
+Schaltwerk für die Umsetzung der Schaltfunktion $y=x_0x_1 + \overline{x}_1x_2$
+
+![Bild](./images/04_Schaltnetze/Glitch.png) <!--style="width: 90%;"
+-->
+
+Die Schaltung befindet sich zunächst in der Konfiguration $x_0=x_1=x_2=1$. Entsprechend liegt für $y$ ebenfalls eine $1$ vor.
+
+Nun wechselt $x_1$ auf "0". Der Inverter benötigt allerdings eine gewisse Zeit, um den Ausgang von "1" in eine „0“ umzusetzen. Für kurze Zeit ist sowohl $x_1=0$, als auch der Wert hinter dem Inverter "0". Entsprechend schaltet "AND_2" nicht durch, sondern gibt eine "0" weiter an den Oder-Baustein.
+
+<!--
+style="width: 80%; min-width: 420px; max-width: 720px;"
+-->
+```ascii
+    ^
+x_0 | -------------------------
+    |
+    |
+x_1 | -----+
+    |      |
+    |      +--------------
+x_2 | ------------------------
+    |
+    |
+ N  |         +---------------
+    |         |
+    | --------+
+ Y  | ------+  +---------------
+    |       |  |
+    |       +--+
+    +------------------------------>                                           .
 ```
 
-#### BCD Decodierer
+**Analyse im Karnaugh-Veitch-Diagramm**
 
-![Bild](./images/04_Schaltnetze/bcd_animation.gif)
+Das potentielle Auftreten eines Glitches wird im Karnaugh-Veitch Diagramm anhand nebeneinander liegender, nicht durch Überlappungen verbundener Schleifen deutlich.
+
+|                  | $\overline{x}_1\,\overline{x}_0$ | $\overline{x}_1x_0$ | $x_1x_0$ | $x_1\overline{x}_0$ |
+| ---------------- | -------------------------------- | ------------------- | -------- | ------------------- |
+| $\overline{x}_2$ | 0                                | 0                   | <span style="color: #0000ff">1</span>         | 0                   |
+| $x_2$            | <span style="color: #ff0000">1</span>                                | <span style="color: #ff0000">1</span>                 | <span style="color: #0000ff">1</span>       | 0                   |
+
+**Lösungsansätze**
+
+1. Integration Glitch-Freier Pfade in dem wir die Überlappung im Karnaugh-Veitch Diagramm über den Minimierungsgedanken stellen.
+
+$y=x_0x_1 + \overline{x}_1x_2 + x_0x_2$
+
+![Bild](./images/04_Schaltnetze/GlitchAdditionalAND.png) <!--style="width: 90%;"
+-->
+
+2. Synchronisation gültiger Zustände
+
+![Bild](./images/04_Schaltnetze/GAL.png) <!--style="width: 90%;"
+-->
