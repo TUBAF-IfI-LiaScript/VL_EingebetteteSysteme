@@ -245,7 +245,7 @@ Am Beispiel der Übungsaufgabe vom Begin der Vorlesung ergibt sich daraus:
 | 1     | 0     | 1     | 0     | 0   |                                                 |
 | 1     | 0     | 1     | 1     | 0   |                                                 |
 | 1     | 1     | 0     | 0     | 1   | $x_4x_3\overline{x}_2\overline{x}_1$            |
-| 1     | 1     | 0     | 1     | 1   | $x_4x_3\overline{x}_2x_1 $                      |
+| 1     | 1     | 0     | 1     | 1   | $x_4x_3\overline{x}_2x_1$                       |
 | 1     | 1     | 1     | 0     | 1   | $x_4x_3x_2\overline{x}_1$                       |
 | 1     | 1     | 1     | 1     | 0   |                                                 |
 
