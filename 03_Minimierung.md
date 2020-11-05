@@ -18,8 +18,7 @@ Link auf die aktuelle Vorlesung im Versionsmanagementsystem GitHub
 
 [https://github.com/TUBAF-IfI-LiaScript/VL_EingebetteteSysteme/blob/00_Einfuehrung](https://github.com/TUBAF-IfI-LiaScript/VL_EingebetteteSysteme/blob/dev/00_Einfuehrung)
 
-Die interaktive Form ist unter diese Link zu finden ->
-[TODO]( )
+Die interaktive Form ist unter [diesem Link](https://liascript.github.io/course/?https://raw.githubusercontent.com/TUBAF-IfI-LiaScript/VL_EingebetteteSysteme/master/03_Minimierung.md#1) zu finden
 
 ---------------------------------------------------------------------
 
@@ -520,7 +519,7 @@ Wählen Sie immer die größtmöglichen Schleifen und vermeiden Sie "Einzeleleme
 Falsch - $f =\overline{w}\,\overline{y} + \overline{w}xyz$
 </td>
 <td>
-Richtig - $f = \overline{w}xz + \overline{w}xz$
+Richtig - $f = \overline{w}\,\overline{y} + \overline{w}xz$
 </td>
 </tr>
 </table>
@@ -578,12 +577,12 @@ $f = z$
 | $y z$                       | 0                                                | 0               | 0    | 0               |
 | $y \overline{z}$            | <span style="background-color: #ff0000">1</span> | 0               | 0    | <span style="background-color: #ff0000">1</span>               |
 
- $f = \overline{x}\,\overline{z}$
 
  ********************************************************************************
 
       {{4-5}}
  ********************************************************************************
+ $f = \overline{x}\,\overline{z}$
 
 |                             | $\overline{w}\,\overline{x}$ | $\overline{w}x$ | $wx$ | $w\overline{x}$ |
 | --------------------------- | --------------------------- | --------------- | ---- | --------------- |
