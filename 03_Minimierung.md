@@ -329,7 +329,7 @@ $$
 
 Welche Form erweist sich in welcher Situation als günstiger?
 
-Eine KDNF ist günstiger als eine KKNF, wenn nur für wenige Kombinationen der Eingabewerte $f (x_1, x_2, ..., x_n) = 1$ gilt. Umgekehrt, wenn nur für wenige Kombinationen der Eingabewerte $f (x_1, x_2, ..., x_n) = 0$ gilt, ist die KKNF vorzuziehen.
+Eine KDNF ist günstiger als eine KKNF, wenn nur für wenige Kombinationen der Eingabewerte $f(x_1, x_2, ..., x_n) = 1$ gilt. Umgekehrt, wenn nur für wenige Kombinationen der Eingabewerte $f(x_1, x_2, ..., x_n) = 0$ gilt, ist die KKNF vorzuziehen.
 
 Für die `OR` Funktion bedeutet das (wenig überraschend):
 
@@ -383,7 +383,7 @@ $A= \overline{x} \cdot \overline{y} + \overline{x} \cdot y + x \cdot \overline{y
 |                | $\overline{x}$                    | $x$                    |
 | -------------- | --------------------------------- | ---------------------- |
 | $\overline{y}$ | $\overline{x} \cdot \overline{y}$ | $x \cdot \overline{y}$ |
-| $y$            | $\overline{x} \cdot y $           | $x \cdot y$            |
+| $y$            | $\overline{x} \cdot y$            | $x \cdot y$            |
 
 Mit dieser verschobenen Wahrheittafel lässt sich der Fingerabdruck einer boolschen Funktion darstellen.
 
@@ -440,12 +440,12 @@ Vorgehen zur Minimierung der KDNF einer $n$-stelligen Funktion $f$
 
 4. die markierten Bereiche nach der Resolutionsregel zu Produkttermen zusammengefasst werden, die summiert werden.
 
-|                             | $\overline{w}\,\overline{x}$ | $\overline{w}x$                                  | $wx$ | $w\overline{x}$ |
-| --------------------------- | --------------------------- | ------------------------------------------------ | ---- | --------------- |
-| $\overline{y}\,\overline{z}$ | 0                           | <span style="background-color: #ff0000">1</span> | 0    | 0               |
-| $\overline{y} z$            | 0                           | <span style="background-color: #ff0000">1</span> | 0    | 0               |
-| $y z$                       | 0                           | 0                                                | 0    | 0               |
-| $y \overline{z}$            | 0                           | 0                                                | 0    | 0               |
+|                              | $\overline{w}\,\overline{x}$ | $\overline{w}x$                                  | $wx$ | $w\overline{x}$ |
+| ---------------------------- | ---------------------------- | ------------------------------------------------ | ---- | --------------- |
+| $\overline{y}\,\overline{z}$ | 0                            | <span style="background-color: #ff0000">1</span> | 0    | 0               |
+| $\overline{y} z$             | 0                            | <span style="background-color: #ff0000">1</span> | 0    | 0               |
+| $y z$                        | 0                            | 0                                                | 0    | 0               |
+| $y \overline{z}$             | 0                            | 0                                                | 0    | 0               |
 
 Welcher Ausdruck steht hinter dem markierten Bereich?
 
