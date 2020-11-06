@@ -109,24 +109,24 @@ $$
 
 Alternativ können wir den Nachweis der Äquivalenz auch über die Wertetabellen darstellen. Das funktioniert natürlich nur bis zu einer gewissen Größe.
 
-| $x_4$ | $x_3$ | $x_2$ | $x_1$ | $f$ |                                                           |
-| ----- | ----- | ----- | ----- | --- | --------------------------------------------------------- |
-| 0     | 0     | 0     | 0     | 0   |                                                           |
-| 0     | 0     | 0     | 1     | 0   |                                                           |
-| 0     | 0     | 1     | 0     | 0   |                                                           |
-| 0     | 0     | 1     | 1     | 0   |                                                           |
-| 0     | 1     | 0     | 0     | 1   | $x_3\overline{x}_1$                                       |
-| 0     | 1     | 0     | 1     | 0   |                                                           |
-| 0     | 1     | 1     | 0     | 1   | $\overline{x}_4x_3x_2\overline{x}_1$, $x_3\overline{x}_1$ |
-| 0     | 1     | 1     | 1     | 0   |                                                           |
-| <span style="color: #ff0000">1</span>      | 0     | <span style="color: #ff0000">0</span>      | 0     | 1   | $x_4\overline{x}_3\overline{x}_2$                         |
-| <span style="color: #ff0000">1</span>      | 0     | <span style="color: #ff0000">0</span>     | 1     | 1   | $x_4\overline{x}_3\overline{x}_2$                         |
-| 1     | 0     | 1     | 0     | 0   |                                                           |
-| 1     | 0     | 1     | 1     | 0   |                                                           |
-| <span style="color: #ff0000">1</span>      | 1     | <span style="color: #ff0000">0</span>     | 0     | 1   | $x_3\overline{x}_1$                                       |
-| <span style="color: #ff0000">1</span>     | 1     |  <span style="color: #ff0000">0</span>     | 1     | 1   | $x_4x_3\overline{x}_2x_1 $                                |
-| 1     | 1     | 1     | 0     | 1   | $x_3\overline{x}_1$                                       |
-| 1     | 1     | 1     | 1     | 0   |                                                           |
+| $x_4$                                 | $x_3$ | $x_2$                                 | $x_1$ | $f$ |                                                           |
+| ------------------------------------- | ----- | ------------------------------------- | ----- | --- | --------------------------------------------------------- |
+| 0                                     | 0     | 0                                     | 0     | 0   |                                                           |
+| 0                                     | 0     | 0                                     | 1     | 0   |                                                           |
+| 0                                     | 0     | 1                                     | 0     | 0   |                                                           |
+| 0                                     | 0     | 1                                     | 1     | 0   |                                                           |
+| 0                                     | 1     | 0                                     | 0     | 1   | $x_3\overline{x}_1$                                       |
+| 0                                     | 1     | 0                                     | 1     | 0   |                                                           |
+| 0                                     | 1     | 1                                     | 0     | 1   | $\overline{x}_4x_3x_2\overline{x}_1$, $x_3\overline{x}_1$ |
+| 0                                     | 1     | 1                                     | 1     | 0   |                                                           |
+| <span style="color: #ff0000">1</span> | 0     | <span style="color: #ff0000">0</span> | 0     | 1   | $x_4\overline{x}_3\overline{x}_2$                         |
+| <span style="color: #ff0000">1</span> | 0     | <span style="color: #ff0000">0</span> | 1     | 1   | $x_4\overline{x}_3\overline{x}_2$                         |
+| 1                                     | 0     | 1                                     | 0     | 0   |                                                           |
+| 1                                     | 0     | 1                                     | 1     | 0   |                                                           |
+| <span style="color: #ff0000">1</span> | 1     | <span style="color: #ff0000">0</span> | 0     | 1   | $x_3\overline{x}_1$                                       |
+| <span style="color: #ff0000">1</span> | 1     | <span style="color: #ff0000">0</span> | 1     | 1   | $x_4x_3\overline{x}_2x_1$                                 | 
+| 1                                     | 1     | 1                                     | 0     | 1   | $x_3\overline{x}_1$                                       |
+| 1                                     | 1     | 1                                     | 1     | 0   |                                                           |
 
 ********************************************************************************
 
