@@ -734,7 +734,6 @@ $$
 \overline{A}_{KDNF} &= x\overline{z} + \overline{w}\,\overline{x}z +  w\overline{x}\,\overline{y} \\
 A_{KDNF} &= \overline{x\overline{z} + \overline{w}\,\overline{x}\,z +  w\overline{x}\,\overline{y}} \\
 A_{KKNF} &= (\overline{x} + z)(w+x+\overline{z})(\overline{w}+x+\overline{y}) \\
-
 \end{aligned}
 $$
 
