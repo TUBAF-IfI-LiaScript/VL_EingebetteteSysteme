@@ -623,8 +623,6 @@ $\overline{A}\,\overline{B} + \overline{A}\,\overline{C} + \overline{B}\,\overli
 
 ********************************************************************************
 
-$ adsfa $
-
 ## Optimierungskriterien
 
 |                             | $\overline{w}\,\overline{x}$ | $\overline{w}x$ | $wx$ | $w\overline{x}$ |
