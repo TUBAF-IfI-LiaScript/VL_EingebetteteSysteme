@@ -124,7 +124,7 @@ Alternativ können wir den Nachweis der Äquivalenz auch über die Wertetabellen
 | 1                                     | 0     | 1                                     | 0     | 0   |                                                           |
 | 1                                     | 0     | 1                                     | 1     | 0   |                                                           |
 | <span style="color: #ff0000">1</span> | 1     | <span style="color: #ff0000">0</span> | 0     | 1   | $x_3\overline{x}_1$                                       |
-| <span style="color: #ff0000">1</span> | 1     | <span style="color: #ff0000">0</span> | 1     | 1   | $x_4x_3\overline{x}_2x_1$                                 | 
+| <span style="color: #ff0000">1</span> | 1     | <span style="color: #ff0000">0</span> | 1     | 1   | $x_4x_3\overline{x}_2x_1$                                 |
 | 1                                     | 1     | 1                                     | 0     | 1   | $x_3\overline{x}_1$                                       |
 | 1                                     | 1     | 1                                     | 1     | 0   |                                                           |
 
@@ -619,7 +619,7 @@ Und jetzt Sie!
 | $\overline{C}$ | 1                            | 1               | 0    | 1               |
 | $C$            | 1                            | 0               | 0    | 0               |
 
-$\overline{A}\,\overline{B} + \overline{A}\,\overline{C} + \overline{B}\,\overline{C} $
+$\overline{A}\,\overline{B} + \overline{A}\,\overline{C} + \overline{B}\,\overline{C}$
 
 ********************************************************************************
 
