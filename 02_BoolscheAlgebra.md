@@ -467,13 +467,13 @@ negiertes ODER == NOR == Peirce-Funktion
 
 negiertes UND == NAND == Sheffer-Funktion genannt
 
-| Eingang x | Eingang y |                       | Implikation                | negiertes UND                  | Einsfunktion |
-| --------- | --------- | --------------------- | -------------------------- | ------------------------------ | ------------ |
-| $x = 0$   | $x = 0$   | 1                     | 1                          | 1                              | 1            |
-| $x = 0$   | $x = 1$   | 1                     | 1                          | 1                              | 1            |
-| $x = 1$   | $x = 0$   | 0                     | 0                          | 1                              | 1            |
-| $x = 1$   | $x = 1$   | 0                     | 1                          | 0                              | 1            |
-|           |           | $f(x,y)=\overline{x}$ | $f(x,y)= \overline{x} + y$ | $f(x,y)=\overline{x \cdot y} $ | $f(x,y)=1$   |
+| Eingang x | Eingang y |                       | Implikation                | negiertes UND                 | Einsfunktion |
+| --------- | --------- | --------------------- | -------------------------- | ----------------------------- | ------------ |
+| $x = 0$   | $x = 0$   | 1                     | 1                          | 1                             | 1            |
+| $x = 0$   | $x = 1$   | 1                     | 1                          | 1                             | 1            |
+| $x = 1$   | $x = 0$   | 0                     | 0                          | 1                             | 1            |
+| $x = 1$   | $x = 1$   | 0                     | 1                          | 0                             | 1            |
+|           |           | $f(x,y)=\overline{x}$ | $f(x,y)= \overline{x} + y$ | $f(x,y)=\overline{x \cdot y}$ | $f(x,y)=1$   |
 
 ### Exkurs: Technische Realisierung
 
