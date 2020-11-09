@@ -2,12 +2,30 @@ import glob, os
 import shutil
 import re
 
-blackList = ["{{", "******", "@Rextester", "@Tau", "@LIA.eval"]
-
 for file in glob.glob("*.md"):
     if file != "README.md":
         shutil.copy2(file, file+"x")
 
+start = ["``` json @DigiSim.evalJson", "```json @DigiSim.evalJson"]
+for file in glob.glob("*.mdx"):
+    content = open(file, 'r').readlines()
+    filtered = []
+    ignoreNextLine = False
+    for line in content:
+        if any(entry in line for entry in start):
+            ignoreNextLine = True
+            filtered.append(line)
+            continue
+        if not ignoreNextLine:
+            filtered.append(line)
+        else:
+            filtered.append("Hier wurde eine animiertes Gattermodell entnommen.\n")
+            ignoreNextLine = False
+
+    with open(file, "w") as outfile:
+        outfile.write("".join(filtered))
+
+blackList = ["{{", "******", "@Rextester", "@Tau", "@LIA.eval"]
 for file in glob.glob("*.mdx"):
     content = open(file, 'r').readlines()
     filtered = []
