@@ -11,7 +11,7 @@ import:   https://raw.githubusercontent.com/LiaTemplates/DigiSim/master/README.m
 
 -->
 
-# 05 - FlipFlops
+# 06 - FlipFlops
 
 **TU Bergakademie Freiberg - Wintersemester 2020 / 21**
 
@@ -19,7 +19,7 @@ Link auf die aktuelle Vorlesung im Versionsmanagementsystem GitHub
 
 [https://github.com/TUBAF-IfI-LiaScript/VL_EingebetteteSysteme/blob/00_Einfuehrung](https://github.com/TUBAF-IfI-LiaScript/VL_EingebetteteSysteme/blob/dev/00_Einfuehrung)
 
-Die interaktive Form ist unter diesem [Link](https://liascript.github.io/course/?https://raw.githubusercontent.com/TUBAF-IfI-LiaScript/VL_EingebetteteSysteme/master/05_FlipFlops.md) zu finden.
+Die interaktive Form ist unter diesem [Link](https://liascript.github.io/course/?https://raw.githubusercontent.com/TUBAF-IfI-LiaScript/VL_EingebetteteSysteme/master/06_FlipFlops.md) zu finden.
 
 ---------------------------------------------------------------------
 
