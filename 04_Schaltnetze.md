@@ -22,7 +22,7 @@ blue: @mark(lightblue,@0)
 gray: @mark(gray,@0)
 -->
 
-## 04 - Minimierung von boolschen Funktionen / Schaltnetze
+# Minimierung von boolschen Funktionen / Schaltnetze
 
 **TU Bergakademie Freiberg - Wintersemester 2020 / 21**
 

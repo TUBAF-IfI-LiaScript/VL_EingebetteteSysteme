@@ -10,7 +10,7 @@ import: https://raw.githubusercontent.com/LiaTemplates/NetSwarm-Simulator/master
         https://github.com/LiaTemplates/Pyodide
 -->
 
-# 03 - Minimierung von boolschen Funktionen I
+# Minimierung von boolschen Funktionen I
 
 **TU Bergakademie Freiberg - Wintersemester 2020 / 21**
 

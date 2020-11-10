@@ -10,7 +10,7 @@ import: https://raw.githubusercontent.com/LiaTemplates/NetSwarm-Simulator/master
 
 -->
 
-# 02 - Boolsche Algebra
+# Boolsche Algebra
 
 **TU Bergakademie Freiberg - Wintersemester 2020 / 21**
 

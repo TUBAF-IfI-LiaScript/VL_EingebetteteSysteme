@@ -22,7 +22,7 @@ blue: @mark(lightblue,@0)
 gray: @mark(gray,@0)
 -->
 
-# 05 - Schaltnetze
+# Schaltnetze
 
 **TU Bergakademie Freiberg - Wintersemester 2020 / 21**
 
