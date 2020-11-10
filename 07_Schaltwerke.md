@@ -156,7 +156,7 @@ Mathematisch kann ein Deterministischer Endlicher Automat als Tupel $A = (Q, \Si
 
 + Q ist eine endliche Zustandsmenge.
 + $\Sigma$ ist das endliche Eingabealphabet, also die Menge erlaubter Eingabesymbole.
-+ $\delta : Q \times \Sigma \rightarrow Q $ ist die Übergangsfunktion (oder Transitionsfunktion). Sie ordnet jedem Paar bestehend aus einem Zustand $q\in Q$ und einem Eingabesymbol $a\in \Sigma$ einen Nachfolgezustand $p\in Q$ zu.
++ $\delta : Q \times \Sigma \rightarrow Q$ ist die Übergangsfunktion (oder Transitionsfunktion). Sie ordnet jedem Paar bestehend aus einem Zustand $q\in Q$ und einem Eingabesymbol $a\in \Sigma$ einen Nachfolgezustand $p\in Q$ zu.
 + $q\in Q$ ist der Startzustand (auch Anfangszustand oder Initalzustand).
 + $F\subseteq Q$ ist die Menge der akzeptierenden Zustände, die sogenannten Finalzustände (oder Endzustände).
 
@@ -277,10 +277,10 @@ digraph finite_state_machine {
 ```
 @plantUML
 
-- Zustand `A`: die letzte Eingabe war keine `1` (`0` oder Start)  
-- Zustand `B`: die letzte Eingabe war `1`, die davor war nicht `1`  
-- Zustand `C`: die letzten beiden Eingaben waren `1`, die davor war nicht `1`  
-- Zustand `D`: mindestens die letzten drei Eingaben waren `1`  
+- Zustand `A`: die letzte Eingabe war keine `1` (`0` oder Start)
+- Zustand `B`: die letzte Eingabe war `1`, die davor war nicht `1`
+- Zustand `C`: die letzten beiden Eingaben waren `1`, die davor war nicht `1`
+- Zustand `D`: mindestens die letzten drei Eingaben waren `1`
 
 
 Zustandsübergänge
@@ -535,9 +535,9 @@ digraph finite_state_machine {
 ```
 @plantUML
 
-- Zustand `A`: die letzte Eingabe war keine `1`  
-- Zustand `B`: die letzte Eingabe war `1`, die davor war nicht `1`  
-- Zustabd `C`: mindestens die letzten zwei eingaben waren `1`  
+- Zustand `A`: die letzte Eingabe war keine `1`
+- Zustand `B`: die letzte Eingabe war `1`, die davor war nicht `1`
+- Zustabd `C`: mindestens die letzten zwei eingaben waren `1`
 
 Welche Bedeutung hat dies für den technischen Entwurf des Schaltwerkes?
 
