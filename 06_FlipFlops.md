@@ -11,7 +11,7 @@ import:   https://raw.githubusercontent.com/LiaTemplates/DigiSim/master/README.m
 
 -->
 
-# 05 - FlipFlops
+# 06 - FlipFlops
 
 **TU Bergakademie Freiberg - Wintersemester 2020 / 21**
 
