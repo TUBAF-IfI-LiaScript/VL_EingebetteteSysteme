@@ -885,7 +885,7 @@ In der Elektronik bezeichnet man mit Glitch eine kurzzeitige Falschaussage in lo
 
 Zeitverhalten realer Logikbauteile
 
-https://www.ti.com/lit/ds/symlink/sn74lvc2g08-ep.pdf?ts=1603723493940&ref_url=https%253A%252F%252Fwww.google.com%252F
+https://www.ti.com/lit/ds/symlink/sn74lvc2g08-ep.pdf
 
 **Konsequenz**
 
