@@ -49,10 +49,9 @@ ab.
 + Welche Besonderheit besteht bei der Ableitung der Schaltfunktionen
 für einen Dekodierer? Was ist ein SLPD und welche Ausprägungen
 kennen Sie davon.
-+ Wie lassen sich mit einem Multiplexer beliebige Wahrheitstafeln
-abbilden. Welche Grenzen hat dieser Ansatz?
 + Welche Gatterkombinationen sind geeignet um beliebige
 Schaltfunktionen damit umzusetzen?
++ Was ist ein Glitch?
 
 ---------------------------------------------------------------------
 
@@ -839,7 +838,7 @@ Prinzipiell lassen sich alle logischen Verknüpfungen als Gatter realisieren. Di
 
 https://de.wikipedia.org/wiki/Liste_von_integrierten_Schaltkreisen_der_74xx-Familie
 
-![Bild](./images/04_Schaltnetze/ICs.png) <!--style="width: 90%;"
+![Bild](./images/04_Schaltnetze/ICs.png) <!--style="width: 80%;"
 -->
 
 Aufwändigere Schaltnetze greifen auf ICs zurück, die
@@ -853,8 +852,8 @@ Schematische Darstellung (hier ein PROM („Programmable Read-Only Memory“) mi
 
 PROM realisiert unmittelbar die Wahrheitstabelle in Hardware!Ein PROM mit $2^m$ $n$-Bit Worten  kann jede beliebige Schaltfunktion   $f:\{0,1\}^n \rightarrow \{0,1\}^m$  ohne Minimierung implementieren.
 
-![Bild](./images/04_Schaltnetze/PROM.png) <!--style="width: 90%;"
--->
+![Bild](./images/04_Schaltnetze/PROM.png) <!--style="width: 40%;" -->
+![Bild](./images/04_Schaltnetze/PAL.png) <!--style="width: 40%;" -->
 
 Realisierung mit PAL / GAL („Programmable / Generic Array Logic“)
 Schematische Darstellung eines  PAL-Bausteins (hier mit 4 Ein- und Ausgängen und 4 Produkttermen je Ausgang):
@@ -864,15 +863,10 @@ Schematische Darstellung eines  PAL-Bausteins (hier mit 4 Ein- und Ausgängen un
 + GAL ist wiederprogrammierbar
 + kann jede (ggf. minimierte) DNF realisieren, wenn Zahl der Produktterme je ODER ausreicht
 
-![Bild](./images/04_Schaltnetze/PAL.png) <!--style="width: 90%;"
--->
 
-![Bild](./images/04_Schaltnetze/PAL16L8.png) <!--style="width: 90%;"
--->
+![Bild](./images/04_Schaltnetze/PAL16L8.png) <!--style="width: 90%;"-->
 
 http://www.applelogic.org/files/PAL16R8.pdf
-
-
 
 PAL wird eingesetzt:
 
