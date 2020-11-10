@@ -11,7 +11,7 @@ import:  https://raw.githubusercontent.com/liascript-templates/plantUML/master/R
 
 -->
 
-# 06 - Schaltwerke
+# 07 - Schaltwerke
 
 **TU Bergakademie Freiberg - Wintersemester 2020 / 21**
 
