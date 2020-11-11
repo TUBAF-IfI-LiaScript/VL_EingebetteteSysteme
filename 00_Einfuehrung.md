@@ -228,7 +228,7 @@ selbst anzugehen.
 
 2. Videos
 
-   + Youtube – „How computers works“ https://www.youtube.com/watch?v=cNN_tTXABUA
+   + Youtube – „How computers works“ [Link](https://www.youtube.com/watch?v=cNN_tTXABUA)
 
 Bei den jeweiligen Vorlesungsinhalten werden zusätzliche Materialien angegeben.
 
@@ -239,7 +239,7 @@ Bei den jeweiligen Vorlesungsinhalten werden zusätzliche Materialien angegeben.
 
 Die Lehrmaterialien finden Sie unter GitHub, einer Webseite für das Versionsmanagement und die Projektverwaltung.
 
-https://github.com/TUBAF-IfI-LiaScript/VL_EingebetteteSysteme/blob/dev/01_HistorischerUeberblick.md
+[https://github.com/TUBAF-IfI-LiaScript/VL_EingebetteteSysteme/blob/dev/01_HistorischerUeberblick.md](https://github.com/TUBAF-IfI-LiaScript/VL_EingebetteteSysteme/blob/dev/01_HistorischerUeberblick.md)
 
 Die Unterlagen selbst sind in der Auszeichnungsprache LiaScipt verfasst und öffentlich verfügbar.
 
@@ -403,6 +403,6 @@ style="width: 80%; display: block; margin-left: auto; margin-right: auto;" -->
 
 Quelle: _Team RobOTTO_, OVGU Magdeburg
 
-## Hausaufgabe 
+## Hausaufgabe
 
 + Legen Sie sich einen GitHub Account an ... und seien Sie der erste, der einen Typo in den Unterlagen findet und diesen als _Contributer_ korrigiert :-)
