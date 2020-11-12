@@ -11,7 +11,7 @@ import: https://raw.githubusercontent.com/LiaTemplates/NetSwarm-Simulator/master
         https://github.com/LiaTemplates/AVR8js/main/README.md#10
 
 mark: <span style="background-color: @0;
-                                   display: flex;O
+                                   display: flex;
                                    width: calc(100% + 32px);
                                    margin: -16px;
                                    padding: 6px 16px 6px 16px;
