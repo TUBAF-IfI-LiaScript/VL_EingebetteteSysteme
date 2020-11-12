@@ -11,7 +11,7 @@ import: https://raw.githubusercontent.com/LiaTemplates/NetSwarm-Simulator/master
         https://github.com/LiaTemplates/AVR8js/main/README.md#10
 
 mark: <span style="background-color: @0;
-                                   display: flex;
+                                   display: flex;O
                                    width: calc(100% + 32px);
                                    margin: -16px;
                                    padding: 6px 16px 6px 16px;
@@ -192,7 +192,7 @@ byte segDigits[10][8] = {
   { 1,0,1,1,1,1,1,1 },  // = 6
   { 1,1,1,1,0,0,1,0 },  // = 7
   { 1,1,1,1,1,1,1,1 },  // = 8
-  { 1,1,1,1,0,0,1,1 },  // = 9
+  { 1,1,1,1,1,0,1,1 },  // = 9
 };
 void setup() {
   for(int i=0;i<8;i++){
