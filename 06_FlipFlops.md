@@ -317,10 +317,10 @@ Für die Realisierung eines synchronisierten Zustandswechsels wird der Eingang u
 
 | $R(t)$                                | $S(t)$                                | $Clk(t)$ | $Q'(t)$       |
 | ------------------------------------- | ------------------------------------- | -------- | ------------- |
-| <span style="color: #ff0000">d</span> | <span style="color: #ff0000">d</span> | 0        | $Q$        |
-| 0                                     | 0                                     | 1        | $Q$              |
-| 1                                     | 1                                     | 1        | 1             |
-| 1                                     | 0                                     | 1        | 0              |
+| <span style="color: #ff0000">d</span> | <span style="color: #ff0000">d</span> | 0        | $Q$           |
+| 0                                     | 0                                     | 1        | $Q$           |
+| 0                                     | 1                                     | 1        | 1             |
+| 1                                     | 0                                     | 1        | 0             |
 | 1                                     | 1                                     | 1        | nicht erlaubt |
 
 Beachten Sie, dass sich mit dem <span style="color: #ff0000">d</span> Zustand die Wertetabelle deutlich verkürzt.
