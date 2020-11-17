@@ -563,8 +563,6 @@ http://www.datasheet-pdf.com/PDF/DM74LS194A-Datasheet-FairchildSemiconductor-518
 
 ### Zusammenfassung
 
-Grafik Folie 29
-
 | Parameter                     | Latch                        | Flip-Flop                                    |
 | ----------------------------- | ---------------------------- | -------------------------------------------- |
 | Eingangssignal                | `Enable`                     | `Clock`                                      |
