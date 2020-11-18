@@ -17,7 +17,7 @@ import:   https://raw.githubusercontent.com/LiaTemplates/DigiSim/master/README.m
 
 Link auf die aktuelle Vorlesung im Versionsmanagementsystem GitHub
 
-[https://github.com/TUBAF-IfI-LiaScript/VL_EingebetteteSysteme/blob/00_Einfuehrung](https://github.com/TUBAF-IfI-LiaScript/VL_EingebetteteSysteme/blob/dev/06_FlipFlops)
+[https://github.com/TUBAF-IfI-LiaScript/VL_EingebetteteSysteme/blob/master/06_FlipFlops.md](https://github.com/TUBAF-IfI-LiaScript/VL_EingebetteteSysteme/blob/master/06_FlipFlops.md)
 
 Die interaktive Form ist unter diesem [Link](https://liascript.github.io/course/?https://raw.githubusercontent.com/TUBAF-IfI-LiaScript/VL_EingebetteteSysteme/master/06_FlipFlops.md) zu finden.
 
@@ -143,8 +143,8 @@ Wir fügen eine weitere Eingangsgröße hinzu, die die Logik des Speichers auf d
 
 | $R(t)$ | $S(t)$ | $Y(t)$ | $Y(t+2\Delta t)$ | Bedeutung      |
 | ------ | ------ | ------ | ---------------- | -------------- |
-| 0      | 0      | 0      | 0                | Speichern$^*$  |
-| 0      | 0      | 1      | 1                | Speichern$^*$  |
+| 0      | 0      | 0      | 0                | Speichern      |
+| 0      | 0      | 1      | 1                | Speichern      |
 | 0      | 1      | 0      | 1                | Setzen         |
 | 0      | 1      | 1      | 1                | Setzen$^*$     |
 | 1      | 0      | 0      | 0                | Rücksetzen$^*$ |
@@ -152,7 +152,11 @@ Wir fügen eine weitere Eingangsgröße hinzu, die die Logik des Speichers auf d
 | 1      | 1      | 0      | 0                | Vermeiden$^*$  |
 | 1      | 1      | 1      | 0                | Vermeiden      |
 
-Die mit * markierten Einträge sind jeweils flüchtig. Sie werden im nächsten Zyklus durch den Zustand ohne Stern gleicher Kategorie überschrieben.
+Die mit * markierten Einträge werden jeweils aus dem benachbarten Zustand erreicht. Wenn wir zum Beispiel von einem Zustand $Y=0$ beim Setzen ausgehen, generieren wir mit $S==1$ ein $Y(t+2\Delta t)$ einen 1-Pegel. Dies entspricht der Zeile 4 der Wahrheitstabelle.
+
+Der Zeitversatz von $2\Delta t$ ergibt sich aus dem Schaltverhalten der beiden Bauteile. In obigem Schaubild sind noch drei Typen (OR, AND und NOT) im folgenden wird diese Konfiguration auf NAND und NOR Gatter vereinheitlicht. Entsprechend kann dann von einem einheitlichen $\Delta t$ ausgegangen werden.
+
+Werden beide Eingänge auf 1-Pegel gesetzt, führen beide Ausgänge 1-Pegel. Dieser Zustand kann nicht gespeichert werden. In der Literatur wird dieser Zustand als "unbestimmt" oder "verboten" bezeichnet. Doch die Unbestimmtheit tritt nur in dem Fall ein, wenn beide Eingänge nach diesem Zustand gleichzeitig 0-Pegel erhalten. Dieser Folgezustand ist "unbestimmt", weil nicht klar ist, welcher Ausgang 1-Pegel führt.
 
 ``` json @DigiSim.evalJson
 {"devices":{"s":{"label":"S","type":"Button","propagation":0,"position":{"x":0,"y":0}},"r":{"label":"R","type":"Button","propagation":0,"position":{"x":0,"y":55}},"y":{"label":"Y","type":"Lamp","propagation":0,"position":{"x":430,"y":25}},"or":{"label":"or","type":"Or","propagation":0,"bits":1,"position":{"x":135,"y":-45}},"and":{"label":"and","type":"And","propagation":0,"bits":1,"position":{"x":255,"y":-10}},"not":{"label":"not","type":"Not","propagation":0,"bits":1,"position":{"x":130,"y":50}}},"connectors":[{"from":{"id":"r","port":"out"},"to":{"id":"not","port":"in"}},{"from":{"id":"not","port":"out"},"to":{"id":"and","port":"in2"}},{"from":{"id":"s","port":"out"},"to":{"id":"or","port":"in2"}},{"from":{"id":"or","port":"out"},"to":{"id":"and","port":"in1"}},{"from":{"id":"and","port":"out"},"to":{"id":"or","port":"in1"},"vertices":[{"x":270,"y":-75}]},{"from":{"id":"and","port":"out"},"to":{"id":"y","port":"in"}}],"subcircuits":{}}
@@ -166,7 +170,7 @@ Daraus folgt die Wertetabelle eines RS-Flip-Flops. Anhand dieser Darstellung wir
 | 0      | 0      | $Y(t)$                   |
 | 0      | 1      | 1                        |
 | 1      | 0      | 0                        |
-| 1      | 1      | nicht erlaubt            |
+| 1      | 1      | Vermeiden                |
 
 Nun können wir mit dem Theorem von de Morgan einige Anpassungen vornehmen:
 
