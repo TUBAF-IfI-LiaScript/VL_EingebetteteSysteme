@@ -267,8 +267,8 @@ digraph finite_state_machine {
 
     node [shape = point ]; qi
     node[shape=circle]
-    A[label="{auf}"];
-    B[label="{zu}"];
+    A[label="zu"];
+    B[label="auf"];
 
     qi -> A;
     A  -> A  [ label = "schließen" ];
