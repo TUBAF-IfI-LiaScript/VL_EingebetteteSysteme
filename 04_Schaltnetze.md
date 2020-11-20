@@ -863,10 +863,8 @@ Schematische Darstellung eines  PAL-Bausteins (hier mit 4 Ein- und Ausgängen un
 + GAL ist wiederprogrammierbar
 + kann jede (ggf. minimierte) DNF realisieren, wenn Zahl der Produktterme je ODER ausreicht
 
-
-![Bild](./images/04_Schaltnetze/PAL16L8.png) <!--style="width: 90%;"-->
-
-http://www.applelogic.org/files/PAL16R8.pdf
+![Bild](./images/04_Schaltnetze/PAL16R8.png) <!--style="width: 90%;"-->[^1]
+[^1]: Datenblatt PAL16R8 Family, Advanced Micro Devices, [link](http://www.applelogic.org/files/PAL16R8.pdf), 1996
 
 PAL wird eingesetzt:
 

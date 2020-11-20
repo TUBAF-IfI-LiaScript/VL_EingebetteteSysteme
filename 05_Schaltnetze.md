@@ -40,9 +40,10 @@ Aus den Materialien wird ab sofort ein **Skript** in Form eines pdf generiert. W
 
 ** Fragen an die Veranstaltung**
 
-+ Unterscheiden Sie Multiplexer und Demultiplexer
++ Unterscheiden Sie Multiplexer und Demultiplexer.
 + Wie lassen sich mit einem Multiplexer beliebige Wahrheitstafeln abbilden. Welche Grenzen hat dieser Ansatz?
 + Welche Aufgaben realisieren Dekoder?
++ Nennen Sie Anwendungsbeispiele für einen Muliplexer.
 
 <!--
 style="width: 80%; min-width: 420px; max-width: 720px;"
