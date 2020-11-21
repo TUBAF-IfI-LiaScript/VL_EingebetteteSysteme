@@ -27,7 +27,7 @@ gray: @mark(gray,@0)
 
 Link auf die aktuelle Vorlesung im Versionsmanagementsystem GitHub
 
-[https://github.com/TUBAF-IfI-LiaScript/VL_EingebetteteSysteme/blob/00_Einfuehrung](https://github.com/TUBAF-IfI-LiaScript/VL_EingebetteteSysteme/blob/dev/00_Einfuehrung)
+[https://github.com/TUBAF-IfI-LiaScript/VL_EingebetteteSysteme/blob/07_Schaltwerke](https://github.com/TUBAF-IfI-LiaScript/VL_EingebetteteSysteme/blob/dev/07_Schaltwerke)
 
 Die interaktive Form ist unter diesem [Link](https://liascript.github.io/course/?https://raw.githubusercontent.com/TUBAF-IfI-LiaScript/VL_EingebetteteSysteme/master/07_Schaltwerke.md) zu finden.
 
@@ -1007,7 +1007,7 @@ Eine kompaktere Darstellung fasst die Kombinationen der Eingänge zusammen und o
 | G                 | G      | G      | G      | G      |
 | L                 | L      | L      | L      | L      |
 
-**Schritt 3:** Auswahl einer binären Zustandskodierung und Generierung einer binären Zustandstabelle
+**Schritt 3: Auswahl einer binären Zustandskodierung und Generierung einer binären Zustandstabelle**
 
 Insgesamt sind 3 Zustände zu kodieren, entsprechend werden wiederum 2 Flip-Flops benötigt. Dabei wird die Kodierung wie folgt vorgenommen:
 
@@ -1046,7 +1046,7 @@ In der traditionellen Darstellung zeigt sich diese wie folgt:
 | 1       | 1       | 1       | 0       | @gray(D)         | @gray(D)         |
 | 1       | 1       | 1       | 1       | @gray(D)         | @gray(D)         |
 
-**Schritt 4:** 4. Schritt: Auswahl eines Flip-Flop Typs und Ermittlung der für jeden Zustandsübergang benötigten Flip-Flop Ansteuerungen
+**Schritt 4: Auswahl eines Flip-Flop Typs und Ermittlung der für jeden Zustandsübergang benötigten Flip-Flop Ansteuerungen** 
 
 Wir entscheiden uns für einen D Flip-Flop für die Realisierung. Die entsprechende invertierte Wahrheitstafel haben Sie zwischenzeitlich im Kopf:
 
@@ -1091,7 +1091,7 @@ $$
 
 ![Bild](./images/07_Schaltwerke/PAL_example_vorlage.png) <!--style="width: 80%;"-->
 
-{{2}}
+{{1}}
 ![Bild](./images/07_Schaltwerke/PAL_example_Solution.png) <!--style="width: 80%;"-->
 
 
