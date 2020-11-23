@@ -491,7 +491,44 @@ DI &= \overline{I} \\
 \end{aligned}
 $$
 
-> Bitte hier die Simulation einfügen
+**Alternative Herleitung:**
+
+Der Zustand eines Zählerbits wechselt, wenn das nächst kleinere von 1 zu 0 springen wird.
+
+Das bedingte wechseln eines Bits lässt sich mit XOR realisieren:
+$ x \bigoplus 0 = x $;
+$ x \bigoplus 1 = \overline{x} $;
+Wenn man möchte, dass $ x $ wechselt, wenn $ x_{flip} $ high ist, dann kann $ x \bigoplus x_{flip} $ verwendet werden.
+
+Aus der Bedingung oben ergibt sich:
+
+$ a_{flip} = b_{flip} \cdot b $, (a wird wechseln, wenn b wechseln wird und b 1 ist, wobei b das nächst niederwertigste Bit von a ist.)
+
+Der neue Zustand von a: $ a' = a \bigoplus a_{flip} $
+
+$ b_{flip} $ lässt sich wie $ a_{flip} $ berechnen, wenn es nicht das niederwertigste Bit ist. Das niederwertigste Bit wechselt dann wenn der Eingang $ count $ (carryIn) auf High ist.
+
+Der Ausgang $ carryOut $ lässt sich berechnen mit $ a_{flip} \cdot a $.
+
+Für einen 4 Bit Zähler mit den bits a,b,c,d (a höchstwertig, d niederwertigste) ergeben sich diese Formeln:
+
+$$
+\begin{aligned}
+d_{flip} &= count\\
+d' &= d_{flip} \bigoplus d\\
+c_{flip} &= d_{flip} \cdot d\\
+c' &= c \bigoplus c_{flip}\\
+b_{flip} &= c_{flip} \cdot c\\
+b' &= b \bigoplus b_{flip}\\
+a_{flip} &= b_{flip} \cdot b\\
+a' &= a \bigoplus a_{flip}\\
+carryOut &= a_{flip} \cdot a\\
+\end{aligned}
+$$
+
+Aus technischen Gründen hat die Folgende Simmulation noch eine Reset Schaltung (jeder neue Zustand wird noch mit $ \overline{reset} $ UND genommen.)
+
+Am Anfang `count` und `~reset` auf LOW lassen, clock puls geben und dann `count` und `~reset` auf HIGH um bei dem nächten clock Puls das Zählen zu beginnen.
 
 ```json @DigiSim.evalJson
 {"devices":{"and5":{"label":"anew and ~reset","type":"And","propagation":1,"bits":1,"position":{"x":355,"y":5}},"and6":{"label":"bnew and ~reset","type":"And","propagation":1,"bits":1,"position":{"x":355,"y":80}},"and7":{"label":"cnew and ~reset","type":"And","propagation":1,"bits":1,"position":{"x":355,"y":145}},"and8":{"label":"dnew and ~reset","type":"And","propagation":1,"bits":1,"position":{"x":355,"y":215}},"resetButton":{"label":"~reset","type":"Button","propagation":0,"position":{"x":25,"y":265}},"countButton":{"label":"count  (dflip)","type":"Button","propagation":0,"position":{"x":-95,"y":245}},"clkButton":{"label":"clk","type":"Button","propagation":0,"position":{"x":195,"y":345}},"lampa":{"label":"a","type":"Lamp","propagation":1,"position":{"x":655,"y":5}},"lampb":{"label":"b","type":"Lamp","propagation":1,"position":{"x":655,"y":70}},"lampc":{"label":"c","type":"Lamp","propagation":1,"position":{"x":655,"y":140}},"lampd":{"label":"d","type":"Lamp","propagation":1,"position":{"x":655,"y":210}},"lampco":{"label":"carry out","type":"Lamp","propagation":1,"position":{"x":630,"y":-60}},"dffa":{"label":"dff a","type":"Dff","propagation":1,"polarity":{"clock":true},"bits":1,"initial":"x","position":{"x":505,"y":5}},"dffb":{"label":"dff b","type":"Dff","propagation":1,"polarity":{"clock":true},"bits":1,"initial":"x","position":{"x":505,"y":90}},"dffc":{"label":"dff c","type":"Dff","propagation":1,"polarity":{"clock":true},"bits":1,"initial":"x","position":{"x":505,"y":160}},"dffd":{"label":"dff d","type":"Dff","propagation":1,"polarity":{"clock":true},"bits":1,"initial":"x","position":{"x":510,"y":235}},"and1":{"label":"aflip and a  (carryOut)","type":"And","propagation":1,"bits":1,"position":{"x":135,"y":-65}},"and2":{"label":"bflip and b  (aflip)","type":"And","propagation":1,"bits":1,"position":{"x":60,"y":0}},"and3":{"label":"cflip and c  (bflip)","type":"And","propagation":1,"bits":1,"position":{"x":35,"y":80}},"and4":{"label":"dflip and d  (cflip)","type":"And","propagation":1,"bits":1,"position":{"x":-30,"y":150}},"xor1":{"label":"a xor aflip","type":"Xor","propagation":1,"bits":1,"position":{"x":210,"y":5}},"xor2":{"label":"b xor bflip","type":"Xor","propagation":1,"bits":1,"position":{"x":215,"y":70}},"xor3":{"label":"c xor cflip","type":"Xor","propagation":1,"bits":1,"position":{"x":210,"y":130}},"xor4":{"label":"d xor dflip","type":"Xor","propagation":1,"bits":1,"position":{"x":210,"y":200}}},"connectors":[{"from":{"id":"countButton","port":"out"},"to":{"id":"xor4","port":"in2"}},{"from":{"id":"countButton","port":"out"},"to":{"id":"and4","port":"in1"},"vertices":[{"x":-80,"y":190}]},{"from":{"id":"and3","port":"out"},"to":{"id":"and2","port":"in1"},"vertices":[{"x":25,"y":65},{"x":5,"y":65}]},{"from":{"id":"and4","port":"out"},"to":{"id":"and3","port":"in1"},"vertices":[{"x":-15,"y":125}]},{"from":{"id":"and4","port":"out"},"to":{"id":"xor3","port":"in2"}},{"from":{"id":"and3","port":"out"},"to":{"id":"xor2","port":"in2"}},{"from":{"id":"and2","port":"out"},"to":{"id":"xor1","port":"in2"}},{"from":{"id":"dffa","port":"out"},"to":{"id":"xor1","port":"in1"},"vertices":[{"x":315,"y":-5}]},{"from":{"id":"and2","port":"out"},"to":{"id":"and1","port":"in1"},"vertices":[{"x":95,"y":-10}]},{"from":{"id":"and1","port":"out"},"to":{"id":"lampco","port":"in"}},{"from":{"id":"clkButton","port":"out"},"to":{"id":"dffd","port":"clk"},"vertices":[{"x":435,"y":360}]},{"from":{"id":"clkButton","port":"out"},"to":{"id":"dffc","port":"clk"},"vertices":[{"x":435,"y":360}]},{"from":{"id":"clkButton","port":"out"},"to":{"id":"dffb","port":"clk"},"vertices":[{"x":455,"y":340}]},{"from":{"id":"clkButton","port":"out"},"to":{"id":"dffa","port":"clk"}},{"from":{"id":"and8","port":"out"},"to":{"id":"dffd","port":"in"}},{"from":{"id":"xor1","port":"out"},"to":{"id":"and5","port":"in1"}},{"from":{"id":"xor2","port":"out"},"to":{"id":"and6","port":"in1"}},{"from":{"id":"xor3","port":"out"},"to":{"id":"and7","port":"in1"}},{"from":{"id":"xor4","port":"out"},"to":{"id":"and8","port":"in1"}},{"from":{"id":"and7","port":"out"},"to":{"id":"dffc","port":"in"}},{"from":{"id":"and6","port":"out"},"to":{"id":"dffb","port":"in"}},{"from":{"id":"and5","port":"out"},"to":{"id":"dffa","port":"in"}},{"from":{"id":"resetButton","port":"out"},"to":{"id":"and8","port":"in2"}},{"from":{"id":"resetButton","port":"out"},"to":{"id":"and7","port":"in2"},"vertices":[{"x":305,"y":255}]},{"from":{"id":"resetButton","port":"out"},"to":{"id":"and6","port":"in2"},"vertices":[{"x":305,"y":255}]},{"from":{"id":"resetButton","port":"out"},"to":{"id":"and5","port":"in2"},"vertices":[{"x":305,"y":255}]},{"from":{"id":"dffd","port":"out"},"to":{"id":"lampd","port":"in"}},{"from":{"id":"dffc","port":"out"},"to":{"id":"lampc","port":"in"}},{"from":{"id":"dffb","port":"out"},"to":{"id":"lampb","port":"in"}},{"from":{"id":"dffa","port":"out"},"to":{"id":"lampa","port":"in"}},{"from":{"id":"dffd","port":"out"},"to":{"id":"xor4","port":"in1"},"vertices":[{"x":310,"y":210},{"x":190,"y":185}]},{"from":{"id":"dffd","port":"out"},"to":{"id":"and4","port":"in2"},"vertices":[{"x":185,"y":180},{"x":15,"y":200}]},{"from":{"id":"dffc","port":"out"},"to":{"id":"xor3","port":"in1"},"vertices":[{"x":545,"y":140},{"x":285,"y":110}]},{"from":{"id":"dffc","port":"out"},"to":{"id":"and3","port":"in2"},"vertices":[{"x":545,"y":140},{"x":285,"y":110},{"x":130,"y":130}]},{"from":{"id":"dffb","port":"out"},"to":{"id":"and2","port":"in2"},"vertices":[{"x":340,"y":60}]},{"from":{"id":"dffb","port":"out"},"to":{"id":"xor2","port":"in1"},"vertices":[{"x":510,"y":60}]},{"from":{"id":"dffa","port":"out"},"to":{"id":"and1","port":"in2"},"vertices":[{"x":310,"y":-5}]}],"subcircuits":{}}
