@@ -180,8 +180,8 @@ __JK-Invertierte Wahrheitstafel__
 | $J(t)$ | $K(t)$ | $Q(t+1)$       | Modus       |
 | ------ | ------ | -------------- | ----------- |
 | 0      | 0      | $Q$            | Beibehalten |
-| 0      | 1      | $0 $           | Löschen     |
-| 1      | 0      | $1 $           | Setzen      |
+| 0      | 1      | $0$            | Löschen     |
+| 1      | 0      | $1$            | Setzen      |
 | 1      | 1      | $\overline{Q}$ | Toggeln     |
 </td>
 <td>
@@ -211,10 +211,10 @@ __D-Invertierte Wahrheitstafel__
 </tr>
 <tr>
 <td>
-| $D(t)$ | $Q(t+1)$       | Modus       |
-| ------ | -------------- | ----------- |
-| 0      | $0 $           | Löschen     |
-| 1      | $1 $           | Setzen      |
+| $D(t)$ | $Q(t+1)$ | Modus   |
+| ------ | -------- | ------- |
+| 0      | $0$      | Löschen |
+| 1      | $1$      | Setzen  |
 </td>
 <td>
 {{0-1}}
@@ -770,7 +770,7 @@ Nehmen wir an, dass die Realisierung nicht mit einem D sondern einen JK-Flip-Flo
 | 1   | 0   | 1                 |
 | 1   | 1   | $\overline{Q(t)}$ |
 
-Der JK-Flip-Flop wechselt beim setzen von $J$ in einen 1 Zustand und kann mit K resetet werden. Eine gleichzeitige Aktivierung beider Eingäng führt zu einem Togglen des Zustandes.
+Der JK-Flip-Flop wechselt beim setzen von $J$ in einen 1 Zustand und kann mit K resetet werden. Eine gleichzeitige Aktivierung beider Eingänge führt zu einem Togglen des Zustandes.
 
 | $Q(t)$ | $Q(t+1)$ | $J$ | $K$ |
 | ------ | -------- | --- | --- |
@@ -1046,7 +1046,7 @@ In der traditionellen Darstellung zeigt sich diese wie folgt:
 | 1       | 1       | 1       | 0       | @gray(D)         | @gray(D)         |
 | 1       | 1       | 1       | 1       | @gray(D)         | @gray(D)         |
 
-**Schritt 4: Auswahl eines Flip-Flop Typs und Ermittlung der für jeden Zustandsübergang benötigten Flip-Flop Ansteuerungen** 
+**Schritt 4: Auswahl eines Flip-Flop Typs und Ermittlung der für jeden Zustandsübergang benötigten Flip-Flop Ansteuerungen**
 
 Wir entscheiden uns für einen D Flip-Flop für die Realisierung. Die entsprechende invertierte Wahrheitstafel haben Sie zwischenzeitlich im Kopf:
 
