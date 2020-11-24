@@ -923,16 +923,14 @@ An dieser Stelle wurden die 2 stufigen Schaltfunktionen mit einem programmierbar
 
 Diese erweitern wir nun um die Speicherglieder und deren Rückkopplung. Beachten Sie die Ergänzung auf der Ausgangsseite und die zusätzliche Clockleitung.
 
-![Bild](./images/07_Schaltwerke/PAL16R8.png) <!--style="width: 60%;"-->[^1]
+![Bild](./images/07_Schaltwerke/PAL16R8.png) <!--style="width: 60%;"-->[^2]
 
-[^1]: Datenblatt PAL16R8 Family, Advanced Micro Devices, [link](http://www.applelogic.org/files/PAL16R8.pdf), 1996
-
-
+[^2]: Datenblatt PAL16R8 Family, Advanced Micro Devices, [link](http://www.applelogic.org/files/PAL16R8.pdf), 1996
 
 
 ## Beispielanwendung
 
-Sequentieller Binärzahlenvergleicher - zwei Zahlenwerte werden sequenziell entsprechend ihren Stellen durch den Vergleicher bewegt und verglichen. Das Schaltwerk speichert das Resultat sobald ein Wert agrößer als der andere .
+Sequentieller Binärzahlenvergleicher - zwei Zahlenwerte werden sequenziell entsprechend ihren Stellen durch den Vergleicher bewegt und verglichen. Das Schaltwerk speichert das Resultat sobald ein Wert größer als der andere .
 
 <!--
 style="width: 80%; min-width: 420px; max-width: 720px;"

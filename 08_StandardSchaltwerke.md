@@ -536,21 +536,21 @@ $$
 Der Zustand eines Zählerbits wechselt, wenn das nächst kleinere von 1 zu 0 springen wird.
 
 Das bedingte wechseln eines Bits lässt sich mit XOR realisieren:
-$ x \bigoplus 0 = x $;
-$ x \bigoplus 1 = \overline{x} $;
-Wenn man möchte, dass $ x $ wechselt, wenn $ x_{flip} $ high ist, dann kann $ x \bigoplus x_{flip} $ verwendet werden.
+$x \bigoplus 0 = x$;
+$x \bigoplus 1 = \overline{x}$;
+Wenn man möchte, dass $x$ wechselt, wenn $x_{flip}$ high ist, dann kann $x \bigoplus x_{flip}$ verwendet werden.
 
 Aus der Bedingung oben ergibt sich:
 
-$ a_{flip} = b_{flip} \cdot b $, (a wird wechseln, wenn b wechseln wird und b 1 ist, wobei b das nächst niederwertigste Bit von a ist.)
+$a_{flip} = b_{flip} \cdot b$, (a wird wechseln, wenn b wechseln wird und b 1 ist, wobei b das nächst niederwertigste Bit von a ist.)
 
-Der neue Zustand von a: $ a' = a \bigoplus a_{flip} $
+Der neue Zustand von a: $a' = a \bigoplus a_{flip}$
 
-$ b_{flip} $ lässt sich wie $ a_{flip} $ berechnen, wenn es nicht das niederwertigste Bit ist. Das niederwertigste Bit wechselt dann wenn der Eingang $ count $ (carryIn) auf High ist.
+$b_{flip}$ lässt sich wie $a_{flip}$ berechnen, wenn es nicht das niederwertigste Bit ist. Das niederwertigste Bit wechselt dann wenn der Eingang $count$ (carryIn) auf High ist.
 
-Der Ausgang $ carryOut $ lässt sich berechnen mit $ a_{flip} \cdot a $.
+Der Ausgang $carryOut$ lässt sich berechnen mit $a_{flip} \cdot a$.
 
-Für einen 4 Bit Zähler mit den bits a,b,c,d (a höchstwertig, d niederwertigste) ergeben sich diese Formeln:
+Für einen 4 Bit Zähler mit den Bits a,b,c,d (a höchstwertig, d niederwertigste) ergeben sich diese Formeln:
 
 $$
 \begin{aligned}
@@ -566,7 +566,7 @@ carryOut &= a_{flip} \cdot a\\
 \end{aligned}
 $$
 
-Aus technischen Gründen hat die Folgende Simmulation noch eine Reset Schaltung (jeder neue Zustand wird noch mit $ \overline{reset} $ UND genommen.)
+Aus technischen Gründen hat die Folgende Simmulation noch eine Reset Schaltung (jeder neue Zustand wird noch mit $\overline{reset}$ UND genommen.)
 
 Es kann passieren, dass carryOut kurz auf HIGH springt, obwohl es LOW sein sollte. Das liegt daran, dass die Ausgänge der Gates nicht sofort anliegen, sondern einige Zeit brauchen. Wegen der Taktung ist das aber Kein Problem, außer die Taktrate ist zu hoch.
 
