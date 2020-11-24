@@ -81,6 +81,9 @@ style="width: 80%; min-width: 420px; max-width: 720px;"
 
 ## Übungsbeispiel
 
+                          {{0-1}}
+*******************************************************************************
+
 Wir wollen eine Ampelanlage entwerfen, die durch einen Eingang $E$ getrieben wird, wobei der Wechsel zwischen den Zuständen von E eine Änderung der Ampelphase bewirkt. Die Umsetzung erfolgt als Moore-Automat.
 
 <!--
@@ -88,14 +91,14 @@ style="width: 80%; min-width: 420px; max-width: 720px;"
 -->
 ```ascii
       ^
-      | --+--------+-----------+-----------+--------+--
-Phase |   | Rot    | Rot-Gelb  | Grün      | Gelb   |
-      | --+--------+-----------+-----------+--------+--
+      | --+--------+----------------+-----------+--------+--
+Phase |   | Rot    | Rot-Gelb       | Grün      | Gelb   |
+      | --+--------+----------------+-----------+--------+--
       |
-      |   +--------+           +-----------+
-E     |   |        |           |           |
-      |---+        +-----------+           +---------
-      +---------------------------------------------+                          .
+      |   +--------+                +-----------+
+E     |   |        |                |           |
+      |---+        +----------------+           +---------
+      +--------------------------------------------------+                          .
 ```
 
 **1. Schritt: Aufstellen des Automatenmodels**
@@ -126,6 +129,10 @@ digraph finite_state_machine {
 ```
 @plantUML
 
+*******************************************************************************
+
+                               {{0-3}}
+*******************************************************************************
 **2. Schritt: Erstellen der Zustandstabelle**
 
 | Vorhergehender Zustand | Eingabe $E$ | Nachfolgezustand |
@@ -139,6 +146,12 @@ digraph finite_state_machine {
 | Gelb                   | 0           | Gelb             |
 | Gelb                   | 1           | Rot              |
 
+
+*******************************************************************************
+
+                               {{1-3}}
+*******************************************************************************
+
 **Schritt 3: Auswahl einer binären Zustandskodierung und Generierung einer binären Zustandstabelle**
 
 | Zustand | G   | F   |
@@ -148,16 +161,25 @@ digraph finite_state_machine {
 | Grün    | 1   | 0   |
 | Gelb    | 1   | 1   |
 
-| G   | F   | E   | G'  | F'  |     |
-| --- | --- | --- | --- | --- | --- |
-|     |     | 0   |     |     |     |
-|     |     | 1   |     |     |     |
-|     |     | 0   |     |     |     |
-|     |     | 1   |     |     |     |
-|     |     | 0   |     |     |     |
-|     |     | 1   |     |     |     |
-|     |     | 0   |     |     |     |
-|     |     | 1   |     |     |     |
+> **Aufgabe:** Ergänzen Sie die Zustandsübergangstabelle!
+
+| G   | F   | E   | G'  | F'  |
+| --- | --- | --- | --- | --- |
+|     |     | 0   |     |     |
+|     |     | 1   |     |     |
+|     |     | 0   |     |     |
+|     |     | 1   |     |     |
+|     |     | 0   |     |     |
+|     |     | 1   |     |     |
+|     |     | 0   |     |     |
+|     |     | 1   |     |     |
+
+*******************************************************************************
+
+                               {{2-3}}
+*******************************************************************************
+
+Lösung:
 
 | Vorhergehender Zustand | G   | F   | Eingabe $E$ | Nachfolgezustand | G'  | F'  |
 | ---------------------- | --- | --- | ----------- | ---------------- | --- | --- |
@@ -170,14 +192,10 @@ digraph finite_state_machine {
 | Gelb                   | 1   | 1   | 0           | Gelb             | 1   | 1   |
 | Gelb                   | 1   | 1   | 1           | Rot              | 0   | 0   |
 
-Die Ansteuerung der drei Ausgabeleitungen R, Gr, Ge ergibt sich aus den Zuständen:
+*******************************************************************************
 
-| Zustand | G   | F   | @gray($R$) | @gray($Gr$) | @gray($Ge$) |
-| ------- | --- | --- | ---------- | ----------- | ----------- |
-| Rot     | 0   | 0   | @gray($1$) | @gray($0$)  | @gray($0$)  |
-| RotGelb | 0   | 1   | @gray($1$) | @gray($0$)  | @gray($1$)  |
-| Grün    | 1   | 0   | @gray($0$) | @gray($1$)  | @gray($0$)  |
-| Gelb    | 1   | 1   | @gray($0$) | @gray($0$)  | @gray($1$)  |
+                              {{3-5}}
+*******************************************************************************
 
 **Schritt 4: Auswahl eines Flip-Flop Typs und Ermittlung der für jeden Zustandsübergang benötigten Flip-Flop Ansteuerungen**
 
@@ -203,6 +221,14 @@ Schauen wir zunächst auf den Flip-Flop G, dessen Eingangsbelegung muss also auf
 | @blue(1) | 1   | 0   | @blue(1)  | 1   | @gray(d)  | @gray(0)  |     |     |
 | @blue(1) | 1   | 1   | @blue(0)  | 0   | @gray(d)  | @gray(1)  |     |     |
 
+> **Aufgabe:** Ergänzen Sie die Einträge für $JF$ und $KF$!
+
+*******************************************************************************
+
+                              {{4-5}}
+*******************************************************************************
+
+
 | G   | @blue(F) | E   | G'  | @blue(F') | JG  | KG  | @gray(JF) | @gray(KF) |
 | --- | -------- | --- | --- | --------- | --- | --- | --------- | --------- |
 | 0   | @blue(0) | 0   | 0   | @blue(1)  | 0   | d   | @gray(1)  | @gray(d)  |
@@ -213,6 +239,11 @@ Schauen wir zunächst auf den Flip-Flop G, dessen Eingangsbelegung muss also auf
 | 1   | @blue(0) | 1   | 1   | @blue(0)  | d   | 0   | @gray(0)  | @gray(d)  |
 | 1   | @blue(1) | 0   | 1   | @blue(1)  | d   | 0   | @gray(d)  | @gray(0)  |
 | 1   | @blue(1) | 1   | 0   | @blue(0)  | d   | 1   | @gray(d)  | @gray(1)  |
+
+*******************************************************************************
+
+                              {{5-7}}
+*******************************************************************************
 
 **Minimieren der Schaltung**
 
@@ -244,33 +275,45 @@ KG       GF    GF   GF   GF         KF     GF   GF   GF   GF
      _  +----+----+----+----+         _  +----+----+----+----+
      E  | d  | d  |    |    |         E  | d  |    |    | d  |
         +----+----+----+----+            +----+----+----+----+
-     E  | d  | d  |  1 |    |         E  | d  | 1  |    | d  |
+     E  | d  | d  |  1 |    |         E  | d  | 1  | 1  | d  |
         +----+----+----+----+            +----+----+----+----+                .
 ```
 
+
+> **Aufgabe:** Lesen Sie die minimierten Funktionen für die Flip-Flop-Eingänge ab!
+
+*******************************************************************************
+
+                              {{6-7}}
+*******************************************************************************
+
 Damit lassen sich folgende Funktionen ablesen:
 
-<table cellpadding="10">
-<tr>
-<td>
-Eingabelogik
-</td>
-<td>
-Ausgabelogik
-</td>
-</tr>
-<tr>
-<td>
 $$
 \begin{aligned}
 JG &= FE \\
 KG &= FE \\
 JF &= \overline{E} \\
-KF &= \overline{G}E \\
+KF &= E \\
 \end{aligned}
 $$
-</td>
-<td >
+
+*******************************************************************************
+
+                              {{7-8}}
+*******************************************************************************
+
+**Ausgabelogik**
+
+Die Ansteuerung der drei Ausgabeleitungen R, Gr, Ge ergibt sich aus den Zuständen:
+
+| Zustand | G   | F   | @gray($R$) | @gray($Gr$) | @gray($Ge$) |
+| ------- | --- | --- | ---------- | ----------- | ----------- |
+| Rot     | 0   | 0   | @gray($1$) | @gray($0$)  | @gray($0$)  |
+| RotGelb | 0   | 1   | @gray($1$) | @gray($0$)  | @gray($1$)  |
+| Grün    | 1   | 0   | @gray($0$) | @gray($1$)  | @gray($0$)  |
+| Gelb    | 1   | 1   | @gray($0$) | @gray($0$)  | @gray($1$)  |
+
 $$
 \begin{aligned}
 R  &= \overline{G} \\
@@ -278,9 +321,8 @@ Gr &= G\overline{F} \\
 Ge &= F
 \end{aligned}
 $$
-</td>
-</tr>
-</table>
+
+*******************************************************************************
 
 ## Register
 
@@ -416,7 +458,7 @@ An dieser Stelle sei noch einmal auf die Erläuterungen zum Schieberegister aus 
 
 Eine sequentielle Schaltung, die Eingangsimpulse auf Zustände abbildet nennt man Zähler. Mit ihnen lassen sich zeitlich aufeinander folgende Ereignisse registrieren aber auch erzeugen.
 
-+ **Synchron vs. asynchron** In einem synchronen Zähler sind alle Zähler-Speicher durch eine Taktleitung getriggert. Der Zustandwechsel wird immer zugleich vollzogen. Asynchrone Zähler heben diese Trennung auf und erlauben eine vereinfachte Umsetzung. Allerdings ist die Gültigkeit der Ergebnisse dann von dem Laufzeitverhalten der Komponenten abhängig.
++ **Synchron vs. asynchron** In einem synchronen Zähler sind alle Zähler-Speicher durch eine Taktleitung getriggert. Der Zustandswechsel wird immer zugleich vollzogen. Asynchrone Zähler heben diese Trennung auf und erlauben eine vereinfachte Umsetzung. Allerdings ist die Gültigkeit der Ergebnisse dann von dem Laufzeitverhalten der Komponenten abhängig.
 
 ![Bild](./images/05_FlipFlops/AsynchronerBinaerZaehler.png)<!-- style="width: 80%; max-width: 800px;" -->
 
@@ -457,8 +499,6 @@ digraph finite_state_machine {
 
 Offenbar sind 4 Zustände notwendig, um die Zahlen von 0-15 abbilden zu können. Die Zustandsübergangstabelle ergibt sich folglich zu.
 
-
-                          q3    q2    q1    q0
 | F   | G   | H   | I   | F'  | G'  | H'  | I'  |
 | --- | --- | --- | --- | --- | --- | --- | --- |
 | 0   | 0   | 0   | 0   | 0   | 0   | 0   | 1   |
@@ -491,7 +531,9 @@ DI &= \overline{I} \\
 \end{aligned}
 $$
 
-> Bitte hier die Simulation einfügen
+![Bild](./images/08_StandardSchaltwerke/Zaehler.svg.png)<!-- style="width: 90%; max-width: 800px;" -->
+
+Das nachfolgende Beispiel realisiert eine alternative Umsetzung und integriert zu Demonstrationszwecken einen Reset-Kanal. Aktivieren Sie zunächst die Clock-Leitung einmal. Für den Zählmechanismus muss dann $\overline{RESET}$ gesetzt sein.
 
 ```json @DigiSim.evalJson
 {"devices":{"and5":{"label":"anew and ~reset","type":"And","propagation":1,"bits":1,"position":{"x":355,"y":5}},"and6":{"label":"bnew and ~reset","type":"And","propagation":1,"bits":1,"position":{"x":355,"y":80}},"and7":{"label":"cnew and ~reset","type":"And","propagation":1,"bits":1,"position":{"x":355,"y":145}},"and8":{"label":"dnew and ~reset","type":"And","propagation":1,"bits":1,"position":{"x":355,"y":215}},"resetButton":{"label":"~reset","type":"Button","propagation":0,"position":{"x":25,"y":265}},"countButton":{"label":"count  (dflip)","type":"Button","propagation":0,"position":{"x":-95,"y":245}},"clkButton":{"label":"clk","type":"Button","propagation":0,"position":{"x":195,"y":345}},"lampa":{"label":"a","type":"Lamp","propagation":1,"position":{"x":655,"y":5}},"lampb":{"label":"b","type":"Lamp","propagation":1,"position":{"x":655,"y":70}},"lampc":{"label":"c","type":"Lamp","propagation":1,"position":{"x":655,"y":140}},"lampd":{"label":"d","type":"Lamp","propagation":1,"position":{"x":655,"y":210}},"lampco":{"label":"carry out","type":"Lamp","propagation":1,"position":{"x":630,"y":-60}},"dffa":{"label":"dff a","type":"Dff","propagation":1,"polarity":{"clock":true},"bits":1,"initial":"x","position":{"x":505,"y":5}},"dffb":{"label":"dff b","type":"Dff","propagation":1,"polarity":{"clock":true},"bits":1,"initial":"x","position":{"x":505,"y":90}},"dffc":{"label":"dff c","type":"Dff","propagation":1,"polarity":{"clock":true},"bits":1,"initial":"x","position":{"x":505,"y":160}},"dffd":{"label":"dff d","type":"Dff","propagation":1,"polarity":{"clock":true},"bits":1,"initial":"x","position":{"x":510,"y":235}},"and1":{"label":"aflip and a  (carryOut)","type":"And","propagation":1,"bits":1,"position":{"x":135,"y":-65}},"and2":{"label":"bflip and b  (aflip)","type":"And","propagation":1,"bits":1,"position":{"x":60,"y":0}},"and3":{"label":"cflip and c  (bflip)","type":"And","propagation":1,"bits":1,"position":{"x":35,"y":80}},"and4":{"label":"dflip and d  (cflip)","type":"And","propagation":1,"bits":1,"position":{"x":-30,"y":150}},"xor1":{"label":"a xor aflip","type":"Xor","propagation":1,"bits":1,"position":{"x":210,"y":5}},"xor2":{"label":"b xor bflip","type":"Xor","propagation":1,"bits":1,"position":{"x":215,"y":70}},"xor3":{"label":"c xor cflip","type":"Xor","propagation":1,"bits":1,"position":{"x":210,"y":130}},"xor4":{"label":"d xor dflip","type":"Xor","propagation":1,"bits":1,"position":{"x":210,"y":200}}},"connectors":[{"from":{"id":"countButton","port":"out"},"to":{"id":"xor4","port":"in2"}},{"from":{"id":"countButton","port":"out"},"to":{"id":"and4","port":"in1"},"vertices":[{"x":-80,"y":190}]},{"from":{"id":"and3","port":"out"},"to":{"id":"and2","port":"in1"},"vertices":[{"x":25,"y":65},{"x":5,"y":65}]},{"from":{"id":"and4","port":"out"},"to":{"id":"and3","port":"in1"},"vertices":[{"x":-15,"y":125}]},{"from":{"id":"and4","port":"out"},"to":{"id":"xor3","port":"in2"}},{"from":{"id":"and3","port":"out"},"to":{"id":"xor2","port":"in2"}},{"from":{"id":"and2","port":"out"},"to":{"id":"xor1","port":"in2"}},{"from":{"id":"dffa","port":"out"},"to":{"id":"xor1","port":"in1"},"vertices":[{"x":315,"y":-5}]},{"from":{"id":"and2","port":"out"},"to":{"id":"and1","port":"in1"},"vertices":[{"x":95,"y":-10}]},{"from":{"id":"and1","port":"out"},"to":{"id":"lampco","port":"in"}},{"from":{"id":"clkButton","port":"out"},"to":{"id":"dffd","port":"clk"},"vertices":[{"x":435,"y":360}]},{"from":{"id":"clkButton","port":"out"},"to":{"id":"dffc","port":"clk"},"vertices":[{"x":435,"y":360}]},{"from":{"id":"clkButton","port":"out"},"to":{"id":"dffb","port":"clk"},"vertices":[{"x":455,"y":340}]},{"from":{"id":"clkButton","port":"out"},"to":{"id":"dffa","port":"clk"}},{"from":{"id":"and8","port":"out"},"to":{"id":"dffd","port":"in"}},{"from":{"id":"xor1","port":"out"},"to":{"id":"and5","port":"in1"}},{"from":{"id":"xor2","port":"out"},"to":{"id":"and6","port":"in1"}},{"from":{"id":"xor3","port":"out"},"to":{"id":"and7","port":"in1"}},{"from":{"id":"xor4","port":"out"},"to":{"id":"and8","port":"in1"}},{"from":{"id":"and7","port":"out"},"to":{"id":"dffc","port":"in"}},{"from":{"id":"and6","port":"out"},"to":{"id":"dffb","port":"in"}},{"from":{"id":"and5","port":"out"},"to":{"id":"dffa","port":"in"}},{"from":{"id":"resetButton","port":"out"},"to":{"id":"and8","port":"in2"}},{"from":{"id":"resetButton","port":"out"},"to":{"id":"and7","port":"in2"},"vertices":[{"x":305,"y":255}]},{"from":{"id":"resetButton","port":"out"},"to":{"id":"and6","port":"in2"},"vertices":[{"x":305,"y":255}]},{"from":{"id":"resetButton","port":"out"},"to":{"id":"and5","port":"in2"},"vertices":[{"x":305,"y":255}]},{"from":{"id":"dffd","port":"out"},"to":{"id":"lampd","port":"in"}},{"from":{"id":"dffc","port":"out"},"to":{"id":"lampc","port":"in"}},{"from":{"id":"dffb","port":"out"},"to":{"id":"lampb","port":"in"}},{"from":{"id":"dffa","port":"out"},"to":{"id":"lampa","port":"in"}},{"from":{"id":"dffd","port":"out"},"to":{"id":"xor4","port":"in1"},"vertices":[{"x":310,"y":210},{"x":190,"y":185}]},{"from":{"id":"dffd","port":"out"},"to":{"id":"and4","port":"in2"},"vertices":[{"x":185,"y":180},{"x":15,"y":200}]},{"from":{"id":"dffc","port":"out"},"to":{"id":"xor3","port":"in1"},"vertices":[{"x":545,"y":140},{"x":285,"y":110}]},{"from":{"id":"dffc","port":"out"},"to":{"id":"and3","port":"in2"},"vertices":[{"x":545,"y":140},{"x":285,"y":110},{"x":130,"y":130}]},{"from":{"id":"dffb","port":"out"},"to":{"id":"and2","port":"in2"},"vertices":[{"x":340,"y":60}]},{"from":{"id":"dffb","port":"out"},"to":{"id":"xor2","port":"in1"},"vertices":[{"x":510,"y":60}]},{"from":{"id":"dffa","port":"out"},"to":{"id":"and1","port":"in2"},"vertices":[{"x":310,"y":-5}]}],"subcircuits":{}}
@@ -500,3 +542,7 @@ $$
 ## Übungsaufgaben
 
 + Entwerfen Sie einen Zähler, der eine Zählrichtungsvorgabe ermöglicht und evaluieren Sie Ihre Lösung mit einem Simulator.
+
+   [logisim-evolution](https://github.com/reds-heig/logisim-evolution)
+
++ Implementieren Sie einen Logik-Analysator für eine gegebene Schaltung. Dieser testet die Zustände systematisch ab und generiert daraus eine Tabelle.
