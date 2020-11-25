@@ -531,7 +531,13 @@ DI &= \overline{I} \\
 \end{aligned}
 $$
 
-**Alternative Herleitung:**
+Im Ergbnis lässt sich das System mit entsprechenden XOR und AND Bausteinen Umsetzen.
+
+![Bild](./images/08_StandardSchaltwerke/Zaehler.svg.png)<!-- style="width: 80%; max-width: 800px;" -->
+
+> **Aufgabe:** Leiten Sie die Im Schaltwerk gezeigte Realsisierung aus den oben genannten Gleichungen her.
+
+**Alternative Implementierung mit erweiterter Funktionalität:**
 
 Der Zustand eines Zählerbits wechselt, wenn das nächst kleinere von 1 zu 0 springen wird.
 
