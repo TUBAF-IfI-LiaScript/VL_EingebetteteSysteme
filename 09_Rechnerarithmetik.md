@@ -2,7 +2,7 @@
 
 author:   Sebastian Zug & André Dietrich & Fabian Bär
 email:    sebastian.zug@informatik.tu-freiberg.de & andre.dietrich@informatik.tu-freiberg.de & fabian.baer@student.tu-freiberg.de
-version:  0.0.2
+version:  0.0.3
 language: de
 narrator: Deutsch Female
 
@@ -117,7 +117,7 @@ ditaa
 @startuml
 ditaa
                +------------------+
-               |c44F              |
+               |c88F              |
                |     Speicher     |
                |                  |
                +-----------+------+
@@ -142,7 +142,7 @@ ditaa
 @startuml
 ditaa
                +------------------+
-               |c44F              |                     
+               |c88F              |                     
                |     Speicher     |
                |                  |
                +---------+-+------+
@@ -229,3 +229,90 @@ ditaa
 @enduml
 ```
 @plantUML
+
+## Wortformate
+
+Befehlsformat:
+
+```text @plantUML
+@startuml
+ditaa
+15         12 11                             0
++------------+-------------------------------+
+|c00F OPCODE | cFF0 Operantenaddresse        |
++------------+-------------------------------+
+@enduml
+```
+
+Datenformat:
+
+```text @plantUML
+@startuml
+ditaa
+   15                                         
++-------+------------------------------------+
+|cF00 V | cFF0                               |
++-------+------------------------------------+
+@enduml
+```
+
+## Vom Modell ....... zum funktionsfähigen Rechner
+
+```text @plantUML
+@startuml
+ditaa
++-----------+   Speicherbezogene Komponenten      
+|  Memory   |                                     
+|c33F       |<-----------------------+            
++---+-------+                        |            
+    |  ^                             |            
+15  V  |              0   11         |          0 
++------+---------------+ +-----------+-----------+
+|Memory Buffer Register| |Memory Address Register|
+|cAAF                  | |cAAF                   |
++----------------------+ +-----------------------+
+@enduml
+```
+
+```text @plantUML
+@startuml
+ditaa
++-----------------------------+                      
+|c88F    Z-Register           |                      
++-----------------------------+                      
+|cFF4                         |     Datenpfadbezogene
+|                             |         Komponenten  
+|             ALU             |                      
+|                             |                      
++-----------+-----------------+                      
+            |     ^                                  
+            V     |                                  
++-----------------+-----------+                      
+|c88F          A              |                      
++-----------------------------+                      
+@enduml
+```
+
+```text @plantUML
+@startuml
+ditaa
+              11                             0     
+             +-------------------------------+     
+             | cFF0 Program Counter          |     
+             +-------------------------------+     
+                                                  
+15         12 11                             0    
++------------+-------------------------------+    
+|c00F OPCODE | cFF0 Operant                  |    
++------------+-------------------------------+    
+      Instruction Register                        
+                                                  
++-----------------+                               
+|cF88             |  +-----------+ +-------------+
+| control unit    |  |c44F Run FF| |c44F State FF|
+|                 |  +-----------+ +-------------+
++-----------------+                               
+
+  Kontrolleinheit bezogene Komponenten            
+@enduml
+```
