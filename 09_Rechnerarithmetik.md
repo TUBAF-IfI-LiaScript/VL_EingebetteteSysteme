@@ -390,7 +390,7 @@ Vorzeichen         Betrag
 ```
 
 
-![](images/09_Arithmetik/Zahlenkreise_VB.png)<!-- style="width: 70%; max-width: 800px;" -->
+![](./images/09_Arithmetik/Zahlenkreise_VB.png)<!-- style="width: 70%; max-width: 800px;" -->
 
 <!--
 style="width: 80%; min-width: 420px; max-width: 720px;"
@@ -437,7 +437,7 @@ style="width: 80%; min-width: 420px; max-width: 720px;"
 
 **Einer-Komplement**
 
-![](images/09_Arithmetik/Zahlenkreise_1er.png)<!-- style="width: 70%; max-width: 800px;" -->
+![](./images/09_Arithmetik/Zahlenkreise_1er.png)<!-- style="width: 70%; max-width: 800px;" -->
 
 | Darstellung | Pros                                                                                                   | Cons                                                                |
 | ----------- | ------------------------------------------------------------------------------------------------------ | ------------------------------------------------------------------- |
@@ -450,7 +450,7 @@ style="width: 80%; min-width: 420px; max-width: 720px;"
 
 **Zweier-Komplement**
 
-![](images/09_Arithmetik/Zahlenkreise_2er.png)<!-- style="width: 70%; max-width: 800px;" -->
+![](./images/09_Arithmetik/Zahlenkreise_2er.png)<!-- style="width: 70%; max-width: 800px;" -->
 
 Die Zweierkomplementdarstellung benötigt, anders als die Einerkomplementdarstellung, keine Fallunterscheidung, ob mit negativen oder mit positiven Zahlen gerechnet wird. Das Problem der Einerkomplementdarstellung, zwei Darstellungen für die Null zu haben, tritt nicht auf.
 
@@ -473,7 +473,7 @@ Die Zweierkomplementdarstellung benötigt, anders als die Einerkomplementdarstel
 + begrenzte Genauigkeit bei der Darstellung von Kommazahlen (Gegenstand der Vorlesung im Sommersemester)
 + keine Abgeschlossenheit der Grundoperationen wie Addition und Multiplikation
 
-![](images/09_Arithmetik/Zahlenkreise_Ueberlauf.png)<!-- style="width: 70%; max-width: 800px;" -->
+![](./images/09_Arithmetik/Zahlenkreise_Ueberlauf.png)<!-- style="width: 70%; max-width: 800px;" -->
 
 ```
            3 + 6 =         -3+(-8) =
@@ -546,9 +546,9 @@ C &= A \cdot B
 $$
 </td>
 <td>
-![Bild](images/09_Arithmetik/Half_Adder.svg.png)<!-- style="width: 50%; max-width: 800px;" -->
+![Bild](./images/09_Arithmetik/Half_Adder.svg.png)<!-- style="width: 50%; max-width: 800px;" -->
 
-![Bild](images/09_Arithmetik/Half_Adder_Symbol.png)<!-- style="width: 50%; max-width: 800px;" -->
+![Bild](./images/09_Arithmetik/Half_Adder_Symbol.png)<!-- style="width: 50%; max-width: 800px;" -->
 </td>
 </tr>
 </table>
@@ -600,9 +600,9 @@ $$
 
 > **Aufgabe:** Die obige Gleichungen sind identisch und unterscheiden sich nur durch $/oplus$ und $+$. Erklären Sie den vermeintlichen Widerspruch.
 
-![](images/09_Arithmetik/Full_Adder_Symbol_2HA.png)<!-- style="width: 100%; max-width: 800px;" -->
+![](./images/09_Arithmetik/Full_Adder_Symbol_2HA.png)<!-- style="width: 100%; max-width: 800px;" -->
 
-![](images/09_Arithmetik/Full_Adder.svg.png)<!-- style="width: 100%; max-width: 800px;" -->
+![](./images/09_Arithmetik/Full_Adder.svg.png)<!-- style="width: 100%; max-width: 800px;" -->
 
 ``` json @DigiSim.evalJson
 {"devices":{"a":{"label":"a","type":"Button","propagation":0,"position":{"x":15,"y":0}},"b":{"label":"b","type":"Button","propagation":0,"position":{"x":15,"y":50}},"cin":{"label":"cin","type":"Button","propagation":0,"position":{"x":15,"y":100}},"s":{"label":"s","type":"Lamp","propagation":1,"position":{"x":470,"y":70}},"cout":{"label":"cout","type":"Lamp","propagation":1,"position":{"x":540,"y":-5}},"xor1":{"label":"a xor b","type":"Xor","propagation":1,"bits":1,"position":{"x":140,"y":20}},"xor2":{"label":"(a xor b) xor cin","type":"Xor","propagation":1,"bits":1,"position":{"x":275,"y":75}},"and1":{"label":"(a xor b) and cin","type":"And","propagation":1,"bits":1,"position":{"x":290,"y":25}},"and2":{"label":"a and b","type":"And","propagation":1,"bits":1,"position":{"x":210,"y":-25}},"or":{"label":"((a xor b) and cin) or (a and b)","type":"Or","propagation":1,"bits":1,"position":{"x":380,"y":-30}}},"connectors":[{"from":{"id":"xor2","port":"out"},"to":{"id":"s","port":"in"}},{"from":{"id":"xor1","port":"out"},"to":{"id":"xor2","port":"in1"}},{"from":{"id":"cin","port":"out"},"to":{"id":"xor2","port":"in2"}},{"from":{"id":"a","port":"out"},"to":{"id":"xor1","port":"in1"}},{"from":{"id":"b","port":"out"},"to":{"id":"xor1","port":"in2"}},{"from":{"id":"cin","port":"out"},"to":{"id":"and1","port":"in2"},"vertices":[{"x":225,"y":115}]},{"from":{"id":"xor1","port":"out"},"to":{"id":"and1","port":"in1"}},{"from":{"id":"a","port":"out"},"to":{"id":"and2","port":"in1"}},{"from":{"id":"b","port":"out"},"to":{"id":"and2","port":"in2"},"vertices":[{"x":105,"y":25}]},{"from":{"id":"and1","port":"out"},"to":{"id":"or","port":"in2"}},{"from":{"id":"and2","port":"out"},"to":{"id":"or","port":"in1"}},{"from":{"id":"or","port":"out"},"to":{"id":"cout","port":"in"}}],"subcircuits":{}}
@@ -612,7 +612,7 @@ $$
 
 Wie können wir also ein paralleles binäres Addierwerk umsetzen? Für die Addition zweier n-Bit Zahlen bedarf es $n$ Volladierer, die miteinander verkettet werden.
 
-![](https://upload.wikimedia.org/wikipedia/commons/f/ff/Ripple-carry-adder.svg)<!-- style="width: 100%; max-width: 800px;" --> [^1]
+![](./images/09_Arithmetik/Ripple-carry-adder.svg.png)<!-- style="width: 100%; max-width: 800px;" --> [^1]
 
 [^1]: Mik81, Carry-Ripple Addierer, [Link](https://commons.wikimedia.org/wiki/File:Ripple-carry-adder.svg)
 
@@ -622,9 +622,9 @@ Wie lässt sich ausgehend von diesen Überlegungen ein 4-Bit Addier-/Subtrahierw
 
 > **Aufgabe:** Entwerfen Sie die externe Beschaltung!
 
-![Bild](images/09_Arithmetik/Subtractor_template.png)<!-- style="width: 100%; max-width: 800px;" -->
+![Bild](./images/09_Arithmetik/Subtractor_template.png)<!-- style="width: 100%; max-width: 800px;" -->
 
-![Bild](images/09_Arithmetik/Subtractor_Final.png)<!-- style="width: 100%; max-width: 800px;" -->
+![Bild](./images/09_Arithmetik/Subtractor_Final.png)<!-- style="width: 100%; max-width: 800px;" -->
 
 ### Carry Look Ahead Addierer
 
@@ -655,7 +655,7 @@ $$
 
 Offenbar lässt sich die Funktion mit einem zweistufigen Schaltnetz umsetzen und generiert eine Laufzeit, die von $n$ unabhänig ist.
 
-![Bild](images/09_Arithmetik/Carry_Look_Ahead_IC.png)<!-- style="width: 100%; max-width: 800px;" -->[^2]
+![Bild](./images/09_Arithmetik/Carry_Look_Ahead_IC.png)<!-- style="width: 100%; max-width: 800px;" -->[^2]
 
 [^2]: Philips Semiconductors, Datenblatt 74HC283
 
