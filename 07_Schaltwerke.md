@@ -27,7 +27,7 @@ gray: @mark(gray,@0)
 
 Link auf die aktuelle Vorlesung im Versionsmanagementsystem GitHub
 
-[https://github.com/TUBAF-IfI-LiaScript/VL_EingebetteteSysteme/blob/07_Schaltwerke](https://github.com/TUBAF-IfI-LiaScript/VL_EingebetteteSysteme/blob/dev/07_Schaltwerke)
+[https://github.com/TUBAF-IfI-LiaScript/VL_EingebetteteSysteme/blob/07_Schaltwerke.md](https://github.com/TUBAF-IfI-LiaScript/VL_EingebetteteSysteme/blob/dev/07_Schaltwerke.md)
 
 Die interaktive Form ist unter diesem [Link](https://liascript.github.io/course/?https://raw.githubusercontent.com/TUBAF-IfI-LiaScript/VL_EingebetteteSysteme/master/07_Schaltwerke.md) zu finden.
 
