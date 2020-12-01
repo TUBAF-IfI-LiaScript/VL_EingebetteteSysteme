@@ -216,13 +216,14 @@ Der Teiler definiert das avisierte Zahlensystem
 > 2. Nun setzt man von links nach rechts eine 1 unter jede Potenz welche in die dezimale Zahl passt und subtrahiert die Potenz von der Zahl.
 >    Wenn die Potenz nicht in die Zahl passt schreibt man eine 0.
 > 3. Dies wird wiederholt bis alle Potenzen belegt sind.
-> 
->   Beispiel: $242_{10} in binär$
->   
->   128|64 |32 |16 |8  |4  |2  |1  
->   ---|---|---|---|---|---|---|---
->   |1 |1  |1  |1  |0  |0  |1  |0
->   
+
+Beispiel: $242_{10}$ in binär
+
+|---|---|---|---|---|---|---|---|
+|128|64 |32 |16 |8  |4  |2  |1  |
+|---|---|---|---|---|---|---|---|
+|1  |1  |1  |1  |0  |0  |1  |0  |
+|---|---|---|---|---|---|---|---|
 
 > **Aufgabe:** Wandeln Sie die Zahl $523_{10}$ in eine binäre Zahl um.
 
