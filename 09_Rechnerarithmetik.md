@@ -22,7 +22,7 @@ gray: @mark(gray,@0)
 import: https://raw.githubusercontent.com/LiaTemplates/DigiSim/master/README.md
 -->
 
-# Rechnerarithmetik
+# Rechnerarithmeti
 
 **TU Bergakademie Freiberg - Wintersemester 2020 / 21**
 
