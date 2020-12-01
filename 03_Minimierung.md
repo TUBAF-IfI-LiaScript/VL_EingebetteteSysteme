@@ -10,7 +10,7 @@ import: https://raw.githubusercontent.com/LiaTemplates/NetSwarm-Simulator/master
         https://github.com/LiaTemplates/Pyodide
 -->
 
-# 03 - Minimierung boolscher Ausdrücke
+# Minimierung von boolschen Funktionen I
 
 **TU Bergakademie Freiberg - Wintersemester 2020 / 21**
 
@@ -109,24 +109,24 @@ $$
 
 Alternativ können wir den Nachweis der Äquivalenz auch über die Wertetabellen darstellen. Das funktioniert natürlich nur bis zu einer gewissen Größe.
 
-| $x_4$ | $x_3$ | $x_2$ | $x_1$ | $f$ |                                                           |
-| ----- | ----- | ----- | ----- | --- | --------------------------------------------------------- |
-| 0     | 0     | 0     | 0     | 0   |                                                           |
-| 0     | 0     | 0     | 1     | 0   |                                                           |
-| 0     | 0     | 1     | 0     | 0   |                                                           |
-| 0     | 0     | 1     | 1     | 0   |                                                           |
-| 0     | 1     | 0     | 0     | 1   | $x_3\overline{x}_1$                                       |
-| 0     | 1     | 0     | 1     | 0   |                                                           |
-| 0     | 1     | 1     | 0     | 1   | $\overline{x}_4x_3x_2\overline{x}_1$, $x_3\overline{x}_1$ |
-| 0     | 1     | 1     | 1     | 0   |                                                           |
-| <span style="color: #ff0000">1</span>      | 0     | <span style="color: #ff0000">0</span>      | 0     | 1   | $x_4\overline{x}_3\overline{x}_2$                         |
-| <span style="color: #ff0000">1</span>      | 0     | <span style="color: #ff0000">0</span>     | 1     | 1   | $x_4\overline{x}_3\overline{x}_2$                         |
-| 1     | 0     | 1     | 0     | 0   |                                                           |
-| 1     | 0     | 1     | 1     | 0   |                                                           |
-| <span style="color: #ff0000">1</span>      | 1     | <span style="color: #ff0000">0</span>     | 0     | 1   | $x_3\overline{x}_1$                                       |
-| <span style="color: #ff0000">1</span>     | 1     |  <span style="color: #ff0000">0</span>     | 1     | 1   | $x_4x_3\overline{x}_2x_1 $                                |
-| 1     | 1     | 1     | 0     | 1   | $x_3\overline{x}_1$                                       |
-| 1     | 1     | 1     | 1     | 0   |                                                           |
+| $x_4$                                 | $x_3$ | $x_2$                                 | $x_1$ | $f$ |                                                           |
+| ------------------------------------- | ----- | ------------------------------------- | ----- | --- | --------------------------------------------------------- |
+| 0                                     | 0     | 0                                     | 0     | 0   |                                                           |
+| 0                                     | 0     | 0                                     | 1     | 0   |                                                           |
+| 0                                     | 0     | 1                                     | 0     | 0   |                                                           |
+| 0                                     | 0     | 1                                     | 1     | 0   |                                                           |
+| 0                                     | 1     | 0                                     | 0     | 1   | $x_3\overline{x}_1$                                       |
+| 0                                     | 1     | 0                                     | 1     | 0   |                                                           |
+| 0                                     | 1     | 1                                     | 0     | 1   | $\overline{x}_4x_3x_2\overline{x}_1$, $x_3\overline{x}_1$ |
+| 0                                     | 1     | 1                                     | 1     | 0   |                                                           |
+| <span style="color: #ff0000">1</span> | 0     | <span style="color: #ff0000">0</span> | 0     | 1   | $x_4\overline{x}_3\overline{x}_2$                         |
+| <span style="color: #ff0000">1</span> | 0     | <span style="color: #ff0000">0</span> | 1     | 1   | $x_4\overline{x}_3\overline{x}_2$                         |
+| 1                                     | 0     | 1                                     | 0     | 0   |                                                           |
+| 1                                     | 0     | 1                                     | 1     | 0   |                                                           |
+| <span style="color: #ff0000">1</span> | 1     | <span style="color: #ff0000">0</span> | 0     | 1   | $x_3\overline{x}_1$                                       |
+| <span style="color: #ff0000">1</span> | 1     | <span style="color: #ff0000">0</span> | 1     | 1   | $x_4x_3\overline{x}_2x_1$                                 |
+| 1                                     | 1     | 1                                     | 0     | 1   | $x_3\overline{x}_1$                                       |
+| 1                                     | 1     | 1                                     | 1     | 0   |                                                           |
 
 ********************************************************************************
 
@@ -213,7 +213,7 @@ Und nun in der Kombination ....
 **Kanonische Konjunktive Normalform (KKNF)**
 
 + eindeutige Darstellung einer booleschen Funktion f als Konjunktion von Maxtermen
-+  Beispiel: $( x + y ) \cdot ( x + y ) \cdot ( x + y )$ ist KKNF von $f(x,y)$
++ Beispiel: $( x + y ) \cdot ( x + y ) \cdot ( x + y )$ ist KKNF von $f(x,y)$
 ********************************************************************************
 
        {{3-4}}
@@ -245,7 +245,7 @@ Am Beispiel der Übungsaufgabe vom Begin der Vorlesung ergibt sich daraus:
 | 1     | 0     | 1     | 0     | 0   |                                                 |
 | 1     | 0     | 1     | 1     | 0   |                                                 |
 | 1     | 1     | 0     | 0     | 1   | $x_4x_3\overline{x}_2\overline{x}_1$            |
-| 1     | 1     | 0     | 1     | 1   | $x_4x_3\overline{x}_2x_1 $                      |
+| 1     | 1     | 0     | 1     | 1   | $x_4x_3\overline{x}_2x_1$                       |
 | 1     | 1     | 1     | 0     | 1   | $x_4x_3x_2\overline{x}_1$                       |
 | 1     | 1     | 1     | 1     | 0   |                                                 |
 
@@ -329,7 +329,7 @@ $$
 
 Welche Form erweist sich in welcher Situation als günstiger?
 
-Eine KDNF ist günstiger als eine KKNF, wenn nur für wenige Kombinationen der Eingabewerte $f (x_1, x_2, ..., x_n) = 1$ gilt. Umgekehrt, wenn nur für wenige Kombinationen der Eingabewerte $f (x_1, x_2, ..., x_n) = 0$ gilt, ist die KKNF vorzuziehen.
+Eine KDNF ist günstiger als eine KKNF, wenn nur für wenige Kombinationen der Eingabewerte $f(x_1, x_2, ..., x_n) = 1$ gilt. Umgekehrt, wenn nur für wenige Kombinationen der Eingabewerte $f(x_1, x_2, ..., x_n) = 0$ gilt, ist die KKNF vorzuziehen.
 
 Für die `OR` Funktion bedeutet das (wenig überraschend):
 
@@ -383,7 +383,7 @@ $A= \overline{x} \cdot \overline{y} + \overline{x} \cdot y + x \cdot \overline{y
 |                | $\overline{x}$                    | $x$                    |
 | -------------- | --------------------------------- | ---------------------- |
 | $\overline{y}$ | $\overline{x} \cdot \overline{y}$ | $x \cdot \overline{y}$ |
-| $y$            | $\overline{x} \cdot y $           | $x \cdot y$            |
+| $y$            | $\overline{x} \cdot y$            | $x \cdot y$            |
 
 Mit dieser verschobenen Wahrheittafel lässt sich der Fingerabdruck einer boolschen Funktion darstellen.
 
@@ -440,12 +440,12 @@ Vorgehen zur Minimierung der KDNF einer $n$-stelligen Funktion $f$
 
 4. die markierten Bereiche nach der Resolutionsregel zu Produkttermen zusammengefasst werden, die summiert werden.
 
-|                             | $\overline{w}\,\overline{x}$ | $\overline{w}x$                                  | $wx$ | $w\overline{x}$ |
-| --------------------------- | --------------------------- | ------------------------------------------------ | ---- | --------------- |
-| $\overline{y}\,\overline{z}$ | 0                           | <span style="background-color: #ff0000">1</span> | 0    | 0               |
-| $\overline{y} z$            | 0                           | <span style="background-color: #ff0000">1</span> | 0    | 0               |
-| $y z$                       | 0                           | 0                                                | 0    | 0               |
-| $y \overline{z}$            | 0                           | 0                                                | 0    | 0               |
+|                              | $\overline{w}\,\overline{x}$ | $\overline{w}x$                                  | $wx$ | $w\overline{x}$ |
+| ---------------------------- | ---------------------------- | ------------------------------------------------ | ---- | --------------- |
+| $\overline{y}\,\overline{z}$ | 0                            | <span style="background-color: #ff0000">1</span> | 0    | 0               |
+| $\overline{y} z$             | 0                            | <span style="background-color: #ff0000">1</span> | 0    | 0               |
+| $y z$                        | 0                            | 0                                                | 0    | 0               |
+| $y \overline{z}$             | 0                            | 0                                                | 0    | 0               |
 
 Welcher Ausdruck steht hinter dem markierten Bereich?
 
@@ -519,7 +519,7 @@ Wählen Sie immer die größtmöglichen Schleifen und vermeiden Sie "Einzeleleme
 Falsch - $f =\overline{w}\,\overline{y} + \overline{w}xyz$
 </td>
 <td>
-Richtig - $f = \overline{w}xz + \overline{w}xz$
+Richtig - $f = \overline{w}\,\overline{y} + \overline{w}xz$
 </td>
 </tr>
 </table>
@@ -577,12 +577,12 @@ $f = z$
 | $y z$                       | 0                                                | 0               | 0    | 0               |
 | $y \overline{z}$            | <span style="background-color: #ff0000">1</span> | 0               | 0    | <span style="background-color: #ff0000">1</span>               |
 
- $f = \overline{x}\,\overline{z}$
 
  ********************************************************************************
 
       {{4-5}}
  ********************************************************************************
+ $f = \overline{x}\,\overline{z}$
 
 |                             | $\overline{w}\,\overline{x}$ | $\overline{w}x$ | $wx$ | $w\overline{x}$ |
 | --------------------------- | --------------------------- | --------------- | ---- | --------------- |
@@ -619,7 +619,7 @@ Und jetzt Sie!
 | $\overline{C}$ | 1                            | 1               | 0    | 1               |
 | $C$            | 1                            | 0               | 0    | 0               |
 
-$\overline{A}\,\overline{B} + \overline{A}\,\overline{C} + \overline{B}\,\overline{C} $
+$\overline{A}\,\overline{B} + \overline{A}\,\overline{C} + \overline{B}\,\overline{C}$
 
 ********************************************************************************
 
@@ -734,7 +734,6 @@ $$
 \overline{A}_{KDNF} &= x\overline{z} + \overline{w}\,\overline{x}z +  w\overline{x}\,\overline{y} \\
 A_{KDNF} &= \overline{x\overline{z} + \overline{w}\,\overline{x}\,z +  w\overline{x}\,\overline{y}} \\
 A_{KKNF} &= (\overline{x} + z)(w+x+\overline{z})(\overline{w}+x+\overline{y}) \\
-
 \end{aligned}
 $$
 
@@ -774,7 +773,7 @@ Folglich ergeben sich 6 Eingangskombinationen, die für unsere Ausgabe irrelevan
 | 0   | 1   | 1   | 0   | 1                                     |
 | 0   | 1   | 1   | 1   | 0                                     |
 | 1   | 0   | 0   | 0   | 1                                     |
-| 1   | 0   | 0   | 1   | 0                                     |
+| 1   | 0   | 0   | 1   | 1                                     |
 | 1   | 0   | 1   | 0   | <span style="color: #ff0000">D</span> |
 | 1   | 0   | 1   | 1   | <span style="color: #ff0000">D</span> |
 | 1   | 1   | 0   | 0   | <span style="color: #ff0000">D</span> |
@@ -790,7 +789,7 @@ Folglich ergeben sich 6 Eingangskombinationen, die für unsere Ausgabe irrelevan
 |                              | $\overline{w}\,\overline{x}$ | $\overline{w}x$ | $wx$ | $w\overline{x}$ |
 | ---------------------------- | ---------------------------- | --------------- | ---- | --------------- |
 | $\overline{y}\,\overline{z}$ | 1                            | 0               | D    | 1               |
-| $\overline{y} z$             | 0                            | 1               | D    | 0               |
+| $\overline{y} z$             | 0                            | 1               | D    | 1               |
 | $y z$                        | 1                            | 0               | D    | D               |
 | $y \overline{z}$             | 1                            | 1               | D    | D               |
 
@@ -799,7 +798,7 @@ Welche Gleichung für `d` lesen Sie draus ab?
 ********************************************************************************
 
 {{3}}
-$d = \overline{x}\,\overline{z} + y\overline{z} + \overline{x}y + x\overline{y}z$
+$d = w + y\overline{z} + \overline{x}y +  x\overline{y}z + \overline{x}\,\overline{z}$
 
 ## Zusammenfassung
 
@@ -834,3 +833,10 @@ print(result)
 sys.version
 ```
 @Pyodide.eval
+
+
+## Hausaufgaben
+
++ Lösen Sie das Minimierungsproblem der Einstiegsaufgabe mit dem Karnaugh-Veitch Diagramm.
++ Stellen Sie die Wahrheitstafel für ein weiteres Element der Sieben-Segmentanzeige auf. Minimieren Sie den Ausdruck.
++ Erstellen Sie mit dem Python-Beispiel eine eigene (willkürliche) Wahrheitstafel und vereinfachen Sie diese mit dem Karnaugh-Veit Diagramm und auf analytischem Wege.

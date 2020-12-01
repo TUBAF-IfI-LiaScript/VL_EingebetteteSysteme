@@ -11,18 +11,17 @@ import:   https://raw.githubusercontent.com/LiaTemplates/DigiSim/master/README.m
 
 -->
 
-# 05 - FlipFlops
+# FlipFlops
 
 **TU Bergakademie Freiberg - Wintersemester 2020 / 21**
 
 Link auf die aktuelle Vorlesung im Versionsmanagementsystem GitHub
 
-[https://github.com/TUBAF-IfI-LiaScript/VL_EingebetteteSysteme/blob/00_Einfuehrung](https://github.com/TUBAF-IfI-LiaScript/VL_EingebetteteSysteme/blob/dev/00_Einfuehrung)
+[https://github.com/TUBAF-IfI-LiaScript/VL_EingebetteteSysteme/blob/master/06_FlipFlops.md](https://github.com/TUBAF-IfI-LiaScript/VL_EingebetteteSysteme/blob/master/06_FlipFlops.md)
 
-Die interaktive Form ist unter diese Link zu finden ->
-[TODO]( )
+Die interaktive Form ist unter diesem [Link](https://liascript.github.io/course/?https://raw.githubusercontent.com/TUBAF-IfI-LiaScript/VL_EingebetteteSysteme/master/06_FlipFlops.md) zu finden.
 
----------------------------------------------------------------------
+--------------------------------------------------------------------
 
 ** Fragen an die Veranstaltung**
 
@@ -82,6 +81,7 @@ Kombinatorische Logik wird durch Schaltnetze repräsentiert, die durch zyklenfre
 3. 0-Verzögerung: keine Berücksichtigung der Gatterlaufzeit.
 
 Frage: Können wir die bisherigen Konzepte und Techniken der logischen Schaltungen einsetzen, um wesentliche Elemente eines Rechners zu beschreiben wie z.B. :
+
 + Ablaufsteuerungen
 + Speicherelemente
 + Takterzeuger
@@ -143,8 +143,8 @@ Wir fügen eine weitere Eingangsgröße hinzu, die die Logik des Speichers auf d
 
 | $R(t)$ | $S(t)$ | $Y(t)$ | $Y(t+2\Delta t)$ | Bedeutung      |
 | ------ | ------ | ------ | ---------------- | -------------- |
-| 0      | 0      | 0      | 0                | Speichern$^*$  |
-| 0      | 0      | 1      | 1                | Speichern$^*$  |
+| 0      | 0      | 0      | 0                | Speichern      |
+| 0      | 0      | 1      | 1                | Speichern      |
 | 0      | 1      | 0      | 1                | Setzen         |
 | 0      | 1      | 1      | 1                | Setzen$^*$     |
 | 1      | 0      | 0      | 0                | Rücksetzen$^*$ |
@@ -152,7 +152,11 @@ Wir fügen eine weitere Eingangsgröße hinzu, die die Logik des Speichers auf d
 | 1      | 1      | 0      | 0                | Vermeiden$^*$  |
 | 1      | 1      | 1      | 0                | Vermeiden      |
 
-Die mit * markierten Einträge sind jeweils flüchtig. Sie werden im nächsten Zyklus durch den Zustand ohne Stern gleicher Kategorie überschrieben.
+Die mit * markierten Einträge werden jeweils aus dem benachbarten Zustand erreicht. Wenn wir zum Beispiel von einem Zustand $Y=0$ beim Setzen ausgehen, generieren wir mit $S==1$ ein $Y(t+2\Delta t)$ einen 1-Pegel. Dies entspricht der Zeile 4 der Wahrheitstabelle.
+
+Der Zeitversatz von $2\Delta t$ ergibt sich aus dem Schaltverhalten der beiden Bauteile. In obigem Schaubild sind noch drei Typen (OR, AND und NOT) im folgenden wird diese Konfiguration auf NAND und NOR Gatter vereinheitlicht. Entsprechend kann dann von einem einheitlichen $\Delta t$ ausgegangen werden.
+
+Werden beide Eingänge auf 1-Pegel gesetzt, führen beide Ausgänge 1-Pegel. Dieser Zustand kann nicht gespeichert werden. In der Literatur wird dieser Zustand als "unbestimmt" oder "verboten" bezeichnet. Doch die Unbestimmtheit tritt nur in dem Fall ein, wenn beide Eingänge nach diesem Zustand gleichzeitig 0-Pegel erhalten. Dieser Folgezustand ist "unbestimmt", weil nicht klar ist, welcher Ausgang 1-Pegel führt.
 
 ``` json @DigiSim.evalJson
 {"devices":{"s":{"label":"S","type":"Button","propagation":0,"position":{"x":0,"y":0}},"r":{"label":"R","type":"Button","propagation":0,"position":{"x":0,"y":55}},"y":{"label":"Y","type":"Lamp","propagation":0,"position":{"x":430,"y":25}},"or":{"label":"or","type":"Or","propagation":0,"bits":1,"position":{"x":135,"y":-45}},"and":{"label":"and","type":"And","propagation":0,"bits":1,"position":{"x":255,"y":-10}},"not":{"label":"not","type":"Not","propagation":0,"bits":1,"position":{"x":130,"y":50}}},"connectors":[{"from":{"id":"r","port":"out"},"to":{"id":"not","port":"in"}},{"from":{"id":"not","port":"out"},"to":{"id":"and","port":"in2"}},{"from":{"id":"s","port":"out"},"to":{"id":"or","port":"in2"}},{"from":{"id":"or","port":"out"},"to":{"id":"and","port":"in1"}},{"from":{"id":"and","port":"out"},"to":{"id":"or","port":"in1"},"vertices":[{"x":270,"y":-75}]},{"from":{"id":"and","port":"out"},"to":{"id":"y","port":"in"}}],"subcircuits":{}}
@@ -166,7 +170,7 @@ Daraus folgt die Wertetabelle eines RS-Flip-Flops. Anhand dieser Darstellung wir
 | 0      | 0      | $Y(t)$                   |
 | 0      | 1      | 1                        |
 | 1      | 0      | 0                        |
-| 1      | 1      | nicht erlaubt            |
+| 1      | 1      | Vermeiden                |
 
 Nun können wir mit dem Theorem von de Morgan einige Anpassungen vornehmen:
 
@@ -186,11 +190,65 @@ Die Darstellung des Flip-Flops kann auch mit Hilfe von NAND Bausteinen erfolgen.
 {"devices":{"s":{"label":"S","type":"Button","propagation":0,"position":{"x":0,"y":0}},"r":{"label":"R","type":"Button","propagation":0,"position":{"x":0,"y":95}},"nots":{"label":"~S","type":"Button","propagation":0,"position":{"x":0,"y":180}},"notr":{"label":"~R","type":"Button","propagation":0,"position":{"x":0,"y":285}},"q1":{"label":"Q","type":"Lamp","propagation":0,"position":{"x":365,"y":85}},"notq1":{"label":"~Q","type":"Lamp","propagation":0,"position":{"x":370,"y":10}},"q2":{"label":"Q","type":"Lamp","propagation":0,"position":{"x":370,"y":205}},"notq2":{"label":"~Q","type":"Lamp","propagation":0,"position":{"x":365,"y":295}},"nor1":{"label":"nor","type":"Nor","propagation":0,"bits":1,"position":{"x":180,"y":80}},"nor2":{"label":"nor","type":"Nor","propagation":0,"bits":1,"position":{"x":175,"y":5}},"nand1":{"label":"nand","type":"Nand","propagation":0,"bits":1,"position":{"x":185,"y":185}},"nand2":{"label":"nand","type":"Nand","propagation":0,"bits":1,"position":{"x":185,"y":270}}},"connectors":[{"from":{"id":"s","port":"out"},"to":{"id":"nor2","port":"in1"}},{"from":{"id":"r","port":"out"},"to":{"id":"nor1","port":"in2"}},{"from":{"id":"nor2","port":"out"},"to":{"id":"notq1","port":"in"}},{"from":{"id":"nor1","port":"out"},"to":{"id":"q1","port":"in"}},{"from":{"id":"nor2","port":"out"},"to":{"id":"nor1","port":"in1"},"vertices":[{"x":255,"y":75}]},{"from":{"id":"nor1","port":"out"},"to":{"id":"nor2","port":"in2"},"vertices":[{"x":260,"y":55}]},{"from":{"id":"nots","port":"out"},"to":{"id":"nand1","port":"in1"}},{"from":{"id":"notr","port":"out"},"to":{"id":"nand2","port":"in2"}},{"from":{"id":"nand1","port":"out"},"to":{"id":"nand2","port":"in1"},"vertices":[{"x":265,"y":245}]},{"from":{"id":"nand2","port":"out"},"to":{"id":"nand1","port":"in2"},"vertices":[{"x":265,"y":260}]},{"from":{"id":"nand1","port":"out"},"to":{"id":"q2","port":"in"}},{"from":{"id":"nand2","port":"out"},"to":{"id":"notq2","port":"in"}}],"subcircuits":{}}
 ```
 
-
-
 Diese Kombination wird in einem eignen Symbol abstrahiert. Dabei wird unser Ausgang Y nun mit Q bezeichnet.
 
 ![Bild](./images/05_FlipFlops/SR_Latch_Symbol.svg.png)<!-- style="width: 15%; max-width: 500px" -->
+
+### D Latch
+
+Der D-Latch macht sich die Tatsache zunutze, dass in den beiden aktiven Eingangskombinationen (01 und 10) eines gattergesteuerten SR-Latch R das Komplement von S ist.
+
+<table>
+<tr>
+<td>
+RS-Latch
+
+| $R(t)$ | $S(t)$ | $Y'(t) = Y(t+2\Delta t)$ |
+| ------ | ------ | ------------------------ |
+| 0      | 0      | $Y(t)$                   |
+| 0      | 1      | 1                        |
+| 1      | 0      | 0                        |
+| 1      | 1      | nicht erlaubt            |
+</td>
+<td>
+D-Latch
+
+| $E(t)$ | $D(t)$ | $Y'(t) = Y(t+2\Delta t)$ |
+| ------ | ------ | ------------------------ |
+| 0      | 0      | $Y(t)$                   |
+| 0      | 1      | $Y(t)$                   |
+| 1      | 0      | 0                        |
+| 1      | 1      | 1                        |
+</td>
+</tr>
+</table>
+
+Die Eingangs-NAND-Stufe wandelt die beiden D-Eingangszustände (0 und 1) durch Invertieren des Dateneingangssignals in diese beiden Eingangskombinationen für den nächsten SR-Latch um.
+
+
+<table>
+<tr>
+<td>
+D-Latch auf der Basis eines NOR-RS-Gatters
+
+![Bild](./images/05_FlipFlops/DLatch_NOR.png)<!-- style="max-width: 300px" -->
+</td>
+<td>
+D-Latch auf mit NAND-RS-Gatters
+
+![Bild](./images/05_FlipFlops/DLatch_NAND.png)<!-- style="max-width: 300px" -->
+</td>
+</tr>
+</table>
+
+
+``` json @DigiSim.evalJson
+{"devices":{"d":{"label":"D","type":"Button","propagation":0,"position":{"x":-110,"y":110}},"e":{"label":"E","type":"Button","propagation":0,"position":{"x":-110,"y":210}},"q":{"label":"Q","type":"Lamp","propagation":0,"position":{"x":395,"y":130}},"notq":{"label":"~Q","type":"Lamp","propagation":0,"position":{"x":395,"y":230}},"nand1":{"label":"nand","type":"Nand","propagation":0,"bits":1,"position":{"x":235,"y":225}},"nand2":{"label":"nand","type":"Nand","propagation":0,"bits":1,"position":{"x":230,"y":125}},"nand3":{"label":"nand","type":"Nand","propagation":0,"bits":1,"position":{"x":55,"y":120}},"nand4":{"label":"nand","type":"Nand","propagation":0,"bits":1,"position":{"x":85,"y":215}}},"connectors":[{"from":{"id":"nand2","port":"out"},"to":{"id":"nand1","port":"in1"}},{"from":{"id":"nand1","port":"out"},"to":{"id":"nand2","port":"in2"}},{"from":{"id":"nand1","port":"out"},"to":{"id":"notq","port":"in"}},{"from":{"id":"nand2","port":"out"},"to":{"id":"q","port":"in"}},{"from":{"id":"e","port":"out"},"to":{"id":"nand4","port":"in2"}},{"from":{"id":"e","port":"out"},"to":{"id":"nand3","port":"in2"}},{"from":{"id":"d","port":"out"},"to":{"id":"nand3","port":"in1"}},{"from":{"id":"nand3","port":"out"},"to":{"id":"nand4","port":"in1"}},{"from":{"id":"nand3","port":"out"},"to":{"id":"nand2","port":"in1"}},{"from":{"id":"nand4","port":"out"},"to":{"id":"nand1","port":"in2"}}],"subcircuits":{}}
+```
+
+![Bild](./images/05_FlipFlops/DLatch_Symbol.svg.png)<!-- style="width: 15%; max-width: 500px" -->
+
+> Das D-Latch kann auch als synchrones Flip-Flop verstanden werden. In diesem Fall würde `E` den Takt betrachtet werden.
 
 ## Anwendungsbeispiele
 
@@ -204,32 +262,33 @@ Der Temperatursensor hat einen digitalen Ausgang, der mit dem Überschreiten ein
 style="width: 80%; min-width: 420px; max-width: 720px;"
 -->
 ```ascii
-    ^
-    |       +------+      +------+      +------+
-T   |       |      |      |      |      |      |
-    | ------+      +------+      +------+      +-----------------
-    |                                               +------+
-R   |                                               |      |
-    | ----------------------------------------------+      +------
-    |         +---------------------------------------+
-Q   |         |                                       |
-    | --------+                                       +-----------
-    +----------------------------------------------------------------->        .
-                                                                 Zeit
+           ^
+Temperatur |       +------+      +--+           +------+
+S          |       |      |      |  |           |      |
+           | ------+      +------+  +-----------+      +-----------------
+           |                                               +------+
+R          |                                               |      |
+           | ----------------------------------------------+      +------
+           |         +---------------------------------------+
+Q          |         |                                       |
+           | --------+                                       +-----------
+           +-----------------------------------------------------------------> .
+                                                                        Zeit
 ```
-
-
 
 __Anwendungsbeispiel 2__
 
+Ein Taster schaltet bei der Aktivierung nicht zu einem definierten Zeitpunkt sondern ist durch eine Übergangsphase gekennzeichnet.
 
-Entprellen eines Schalters
-
-
+![Bild](./images/05_FlipFlops/EntprellterTaster.png)<!-- style="width: 35%; max-width: 500px" -->
 
 __Anwendungsbeispiel 3__
 
-Rechts Links Lauf eines Motors
+Wir wollen eine Schaltung entwerfen, die für einen Motor den abrupten Wechsel von einem Rechts- auf einen Links-Lauf vermeidet. Wie könnte dies umgesetzt werden?
+
+![Bild](./images/05_FlipFlops/RechtsLinksLauf_Muster.png)<!-- style="width: 55%; max-width: 500px" -->
+
+Der Motor soll nur aus einem Stop-Mode heraus in den Links-Lauf oder den Rechts-Lauf starten.
 
 ## Taktung von Schaltwerken
 
@@ -262,10 +321,10 @@ Für die Realisierung eines synchronisierten Zustandswechsels wird der Eingang u
 
 | $R(t)$                                | $S(t)$                                | $Clk(t)$ | $Q'(t)$       |
 | ------------------------------------- | ------------------------------------- | -------- | ------------- |
-| <span style="color: #ff0000">d</span> | <span style="color: #ff0000">d</span> | 0        | $Q$        |
-| 0                                     | 0                                     | 1        | $Q$              |
-| 1                                     | 1                                     | 1        | 1             |
-| 1                                     | 0                                     | 1        | 0              |
+| <span style="color: #ff0000">d</span> | <span style="color: #ff0000">d</span> | 0        | $Q$           |
+| 0                                     | 0                                     | 1        | $Q$           |
+| 0                                     | 1                                     | 1        | 1             |
+| 1                                     | 0                                     | 1        | 0             |
 | 1                                     | 1                                     | 1        | nicht erlaubt |
 
 Beachten Sie, dass sich mit dem <span style="color: #ff0000">d</span> Zustand die Wertetabelle deutlich verkürzt.
@@ -291,44 +350,222 @@ Q   |       :  |            :  |          :  |:  |
              2t              2t            2t  2t
 ```
 
+
+<table>
+<tr>
+<td>
+
 ![Bild](./images/05_FlipFlops/synchronizedRS_NOR.png)
+</td>
+<td>
 
-### D-Latch
+![Bild](./images/05_FlipFlops/SR_Level_Symbol.svg.png)<!-- style="width: 45%; max-width: 800px;" -->
 
-...
+</td>
+</tr>
+</table>
 
-``` json @DigiSim.evalJson
-{"devices":{"d":{"label":"D","type":"Button","propagation":0,"position":{"x":-110,"y":110}},"e":{"label":"E","type":"Button","propagation":0,"position":{"x":-110,"y":210}},"q":{"label":"Q","type":"Lamp","propagation":0,"position":{"x":395,"y":130}},"notq":{"label":"~Q","type":"Lamp","propagation":0,"position":{"x":395,"y":230}},"nand1":{"label":"nand","type":"Nand","propagation":0,"bits":1,"position":{"x":235,"y":225}},"nand2":{"label":"nand","type":"Nand","propagation":0,"bits":1,"position":{"x":230,"y":125}},"nand3":{"label":"nand","type":"Nand","propagation":0,"bits":1,"position":{"x":55,"y":120}},"nand4":{"label":"nand","type":"Nand","propagation":0,"bits":1,"position":{"x":85,"y":215}}},"connectors":[{"from":{"id":"nand2","port":"out"},"to":{"id":"nand1","port":"in1"}},{"from":{"id":"nand1","port":"out"},"to":{"id":"nand2","port":"in2"}},{"from":{"id":"nand1","port":"out"},"to":{"id":"notq","port":"in"}},{"from":{"id":"nand2","port":"out"},"to":{"id":"q","port":"in"}},{"from":{"id":"e","port":"out"},"to":{"id":"nand4","port":"in2"}},{"from":{"id":"e","port":"out"},"to":{"id":"nand3","port":"in2"}},{"from":{"id":"d","port":"out"},"to":{"id":"nand3","port":"in1"}},{"from":{"id":"nand3","port":"out"},"to":{"id":"nand4","port":"in1"}},{"from":{"id":"nand3","port":"out"},"to":{"id":"nand2","port":"in1"}},{"from":{"id":"nand4","port":"out"},"to":{"id":"nand1","port":"in2"}}],"subcircuits":{}}
-```
-
-
-### Herausforderungen
 
 Durch die Möglichkeit mehrerer Zustandsänderungen in einer Taktphase ist das getaktete RS Flip-Flop für viele Anwendungen ungeeignet.
 
-HINWEIS auf Folie 20
+![Bild](./images/05_FlipFlops/ZustandsgesteuertesShiftRegister.png)<!-- style="width: 95%; max-width: 800px" -->
 
+Gewünscht: Flip-Flop Variante, die Änderungen nur zu einem definierten Zeitpunkt zulässt
 
 ### Master-Slave Flip-Flops
 
+Ein Master-Slave RS Flip-Flop besteht aus 2 hintereinander-geschalteten zustandsgesteuerten RS Flip-Flops (als „Master“ und als „Slave“ bezeichnet) zusätzlicher Inverter negiert Taktsignal für „Slave“.
+
+![Bild](./images/05_FlipFlops/MasterSlave.png)
+
+Ablauf einer Periode:
+
+1. „Master“ übernimmt Eingangswerte bei Clk = 1 („Slave“ ändert sich nicht
+2. „Slave“ übernimmt Werte vom „Master“ bei Clk = 0 („Master“ ändert sich nicht)
+
+![Bild](./images/05_FlipFlops/timeLineMasterSlave.png)<!-- style="width: 35%; max-width: 200px;" -->
+
+> Frage: Welche maximale Verzögerung für ein eingehendes Signal ergibt sich also?
 
 ### Flankengesteuerte Flip-Flops
 
-JK
+Durch eine spezielle Schaltungstechnik kann erreicht werden, dass auch die Eingangsleitungen nur
 
-T Flip-Flop
++ bei steigender Flanke (positive Flanke),
+![Bild](./images/05_FlipFlops/SR_Flanken_Symbol.svg.png)<!-- style="width: 20%; max-width: 800px;" -->
+
++ bei fallender Flanke (negative Flanke),
+![Bild](./images/05_FlipFlops/SR_Flanken2_Symbol.svg.png)<!-- style="width: 20%; max-width: 800px;" -->
+
++ in beiden Fällen berücksichtigt werden!
+
+
+
+Wie lässt sich ein Flankendetektor umsetzen? Wir machen uns das Laufzeitverhalten unserer Bauteile zu Nutze.
+
+<table>
+<tr>
+<td>
+
+![Bild](./images/05_FlipFlops/FlankenDetektor.png)<!-- style="width: 95%; max-width: 800px;" -->
+</td>
+<td>
+
+<!--
+style="width: 95%; max-width: 1000px;"
+-->
+```ascii
+    ^
+    |     +-------------- 1
+E   |     |
+    | ----+               0
+    | -----+
+    |      |
+    |      +-------------
+    |       +------------
+    |       |
+    | ------+
+    |   -----+
+B   |        |
+    |        +-----------
+    |
+    |     +--+
+A   |     |  |
+    | ----+  +-------------
+    +----------------------->    Zeit
+
+```
+
+</td>
+</tr>
+</table>
+
+Die Signallaufzeiten sind für die ansteigende und fallende Signalflanke unterschiedlich und variieren mit den Schaltkreisfamilien (3 - 30ns)
+
+Welches Verhalten ergibt sich für ein (positiv) flankengetriggertes RS-FlipFlop daraus?
+
+
+
+<table>
+<tr>
+<td>
+Zustandsgetrieben
+
+<!--
+style="width: 80%; min-width: 420px; max-width: 720px;"
+-->
+```ascii
+
+    |       +------+      +------+      +------+      +-----
+Clk |       |      |      |      |      |      |      |
+    | ------+      +------+      +------+      +------+
+    |     +------+                         +--+
+S   |     | :    |                         |  |
+    | ----+ :    +-------------------------+  +--------------
+    |       :        +--+   +---+      +----+
+R   |       :        |  |   |   |      |    |
+    | ------:--------+  +---+   +------+    +----------------
+    |       :  +---------------+                             1
+Q   |       :  |            :  |
+    |-------:--+            :  +---------------------------- 0
+    +-------:--:------------:--:-------------------------------->          .
+             2t              2t
+```
+</td>
+<td>
+Positiv Flankengetrieben
+
+<!--
+style="width: 80%; min-width: 420px; max-width: 720px;"
+-->
+```ascii
+
+    |       +------+      +------+      +------+      +-----
+Clk |       |      |      |      |      |      |      |
+    | ------+      +------+      +------+      +------+
+    |     +------+                      :  +--+
+S   |     | :    |                      :  |  |
+    | ----+ :    +----------------------:--+  +--------------
+    |       :        +--+   +---+      +----+
+R   |       :        |  |   |   |      |:   |
+    | ------:--------+  +---+   +------+:   +----------------
+    |       :  +---------------------------+                    1
+Q   |       :  |                        :  |
+    |-------:--+                        :  +------------------- 0
+    +-------:--:------------------------:--:-------------------->          .
+             2t                          2t
+```
+</td>
+</tr>
+</table>
+
+### Weitere Flip-Flop Konfigurationen
+
+**JK Flip-Flop**
+
+JK-Flipflops wurden wahrscheinlich nach Jack Kilby benannt. Sie basieren auf dem asynchronen RS-Flipflop, sind aber flankengesteuert oder als Master-Slave-Flipflop ausgeführt. Mit dem Taktsignal und der Eingangsbelegung J = 1 und K = 0 wird am Ausgang eine 1 erzeugt und gespeichert, alternativ bei K = 1 und J = 0 eine 0. Der Zustand J = K = 1 ist erlaubt; in diesem Fall wechselt der Ausgangspegel mit jeder wirksamen Flanke des Taktsignals. Dieses Verhalten lässt die Bezeichnung als Toggle-Flipflop zu.
+
+| $J(t)$                                | $K(t)$                                | $Q'(t)$ bei Flankenwechsel       |
+| ------------------------------------- | ------------------------------------- | ------------- |
+| 0                                     | 0                                     | $Q$           |
+| 0                                     | 1                                     | 0             |
+| 1                                     | 0                                     | 1             |
+| 1                                     | 1                                     | <span style="color: #ff0000">$\overline{Q}$</span>  |
+
+![Bild](./images/05_FlipFlops/JK_FlipFlop.png)<!-- style="width: 75%; max-width: 800px;" -->
+
+<!--
+style="width: 100%; min-width: 420px; max-width: 720px;"
+-->
+```ascii
+
+    |       +------+      +------+      +------+      +-----
+Clk |       |      |      |      |      |      |      |
+    | ------+      +------+      +------+      +------+
+    |     +------+        :            +----------------+
+J   |     | :    |        :            |:             : |
+    | ----+ :    +---------------------+:             : +---
+    |       :        +------+   +---------+         +-----+
+K   |       :        |    : |   |       : |         | :   |
+    | ------:--------+    : +---+       : +---------+ :   +--
+    |       :  +-------------+          :  +-------------+     1
+Q   |       :  |          :  |          :  |          :  |
+    |-------:--+          :  +-------------+          :  +---- 0
+    +-------:--:------------------------:--:----------:--:------>          .
+             2t                          2t
+```
+
+**T Flip-Flop**
+
+Das synchrone T-Flipflop besitzt neben dem Clk-Takteingang einen T-Eingang. T steht dabei für toggle – hin- und herschalten. Es zeigt ein Wechselverhalten synchron zur aktiven Flanke immer dann und nur dann, wenn T = 1 ist. Er kann aus einem flankengesteuerten JK-Flipflop gebildet werden, indem J- und K-Eingang verbunden werden und gemeinsam als T-Eingang fungieren.
+
+![Bild](./images/05_FlipFlops/T_Flip-flop.svg.png)<!-- style="width: 20%; max-width: 800px;" -->
+
+| $T(t)$ | $Q'(t)$ bei Flankenwechsel |
+| ------ | -------------------------- |
+| 0      | $Q$                        |
+| 1      | $\overline{Q}$             |
+
 
 ### Anwendungen
 
-Asynchroner 3-Bit Zähler
+**Asynchroner 3-Bit Zähler / Frequenzteiler**
 
-Frequenzteiler
+![Bild](./images/05_FlipFlops/AsynchronerBinaerZaehler.png)<!-- style="width: 80%; max-width: 800px;" -->
 
-4 Bit-Speicher Array
+![Bild](./images/05_FlipFlops/AsynchronerBinaerZaehlerTiming.png)<!-- style="width: 80%; max-width: 1200px;" -->
+
+> Beachten Sie die Verzögerung der flanken-getriggerten JK-Flipflops - diese bestimmt die maximale Taktfrequenz
+
+
+**4 Bit-Speicher Array**
+
+DM74LS194A 4-Bit Bidirectional Universal Shift Register
+
+http://www.datasheet-pdf.com/PDF/DM74LS194A-Datasheet-FairchildSemiconductor-518503
+
 
 ### Zusammenfassung
-
-Grafik Folie 29
 
 | Parameter                     | Latch                        | Flip-Flop                                    |
 | ----------------------------- | ---------------------------- | -------------------------------------------- |
@@ -341,24 +578,15 @@ Grafik Folie 29
 
 ## Einsatzbeispiel
 
-![Bild](./images/05_FlipFlops/CopyRegisters.png)
+Konfiguration eines einzelnen IO Pins eines AVR Mikrocontrollers mit Hilfe von 4 Flip-Flops.
 
-Transfer
-
-
-
-
-Transfer und Copy
-
-
-Rechts - Links Schieberegister mit paralleler Ladeoperation
-
+![Bild](./images/05_FlipFlops/DFlipFlopsImAVR.png)
 
 ## Realisierungsbeispiel
 
 Schaltung basierend auf 74HC00 IC (4x NAND)
 
-![74HC00](./images/05_FlipFlops/nand_ic2_small.jpg)
+![74HC00](./images/05_FlipFlops/nand_ic2_small.jpg)<!-- style="width: 40%; max-width: 800px;" -->
 
 Schaltung planen:
 
@@ -366,8 +594,9 @@ Schaltung planen:
 
 Aufbauen:
 
-![Schaltung gebaut](./images/05_FlipFlops/dlatch_board.jpg)
+![Schaltung gebaut](./images/05_FlipFlops/dlatch_board.jpg)<!-- style="width: 40%; max-width: 800px;" -->
 
 ## Übungsaufgaben
 
 + Weisen Sie nach, dass der zweite Ausgang P am RS-Flip-Flop den invertierten Wert von Q realisiert.
++ Experimentieren Sie mit der Elektroniksimulation TinkerCAD und einem vorgefertigen Beispiel für ein SR Flip-Flop [Link](https://www.tinkercad.com/things/2u00e0a3qoq-sr-flip-flop-using-nand-gate)

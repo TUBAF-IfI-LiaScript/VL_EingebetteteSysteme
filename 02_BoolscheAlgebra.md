@@ -10,7 +10,7 @@ import: https://raw.githubusercontent.com/LiaTemplates/NetSwarm-Simulator/master
 
 -->
 
-# 02 - Boolsche Algebra
+# Boolsche Algebra
 
 **TU Bergakademie Freiberg - Wintersemester 2020 / 21**
 
@@ -413,7 +413,7 @@ $$
 | 0     | 1     | 0     | 0   |                                                           |
 | 0     | 1     | 1     | 0   |                                                           |
 | 1     | 0     | 0     | 1   | $x_1\cdot \overline{x}_2 \cdot \overline{x}_3$            |
-| 1     | 0     | 1     | 1   | $ x_1\cdot \overline{x}_2 \cdot x_3$                      |
+| 1     | 0     | 1     | 1   | $x_1\cdot \overline{x}_2 \cdot x_3$                       |
 | 1     | 1     | 0     | 1   | $x_1\cdot x_2 \cdot \overline{x}_3$                       |
 | 1     | 1     | 1     | 0   |                                                           |
 
@@ -463,17 +463,17 @@ negiertes ODER == NOR == Peirce-Funktion
 | $x = 0$   | $y = 1$   | 0                        | 0                                                    | 0                      | 0                       |
 | $x = 1$   | $y = 0$   | 0                        | 0                                                    | 1                      | 1                       |
 | $x = 1$   | $y = 1$   | 0                        | 1                                                    | 0                      | 1                       |
-|           |           | $f(x,y)=\overline{x+ y}$ | $f(x,y)= x\cdot y + \overline{x} \cdot \overline{y}$ | $f(x,y)=\overline{y} $ | $f(x,y)=x+\overline{y}$ |
+|           |           | $f(x,y)=\overline{x+ y}$ | $f(x,y)= x\cdot y + \overline{x} \cdot \overline{y}$ | $f(x,y)=\overline{y}$ | $f(x,y)=x+\overline{y}$ |
 
 negiertes UND == NAND == Sheffer-Funktion genannt
 
-| Eingang x | Eingang y |                       | Implikation                | negiertes UND                  | Einsfunktion |
-| --------- | --------- | --------------------- | -------------------------- | ------------------------------ | ------------ |
-| $x = 0$   | $x = 0$   | 1                     | 1                          | 1                              | 1            |
-| $x = 0$   | $x = 1$   | 1                     | 1                          | 1                              | 1            |
-| $x = 1$   | $x = 0$   | 0                     | 0                          | 1                              | 1            |
-| $x = 1$   | $x = 1$   | 0                     | 1                          | 0                              | 1            |
-|           |           | $f(x,y)=\overline{x}$ | $f(x,y)= \overline{x} + y$ | $f(x,y)=\overline{x \cdot y} $ | $f(x,y)=1$   |
+| Eingang x | Eingang y |                       | Implikation                | negiertes UND                 | Einsfunktion |
+| --------- | --------- | --------------------- | -------------------------- | ----------------------------- | ------------ |
+| $x = 0$   | $x = 0$   | 1                     | 1                          | 1                             | 1            |
+| $x = 0$   | $x = 1$   | 1                     | 1                          | 1                             | 1            |
+| $x = 1$   | $x = 0$   | 0                     | 0                          | 1                             | 1            |
+| $x = 1$   | $x = 1$   | 0                     | 1                          | 0                             | 1            |
+|           |           | $f(x,y)=\overline{x}$ | $f(x,y)= \overline{x} + y$ | $f(x,y)=\overline{x \cdot y}$ | $f(x,y)=1$   |
 
 ### Exkurs: Technische Realisierung
 
