@@ -9,6 +9,16 @@ narrator: Deutsch Female
 import:  https://raw.githubusercontent.com/liascript-templates/plantUML/master/README.md
          https://raw.githubusercontent.com/LiaTemplates/DigiSim/master/README.md
 
+mark: <span style="background-color: @0;
+                                  display: flex;
+                                  width: calc(100% + 32px);
+                                  margin: -16px;
+                                  padding: 6px 16px 6px 16px;
+                                  ">@1</span>
+red:  @mark(#FF888888,@0)
+blue: @mark(lightblue,@0)
+gray: @mark(gray,@0)
+
 -->
 
 # Schaltwerke
@@ -17,7 +27,7 @@ import:  https://raw.githubusercontent.com/liascript-templates/plantUML/master/R
 
 Link auf die aktuelle Vorlesung im Versionsmanagementsystem GitHub
 
-[https://github.com/TUBAF-IfI-LiaScript/VL_EingebetteteSysteme/blob/00_Einfuehrung](https://github.com/TUBAF-IfI-LiaScript/VL_EingebetteteSysteme/blob/dev/00_Einfuehrung)
+[https://github.com/TUBAF-IfI-LiaScript/VL_EingebetteteSysteme/blob/07_Schaltwerke.md](https://github.com/TUBAF-IfI-LiaScript/VL_EingebetteteSysteme/blob/dev/07_Schaltwerke.md)
 
 Die interaktive Form ist unter diesem [Link](https://liascript.github.io/course/?https://raw.githubusercontent.com/TUBAF-IfI-LiaScript/VL_EingebetteteSysteme/master/07_Schaltwerke.md) zu finden.
 
@@ -25,8 +35,10 @@ Die interaktive Form ist unter diesem [Link](https://liascript.github.io/course/
 
 ** Fragen an die Veranstaltung**
 
-+
-
++ Welche Kernelemente hat ein Schaltwerk?
++ Worin unterscheiden sich die Varianten von Mealy und Moore?
++ Welches Vorgehen ist für die Umsetzung eines Schaltwerkes notwendig?
++ An welcher Stelle ist die invertierte Wahrheitstabelle eines Flip-Flops wichtig?
 
 <!--
 style="width: 80%; min-width: 420px; max-width: 720px;"
@@ -119,27 +131,109 @@ Eingaben       +------------------+           Ausgaben
 
 ### Wiederholung: Beschreibung von Flip-Flops
 
+
+<table>
+<tr>
+<td>
 __Wahrheitstafel__ zeigt die Eingaben, die notwendig sind, um eine bestimmte Zustandsänderung herbeizuführen.
-
-| $R(t)$ | $S(t)$ | $Q(t+1)$      |
-| ------ | ------ | ------------- |
-| 0      | 0      | $Q$           |
-| 0      | 1      | 1             |
-| 1      | 0      | 0             |
-| 1      | 1      | nicht erlaubt |
-
+</td>
+<td>
 __Invertierte Wahrheitstafel__ zeigt die Eingaben, die notwendig sind, um eine bestimmte Zustandsänderung herbeizuführen.
-
+</td>
+</tr>
+<tr>
+<td>
+| $R(t)$ | $S(t)$ | $Q(t+1)$  |
+| ------ | ------ | --------- |
+| 0      | 0      | $Q$       |
+| 0      | 1      | 1         |
+| 1      | 0      | 0         |
+| 1      | 1      | Vermeiden |
+</td>
+<td>
 | $Q(t)$ | $Q(t+1)$ | $S$ | $R$ |
 | ------ | -------- | --- | --- |
 | 0      | 0        | 0   | d   |
 | 0      | 1        | 1   | 0   |
 | 1      | 0        | 0   | 1   |
 | 1      | 1        | d   | 0   |
+</td>
+</tr>
+</table>
 
-> Merke: Die invertierte Wahrheitstafel beantwortet die Frage, wie die Eingänge beschaltet werden müssen, um einen bestimmten Zustand zu realsieren.
+> **Merke:** Die invertierte Wahrheitstafel beantwortet die Frage, wie die Eingänge beschaltet werden müssen, um einen bestimmten Zustand zu realisieren.
 
-Stellen Sie die invertierten Wahrheitstafeln für den JK und den D Flip-Flop auf!
+
+> **Aufgabe:** Stellen Sie die invertierten Wahrheitstafeln für den flankengesteuerten JK- und den flankengesteuerten D-Flip-Flop auf!
+
+<table>
+<tr>
+<td>
+__JK-Wahrheitstafel__
+</td>
+<td>
+__JK-Invertierte Wahrheitstafel__
+</td>
+</tr>
+<tr>
+<td>
+| $J(t)$ | $K(t)$ | $Q(t+1)$       | Modus       |
+| ------ | ------ | -------------- | ----------- |
+| 0      | 0      | $Q$            | Beibehalten |
+| 0      | 1      | $0$            | Löschen     |
+| 1      | 0      | $1$            | Setzen      |
+| 1      | 1      | $\overline{Q}$ | Toggeln     |
+</td>
+<td>
+{{0-1}}
+| $Q(t)$ | $Q(t+1)$ | $J$ | $K$ |
+| ------ | -------- | --- | --- |
+| $0$    | $0$      |     |     |
+| $0$    | $1$      |     |     |
+| $1$    | $0$      |     |     |
+| $1$    | $1$      |     |     |
+{{1}}
+| $Q(t)$ | $Q(t+1)$ | $J$ | $K$ |
+| ------ | -------- | --- | --- |
+| 0      | 0        | 0   | $d$ |
+| 0      | 1        | 1   | $d$ |
+| 1      | 0        | d   | $1$ |
+| 1      | 1        | d   | $0$ |
+</td>
+</tr>
+<tr>
+<td>
+__D-Wahrheitstafel__
+</td>
+<td>
+__D-Invertierte Wahrheitstafel__
+</td>
+</tr>
+<tr>
+<td>
+| $D(t)$ | $Q(t+1)$ | Modus   |
+| ------ | -------- | ------- |
+| 0      | $0$      | Löschen |
+| 1      | $1$      | Setzen  |
+</td>
+<td>
+{{0-1}}
+| $Q(t)$ | $Q(t+1)$ | $D$ |
+| ------ | -------- | --- |
+| $0$    | $0$      |   |
+| $0$    | $1$      |   |
+| $1$    | $0$      |   |
+| $1$    | $1$      |   |
+{{1}}
+| $Q(t)$ | $Q(t+1)$ | $D$ |
+| ------ | -------- | --- |
+| $0$    | $0$      | $0$ |
+| $0$    | $1$      | $1$ |
+| $1$    | $0$      | $0$ |
+| $1$    | $1$      | $1$ |
+</td>
+</tr>
+</table>
 
 ### Grundkonzept
 
@@ -173,8 +267,8 @@ digraph finite_state_machine {
 
     node [shape = point ]; qi
     node[shape=circle]
-    A[label="{auf}"];
-    B[label="{zu}"];
+    A[label="zu"];
+    B[label="auf"];
 
     qi -> A;
     A  -> A  [ label = "schließen" ];
@@ -340,7 +434,7 @@ Damit ergibt sich dann eine neue Zustandstabelle
 
 Realisierung der Schaltfunktion
 
-![Bild](./images/06_Schaltwerke/Schaltwerk_Detektor.png)
+![Bild](./images/07_Schaltwerke/Schaltwerk_Detektor.png)
 
 Um die entsprechende Schaltfunktionen für die Änderung der Zustände und die Ausgabe aufzustellen, brauchen wir die invertierte Wahrheitstafel des intendierten Flip-Flops.
 
@@ -395,15 +489,13 @@ $$
 </tr>
 </table>
 
-Simulation
-
 Bitte mit Eingabe 0 starten, um Startzustand korrekt zu setzen!
 
 ```json @DigiSim.evalJson
 {"devices":{"e":{"label":"E","type":"Button","propagation":0,"position":{"x":-160,"y":10}},"clk":{"label":"Clk","type":"Button","propagation":0,"position":{"x":-160,"y":-50}},"not":{"label":"~G","type":"Not","propagation":0,"bits":1,"position":{"x":-135,"y":110}},"and1":{"label":"FE","type":"And","propagation":0,"bits":1,"position":{"x":30,"y":190}},"and2":{"label":"GE","type":"And","propagation":0,"bits":1,"position":{"x":10,"y":20}},"and3":{"label":"(~G)E","type":"And","propagation":0,"bits":1,"position":{"x":20,"y":100}},"and4":{"label":"FG","type":"And","propagation":0,"bits":1,"position":{"x":245,"y":175}},"or1":{"label":"GE + FE","type":"Or","propagation":0,"bits":1,"position":{"x":165,"y":15}},"or2":{"label":"(~G)E + FE","type":"Or","propagation":0,"bits":1,"position":{"x":175,"y":90}},"fff":{"label":"F FlipFlop","type":"Dff","propagation":0,"polarity":{"clock":true},"bits":1,"initial":"x","position":{"x":335,"y":30}},"ffg":{"label":"G FlipFlop","type":"Dff","propagation":0,"polarity":{"clock":true},"bits":1,"initial":"x","position":{"x":340,"y":95}},"a":{"label":"A","type":"Lamp","propagation":0,"position":{"x":395,"y":180}}},"connectors":[{"from":{"id":"or1","port":"out"},"to":{"id":"fff","port":"in"}},{"from":{"id":"or2","port":"out"},"to":{"id":"ffg","port":"in"}},{"from":{"id":"not","port":"out"},"to":{"id":"and3","port":"in2"}},{"from":{"id":"e","port":"out"},"to":{"id":"and2","port":"in1"}},{"from":{"id":"e","port":"out"},"to":{"id":"and3","port":"in1"}},{"from":{"id":"and2","port":"out"},"to":{"id":"or1","port":"in1"}},{"from":{"id":"and3","port":"out"},"to":{"id":"or2","port":"in1"}},{"from":{"id":"and1","port":"out"},"to":{"id":"or2","port":"in2"}},{"from":{"id":"and1","port":"out"},"to":{"id":"or1","port":"in2"}},{"from":{"id":"e","port":"out"},"to":{"id":"and1","port":"in1"}},{"from":{"id":"ffg","port":"out"},"to":{"id":"not","port":"in"},"vertices":[{"x":410.95,"y":240},{"x":325,"y":240}]},{"from":{"id":"ffg","port":"out"},"to":{"id":"and2","port":"in2"},"vertices":[{"x":440,"y":210},{"x":405,"y":240},{"x":-90,"y":195},{"x":-145,"y":140},{"x":-120,"y":85}]},{"from":{"id":"fff","port":"out"},"to":{"id":"and1","port":"in2"},"vertices":[{"x":460,"y":255}]},{"from":{"id":"clk","port":"out"},"to":{"id":"fff","port":"clk"},"vertices":[{"x":270,"y":-35}]},{"from":{"id":"clk","port":"out"},"to":{"id":"ffg","port":"clk"},"vertices":[{"x":275,"y":-35}]},{"from":{"id":"and4","port":"out"},"to":{"id":"a","port":"in"}},{"from":{"id":"fff","port":"out"},"to":{"id":"and4","port":"in1"},"vertices":[{"x":460,"y":165}]},{"from":{"id":"ffg","port":"out"},"to":{"id":"and4","port":"in2"},"vertices":[{"x":390,"y":240},{"x":225,"y":240}]}],"subcircuits":{}}
 ```
 
-## Allgemeines Vorgehen
+## Allgemeine Vorgehensweise
 
 1. Schritt: Spezifikation des Zustandsdiagramms
 2. Schritt: Transformation in eine Zustandstabelle
@@ -412,7 +504,7 @@ Bitte mit Eingabe 0 starten, um Startzustand korrekt zu setzen!
 5. Schritt: Ableitung einer KNF oder DNF
 6. Schritt: Minimierung
 
-## Automaten Typen
+### Automaten Typen
 
 **Moore-Automat**
 
@@ -509,37 +601,6 @@ digraph finite_state_machine {
 
 **Die Ausgabe Y hängt jedoch die Ausgabelogik vom aktuellen Zustand und vom Eingabesignal E ab**
 
-Welche Vereinfachungsmöglichkeiten sehen Sie?
-
-```text @plantUML
-@startuml
-digraph finite_state_machine {
-    rankdir=LR;
-
-    node [shape = point ]; qi1
-    node[shape=circle]
-    A1[label="A"];
-    B1[label="B"];
-    C1[label="C"];
-
-    qi1 -> A1;
-    A1  -> A1  [ label = "E=0 \n A=0" ];
-    A1  -> B1  [ label = "E=1 \n A=0" ];
-    B1  -> A1  [ label = "E=0 \n A=0" ];
-    B1  -> C1  [ label = "E=1 \n A=0" ];
-    C1  -> A1  [ label = "E=0 \n A=0", fontcolor=green ];
-    C1  -> C1  [ label = "E=1 \n A=1", fontcolor=blue ];
-}
-
-@enduml
-```
-@plantUML
-
-- Zustand `A`: die letzte Eingabe war keine `1`
-- Zustand `B`: die letzte Eingabe war `1`, die davor war nicht `1`
-- Zustabd `C`: mindestens die letzten zwei eingaben waren `1`
-
-Welche Bedeutung hat dies für den technischen Entwurf des Schaltwerkes?
 
 Der Mealy-Automat ist die generellere Form. Der Moore-Automat unterbindet den Einfluss des Einganges. Eine weitere Spezialisierung ist der sogenannte Medwedew-Automat, bei dem ganz auf die Ausgabelogik verzichtet wird.
 
@@ -550,6 +611,33 @@ Der Mealy-Automat ist die generellere Form. Der Moore-Automat unterbindet den Ei
 
 Noch mal zurück zum Beispiel des Binärsequenzdetektors. Welche Konsequenzen hätte die Umsetzung als Mealy-Automat?
 
+```text @plantUML
+@startuml
+digraph finite_state_machine {
+    rankdir=LR;
+
+    node [shape = point ]; qi
+    node [shape = point ]; qi1
+    node[shape=circle]
+    A[label="A"];
+    B[label="B"];
+    C[label="C"];
+    D[label="D"];
+
+    qi -> A;
+    A  -> A  [ label = "E=0 \n A=0" ];
+    A  -> B  [ label = "E=1 \n A=0" ];
+    B  -> A  [ label = "E=0 \n A=0" ];
+    B  -> C  [ label = "E=1 \n A=0" ];
+    C  -> A  [ label = "E=0 \n A=0", fontcolor=green];
+    C  -> D  [ label = "E=1 \n A=1", fontcolor=blue ];
+    D  -> D  [ label = "E=1 \n A=1", fontcolor=blue ];
+    D  -> A  [ label = "E=0 \n A=0", fontcolor=green];
+}
+
+@enduml
+```
+@plantUML
 
 ```text @plantUML
 @startuml
@@ -671,7 +759,7 @@ Bitte mit Eingabe 0 starten, um Flipflops zurück zu setzen!
 In der Simulation sehen Sie dass wir gegenüber dem Moore-Automaten ...
 
 
-## Bedeutung des Flip-Flop Typs
+### Bedeutung des Flip-Flop Typs
 
 Nehmen wir an, dass die Realisierung nicht mit einem D sondern einen JK-Flip-Flop erfolgen soll.
 
@@ -682,7 +770,7 @@ Nehmen wir an, dass die Realisierung nicht mit einem D sondern einen JK-Flip-Flo
 | 1   | 0   | 1                 |
 | 1   | 1   | $\overline{Q(t)}$ |
 
-Der JK-Flip-Flop wechselt beim setzen von $J$ in einen 1 Zustand und kann mit K resetet werden. Eine gleichzeitige Aktivierung beider Eingäng führt zu einem Togglen des Zustandes.
+Der JK-Flip-Flop wechselt beim setzen von $J$ in einen 1 Zustand und kann mit K resetet werden. Eine gleichzeitige Aktivierung beider Eingänge führt zu einem Togglen des Zustandes.
 
 | $Q(t)$ | $Q(t+1)$ | $J$ | $K$ |
 | ------ | -------- | --- | --- |
@@ -765,7 +853,246 @@ Bitte am Anfang `start` auf AN, dann `clk` puls, dann `start` auf AUS, um JK Fli
 
 Welche Unterschiede sehen Sie gegenüber der Realisierung mit D-Flip-Flops?
 
+<table style="valign: top;">
+<tr>
+<td  style="border-bottom:  1px solid black;">
+Lösung
+</td>
+<td  style="border-left: 1px solid black;border-bottom:  1px solid black;">
+JK-Flip-Flop
+</td>
+<td  style="border-left: 1px solid black;border-bottom:  1px solid black;">
+D Flip-Flop
+</td>
+</tr>
+<tr>
+<td>
+Gleichungen
+</td>
+<td style="border-left: 1px solid black;">
+$$
+\begin{aligned}
+JF &= GE \\
+KF &= \overline{E} \\
+JG &= E \\
+KG &= \overline{E} + \overline{F} \\
+A &= EF
+\end{aligned}
+$$
+</td>
+<td style="border-left: 1px solid black;">
+$$
+\begin{aligned}
+F` &= GE + FE \\
+G` &= \overline{G}E + FE \\
+A &= EF
+\end{aligned}
+$$
+</td>
+</tr>
+<tr>
+<td>
+Bauteile
+</td>
+<td style="border-left: 1px solid black;">
++ Negation von E,
++ 2 x AND,
++ 1 x OR
+</td>
+<td style="border-left: 1px solid black;">
++ 3 x AND,
++ 2 x OR
+</td>
+</tr>
+</table>
+
+> Merke: Jeder beliebige getaktete Flip-Flop Typ kann für die Umsetzung verwendet werden.
+
+Dabei wirken sich die unterschiedlichen inversen Zustandsübergangstabellen mit entsprechenden „don‘t care“ Einträgen auf die Komplexität des Schaltwerkes aus.
+
+### Realisierung von Schaltwerken
+
+Eine Umsetzungsmöglichkeit für Schaltnetze sind die sogenannten PAL (Programmable Array Logic) die bereits in der Vorlesung 4 eingeführt wurden [Link](https://liascript.github.io/course/?https://raw.githubusercontent.com/TUBAF-IfI-LiaScript/VL_EingebetteteSysteme/master/04_Schaltnetze.md#13).
+
+An dieser Stelle wurden die 2 stufigen Schaltfunktionen mit einem programmierbaren `AND` Array vorgestellt.
+
+![Bild](./images/04_Schaltnetze/PAL.png) <!--style="width: 30%;" -->
+![Bild](./images/04_Schaltnetze/PAL16L8.png) <!--style="width: 60%;"-->[^1]
+
+[^1]: Datenblatt PAL16R8 Family, Advanced Micro Devices, [link](http://www.applelogic.org/files/PAL16R8.pdf), 1996
+
+Diese erweitern wir nun um die Speicherglieder und deren Rückkopplung. Beachten Sie die Ergänzung auf der Ausgangsseite und die zusätzliche Clockleitung.
+
+![Bild](./images/07_Schaltwerke/PAL16R8.png) <!--style="width: 60%;"-->[^2]
+
+[^2]: Datenblatt PAL16R8 Family, Advanced Micro Devices, [link](http://www.applelogic.org/files/PAL16R8.pdf), 1996
+
+
+## Beispielanwendung
+
+Sequentieller Binärzahlenvergleicher - zwei Zahlenwerte werden sequenziell entsprechend ihren Stellen durch den Vergleicher bewegt und verglichen. Das Schaltwerk speichert das Resultat sobald ein Wert größer als der andere .
+
+<!--
+style="width: 80%; min-width: 420px; max-width: 720px;"
+-->
+```ascii
+
+           <------ Linksshift
+         +---+---+---+---+---+---+---+
+  +----- | 1 | 1 | 0 | 0 | 1 | 0 | 1 |   Shiftregister A
+  |      +---+---+---+---+---+---+---+
+  |
+  |
+  |      +---+---+---+---+---+---+---+
+  |  +-- | 1 | 1 | 0 | 1 | 1 | 1 | 0 |   Shiftregister B
+  |  |   +---+---+---+---+---+---+---+
+  |  |
+  |  |   +-------------+               +------------------+----+----+
+  |  |   |             |               |                  | R1 | R2 |
+  |  +-> | Vergleicher | --> R1        +------------------+----+----+
+  |      |             |               | Equal   E: A==B  | 0  | 0  |
+  |      |             |               | Greater G: A">"B | 1  | 0  |
+  +----> |             | --> R2        | Less    L: A"<"B | 0  | 1  |
+         |             |               +------------------+----+----+
+         +-------------+                                                       .
+```
+
+**1. Schritt: Aufgabenspezifikation, Erstellen eines Zustandsdiagramms**
+
+Für die Aufgabe ergibt sich folgender Graph:
+
+```text @plantUML
+@startuml
+digraph finite_state_machine {
+    rankdir=LR;
+
+    node [shape = point ]; qi
+    node[shape=circle]
+    E[label="E"];
+    G[label="G"];
+    L[label="L"];
+
+
+    qi -> E;
+    E  -> E  [ label = "AB={00, 11}" ];
+    E  -> G  [ label = "AB=10" ];
+    G  -> G  [ label = "AB={00, 01, \n10, 11}"];
+    E  -> L  [ label = "AB=01" ];
+    L  -> L  [ label = "AB={00, 01, \n10, 11}"];
+}
+@enduml
+```
+@plantUML
+
+Im Beispiel liegt ein Medwedew-Automat vor. Die Zustände werden direkt auf den Ausgang abgebildet.
+
+**2. Schritt: Erstellen der Zustandstabelle**
+
+Hier wäre eine Zustandstabelle denkbar, die alle Eingangskombinationen mit allen Zuständen zeilenweise verknüpft.
+
+| aktueller Zustand | A   | B   | Folgezustand |
+| ----------------- | --- | --- | ------------ |
+| E                 | 0   | 0   | E            |
+| E                 | 0   | 1   | L            |
+| E                 | 1   | 0   | G            |
+| ...               |     |     |              |
+
+Eine kompaktere Darstellung fasst die Kombinationen der Eingänge zusammen und ordnet sie den Folgezuständen zu.
+
+| aktueller Zustand | AB==00 | AB==01 | AB==10 | AB==11 |
+| ----------------- | ------ | ------ | ------ | ------ |
+| E                 | E      | L      | G      | E      |
+| G                 | G      | G      | G      | G      |
+| L                 | L      | L      | L      | L      |
+
+**Schritt 3: Auswahl einer binären Zustandskodierung und Generierung einer binären Zustandstabelle**
+
+Insgesamt sind 3 Zustände zu kodieren, entsprechend werden wiederum 2 Flip-Flops benötigt. Dabei wird die Kodierung wie folgt vorgenommen:
+
+| Zustand | F   | G   |
+| ------- | --- | --- |
+| E       | 0   | 0   |
+| G       | 0   | 1   |
+| L       | 1   | 0   |
+
+Damit ergibt sich folgende Binäre Zustandstabelle
+
+| aktueller Zustand | AB==00 | AB==01 | AB==10 | AB==11 |
+| ----------------- | ------ | ------ | ------ | ------ |
+| 00                | 00     | 10     | 01     | 00     |
+| 01                | 01     | 01     | 01     | 01     |
+| 10                | 10     | 10     | 10     | 10     |
+
+In der traditionellen Darstellung zeigt sich diese wie folgt:
+
+| $F_{t}$ | $G_{t}$ | $A_{t}$ | $B_{t}$ | @gray($F_{t+1}$) | @gray($G_{t+1}$) |
+| ------- | ------- | ------- | ------- | ---------------- | ---------------- |
+| 0       | 0       | 0       | 0       | @gray(0)         | @gray(0)         |
+| 0       | 0       | 0       | 1       | @gray(1)         | @gray(0)         |
+| 0       | 0       | 1       | 0       | @gray(0)         | @gray(1)         |
+| 0       | 0       | 1       | 1       | @gray(0)         | @gray(0)         |
+| 0       | 1       | 0       | 0       | @gray(0)         | @gray(1)         |
+| 0       | 1       | 0       | 1       | @gray(0)         | @gray(1)         |
+| 0       | 1       | 1       | 0       | @gray(0)         | @gray(1)         |
+| 0       | 1       | 1       | 1       | @gray(0)         | @gray(1)         |
+| 1       | 0       | 0       | 0       | @gray(1)         | @gray(0)         |
+| 1       | 0       | 0       | 1       | @gray(1)         | @gray(0)         |
+| 1       | 0       | 1       | 0       | @gray(1)         | @gray(0)         |
+| 1       | 0       | 1       | 1       | @gray(1)         | @gray(0)         |
+| 1       | 1       | 0       | 0       | @gray(D)         | @gray(D)         |
+| 1       | 1       | 0       | 1       | @gray(D)         | @gray(D)         |
+| 1       | 1       | 1       | 0       | @gray(D)         | @gray(D)         |
+| 1       | 1       | 1       | 1       | @gray(D)         | @gray(D)         |
+
+**Schritt 4: Auswahl eines Flip-Flop Typs und Ermittlung der für jeden Zustandsübergang benötigten Flip-Flop Ansteuerungen**
+
+Wir entscheiden uns für einen D Flip-Flop für die Realisierung. Die entsprechende invertierte Wahrheitstafel haben Sie zwischenzeitlich im Kopf:
+
+| $Q(t)$ | $Q(t+1)$ | $D$ |
+| ------ | -------- | --- |
+| $0$    | $0$      | $0$ |
+| $0$    | $1$      | $1$ |
+| $1$    | $0$      | $0$ |
+| $1$    | $1$      | $1$ |
+
+Damit lässt sich die Zustandsübergangstabelle entsprechend einfach um die zugehörige Eingangsbelegung ergänzen. Für die D-Flip-Flops ist dies einfach eine Kopie der Zustandsspalten.
+
+| $F_{t}$ | $G_{t}$ | $A_{t}$ | $B_{t}$ | @gray($F_{t+1}$) | @gray($G_{t+1}$) | $DF$    | $DG$     |
+| ------- | ------- | ------- | ------- | ---------------- | ---------------- | ------- | -------- |
+| 0       | 0       | 0       | 0       | @gray(0)         | @gray(0)         | 0       | 0        |
+| 0       | 0       | 0       | 1       | @gray(1)         | @gray(0)         | @red(1) | 0        |
+| 0       | 0       | 1       | 0       | @gray(0)         | @gray(1)         | 0       | @blue(1) |
+| 0       | 0       | 1       | 1       | @gray(0)         | @gray(0)         | 0       | 0        |
+| 0       | 1       | 0       | 0       | @gray(0)         | @gray(1)         | 0       | @blue(1) |
+| 0       | 1       | 0       | 1       | @gray(0)         | @gray(1)         | 0       | @blue(1) |
+| 0       | 1       | 1       | 0       | @gray(0)         | @gray(1)         | 0       | @blue(1) |
+| 0       | 1       | 1       | 1       | @gray(0)         | @gray(1)         | 0       | @blue(1) |
+| 1       | 0       | 0       | 0       | @gray(1)         | @gray(0)         | @red(1) | 0        |
+| 1       | 0       | 0       | 1       | @gray(1)         | @gray(0)         | @red(1) | 0        |
+| 1       | 0       | 1       | 0       | @gray(1)         | @gray(0)         | @red(1) | 0        |
+| 1       | 0       | 1       | 1       | @gray(1)         | @gray(0)         | @red(1) | 0        |
+| 1       | 1       | 0       | 0       | @gray(D)         | @gray(D)         | D       | D        |
+| 1       | 1       | 0       | 1       | @gray(D)         | @gray(D)         | D       | D        |
+| 1       | 1       | 1       | 0       | @gray(D)         | @gray(D)         | D       | D        |
+| 1       | 1       | 1       | 1       | @gray(D)         | @gray(D)         | D       | D        |
+
+> **Aufgabe:** Lesen Sie die minimale Funktion für `DF` und `DG` ab!
+
+$$
+\begin{aligned}
+DF &= F +\overline{G}\,\overline{A}\,B\\
+DG &= G +\overline{F}\,A\,\overline{B}
+\end{aligned}
+$$
+
+> **Aufgabe:** Setzen Sie die Gleichungen mit einem PAL um!
+
+![Bild](./images/07_Schaltwerke/PAL_example_vorlage.png) <!--style="width: 80%;"-->
+
+{{1}}
+![Bild](./images/07_Schaltwerke/PAL_example_Solution.png) <!--style="width: 80%;"-->
+
+
 ## Übungsaufgaben
 
-+ Recherchieren Sie die Einsatzmöglichkeiten des Medwedew-Automaten. In welchem Rahmen macht dessen Beschränkung Sinn?
-+
++ Entwerfen Sie einen Sequenzdetektor, der für ein alternatives Muster, als das behandelte die Evaluation eines Datenstromes übernimmt.
