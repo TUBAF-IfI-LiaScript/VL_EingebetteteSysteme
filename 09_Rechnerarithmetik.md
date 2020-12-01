@@ -86,7 +86,8 @@ style="width: 80%; min-width: 420px; max-width: 720px;"
 
 ## Zahlendarstellung
 
-### Ganzzahlige Zahlensystem
+Ganzzahlige Zahlensystem
+====================================
 
             {{0-1}}
 ********************************************************************************
@@ -106,6 +107,9 @@ Es handelt sich um eine additive Zahlschrift, mit ergänzender Regel für die su
 
 [^1]: WarpFlyght, Eingang des Kolosseums mit der römischen Zahl LII (52), https://commons.wikimedia.org/wiki/File:Colosseum-Entrance_LII.jpg
 
+********************************************************************************
+
+          {{1-2}}
 ********************************************************************************
 
 **Dezimale Zahlen**
@@ -131,6 +135,11 @@ y &= y_{n-1} \cdot 2^{n-1} + y_{n-2} \cdot 2^{n-2} + .... + y_{1} \cdot 2^{1} + 
 $$
 
 Beispiel $11101_{2}=1 \cdot 2^4 + 1 \cdot 2^3 + 1 \cdot 2^2 + 0 \cdot 2^1 +1 \cdot 2^0 = 16 + 8 + 4 +1 = 29$
+
+********************************************************************************
+
+          {{2-3}}
+********************************************************************************
 
 **Verallgemeinerung b-adische Zahlensysteme**
 
@@ -160,12 +169,17 @@ Beispiel $FE01_{16}=15 \cdot 16^3 + 14 \cdot 16^2 + 0 \cdot 16^1 + 1 \cdot 16^0 
 
 Beispiel: $214_{10}$
 
-| Zahlensystem | x_{7} | x_{6} | x_{5} | x_{4} | x_{3} | x_{2} | x_{1} | x_{0} |
-| ------------ | ----- | ----- | ----- | ----- | ----- | ----- | ----- | ----- |
-| Dual         | 1     | 1     | 0     | 1     | 0     | 1     | 1     | 0     |
-| Oktal        |       |       |       |       |       | 3     | 2     | 6     |
-| Dezimal      |       |       |       |       |       | 2     | 1     | 4     |
-| Hexadezimal  |       |       |       |       |       |       | D     | 6     |
+| Zahlensystem | $x_{7}$ | $x_{6}$ | $x_{5}$ | $x_{4}$ | $x_{3}$ | $x_{2}$ | $x_{1}$ | $x_{0}$ |
+| ------------ | ------- | ------- | ------- | ------- | ------- | ------- | ------- | ------- |
+| Dual         | 1       | 1       | 0       | 1       | 0       | 1       | 1       | 0       |
+| Oktal        |         |         |         |         |         | 3       | 2       | 6       |
+| Dezimal      |         |         |         |         |         | 2       | 1       | 4       |
+| Hexadezimal  |         |         |         |         |         |         | D       | 6       |
+
+********************************************************************************
+
+          {{3-5}}
+********************************************************************************
 
 Algorithmus zur Umwandlung einer ganzen Zahl z aus dem Dezimalsystem in eine Zahl x zur Basis b:
 
@@ -197,11 +211,34 @@ Der Teiler definiert das avisierte Zahlensystem
 
 ```
 
+> **Aufgabe:** Wandeln Sie die Zahl $523_{10}$ in eine binäre Zahl um.
+
+********************************************************************************
+
+          {{4}}
+********************************************************************************
+<!--
+style="width: 80%; min-width: 420px; max-width: 720px;"
+-->
+```ascii
+  523 / 2 = 261   Rest   1   |
+  261 / 2 = 130   Rest   1   |
+  130 / 2 =  65   Rest   0   |
+   65 / 2 =  32   Rest   1   |
+   32 / 2 =  16   Rest   0   |
+   16 / 2 =   8   Rest   0   |                                            .
+    8 / 2 =   4   Rest   0   |
+    4 / 2 =   2   Rest   0   |
+    2 / 2 =   1   Rest   1   v
+```
+
+********************************************************************************
+
 ### Gebrochene Zahlen
 
 Die Römer nutzten Brüche mit der Basis 12(!). Die Nutzung der 12 lag nahe, weil sich die am häufigsten benötigten Brüche _eine Hälfte_, _ein Drittel_ und _ein Viertel_ durch Vielfache von $1/12$ darstellen lassen. Der römische Name für ein Zwölftel ist Uncia, ein Wort, das später zum Gewichtsmaß _Unze_ wurde. Für Brüche, deren Zähler um 1 kleiner als der Nenner ist, wurde teilweise eine subtraktive Bezeichnung verwendet.
 
-Die Darstellung einer gebrochenen Zahl ist in einem $b$-adischen System mit $n$ Vorkomma und $m$ Nachkommestellen definiert mit:
+Die Darstellung einer gebrochenen Zahl ist in einem $b$-adischen System mit $n$ Vorkomma und $m$ Nachkommastellen definiert mit:
 
 $$
 \begin{aligned}
@@ -246,8 +283,10 @@ Der Faktor definiert das avisierte Zahlensystem
 
 Ergebnis $0.8125_{10} = 0.1011$
 
-Beispiel 2: Wandeln Sie $0.1_{10}$ in eine duale Zahl
+> Beispiel 2: Wandeln Sie $0.1_{10}$ in eine duale Zahl
 
+                           {{1}}
+********************************************************************************
 <!--
 style="width: 80%; min-width: 420px; max-width: 720px;"
 -->
@@ -273,6 +312,8 @@ for i in range(0, 1000000):
 print("{0:50.50f}\n{1}".format(a, x))
 ```
 @LIA.eval(`["main.py"]`, `python3 -m compileall .`, `python3 main.py`)
+
+********************************************************************************
 
 ### Wechsel zwischen Zahlensystemen mit Basis $2^n$
 
@@ -343,6 +384,8 @@ style="width: 80%; min-width: 420px; max-width: 720px;"
                                            1 / 2 =   0    Rest   1   v         .
 ```
 
+          {{1}}
+********************************************************************************
 
 |     | $0$ | $0$ | $1$ | $1$ | $0$ | $1$ | $1$ | $1$ | Summand A $(55)_{10}$  |
 | --- | --- | --- | --- | --- | --- | --- | --- | --- | ---------------------- |
@@ -350,26 +393,28 @@ style="width: 80%; min-width: 420px; max-width: 720px;"
 | @red($1$)   | @blue($1$)  | @blue($1$)  | @blue($1$)  | @blue($1$)  |@blue($0$)    | @blue($1$)   | @blue($1$)  |@blue( $0$  )    | @blue($Carry$)              |
 |     | $0$ | $1$ | $1$ | $0$ | $1$ | $1$ | $0$ | $1$ | Ergebnis $(269)^{10}$  |
 
-Der Intel 4004 hatte eine Datenbreite von 4 Bit. Er verknüpfte für die Akkumulation von 2 32 Bit Zahlen 4 einzelkalkulationen und reichte das Carry Flag entsprechend weiter.
+Der Intel 4004 hatte eine Datenbreite von 4 Bit. Er verknüpfte für die Akkumulation von 2 32 Bit Zahlen 4 Einzelkalkulationen und reichte das Carry-Flag entsprechend weiter.
 
-
-
-<!--
-style="width: 80%; min-width: 420px; max-width: 720px;"
--->
-```ascii
-TODO                                                                          .
-```
+********************************************************************************
 
 ### Negative Zahlen
 
+
+          {{0-1}}
+********************************************************************************
+
 > "... aber wie hältst Du es mit den negativen Zahlen?"
 
-| Kriterion | Erläuterung |
-| --------- | ----------- |
-|           |             |
-| Symmetrie |             |
-|           |             |
+| Kriterien                           | Erläuterung                                                                     |
+| ----------------------------------- | ------------------------------------------------------------------------------- |
+| Einheitlichkeit von Addition Subtraktion |  Können wir die Subtraktion und Addition über ein Rechenwerk umsetzen?                                                                               |
+| Symmetrie                           | Ist das Spektrum der darstellbaren Zahlenwerte im positiv wie negativen gleich? |
+|                                     |                                                                                 |
+
+********************************************************************************
+
+          {{1-2}}
+********************************************************************************
 
 **Intuitiver Ansatz - Betrag mit Vorzeichen**
 
@@ -410,6 +455,10 @@ Addition            Subtraktion
 |             | + Einfache Bildung des Komplements | - Doppelte „0“ - $0000...0_2$ und $1000...1_2$              |
 |             |                                    | - Addition / Subtraktion  über unterschiedliche Rechenwerke |
 
+********************************************************************************
+
+          {{2-5}}
+********************************************************************************
 
 **Komplement Darstellung**
 
@@ -435,6 +484,11 @@ style="width: 80%; min-width: 420px; max-width: 720px;"
                         612 + 655 = (1)267          612 + 654 + 1 = (1)267     .
 ```
 
+********************************************************************************
+
+          {{3-5}}
+********************************************************************************
+
 **Einer-Komplement**
 
 ![](./images/09_Arithmetik/Zahlenkreise_1er.png)<!-- style="width: 70%; max-width: 800px;" -->
@@ -444,9 +498,10 @@ style="width: 80%; min-width: 420px; max-width: 720px;"
 |             | + der darstellbare Zahlenbereich ist symmetrisch zu 0                                                  | - Doppelte „0“ - $0000...0_2$ und $1111...1_2$                      |
 |             | + sehr einfache Umwandlung von positiver zu negativer Zahl und umgekehrt durch Invertierung aller Bits | - Addierwerke sind aufwendiger, da die Summe korrigiert werden muss |
 
+********************************************************************************
 
-
-
+          {{4-5}}
+********************************************************************************
 
 **Zweier-Komplement**
 
@@ -459,12 +514,26 @@ Die Zweierkomplementdarstellung benötigt, anders als die Einerkomplementdarstel
 |             | + eindeutige Darstellung der Null als $000...0_2$ | - darstellbarer Zahlenbereich ist asymmetrisch (Zweierkomplement der kleinsten negativen Zahl ist nicht darstellbar!)                    |
 |             |                                                   | + Umwandlung von positiver zu negativer Zahl und umgekehrt erfordert die Invertierung aller Bits sowie ein Addierwerk zur Addition von 1 |
 
+********************************************************************************
+
+          {{5}}
+********************************************************************************
 
 **Zusammenfassung**
 
+| Darstellung | Pros                               | Cons                                                        |
+| ----------- | ---------------------------------- | ----------------------------------------------------------- |
+| Vorzeichen / Betrag             | + Einfache Bildung des Komplements | - Doppelte „0“ - $0000...0_2$ und $1000...1_2$              |
+|             |                                    | - Addition / Subtraktion  über unterschiedliche Rechenwerke |
+| Einerkomplement           | + der darstellbare Zahlenbereich ist symmetrisch zu 0                                                  | - Doppelte „0“ - $0000...0_2$ und $1111...1_2$                      |
+|             | + sehr einfache Umwandlung von positiver zu negativer Zahl und umgekehrt durch Invertierung aller Bits | - Addierwerke sind aufwendiger, da die Summe korrigiert werden muss |
+| Zweierkomplement               | + eindeutige Darstellung der Null als $000...0_2$ | - darstellbarer Zahlenbereich ist asymmetrisch (Zweierkomplement der kleinsten negativen Zahl ist nicht darstellbar!)                    |
+|             |                                                   | + Umwandlung von positiver zu negativer Zahl und umgekehrt erfordert die Invertierung aller Bits sowie ein Addierwerk zur Addition von 1 |
 
 
 > **Merke:** In aktuellen Rechnern wird ausschließlich das Zweierkomplement verwandt.
+
+********************************************************************************
 
 ### Überlauf bei arithmetischen Operationen
 
@@ -503,6 +572,9 @@ Dafür werden die höchstrangigen Bits der Summanden und des Ergebnisses ausgewe
 
 ## Schaltwerke für arithmetische Operationen
 
+           {{0}}
+********************************************************************************
+
 Wir starten aus der Sicht eines einzigen Bits und erweitern die Konzepte dann auf die notwendigen Registerbreiten (8 - 64 Bit).
 
 | A   | B   | Addition                                                   | Subtraktion                                                | Multiplikation                                                   |
@@ -514,6 +586,14 @@ Wir starten aus der Sicht eines einzigen Bits und erweitern die Konzepte dann au
 |     |     | ![Bild](./images/04_Schaltnetze/188px-Xor-gate-en.svg.png) | ![Bild](./images/04_Schaltnetze/188px-Xor-gate-en.svg.png) | ![Bild](./images/04_Schaltnetze/188px-Logic-gate-and-us.svg.png) |
 |     |     | Vierteladdierer                                            | Viertelsubtrahierer                                        | 1-Bit Multiplizierer                                                                 |
 
+
+********************************************************************************
+
+          {{1-2}}
+********************************************************************************
+
+**Halbaddierer**
+
 Um das Ergebnis komplett darzustellen müsen wir für die Addition (Subtraktion als Komplementoperation) neben dem Ergebnis $S$ auch die Carry Flags $C$ berücksichtigen.
 
 <table>
@@ -523,9 +603,6 @@ Erweiterte Wahrheitstabelle
 </td>
 <td>
 Gleichungen
-</td>
-<td>
-Mögliche Realsierung
 </td>
 </tr>
 <tr>
@@ -545,17 +622,24 @@ C &= A \cdot B
 \end{aligned}
 $$
 </td>
-<td>
-![Bild](./images/09_Arithmetik/Half_Adder.svg.png)<!-- style="width: 50%; max-width: 800px;" -->
-
-![Bild](./images/09_Arithmetik/Half_Adder_Symbol.png)<!-- style="width: 50%; max-width: 800px;" -->
-</td>
 </tr>
 </table>
+
+Die Wahrheitstafel lässt sich mit folgendem Schaltnetz umsetzen:
+
+![Bild](./images/09_Arithmetik/Half_Adder.svg.png)<!-- style="width: 40%; max-width: 800px;" -->
+![Bild](./images/09_Arithmetik/Half_Adder_Symbol.png)<!-- style="width: 15%; max-width: 600px;" -->
 
 ``` json @DigiSim.evalJson
 {"devices":{"a":{"label":"a","type":"Button","propagation":0,"position":{"x":15,"y":0}},"b":{"label":"b","type":"Button","propagation":0,"position":{"x":15,"y":50}},"s":{"label":"s","type":"Lamp","propagation":1,"position":{"x":315,"y":45}},"cout":{"label":"cout","type":"Lamp","propagation":1,"position":{"x":315,"y":0}},"xor":{"label":"a xor b","type":"Xor","propagation":1,"bits":1,"position":{"x":160,"y":50}},"and":{"label":"a and b","type":"And","propagation":1,"bits":1,"position":{"x":155,"y":-5}}},"connectors":[{"from":{"id":"a","port":"out"},"to":{"id":"and","port":"in1"}},{"from":{"id":"b","port":"out"},"to":{"id":"and","port":"in2"}},{"from":{"id":"and","port":"out"},"to":{"id":"cout","port":"in"}},{"from":{"id":"a","port":"out"},"to":{"id":"xor","port":"in1"}},{"from":{"id":"b","port":"out"},"to":{"id":"xor","port":"in2"}},{"from":{"id":"xor","port":"out"},"to":{"id":"s","port":"in"}}],"subcircuits":{}}
 ```
+
+********************************************************************************
+
+          {{2-3}}
+********************************************************************************
+
+**Volladierer**
 
 Die allgemeingültige Addition von  $A_i$, $B_i$ und $C_{i–1}$  an den Bitpositionen  $i = 1, ... , n–1$  erfordert einen Volladdierer (FA = „Full Adder“), der die Summe $S_i$ und den Übertrag $C_i$ bestimmt:
 
@@ -566,9 +650,6 @@ Erweiterte Wahrheitstabelle
 </td>
 <td>
 Gleichungen
-</td>
-<td>
-Mögliche Realsierung
 </td>
 </tr>
 <tr>
@@ -607,6 +688,9 @@ $$
 ``` json @DigiSim.evalJson
 {"devices":{"a":{"label":"a","type":"Button","propagation":0,"position":{"x":15,"y":0}},"b":{"label":"b","type":"Button","propagation":0,"position":{"x":15,"y":50}},"cin":{"label":"cin","type":"Button","propagation":0,"position":{"x":15,"y":100}},"s":{"label":"s","type":"Lamp","propagation":1,"position":{"x":470,"y":70}},"cout":{"label":"cout","type":"Lamp","propagation":1,"position":{"x":540,"y":-5}},"xor1":{"label":"a xor b","type":"Xor","propagation":1,"bits":1,"position":{"x":140,"y":20}},"xor2":{"label":"(a xor b) xor cin","type":"Xor","propagation":1,"bits":1,"position":{"x":275,"y":75}},"and1":{"label":"(a xor b) and cin","type":"And","propagation":1,"bits":1,"position":{"x":290,"y":25}},"and2":{"label":"a and b","type":"And","propagation":1,"bits":1,"position":{"x":210,"y":-25}},"or":{"label":"((a xor b) and cin) or (a and b)","type":"Or","propagation":1,"bits":1,"position":{"x":380,"y":-30}}},"connectors":[{"from":{"id":"xor2","port":"out"},"to":{"id":"s","port":"in"}},{"from":{"id":"xor1","port":"out"},"to":{"id":"xor2","port":"in1"}},{"from":{"id":"cin","port":"out"},"to":{"id":"xor2","port":"in2"}},{"from":{"id":"a","port":"out"},"to":{"id":"xor1","port":"in1"}},{"from":{"id":"b","port":"out"},"to":{"id":"xor1","port":"in2"}},{"from":{"id":"cin","port":"out"},"to":{"id":"and1","port":"in2"},"vertices":[{"x":225,"y":115}]},{"from":{"id":"xor1","port":"out"},"to":{"id":"and1","port":"in1"}},{"from":{"id":"a","port":"out"},"to":{"id":"and2","port":"in1"}},{"from":{"id":"b","port":"out"},"to":{"id":"and2","port":"in2"},"vertices":[{"x":105,"y":25}]},{"from":{"id":"and1","port":"out"},"to":{"id":"or","port":"in2"}},{"from":{"id":"and2","port":"out"},"to":{"id":"or","port":"in1"}},{"from":{"id":"or","port":"out"},"to":{"id":"cout","port":"in"}}],"subcircuits":{}}
 ```
+
+********************************************************************************
+
 
 ## Umsetzung von Addierwerken
 
