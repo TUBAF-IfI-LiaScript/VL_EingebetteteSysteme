@@ -390,8 +390,8 @@ style="width: 80%; min-width: 420px; max-width: 720px;"
 |     | $0$ | $0$ | $1$ | $1$ | $0$ | $1$ | $1$ | $1$ | Summand A $(55)_{10}$  |
 | --- | --- | --- | --- | --- | --- | --- | --- | --- | ---------------------- |
 | +   | $1$ | $1$ | $0$ | $1$ | $0$ | $1$ | $1$ | $0$ | Summand B $(214)_{10}$ |
-| @red($1$)   | @blue($1$)  | @blue($1$)  | @blue($1$)  | @blue($1$)  |@blue($0$)    | @blue($1$)   | @blue($1$)  |@blue( $0$  )    | @blue($Carry$)              |
-|     | $0$ | $1$ | $1$ | $0$ | $1$ | $1$ | $0$ | $1$ | Ergebnis $(269)^{10}$  |
+| @red($1$)   | @blue($1$)  | @blue($1$)  | @blue($1$)  | @blue($0$)  |@blue($1$)    | @blue($1$)   | @blue($0$)  |@blue( $0$  )    | @blue($Carry$)              |
+|     | $0$ | $0$ | $0$ | $0$ | $1$ | $1$ | $0$ | $1$ | Ergebnis $(269)^{10}$  |
 
 Der Intel 4004 hatte eine Datenbreite von 4 Bit. Er verknüpfte für die Akkumulation von 2 32 Bit Zahlen 4 Einzelkalkulationen und reichte das Carry-Flag entsprechend weiter.
 
