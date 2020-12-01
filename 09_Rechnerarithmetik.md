@@ -681,9 +681,8 @@ $$
 
 > **Aufgabe:** Die obige Gleichungen sind identisch und unterscheiden sich nur durch $/oplus$ und $+$. Erklären Sie den vermeintlichen Widerspruch.
 
-![](./images/09_Arithmetik/Full_Adder_Symbol_2HA.png)<!-- style="width: 100%; max-width: 800px;" -->
-
-![](./images/09_Arithmetik/Full_Adder.svg.png)<!-- style="width: 100%; max-width: 800px;" -->
+![](./images/09_Arithmetik/Full_Adder.svg.png)<!-- style="width: 45%; max-width: 600px;" -->
+![](./images/09_Arithmetik/Full_Adder_Symbol_2HA.png)<!-- style="width: 15%; max-width: 800px;" -->
 
 ``` json @DigiSim.evalJson
 {"devices":{"a":{"label":"a","type":"Button","propagation":0,"position":{"x":15,"y":0}},"b":{"label":"b","type":"Button","propagation":0,"position":{"x":15,"y":50}},"cin":{"label":"cin","type":"Button","propagation":0,"position":{"x":15,"y":100}},"s":{"label":"s","type":"Lamp","propagation":1,"position":{"x":470,"y":70}},"cout":{"label":"cout","type":"Lamp","propagation":1,"position":{"x":540,"y":-5}},"xor1":{"label":"a xor b","type":"Xor","propagation":1,"bits":1,"position":{"x":140,"y":20}},"xor2":{"label":"(a xor b) xor cin","type":"Xor","propagation":1,"bits":1,"position":{"x":275,"y":75}},"and1":{"label":"(a xor b) and cin","type":"And","propagation":1,"bits":1,"position":{"x":290,"y":25}},"and2":{"label":"a and b","type":"And","propagation":1,"bits":1,"position":{"x":210,"y":-25}},"or":{"label":"((a xor b) and cin) or (a and b)","type":"Or","propagation":1,"bits":1,"position":{"x":380,"y":-30}}},"connectors":[{"from":{"id":"xor2","port":"out"},"to":{"id":"s","port":"in"}},{"from":{"id":"xor1","port":"out"},"to":{"id":"xor2","port":"in1"}},{"from":{"id":"cin","port":"out"},"to":{"id":"xor2","port":"in2"}},{"from":{"id":"a","port":"out"},"to":{"id":"xor1","port":"in1"}},{"from":{"id":"b","port":"out"},"to":{"id":"xor1","port":"in2"}},{"from":{"id":"cin","port":"out"},"to":{"id":"and1","port":"in2"},"vertices":[{"x":225,"y":115}]},{"from":{"id":"xor1","port":"out"},"to":{"id":"and1","port":"in1"}},{"from":{"id":"a","port":"out"},"to":{"id":"and2","port":"in1"}},{"from":{"id":"b","port":"out"},"to":{"id":"and2","port":"in2"},"vertices":[{"x":105,"y":25}]},{"from":{"id":"and1","port":"out"},"to":{"id":"or","port":"in2"}},{"from":{"id":"and2","port":"out"},"to":{"id":"or","port":"in1"}},{"from":{"id":"or","port":"out"},"to":{"id":"cout","port":"in"}}],"subcircuits":{}}
@@ -702,13 +701,24 @@ Wie können wir also ein paralleles binäres Addierwerk umsetzen? Für die Addit
 
 Das Carry wird von Stelle zu Stelle weitergegeben, woraus der Name „Ripple Carry“-Addierer resultiert. Das Ergebnis steht damit erst nach dem kompletten Durchlauf durch alle Volladdierer zur Verfügung.
 
+          {{1-3}}
+********************************************************************************
+
 Wie lässt sich ausgehend von diesen Überlegungen ein 4-Bit Addier-/Subtrahierwerk realisieren. Wir wollen die Funktion $A+B$ sowie $A-B$ umsetzen können.
 
 > **Aufgabe:** Entwerfen Sie die externe Beschaltung!
 
 ![Bild](./images/09_Arithmetik/Subtractor_template.png)<!-- style="width: 100%; max-width: 800px;" -->
 
+********************************************************************************
+
+
+          {{2}}
+********************************************************************************
+
 ![Bild](./images/09_Arithmetik/Subtractor_Final.png)<!-- style="width: 100%; max-width: 800px;" -->
+
+********************************************************************************
 
 ### Carry Look Ahead Addierer
 
@@ -835,4 +845,5 @@ Ergebnis:  1010100111001010 (43466)
 
 ## Übungsaufgaben
 
-+
++ Implementieren Sie einen 2Bit Multiplikator in einer Simulation. Welche Breite braucht man für das Ausgangsregister.
++ Realisieren Sie ein Subtraktions- / Additionswerk
