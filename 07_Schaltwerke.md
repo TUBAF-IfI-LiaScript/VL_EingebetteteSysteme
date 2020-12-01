@@ -21,7 +21,7 @@ gray: @mark(gray,@0)
 
 -->
 
-# Schaltwerke
+# Schaltwerk
 
 **TU Bergakademie Freiberg - Wintersemester 2020 / 21**
 
