@@ -1092,6 +1092,7 @@ $$
 {{1}}
 ![Bild](./images/07_Schaltwerke/PAL_example_Solution.png) <!--style="width: 80%;"-->
 
+> AND-Verbindungen, welche dasselbe OR-Gatter besitzen, sind kommutativ.
 
 ## Übungsaufgaben
 
