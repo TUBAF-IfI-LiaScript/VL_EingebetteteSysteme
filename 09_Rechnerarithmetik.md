@@ -181,7 +181,7 @@ Beispiel: $214_{10}$
           {{3-5}}
 ********************************************************************************
 
-Algorithmus zur Umwandlung einer ganzen Zahl z aus dem Dezimalsystem in eine Zahl x zur Basis b:
+Für die Realisierung der Wandlung einer dezimalen Zahl $z$ in eine Zahl x zur Basis b folgt man folgendem Algorithmus:
 
 ```
 i=0
@@ -210,6 +210,20 @@ Der Teiler definiert das avisierte Zahlensystem
    1 / 2 =  0    Rest   1   v                                                  .
 
 ```
+
+Für binäre Zahlen kann mit Blick auf die bekannten Zweierpotenzen auch effizienter
+vorgegangen werden:
+
+1. Man schreibe alle Zweierpotenzen, welche kleiner als die Dezimalzahl sind, rückwärts auf (beginne von rechts und schreibe links jeweils den mit 2 multiplizierten Wert).
+2. Nun setzt man von links nach rechts eine 1 unter jede Potenz welche in die dezimale Zahl passt und subtrahiert die Potenz von der Zahl. Wenn die Potenz nicht in die Zahl passt schreibt man eine 0.
+3. Dies wird wiederholt bis alle Potenzen belegt sind.
+
+__Beispiel:__ $242_{10}$ in binär
+
+| 128         | 64        | 32       | 16      | 8     | 4     | 2     | 1   |
+| ----------- | --------- | -------- | ------- | ----- | ----- | ----- | --- |
+| 1           | 1         | 1        | 1       | 0     | 0     | 1     | 0   |
+| $242-128=114$ | $114-64=50$ | $50-32=18$ | $18-16=2$| $2-8<0$ | $2-4<0$ | $2-2=0$ | $0-1<0$  |
 
 > **Aufgabe:** Wandeln Sie die Zahl $523_{10}$ in eine binäre Zahl um.
 
@@ -251,7 +265,7 @@ $$
 | ----- | ----- | ----- | ----- | ----- | ----- | ----- | ----- | -------- | -------- | -------- | -------- |
 | 128      |  64     |   32    | 16      |  8     |  4     |    2   | 1     | 0.5      | 0.25     | 0.125    | 0.0625   |
 
-Beispiel: $1011,1101 = 4 + 2 + 1 + 0.5 + 0.25 +0.625 = 11.8125$
+Beispiel: $1011,1101 = 4 + 2 + 1 + 0.5 + 0.25 + 0.625 = 11.8125$
 
 ```
 i=0
@@ -265,23 +279,23 @@ wiederhole, bis z=0:
   i++
 ```
 
-Beispiel 1: Wandeln Sie $0.8125_{10}$ in eine duale Zahl
+Beispiel 1: Wandeln Sie $0.28125_{10}$ in eine duale Zahl
 
 <!--
 style="width: 80%; min-width: 420px; max-width: 720px;"
 -->
 ```ascii
 Der Faktor definiert das avisierte Zahlensystem
-         |
-         v
-  0.8125 ∙ 2 = 1.625  1  Rest   0.625
-  0.625  ∙ 2 = 1.25   1  Rest   0.25
-  0.25   ∙ 2 = 0.5    0  Rest   0.5
-  0.5    ∙ 2 = 1      1  Rest   0                                             .
+          |
+          v
+0.28125 ∙ 2 = 0.5625  "<" 1  -> 0  Rest   0.5625
+0.5625  ∙ 2 = 1.125   ">" 1  -> 1  Rest   0.125
+0.125   ∙ 2 = 0.25    "<" 1  -> 0  Rest   0.25
+0.5     ∙ 2 = 1       "<="1  -> 1  Rest   0                                    .
 
 ```
 
-Ergebnis $0.8125_{10} = 0.1011$
+Ergebnis $0.28125_{10} = 0.25 + 0.625 = 0.0101$
 
 > Beispiel 2: Wandeln Sie $0.1_{10}$ in eine duale Zahl
 
