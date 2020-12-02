@@ -211,6 +211,26 @@ Der Teiler definiert das avisierte Zahlensystem
 
 ```
 
+> Eine weitere Möglichkeit eine dezimale in eine binäre Zahl umzuwandeln:
+
+> 1. Man schreibe alle Zweierpotenzen, welche kleiner als die Dezimalzahl sind, rückwärts auf (beginne von rechts und schreibe links jeweils den mit 2 multiplizierten Wert).
+2. Nun setzt man von links nach rechts eine 1 unter jede Potenz welche in die dezimale Zahl passt und subtrahiert die Potenz von der Zahl.<br>Wenn die Potenz nicht in die Zahl passt schreibt man eine 0.
+3. Dies wird wiederholt bis alle Potenzen belegt sind.
+
+> <!--
+style="padding-left:70px;"
+-->__Beispiel:__ $242_{10}$ in binär
+
+> <!--
+style="padding-left:70px;"
+-->|128         |64         |32        |16       |8  |4  |2      |1  |
+> |:---:|:---:|:---:|:---:|:---:|:---:|:---:|:---:|
+> |1           |1          |1         |1        |0  |0  |1      |0  |
+> |242-128=114 |114-64=50  |50-32=18  |18-16=2  |-  |-  |2-2=0  |-  |
+
+> _Sonderfall:_ Die Dezimalzahl entspricht einer Zweierpotenz.
+
+
 > **Aufgabe:** Wandeln Sie die Zahl $523_{10}$ in eine binäre Zahl um.
 
 ********************************************************************************
