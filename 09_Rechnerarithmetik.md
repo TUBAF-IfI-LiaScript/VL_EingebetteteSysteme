@@ -147,7 +147,7 @@ Jede natürliche Zahl $z$ mit $0 \leq z \leq b^n–1$ ist eindeutig als $n$-stel
 
 $$
 \begin{aligned}
-z &= (z_{n-1} z_{n-2} z_{n-3} ... z_{2} z_{1} z_{0})_{2} \\
+z &= (z_{n-1} z_{n-2} z_{n-3} ... z_{2} z_{1} z_{0})_{b} \\
 z &= z_{n-1} \cdot b^{n-1} + z_{n-2} \cdot b^{n-2} + .... + z_{1} \cdot b^{1} + z_{0} \cdot b^{0}\\
 \end{aligned}
 $$
@@ -165,7 +165,7 @@ Beispiel $FE01_{16}=15 \cdot 16^3 + 14 \cdot 16^2 + 0 \cdot 16^1 + 1 \cdot 16^0 
 
 > **Aufgabe:** Informieren Sie sich über das _Sexagesimalsystem_ der babylonischen Mathematik! Warum verwendete man die 60 als Grundlage?
 
-> **Merke:** Mit der Darstellung einer Zahl im binären Zahlensystem sinkt die Zahl der Ziffernsymbole gleichzeitig steigt die Zahl der notwendigen Stellen an! Wir brauchen mehr Platz.
+> **Merke:** Mit der Darstellung einer Zahl im binären Zahlensystem sinkt die Zahl der Ziffernsymbole. Gleichzeitig steigt die Zahl der notwendigen Stellen an! Wir brauchen mehr Platz.
 
 Beispiel: $214_{10}$
 
@@ -243,14 +243,16 @@ style="width: 80%; min-width: 420px; max-width: 720px;"
    16 / 2 =   8   Rest   0   |                                            .
     8 / 2 =   4   Rest   0   |
     4 / 2 =   2   Rest   0   |
-    2 / 2 =   1   Rest   1   v
+    2 / 2 =   1   Rest   0   |
+    1 / 2 =   0   Rest   1   v
 ```
+$523_{10}$=$1000001011_{2}$
 
 ********************************************************************************
 
 ### Gebrochene Zahlen
 
-Die Römer nutzten Brüche mit der Basis 12(!). Die Nutzung der 12 lag nahe, weil sich die am häufigsten benötigten Brüche _eine Hälfte_, _ein Drittel_ und _ein Viertel_ durch Vielfache von $1/12$ darstellen lassen. Der römische Name für ein Zwölftel ist Uncia, ein Wort, das später zum Gewichtsmaß _Unze_ wurde. Für Brüche, deren Zähler um 1 kleiner als der Nenner ist, wurde teilweise eine subtraktive Bezeichnung verwendet.
+Die Römer nutzten Brüche mit der Basis 12(!). Die Nutzung der 12 lag nahe, weil sich die am häufigsten benötigten Brüche *eine Hälfte*, _ein Drittel_ und _ein Viertel_ durch Vielfache von $1/12$ darstellen lassen. Der römische Name für ein Zwölftel ist Uncia, ein Wort, das später zum Gewichtsmaß _Unze_ wurde. Für Brüche, deren Zähler um 1 kleiner als der Nenner ist, wurde teilweise eine subtraktive Bezeichnung verwendet.
 
 Die Darstellung einer gebrochenen Zahl ist in einem $b$-adischen System mit $n$ Vorkomma und $m$ Nachkommastellen definiert mit:
 
@@ -265,7 +267,7 @@ $$
 | ----- | ----- | ----- | ----- | ----- | ----- | ----- | ----- | -------- | -------- | -------- | -------- |
 | 128      |  64     |   32    | 16      |  8     |  4     |    2   | 1     | 0.5      | 0.25     | 0.125    | 0.0625   |
 
-Beispiel: $1011,1101 = 4 + 2 + 1 + 0.5 + 0.25 + 0.625 = 11.8125$
+Beispiel: $1011,1101 = 8 + 2 + 1 + 0.5 + 0.25 + 0.625 = 11.8125$
 
 ```
 i=0
@@ -291,11 +293,12 @@ Der Faktor definiert das avisierte Zahlensystem
 0.28125 ∙ 2 = 0.5625  "<" 1  -> 0  Rest   0.5625
 0.5625  ∙ 2 = 1.125   ">" 1  -> 1  Rest   0.125
 0.125   ∙ 2 = 0.25    "<" 1  -> 0  Rest   0.25
+0.25    ∙ 2 = 0.5     "<" 1  -> 0  Rest   0.5
 0.5     ∙ 2 = 1       "<="1  -> 1  Rest   0                                    .
 
 ```
 
-Ergebnis $0.28125_{10} = 0.25 + 0.625 = 0.0101$
+Ergebnis $0.28125_{10} = 0.25 + 0.03125 = 0.01001$
 
 > Beispiel 2: Wandeln Sie $0.1_{10}$ in eine duale Zahl
 
@@ -378,7 +381,7 @@ Die Addition zweier positiver n-stelliger Binärzahlen $a$ und $b$ kann stellenw
 | ---------- | ---------- | ---------- | ---------- | ---------- | ---------- | ---------- | ---------- | ------------- | --------------------- |
 | +          | $0$        | $1$        | $0$        | $1$        | $0$        | $1$        | $1$        | $0$           | Summand B $(86)_{10}$ |
 | @red($0$) | @blue($0$) | @blue($0$) | @blue($1$) | @blue($0$) | @blue($1$) | @blue($1$) | @blue($0$) | @blue( $0$  ) | @blue($Carry$)        |
-|            | $0$        | $1$        | $1$        | $0$        | $1$        | $1$        | $0$        | $1$           | Ergebnis $(109)^{10}$ |
+|            | $0$        | $1$        | $1$        | $0$        | $1$        | $1$        | $0$        | $1$           | Ergebnis $(109)_{10}$ |
 
 Kein Überlauf!
 
@@ -405,7 +408,7 @@ style="width: 80%; min-width: 420px; max-width: 720px;"
 | --- | --- | --- | --- | --- | --- | --- | --- | --- | ---------------------- |
 | +   | $1$ | $1$ | $0$ | $1$ | $0$ | $1$ | $1$ | $0$ | Summand B $(214)_{10}$ |
 | @red($1$)   | @blue($1$)  | @blue($1$)  | @blue($1$)  | @blue($0$)  |@blue($1$)    | @blue($1$)   | @blue($0$)  |@blue( $0$  )    | @blue($Carry$)              |
-|     | $0$ | $0$ | $0$ | $0$ | $1$ | $1$ | $0$ | $1$ | Ergebnis $(269)^{10}$  |
+|     | $0$ | $0$ | $0$ | $0$ | $1$ | $1$ | $0$ | $1$ | Ergebnis $(269)_{10}$  |
 
 Der Intel 4004 hatte eine Datenbreite von 4 Bit. Er verknüpfte für die Akkumulation von 2 32 Bit Zahlen 4 Einzelkalkulationen und reichte das Carry-Flag entsprechend weiter.
 
@@ -421,8 +424,8 @@ Der Intel 4004 hatte eine Datenbreite von 4 Bit. Er verknüpfte für die Akkumul
 
 | Kriterien                           | Erläuterung                                                                     |
 | ----------------------------------- | ------------------------------------------------------------------------------- |
-| Einheitlichkeit von Addition Subtraktion |  Können wir die Subtraktion und Addition über ein Rechenwerk umsetzen?                                                                               |
-| Symmetrie                           | Ist das Spektrum der darstellbaren Zahlenwerte im positiv wie negativen gleich? |
+| Einheitlichkeit von Addition & Subtraktion |  Können wir die Subtraktion und Addition über ein Rechenwerk umsetzen?                                                                               |
+| Symmetrie                           | Ist das Spektrum der darstellbaren Zahlenwerte im Positiven wie Negativen gleich? |
 |                                     |                                                                                 |
 
 ********************************************************************************
@@ -526,7 +529,7 @@ Die Zweierkomplementdarstellung benötigt, anders als die Einerkomplementdarstel
 | Darstellung | Pros                                              | Cons                                                                                                                                     |
 | ----------- | ------------------------------------------------- | ---------------------------------------------------------------------------------------------------------------------------------------- |
 |             | + eindeutige Darstellung der Null als $000...0_2$ | - darstellbarer Zahlenbereich ist asymmetrisch (Zweierkomplement der kleinsten negativen Zahl ist nicht darstellbar!)                    |
-|             |                                                   | + Umwandlung von positiver zu negativer Zahl und umgekehrt erfordert die Invertierung aller Bits sowie ein Addierwerk zur Addition von 1 |
+|             |                                                   | - Umwandlung von positiver zu negativer Zahl und umgekehrt erfordert die Invertierung aller Bits sowie ein Addierwerk zur Addition von 1 |
 
 ********************************************************************************
 
@@ -542,7 +545,7 @@ Die Zweierkomplementdarstellung benötigt, anders als die Einerkomplementdarstel
 | Einerkomplement           | + der darstellbare Zahlenbereich ist symmetrisch zu 0                                                  | - Doppelte „0“ - $0000...0_2$ und $1111...1_2$                      |
 |             | + sehr einfache Umwandlung von positiver zu negativer Zahl und umgekehrt durch Invertierung aller Bits | - Addierwerke sind aufwendiger, da die Summe korrigiert werden muss |
 | Zweierkomplement               | + eindeutige Darstellung der Null als $000...0_2$ | - darstellbarer Zahlenbereich ist asymmetrisch (Zweierkomplement der kleinsten negativen Zahl ist nicht darstellbar!)                    |
-|             |                                                   | + Umwandlung von positiver zu negativer Zahl und umgekehrt erfordert die Invertierung aller Bits sowie ein Addierwerk zur Addition von 1 |
+|             |                                                   | - Umwandlung von positiver zu negativer Zahl und umgekehrt erfordert die Invertierung aller Bits sowie ein Addierwerk zur Addition von 1 |
 
 
 > **Merke:** In aktuellen Rechnern wird ausschließlich das Zweierkomplement verwandt.
@@ -572,10 +575,10 @@ Die Zweierkomplementdarstellung benötigt, anders als die Einerkomplementdarstel
             01001 = 9        10101 = -11
 ```
 
-Bei beliebig großen Registern zur Aufnahme der Komplementdarstellung einer binären Zahl können Addition und Subtraktion ohne Einschränkungen ausgeführt werden. ABER: Mit der Beschränkung kann de
+Bei beliebig großen Registern zur Aufnahme der Komplementdarstellung einer binären Zahl können Addition und Subtraktion ohne Einschränkungen ausgeführt werden. ABER: Mit der Beschränkung kann die
 
-+ Addition zweier positiver Zahlen kann eine negative Zahl ergeben !
-+ Addition zweier negativer Zahlen kann eine positive Zahle ergeben !
++ Addition zweier positiver Zahlen eine negative Zahl ergeben !
++ Addition zweier negativer Zahlen eine positive Zahle ergeben !
 
 Entsprechend müssen Überschreitungen des Zahlenbereiches erkannt und behandelt werden. Die Bedingungen dafür sind: Gegeben die Operanden $a$ und $b$  und das Ergebnis $s$
 
@@ -653,7 +656,7 @@ Die Wahrheitstafel lässt sich mit folgendem Schaltnetz umsetzen:
           {{2-3}}
 ********************************************************************************
 
-**Volladierer**
+**Volladdierer**
 
 Die allgemeingültige Addition von  $A_i$, $B_i$ und $C_{i–1}$  an den Bitpositionen  $i = 1, ... , n–1$  erfordert einen Volladdierer (FA = „Full Adder“), der die Summe $S_i$ und den Übertrag $C_i$ bestimmt:
 
@@ -682,7 +685,7 @@ Gleichungen
 <td>
 $$
 \begin{aligned}
-S_i &= A_i \oplus B_i \oplus C_i\\
+S_i &= A_i \oplus B_i \oplus C_{i-1}\\
 C_i &= \overline{A_i}B_i C_{i-1} + A_i\overline{B_i}C_{i-1} + A_iB_i\overline{C}_{i-1} + A_iB_iC_{i-1} \\
 C_i &= (\overline{A_i}B_i + A_i\overline{B_i} )C_{i-1} + A_iB_i \\
     &= (A_i \oplus B_i)C_{i-1} + A_iB_i \\
@@ -693,7 +696,7 @@ $$
 </tr>
 </table>
 
-> **Aufgabe:** Die obige Gleichungen sind identisch und unterscheiden sich nur durch $/oplus$ und $+$. Erklären Sie den vermeintlichen Widerspruch.
+> **Aufgabe:** Die obigen Gleichungen sind identisch und unterscheiden sich nur durch $\oplus$ und $+$. Erklären Sie den vermeintlichen Widerspruch.
 
 ![](./images/09_Arithmetik/Full_Adder.svg.png)<!-- style="width: 45%; max-width: 600px;" -->
 ![](./images/09_Arithmetik/Full_Adder_Symbol_2HA.png)<!-- style="width: 15%; max-width: 800px;" -->
