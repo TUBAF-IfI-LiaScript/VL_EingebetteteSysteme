@@ -167,3 +167,34 @@ ditaa
   Kontrolleinheit bezogene Komponenten
 @enduml
 ```
+## Interpretation der Befehle
+
+```text @plantUML
+@startuml
+ditaa
+                           Instruction Register                                                                    
+                        +---------+------------+                                                                   
+                        |OPCODE   |            |                                                                   
+                        +-+-+-+-+-+------------+                                                                   
+                         | | | |                                                                                   
+                         V V V V                                                                                   
+         +-----------------------------------------------------------------+                                       
+         |                       1 aus 16 Dekodierer                       |                                       
+         |                                                                 |                                       
+         +--+---+---+---+---+---+---+---+---+---+---+---+---+---+---+---+--+                                       
+            |   |   |   |   |   |   |   |   |   |   |   |   |   |   |   |                                          
+            |   |   |   |   |   |   |   |   |   |   |   |   |   |   |   |                                          
+           HLT JMA JMP SRJ CSA RAL INP OUT NOT LDA STA ADD XOR IOR AND NOP                                         
+            |   |   |   |   |   |   |   |   |   |   |   |   |   |   |   |                                          
+            V   V   V   V   V   V   V   V   V   V   V   V   V   V   V   V                                          
+         +-----------------------------------------------------------------+  Steuersignale:                       
+         |cF41                                                             +---> ALU,                              
+         |                                                                 |     Register Kontrolle,               
+         |                                                                 +---> Speicher Kontrolle,               
+Clock--->|             Sequentielles Schaltnetz                            |     ...                               
+         |                                                                 | ...                                   
+         |                                                                 |  Flags:                               
+         |                                                                 |<--- Signum, Zero, Overflow, Carry, ...
+         +-----------------------------------------------------------------+                                       
+@enduml
+```
