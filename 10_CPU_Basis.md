@@ -321,6 +321,7 @@ ditaa
 @plantUML
 
 Das Steuerwerk ist nun dafür verantwortlich:
+
 + Adressen zu berechnen
 + Befehle zu interpretieren
 + die ALU über entsprechende Flags zu konfigurieren
