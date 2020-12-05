@@ -2,7 +2,7 @@
 
 author:   Sebastian Zug & André Dietrich & Fabian Bär
 email:    sebastian.zug@informatik.tu-freiberg.de & andre.dietrich@informatik.tu-freiberg.de & fabian.baer@student.tu-freiberg.de
-version:  0.0.2
+version:  0.0.4
 language: de
 narrator: Deutsch Female
 
@@ -25,7 +25,7 @@ gray: @mark(gray,@0)
 
 Link auf die aktuelle Vorlesung im Versionsmanagementsystem GitHub
 
-[https://github.com/TUBAF-IfI-LiaScript/VL_EingebetteteSysteme/blob/10_CPU_Basis.md](https://github.com/TUBAF-IfI-LiaScript/VL_EingebetteteSysteme/blob/master/11_Modell_CPU.md)
+[https://github.com/TUBAF-IfI-LiaScript/VL_EingebetteteSysteme/blob/11_Modell_CPU.md](https://github.com/TUBAF-IfI-LiaScript/VL_EingebetteteSysteme/blob/master/11_Modell_CPU.md)
 
 Die interaktive Form ist unter [diesem Link](https://liascript.github.io/course/?https://raw.githubusercontent.com/TUBAF-IfI-LiaScript/VL_EingebetteteSysteme/master/11_Modell_CPU.md#1) zu finden
 
@@ -460,3 +460,35 @@ digraph finite_state_machine {
 @enduml
 ```
 @plantUML
+
+## Umsetzung als Schaltnetz / Schaltwerk
+
+```text @plantUML
+@startuml
+ditaa
+                           Instruction Register
+                        +---------+------------+
+                        |OPCODE   |            |
+                        +-+-+-+-+-+------------+
+                         | | | |
+                         V V V V
+         +-----------------------------------------------------------------+
+         |                       1 aus 16 Dekodierer                       |
+         |                                                                 |
+         +--+---+---+---+---+---+---+---+---+---+---+---+---+---+---+---+--+
+            |   |   |   |   |   |   |   |   |   |   |   |   |   |   |   |
+            |   |   |   |   |   |   |   |   |   |   |   |   |   |   |   |
+           HLT JMA JMP SRJ CSA RAL INP OUT NOT LDA STA ADD XOR IOR AND NOP
+            |   |   |   |   |   |   |   |   |   |   |   |   |   |   |   |
+            V   V   V   V   V   V   V   V   V   V   V   V   V   V   V   V
+         +-----------------------------------------------------------------+  Steuersignale:
+         |cF41                                                             +---> ALU,
+         |                                                                 |     Register Kontrolle,
+         |                                                                 +---> Speicher Kontrolle,
+Clock--->|             Sequentielles Schaltnetz                            |     ...
+         |                                                                 | ...
+         |                                                                 |  Flags:
+         |                                                                 |<--- Signum, Zero, Overflow, Carry, ...
+         +-----------------------------------------------------------------+
+@enduml
+```
