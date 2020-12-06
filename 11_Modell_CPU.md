@@ -682,3 +682,54 @@ Oscillator           |---|   |   |
                            3 zu 8 Decoder
 @enduml
 ```
+
+## Integrierung der Taktvorgabe in Steuerwerk
+
+```text @plantUML.png
+@startuml
+ditaa
+                                                       Instruction Register
+                                                    +---------+------------+
+                                                    |OPCODE   |            |
+                                                    +-+-+-+-+-+------------+
+                                                     | | | |
+                                                     V V V V
+                                     +-----------------------------------------------------------------+
+                                     |                       1 aus 16 Dekodierer                       |
+                                     |                                                                 |
+Benutzer                             +--+---+---+---+---+---+---+---+---+---+---+---+---+---+---+---+--+
+Eingaben    +---+                       |   |   |   |   |   |   |   |   |   |   |   |   |   |   |   |
+   HLT----->| OR|<-----------------+    |   |   |   |   |   |   |   |   |   |   |   |   |   |   |   |
+   RUN----+ +-+-+                  |   HLT JMA JMP SRJ CSA RAL INP OUT NOT LDA STA ADD XOR IOR AND NOP
+          |   |                    |    |   |   |   |   |   |   |   |   |   |   |   |   |   |   |   |
+          V   V     Status FF      |    V   V   V   V   V   V   V   V   V   V   V   V   V   V   V   V
+        +-------+  +---+ +---+     | ++----------------------------------------------------------------+  Steuersignale:
+        | R | H |  | F | | E |<-+  +-+HLT                                                              |
+        +-+-----+  ++--+ +-+-+  |    |                                                                 |
+          |Run FF   | ^    |    +----+E'                                                               |
+          |         | |    +-------->|E                                                                |
+          |         | +--------------+F'                                                               |
+          |         +--------------->|F                                                                |
+          |                          |                                                                 |
+          |                  +---+   |cF41                                                             |
+          |  +---+   +---+   |   |   |                                                                 |
++-------+ +->|   |   |  Q+-->|   +-->|CP1                                                              +---> ALU,
+|       |    | & +-->|T  |   |   |   |                                                                 |     Register Kontrolle,
+|  +-+  +--->|   |   |   |   |   +-->|CP2                 Kombinatorisches Schaltnetz                  +---> Speicher Kontrolle,
+|  | |  |    +---+   |---|   |   |   |                                                                 |     ...
+| -+ +- |            |  Q+-->|   +-->|CP3                                                              | ...
+|       |            |   |   |   |   |                                                                 |  Flags:
++-------+            |   |   |   +-->|CP4                                                              |<--- Signum, Zero, Overflow, Carry, ...
+Oscillator           |---|   |   |   |                                                                 |
+                     |  Q+-->|   +-->|CP5                                                              |
+                     |   |   |   |   |                                                                 |
+   8-Phasen          |   |   |   +-->|CP6                                                              |
+   Taktgeber         +---+   |   |   |                                                                 |
+                     3 Bit   |   +-->|CP7                                                              |
+                     Zähler  |   |   |                                                                 |
+                             |   +-->|CP8                                                              |
+                             |   |   |                                                                 |
+                             +---+   +-----------------------------------------------------------------+
+                      3 zu 8 Decoder
+@enduml
+```
