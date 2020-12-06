@@ -80,7 +80,7 @@ style="width: 80%; min-width: 420px; max-width: 720px;"
 
 ## Ausgangspunkt
 
-```text @plantUML
+```text @plantUML.png
 @startuml
 ditaa
                +------------------+
@@ -174,7 +174,7 @@ Nun muss die Aufteilung ein Befehlswort in ein Feld für den Operationscode und 
 
 Befehlsformat:
 
-```text @plantUML
+```text @plantUML.png
 @startuml
 ditaa
 15         12 11                             0
@@ -186,7 +186,7 @@ ditaa
 
 Datenformat:
 
-```text @plantUML
+```text @plantUML.png
 @startuml
 ditaa
    15
@@ -242,7 +242,7 @@ Da wir als Befehl nur den zyklischen Linksshift (`RAL`) um 1 Stelle zur Vefügun
 
 Die Elemente des Rechners lassen sich, wie bereits in der vergangen Vorlesung dargestellt, in 4 Kategorien einteilen - Speicher, Rechenwerk, Steuerwerk und Ein-Ausgabe
 
-```text @plantUML
+```text @plantUML.png
 @startuml
 ditaa
 +-----------------------------------------------------+  +---------------------------------+
@@ -293,7 +293,7 @@ abgefragt werden.
 
 ### Speicherbezogene Komponente
 
-```text @plantUML
+```text @plantUML.png
 @startuml
 ditaa
 +-----------------------------------------------------+
@@ -331,19 +331,21 @@ Der Datenpfad besteht aus der ALU, dem allgemeinen Register A (Akkumulator), ein
 
 Sie setzen voraus, daß der eine Operand in A steht, der zweite Operand muß aus dem Speicher von Adresse "addr" gelesen wird. Dabei gehen wir davon aus, dass der Operand im MBR zur Verfügung steht. Da die ALU rein kombinatorisch aufgebaut werden soll, müssen beide Operanden während der Verarbeitungszeit an den Eingängen anliegen. Das Ergebnis der Operation wird in A verfügbar gemacht. Damit das Ergebnis der Operation nicht einen der Operanden in A überschreibt, ist das Hilfsregister Z vorgesehen. Während der Befehlsausführung wird der Operand aus A nach Z transferiert, damit das Ergebnis in A gespeichert werden kann.
 
-```text @plantUML
+```text @plantUML.png
 @startuml
 ditaa
 +---------------------------------+
 |  Datenpfadbezogene Komponenten  |
 |  c88F                           |
+|                                 |
 | +-----------------------------+ |
-| |        Z-Register           | |
+| |        Z Register           | |
+| +-----------------------------+ |
 | +-----------------------------+ |
 | |                             | |
 | |             ALU             | |
 | |                             | |
-| +-----------+-----------------+ |
+| +-----------------------------+ |
 |             |     ^             |
 |             v     |             |
 | +-----------------+-----------+ |
@@ -352,8 +354,8 @@ ditaa
 |             |     ^             |
 |             V     |             |
 | +-----------------+-----------+ |
-| |              SWR            | |
-| | +-----------------------------+
+| |            SWR              | |
+| +-----------------------------+ |
 +---------------------------------+
 @enduml
 ```
@@ -361,7 +363,7 @@ ditaa
 
 ### Steuerwerk
 
-```text @plantUML
+```text @plantUML.png
 @startuml
 ditaa
 +-----------------------------------------------------+
@@ -435,7 +437,7 @@ Die hier verwendete Register-Transfer Sprache wurde von T.C. Bartee, I.L. Lebow,
 |  5. ggf Ergebnis speichern                              |  Sichere den Inhalt von A ins MBR, Manipuliere den Inhalt des MBR                                                                                       |
 
 
-```text @plantUML
+```text @plantUML.png
 @startuml
 digraph finite_state_machine {
     node [shape = point ]; qi
@@ -463,7 +465,7 @@ digraph finite_state_machine {
 
 ## Umsetzung als Schaltnetz / Schaltwerk
 
-```text @plantUML
+```text @plantUML.png
 @startuml
 ditaa
                            Instruction Register
