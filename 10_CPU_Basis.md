@@ -112,7 +112,7 @@ Arithmetische Funktionen: ADD, SUB, (MUL), (DIV)
 
 Sonstige: SHIFT LEFT (arithmetisch, logisch), SHIFT RIGHT (arithmetisch, logisch)
 
-```text @plantUML
+```text @plantUML.png
 @startuml
 ditaa
              Daten                 Daten
@@ -166,7 +166,6 @@ ditaa
 +-------------------------+                         v S
 @enduml
 ```
-@plantUML
 
 Der Status S umfasst eine Zusammenstellung der Resultate der Operationen codiert als 1-Bit Werte:
 
@@ -208,7 +207,7 @@ Zwischenstand
 
 Für diesen Schritt fassen wir das obige Schaltbild unserer hypothetischen ALU mit 8 Funktionen in einem abstrakteren Schaubild zusammen.
 
-```text @plantUML
+```text @plantUML.png
 @startuml
 ditaa
            +-----+-----+
@@ -224,7 +223,7 @@ ditaa
            +-----------+
 @enduml
 ```
-@plantUML
+
 
 
 | Bezeichnung | Bedeutung                               |
@@ -243,7 +242,7 @@ Der Speicher umfasst unsere Programmbestandteile `AND_B` usw. in jeweils einem 4
 
 Analog zur Diskussion um die abstraktere Darstellung der ALU fassen wir auch den Speicher in einem Block-Symbol zusammen.
 
-```text @plantUML
+```text @plantUML.png
 @startuml
 ditaa
                +------------------+
@@ -264,13 +263,13 @@ ditaa
                                            +-----------+
 @enduml
 ```
-@plantUML
+
 
 Wie allerdings setzen wir den Fortschritt im Programm um? Nach welcher Methodik werden die nachfolgenden Befehle aufgerufen?
 
 Eine weitere Komponente, das Steuerwerk übernimmt diese Aufgabe. Anstatt nun eine Folge von Kontrollflags vorzugeben, erzeugen wir intern eine Folge von Adressen, die auf Speicherbereiche verweisen, in denen die Konfigurationen der ALU hinterlegt sind.
 
-```text @plantUML
+```text @plantUML.png
 @startuml
 ditaa
                +------------------+
@@ -291,11 +290,10 @@ ditaa
 +----------+                               +-----------+
 @enduml
 ```
-@plantUML
 
 Allerdings bleibt bei dieser Konfiguration unser Status auf der Strecke! Im Grund müssen wir die Information dazu aber Operationsspezifisch auswerten. Es genügt also nicht allein eine Adressberechung zu realsieren, vielmehr bedarf es einer generellen Steuerungskomponente, die die Ausführung von Befehlen initiiert und überwacht.
 
-```text @plantUML
+```text @plantUML.png
 @startuml
 ditaa
                +------------------+
@@ -318,7 +316,6 @@ ditaa
 +----------+                               +-----------+
 @enduml
 ```
-@plantUML
 
 Das Steuerwerk ist nun dafür verantwortlich:
 
@@ -344,7 +341,7 @@ Zwischenstand
 
 Wo kommen aber die Daten her? Bislang haben wir uns damit begnügt anzunehmen, dass diese auf "magische" Art und Weise in unseren Registern stehen.
 
-```text @plantUML
+```text @plantUML.png
 @startuml
 ditaa
                +------------------+
@@ -367,7 +364,6 @@ ditaa
 +----------+                               +-----------+
 @enduml
 ```
-@plantUML
 
 Im Speicher stehen nun nicht nur Befehle für die Ausführung unserer ALU-Funktionen, sondern auch die Daten für unsere Berechnungen. Auf diese verweisen wir mit separaten Befehlen.
 
@@ -408,7 +404,7 @@ Zwischenstand
 
 Das Steuerwerk koordiniert neben der ALU die Ein- und Ausgabeschnittstelle.
 
-```text @plantUML
+```text @plantUML.png
 @startuml
 ditaa
                +------------------+
@@ -444,7 +440,6 @@ ditaa
                +-------------------+
 @enduml
 ```
-@plantUML
 
 ## 1945:  Von-Neumann Architektur
 
@@ -452,7 +447,7 @@ John von Neumann beschrieb 1945 in seinem Aufsatz ”First Draft of a Report on 
 
 Einige der Ideen des Konzepts wurden bereits von Konrad Zuse erkannt und teilweise in der Z1 und der Z3 realisiert.
 
-```text @plantUML
+```text @plantUML.png
 @startuml
 ditaa
   ^  |
@@ -477,7 +472,6 @@ ditaa
 +------+    +----------+    +------------+
 @enduml
 ```
-@plantUML
 
 ## Hausaufgaben
 
