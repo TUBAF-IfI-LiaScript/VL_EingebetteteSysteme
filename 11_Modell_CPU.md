@@ -464,10 +464,7 @@ digraph finite_state_machine {
 @plantUML
 
 
-### Test
-
-<script src='https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.4/MathJax.js?config=default'></script>
-
+### Test Ablauf einer Abarbeitung
 
 <table border="1" width="60%">
 <thead>
