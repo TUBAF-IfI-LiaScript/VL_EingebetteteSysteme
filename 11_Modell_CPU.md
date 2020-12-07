@@ -652,10 +652,10 @@ Clock--->|             Sequentielles Schaltnetz                            |    
 @startuml
 ditaa
                                     Zykluszeit des Speichers
-      RUN/HLT        3 Bit             |<-------------->| 
+      RUN/HLT        3 Bit             |<-------------->|
           |          Zähler  +---+                        
           |  +---+   +---+   |   |     +-+              +-
-+-------+ +->|   |   |  Q+-->|   +--> -+ +--------------+ 
++-------+ +->|   |   |  Q+-->|   +--> -+ +--------------+
 |       |    | & +-->|T  |   |   |                        
 |  +-+  +--->|   |   |   |   |   |       +-+              
 |  | |  |    +---+   |---|   |   +--> ---+ +--------------
@@ -675,7 +675,7 @@ Oscillator           |---|   |   |
                              |   |                  +-+   
                              |   +--> --------------+ +---
                              |   |                        
-                             |   |                    +-+ 
+                             |   |                    +-+
                              |   +--> ----------------+ +-
                              |   |                        
                              +---+                        
@@ -734,6 +734,17 @@ Oscillator           |---|   |   |   |                                          
 @enduml
 ```
 
+## Kombinatorik für 2 Zyklusbefehle am Beispiel der Arithmetischen Operationen
+
+![kombinatorik1](./images/11_Modell_CPU/kombinatorik1.svg)
+
+![kombinatorik2](./images/11_Modell_CPU/kombinatorik2.svg)
+
+![kombinatorik3](./images/11_Modell_CPU/kombinatorik3.svg)
+
+![kombinatorik4](./images/11_Modell_CPU/kombinatorik4.svg)
+
+
 ## Kontroll Schaltung als Statemachine mit Kombinatorischer Logik
 
 ```text @plantUML.png
@@ -783,7 +794,7 @@ state "Jmp\n(Set Programcounter to Operant)" as Jmp : PC ← IR_11-0
 state jmafork <<fork>> : Evaluate A_15
 state "Csa\n(load switches state to a)" as Csa : A ← SWR
 state "Jsr1\n(Set Programcounter to Operant)" as Jsr1 : A ← PC_11-0
-state "Jsr2\n(special Fetch0, load Operant to MBR and program counter)" as Jsr2 : "MBR ← IR_11-0\nPC ← IR_11-0"
+state "Jsr2\n(special Fetch0, load Operant to MBR and program counter)" as Jsr2 : MBR ← IR_11-0\nPC ← IR_11-0
 state "Fetch0\n(prepare instruction load)" as Fetch0 : MAR ← PC
 state "Other Operations ..." as OTHER : ...
 state "Rest\n(reset program counter)" as Reset : PC ← 0x0000
