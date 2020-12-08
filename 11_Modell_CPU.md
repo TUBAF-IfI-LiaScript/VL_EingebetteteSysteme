@@ -188,7 +188,7 @@ Datenformat:
 ```text @plantUML.png
 @startuml
 ditaa
-   15
+   15    14                                  0
 +-------+------------------------------------+
 |cF00 V | cFF0                               |
 +-------+------------------------------------+
@@ -644,3 +644,228 @@ Clock--->|             Sequentielles Schaltnetz                            |    
          +-----------------------------------------------------------------+
 @enduml
 ```
+
+## Taktvorgabe
+
+```text @plantUML.png
+@startuml
+ditaa
+                                    Zykluszeit des Speichers
+      RUN/HLT        3 Bit             |<-------------->|
+          |          Zähler  +---+                        
+          |  +---+   +---+   |   |     +-+              +-
++-------+ +->|   |   |  Q+-->|   +--> -+ +--------------+
+|       |    | & +-->|T  |   |   |                        
+|  +-+  +--->|   |   |   |   |   |       +-+              
+|  | |  |    +---+   |---|   |   +--> ---+ +--------------
+| -+ +- |            |  Q+-->|   |                        
+|       |            |   |   |   |          +-+           
++-------+            |   |   |   +--> ------+ +-----------
+Oscillator           |---|   |   |                        
+                     |  Q+-->|   |            +-+         
+                     |   |   |   +--> --------+ +---------
+                     |   |   |   |                        
+                     +---+   |   |              +-+       
+                             |   +--> ----------+ +-------
+                             |   |                        
+                             |   |                +-+     
+                             |   +--> ------------+ +-----
+                             |   |                        
+                             |   |                  +-+   
+                             |   +--> --------------+ +---
+                             |   |                        
+                             |   |                    +-+
+                             |   +--> ----------------+ +-
+                             |   |                        
+                             +---+                        
+                           3 zu 8 Decoder
+@enduml
+```
+
+## Integrierung der Taktvorgabe in Steuerwerk
+
+```text @plantUML.png
+@startuml
+ditaa
+                                                       Instruction Register
+                                                    +---------+------------+
+                                                    |OPCODE   |            |
+                                                    +-+-+-+-+-+------------+
+                                                     | | | |
+                                                     V V V V
+                                     +-----------------------------------------------------------------+
+                                     |                       1 aus 16 Dekodierer                       |
+                                     |                                                                 |
+Benutzer                             +--+---+---+---+---+---+---+---+---+---+---+---+---+---+---+---+--+
+Eingaben    +---+                       |   |   |   |   |   |   |   |   |   |   |   |   |   |   |   |
+   HLT----->| OR|<-----------------+    |   |   |   |   |   |   |   |   |   |   |   |   |   |   |   |
+   RUN----+ +-+-+                  |   HLT JMA JMP SRJ CSA RAL INP OUT NOT LDA STA ADD XOR IOR AND NOP
+          |   |                    |    |   |   |   |   |   |   |   |   |   |   |   |   |   |   |   |
+          V   V     Status FF      |    V   V   V   V   V   V   V   V   V   V   V   V   V   V   V   V
+        +-------+  +---+ +---+     | ++----------------------------------------------------------------+  Steuersignale:
+        | R | H |  | F | | E |<-+  +-+HLT                                                              |
+        +-+-----+  ++--+ +-+-+  |    |                                                                 |
+          |Run FF   | ^    |    +----+E'                                                               |
+          |         | |    +-------->|E                                                                |
+          |         | +--------------+F'                                                               |
+          |         +--------------->|F                                                                |
+          |                          |                                                                 |
+          |                  +---+   |cF41                                                             |
+          |  +---+   +---+   |   |   |                                                                 |
++-------+ +->|   |   |  Q+-->|   +-->|CP1                                                              +---> ALU,
+|       |    | & +-->|T  |   |   |   |                                                                 |     Register Kontrolle,
+|  +-+  +--->|   |   |   |   |   +-->|CP2                 Kombinatorisches Schaltnetz                  +---> Speicher Kontrolle,
+|  | |  |    +---+   |---|   |   |   |                                                                 |     ...
+| -+ +- |            |  Q+-->|   +-->|CP3                                                              | ...
+|       |            |   |   |   |   |                                                                 |  Flags:
++-------+            |   |   |   +-->|CP4                                                              |<--- Signum, Zero, Overflow, Carry, ...
+Oscillator           |---|   |   |   |                                                                 |
+                     |  Q+-->|   +-->|CP5                                                              |
+                     |   |   |   |   |                                                                 |
+   8-Phasen          |   |   |   +-->|CP6                                                              |
+   Taktgeber         +---+   |   |   |                                                                 |
+                     3 Bit   |   +-->|CP7                                                              |
+                     Zähler  |   |   |                                                                 |
+                             |   +-->|CP8                                                              |
+                             |   |   |                                                                 |
+                             +---+   +-----------------------------------------------------------------+
+                      3 zu 8 Decoder
+@enduml
+```
+
+## Kombinatorik für 2 Zyklusbefehle am Beispiel der Arithmetischen Operationen
+
+![kombinatorik1](./images/11_Modell_CPU/kombinatorik1.svg)
+
+![kombinatorik2](./images/11_Modell_CPU/kombinatorik2.svg)
+
+![kombinatorik3](./images/11_Modell_CPU/kombinatorik3.svg)
+
+![kombinatorik4](./images/11_Modell_CPU/kombinatorik4.svg)
+
+
+## Kontroll Schaltung als Statemachine mit Kombinatorischer Logik
+
+```text @plantUML.png
+@startuml
+ditaa
++----------------------------------+
+|c42C                              +------->
+|                                  |
+|                                  +------->  Kontroll
+|                                  |          Signale
+|     Kombinatorische Logik        +------->
+|                                  |
+|                                  +------->
+|                                  |
+|                                  +------+
++-+-+-+-+---+----------+-----------+      |
+  ^ ^ ^ ^   ^          ^Aktueller         |
+  | | | |   |          |  Zustand         |
+  | | | |   |     +----+-----------+      |
+  | | | |   |     |Zustandsspeicher|      |
+  | | | |   |     |cC42            |      |
+  | | | |   |     | +--+ +--+      |      |
+  | | | |   |     | |FF| |FF| ...  |      |
+  | | | |   |     | +--+ +--+      |      |
+  | | | |   |     +------------+---+      |
+  | | | |   |          ^       ^          |
+  Opcode    |          |       |          |
+        Alu States     |       |          |
+                       |       +----------+
+                       |      Neuer Zustand
+                       |
+                     Clock
+@enduml
+```
+
+```text @plantUML.png
+@startuml
+state "Fetch1\n(memory read)" as Fetch1 : MBR ← M[MAR]
+state "Fetch2\n(wait for memory read)" as Fetch2 : (wait)
+state "Fetch3\n(increment program counter)" as Fetch3 : PC ← PC+1
+state "Fetch4\n(instruction load)" as Fetch4 : IR ← MBR
+state "Fetch5,6\n(instruction decoding...)" as Fetch56 : (wait)
+state decodefork <<fork>>
+state "Hlt\n(Set Halt signal)" as Hlt : RF ← H
+state "Wait\n(wait unitl CP8)" as Wait : (wait)
+state "Jmp\n(Set Programcounter to Operant)" as Jmp : PC ← IR_11-0
+state jmafork <<fork>> : Evaluate A_15
+state "Csa\n(load switches state to a)" as Csa : A ← SWR
+state "Jsr1\n(Set Programcounter to Operant)" as Jsr1 : A ← PC_11-0
+state "Jsr2\n(special Fetch0, load Operant to MBR and program counter)" as Jsr2 : MBR ← IR_11-0\nPC ← IR_11-0
+state "Fetch0\n(prepare instruction load)" as Fetch0 : MAR ← PC
+state "Other Operations ..." as OTHER : ...
+state "Rest\n(reset program counter)" as Reset : PC ← 0x0000
+
+[*] --> Reset
+Reset --> Fetch0
+Fetch0 --> Fetch1 : CP1
+Fetch1 --> Fetch2 : CP2
+Fetch2 --> Fetch3 : CP3
+Fetch3 --> Fetch4 : CP4
+Fetch4 --> Fetch56 : CP5
+Fetch56 --> decodefork : CP7
+decodefork --> Hlt : op == HLT
+decodefork --> Wait : op == NOP
+decodefork --> Jmp : op == JMP
+decodefork --> jmafork : op == JMA
+jmafork --> Jmp : A_15 == 1
+jmafork --> Wait : A_15 == 0
+decodefork --> Csa : op == CSA
+decodefork --> Jsr1 : op == JSR
+decodefork --> OTHER : op == RAL,NOT,LDA,STA,ADD,XOR,AND,IOR
+Hlt --> Fetch0 : CP8
+Jmp --> Fetch0 : CP8
+Wait --> Fetch0 : CP8
+Csa --> Fetch0 : CP8
+Jsr1 --> Jsr2 : CP8
+Jsr2 --> Fetch1 : CP1
+OTHER --> Fetch0 : CP8 (Execute Phase)
+@enduml
+```
+
+
+
+## Kontroll Schaltung als Statemachine mit Mikroprogrammspeicher
+
+```text @plantUML.png
+@startuml
+ditaa
+         +----------------------------------+
+         |c8C2                              +------->
+         |                                  |
+         |                                  +------->  Kontroll
+         |                                  |          Signale
+         |     Mikroprogramm Speicher       +------->
+         |                                  |
+         |                                  +------->
+         |                                  |
+         |                                  +-------+
+         +-+--------------------------------+       |
+           ^                    ^Aktuelle Microcode |
+           |                    |Instruction Adresse|
+           |  +-----------------+-----------+       |
+           |  |Adressspeicher               |       |
+ Alu States|  |                             |       |
+           |  |  +--+ +--+ +--+             |       |
+              |  |FF| |FF| |FF|  ...        |       |
+              |  +--+ +--+ +--+         cC42|       |
+              +-----------------------------+       |
+                 ^             ^Folgeadresse        |
+                 |             |                    |
+                 |  +----------+----------+         |
+                 |  |  Adress Generierung |         |
+            Clock|  |cFF0                 |         |
+                 |  ++-+-+-+------------+-+         |
+                     ^ ^ ^ ^            ^           |
+                     | | | |            |           |
+                     | | | |            |           |
+                     Opcodes            +-----------+
+                                        Folgezustands
+                                          Kontrolle
+@enduml
+```
+
+Die Folgeadresse ergibt sich aus dem Folgezustand und bem Operation Decode aus dem Opcode.  
+Die Wörter im Mikroprogram Speicher enthalten Informationen zu den Kontroll Signalen und der Folgezustandkontrolle.
