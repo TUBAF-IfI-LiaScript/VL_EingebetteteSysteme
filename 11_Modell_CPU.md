@@ -116,7 +116,6 @@ ditaa
                +-------------------+
 @enduml
 ```
-@plantUML
 
 Der Prozessor ist die Einheit eines Rechners, die Daten nach einem vom Anwender spezifizierten Programm manipuliert. Das Programm wird als eine Folge von Anweisungen oder Befehlen für die CPU formuliert. Die CPU besteht daher:
 
@@ -466,150 +465,150 @@ digraph finite_state_machine {
 
 ### Test Ablauf einer Abarbeitung
 
-<table border="1" width="60%">
+<table border="1">
 <thead>
-  <tr>
-    <th>OPCode</th>
-    <th>0000</th>
-    <th>0001</th>
-    <th>0010</th>
-    <th>0011</th>
-    <th>0100</th>
-    <th>0101</th>
-    <th>0110</th>
-    <th>0111</th>
-    <th>1000</th>
-    <th>1001</th>
-    <th>1010</th>
-    <th>1011</th>
-    <th>1100</th>
-    <th>1101</th>
-    <th>1110</th>
-    <th>1111</th>
-  </tr>
+<tr>
+<th>OPCode</th>
+<th>0000</th>
+<th>0001</th>
+<th>0010</th>
+<th>0011</th>
+<th>0100</th>
+<th>0101</th>
+<th>0110</th>
+<th>0111</th>
+<th>1000</th>
+<th>1001</th>
+<th>1010</th>
+<th>1011</th>
+<th>1100</th>
+<th>1101</th>
+<th>1110</th>
+<th>1111</th>
+</tr>
 </thead>
 <tbody>
-  <tr>
-    <td>Befehl</td>
-    <td>HLT</td>
-    <td>JMA</td>
-    <td>JMP</td>
-    <td>SRJ</td>
-    <td></td>
-    <td>RAL</td>
-    <td>INP</td>
-    <td>OUT</td>
-    <td>NOT</td>
-    <td>LDA</td>
-    <td>STA</td>
-    <td>ADD</td>
-    <td>XOR</td>
-    <td>AND</td>
-    <td>IOR</td>
-    <td>NOP</td>
-  </tr>
-  <tr>
-    <td>CP1</td>
-    <td colspan="16"> $MBR \leftarrow M[A]$</td>
-  </tr>
-  <tr>
-    <td>CP2</td>
-    <td></td>
-    <td></td>
-    <td></td>
-    <td></td>
-    <td></td>
-    <td></td>
-    <td></td>
-    <td></td>
-    <td></td>
-    <td></td>
-    <td></td>
-    <td></td>
-    <td></td>
-    <td></td>
-    <td></td>
-    <td></td>
-  </tr>
-  <tr>
-    <td>CP3</td>
-    <td colspan="16"> $PC \leftarrow PC + 1$</td>
-  </tr>
-  <tr>
-    <td>CP4</td>
-    <td colspan="16"> $IR \leftarrow MBR $ </td>
-  </tr>
-  <tr>
-    <td>CP5</td>
-    <td></td>
-    <td></td>
-    <td></td>
-    <td></td>
-    <td></td>
-    <td></td>
-    <td></td>
-    <td></td>
-    <td></td>
-    <td></td>
-    <td></td>
-    <td></td>
-    <td></td>
-    <td></td>
-    <td></td>
-    <td></td>
-  </tr>
-  <tr>
-    <td>CP6</td>
-    <td></td>
-    <td></td>
-    <td></td>
-    <td></td>
-    <td></td>
-    <td></td>
-    <td></td>
-    <td></td>
-    <td></td>
-    <td></td>
-    <td></td>
-    <td></td>
-    <td></td>
-    <td></td>
-    <td></td>
-    <td></td>
-  </tr>
-  <tr>
-    <td>CP7</td>
-    <td></td>
-    <td></td>
-    <td></td>
-    <td></td>
-    <td></td>
-    <td></td>
-    <td></td>
-    <td></td>
-    <td></td>
-    <td></td>
-    <td></td>
-    <td></td>
-    <td></td>
-    <td></td>
-    <td></td>
-    <td></td>
-  </tr>
-  <tr>
-    <td>CP8</td>
-    <td></td>
-    <td></td>
-    <td></td>
-    <td></td>
-    <td></td>
-    <td></td>
-    <td></td>
-    <td></td>
-    <td></td>
-    <td colspan="6">$SF\leftarrow E$</td>
-    <td></td>
-  </tr>
+<tr>
+<td>Befehl</td>
+<td>HLT</td>
+<td>JMA</td>
+<td>JMP</td>
+<td>SRJ</td>
+<td></td>
+<td>RAL</td>
+<td>INP</td>
+<td>OUT</td>
+<td>NOT</td>
+<td>LDA</td>
+<td>STA</td>
+<td>ADD</td>
+<td>XOR</td>
+<td>AND</td>
+<td>IOR</td>
+<td>NOP</td>
+</tr>
+<tr>
+<td>CP1</td>
+<td colspan="16"> $MBR \leftarrow M[A]$</td>
+</tr>
+<tr>
+<td>CP2</td>
+<td></td>
+<td></td>
+<td></td>
+<td></td>
+<td></td>
+<td></td>
+<td></td>
+<td></td>
+<td></td>
+<td></td>
+<td></td>
+<td></td>
+<td></td>
+<td></td>
+<td></td>
+<td></td>
+</tr>
+<tr>
+<td>CP3</td>
+<td colspan="16"> $PC \leftarrow PC + 1$</td>
+</tr>
+<tr>
+<td>CP4</td>
+<td colspan="16"> $IR \leftarrow MBR $ </td>
+</tr>
+<tr>
+<td>CP5</td>
+<td></td>
+<td></td>
+<td></td>
+<td></td>
+<td></td>
+<td></td>
+<td></td>
+<td></td>
+<td></td>
+<td></td>
+<td></td>
+<td></td>
+<td></td>
+<td></td>
+<td></td>
+<td></td>
+</tr>
+<tr>
+<td>CP6</td>
+<td></td>
+<td></td>
+<td></td>
+<td></td>
+<td></td>
+<td></td>
+<td></td>
+<td></td>
+<td></td>
+<td></td>
+<td></td>
+<td></td>
+<td></td>
+<td></td>
+<td></td>
+<td></td>
+</tr>
+<tr>
+<td>CP7</td>
+<td></td>
+<td></td>
+<td></td>
+<td></td>
+<td></td>
+<td></td>
+<td></td>
+<td></td>
+<td></td>
+<td></td>
+<td></td>
+<td></td>
+<td></td>
+<td></td>
+<td></td>
+<td></td>
+</tr>
+<tr>
+<td>CP8</td>
+<td></td>
+<td></td>
+<td></td>
+<td></td>
+<td></td>
+<td></td>
+<td></td>
+<td></td>
+<td></td>
+<td colspan="6">$SF\leftarrow E$</td>
+<td></td>
+</tr>
 </tbody>
 </table>
 
