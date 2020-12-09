@@ -37,7 +37,6 @@ jobs:
           name: pdf
           path: output
 
-jobs:
   convert_to_tex:
     runs-on: ubuntu-18.04
     container:
