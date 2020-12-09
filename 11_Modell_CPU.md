@@ -15,7 +15,7 @@ mark: <span style="background-color: @0;
                                   padding: 6px 16px 6px 16px;
                                   ">@1</span>
 red:  @mark(#FF888888,@0)
-blue: @mark(lightblue,@0)
+blue: @mark(#898AE3,@0)
 gray: @mark(gray,@0)
 -->
 
@@ -469,6 +469,10 @@ Die hier verwendete Register-Transfer Sprache wurde von T.C. Bartee, I.L. Lebow,
 |                       | $C_n\cdot JMP:  PC\leftarrow IR_{11-0}$                      | Wenn der Takt $C_n$ anliegt, und der Befehl "JMP" ausgeführt wird, erfolgt der Transfer des Inhaltes des Instruktionsregisters an den Programmzähler. |
 
 ### Abläufe der Befehlsabarbeitung
+<!--
+colspan: <!--colspan="@0" style="text-align: center; vertical-align: middle;"-->
+-->
+
 
 Einige Befehle, insbesondere die, welche keinen zweiten Operanden oder ALU-Aktivitäten benötigen, können vollständig in der IF-Phase abgearbeitet werden. Dies gilt für $HLT$, $NOP$, $CSA$, und die Sprungbefehle $JMP$, $JMA$ und $SRJ.$  Bei diesen Befehlen wird im letzten Prozessorzyklus (CP8) eine neue Adresse in das $MAR$ geladen, und dadurch der neue Speicherzyklus vorbereitet.
 
@@ -478,300 +482,28 @@ Bei den Befehlen, zu deren Ausführung die EX-Phase benötigt wird, wird in CP8 
 
 In der EX-Phase werden die arithmetisch/logischen Operationen, sowie Speicherbefehle LOAD/STORE und Ein/Ausgabebefehle ausgeführt.
 
-<table border="1">
-<thead>
-<tr>
-<th>OPCode</th>
-<th>0000</th>
-<th>0001</th>
-<th>0010</th>
-<th>0011</th>
-<th>0100</th>
-<th>0101</th>
-<th>0110</th>
-<th>0111</th>
-<th>1000</th>
-<th>1001</th>
-<th>1010</th>
-<th>1011</th>
-<th>1100</th>
-<th>1101</th>
-<th>1110</th>
-<th>1111</th>
-</tr>
-</thead>
-<tbody>
-<tr>
-<td>Befehl</td>
-<td>HLT</td>
-<td>JMA</td>
-<td>JMP</td>
-<td>JSR</td>
-<td>SWR</td>
-<td>RAL</td>
-<td>INP</td>
-<td>OUT</td>
-<td>NOT</td>
-<td>LDA</td>
-<td>STA</td>
-<td>ADD</td>
-<td>XOR</td>
-<td>AND</td>
-<td>IOR</td>
-<td>NOP</td>
-</tr>
-<tr>
-<td>CP1</td>
-<td colspan="16" style="text-align: center; vertical-align: middle;"> $MBR \leftarrow M[A]$</td>
-</tr>
-<tr>
-<td>CP2</td>
-<td></td>
-<td></td>
-<td></td>
-<td></td>
-<td></td>
-<td></td>
-<td></td>
-<td></td>
-<td></td>
-<td></td>
-<td></td>
-<td></td>
-<td></td>
-<td></td>
-<td></td>
-<td></td>
-</tr>
-<tr>
-<td>CP3</td>
-<td colspan="16" style="text-align: center; vertical-align: middle;"> $PC \leftarrow PC + 1$</td>
-</tr>
-<tr>
-<td>CP4</td>
-<td colspan="16" style="text-align: center; vertical-align: middle;"> $IR \leftarrow MBR $ </td>
-</tr>
-<tr>
-<td>CP5</td>
-<td></td>
-<td></td>
-<td></td>
-<td></td>
-<td></td>
-<td></td>
-<td></td>
-<td></td>
-<td></td>
-<td></td>
-<td></td>
-<td></td>
-<td></td>
-<td></td>
-<td></td>
-<td></td>
-</tr>
-<tr>
-<td>CP6</td>
-<td></td>
-<td></td>
-<td></td>
-<td></td>
-<td></td>
-<td></td>
-<td></td>
-<td></td>
-<td></td>
-<td></td>
-<td></td>
-<td></td>
-<td></td>
-<td></td>
-<td></td>
-<td></td>
-</tr>
-<tr>
-<td>CP7</td>
-<td>$RF \leftarrow H$</td>
-<td>$A_{15}=1:PC\leftarrow IR_{11-0}$</td>
-<td>$PC\leftarrow IR_{11-0}$</td>
-<td>$A_{11-0} \leftarrow  PC$</td>
-<td>$A \leftarrow SWR$</td>
-<td>$Z \leftarrow A$</td>
-<td></td>
-<td></td>
-<td>$Z \leftarrow A$</td>
-<td></td>
-<td></td>
-<td>$Z \leftarrow A$</td>
-<td>$Z \leftarrow A$</td>
-<td>$Z \leftarrow A$</td>
-<td>$Z \leftarrow A$</td>
-<td></td>
-</tr>
-<tr>
-<td>CP8</td>
-<td>$MAR \leftarrow PC$</td>
-<td>$MAR \leftarrow PC$</td>
-<td>$MAR \leftarrow PC$</td>
-<td>$PC\leftarrow IR_{11-0}, MAR \leftarrow PC $</td>
-<td>$MAR \leftarrow PC$</td>
-<td>$SF\leftarrow E$</td>
-<td></td>
-<td></td>
-<td>$SF\leftarrow E$</td>
-<td colspan="6" style="text-align: center; vertical-align: middle;"> $SF\leftarrow E, MAR \leftarrow IR_{11-0}$</td>
-<td>$MAR \leftarrow PC$</td>
-</tr>
-</tbody>
-<tbody bgcolor='#898ae3'>
-<tr>
-<td>CP1</td>
-<td></td>
-<td></td>
-<td></td>
-<td></td>
-<td></td>
-<td></td>
-<td></td>
-<td></td>
-<td></td>
-<td>$MBR\leftarrow M[A]$</td>
-<td></td>
-<td>$MBR\leftarrow M[A]$</td>
-<td>$MBR\leftarrow M[A]$</td>
-<td>$MBR\leftarrow M[A]$</td>
-<td>$MBR\leftarrow M[A]$</td>
-<td></td>
-</tr>
-<tr>
-<td>CP2</td>
-<td></td>
-<td></td>
-<td></td>
-<td></td>
-<td></td>
-<td>$A\leftarrow Z^*$</td>
-<td></td>
-<td></td>
-<td>$A\leftarrow \overline{Z}$</td>
-<td></td>
-<td></td>
-<td></td>
-<td></td>
-<td></td>
-<td></td>
-<td></td>
-</tr>
-<tr>
-<td>CP3</td>
-<td></td>
-<td></td>
-<td></td>
-<td></td>
-<td></td>
-<td></td>
-<td></td>
-<td></td>
-<td></td>
-<td></td>
-<td></td>
-<td></td>
-<td></td>
-<td></td>
-<td></td>
-<td></td>
-</tr>
-<tr>
-<td>CP4</td>
-<td></td>
-<td></td>
-<td></td>
-<td></td>
-<td></td>
-<td></td>
-<td></td>
-<td></td>
-<td></td>
-<td></td>
-<td></td>
-<td></td>
-<td></td>
-<td></td>
-<td></td>
-<td></td>
-</tr>
-<tr>
-<td>CP5</td>
-<td></td>
-<td></td>
-<td></td>
-<td></td>
-<td></td>
-<td></td>
-<td></td>
-<td></td>
-<td></td>
-<td>$A\leftarrow MBR$</td>
-<td>$MBR \leftarrow A$</td>
-<td></td>
-<td></td>
-<td></td>
-<td></td>
-<td></td>
-</tr>
-<tr>
-<td>CP6</td>
-<td></td>
-<td></td>
-<td></td>
-<td></td>
-<td></td>
-<td></td>
-<td></td>
-<td></td>
-<td></td>
-<td></td>
-<td>$M[A] \leftarrow MBR$</td>
-<td></td>
-<td></td>
-<td></td>
-<td></td>
-<td></td>
-</tr>
-<tr>
-<td>CP7</td>
-<td></td>
-<td></td>
-<td></td>
-<td></td>
-<td></td>
-<td></td>
-<td></td>
-<td></td>
-<td></td>
-<td></td>
-<td></td>
-<td>$A \leftarrow Sum(MBR, Z)$</td>
-<td>$A \leftarrow MBR \oplus Z$</td>
-<td>$A \leftarrow MBR \cdot Z$</td>
-<td>$A \leftarrow MBR + Z$</td>
-<td></td>
-</tr>
-<tr>
-<td>CP8</td>
-<td></td>
-<td></td>
-<td></td>
-<td></td>
-<td></td>
-<td>$MAR \leftarrow PC, SF \leftarrow F$</td>
-<td></td>
-<td></td>
-<td colspan="7" style="text-align: center; vertical-align: middle;"> $ MAR \leftarrow PC, SF \leftarrow F$</td>
-<td></td>
-</tr>
-</tbody>
-</table>
+<!--data-type="None"-->
+| OPCode | 0000           | 0001  | 0010  | 0011  | 0100  | 0101  | 0110  | 0111  | 1000  | 1001  | 1010  | 1011  | 1100  | 1101  | 1110  | 1111  |
+| ------ | -------------- | ----- | ----- | ----- | ----- | ----- | ----- | ----- | ----- | ----- | ----- | ----- | ----- | ----- | ----- | ----- |
+|        | `HLT`          | `JMA` | `JMP` | `JSR` | `SWR` | `RAL` | `INP` | `OUT` | `NOT` | `LDA` | `STA` | `ADD` | `XOR` | `AND` | `IOR` | `NOP` |
+| CP1    | @colspan(16) $MBR \leftarrow M[MAR]$ |
+| CP2    |                |       |       |       |       |       |       |       |       |       |       |       |       |       |       |       |
+| CP3    | @colspan(16) $PC \leftarrow PC + 1$     |
+| CP4    | @colspan(16) $IR \leftarrow MBR $              |
+| CP5    |                |       |       |       |       |       |       |       |       |       |       |       |       |       |       |       |
+| CP6    |                |       |       |       |       |       |       |       |       |       |       |       |       |       |       |       |
+| CP7    | $RF \leftarrow H$ | $A_{15}=1:PC\leftarrow IR_{11-0}$ | $PC\leftarrow IR_{11-0}$ | $A_{11-0} \leftarrow  PC$ | $A \leftarrow SWR$ | $Z \leftarrow A$ |  |  | $Z \leftarrow A$ |  |  | $Z \leftarrow A$ | $Z \leftarrow A$ | $Z \leftarrow A$ | $Z \leftarrow A$ |
+| CP8    | $MAR \leftarrow PC$ | $MAR \leftarrow PC$ | $MAR \leftarrow PC$ | $PC\leftarrow IR_{11-0}, MAR \leftarrow PC $ | $MAR \leftarrow PC$ | $SF\leftarrow E$ |  |  | $SF\leftarrow E$ | @colspan(6) $SF\leftarrow E, MAR \leftarrow IR_{11-0}$ | $MAR \leftarrow PC$ |
+| <!-- style="background-color: #898AE3;" --> $CP1$    | | | | | | | | | | $MBR\leftarrow M[MAR]$| | @colspan(4) $MBR\leftarrow M[MAR]$| |
+| <!-- style="background-color: #898AE3;" --> $CP2$    | |    |     |     |     | $A\leftarrow Z^*$ |    |     | $A\leftarrow \overline{Z}$ |     |     |     |     |     |  | |
+| <!-- style="background-color: #898AE3;" --> $CP3$     |                |       |       |       |       |       |       |       |       |       |       |       |       |       |       |       |
+| <!-- style="background-color: #898AE3;" --> $CP4$     |                |       |       |       |       |       |       |       |       |       |       |       |       |       |       |       |
+| <!-- style="background-color: #898AE3;" --> $CP5$     |   |  |  |  |  |  |  |  |  | $A\leftarrow MBR$ | $MBR \leftarrow A$ |  |  |  |  | |
+| <!-- style="background-color: #898AE3;" --> $CP6$     |   |  |  |  |  |  |  |  |  |  | $M[MAR] \leftarrow MBR$ |  |  |  |  |  |
+| <!-- style="background-color: #898AE3;" --> $CP7$     | | | | | | | | | | | | $A \leftarrow Sum(MBR, Z)$| $A \leftarrow MBR \oplus Z$| $A \leftarrow MBR \cdot Z$| $A \leftarrow MBR + Z$| |
+| <!-- style="background-color: #898AE3;" --> $CP8$     |  |  |  |  |  | $MAR \leftarrow PC, SF \leftarrow F$ |  |  | @colspan(7) $ MAR \leftarrow PC, SF \leftarrow F$ |  |
+
+
 
 Der folgende Automat bildet die Abarbeitung der Instruktionen `HLT`, `JMP`, `JMA` und `JSR` in einem Automaten ab.
 
