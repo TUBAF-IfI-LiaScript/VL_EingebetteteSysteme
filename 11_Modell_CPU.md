@@ -946,12 +946,10 @@ Oscillator           |---|   |   |   |                                          
 
 ![Schaltung](./images/11_Modell_CPU/EinZyklusBefehle.png)<!-- width="80%" -->
 
-
-![kombinatorik1](./images/11_Modell_CPU/kombinatorik1.svg)<!-- width="20%" -->
-![kombinatorik2](./images/11_Modell_CPU/kombinatorik2.svg)<!-- width="20%" -->
-![kombinatorik3](./images/11_Modell_CPU/kombinatorik3.svg)<!-- width="20%" -->
-![kombinatorik4](./images/11_Modell_CPU/kombinatorik4.svg)<!-- width="20%" -->
-
+![kombinatorik1](./images/11_Modell_CPU/kombinatorik1.svg.png)<!-- width="20%" -->
+![kombinatorik2](./images/11_Modell_CPU/kombinatorik2.svg.png)<!-- width="20%" -->
+![kombinatorik3](./images/11_Modell_CPU/kombinatorik3.svg.png)<!-- width="20%" -->
+![kombinatorik4](./images/11_Modell_CPU/kombinatorik4.svg.png)<!-- width="20%" -->
 
 ## Beschränkungen der aktuellen Lösung
 
