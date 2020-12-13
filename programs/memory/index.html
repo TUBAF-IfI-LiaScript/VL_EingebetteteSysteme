@@ -1,0 +1,131 @@
+<html>
+    <head>
+        <meta charset="utf-8"/>
+        <title>Speicher</title>
+        <script type="text/javascript" src="fjangnodes.js"></script>
+        <script type="text/javascript" src="basictypes.js"></script>
+        <script type="text/javascript" src="component.js"></script>
+        <script type="text/javascript" src="webinterfacenodes.js"></script>
+        <script type="text/javascript" src="modell.js"></script>
+        <script type="text/javascript">
+        
+const ADR_LENGTH = 12;
+        
+        
+onload = function() {
+    let checkboxClassName = "cbx";
+    let inputTextClassName = "inptext";
+    
+    let arc = 16;
+    let bitsDatatype = new BitsDatatype(arc);
+    
+    //prepare memory
+    let words = [];
+    let N = (1 << ADR_LENGTH);
+    for (let i = 0; i < N; i++) words.push(bitsDatatype.getDefaultValue());
+    words[8] = bitsDatatype.parseFrom01String("1010101010101010",true);
+    words[9] = bitsDatatype.parseFrom01String("1111111111111111",true);
+    words[10] = bitsDatatype.parseFrom01String("1100110011001100",true);
+    words[11] = bitsDatatype.parseFrom01String("1110001110001110",true);
+    words[12] = bitsDatatype.parseFrom01String("0000000000101010",true);
+
+    
+    
+    
+    let mem = new Memory(bitsDatatype,ADR_LENGTH,words);
+    let mar = new MemoryAdressRegister(arc,ADR_LENGTH);
+    let mbr = new BusPlusExtraInputRegister(bitsDatatype);
+
+    let clk = new BitIO(false,checkboxClassName);//clock
+
+    let valBus = new Bits10IO(arc,false,inputTextClassName);//bus input and output text field
+    let valMAR = new Bits10IO(ADR_LENGTH,true,inputTextClassName);//mar output field
+    let valMBR = new Bits10IO(arc,true,inputTextClassName);//mbr output field
+    
+    let memWrEnable = new BitIO(false,checkboxClassName);
+    let memToMbr = new BitIO(false,checkboxClassName);//mem[mar] --> mbr
+    
+    let mbrInputEnable = new BitIO(false,checkboxClassName);
+    let mbrOutputEnable = new BitIO(false,checkboxClassName);
+    let marInputEnable = new BitIO(false,checkboxClassName);
+    
+    let world = new FjangWorld([mem,mar,mbr,clk,valBus,valMAR,valMBR,memWrEnable,memToMbr,mbrInputEnable,mbrOutputEnable,marInputEnable]);
+
+    //datensignale
+    FjangNode.connectBi(valBus.bitsNode,mbr.busNode);// bus <--> mbr:bus
+    FjangNode.connectFromTo(valBus.bitsNode,mar.busNode);// bus --> mar:bus
+    FjangNode.connectFromTo(mar.valueNode,mem.adressNode);// mar:val --> mem:adr
+    FjangNode.connectFromTo(mbr.valueNode,mem.dataInNode);// mbr:value --> mem:dataIn
+    FjangNode.connectFromTo(mem.dataOutNode,mbr.secondInputNode);// mem:dataOut --> mbr:secondInput
+    
+    FjangNode.connectFromTo(mar.valueNode,valMAR.bitsNode);
+    FjangNode.connectFromTo(mbr.valueNode,valMBR.bitsNode);
+
+    //steuersignale
+    
+    FjangNode.connectFromTo(clk.bitNode,mar.clockNode);
+    FjangNode.connectFromTo(clk.bitNode,mbr.clockNode);
+    FjangNode.connectFromTo(clk.bitNode,mem.clockNode);
+    FjangNode.connectFromTo(memWrEnable.bitNode,mem.writeEnableNode);
+    FjangNode.connectFromTo(memToMbr.bitNode,mbr.inputEnableSecondNode);
+    FjangNode.connectFromTo(mbrInputEnable.bitNode,mbr.inputEnableBusNode);
+    FjangNode.connectFromTo(mbrOutputEnable.bitNode,mbr.outputEnableNode);
+    FjangNode.connectFromTo(marInputEnable.bitNode,mar.inputEnableNode);
+
+    
+    document.getElementById("clk").appendChild(clk.getHtmlElement());
+    document.getElementById("valBus").appendChild(valBus.getHtmlElement());    
+    document.getElementById("valMAR").appendChild(valMAR.getHtmlElement());    
+    document.getElementById("valMBR").appendChild(valMBR.getHtmlElement());
+    document.getElementById("memWrEnable").appendChild(memWrEnable.getHtmlElement());    
+    document.getElementById("memToMbr").appendChild(memToMbr.getHtmlElement());
+    document.getElementById("mbrInputEnable").appendChild(mbrInputEnable.getHtmlElement());
+    document.getElementById("mbrOutputEnable").appendChild(mbrOutputEnable.getHtmlElement()); 
+    document.getElementById("marInputEnable").appendChild(marInputEnable.getHtmlElement());
+
+    
+    window.setInterval(function() {
+        world.tick();
+        let memoValStr = "Memory:\n";
+        for (let i = 0; i < 20; i++) {
+            memoValStr+= bitsDatatype.to01String(words[i],true) + " (" + i + ")\n";
+        }
+        document.getElementById("memValue").value = memoValStr + "...";
+    },100);
+}
+
+        </script>        
+        <style>
+.cbx {
+    margin:0px;
+}
+.inptext {
+    width:220px;
+    min-width:215px;
+    max-width:215px;
+    font-size:20px;
+    overflow:hidden;
+}
+        
+.fliege {
+    position: absolute;
+}
+
+        </style>
+        
+    </head>
+    <body>
+        <img src="img/mem.png" class="fliege" style="top:0px; left:0px; width:512px; height:512px">
+        <span class="fliege" style="top:5px; left:370px;">clock:<span id="clk"></span></span>
+        <span id="valBus" class="fliege" style="top:0px; left:0px;"></span>
+        <span id="valMBR" class="fliege" style="top:55px; left:156px;"></span>
+        <span id="valMAR" class="fliege" style="top:415px; left:156px;"></span>
+        <span id="memWrEnable" class="fliege" style="top:150px; left:236px;"></span>
+        <span id="memToMbr" class="fliege" style="top:117px; left:275px;"></span>
+        <span id="mbrInputEnable" class="fliege" style="top:53px; left:124px;"></span>
+        <span id="mbrOutputEnable" class="fliege" style="top:81px; left:84px;"></span>
+        <span id="marInputEnable" class="fliege" style="top:425px; left:125px;"></span>
+        <textarea id="memValue" class="fliege" style="top:0px; left:522px;" rows="22" cols="21" readonly></textarea>
+        
+    </body>
+</html>

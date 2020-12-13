@@ -16,7 +16,7 @@ import: https://raw.githubusercontent.com/LiaTemplates/NetSwarm-Simulator/master
 
 Link auf die aktuelle Vorlesung im Versionsmanagementsystem GitHub
 
-[https://github.com/TUBAF-IfI-LiaScript/VL_EingebetteteSysteme/blob/00_Einfuehrung](https://github.com/TUBAF-IfI-LiaScript/VL_EingebetteteSysteme/blob/dev/00_Einfuehrung)
+[https://github.com/TUBAF-IfI-LiaScript/VL_EingebetteteSysteme/blob/master/03_Minimierung.md](https://github.com/TUBAF-IfI-LiaScript/VL_EingebetteteSysteme/blob/master/03_Minimierung.md)
 
 Die interaktive Form ist unter [diesem Link](https://liascript.github.io/course/?https://raw.githubusercontent.com/TUBAF-IfI-LiaScript/VL_EingebetteteSysteme/master/03_Minimierung.md#1) zu finden
 
@@ -93,8 +93,8 @@ f(x_1, x_2, x_3, x_4) &= x_3\overline{x}_1+ x_4\overline{x}_3\overline{x}_2 + \o
 &= x_3\overline{x}_1 + x_4x_3\overline{x}_2x_1   + x_4\overline{x}_3\overline{x}_2 & (Absorbtionsgesetz) \\
 &= x_3 (\overline{x}_1 + x_4\overline{x}_2x_1)   + x_4\overline{x}_3\overline{x}_2 & (Distributivgesetz) \\
 &= x_3 ((\overline{x}_1 + x_4) \cdot (\overline{x}_1 +\overline{x}_2) \cdot (\overline{x}_1 +x_1))   + x_4\overline{x}_3\overline{x}_2 & (Idempotenzgesetz) \\
-&= x_3 ((\overline{x}_1 + x_4) \cdot (\overline{x}_1 +\overline{x}_2) \cdot (1)   + x_4\overline{x}_3\overline{x}_2 & (Neutrales Element) \\
-&= x_3 ((\overline{x}_1 + x_4) \cdot (\overline{x}_1 +\overline{x}_2) + x_4\overline{x}_3\overline{x}_2 & (Distributivgesetz) \\
+&= x_3 ((\overline{x}_1 + x_4) \cdot (\overline{x}_1 +\overline{x}_2) \cdot (1))   + x_4\overline{x}_3\overline{x}_2 & (Neutrales Element) \\
+&= x_3 ((\overline{x}_1 + x_4) \cdot (\overline{x}_1 +\overline{x}_2)) + x_4\overline{x}_3\overline{x}_2 & (Distributivgesetz) \\
 &= x_3 (\overline{x}_1 + (x_4 \cdot \overline{x}_2))+ x_4\overline{x}_3\overline{x}_2 & (Distributivgesetz) \\
 &= x_3\overline{x}_1 + x_3x_4\overline{x}_2+ x_4\overline{x}_3\overline{x}_2 & (Distributivgesetz) \\
 &= x_3\overline{x}_1 + x_4\overline{x}_2(x_3 + \overline{x}_3) & (Distributivgesetz) \\
@@ -195,7 +195,7 @@ Für die Darstellung der Normalform benötigen wir zunächst weitere Begriffsdef
 
 Und nun in der Kombination ....
 
-**Disjuktive Normalform (DNF, Summe von Produkt-Mintermen)**
+**Disjunktive Normalform (DNF, Summe von Produkt-Mintermen)**
 
 + Disjunktion von Produkttermen
 + Beispiel: $( x \cdot y ) + ( x \cdot y \cdot z )$
@@ -415,7 +415,7 @@ $f= x \cdot \overline{y} + \overline{x} \cdot y$
 
        {{1-2}}
 ********************************************************************************
-Dieses Konzept lässt sich auch auf Variablen mit bis zu 4 Variablen übertragen.
+Dieses Konzept lässt sich auch auf Funktionen mit bis zu 4 Variablen übertragen.
 
 |                | $\overline{x}\,\overline{y}$                      | $\overline{x}y$                        | $xy$ | $x\overline{y}$ |
 | -------------- | ------------------------------------------------ | -------------------------------------- | ---- | --------------- |
