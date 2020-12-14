@@ -1,0 +1,129 @@
+<html>
+    <head>
+        <meta charset="utf-8"/>
+        <title>Rechenwerk</title>
+        <script type="text/javascript" src="fjangnodes.js"></script>
+        <script type="text/javascript" src="basictypes.js"></script>
+        <script type="text/javascript" src="component.js"></script>
+        <script type="text/javascript" src="webinterfacenodes.js"></script>
+        <script type="text/javascript" src="modell.js"></script>
+        <script type="text/javascript">
+        
+const BITLENGTH = 16;
+        
+        
+onload = function() {
+    let checkboxClassName = "cbx";
+    let inputTextClassName = "inptext";
+    let selectClassName = "";
+    
+    
+    
+    let arc = BITLENGTH;
+    let bitsDatatype = new BitsDatatype(arc);
+
+    let alu = new AluSimple(arc);
+    let a = new BusPlusExtraInputRegister(bitsDatatype);
+    let z = new Register(bitsDatatype);
+        
+    let op = new ElementOfSetIO(AluSimple.OPERATION_DATATYPE.getElements(),false,selectClassName);
+    let ci = new BitIO(false,checkboxClassName);//carryIn
+    let clk = new BitIO(false,checkboxClassName);//clock
+    let aIn = new BitIO(false,checkboxClassName);//a input enable
+    let aOut = new BitIO(false,checkboxClassName);//a output enable
+    let aToZ = new BitIO(false,checkboxClassName);//a --> z transfer enable
+    let oToA = new BitIO(false,checkboxClassName);//alu out --> a transfer enable
+    let valBus = new Bits10IO(arc,false,inputTextClassName);
+    let valA = new Bits10IO(arc,true,inputTextClassName);
+    let valZ = new Bits10IO(arc,true,inputTextClassName);
+    let valAluOut = new Bits10IO(arc,true,inputTextClassName);
+    let co = new BitIO(true,checkboxClassName);//carryOut
+    let ov = new BitIO(true,checkboxClassName);//overflow
+    
+    let world = new FjangWorld([alu,a,z,op,ci,clk,aIn,aOut,aToZ,oToA,valBus,valA,valZ,valAluOut,co,ov]);
+
+    //datensignale
+    FjangNode.connectBi(valBus.bitsNode,a.busNode);
+    FjangNode.connectFromTo(valBus.bitsNode,alu.yNode);
+    FjangNode.connectFromTo(a.valueNode,z.busNode);
+    FjangNode.connectFromTo(z.valueNode,alu.xNode);
+    FjangNode.connectFromTo(alu.outNode,a.secondInputNode);
+
+    FjangNode.connectFromTo(a.valueNode,valA.bitsNode);
+    FjangNode.connectFromTo(z.valueNode,valZ.bitsNode);
+    FjangNode.connectFromTo(alu.outNode,valAluOut.bitsNode);
+    
+    //steuersignale
+    
+    FjangNode.connectFromTo(clk.bitNode,a.clockNode);
+    FjangNode.connectFromTo(clk.bitNode,z.clockNode);
+    FjangNode.connectFromTo(op.eosNode,alu.opNode);
+    FjangNode.connectFromTo(aIn.bitNode,a.inputEnableBusNode);
+    FjangNode.connectFromTo(aOut.bitNode,a.outputEnableNode);
+    FjangNode.connectFromTo(aToZ.bitNode,z.inputEnableNode);
+    FjangNode.connectFromTo(oToA.bitNode,a.inputEnableSecondNode);
+    FjangNode.connectFromTo(ci.bitNode,alu.carryInNode);
+
+    
+    //output flags
+    FjangNode.connectFromTo(alu.carryOutNode,co.bitNode);
+    FjangNode.connectFromTo(alu.overflowNode,ov.bitNode);
+
+    
+    document.getElementById("valBus").appendChild(valBus.getHtmlElement());    
+    document.getElementById("valA").appendChild(valA.getHtmlElement());    
+    document.getElementById("valZ").appendChild(valZ.getHtmlElement());
+    document.getElementById("valAluOut").appendChild(valAluOut.getHtmlElement());    
+    document.getElementById("clk").appendChild(clk.getHtmlElement());
+    document.getElementById("aIn").appendChild(aIn.getHtmlElement());
+    document.getElementById("aOut").appendChild(aOut.getHtmlElement());
+    document.getElementById("aToZ").appendChild(aToZ.getHtmlElement()); 
+    document.getElementById("oToA").appendChild(oToA.getHtmlElement());
+    document.getElementById("ci").appendChild(ci.getHtmlElement());    
+    document.getElementById("co").appendChild(co.getHtmlElement());    
+    document.getElementById("ov").appendChild(ov.getHtmlElement());    
+    document.getElementById("op").appendChild(op.getHtmlElement());    
+
+    
+    window.setInterval(function() {world.tick()},100);
+}
+
+        </script>        
+        <style>
+.cbx {
+    margin:0px;
+}
+.inptext {
+    width:220px;
+    min-width:215px;
+    max-width:215px;
+    font-size:20px;
+    overflow:hidden;
+}
+        
+.fliege {
+    position: absolute;
+}
+
+        </style>
+        
+    </head>
+    <body>
+        <img src="img/rechenwerk.png" class="fliege" style="top:0px; left:0px; width:512px; height:512px">
+        <span id="valBus" class="fliege" style="top:0px; left:0px;"></span>
+        <span id="valA" class="fliege" style="top:55px; left:155px;"></span>
+        <span id="valZ" class="fliege" style="top:165px; left:155px;"></span>
+        <span id="valAluOut" class="fliege" style="top:360px; left:360px;"></span>
+        <span class="fliege" style="top:5px; left:370px;">clock:<span id="clk"></span></span>
+        <span id="aIn" class="fliege" style="top:52px; left:124px;"></span>
+        <span id="aOut" class="fliege" style="top:84px; left:80px;"></span>
+        <span id="aToZ" class="fliege" style="top:124px; left:245px;"></span>
+        <span id="oToA" class="fliege" style="top:70px; left:389px;"></span>
+        <span class="fliege" style="top:290px; left:90px;">carry in:<span id="ci"></span></span>
+        <span class="fliege" style="top:430px; left:340px;">carry out:<span id="co"></span></span>
+        <span class="fliege" style="top:460px; left:340px;">overflow:<span id="ov"></span></span>
+        <span id="op" class="fliege" style="top:343px; left:286px;"></span>
+
+        
+    </body>
+</html>
