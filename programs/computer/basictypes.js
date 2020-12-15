@@ -66,6 +66,11 @@ class BitsDatatype extends Datatype {
         for (let i = 0; i < value.length; i++) if (value[i]) ret |= (1 << i);
         return ret;
     }
+    parseFromUInt(n,leng) {
+        let ret = [];
+        for (let i = 0; i < leng; i++) ret.push(((n >> i) & 1) === 1);
+        return ret;
+    }
 }
 //output length: length of x
 BitsDatatype.sum = function(x,y,carry) {

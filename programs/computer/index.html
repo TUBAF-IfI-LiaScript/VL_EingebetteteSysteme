@@ -9,27 +9,15 @@
         <script type="text/javascript" src="modell.js"></script>
         <script type="text/javascript" src="controlsignals.js"></script>
         <script type="text/javascript">
-const PROGRAM = [
-    "1001000000001000",// 0:   lda x (adresse: 8) (program start)
-    "1011000000001001",// 1:   add y (adresse: 9)
-    "1010000000001010",// 2:   sta z (adresse: 10)
-    "0000000000000000",// 3:   hlt
-    "0000000000000000",// 4:   hlt
-    "0000000000000000",// 5:   hlt
-    "0000000000000000",// 6:   hlt
-    "0000000000000000",// 7:   hlt
-    "0000000000001011",// 8:   x = 11
-    "0000000000011111",// 9:   y = 31
-    "0000000000000000" //10:   z
-];
-
+const DEFAULT_PROGRAM = "9004b005a0060000000b001f0000";
+        
 const OPCODES = [
     "HLT",//0000
     "JMA",//0001
     "JMP",//0010
     "JSR",//0011
     "SWR",//0100
-    "RAL",//0101
+    "RAR",//0101
     "INP",//0110
     "OUT",//0111
     "NOT",//1000
@@ -53,14 +41,18 @@ onload = function() {
     let arc = 16;
     let bitsDatatype = new BitsDatatype(arc);
     
+    const program = [];
+    let prgStr = prompt("Speicherinhalt", DEFAULT_PROGRAM);
+    let prgLines = prgStr.match(/.{1,4}/g);
+    
     //prepare memory
     let words = [];
     let N = (1 << ADR_LENGTH);
     for (let i = 0; i < N; i++) {
-        if (PROGRAM[i] === undefined) {
+        if (prgLines[i] === undefined) {
             words.push(bitsDatatype.getDefaultValue());
         } else {
-            words.push(bitsDatatype.parseFrom01String(PROGRAM[i],true));
+            words.push(bitsDatatype.parseFromUInt(("0x" + prgLines[i])*1,arc));
         }
     }
 
@@ -91,7 +83,7 @@ onload = function() {
     let a = new ARegister(arc);
     let z = new Register(bitsDatatype);
         
-    let op = new ElementOfSetIO(AluSimple.OPERATION_DATATYPE.getElements(),false,selectClassName);
+    let op = new ElementOfSetIO(AluSimple.OPERATION_DATATYPE.getElements(),true,selectClassName);
     let ci = new BitIO(true,checkboxClassName);//carryIn
     let aIn = new BitIO(true,checkboxClassName);//a input enable
     let aOut = new BitIO(true,checkboxClassName);//a output enable
@@ -143,7 +135,10 @@ onload = function() {
     let valNext = new Bits10IO(MICRO_ADRESS_LENGTH,true,outputTextClassName);// nächte micro code adresse vor (adress magie)
     let valInfo = new FreeOutIO(outputTextClassName);
     
-    let world = new FjangWorld([clk,valBus,mem,mar,mbr,valMAR,valMBR,memWrEnable,memToMbr,mbrInputEnable,mbrOutputEnable,marInputEnable,alu,a,z,op,ci,aIn,aOut,aToZ,oToA,valA,valZ,valAluOut,co,ov,sig,pc,pcVal,pcIn,pcOut,pcCount,ir,irVal,irOp,irIn,irOut,opIntp,valOpIntp,swr,swrInput,swrOut,out,valOut,outIn,adressMagic,microAdressRegister,controlBoss,valMicroAdress,valC,valS,valNext,valInfo]);
+    let autoClk = new AutoClock(8);
+    let autoClkEnable = new BitIO(false,checkboxClassName);
+    
+    let world = new FjangWorld([clk,valBus,mem,mar,mbr,valMAR,valMBR,memWrEnable,memToMbr,mbrInputEnable,mbrOutputEnable,marInputEnable,alu,a,z,op,ci,aIn,aOut,aToZ,oToA,valA,valZ,valAluOut,co,ov,sig,pc,pcVal,pcIn,pcOut,pcCount,ir,irVal,irOp,irIn,irOut,opIntp,valOpIntp,swr,swrInput,swrOut,out,valOut,outIn,adressMagic,microAdressRegister,controlBoss,valMicroAdress,valC,valS,valNext,valInfo,autoClk,autoClkEnable]);
 
     //mem:
     //datensignale
@@ -235,6 +230,9 @@ onload = function() {
     FjangNode.connectFromTo(controlBoss.signalNodes.c,adressMagic.cNode);
     FjangNode.connectFromTo(controlBoss.signalNodes.s,adressMagic.sNode);
 
+    FjangNode.connectFromTo(a.signumNode,adressMagic.negativeNode);
+
+    
     FjangNode.connectFromTo(adressMagic.adressOutNode,microAdressRegister.busNode);
     FjangNode.connectFromTo(microAdressRegister.valueNode,controlBoss.adressInNode);
     FjangNode.connectFromTo(microAdressRegister.valueNode, valMicroAdress.bitsNode);
@@ -265,6 +263,8 @@ onload = function() {
     FjangNode.connectFromTo(controlBoss.signalNodes.carryIn,ci.bitNode);
     FjangNode.connectFromTo(controlBoss.signalNodes.aluOp,op.eosNode);
 
+    FjangNode.connectFromTo(autoClkEnable.bitNode,autoClk.enableNode);
+    FjangNode.connectFromTo(autoClk.clockNode,clk.bitNode);
     
     document.getElementById("clk").appendChild(clk.getHtmlElement());
     document.getElementById("valBus").appendChild(valBus.getHtmlElement());
@@ -309,7 +309,8 @@ onload = function() {
     document.getElementById("valS").appendChild(valS.getHtmlElement());
     document.getElementById("valInfo").appendChild(valInfo.getHtmlElement());
 
-    
+    document.getElementById("autoClkEnable").appendChild(autoClkEnable.getHtmlElement());
+
     
     
     window.setInterval(function() {
@@ -357,6 +358,7 @@ onload = function() {
     <body>
         <img src="img/computer.png" class="fliege" style=" left:0px; top:0px; width:768px; height:922px">
         <span class="fliege" style="left:250px; top:106px;">clock:<span id="clk"></span></span>
+        <span class="fliege" style="left:250px; top:136px;">autoclock:<span id="autoClkEnable"></span></span>
         <span id="valBus" class="fliege" style="left:255px; top:15px;"></span>
         <span id="valMBR" class="fliege" style="left:466px; top:120px;"></span>
         <span id="valMAR" class="fliege" style="left:466px; top:300px;"></span>

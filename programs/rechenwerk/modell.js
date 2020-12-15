@@ -94,6 +94,10 @@ class AluSimple extends FjangComponent {
                 out = [];
                 for (let i = 0; i < this.bitsLength; i++) out.push(x[i] || y[i]);
                 break;
+            case "x xor y":
+                out = [];
+                for (let i = 0; i < this.bitsLength; i++) out.push(xor(x[i],y[i]));
+                break;
             case "rar(x)":
                 out = [];
                 for (let i = 0; i < this.bitsLength; i++) out.push(x[(i+1)%this.bitsLength]);
@@ -107,7 +111,7 @@ class AluSimple extends FjangComponent {
         this.overflowNode.set(overflow);
     }
 }
-AluSimple.OPERATION_DATATYPE = new ElementOfSetDatatype(["x+y","~x","x and y","x or y","rar(x)"],"AluOp");
+AluSimple.OPERATION_DATATYPE = new ElementOfSetDatatype(["x+y","~x","x and y","x or y","x xor y","rar(x)"],"AluOp");
 
 function xor(a,b) {
     return a && !b || !a && b;
