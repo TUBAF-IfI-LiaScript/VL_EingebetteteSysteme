@@ -56,6 +56,27 @@ y: 0
   sta @adrTo
 @end
         </textarea><br><br>
+
+Bildschirm mmio schön bunt machen (deltatime verringern und ticks per frame erhöhen, sonst dauert das ewig)<br>
+<textarea rows="18" cols="32">
+loop: lda color
+add adder
+sta color
+staCmnd: sta 0x0800
+lda staCmnd
+add one
+and mask
+ior staOp
+@ selbst modifizierend:
+sta staCmnd
+jmp loop
+color: 0x0888
+adder: 0x0123
+pointer: 0x0800
+one: 1
+mask: 0x07ff
+staOp: 0b1010100000000000
+</textarea>
         <br>
     </body>
 </html>
