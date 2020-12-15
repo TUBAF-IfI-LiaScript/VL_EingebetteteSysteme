@@ -1,0 +1,61 @@
+<html>
+    <head>
+        <meta charset="utf-8"/> 
+        <title>Mein Assembler, der sich nicht an irgendwelche standards hält und so...</title>
+    </head>
+    <body>
+        Ganz Einfaches Beispiel:<br>
+        <textarea rows="8" cols="32">
+
+lda x
+add y
+sta z
+hlt
+x: 11
+y: 31
+z: 0
+@ ich bin ein dummer Kommentar
+        </textarea><br><br>
+        Endloschleife, die x immer um 3 hoch zählt:<br>
+        <textarea rows="8" cols="32">
+lda x
+loopstart:
+add y
+sta x
+jmp loopstart
+x: 0
+y: 3
+        </textarea><br><br>
+        Es ist möglich, dass der Assembler an einier bestimmten Stelle im Speicher (hier 12) etwas einfügt. x bekommt hier die Adresse 12, y die Adresse 13<br>
+        <textarea rows="8" cols="32">
+lda x
+loopstart:
+add y
+sta x
+jmp loopstart
+12:
+x: 0
+y: 3
+        </textarea><br><br>
+        Man kann Makros definieren und aufrufen:<br>
+        <textarea rows="16" cols="32">
+@ makro aufrufen:
+@cp x y
+hlt
+
+x: 123
+y: 0
+        
+@ makro definieren:
+@ (mit dem namen cp
+@ und den Parametern
+@ adrFrom und adrTo)
+
+@define cp adrFrom adrTo
+  lda @adrFrom
+  sta @adrTo
+@end
+        </textarea><br><br>
+        <br>
+    </body>
+</html>

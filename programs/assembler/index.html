@@ -1,0 +1,72 @@
+<html>
+  <head>
+    <meta charset="utf-8"/>
+    <title>VL_Eingebettete Systeme Assembler</title>
+  </head>
+  <body>
+    <h1> Assembler für die Modellarchitektur</h1>
+    <a href="./assembler.html">Zum Assembler</a><br>
+    <a href="./beispiele.html">Beispiele</a><br>
+    
+    <h2>Kommentare:</h2>
+        Eine Zeile kann mit @ am Zeilenanfang auskommentiert werden.
+    
+    <h2>Adressen:</h2>
+        Der Assembler startet in der ersten Zeile mit der Adresse 0.<br>
+        An dieser sollte der erste Befehl stehen.
+        Man kann zu adressen (hier 0x0123) springen:<br>
+        <textarea readonly cols="20" rows="2">
+0x0123: befehl/daten
+        </textarea><br>
+        Der Assembler prüft nicht, ob Befehle oder Datenwörter von anderen überschrieben werden!
+        
+    <h2>Daten:</h2>
+        Daten können binär (0b...), hexadezimal (0x...) oder dezimal vorzeichenlos angegeben werden.<br>
+        Jedes Datenwort muss auf eine eigene Zeile.
+        
+    <h2>Befehle:</h2>
+        hlt<br>
+        jma adr<br>
+        jmp adr<br>
+        jsr adr<br>
+        swr<br>
+        rar<br>
+        inp<br>
+        out<br>
+        not<br>
+        lda adr<br>
+        sta adr<br>
+        add adr<br>
+        xor adr<br>
+        and adr<br>
+        ior adr<br>
+        nop<br><br>
+    Jeder Befehl muss auf eine neue Zeile.<br>
+    Mehr als zwei Leerzeichen nebeneinander werden als eins interpretiert. Leerzeichen am Rand werden ignoriert<br>
+    <h2>Label:</h2>
+    Man kann labels definieren:<br>
+    <textarea readonly cols="30" rows="2">
+labelname: befehl/daten
+    </textarea><br>
+    oder 
+    <textarea readonly cols="20" rows="2">
+labelname:
+befehl/daten
+    </textarea><br>
+    
+    <h2>Makros:</h2>
+        Man kann Befehle in einem Makro zusammenfassen, was beliebig oft eingesetzt werden kann.<br>
+        Makro definition:<br>
+        <textarea readonly cols="60" rows="8">
+@define nameDesMakros parameterName1 parameterName2 ...
+  befehl1
+  befehl2 @parameterName1
+  ...
+@end
+        </textarea><br>
+        Makro aufrufen (hier mit den Parametern 12345 und z):<br>
+        @nameDesMakros 12345 z
+        <br>
+        WICHTIG: Der Makroaufruf muss am Anfang der Zeile Stehen (keine Labeldefinition davor).
+    </body>
+</html>
