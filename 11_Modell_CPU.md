@@ -283,11 +283,17 @@ else
 > **Achtung!** Unser Modellrechner hat bestenfalls didaktische Qualitäten. Vergleiche den Befehlssatz eines realen Systems ([ATmega Handbuch](https://ww1.microchip.com/downloads/en/DeviceDoc/Atmel-7810-Automotive-Microcontrollers-ATmega328P_Datasheet.pdf) oder [Intel Instruction Set](https://en.wikipedia.org/wiki/X86_instruction_listings))
 
 {{2}}
-> Entsprechend ändert sich auch das Ergebnis des Compiliervorganges in Abhängigkeit von der verwendeten Architektur!
+> Entsprechend ändert sich auch das Ergebnis des Compiliervorganges in Abhängigkeit von der verwendeten Architektur! (vgl [godbolt.org](https://godbolt.org/) )
 
 ## Elemente des Modelle-Rechners
 
 Die Elemente des Rechners lassen sich, wie bereits in der vergangen Vorlesung dargestellt, in 4 Kategorien einteilen - Speicher, Rechenwerk, Steuerwerk und Ein-Ausgabe.
+
+Um Ihr Verständnis zu fördern, hat ein Kommilitone - Fabian Bär - von Ihnen eine kleine Simulation vorbereitet, die das Zusammenspiel der Komponenten illustriert. Diese ist unter
+
+[Simulation](https://tubaf-ifi-liascript.github.io/VL_EingebetteteSysteme)
+
+zu finden.
 
 ### Speicherbezogene Komponente
 
@@ -320,6 +326,8 @@ In einem Speicherzyklus muss der Prozessor zunächst eine Adresse liefern, die w
 2. Das Speicher-Puffer-Register (MBR : Memory Buffer Register). Bei einer Schreiboperation legt der Prozessor ein Datenwort hier ab, so dass es durch den (langsamen) Schreibvorgang im Speicher unter der Adresse abgespeichert wird, die im MAR spezifiziert ist. Beim Lesen stößt der Prozessor den Lesevorgang an und kann später das adressierte Wort aus dem MBR auslesen. Die Adresse ist bei uns 11Bit breit. Wir können also 2^11 Adressen ansprechen, die jeweils 16 Bit Daten repräsentieren.
 
 Durch MBR und MAR sind Prozessor und Speicher bezüglich ihrer Zykluszeiten weitgehend entkoppelt.
+
+[Link auf den Simulator](https://tubaf-ifi-liascript.github.io/VL_EingebetteteSysteme/programs/memory/index.html)
 
 ### Datenpfadbezogene Komponente
 
@@ -356,6 +364,7 @@ ditaa
 @enduml
 ```
 
+[Link auf den Simulator](https://tubaf-ifi-liascript.github.io/VL_EingebetteteSysteme/programs/rechenwerk/index.html)
 
 ### Steuerwerk
 
@@ -446,6 +455,8 @@ ditaa
 2. Das Schalterregister (`Switch Register: SWR`) besteht aus 16 Schaltern, die z.B. an der Frontplatte eines Rechners angebracht sind. Sie können manuell gesetzt und vom Rechner abgefragt werden.
 3. Der Programmzähler (`Programm Counter`) wird beim Unterprogrammsprung(JSR, Jump Subroutine) in den Akkumulator geladen, durch den Befehl RTS (Return from Subroutine) wird der Inhalt des Akkumulators in den Programmzähler geladen.
 4. Das `Halt-Flip-Flop` wird durch den Befehl HLT gesetzt. Es kann nur manuell zurückgesetzt werden.
+
+[Link auf den Simulator](https://tubaf-ifi-liascript.github.io/VL_EingebetteteSysteme/programs/computermanuell/index.html)
 
 ## Beschreibung der prozessorinternen Vorgänge
 
@@ -721,14 +732,17 @@ Oscillator           |---|   |   |   |                                          
 @enduml
 ```
 
-### Realsierung der Kombinatorischen Logik in der Kontrolleinheit
+### Realsierung der kombinatorischen Logik in der Kontrolleinheit
 
 ![Schaltung](./images/11_Modell_CPU/EinZyklusBefehle.png)<!-- width="80%" -->
 
-![kombinatorik1](./images/11_Modell_CPU/kombinatorik1.svg.png)<!-- width="20%" -->
-![kombinatorik2](./images/11_Modell_CPU/kombinatorik2.svg.png)<!-- width="20%" -->
-![kombinatorik3](./images/11_Modell_CPU/kombinatorik3.svg.png)<!-- width="20%" -->
-![kombinatorik4](./images/11_Modell_CPU/kombinatorik4.svg.png)<!-- width="20%" -->
+`Bus off` == Lesender Zugriff auf den Bus /
+`Bus on` == schreibender Zugriff
+
+![kombinatorik1](./images/11_Modell_CPU/kombinatorik1.svg.png)<!-- width="10%" -->
+![kombinatorik2](./images/11_Modell_CPU/kombinatorik2.svg.png)<!-- width="10%" -->
+![kombinatorik3](./images/11_Modell_CPU/kombinatorik3.svg.png)<!-- width="10%" -->
+![kombinatorik4](./images/11_Modell_CPU/kombinatorik4.svg.png)<!-- width="10%" -->
 
 ## Beschränkungen der aktuellen Lösung
 
@@ -765,7 +779,7 @@ ditaa
 @enduml
 ```
 
-
+{{0-1}}
 | Aspekt                      | Kombinatorische Logik                  |
 | --------------------------- | -------------------------------------- |
 | Grundlegende Repräsentation | Endlicher Automat                      |
@@ -773,7 +787,7 @@ ditaa
 | Logische Repräsentation     | Boolsche Gleichungen                   |
 | Implementierungstechnik     | Gatter, Programmierbare Logikbausteine |
 
-
+{{1-2}}
 ```text @plantUML.png
 @startuml
 ditaa
@@ -812,16 +826,13 @@ ditaa
 @enduml
 ```
 
+{{1-2}}
 | Aspekt                      | Kombinatorische Logik                  | Mikroprogramm     |
 | --------------------------- | -------------------------------------- | ----------------- |
 | Grundlegende Repräsentation | Endlicher Automat                      | Programm          |
 | Fortschaltung der Kontrolle | Expliziter Folgezustand                | Programmzähler    |
 | Logische Repräsentation     | Boolsche Gleichungen                   | Wahrheitstabelle  |
 | Implementierungstechnik     | Gatter, Programmierbare Logikbausteine | R/W-Speicher, ROM |
-
-
-Die Folgeadresse ergibt sich aus dem Folgezustand und beim Operation Decode aus dem Opcode.
-Die Wörter im Mikroprogram Speicher enthalten Informationen zu den Kontroll Signalen und der Folgezustandkontrolle.
 
 
 ## Mikroprogramme
@@ -910,20 +921,23 @@ Das Mikroprogrammwort enthält außer dem Steuerteil noch den Adressteil. Der Ad
 
 Um die Sprünge zu realisieren werden dem Mikroprogrammwort neben der Folgeadresse zwei Flags beigefügt:
 
-+ `c` - "computed next":  Die Folgeadresse wird aus der Adresse im Adressfeld der MIP und dem OPCODE-Feld des IR15-12 gebildet. Dabei wird das OPCODE-Feld auf die Adresse im Adressfeld des MIP-Wortes addiert.
++ "computed next" `c` - Die Folgeadresse wird aus der Adresse im Adressfeld der MIP und dem OPCODE-Feld des $IR_{15-12}$ gebildet. Dabei wird das OPCODE-Feld auf die Adresse im Adressfeld des MIP-Wortes addiert.
 
-+ `s` - "skip next on condition": Berücksichtigt wird das Vorzeichenbit des Akkumulators $A_{15} = 0$. Trifft die Bedingung zu, d.h. $A_{15} = 0$, wird die nächste Instruktion übersprungen (Folgeadresse +1). Trifft die Bedingung nicht zu, wird die nächste Instruktion von der spezifizierten Folgeadresse genommen.
++ skip next on condition `s`- Berücksichtigt wird das Vorzeichenbit des Akkumulators $A_{15}=0$. Trifft die Bedingung zu, d.h. $A_{15}=0$, wird die nächste Instruktion übersprungen (Folgeadresse +1). Trifft die Bedingung nicht zu, wird die nächste Instruktion von der spezifizierten Folgeadresse genommen.
 
-![AdressierungsEinheit](./images/11_Modell_CPU/AdressierungsEinheit.png)<!-- width="100%" -->
+![AdressierungsEinheit](./images/11_Modell_CPU/AdressierungsEinheit.png)<!-- width="60%" -->
 
 ### Layout eines Programmes im Mikroprogammspeicher
 
-MikroprogrammSpeicherAuszug
+Und wie sieht das nun konkret aus?
 
-![AdressierungsEinheit](./images/11_Modell_CPU/MikroprogrammSpeicherAuszug.png)<!-- width="100%" -->
+![AdressierungsEinheit](./images/11_Modell_CPU/MikroprogrammSpeicherAuszug.png)<!-- width="60%" -->
 
 {{1}}
-![AdressierungsEinheit](./images/11_Modell_CPU/MikroprogrammSpeicherAuszugII.png)<!-- width="100%" -->
+> **Frage: ** Welche Vereinfachungsmöglichkeiten sehen Sie?
+
+{{2}}
+![AdressierungsEinheit](./images/11_Modell_CPU/MikroprogrammSpeicherAuszugII.png)<!-- width="60%" -->
 
 
 ### Horizontale vs. vertikale Mikroprogrammierung
@@ -934,9 +948,9 @@ MikroprogrammSpeicherAuszug
 
 + _Wie erreicht man größtmöglichen Komfort bei der Programmierung?_ Zielkonflikt: Komfort gegen Effizienz und Flexibilität
 
-![AdressierungsEinheit](./images/11_Modell_CPU/vertikaleMikroprogrammierung.png)<!-- width="100%" -->
+![AdressierungsEinheit](./images/11_Modell_CPU/vertikaleMikroprogrammierung.png)<!-- width="60%" -->
 
-![AdressierungsEinheit](./images/11_Modell_CPU/horizontaleMikroprogrammierung.png)<!-- width="100%" -->
+![AdressierungsEinheit](./images/11_Modell_CPU/horizontaleMikroprogrammierung.png)<!-- width="60%" -->
 
 
 |          | Horizontale Mikroprogrammierung                                            | Vertikale Mikroprogrammierung                                                                |
