@@ -235,6 +235,10 @@ class AluSimple extends FjangComponent {
                 out = [];
                 for (let i = 0; i < this.bitsLength; i++) out.push(x[i] || y[i]);
                 break;
+            case "x xor y":
+                out = [];
+                for (let i = 0; i < this.bitsLength; i++) out.push(xor(x[i],y[i]));
+                break;
             case "rar(x)":
                 out = [];
                 for (let i = 0; i < this.bitsLength; i++) out.push(x[(i+1)%this.bitsLength]);
@@ -248,7 +252,7 @@ class AluSimple extends FjangComponent {
         this.overflowNode.set(overflow);
     }
 }
-AluSimple.OPERATION_DATATYPE = new ElementOfSetDatatype(["x+y","~x","x and y","x or y","rar(x)"],"AluOp");
+AluSimple.OPERATION_DATATYPE = new ElementOfSetDatatype(["x+y","~x","x and y","x or y","x xor y","rar(x)"],"AluOp");
 
 function xor(a,b) {
     return a && !b || !a && b;
@@ -343,5 +347,24 @@ class ControlBoss extends FjangComponent {
         this.currentStateIndex = this.microAdressBitsDatatype.toUInt(this.adressInNode.get());
         let currentState = this.states[this.currentStateIndex];
         for (let n of this.signalNames) this.signalNodes[n].set(currentState[n]);
+    }
+}
+
+class AutoClock extends FjangComponent {
+    constructor(oscillationPeriod) {
+        super();
+        this.oscillationPeriod = oscillationPeriod;
+        this.time = 1;
+        this.enableNode = new FjangNode(BitDatatype.STATIC);
+        this.clockNode = new FjangNode(BitDatatype.STATIC);
+    }
+    getNodes() {
+        return [this.enableNode,this.clockNode];
+    }
+    tick() {
+        if (this.enableNode.get()) {
+            this.clockNode.set(this.time === 0);
+            this.time = (this.time+1)%this.oscillationPeriod;
+        }
     }
 }
