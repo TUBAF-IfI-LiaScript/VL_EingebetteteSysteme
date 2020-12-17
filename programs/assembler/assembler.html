@@ -1,0 +1,76 @@
+<html>
+    <head>
+        <meta charset="utf-8"/> 
+        <title>Mein Assembler, der sich nicht an irgendwelche standards hält und so...</title>
+        <script type="text/javascript" src="assembler.js"></script>
+        <script type="text/javascript">
+const BIN = ["0","1"];
+const HEX = ["0","1","2","3","4","5","6","7","8","9","a","b","c","d","e","f"];
+function ass() {
+    let s = document.getElementById("code").value;
+    try {
+        let noMakrosLines = assembleStep1(s);
+        let noMakrosStr = "";
+        let i = 0;
+        for (let l of noMakrosLines) {
+            for (let w of l) {
+                noMakrosStr += w + " "
+            }
+            noMakrosStr += "\n";
+            i++;
+        }
+        document.getElementById("nomakros").value = noMakrosStr;
+
+
+        let instrOlyLines = assembleStep2(noMakrosLines);
+        let instrOlyStr = "";
+        i = 0;
+        for (let l of instrOlyLines) {
+            instrOlyStr += i + ":\t";
+            for (let w of l) {
+                instrOlyStr += w + " "
+            }
+            instrOlyStr += "\n";
+            i++;
+        }
+        document.getElementById("instructionsonly").value = instrOlyStr;
+        let bin = assembleStep3(instrOlyLines);
+        
+        console.log(bin);
+        let binStr = "";
+        for (let n of bin) {
+            for (let i = 15; i >= 0; i--) binStr += BIN[(n >> i) & 1];
+            binStr += "\n";
+        }
+        document.getElementById("binary").value = binStr;
+        
+        let hexStr = "";
+        for (let n of bin) {
+            hexStr += HEX[(n >> 12) & 0xf] + HEX[(n >> 8) & 0xf] + HEX[(n >> 4) & 0xf] + HEX[n & 0xf];
+        }
+        
+        document.getElementById("hex").value = hexStr;
+        
+    } catch (e) {
+       console.log(e);
+        alert(e);
+    }
+}
+        </script>
+    </head>
+    <body>
+        <textarea id="code" rows="16" cols="32">
+lda x 
+sta y 
+hlt 
+x: 123 
+y: 0
+        </textarea>
+        <textarea id="nomakros" rows="16" cols="32" readonly spellcheck="false"></textarea>
+        <textarea id="instructionsonly" rows="16" cols="32" readonly spellcheck="false"></textarea>
+        <textarea id="binary" rows="16" cols="32" readonly spellcheck="false"></textarea><br/>
+        <input type="button" onclick="ass()" value="Assemble"/><br>
+        Hexadezimale Program Daten:<textarea id="hex" rows="4" cols="64" readonly spellcheck="false"></textarea><br/>
+        <a href="./beispiele.html">Beispiele</a>
+    </body>
+</html>

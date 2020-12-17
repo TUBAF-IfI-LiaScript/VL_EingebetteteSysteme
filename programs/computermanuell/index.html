@@ -1,12 +1,13 @@
 <html>
     <head>
         <meta charset="utf-8"/>
-        <title>Speicher</title>
+        <title>Computer (manuell)</title>
         <script type="text/javascript" src="fjangnodes.js"></script>
         <script type="text/javascript" src="basictypes.js"></script>
         <script type="text/javascript" src="component.js"></script>
         <script type="text/javascript" src="webinterfacenodes.js"></script>
         <script type="text/javascript" src="modell.js"></script>
+        <script type="text/javascript" src="mmio.js"></script>
         <script type="text/javascript">
 const PROGRAM = [
     "1001000000001000",// 0:   lda x (adresse: 8) (program start)
@@ -41,7 +42,8 @@ const OPCODES = [
     "NOP" //1111
 ];
 const ADR_LENGTH = 12;
-        
+const SCREEN_ZOOM = 6;
+
         
 onload = function() {
     let checkboxClassName = "cbx";
@@ -252,14 +254,24 @@ onload = function() {
     document.getElementById("valOut").appendChild(valOut.getHtmlElement());
     document.getElementById("outIn").appendChild(outIn.getHtmlElement());
 
+     // ----------------------- MMIO -------------------
+    
+    
+    let mmioMem = new MemOutput(words,arc,0,20);
+    document.getElementById("mmioMem").appendChild(mmioMem.getHtmlElement());
+    let mmioScreen = new ImageOutRGBA16(words,0x800,64,32,SCREEN_ZOOM,true);
+    document.getElementById("mmioScreen").appendChild(mmioScreen.getHtmlElement());
+
+    let mmioElements = [mmioMem,mmioScreen];
     
     window.setInterval(function() {
         world.tick();
-        let memoValStr = "Memory:\n";
-        for (let i = 0; i < 20; i++) {
-            memoValStr+= bitsDatatype.to01String(words[i],true) + " (" + i + ")\n";
-        }
-        document.getElementById("memValue").value = memoValStr + "...";
+        for (let m of mmioElements) m.tick();
+        //let memoValStr = "Memory:\n";
+        //for (let i = 0; i < 20; i++) {
+        //    memoValStr+= bitsDatatype.to01String(words[i],true) + " (" + i + ")\n";
+        //}
+        //document.getElementById("memValue").value = memoValStr + "...";
     },100);
 }
 
@@ -332,8 +344,10 @@ onload = function() {
         <span id="valOut" class="fliege" style="left:95px; top:845px;"></span>
         <span id="outIn" class="fliege" style="left:325px; top:849px;"></span>
 
+        <span id="mmioMem" class="fliege" style="left:770px; top:0px;"></span>
+        <span id="mmioScreen" class="fliege" style="left:770px; top:500px;">Bildschirm (MMIO, Adresse 0xf00 bis 0xfff, 12 Bit Farben, xxxxbbbbggggrrrr)<br></span>
         
-        <textarea id="memValue" class="fliege" style="top:0px; left:770px;" rows="22" cols="20" readonly></textarea>
+        <!--textarea id="memValue" class="fliege" style="top:0px; left:770px;" rows="22" cols="20" readonly></textarea-->
         
     </body>
 </html>
