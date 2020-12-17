@@ -964,8 +964,7 @@ Und wie sieht das nun konkret aus?
 Ausgangspunkt der Mikroprogrammierung:
 
 1. Mächtige Maschinenbefehle unterstützen den Programmierer.
-2. Leichte Änderbarkeit der Maschinenbefehle ist notwendig, um die Fortentwicklung des Befehlssatzes und Spezialanwendungen zu
-unterstützen.
+2. Leichte Änderbarkeit der Maschinenbefehle ist notwendig, um die Fortentwicklung des Befehlssatzes und Spezialanwendungen zu unterstützen.
 3. Mikroprogramme können leichter entworfen werden als Logik.
 4. Mikroprogramme können komplexe Operationen effizienter bereitstellen als eine Sequenz von Maschineninstruktionen, da sie die Parallelität der Hardware ausnutzen können.
 5. Mikroprogramme können komplexe Operationen effizienter bereitstellen als eine Sequenz von Maschineninstruktionen, da Mikroprogrammspeicher schneller ist als Speicher für Maschinenprogramme.
