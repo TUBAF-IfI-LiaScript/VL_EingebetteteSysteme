@@ -311,9 +311,9 @@ Eine weitergehendere Beschäftigung mit dem eigentlichen Befehlssatz ist an dies
 | MA        | Memory Access                           | Daten werden aus dem Speicher geladen oder in den Speicher geschrieben                                         |
 | WB        | Write Back                              | Resultat der Berechnung wird in ein Zielregister übertragen                                                    |
 
-![Fließbandverarbeitung](https://upload.wikimedia.org/wikipedia/commons/thumb/9/9e/Pipeline_MIPS.png/800px-Pipeline_MIPS.png)<!-- width="60%" --> [^1]
+![Fließbandverarbeitung](https://upload.wikimedia.org/wikipedia/commons/thumb/9/9e/Pipeline_MIPS.png/800px-Pipeline_MIPS.png)<!-- width="60%" --> [^2]
 
-[^1]: Autor: Hellisp, Pipelined MIPS Microprocessor, https://commons.wikimedia.org/wiki/File:Pipeline_MIPS.png
+[^2]: Autor: Hellisp, Pipelined MIPS Microprocessor, https://commons.wikimedia.org/wiki/File:Pipeline_MIPS.png
 
 > Nach unserer Rechnung ließe sich mit einem solchen System eine Beschleunigung von
 > $$ S = lim \frac{n \cdot 5}{5 + (n-1)} = 5 $$
@@ -469,9 +469,9 @@ style="width: 80%; min-width: 420px; max-width: 720px;"
 
     Wenn ein Zweig ausgewertet wird, wird der entsprechende Zustandsautomat aktualisiert. Zweige, die als nicht belegt bewertet werden, ändern den Zustand in Richtung stark nicht belegt, und Zweige, die als belegt bewertet werden, ändern den Zustand in Richtung stark belegt. Der Vorteil des Zwei-Bit-Zählerschemas gegenüber einem Ein-Bit-Schema ist, dass ein bedingter Sprung zweimal von dem abweichen muss, was er in der Vergangenheit am meisten getan hat, bevor sich die Vorhersage ändert. Zum Beispiel wird ein schleifenschließender bedingter Sprung einmal und nicht zweimal falsch vorhergesagt.
 
-![BranchPrediction](https://upload.wikimedia.org/wikipedia/commons/thumb/c/c8/Branch_prediction_2bit_saturating_counter-dia.svg/1920px-Branch_prediction_2bit_saturating_counter-dia.svg.png)<!--style="width: 80%; min-width: 420px; max-width: 720px;"--> [^1]
+![BranchPrediction](https://upload.wikimedia.org/wikipedia/commons/thumb/c/c8/Branch_prediction_2bit_saturating_counter-dia.svg/1920px-Branch_prediction_2bit_saturating_counter-dia.svg.png)<!--style="width: 80%; min-width: 420px; max-width: 720px;"--> [^3]
 
-[^1] State diagram of 2-bit saturating counter for branch predictor, https://en.wikipedia.org/wiki/Branch_predictor#/media/File:Branch_prediction_2bit_saturating_counter-dia.svg
+[^3] State diagram of 2-bit saturating counter for branch predictor, https://en.wikipedia.org/wiki/Branch_predictor#/media/File:Branch_prediction_2bit_saturating_counter-dia.svg
 
 ********************************************************************************
 
@@ -604,13 +604,13 @@ Instruktionen durch den Compiler einfach und überschaubar ist.
 | Aufwändigere Implementierung IM ASSEMBLER | höhere Taktraten                     |
 |                                           | Ausnutzung von Pipelining Techniken  |
 
-|                                   | CISC    | RISC    |
-| --------------------------------- | ------- | ------- |
-| Ausführungszeit einer Instruktion | $geq 1$ | meist 1 |
-
-
-
-
+|                                   | CISC          | RISC     |
+| --------------------------------- | ------------- | -------- |
+| Ausführungszeit einer Instruktion | $geq 1$       | meist 1  |
+| Instruktuionssatz                 | groß          | klein    |
+| Instruktionsformat                | variabel      | strikt   |
+| CPU-Abarbeitungslogik             | Mikroprogramm | Hardware |
+| Komplexität                       | Hardware      | Compiler |
 
 > **Merke: ** Die Abgrenzung zwischen Complex Instruction Set (CISC) vs Reduced Instruction Set (RISC) ist heute kaum noch präsent. Vielmehr verschmelzen die Konzepte in aktuellen Prozessoren.
 
@@ -630,3 +630,19 @@ Tabak argumentierte, dass 5 der Kriterien positiv evaluiert sein müssen, um ein
 Womit haben wir es also bei unserem Modellrechner zu tuen?
 
 ### Atmega32 als RISC Architektur
+
+Und wie geht es insgesamt weiter?
+
+![atmega](./images/12_Pipeline/AtmegaArchitektur.png)<!--style="width: 80%; min-width: 420px; max-width: 720px;"--> [^4]
+
+[^4]: Firma Microchip, Handbuch Atmega, https://ww1.microchip.com/downloads/en/DeviceDoc/Atmel-7810-Automotive-Microcontrollers-ATmega328P_Datasheet.pdf
+
+![atmega](./images/12_Pipeline/AtmegaPipline.png)<!--style="width: 80%; min-width: 420px; max-width: 720px;"--> [^4]
+
+[^4]: Firma Microchip, Handbuch Atmega, https://ww1.microchip.com/downloads/en/DeviceDoc/Atmel-7810-Automotive-Microcontrollers-ATmega328P_Datasheet.pdf
+
+### Vorbereitung der praktischen Aufgaben
+
+Wer von Ihnen hat bereits Erfahrung bei der Arbeit mit Arduino?
+
+Wer von Ihnen hat Zugriff auf einen Arduino Uno, einen Nano oder einen anderen Mikrocontroller?
