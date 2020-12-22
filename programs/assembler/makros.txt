@@ -1,0 +1,60 @@
+@ ----- Konstanten -----
+
+zero: 0
+one: 1
+full: 0xffff
+opcodemask: 0xf000
+operantmask: 0x0fff
+staopcode: 0b1010000000000000
+ldaopcode: 0b1001000000000000
+
+
+@ ----- Math -----
+
+@define negateA
+  not
+  add one
+@end
+
+@define sum a b y
+  lda @a
+  add @b
+  sta @y
+@end
+
+@define diff a b y
+  lda @b
+  @negateA
+  add @a
+  sta @y
+@end
+
+@ ----- Memory -----
+
+@define cp adrFrom adrTo
+  lda @adrFrom
+  sta @adrTo
+@end
+
+@ schreibt das Wort an der Adresse valAdr zu der Adresse, die bei adrAdr im Speicher liegt
+
+@define writePointer valAdr adrAdr
+  lda @adrAdr
+  and operantmask
+  ior staopcode
+  sta stCmndLocation
+  lda @valAdr
+  stCmndLocation: sta 0
+@end
+
+@ liest das Wort, was an der Adresse, die bei adrAdr im Speicher liegt und kopiert es zu destAdr
+
+@define readPointer destAdr adrAdr
+  lda @adrAdr
+  and operantmask
+  ior ldaopcode
+  sta ldCmndLocation
+  ldCmndLocation: lda 0
+  sta @destAdr
+@end
+

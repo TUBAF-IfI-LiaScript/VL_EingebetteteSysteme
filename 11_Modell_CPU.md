@@ -236,10 +236,64 @@ Der entsprechende Speicherauszug dazu:
 
 Da wir als Befehl nur den zyklischen Linksshift (`RAL`) um 1 Stelle zur Vefügung haben, müssen wir den zyklischen Rechtsshift um eine beliebige Anzahl (<215-1) von Stellen durch ein Programm simulieren. Im Modellrechner kann in einem Befehl kein Direktoperand angegeben werden. Deshalb werden alle Konstanten und Variablen im Speicher ablegen.
 
+Und wie kommen wir dahin? In den seltensten Fällen wollen wir einen Rechner in der Assemblersprache programmieren. Deshalb nutzen wir Compiler, um ausgehend von einer Hochsprache (C, C++, ...) die für den Prozessor verständlichen Sprachkonstrukte zu generieren.
+
+> **Aufgabe: ** Setzen Sie folgendes Fragment eines C-Programmes in einem Assembler-Code für unseren Modellrechner um.
+
+```
+#include<stdlib.h>
+
+var = -10;
+
+if (var < 0){
+  var++;
+  digitalWrite(); // Ausgabe des Wertes von Register A auf dem Ausgabedisplay
+}
+else
+{
+  stop();         // Ausführen des HLT Befehls
+}
+```
+
+{{1}}
+| Adresse  | Speicherinhalt    |                      Programmzeilen                      | Kommentar                                                       |
+| -------- | ----------------- |:--------------------------------------------------------:| --------------------------------------------------------------- |
+| 00010000 | $1001$ $10000001$ | `         LDA 10000001`<!-- style="white-space: pre;"--> | Lade den Wert von var aus dem Speicher $10000001$ in Register A |
+| 00010001 | $0001$ $10000010$ | `         JMA 00010011`<!-- style="white-space: pre;"--> | Wenn ein negativer Wert vorliegt, springe zu AddrIf             |
+| 00010010 | $0000$ $ -------$ | `         HLT         `<!-- style="white-space: pre;"--> | Stoppe die Abarbeitung                                          |
+| 00010011 | $1011$ $10000010$ | `AddrIf   ADD 10000010`<!-- style="white-space: pre;"--> | Inkrementiere A                                                 |
+| 00010100 | $0100$ $ -------$ | `         SWR         `<!-- style="white-space: pre;"--> | Zeige A auf dem LED Streifen an                                 |
+| 00011100 | $1010$ $10000011$ | `         STA 10000001`<!-- style="white-space: pre;"--> | Speichere A                               |
+
+{{1}}
+| Adresse  | Speicherinhalt | Bedeutung     |
+| -------- | -------------- | ------------- |
+| 00010000 | $100110000001$ |               |
+| 00010001 | $000110000010$ |               |
+| 00010010 | $000000000000$ |               |
+| 00010011 | $101110000010$ |               |
+| 00010100 | $010000000000$ |               |
+| 00011100 | $101010000011$ |               |
+| ...      |                |               |
+| 10000001 | $111111110110$ | int var = -10 |
+| 10000010 | $000000000001$ | Konstante 1   |
+
+
+{{2}}
+> **Achtung!** Unser Modellrechner hat bestenfalls didaktische Qualitäten. Vergleiche den Befehlssatz eines realen Systems ([ATmega Handbuch](https://ww1.microchip.com/downloads/en/DeviceDoc/Atmel-7810-Automotive-Microcontrollers-ATmega328P_Datasheet.pdf) oder [Intel Instruction Set](https://en.wikipedia.org/wiki/X86_instruction_listings))
+
+{{2}}
+> Entsprechend ändert sich auch das Ergebnis des Compiliervorganges in Abhängigkeit von der verwendeten Architektur! (vgl [godbolt.org](https://godbolt.org/) )
 
 ## Elemente des Modelle-Rechners
 
 Die Elemente des Rechners lassen sich, wie bereits in der vergangen Vorlesung dargestellt, in 4 Kategorien einteilen - Speicher, Rechenwerk, Steuerwerk und Ein-Ausgabe.
+
+Um Ihr Verständnis zu fördern, hat ein Kommilitone - Fabian Bär - von Ihnen eine kleine Simulation vorbereitet, die das Zusammenspiel der Komponenten illustriert. Diese ist unter
+
+[Simulation](https://tubaf-ifi-liascript.github.io/VL_EingebetteteSysteme)
+
+zu finden.
 
 ### Speicherbezogene Komponente
 
@@ -273,13 +327,15 @@ In einem Speicherzyklus muss der Prozessor zunächst eine Adresse liefern, die w
 
 Durch MBR und MAR sind Prozessor und Speicher bezüglich ihrer Zykluszeiten weitgehend entkoppelt.
 
+[Link auf den Simulator](https://tubaf-ifi-liascript.github.io/VL_EingebetteteSysteme/programs/memory/index.html)
+
 ### Datenpfadbezogene Komponente
 
 Der Datenpfad besteht aus der ALU, dem allgemeinen Register A (Akkumulator), einem Hilfsregister Z und dem Eingang-Ausgang-Schalterregister SWR. Die zweistelligen arithmetischen und logischen Befehle haben alle die Form:
 
 < OPCODE, addr >
 
-Sie setzen voraus, daß der eine Operand in A steht, der zweite Operand muß aus dem Speicher von Adresse "addr" gelesen wird. Dabei gehen wir davon aus, dass der Operand im MBR zur Verfügung steht. Da die ALU rein kombinatorisch aufgebaut werden soll, müssen beide Operanden während der Verarbeitungszeit an den Eingängen anliegen. Das Ergebnis der Operation wird in A verfügbar gemacht. Damit das Ergebnis der Operation nicht einen der Operanden in A überschreibt, ist das Hilfsregister Z vorgesehen. Während der Befehlsausführung wird der Operand aus A nach Z transferiert, damit das Ergebnis in A gespeichert werden kann.
+Sie setzen voraus, daß der eine Operand in A steht, der zweite Operand muss aus dem Speicher von Adresse `addr` gelesen wird. Dabei gehen wir davon aus, dass der Operand im MBR zur Verfügung steht. Da die ALU rein kombinatorisch aufgebaut werden soll, müssen beide Operanden während der Verarbeitungszeit an den Eingängen anliegen. Das Ergebnis der Operation wird in A verfügbar gemacht. Damit das Ergebnis der Operation nicht einen der Operanden in A überschreibt, ist das Hilfsregister Z vorgesehen. Während der Befehlsausführung wird der Operand aus A nach Z transferiert, damit das Ergebnis in A gespeichert werden kann.
 
 ```text @plantUML.png
 @startuml
@@ -287,14 +343,13 @@ ditaa
 +---------------------------------+
 |  Datenpfadbezogene Komponenten  |
 |  c88F                           |
-|                                 |
 | +-----------------------------+ |
 | |        Z-Register           | |
 | +-----------------------------+ |
 | |                             | |
 | |             ALU             | |
 | |                             | |
-| +-----------------------------+ |
+| +-----------+-----------------+ |
 |             |     ^             |
 |             v     |             |
 | +-----------------+-----------+ |
@@ -303,12 +358,13 @@ ditaa
 |             |     ^             |
 |             V     |             |
 | +-----------------+-----------+ |
-| |            SWR              | |
+| |              SWR            | |
 | +-----------------------------+ |
 +---------------------------------+
 @enduml
 ```
 
+[Link auf den Simulator](https://tubaf-ifi-liascript.github.io/VL_EingebetteteSysteme/programs/rechenwerk/index.html)
 
 ### Steuerwerk
 
@@ -399,6 +455,8 @@ ditaa
 2. Das Schalterregister (`Switch Register: SWR`) besteht aus 16 Schaltern, die z.B. an der Frontplatte eines Rechners angebracht sind. Sie können manuell gesetzt und vom Rechner abgefragt werden.
 3. Der Programmzähler (`Programm Counter`) wird beim Unterprogrammsprung(JSR, Jump Subroutine) in den Akkumulator geladen, durch den Befehl RTS (Return from Subroutine) wird der Inhalt des Akkumulators in den Programmzähler geladen.
 4. Das `Halt-Flip-Flop` wird durch den Befehl HLT gesetzt. Es kann nur manuell zurückgesetzt werden.
+
+[Link auf den Simulator](https://tubaf-ifi-liascript.github.io/VL_EingebetteteSysteme/programs/computermanuell/index.html)
 
 ## Beschreibung der prozessorinternen Vorgänge
 
@@ -674,14 +732,17 @@ Oscillator           |---|   |   |   |                                          
 @enduml
 ```
 
-### Realsierung der Kombinatorischen Logik in der Kontrolleinheit
+### Realsierung der kombinatorischen Logik in der Kontrolleinheit
 
 ![Schaltung](./images/11_Modell_CPU/EinZyklusBefehle.png)<!-- width="80%" -->
 
-![kombinatorik1](./images/11_Modell_CPU/kombinatorik1.svg.png)<!-- width="20%" -->
-![kombinatorik2](./images/11_Modell_CPU/kombinatorik2.svg.png)<!-- width="20%" -->
-![kombinatorik3](./images/11_Modell_CPU/kombinatorik3.svg.png)<!-- width="20%" -->
-![kombinatorik4](./images/11_Modell_CPU/kombinatorik4.svg.png)<!-- width="20%" -->
+`Bus off` == Lesender Zugriff auf den Bus /
+`Bus on` == schreibender Zugriff
+
+![kombinatorik1](./images/11_Modell_CPU/kombinatorik1.svg.png)<!-- width="10%" -->
+![kombinatorik2](./images/11_Modell_CPU/kombinatorik2.svg.png)<!-- width="10%" -->
+![kombinatorik3](./images/11_Modell_CPU/kombinatorik3.svg.png)<!-- width="10%" -->
+![kombinatorik4](./images/11_Modell_CPU/kombinatorik4.svg.png)<!-- width="10%" -->
 
 ## Beschränkungen der aktuellen Lösung
 
@@ -718,7 +779,7 @@ ditaa
 @enduml
 ```
 
-
+{{0-1}}
 | Aspekt                      | Kombinatorische Logik                  |
 | --------------------------- | -------------------------------------- |
 | Grundlegende Repräsentation | Endlicher Automat                      |
@@ -726,7 +787,7 @@ ditaa
 | Logische Repräsentation     | Boolsche Gleichungen                   |
 | Implementierungstechnik     | Gatter, Programmierbare Logikbausteine |
 
-
+{{1-2}}
 ```text @plantUML.png
 @startuml
 ditaa
@@ -765,6 +826,7 @@ ditaa
 @enduml
 ```
 
+{{1-2}}
 | Aspekt                      | Kombinatorische Logik                  | Mikroprogramm     |
 | --------------------------- | -------------------------------------- | ----------------- |
 | Grundlegende Repräsentation | Endlicher Automat                      | Programm          |
@@ -773,8 +835,139 @@ ditaa
 | Implementierungstechnik     | Gatter, Programmierbare Logikbausteine | R/W-Speicher, ROM |
 
 
-Die Folgeadresse ergibt sich aus dem Folgezustand und bem Operation Decode aus dem Opcode.
-Die Wörter im Mikroprogram Speicher enthalten Informationen zu den Kontroll Signalen und der Folgezustandkontrolle.
+## Mikroprogramme
+
+Motivation
+----------------------
+
+Realisierung am Beispiel der Implementierung eines `JMA`-Befehls als Mikroprogramm
+
+<!--
+style="width: 80%; min-width: 420px; max-width: 720px;"
+-->
+```ascii
+                               |                      |
+                               +----------------------+  -+            <-----+
+                               |    MBR <- M[MAR]     |   |                  |
+                               +----------------------+   |                  |
+                               |         NOP          |   |                  |
+                               +----------------------+   |> Prolog für      |
+                               |    PC <- PC + 1      |   |  alle            |
+       +---------+             +----------------------+   |  Mikroprogramme  |
+       | OPCODE  | <---------- |      IR <- MBR       |   |                  |
+       +---------+             +----------------------+  -+                  |
+            |                  |                      |                      |
+            v                  +----------------------+                      |
+       +---------+             |                      |                      |
+       | Adress- |             +----------------------+                      |
+       | magie   | ----------> |A15=0: skip next inst.|                      |
+       +---------+             +----------------------+                      |
+                               |    PC<-IR{11-0}      |                      |
+                               +----------------------+                      |
+                               |    MAR <- PC         |  --------------------+
+                               +----------------------+      Rücksprung
+                               |                      |
+
+```
+
++ Fortlaufende Abarbeitung der Mikroprogramminstruktionen
++ Die externe Quelle der Bedingungen auszuwählen.
++ Einen Indexmechanismus einzuführen, der es erlaubt, eine Adresse aus dem Adressfeld der MIP und externen Adressinformationen zu bilden (bedingte Adressfortschaltung)
+
+### Umsetzung
+
+Das Mikroprogrammwortes umfasst alle Steuersignale für Register, ALU, Speicher, usw., die jeweils durch ein Bit in der repräsentiert sind. Eine Steuerleitung wird aktiviert, wenn dieses Bit auf "1" gesetzt ist. Wird das Bit auf "0" gesetzt, wird die Steuerleitung deaktiviert. Der erste Teil des Mikroprogrammwortes wird entsprechend als Steuerwort bezeichnet.
+
+```text @plantUML.png
+@startuml
+ditaa
+                             Instruction Register
+                         +---------+-------------------+
+      A_15               | OPCODE  |                   |
+        |   |            +---------+-------------------+
+        v   v                |
+      +------------------+   |
+ +----| Adressgenerator  | <-+
+ |    |                  | <-------------------------------------------------------------------+
+ |    +------------------+                                                                     |
+ |                                                                                             |
+ |  +--------------------------------------------------------------------------------- --+     |
+ |  | Mikroprogrammspeicher                                                              |     |
+ |  | +---------------------------------------------+------------------+-------+-------+ |     |
+ +->| |cC42                                         |cFF0              |c8C2   |c8C2   | |     |
+    | +---------------------------------------------+------------------+-------+-------+ |     |
+    | |cC42                                         |cFF0              |c8C2   |c8C2   | |     |
+    | +---------------------------------------------+------------------+-------+-------+ |     |
+    | |cC42                                         |cFF0              |c8C2   |c8C2   | |     |
+    | +---------------------------------------------+------------------+-------+-------+ |     |
+    +------------------------------------------------------------------------------------+     |
+                              |                                |           |      |            |
+     21                       v                      0         v           v      v            |
+      +---------------------------------------------+------------------+-------+-------+       |
+      |cC42         Mikroinstruktionsregister       |cFF0 Folgeadresse |c8C2 c |c8C2 s |       |
+      +---------------------------------------------+------------------+-------+-------+       |
+                    Steuersignale                    |                                |        |
+                                                     +----------------+---------------+        |
+       Mikroinstruktion im Detail                                     +------------------------+
+      +------+-------+-------+--------+---------+-------+-----+-----+-------+-----+-----+-------+
+      | init | init  | ....  | MBR    | MBR     | ....  | RUN | HLT | ....  | ADD | XOR | ....  |
+      | Read | Write |       | on Bus | off Bus |       |     |     |       |     |     |       |
+      |cC42  | cC42  | cC42  |cC42    | cC42    |cC42   |cC42 |cC42 |cC42   |cC42 |cC42 |cC42   |
+      +------+-------+-------+--------+---------+-------+-----+-----+-------+-----+-----+-------+
+@enduml
+```
+
+Das Mikroprogrammwort enthält außer dem Steuerteil noch den Adressteil. Der Adressteil eines Mikroprogrammwortes enthält direkt die Adresse des nächsten Mikroprogrammwortes. Allerdings muss der Modellrechner auch auf Statusinformation der ALU und auf den Inhalt des OPCODE-Feldes des IR reagieren, so dass der Ablauf des Mikroprogramms nicht immer gleich ist.
+
+Um die Sprünge zu realisieren werden dem Mikroprogrammwort neben der Folgeadresse zwei Flags beigefügt:
+
++ "computed next" `c` - Die Folgeadresse wird aus der Adresse im Adressfeld der MIP und dem OPCODE-Feld des $IR_{15-12}$ gebildet. Dabei wird das OPCODE-Feld auf die Adresse im Adressfeld des MIP-Wortes addiert.
+
++ skip next on condition `s`- Berücksichtigt wird das Vorzeichenbit des Akkumulators $A_{15}=0$. Trifft die Bedingung zu, d.h. $A_{15}=0$, wird die nächste Instruktion übersprungen (Folgeadresse +1). Trifft die Bedingung nicht zu, wird die nächste Instruktion von der spezifizierten Folgeadresse genommen.
+
+![AdressierungsEinheit](./images/11_Modell_CPU/AdressierungsEinheit.png)<!-- width="60%" -->
+
+### Layout eines Programmes im Mikroprogammspeicher
+
+Und wie sieht das nun konkret aus?
+
+![AdressierungsEinheit](./images/11_Modell_CPU/MikroprogrammSpeicherAuszug.png)<!-- width="60%" -->
+
+{{1}}
+> **Frage: ** Welche Vereinfachungsmöglichkeiten sehen Sie?
+
+{{2}}
+![AdressierungsEinheit](./images/11_Modell_CPU/MikroprogrammSpeicherAuszugII.png)<!-- width="60%" -->
+
+
+### Horizontale vs. vertikale Mikroprogrammierung
+
++ _Wie kann der Micro-Code optimiert werden?_ Zielkonflikt: Hardwarekosten gegen Geschwindigkeit und Flexibiltät
+
++ _Wie kann des Micro-Wort verkürzt und der M-Speicher vekleinert werden?_ Zielkonflikt: Wortlänge gegen Dekodierungsaufwand und Flexibilität
+
++ _Wie erreicht man größtmöglichen Komfort bei der Programmierung?_ Zielkonflikt: Komfort gegen Effizienz und Flexibilität
+
+![AdressierungsEinheit](./images/11_Modell_CPU/vertikaleMikroprogrammierung.png)<!-- width="60%" -->
+
+![AdressierungsEinheit](./images/11_Modell_CPU/horizontaleMikroprogrammierung.png)<!-- width="60%" -->
+
+
+|          | Horizontale Mikroprogrammierung                                            | Vertikale Mikroprogrammierung                                                                |
+| -------- | -------------------------------------------------------------------------- | -------------------------------------------------------------------------------------------- |
+| Idee     | Jedes Bit des Mikroinstruktionswortes steuert direkt eine Kontroll-Leitung | Mikroinstruktionswort ist in Felder aufgeteilt, die codierte Steuerinformation enthalten     |
+| Vorteil  | maximale Flexibilität, Geschwindigkeit                                     | Kurzes Mikroinstruktionswort, kleiner Mikroprogrammspeicher , übersichtlicher Mikroprogramme |
+| Nachteil | sehr langes Mikroinstruktionswort, großer Mikroprogrammspeicher            | Zusätzliche Dekodierungshardware, Flexibilität, Geschwindigkeit                              |
+
+### Diskussion
+
+Ausgangspunkt der Mikroprogrammierung:
+
+1. Mächtige Maschinenbefehle unterstützen den Programmierer.
+2. Leichte Änderbarkeit der Maschinenbefehle ist notwendig, um die Fortentwicklung des Befehlssatzes und Spezialanwendungen zu unterstützen.
+3. Mikroprogramme können leichter entworfen werden als Logik.
+4. Mikroprogramme können komplexe Operationen effizienter bereitstellen als eine Sequenz von Maschineninstruktionen, da sie die Parallelität der Hardware ausnutzen können.
+5. Mikroprogramme können komplexe Operationen effizienter bereitstellen als eine Sequenz von Maschineninstruktionen, da Mikroprogrammspeicher schneller ist als Speicher für Maschinenprogramme.
 
 ## Hausaufgaben
 

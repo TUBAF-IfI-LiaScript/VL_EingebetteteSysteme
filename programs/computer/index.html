@@ -1,0 +1,431 @@
+<html>
+    <head>
+        <meta charset="utf-8"/>
+        <title>Computer</title>
+        <script type="text/javascript" src="fjangnodes.js"></script>
+        <script type="text/javascript" src="basictypes.js"></script>
+        <script type="text/javascript" src="component.js"></script>
+        <script type="text/javascript" src="webinterfacenodes.js"></script>
+        <script type="text/javascript" src="modell.js"></script>
+        <script type="text/javascript" src="controlsignals.js"></script>
+        <script type="text/javascript" src="mmio.js"></script>
+        <script type="text/javascript">
+const DEFAULT_PROGRAM = "9004b005a0060000000b001f0000";
+        
+const OPCODES = [
+    "HLT",//0000
+    "JMA",//0001
+    "JMP",//0010
+    "JSR",//0011
+    "SWR",//0100
+    "RAR",//0101
+    "INP",//0110
+    "OUT",//0111
+    "NOT",//1000
+    "LDA",//1001
+    "STA",//1010
+    "ADD",//1011
+    "XOR",//1100
+    "AND",//1101
+    "IOR",//1110
+    "NOP" //1111
+];
+const ADR_LENGTH = 12;
+const SCREEN_ZOOM = 6;
+        
+onload = function() {
+    let checkboxClassName = "cbx";
+    let inputTextClassName = "inptext";
+    let outputTextClassName = "inpoutptext";
+    let selectClassName = "";
+    
+    let arc = 16;
+    let bitsDatatype = new BitsDatatype(arc);
+    
+    const program = [];
+    let prgStr = prompt("Speicherinhalt", DEFAULT_PROGRAM);
+    let prgLines = prgStr.match(/.{1,4}/g);
+    
+    //prepare memory
+    let words = [];
+    let N = (1 << ADR_LENGTH);
+    for (let i = 0; i < N; i++) {
+        if (prgLines[i] === undefined) {
+            words.push(bitsDatatype.getDefaultValue());
+        } else {
+            words.push(bitsDatatype.parseFromUInt(("0x" + prgLines[i])*1,arc));
+        }
+    }
+
+    
+    
+    let clk = new BitIO(false,checkboxClassName);//clock
+    let valBus = new Bits10IO(arc,true,outputTextClassName);
+
+    
+    //mem:
+    let mem = new Memory(bitsDatatype,ADR_LENGTH,words);
+    let mar = new MemoryAdressRegister(arc,ADR_LENGTH);
+    let mbr = new BusPlusExtraInputRegister(bitsDatatype);
+
+    let valMAR = new Bits10IO(ADR_LENGTH,true,outputTextClassName);//mar output field
+    let valMBR = new Bits10IO(arc,true,outputTextClassName);//mbr output field
+    
+    let memWrEnable = new BitIO(true,checkboxClassName);
+    let memToMbr = new BitIO(true,checkboxClassName);//mem[mar] --> mbr
+    
+    let mbrInputEnable = new BitIO(true,checkboxClassName);
+    let mbrOutputEnable = new BitIO(true,checkboxClassName);
+    let marInputEnable = new BitIO(true,checkboxClassName);
+    
+    //rechenwerk:
+    
+    let alu = new AluSimple(arc);
+    let a = new ARegister(arc);
+    let z = new Register(bitsDatatype);
+        
+    let op = new ElementOfSetIO(AluSimple.OPERATION_DATATYPE.getElements(),true,selectClassName);
+    let ci = new BitIO(true,checkboxClassName);//carryIn
+    let aIn = new BitIO(true,checkboxClassName);//a input enable
+    let aOut = new BitIO(true,checkboxClassName);//a output enable
+    let aToZ = new BitIO(true,checkboxClassName);//a --> z transfer enable
+    let oToA = new BitIO(true,checkboxClassName);//alu out --> a transfer enable
+    let valA = new Bits10IO(arc,true,outputTextClassName);
+    let valZ = new Bits10IO(arc,true,outputTextClassName);
+    let valAluOut = new Bits10IO(arc,true,outputTextClassName);
+    let co = new BitIO(true,checkboxClassName);//carryOut
+    let ov = new BitIO(true,checkboxClassName);//overflow
+    let sig = new BitIO(true,checkboxClassName);//sig(a)
+    
+    //anderes:
+    
+    let pc = new ProgramCounterRegister(arc);
+    let pcVal = new Bits10IO(arc,true,outputTextClassName);
+    let pcIn = new BitIO(true,checkboxClassName);
+    let pcOut = new BitIO(true,checkboxClassName);
+    let pcCount = new BitIO(true,checkboxClassName);
+    
+    let ir = new InstructionRegister(arc,4);
+    let irVal = new Bits10IO(arc,true,outputTextClassName);
+    let irOp = new Bits10IO(4,true,outputTextClassName);
+    let irIn = new BitIO(true,checkboxClassName);
+    let irOut = new BitIO(true,checkboxClassName);
+
+    let opIntp = new OpcodeInterpreter(4,OPCODES);
+    let valOpIntp = new ElementOfSetIO(OPCODES,true,selectClassName);
+    
+    let swr = new BusOutBuffer(bitsDatatype);
+    let swrInput = new Bits10IO(arc,false,inputTextClassName);
+    let swrOut = new BitIO(true,checkboxClassName);
+    
+    let out = new Register(bitsDatatype);
+    let valOut = new Bits10IO(arc,true,outputTextClassName);
+    let outIn = new BitIO(true,checkboxClassName);
+    
+    //kontroll zeugs
+    
+    let microAdrBitsDatatype = new BitsDatatype(MICRO_ADRESS_LENGTH);
+    
+    let adressMagic = new AdressMagic(MICRO_ADRESS_LENGTH,4);
+    let microAdressRegister = new Register(microAdrBitsDatatype);
+    let controlBoss = new ControlBoss(CONTROL_SIGNALS,CONSTROL_STATES,MICRO_ADRESS_LENGTH);
+    
+    let valMicroAdress = new Bits10IO(MICRO_ADRESS_LENGTH,true,outputTextClassName);
+    let valC = new BitIO(true,checkboxClassName);// c
+    let valS = new BitIO(true,checkboxClassName);// ... und s steuersignale für die Adress Magie
+    let valNext = new Bits10IO(MICRO_ADRESS_LENGTH,true,outputTextClassName);// nächte micro code adresse vor (adress magie)
+    let valInfo = new FreeOutIO(outputTextClassName);
+    
+    let autoClk = new AutoClock(8);
+    let autoClkEnable = new BitIO(false,checkboxClassName);
+    
+    let world = new FjangWorld([clk,valBus,mem,mar,mbr,valMAR,valMBR,memWrEnable,memToMbr,mbrInputEnable,mbrOutputEnable,marInputEnable,alu,a,z,op,ci,aIn,aOut,aToZ,oToA,valA,valZ,valAluOut,co,ov,sig,pc,pcVal,pcIn,pcOut,pcCount,ir,irVal,irOp,irIn,irOut,opIntp,valOpIntp,swr,swrInput,swrOut,out,valOut,outIn,adressMagic,microAdressRegister,controlBoss,valMicroAdress,valC,valS,valNext,valInfo,autoClk,autoClkEnable]);
+
+    //mem:
+    //datensignale
+    FjangNode.connectBi(valBus.bitsNode,mbr.busNode);// bus <--> mbr:bus
+    FjangNode.connectFromTo(valBus.bitsNode,mar.busNode);// bus --> mar:bus
+    FjangNode.connectFromTo(mar.valueNode,mem.adressNode);// mar:val --> mem:adr
+    FjangNode.connectFromTo(mbr.valueNode,mem.dataInNode);// mbr:value --> mem:dataIn
+    FjangNode.connectFromTo(mem.dataOutNode,mbr.secondInputNode);// mem:dataOut --> mbr:secondInput
+    
+    FjangNode.connectFromTo(mar.valueNode,valMAR.bitsNode);
+    FjangNode.connectFromTo(mbr.valueNode,valMBR.bitsNode);
+
+    //steuersignale
+    
+    FjangNode.connectFromTo(clk.bitNode,mar.clockNode);
+    FjangNode.connectFromTo(clk.bitNode,mbr.clockNode);
+    FjangNode.connectFromTo(clk.bitNode,mem.clockNode);
+    FjangNode.connectFromTo(memWrEnable.bitNode,mem.writeEnableNode);
+    FjangNode.connectFromTo(memToMbr.bitNode,mbr.inputEnableSecondNode);
+    FjangNode.connectFromTo(mbrInputEnable.bitNode,mbr.inputEnableBusNode);
+    FjangNode.connectFromTo(mbrOutputEnable.bitNode,mbr.outputEnableNode);
+    FjangNode.connectFromTo(marInputEnable.bitNode,mar.inputEnableNode);
+
+    //alu:
+    
+    //datensignale
+    FjangNode.connectBi(valBus.bitsNode,a.busNode);
+    FjangNode.connectFromTo(valBus.bitsNode,alu.yNode);
+    FjangNode.connectFromTo(a.valueNode,z.busNode);
+    FjangNode.connectFromTo(z.valueNode,alu.xNode);
+    FjangNode.connectFromTo(alu.outNode,a.secondInputNode);
+
+    FjangNode.connectFromTo(a.valueNode,valA.bitsNode);
+    FjangNode.connectFromTo(z.valueNode,valZ.bitsNode);
+    FjangNode.connectFromTo(alu.outNode,valAluOut.bitsNode);
+    
+    //steuersignale
+    
+    FjangNode.connectFromTo(clk.bitNode,a.clockNode);
+    FjangNode.connectFromTo(clk.bitNode,z.clockNode);
+    FjangNode.connectFromTo(op.eosNode,alu.opNode);
+    FjangNode.connectFromTo(aIn.bitNode,a.inputEnableBusNode);
+    FjangNode.connectFromTo(aOut.bitNode,a.outputEnableNode);
+    FjangNode.connectFromTo(aToZ.bitNode,z.inputEnableNode);
+    FjangNode.connectFromTo(oToA.bitNode,a.inputEnableSecondNode);
+    FjangNode.connectFromTo(ci.bitNode,alu.carryInNode);
+    
+    //output flags
+    FjangNode.connectFromTo(alu.carryOutNode,co.bitNode);
+    FjangNode.connectFromTo(alu.overflowNode,ov.bitNode);
+    
+    FjangNode.connectFromTo(a.signumNode,sig.bitNode);
+
+    //anderes:
+    
+    FjangNode.connectBi(valBus.bitsNode, pc.busNode);
+    FjangNode.connectFromTo(pc.valueNode,pcVal.bitsNode);
+    
+    FjangNode.connectFromTo(clk.bitNode, pc.clockNode);
+    FjangNode.connectFromTo(pcIn.bitNode,pc.inputEnableNode);
+    FjangNode.connectFromTo(pcOut.bitNode,pc.outputEnableNode);
+    FjangNode.connectFromTo(pcCount.bitNode,pc.countNode);
+
+    
+    FjangNode.connectBi(valBus.bitsNode, ir.busNode);
+    FjangNode.connectFromTo(ir.valueNode,irVal.bitsNode);
+    FjangNode.connectFromTo(ir.opcodeNode,irOp.bitsNode);
+
+    FjangNode.connectFromTo(clk.bitNode, ir.clockNode);
+    FjangNode.connectFromTo(irIn.bitNode,ir.inputEnableNode);
+    FjangNode.connectFromTo(irOut.bitNode,ir.outputEnableNode);
+    
+    FjangNode.connectFromTo(ir.opcodeNode,opIntp.opcodeBitsInputNode);
+    FjangNode.connectFromTo(opIntp.opcodeOutputNode,valOpIntp.eosNode);
+
+    FjangNode.connectFromTo(swrInput.bitsNode,swr.inputNode);
+    FjangNode.connectFromTo(swr.busNode,valBus.bitsNode);
+    FjangNode.connectFromTo(swrOut.bitNode,swr.outputEnableNode);
+
+    FjangNode.connectFromTo(valBus.bitsNode,out.busNode);
+    FjangNode.connectFromTo(clk.bitNode, out.clockNode);
+    FjangNode.connectFromTo(out.valueNode,valOut.bitsNode);
+    FjangNode.connectFromTo(outIn.bitNode,out.inputEnableNode);
+    
+    //kontroll zeugs:
+    
+    FjangNode.connectFromTo(ir.opcodeNode,adressMagic.opcodeNode);
+    FjangNode.connectFromTo(controlBoss.signalNodes.next,adressMagic.adressInNode);
+    FjangNode.connectFromTo(controlBoss.signalNodes.c,adressMagic.cNode);
+    FjangNode.connectFromTo(controlBoss.signalNodes.s,adressMagic.sNode);
+
+    FjangNode.connectFromTo(a.signumNode,adressMagic.negativeNode);
+
+    
+    FjangNode.connectFromTo(adressMagic.adressOutNode,microAdressRegister.busNode);
+    FjangNode.connectFromTo(microAdressRegister.valueNode,controlBoss.adressInNode);
+    FjangNode.connectFromTo(microAdressRegister.valueNode, valMicroAdress.bitsNode);
+    FjangNode.connectFromTo(clk.bitNode,microAdressRegister.clockNode);
+    microAdressRegister.inputEnableNode.set(true);
+
+    FjangNode.connectFromTo(controlBoss.signalNodes.info,valInfo.valueNode);
+    FjangNode.connectFromTo(controlBoss.signalNodes.c,valC.bitNode);
+    FjangNode.connectFromTo(controlBoss.signalNodes.s,valS.bitNode);
+    
+    
+    FjangNode.connectFromTo(controlBoss.signalNodes.mbrIn,mbrInputEnable.bitNode);
+    FjangNode.connectFromTo(controlBoss.signalNodes.mbrOut,mbrOutputEnable.bitNode);
+    FjangNode.connectFromTo(controlBoss.signalNodes.marIn,marInputEnable.bitNode);
+    FjangNode.connectFromTo(controlBoss.signalNodes.memRead,memToMbr.bitNode);
+    FjangNode.connectFromTo(controlBoss.signalNodes.memWrite,memWrEnable.bitNode);
+    FjangNode.connectFromTo(controlBoss.signalNodes.aIn,aIn.bitNode);
+    FjangNode.connectFromTo(controlBoss.signalNodes.aOut,aOut.bitNode);
+    FjangNode.connectFromTo(controlBoss.signalNodes.oToA,oToA.bitNode);
+    FjangNode.connectFromTo(controlBoss.signalNodes.aToZ,aToZ.bitNode);
+    FjangNode.connectFromTo(controlBoss.signalNodes.irIn,irIn.bitNode);
+    FjangNode.connectFromTo(controlBoss.signalNodes.irOut,irOut.bitNode);
+    FjangNode.connectFromTo(controlBoss.signalNodes.pcIn,pcIn.bitNode);
+    FjangNode.connectFromTo(controlBoss.signalNodes.pcOut,pcOut.bitNode);
+    FjangNode.connectFromTo(controlBoss.signalNodes.pcInc,pcCount.bitNode);
+    FjangNode.connectFromTo(controlBoss.signalNodes.swrOut,swrOut.bitNode);
+    FjangNode.connectFromTo(controlBoss.signalNodes.outIn,outIn.bitNode);
+    FjangNode.connectFromTo(controlBoss.signalNodes.carryIn,ci.bitNode);
+    FjangNode.connectFromTo(controlBoss.signalNodes.aluOp,op.eosNode);
+
+    FjangNode.connectFromTo(autoClkEnable.bitNode,autoClk.enableNode);
+    FjangNode.connectFromTo(autoClk.clockNode,clk.bitNode);
+    
+    document.getElementById("clk").appendChild(clk.getHtmlElement());
+    document.getElementById("valBus").appendChild(valBus.getHtmlElement());
+    document.getElementById("valMAR").appendChild(valMAR.getHtmlElement());    
+    document.getElementById("valMBR").appendChild(valMBR.getHtmlElement());
+    document.getElementById("memWrEnable").appendChild(memWrEnable.getHtmlElement());    
+    document.getElementById("memToMbr").appendChild(memToMbr.getHtmlElement());
+    document.getElementById("mbrInputEnable").appendChild(mbrInputEnable.getHtmlElement());
+    document.getElementById("mbrOutputEnable").appendChild(mbrOutputEnable.getHtmlElement()); 
+    document.getElementById("marInputEnable").appendChild(marInputEnable.getHtmlElement());
+
+    document.getElementById("valA").appendChild(valA.getHtmlElement());
+    document.getElementById("valZ").appendChild(valZ.getHtmlElement());
+    document.getElementById("valAluOut").appendChild(valAluOut.getHtmlElement());
+    document.getElementById("aIn").appendChild(aIn.getHtmlElement());
+    document.getElementById("aOut").appendChild(aOut.getHtmlElement());
+    document.getElementById("aToZ").appendChild(aToZ.getHtmlElement());
+    document.getElementById("oToA").appendChild(oToA.getHtmlElement());
+    document.getElementById("op").appendChild(op.getHtmlElement());
+    document.getElementById("ci").appendChild(ci.getHtmlElement());
+    document.getElementById("co").appendChild(co.getHtmlElement());
+    document.getElementById("ov").appendChild(ov.getHtmlElement());
+    document.getElementById("sig").appendChild(sig.getHtmlElement());
+
+    
+    document.getElementById("irVal").appendChild(irVal.getHtmlElement());
+    document.getElementById("irOp").appendChild(irOp.getHtmlElement());
+    document.getElementById("irIn").appendChild(irIn.getHtmlElement());
+    document.getElementById("irOut").appendChild(irOut.getHtmlElement());
+    document.getElementById("pcVal").appendChild(pcVal.getHtmlElement());
+    document.getElementById("pcIn").appendChild(pcIn.getHtmlElement());
+    document.getElementById("pcOut").appendChild(pcOut.getHtmlElement());
+    document.getElementById("pcCount").appendChild(pcCount.getHtmlElement());
+    document.getElementById("valOpIntp").appendChild(valOpIntp.getHtmlElement());
+    document.getElementById("swrInput").appendChild(swrInput.getHtmlElement());
+    document.getElementById("swrOut").appendChild(swrOut.getHtmlElement());
+    document.getElementById("valOut").appendChild(valOut.getHtmlElement());
+    document.getElementById("outIn").appendChild(outIn.getHtmlElement());
+
+    document.getElementById("valMicroAdress").appendChild(valMicroAdress.getHtmlElement());
+    document.getElementById("valC").appendChild(valC.getHtmlElement());
+    document.getElementById("valS").appendChild(valS.getHtmlElement());
+    document.getElementById("valInfo").appendChild(valInfo.getHtmlElement());
+
+    document.getElementById("autoClkEnable").appendChild(autoClkEnable.getHtmlElement());
+
+    // ----------------------- MMIO -------------------
+    
+    
+    let mmioMem = new MemOutput(words,arc,0,20);
+    document.getElementById("mmioMem").appendChild(mmioMem.getHtmlElement());
+    let mmioScreen = new ImageOutRGBA16(words,0x800,64,32,SCREEN_ZOOM,true);
+    document.getElementById("mmioScreen").appendChild(mmioScreen.getHtmlElement());
+
+    let mmioElements = [mmioMem,mmioScreen];
+    
+    
+    tick = function() {
+        world.tick();
+    };
+    show = function() {
+        for (let m of mmioElements) m.tick();
+    }
+    intervl();
+}
+let tick = function() {};
+let show = function() {};
+
+let intv = undefined;
+function intervl() {
+    if (intv !== undefined) window.clearInterval(intv);
+    let ticksPerFrame = document.getElementById("ticksPerFrame").value*1;
+    let deltaTime = document.getElementById("deltaTime").value*1;
+    
+    intv = window.setInterval(function() {
+        for (let i = 0; i < ticksPerFrame; i++) tick();
+        show();
+    },deltaTime);
+}
+        </script>        
+        <style>
+.cbx {
+    margin:0px;
+}
+.inptext {
+    width:220px;
+    min-width:215px;
+    max-width:215px;
+    font-size:20px;
+    overflow:hidden;
+    background-color:rgba(255,255,255,0.4);
+    border:2px solid rgba(0,0,0,0.4);
+    color:#000000;
+}
+.inpoutptext {
+    width:220px;
+    min-width:215px;
+    max-width:215px;
+    font-size:20px;
+    overflow:hidden;
+    background-color:rgba(0,0,0,0);
+    border:none;
+    color:#000000;
+}
+.fliege {
+    position: absolute;
+}
+
+        </style>
+        
+    </head>
+    <body>
+        <img src="img/computer.png" class="fliege" style=" left:0px; top:0px; width:768px; height:922px">
+        <span class="fliege" style="left:250px; top:106px;">clock:<span id="clk"></span></span>
+        <span class="fliege" style="left:250px; top:136px;">autoclock:<span id="autoClkEnable"></span></span>
+        <span id="valBus" class="fliege" style="left:255px; top:15px;"></span>
+        <span id="valMBR" class="fliege" style="left:466px; top:120px;"></span>
+        <span id="valMAR" class="fliege" style="left:466px; top:300px;"></span>
+        <span id="mbrInputEnable" class="fliege" style="left:433px; top:118px;"></span>
+        <span id="mbrOutputEnable" class="fliege" style="left:414px; top:146px;"></span>
+        <span id="marInputEnable" class="fliege" style="left:433px; top:309px;"></span>
+        <span id="memWrEnable" class="fliege" style="left:541px; top:176px;"></span>
+        <span id="memToMbr" class="fliege" style="left:580px; top:176px;"></span>
+        <span id="valA" class="fliege" style="left:466px; top:455px;"></span>
+        <span id="valZ" class="fliege" style="left:466px; top:555px;"></span>
+        <span id="valAluOut" class="fliege" style="left:580px; top:766px;"></span>
+        <span id="aIn" class="fliege" style="left:433px; top:451px;"></span>
+        <span id="aOut" class="fliege" style="left:414px; top:476px;"></span>
+        <span id="aToZ" class="fliege" style="left:552px; top:521px;"></span>
+        <span id="oToA" class="fliege" style="left:694px; top:467px;"></span>
+        <span id="op" class="fliege" style="left:480px; top:737px;"></span>
+        <span class="fliege" style="left:596px; top:648px;">carryIn:<span id="ci"></span></span>
+        <span class="fliege" style="left:596px; top:820px;">carryOut:<span id="co"></span></span>
+        <span class="fliege" style="left:596px; top:850px;">overflow:<span id="ov"></span></span>
+        <span class="fliege" style="left:460px; top:412px;">negative:<span id="sig"></span></span>
+        <span id="irVal" class="fliege" style="left:95px; top:504px;"></span>
+        <span id="irOp" class="fliege" style="left:156px; top:440px;"></span>
+        <span id="irIn" class="fliege" style="left:325px; top:531px;"></span>
+        <span id="irOut" class="fliege" style="left:341px; top:501px;"></span>
+        <span id="pcVal" class="fliege" style="left:95px; top:672px;"></span>
+        <span id="pcIn" class="fliege" style="left:325px; top:697px;"></span>
+        <span id="pcOut" class="fliege" style="left:341px; top:668px;"></span>
+        <span id="pcCount" class="fliege" style="left:235px; top:637px;"></span>
+        <span id="valOpIntp" class="fliege" style="left:45px; top:440px;"></span>
+        <span id="swrInput" class="fliege" style="left:95px; top:765px;"></span>
+        <span id="swrOut" class="fliege" style="left:341px; top:771px;"></span>
+        <span id="valOut" class="fliege" style="left:95px; top:845px;"></span>
+        <span id="outIn" class="fliege" style="left:325px; top:849px;"></span>
+        <span id="valMicroAdress" class="fliege" style="left:107px; top:287px;"></span>
+        <span class="fliege" style="left:273px; top:356px;">c:<span id="valC"></span></span>
+        <span class="fliege" style="left:273px; top:376px;">s:<span id="valS"></span></span>
+        <span id="valInfo" class="fliege" style="left:39px; top:107px;"></span>
+
+        <span id="mmioMem" class="fliege" style="left:770px; top:0px;"></span>
+        <span id="mmioScreen" class="fliege" style="left:770px; top:500px;">Bildschirm (MMIO, Adresse 0xf00 bis 0xfff, 12 Bit Farben, xxxxbbbbggggrrrr)<br></span>
+
+        <input type="range" class="fliege" id="ticksPerFrame" min="1" max="200" step="1" value="1" onchange="intervl()" style="left:0px; top:0px;" title="ticks per frame">
+        <input type="range" class="fliege" id="deltaTime" min="1" max="1000" step="1" value="100" onchange="intervl()" style="left:0px; top:25px;" title="deltatime">
+
+        <!--textarea id="memValue" class="fliege" style="top:0px; left:770px;" rows="22" cols="20" readonly></textarea-->
+        
+    </body>
+</html>
