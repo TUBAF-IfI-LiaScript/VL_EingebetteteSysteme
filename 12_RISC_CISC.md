@@ -327,15 +327,25 @@ Eine weitergehendere Beschäftigung mit dem eigentlichen Befehlssatz ist an dies
 
 ### Pipelining Hindernisse
 
-Ressourcenkonflikte
+**Ressourcenkonflikte**
 -------------------------
 
 Ressourcenkonflikte treten auf, wenn auf bestimmte Elemente gleichermaßen zugegriffen werden soll, z. B. ein synchroner Zugriff auf einen Registerspeicher mit nur einem Eingang.
 
-Kontrollkonflikte
+**Kontrollkonflikte**
 ---------------------------
 Steuerkonflikte treten bei Instruktionen auf, die den Befehlszähler verändern, bei bedingten oder unbedingten Sprungbefehlen. Da der "richtige" Befehl erst am Ende des Auslesens des Sprungbefehls bekannt ist, muss die Pipeline ggf. komplett geleert werden.
 
+```
+add r1, r2, r3    // r3 = r1 + r2
+beq r4, r5, 100   // if r4 == r5 springe nach PC + 100
+sub r4, r5, r6    // sonst r6 = r4 - r5
+```
+
+
+<!--
+style="width: 80%; min-width: 420px; max-width: 720px;"
+-->
 ```ascii
                                          | Die Zieladresse liegt vor
                                          v
@@ -346,12 +356,12 @@ Steuerkonflikte treten bei Instruktionen auf, die den Befehlszähler verändern,
 2-4)                        ....
 
                                        +----+----+----+----+----+
-5) Sprungbefehl                        | IF | ID | EX | MA | WB |
+5) "richtiger Befehl"                  | IF | ID | EX | MA | WB |
                                        +----+----+----+----+----+              .
 ```
 
 
-Datenkonflikte
+**Datenkonflikte**
 ---------------------------
 Datenkonflikte ergeben sich aus Datenabhängigkeiten zwischen Befehlen im Programm
 
@@ -363,6 +373,9 @@ R4 = R1+1
 ```
 
 
+<!--
+style="width: 80%; min-width: 420px; max-width: 720px;"
+-->
 ```ascii
 
                 Hier wird r1 zur      |  | Hier ist r1 im Register File bereit
@@ -400,46 +413,79 @@ Die beiden letztgenannten Datenkonflikte sind für die beschriebene Pipeline nic
 
 ### Pipelining Lösungsansätze
 
+                    {{0-1}}
+********************************************************************************
+
 Lösungsansätze für Ressourcenkonflikte
 -----------------------------------------
 
 In der MIPS-Implementierung wurde dafür Sorge getragen, dass die Bauteile, die
 aus mehreren Pipeline-Stufen angesprochen werden, hardwaretechnisch dafür vorbereitet wurden. Das Register File, dass sowohl aus der Instruction Decode Phase UND der Write Back Phase angesprochen werden kann, wurden in Hardware die Vorkehrungen getroffen, um einen Zeitgleichen Zugriff zu ermöglichen. Dabei entsteht dann aber ggf. parallel ein Datenkonflikt!
 
+vgl. Multipler Zugriff auf das Register-File
+
+********************************************************************************
+
+                    {{1-2}}
+********************************************************************************
+
 Lösungsansätze für Kontrollabhängigkeiten
 ------------------------------------------
 
 1. Verzögern oder Verschieben - Einfügen von NOP oder von unabhängigen nachfolgenden Befehlen, um die ungewisse weitere Abfolge zu überbrücken
 
+<!--
+style="width: 80%; min-width: 420px; max-width: 720px;"
+-->
 ```ascii
-                Flag aktiviert  |        | Die Zieladresse liegt vor
-                                v        v
-                   +----+----+----+----+----+
-1) Sprungbefehl    | IF | ID | EX | MA | WB |
-                   +----+----+----+----+----+----+
-                        | IF | ID | EX | MA | WB |
-                        +----+----+----+----+----+----+
-                             | IF | ID | EX | MA | WB |
-                             +----+----+----+----+----+----+
-                                  | IF | ID | EX | MA | WB |
-                                       +----+----+----+----+----+
-5) Sprungbefehl                        | IF | ID | EX | MA | WB |
-                                       +----+----+----+----+----+              .
+                    Flag aktiviert  |        | Die Zieladresse liegt vor
+                                    v        v
+                       +----+----+----+----+----+
+    1) Sprungbefehl    | IF | ID | EX | MA | WB |
+                       +----+----+----+----+----+----+
+       nop                  | IF | ID | EX | MA | WB |
+                            +----+----+----+----+----+----+
+       nop                       | IF | ID | EX | MA | WB |
+                                 +----+----+----+----+----+----+
+       nop                            | IF | ID | EX | MA | WB |
+                                      +----+----+----+----+----+----+
+    5) "richtiger Befehl"                  | IF | ID | EX | MA | WB |
+                                           +----+----+----+----+----+          .
 ```
+
 
 2. Sprungvorhersagen - Prognose des weiteren Ausführungsweges
 
-Unter Sprungvorhersage versteht man
+    Unter Sprungvorhersage versteht man die Vorhersage, ob ein bedingter Sprung ausgeführt wird und die Ermittlung der Zieladresse des Sprunges
 
-+ die Vorhersage, ob ein bedingter Sprung ausgeführt wird
-+ die Ermittlung der Zieladresse des Sprunges
+    Eine 1-Bit-Sprungvorhersage (im Wesentlichen ein Flip-Flop) zeichnet das letzte Ergebnis der Verzweigung auf.
 
+    Ein 2-Bit-Sprungvorhersage ist ein Zustandsautomat mit vier Zuständen:
+
+       + Stark nicht besetzt
+       + Schwach nicht besetzt
+       + Schwach besetzt
+       + Stark eingenommen
+
+    Wenn ein Zweig ausgewertet wird, wird der entsprechende Zustandsautomat aktualisiert. Zweige, die als nicht belegt bewertet werden, ändern den Zustand in Richtung stark nicht belegt, und Zweige, die als belegt bewertet werden, ändern den Zustand in Richtung stark belegt. Der Vorteil des Zwei-Bit-Zählerschemas gegenüber einem Ein-Bit-Schema ist, dass ein bedingter Sprung zweimal von dem abweichen muss, was er in der Vergangenheit am meisten getan hat, bevor sich die Vorhersage ändert. Zum Beispiel wird ein schleifenschließender bedingter Sprung einmal und nicht zweimal falsch vorhergesagt.
+
+![BranchPrediction](https://upload.wikimedia.org/wikipedia/commons/thumb/c/c8/Branch_prediction_2bit_saturating_counter-dia.svg/1920px-Branch_prediction_2bit_saturating_counter-dia.svg.png)<!--style="width: 80%; min-width: 420px; max-width: 720px;"--> [^1]
+
+[^1] State diagram of 2-bit saturating counter for branch predictor, https://en.wikipedia.org/wiki/Branch_predictor#/media/File:Branch_prediction_2bit_saturating_counter-dia.svg
+
+********************************************************************************
+
+                    {{2-4}}
+********************************************************************************
 
 Lösungsansätze für Datenkonflikte
 -----------------------------------------
 
 1. Softwarelösungen - Einfügen fvon NOP Befehlen zur Auflösung
 
+<!--
+style="width: 80%; min-width: 420px; max-width: 720px;"
+-->
 ```ascii
                                               | R2 ist bereit
                                               v
@@ -460,13 +506,21 @@ Lösungsansätze für Datenkonflikte
 
 ```asm
 add r0, r1, r2
-add r4, r1, r3
+add r4, r2, r3
 mul r5, r6, r7
 mul r7, r5, r9
 ```
 
 > **Aufgabe:** Bringen Sie die oben genannte Folge von Befehlen in eine konfliktfreie Reihung.
 
+********************************************************************************
+
+                    {{3-4}}
+********************************************************************************
+
+<!--
+style="width: 80%; min-width: 420px; max-width: 720px;"
+-->
 ```ascii
                         +----+----+----+----+----+
 1) add r0, r1, r2       | IF | ID | EX | MA | WB |
@@ -475,7 +529,7 @@ mul r7, r5, r9
                              +----+----+----+----+----+---+
 3) nop                           | IF | ID | EX | MA | WB |
                                   +----+----+----+----+----+----+
-4) add r4, r1, r3                      | IF | ID | EX | MA | WB |
+4) add r4, r2, r3                      | IF | ID | EX | MA | WB |
                                        +----+----+----+----+----+----+
 4) mul r7, r5, r9                           | IF | ID | EX | MA | WB |
                                             +----+----+----+----+----+
@@ -489,10 +543,9 @@ mul r7, r5, r9
      + Rückführung von ALU-Ausgaben auf deren Eingabe (ME->ME)
      + Load Forwarding (WB ->ID)
 
-## CISC vs RISC
+********************************************************************************
 
-Motivation
-----------------------
+## CISC vs RISC
 
 Kann das Konzept auf einen beliebigen Befehlssatz angewendet werden?
 
@@ -551,6 +604,14 @@ Instruktionen durch den Compiler einfach und überschaubar ist.
 | Aufwändigere Implementierung IM ASSEMBLER | höhere Taktraten                     |
 |                                           | Ausnutzung von Pipelining Techniken  |
 
+|                                   | CISC    | RISC    |
+| --------------------------------- | ------- | ------- |
+| Ausführungszeit einer Instruktion | $geq 1$ | meist 1 |
+
+
+
+
+
 > **Merke: ** Die Abgrenzung zwischen Complex Instruction Set (CISC) vs Reduced Instruction Set (RISC) ist heute kaum noch präsent. Vielmehr verschmelzen die Konzepte in aktuellen Prozessoren.
 
 D. Tabak entwarf in seine Buch _RISC-Architecture_ (John Wiley & Sons, 1987) einen Kriterienkatalog:
@@ -563,3 +624,9 @@ D. Tabak entwarf in seine Buch _RISC-Architecture_ (John Wiley & Sons, 1987) ein
 + Single Cycle Instruktionen
 + Festverdrahtete Maschinenbefehle
 + HLL / Optimierende Compiler
+
+Tabak argumentierte, dass 5 der Kriterien positiv evaluiert sein müssen, um ein RISC System zu identifizieren.
+
+Womit haben wir es also bei unserem Modellrechner zu tuen?
+
+### Atmega32 als RISC Architektur
