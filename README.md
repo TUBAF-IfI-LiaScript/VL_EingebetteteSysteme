@@ -16,9 +16,9 @@ der Relevanz dieses Wissens bei der hardwarenahen Codeentwicklung.
 | 5     | 6   | 17. November | Flip-Flops                       |
 |       | 7   | 19. November | Schaltwerke                      |
 | 6     | 8   | 24. November | Standard Schaltwerke             |
-| 7     | 9   | 01. Dezemeber| Rechnerarithmetik                |
-|       | 10  | 03. Dezemeber| CPU Motivation                   |
-| 8     | 11  | 15. Dezmeber | Modell CPU                       |
+| 7     | 9   | 01. Dezember | Rechnerarithmetik                |
+|       | 10  | 03. Dezember | CPU Motivation                   |
+| 8     | 11  | 15. Dezember | Modell CPU                       |
 | 9     |     | 17. Dezember | Befehlsabarbeitung               |
 |       | 12  | 22. Dezember | RISC und Pipelining              |
 | 10    | 13  | 12. Januar   | Eingebettete Systeme             |
