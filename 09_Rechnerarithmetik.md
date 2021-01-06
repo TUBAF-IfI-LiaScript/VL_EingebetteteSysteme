@@ -205,11 +205,12 @@ Der Teiler definiert das avisierte Zahlensystem
        v
   29 / 2 = 14    Rest   1   ^
   14 / 2 =  7    Rest   0   |
-   7 / 2 =  3    Rest   1   |
+   7 / 2 =  3    Rest   1   | Leserichtung für die Binärzahl
    3 / 2 =  1    Rest   1   |
    1 / 2 =  0    Rest   1   |                                                  .
 
 ```
+$29_{10}$=$11101_{2}$
 
 Für binäre Zahlen kann mit Blick auf die bekannten Zweierpotenzen auch effizienter
 vorgegangen werden:
