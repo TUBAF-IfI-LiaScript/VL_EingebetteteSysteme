@@ -203,11 +203,11 @@ style="width: 80%; min-width: 420px; max-width: 720px;"
 Der Teiler definiert das avisierte Zahlensystem
        |
        v
-  29 / 2 = 14    Rest   1   |
+  29 / 2 = 14    Rest   1   ^
   14 / 2 =  7    Rest   0   |
    7 / 2 =  3    Rest   1   |
    3 / 2 =  1    Rest   1   |
-   1 / 2 =  0    Rest   1   v                                                  .
+   1 / 2 =  0    Rest   1   |                                                  .
 
 ```
 
@@ -235,7 +235,7 @@ __Beispiel:__ $242_{10}$ in binär
 style="width: 80%; min-width: 420px; max-width: 720px;"
 -->
 ```ascii
-  523 / 2 = 261   Rest   1   |
+  523 / 2 = 261   Rest   1   ^
   261 / 2 = 130   Rest   1   |
   130 / 2 =  65   Rest   0   |
    65 / 2 =  32   Rest   1   |
@@ -244,7 +244,7 @@ style="width: 80%; min-width: 420px; max-width: 720px;"
     8 / 2 =   4   Rest   0   |
     4 / 2 =   2   Rest   0   |
     2 / 2 =   1   Rest   0   |
-    1 / 2 =   0   Rest   1   v
+    1 / 2 =   0   Rest   1   |
 ```
 $523_{10}$=$1000001011_{2}$
 
@@ -290,11 +290,11 @@ style="width: 80%; min-width: 420px; max-width: 720px;"
 Der Faktor definiert das avisierte Zahlensystem
           |
           v
-0.28125 ∙ 2 = 0.5625  "<" 1  -> 0  Rest   0.5625
-0.5625  ∙ 2 = 1.125   ">" 1  -> 1  Rest   0.125
-0.125   ∙ 2 = 0.25    "<" 1  -> 0  Rest   0.25
-0.25    ∙ 2 = 0.5     "<" 1  -> 0  Rest   0.5
-0.5     ∙ 2 = 1       "<="1  -> 1  Rest   0                                    .
+0.28125 ∙ 2 = 0.5625  "<" 1  -> 0 | Rest   0.5625
+0.5625  ∙ 2 = 1.125   ">" 1  -> 1 | Rest   0.125
+0.125   ∙ 2 = 0.25    "<" 1  -> 0 | Rest   0.25
+0.25    ∙ 2 = 0.5     "<" 1  -> 0 | Rest   0.5
+0.5     ∙ 2 = 1       "<="1  -> 1 v Rest   0                                    .
 
 ```
 
@@ -308,15 +308,15 @@ Ergebnis $0.28125_{10} = 0.25 + 0.03125 = 0.01001$
 style="width: 80%; min-width: 420px; max-width: 720px;"
 -->
 ```ascii
-  0.1 ∙ 2 = 0.2  0  Rest   0.2
-  0.2 ∙ 2 = 0.4  0  Rest   0.4
-  0.4 ∙ 2 = 0.8  0  Rest   0.8
-  0.8 ∙ 2 = 1.6  1  Rest   0.6
-  0.6 ∙ 2 = 1.2  1  Rest   0.2
-  0.2 ∙ 2 = 0.4  0  Rest   0.4
-  0.4 ∙ 2 = 0.8  0  Rest   0.8
-  0.8 ∙ 2 = 1.6  1  Rest   0.6
-  0.6 ∙ 2 = 1.2  1  Rest   0.2                                             .
+  0.1 ∙ 2 = 0.2  0 | Rest   0.2
+  0.2 ∙ 2 = 0.4  0 | Rest   0.4
+  0.4 ∙ 2 = 0.8  0 | Rest   0.8
+  0.8 ∙ 2 = 1.6  1 | Rest   0.6
+  0.6 ∙ 2 = 1.2  1 | Rest   0.2
+  0.2 ∙ 2 = 0.4  0 | Rest   0.4
+  0.4 ∙ 2 = 0.8  0 | Rest   0.8
+  0.8 ∙ 2 = 1.6  1 | Rest   0.6
+  0.6 ∙ 2 = 1.2  1 v Rest   0.2                                             .
 ```
 
 Ergebnis Offenbar ist für den Wert $0.1_{10}$ keine exakte Repräsentation im dualen System möglich $0,0001100110011...._2$. Welche Konsequenzen hat das?
@@ -391,14 +391,14 @@ Kein Überlauf!
 style="width: 80%; min-width: 420px; max-width: 720px;"
 -->
 ```ascii
-  55 / 2 = 27    Rest   1   |            214 / 2 = 107    Rest   0   |
+  55 / 2 = 27    Rest   1   ^            214 / 2 = 107    Rest   0   ^
   27 / 2 = 13    Rest   1   |            107 / 2 =  53    Rest   1   |
   13 / 2 =  6    Rest   1   |             53 / 2 =  26    Rest   1   |
    6 / 2 =  3    Rest   0   |             26 / 2 =  13    Rest   0   |
    3 / 2 =  1    Rest   1   |             13 / 2 =   6    Rest   1   |
-   1 / 2 =  0    Rest   1   v              6 / 2 =   3    Rest   0   |
+   1 / 2 =  0    Rest   1   |              6 / 2 =   3    Rest   0   |
                                            3 / 2 =   1    Rest   1   |
-                                           1 / 2 =   0    Rest   1   v         .
+                                           1 / 2 =   0    Rest   1   |         .
 ```
 
           {{1}}
