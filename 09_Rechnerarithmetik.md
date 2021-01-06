@@ -782,8 +782,8 @@ Ein Carry-Save-Addierer wird verwendet, um die Summe von drei oder mehr Binärza
 + 11001 (b)                       25
 + 01011 (c)                       11
 -------                         ----
-  00001 Summe ohne Carrys         45
- 11011  Carry Flags               1
+  00001 Summe ohne Carrys         1
+ 11011  Carry Flags               54
  ------                         ----
  110111 Gesamtsumme               55
 ```
