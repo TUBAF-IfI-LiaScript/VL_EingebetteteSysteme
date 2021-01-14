@@ -443,7 +443,7 @@ Bei der Analyse der Struktur des AVRs haben wir bisher 3 Arten von Speicher kenn
 
 |                     | Flash           | EEPROM     | RAM              |
 | ------------------- | --------------- | ---------- | ---------------- |
-| Zweck               | Arbeitsspeicher |            | Programmspeicher |
+| Zweck               | Programmspeicher|            | Arbeitsspeicher  |
 | Größe im Atmega328p | 32 KByte        | 1 KByte    | 2 KByte          |
 | Schreibzyklen       | $>10.000$       | $>100.000$ | unbegrenzt       |
 | Lesezyklen          | unbegrenzt      | unbegrenzt | unbegrenzt       |
