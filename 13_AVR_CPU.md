@@ -9,6 +9,7 @@ narrator: Deutsch Female
 import:  https://raw.githubusercontent.com/liascript-templates/plantUML/master/README.md
          https://github.com/LiaTemplates/Pyodide
          https://github.com/LiaTemplates/AVR8js/main/README.md#10
+         https://github.com/liascript/CodeRunner
 
 mark: <span style="background-color: @0;
                                   display: flex;
@@ -811,5 +812,113 @@ Zusammengesetzt ergibt sich eine Folgeadresse $0xe4$. Im Programmspeicher steht 
 
 ## Vorbereitung der praktischen Aufgaben
 
-+ Anmeldung bei TinkerCad - https://www.tinkercad.com/
-+ Optional - Abholen eines Mikrocontrollers
+**Bitoperationen in C**
+
+| Operation | Bedeutung               |
+| --------- | ----------------------- |
+| `>>`      | Rechts schieben         |
+| `<<`      | Links schieben          |
+| `|`       | binäres, bitweises ODER |
+| `&`       | binäres, bitweises UND  |
+| `^`       | binäres, bitweises XOR  |
+
+```cpp                     Bitshifting.cpp
+#include <iostream>
+#include <bitset>
+
+int main()
+{
+  char v = 0x1;
+  for (int i = 0; i <=7; i++){
+    std::cout << std::bitset<8>((v<<i)) << std::endl;
+  }
+  return 0;
+}
+```
+@LIA.eval(`["main.c"]`, `g++ -Wall main.c -o a.out`, `./a.out`)
+
+Mit diesen Operationen werden sogenannte Masken gebildet und diese dann auf die
+Register übertragen.
+
+### Setzen eines Bits
+
+```cpp                     BitSetting.cpp
+#include <iostream>
+#include <bitset>
+
+/* übersichtlicher mittels Bit-Definitionen */
+#define PB0 0
+#define PB1 1
+#define PB2 2
+
+int main()
+{
+  char PORTB;  // Wir "simulieren" die Portbezeichnung
+  PORTB = 0;
+  std::cout << std::bitset<8>(PORTB) << std::endl;
+
+  // Langschreibweise
+  PORTB = PORTB | 1;
+  std::cout << std::bitset<8>(PORTB) << std::endl;
+  // Kurzschreibweise
+  PORTB |= 0xF0;   
+  std::cout << std::bitset<8>(PORTB) << std::endl;
+
+  // Kurzschreibweise mit mehrteiliger Maske (setzt Bit 0 und 2 in PORTB auf "1")
+  PORTB |= ((1 << PB0) | (1 << PB2));
+  std::cout << std::bitset<8>(PORTB) << std::endl;
+}
+```
+@LIA.eval(`["main.c"]`, `g++ -Wall main.c -o a.out`, `./a.out`)
+
+### Löschen eines Bits
+
+Das Löschen basiert auf der Idee, dass wir eine Maske auf der Basis der invertierten
+Bits generieren und diese dann mit dem bestehenden Set mittels `&` abbilden.
+
+```cpp                     BitSetting.cpp
+#include <iostream>
+#include <bitset>
+
+/* übersichtlicher mittels Bit-Definitionen */
+#define PB0 0
+#define PB1 1
+#define PB2 2
+
+int main()
+{
+  char PORTB = ((1 << PB0) | (1 << PB2));
+  std::cout << std::bitset<8>(PORTB) << std::endl;
+
+  PORTB &= ~(1 << PB0);
+  std::cout << std::bitset<8>(PORTB) << std::endl;
+}
+```
+@LIA.eval(`["main.c"]`, `g++ -Wall main.c -o a.out`, `./a.out`)
+
+### Prüfen eines Bits
+
+```cpp                     BitSetting.cpp
+#include <iostream>
+#include <bitset>
+
+/* übersichtlicher mittels Bit-Definitionen */
+#define PB0 0
+#define PB1 1
+#define PB2 2
+
+int main()
+{
+  char PORTB = ((1 << PB0) | (1 << PB2));
+  std::cout << std::bitset<8>(PORTB) << std::endl;
+
+  if (PORTB & (1 << PB0))
+       std::cout << "Bit 2 gesetzt" << std::endl;
+  if (!(PORTB & (1 << PB0)))
+       std::cout << "Bit 2 nicht gesetzt" << std::endl;
+  // Ist PB0 ODER PB2 gesetzt?
+  if (PORTB & ((1 << PB0) | (1 << PB2)))
+     std::cout << "Bit 0 oder 2 gesetzt" << std::endl;
+}
+```
+@LIA.eval(`["main.c"]`, `g++ -Wall main.c -o a.out`, `./a.out`)
