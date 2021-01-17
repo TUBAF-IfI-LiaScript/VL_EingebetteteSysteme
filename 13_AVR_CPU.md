@@ -159,8 +159,8 @@ style="width: 70%; max-width: 720px; display: block; margin-left: auto; margin-r
 
 1. eine praktische Realisierung unserer Prozessorarchitektur (Spannungsversorgung, Taktgeber, usw.)
 2. eine Erweiterung der Fähigkeiten unseres Prozessors (Analoge Eingänge, Zeitmessung, Verarbeitung von Gleitkommawerten, usw.)
-2. eine effiziente Programmiermöglichkeit in einer Hochsprache
-3. Konzepte für die Implementierung von eingebetteten Systemen, die sich von konventionellen Rechnerlösungen in verschiedenen Punkten unterscheiden.
+3. eine effiziente Programmiermöglichkeit in einer Hochsprache
+4. Konzepte für die Implementierung von eingebetteten Systemen, die sich von konventionellen Rechnerlösungen in verschiedenen Punkten unterscheiden.
 
 In den kommenden Vorlesungen wollen wir diese Anforderungen ausgehend von unseren bisher erlangten Kenntnissen aufgreifen und konkretisieren. Die Übungen adressieren dies Konzepte dann auf der praktischen Ebene.
 
@@ -221,7 +221,7 @@ Das Werbematerial der vormaligen Firma AVR macht das anhand einer Grafik deutlic
 
 [^2]:
 
-Den Tiny Controller hatten wir in seiner Architektur bereits gesehen. Schon ein Atmega32U4 bringt einen deutlich größeren Umfang an Perepherie mit.
+Den Tiny Controller hatten wir in seiner Architektur bereits gesehen. Schon ein Atmega32U4 bringt einen deutlich größeren Umfang an Peripherie mit.
 
 ![Bild](./images/13_AVR_CPU/AtMega32U4.png)<!-- style="width: 75%; max-width: 1000px" -->[^3]
 
@@ -300,7 +300,7 @@ Die Namensgebung ergibt sich dabei aus der Speichergröße des verwendeten Typs:
 | ATmega168A        |        16KBytes |       512Bytes |        1KBytes | 2 instruction words/vector        |
 | ATmega168PA       |        16KBytes |       512Bytes |        1KBytes | 2 instruction words/vector        |
 | ATmega328         |        32KBytes |        1KBytes |        2KBytes | 2 instruction words/vector        |
-|  ATmega328P |  32KBytes |  1KBytes |  2KBytes) |  2 instruction words/vector |
+| ATmega328P        |  32KBytes       |  1KBytes       |  2KBytes       |  2 instruction words/vector       |
 
 Beschriebene Parameter:
 
@@ -493,7 +493,7 @@ Quellen für Reset
 +  External Reset
 +  Watchdog Reset
 +  Brown-out Reset
-+  JTAG AVR Rese
++  JTAG AVR Reset
 
 **Was passiert beim Reset?**
 
