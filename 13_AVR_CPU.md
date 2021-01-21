@@ -669,7 +669,7 @@ Die Generierung der Warteschleife von 1s ist dem Delay-Generator http://darcy.rs
 int main (void) {
    DDRB |= (1 << PB5);
    while(1) {
-       // PINB ^= (1 << PB5);   // Dieses Feature ist im Simulator
+       // PINB = (1 << PB5);   // Dieses Feature ist im Simulator
        PORTB ^= ( 1 << PB5 );
        _delay_ms(1000);
    }
