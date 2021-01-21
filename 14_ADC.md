@@ -9,6 +9,10 @@ narrator: Deutsch Female
 import:  https://raw.githubusercontent.com/liascript-templates/plantUML/master/README.md
          https://github.com/LiaTemplates/Pyodide
 
+script:   https://cdn.jsdelivr.net/chartist.js/latest/chartist.min.js
+link: https://cdn.jsdelivr.net/chartist.js/latest/chartist.min.css
+link: https://cdnjs.cloudflare.com/ajax/libs/animate.css/3.7.0/animate.min.css
+
 mark: <span style="background-color: @0;
                                   display: flex;
                                   width: calc(100% + 32px);
@@ -329,9 +333,6 @@ Vorteil
 
 ## Herausforderungen bei der Wandlung
 
-
-
-
 **Fehlertypen**
 
 ![Bild](./images/14_ADC/Fehler.png)<!-- style="width: 85%; max-width: 1000px" -->
@@ -349,9 +350,7 @@ Vorteil
 
 **Referenzspannung**
 
-Bereitstellung einer hinreichend stabilen Referenzspannung
-
-Diode als Referenzspannung
+Eine Herausforderung liegt in der Stabilen Bereitstellung der Referenzspannung für den Analog-Digital-Wandler.
 
 ## Parameter eines Analog-Digital-Wandlers
 
@@ -364,7 +363,7 @@ Diode als Referenzspannung
 + Ausgangsinterfaces (parallele Pins, Bus)
 + Temperaturabhängigkeit und Rauschverhalten (Gain, Nicht-Linearität, Offset)
 
-### Umsetzung im AVR
+## Umsetzung im AVR
 
 | Handbuch des Atmega328p                             | Bedeutung                                                                                       |
 | --------------------------------------------------- | ----------------------------------------------------------------------------------------------- |
@@ -393,15 +392,105 @@ Grundsätzlich sind 3 Modi für die Wandlung möglich:
 
 [^3]: Firma Microchip, megaAVR® Data Sheet, Seite 247, [Link](http://ww1.microchip.com/downloads/en/DeviceDoc/ATmega48A-PA-88A-PA-168A-PA-328-P-DS-DS40002061A.pdf)
 
+![Bild](./images/14_ADC/TimeLineADC.png)<!-- style="width: 75%; max-width: 1000px" -->[^4]
+
+[^4]: Firma Microchip, megaAVR® Data Sheet, Seite 250, [Link](http://ww1.microchip.com/downloads/en/DeviceDoc/ATmega48A-PA-88A-PA-168A-PA-328-P-DS-DS40002061A.pdf)
+
+**Ergebnisregister**
+
+Die Atmega Prozessoren bieten eine Auflösung von 10Bit oder 8Bit für die analogen Wandlungen. Entsprechend stehen zwei Register `ADCL` und `ADCH` für die Speicherung bereit. Standardmäßig (d.h. `ADLAR == 0`) werden die niederwertigsten 8 im Register `ADCL` bereitgehalten und die zwei höherwertigsten im Register `ADCH`.
+
+<!--
+style="width: 80%; min-width: 420px; max-width: 720px;"
+-->
+```ascii
+             ADCH                                   ADCL
+  +---+---+---+---+---+---+---+---+   +---+---+---+---+---+---+---+---+
+  |   |   |   |   |   |   |   |   |   |   |   |   |   |   |   |   |   |
+  +---+---+---+---+---+---+---+---+   +---+---+---+---+---+---+---+---+
+                            9   8       7   6   5   4   3   2   1   0
+```
+
+Das Ergebnis ergibt sich dann zu
+
+```c
+uint8_t theLowADC = ADCL
+uint16_t theTenBitResults = ADCH<<8 | theLowADC;
+```
+
+Ist keine 10-bit Genauigkeit erforderlich, wird diese Zuordnung durch das Setzen des `ADLAR` Bits im `ADMUX` Register angepasst. Auf diese Weise kann das ADC Ergebnis direkt als 8 Bit Zahl aus `ADCH` ausgelesen werden.
+
+<!--
+style="width: 80%; min-width: 420px; max-width: 720px;"
+-->
+```ascii
+             ADCH                                   ADCL
+  +---+---+---+---+---+---+---+---+   +---+---+---+---+---+---+---+---+
+  |   |   |   |   |   |   |   |   |   |   |   |   |   |   |   |   |   |
+  +---+---+---+---+---+---+---+---+   +---+---+---+---+---+---+---+---+
+    9   8   7   6   5   4   3   2       1   0
+```
+
+> **Merke: ** Immer zuerst ADCL und erst dann ADCH auslesen.
+
+Beim Zugriff auf ADCL wird das ADCH Register gegenüber Veränderungen vom ADC gesperrt. Erst beim nächsten Auslesen des ADCH-Registers wird diese Sperre wieder aufgehoben. Dadurch ist sichergestellt, dass die Inhalte von ADCL und ADCH immer aus demselben Wandlungsergebnis stammen, selbst wenn der ADC im Hintergrund im Free-Conversion-Mode arbeitet.
 
 
 ## Beispiele
 
-**Beispiel 1 - Lesen eines Analogen Distanzsensors**
+**Beispiel 1 - Heißleiter**
+
+ NTC-Widerstände (_Negative Temperature Coefficient_) werden zur Messung der Temperatur eingesetzt. Wichtigster Kennwert eines NTCs ist der Nennwiderstand R25 bei einer Nenntemperatur von 25 °C.
+
+
+ NTC-Widerstand Kennlinie
+   40     |  *                                    (* Temperaturverlauf)
+          |    *                                    (r 25 Grad Celsius)
+          |             
+          |rrrrrrrrr*      
+ R in kOhm|         r               
+          |         r      *       
+          |         r             *
+          |         r                         *
+          |         r
+   0      +------------------------------------------
+          0     Temperatur in Grad Celsius       100
+
+
+![Bild](./images/14_ADC/Heissleiter.png)<!-- style="width: 75%; max-width: 500px" -->
+
+
+$$
+\begin{aligned}
+\frac{R_{NTC}}{R_1} &= \frac{U_{NTC}}{U_{R1}} = \frac{U_{NTC}}{(U_{ges} - U_{NTC})}  \\
+R_{NTC} &= R_{1}  \cdot \frac{U_{NTC}}{(U_{ges} - U_{NTC})}
+\end{aligned}
+$$
+
+Wenn wir davon ausgehen, dass die Referenzspannung des AD-Wandlers gleich $U_{ges}$ ist, generieren wir eine digitale Repräsentation $U_{NTC_d}$ entsprechend
+
+$$
+U_{NTC_d} = U_{NTC} \cdot \frac{U_{ges}}{ADC_{resolution}}
+$$
+
+Wie interpretieren wir somit einen beispielhaften Wert von `628` am Ende des Wandlungsprozesses?
+
+$$
+U_{NTC}  = U_{NTC_d} \cdot \frac{ADC_{resolution}}{U_{ges}}
+$$
+
+Mit diesem Spannungswert können wir nun den zugrundeliegenden Widerstand berechnen und letztendlich die Temperatur.
+
+**Beispiel 2 - Lesen eines Analogen Distanzsensors**
 
 Für das Beispiel wird der AtMega2560 verwendet, der eine interne Referenzspannung von 2.56 V anstatt der des AtMega328 von 1.1 V bereit stellt.
 
-Die Bedeutung ergibt sich beim Blick ins Datenblatt des Sensors GP2D, dessen Maximalwertausgabewert liegt bei etwa 2.5V
+
+![Bild](./images/14_ADC/AtMega2560Refs.png)<!-- style="width: 75%; max-width: 1000px" -->[^5]
+
+[^5]: Firma Atmel, Atmel ATmega640/V-1280/V-1281/V-2560/V-2561/V, Seite 281, [Link](https://ww1.microchip.com/downloads/en/devicedoc/atmel-2549-8-bit-avr-microcontroller-atmega640-1280-1281-2560-2561_datasheet.pdf)
+
+Die Bedeutung ergibt sich beim Blick ins Datenblatt des Sensors GP2D, dessen Maximalwertausgabewert liegt bei etwa 2.55V
 
 ```c
 #ifndef F_CPU
@@ -420,14 +509,13 @@ int readADC(int channel) {
   // Den ADC initialisieren und einen sog. Dummyreadout machen
   ADCSRA |= (1<<ADSC);
   while(ADCSRA & (1<<ADSC));
-  //4 Leseoperationen
-  for(i=0; i<4; i++) {
-    ADCSRA |= (1<<ADSC);
-    while(ADCSRA & (1<<ADSC)); // Auf Ergebnis warten...
-    result += ADCW; }
+  ADCSRA |= (1<<ADSC);
+  while(ADCSRA & (1<<ADSC)); // Auf Ergebnis warten...
+  // Lesen des egisters "ADCW" takes care of how to read ADCL and ADCH.
+  result = ADCW;
   // ADC wieder deaktivieren
-  ADCSRA &= ~(1<<ADEN);
-  return result>>2;
+  ADCSRA = 0;
+  return result;
 }
 
 int main(void)
@@ -435,8 +523,8 @@ int main(void)
   Serial.begin(9600);
   while (1) //infinite loop
   {
-    int result = readADC(0);
-    Serial.println(result);
+    int result_individual = readADC(0);
+    Serial.println(result_individual);
     Serial.flush();
     _delay_ms(10); //1 second delay
   }
@@ -444,7 +532,9 @@ int main(void)
 }
 ```
 
-**Beispiel 2 - Temperaturüberwachung des Controllers**
+> _The first ADC conversion result after switching reference voltage source may be inaccurate, and the user is advised to discard this result._ Handbuch Seite 252
+
+**Beispiel 3 - Temperaturüberwachung des Controllers**
 
 > _The temperature measurement is based on an on-chip temperature sensor that is coupled to a single ended ADC8 channel. Selecting the ADC8 channel by writing the MUX3...0 bits in ADMUX register to "1000" enables the temperature sensor. The internal 1.1V voltage reference must also be selected for the ADC voltage reference source in the temperature sensor measurement. When the temperature sensor is enabled, the ADC converter can be used in single conversion mode to measure the voltage over the temperature sensor._ Handbuch Seite 256
 
@@ -473,8 +563,6 @@ double getTemp(void)
 
     // Detect end-of-conversion
     while (ADCSRA & (1<<ADSC));
-
-    // Reading register "ADCW" takes care of how to read ADCL and ADCH.
     wADC = ADCW;
 
     // The offset of 324.31 could be wrong. It is just an indication.
