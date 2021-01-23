@@ -88,28 +88,27 @@ Ein Interrupt beschreibt die kurzfristige Unterbrechung der normalen Programmaus
 
 ```text @plantUML.png
 @startuml
-ditaa       
-                           Hauptprogramm              Interrupt-Routine
-
-                         +---------------+        
-                         : ...           |              
-                         +---------------+                                                                   
-                         : Instruktion 1 |      +-------------+                                         
-                         +---------------+      |             |                        
-Interrupt  tritt auf ->  : Instruktion 2 |      |             v                                       
-                         +---------------+      |     +---------------+                                      
-                                 |              |     : Instruktion A |                             
-                                 +--------------+     +---------------+                   
-                                                      : Instruktion B |
-                                 +--------------+     +---------------+
-                                 |              |     : Instruktion C |
-                         +---------------+      |     +---------------+
-                         : Instruktion 3 |      |             |
-                         +---------------+      +-------------+
-                         : Instruktion 4 |
-                         +---------------+
-                         : ...           |
-                         +---------------+
+ditaa
+                         Hauptprogramm              Interrupt-Routine
+                       +---------------+        
+                       : ...           |              
+                       +---------------+                                                             
+                       : Instruktion 1 |      +-------------+                                         
+                       +---------------+      |             |                        
+Interrupt tritt auf -> : Instruktion 2 |      |             v                                       
+                       +---------------+      |     +---------------+                             
+                               |              |     : Instruktion A |                             
+                               +--------------+     +---------------+                   
+                                                    : Instruktion B |
+                               +--------------+     +---------------+
+                               |              |     : Instruktion C |
+                       +---------------+      |     +---------------+
+                       : Instruktion 3 |      |             |
+                       +---------------+      +-------------+
+                       : Instruktion 4 |
+                       +---------------+
+                       : ...           |
+                       +---------------+
 
 @enduml
 ```
