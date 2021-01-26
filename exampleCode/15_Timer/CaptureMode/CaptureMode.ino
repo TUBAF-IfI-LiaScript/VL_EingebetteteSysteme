@@ -12,8 +12,6 @@ int main(void)
   PORTB = 0xFF;
  
   TCCR1A = 0; // Normal Mode
-
-  TCCR1B = 0;
   //         1024 als Prescale-Wert     Rising edge
   TCCR1B  = (1 << CS12) | (1 <<CS10) | (1 << ICES1);  
   TIFR1 = (1<<ICF1);

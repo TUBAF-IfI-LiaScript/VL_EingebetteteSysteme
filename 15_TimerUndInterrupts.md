@@ -287,6 +287,7 @@ int main(){
 ### Einführungsbeispiele
 
 **Externe Interrupts**
+
 Wenden wir das Konzept mal auf einen konkreten Einsatzfall an und lesen die externen Interrupts in einer Schaltung. Dabei sollen Aktivitäten an einem externen Interruptsensiblen Pin überwacht werden.
 
 > **Aufgabe:** Ermitteln Sie mit die PORT zugehörigkeit und die ID der Externen Interrupt PINs `ÌNT0` und `ÌNT1`. Welche Arduino Pin ID gehört dazu?
@@ -303,8 +304,8 @@ ISR(INT0_vect) {
 
 int main (void) {
    DDRB |= (1 << PB5);
-   DDRD &= ~(1 << DDD2);    
-   PORTD |= (1 << PORTD2);   
+   DDRD &= ~(1 << DDD2);       // Pin als Eingang
+   PORTD |= (1 << PORTD2);     // Pullup-Konfiguration
    EIMSK |= ( 1 << INT0);
    EICRA |= ( 1 << ISC01);
    sei();
@@ -315,30 +316,40 @@ int main (void) {
 
 **Analog Digitalwandler**
 
-```c
-#define F_CPU 16000000UL
+Das folgende Beispiel nutzt den Analog-Digital-Wandler in einem teilautonomen Betrieb. Innerhalb der Interrupt-Routine wird das Ergebnis ausgewertet und jeweils eine neue Wandlung aktiviert.
 
+Als Demonstrator dient ein Spannungsteiler über einen lichtabhängigen Widerstand.
+
+```c
 #include <avr/io.h>
 #include <avr/interrupt.h>
 
 // Interrupt subroutine for ADC conversion complete interrupt
 ISR(ADC_vect) {
-   if(ADCW >= 900)            
+   //Serial.println(ADCW);
+   if(ADCW >= 600)            
        PORTB |= (1 << PB5);
    else
        PORTB &=~(1 << PB5);
    ADCSRA |= (1<<ADSC);       
 }
 
-int main(void) {
+int main(void){
+    Serial.begin(9600);
     DDRB |= (1 << PB5);  
     ADMUX = (1<<REFS0);  
-    ADCSRA |= (1<<ADEN)|(1<<ADIE);              
+    ADCSRA |= (1 << ADPS2) | (1 << ADPS1) | (1<<ADPS0) | (1<<ADEN)|(1<<ADIE);              
     sei();                            // Set the I-bit in SREG
     ADCSRA |= (1<<ADSC);              // Start the first conversion
 
-    while (1);
-    return 0;                         // This line will never be executed
+    int i = 0;
+    while (1) {
+       Serial.print("Ich rechne fleißig ... ");
+       Serial.println(i++);
+       _delay_ms(50);
+    }
+
+    return 0;                         
 }
 ```
 
@@ -568,13 +579,39 @@ Folgende Fragen müssen wir die Nutzung des Timers beantwortet werden:
 
 #### Timer Modi
 
+Timer-Modi bestimmen das Verhalten des Zählers und der angeschlossenen Ausgänge / Interrupts. Neben dem als Normal-Mode bezeichneten Mechanismus existieren weitere Konfigurationen, die unterschiedliche Anwendungsfelder bedienen.
+
+**Clear to Compare Mode (CTC)**
+
 ![Bild](./images/15_Timer/CTC_mode.png)<!-- style="width: 75%; max-width: 1000px" -->[^4]
 
+Die Periode über eine `OCnA` Ausgang ergibt sich entsprechend zu
+
+$$
+f_{OCnA} = \frac{f_{clk_i/o}}{2 \cdot N \ cdot (1 + OCRnA)}
+$$
+
+Der Counter läuft zwei mal durch die Werte bis zum Vergleichsregister `OCRnA`. Die Frequenz kann durch das Setzen eine Prescalers korrigiert werden.
+
+**Fast PWM**
+
 ![Bild](./images/15_Timer/FastPWM.png)<!-- style="width: 75%; max-width: 1000px" -->[^4]
+
+Die Periode des Signals an `OCRnA` wechselt während eines Hochzählens des Counters. Damit kann eine größere Frequenz bei gleicher Auflösung des Timers verglichen mit CTC erreicht werden.
+
+$$
+f_{OCnA} = \frac{f_{clk_i/o}}{N \ cdot (1 + TOP)}
+$$
+
+**Phase Correct PWM**
 
 ![Bild](./images/15_Timer/PhaseCorrectPWM.png)<!-- style="width: 75%; max-width: 1000px" -->[^4]
 
 [^4]: Firma Microchip, megaAVR® Data Sheet, Seite 141, [Link](http://ww1.microchip.com/downloads/en/DeviceDoc/ATmega48A-PA-88A-PA-168A-PA-328-P-DS-DS40002061A.pdf)
+
+$$
+f_{OCnA} = \frac{f_{clk_i/o}}{2 \cdot N \ cdot TOP)}
+$$
 
 #### Timer-Funktionalität (Normal-Mode)
 
@@ -634,6 +671,8 @@ Wir verknüpfen unseren Timer im Comparemodus mit einem entsprechenden Ausgang u
 
 > **Frage:** Welchen physischen Pin des Controllers können wir mit unserem Timer 1 ansteuern?
 
+**Normal Mode Konfiguration**
+
 <div>
   <wokwi-led color="green" pin="9" port="B" label="B1"></wokwi-led>
   <span id="simulation-time"></span>
@@ -654,11 +693,36 @@ int main(void)
 
   while (1) _delay_ms(500);
 }
-
-
 ```
 @AVR8js.sketch
 
+**Fast PWW Konfiguration**
+
+```cpp       avrlibc.cpp
+#ifndef F_CPU
+#define F_CPU 16000000UL // 16 MHz clock speed
+#endif
+
+int main(void){
+  DDRB |=  (1<<PORTB1); //Define OCR1A as Output
+  TCCR1A |= (1<<COM1A1) | (1<<WGM10);  //Set Timer Register   
+  TCCR1B |= (1<<WGM12) | (1<<CS11);
+  OCR1A = 0;
+  int timer;
+  while(1) {
+  		while(timer < 255){ //Fade from low to high
+  		   timer++;
+  		   OCR1A = timer;
+  		   _delay_ms(50);
+  		}
+  		while(timer > 1){ //Fade from high to low
+  		   timer--;
+  		   OCR1A = timer;
+  		   _delay_ms(50);
+  		}
+   }
+}
+```
 
 #### Capture Mode
 
