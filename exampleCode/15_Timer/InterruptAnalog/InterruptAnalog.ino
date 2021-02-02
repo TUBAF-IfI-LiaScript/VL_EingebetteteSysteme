@@ -19,8 +19,11 @@ int main(void)
     DDRB |= (1 << PB5);  
     ADMUX = (1<<REFS0);  
     ADCSRA |= (1 << ADPS2) | (1 << ADPS1) | (1<<ADPS0) | (1<<ADEN)|(1<<ADIE);              
+    ADCSRA |= (1<<ADSC);              // Dummy read
+    while(ADCSRA & (1<<ADSC));
+    ADCSRA |= (1<<ADSC);              // Start conversion "chain"
+    (void) ADCW;
     sei();                            // Set the I-bit in SREG
-    ADCSRA |= (1<<ADSC);              // Start the first conversion
     
     int i = 0;
     while (1) {
@@ -28,7 +31,5 @@ int main(void)
        Serial.println(i++);
        _delay_ms(50);
     }
-
-    return 0;                         // This line will never be executed
-
+    return 0;                       
 }

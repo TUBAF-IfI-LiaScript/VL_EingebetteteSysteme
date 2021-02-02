@@ -339,8 +339,11 @@ int main(void){
     DDRB |= (1 << PB5);  
     ADMUX = (1<<REFS0);  
     ADCSRA |= (1 << ADPS2) | (1 << ADPS1) | (1<<ADPS0) | (1<<ADEN)|(1<<ADIE);              
+    ADCSRA |= (1<<ADSC);              // Dummy read
+    while(ADCSRA & (1<<ADSC));
+    ADCSRA |= (1<<ADSC);              // Start conversion "chain"
+    (void) ADCW;
     sei();                            // Set the I-bit in SREG
-    ADCSRA |= (1<<ADSC);              // Start the first conversion
 
     int i = 0;
     while (1) {
@@ -615,7 +618,7 @@ $$
 
 #### Timer-Funktionalität (Normal-Mode)
 
-Für die Umsetzung eines einfachen Timers, der wie im Nachfolgenden Beispiel jede
+Für die Umsetzung eines einfachen Timers, der wie im nachfolgenden Beispiel jede
 Sekunde aktiv wird, genügt es einen entsprechenden Vergleichswert zu bestimmen,
 den der Zähler erreicht haben muss.
 
@@ -671,6 +674,9 @@ Wir verknüpfen unseren Timer im Comparemodus mit einem entsprechenden Ausgang u
 
 > **Frage:** Welchen physischen Pin des Controllers können wir mit unserem Timer 1 ansteuern?
 
+Setzen wir also die Möglichkeiten des Timers vollständig ein, um das Blinken im Hintergrund ablaufen zu lassen. Ab Zeile 13 läuft dieser Prozess komplett auf der
+Hardware und unser Hauptprogramm könnte eigenständige Aufgaben wahrnehmen.
+
 **Normal Mode Konfiguration**
 
 <div>
@@ -696,7 +702,30 @@ int main(void)
 ```
 @AVR8js.sketch
 
-**Fast PWW Konfiguration**
+Was passiert, wenn die Aktivierung und Deaktivierung mit einer höheren Frequenz vorgenommen wird? Die effektiv wirkende Spannung wird durch den Mittelwert repräsentiert. Damit ist eine Quasi-Digital-Analoge Ausgabe ohne eine entsprechende Hardware möglich.
+
+> **Merke:** Reale Analog-Digital-Wandler würden ein Ergebnis zwischen 0 und $2^n$ projiziert auf eine Referenzspannung ausgeben. PWM generiert diesen Effekt durch ein variierendes Verhältnis zwischen an und aus Phasen.
+
+<!--
+style="width: 80%; min-width: 420px; max-width: 720px;"
+-->
+```ascii
+            Tastverhältnis
+         ^  "1/4"    "2/3"
+Spannung |  +---+........       +----
+         |  |   |       .       |
+         |  |   |       .       |
+         |  |   |       .       |
+         |  |   |       .       |
+         |  |   |       .       |
+         |--+   +---------------+
+         +------------------------------->
+            <------------------>
+                  Periode                                                       .
+```
+
+Im folgenden wird der **Fast PWW Mode** genutzt, um auf diesem Wege die LED an
+PIN 9 zu periodisch zu dimmen. Dazu wird der Vergleichswert, der in OCR1A enthalten ist kontinuierlich verändert.
 
 ```cpp       avrlibc.cpp
 #ifndef F_CPU
@@ -729,7 +758,6 @@ int main(void){
 ![Bild](./images/15_Timer/AVR_Capture_Unit.png)<!-- style="width: 75%; max-width: 1000px" -->[^2]
 
 [^2]: Firma Microchip, megaAVR® Data Sheet, Seite 126, [Link](http://ww1.microchip.com/downloads/en/DeviceDoc/ATmega48A-PA-88A-PA-168A-PA-328-P-DS-DS40002061A.pdf)
-
 
 ```cpp       avrlibc.cpp
 #include <avr/io.h>
@@ -779,7 +807,6 @@ Zähler |    +       +
 > **Frage:** Sie wollen die Ausgabe in Ticks in eine Darstellung in ms überführen. Welche Kalkulation ist dafür notwendig?
 
 > **Problem:** Wie große ist das maximal Darstellbare Zahlenintervall?
-
 
 ### Anwendungen
 

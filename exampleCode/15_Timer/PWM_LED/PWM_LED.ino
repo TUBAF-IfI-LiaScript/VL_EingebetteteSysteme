@@ -13,14 +13,14 @@ int main(void){
       while(timer < 255){ //Fade from low to high
          timer++;
          OCR1A = timer;
-         _delay_ms(20);
+         _delay_ms(10);
          Serial.print("Auf ");
          Serial.println(timer);
       } 
       while(timer > 1){ //Fade from high to low
          timer--;
          OCR1A = timer;
-         _delay_ms(20);
+         _delay_ms(10);
          Serial.print("Ab  ");
          Serial.println(timer);
       }
