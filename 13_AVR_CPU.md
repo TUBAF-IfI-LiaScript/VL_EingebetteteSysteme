@@ -2,7 +2,7 @@
 
 author:   Sebastian Zug & André Dietrich & Fabian Bär
 email:    sebastian.zug@informatik.tu-freiberg.de & andre.dietrich@informatik.tu-freiberg.de & fabian.baer@student.tu-freiberg.de
-version:  0.0.4
+version:  0.1.4
 language: de
 narrator: Deutsch Female
 
@@ -803,12 +803,32 @@ Offenbar handelt es sich um einen `Jump` Befehl. Dieser besteht aus 2 Worten, wi
 ```
         ---- ---       ---
 94 0c = 1001.0100.0000.1100
-00 72 = 0000.0000.1110.0100
+00 72 = 0000.0000.0111.0010
 
-Folgeadresse 00.0000.0000.0000.0111.0010 = 0xe4
+Folgeadresse 00.0000.0000.0000.0111.0010 = 0x72
 ```
 
-Zusammengesetzt ergibt sich eine Folgeadresse $0xe4$. Im Programmspeicher steht auf den ersten 8 Byte `jmp 0xe4`
+Nun greift aber eine Besonderheit des AVR Controllers. Dieser adressiert seine Speicherinhalte Wortweise. Der GCC erzeugt aber byteweise adressierten Code. Im Objektfile finden sie die byteweisen Adressierungen in der ersten Spalte. Um also die wortbasierten Adressen "umzurechnen" müssen Sie mit 2 multipliziert werden. In unserem Fall folgt daraus `0xe4`.
+
+```asm
+00000000 <__vectors>:
+   0:	0c 94 72 00 	jmp	0xe4	; 0xe4 <__ctors_end>
+   4:	0c 94 7e 00 	jmp	0xfc	; 0xfc <__bad_interrupt>
+   8:	0c 94 7e 00 	jmp	0xfc	; 0xfc <__bad_interrupt>
+   c:	0c 94 7e 00 	jmp	0xfc	; 0xfc <__bad_interrupt>
+   ...
+
+000000e4 <__ctors_end>:
+  e4:	11 24       	eor	r1, r1
+  e6:	1f be       	out	0x3f, r1	; 63
+  ...
+
+000000fc <__bad_interrupt>:
+  fc:	0c 94 00 00 	jmp	0	; 0x0 <__vectors>
+
+```
+
+Im Programmspeicher steht auf den ersten 8 Byte `jmp 0xe4`
 
 ## Vorbereitung der praktischen Aufgaben
 
