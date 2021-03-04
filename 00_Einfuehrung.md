@@ -9,6 +9,7 @@ narrator: Deutsch Female
 import:   https://raw.githubusercontent.com/liascript-templates/plantUML/master/README.md
           https://raw.githubusercontent.com/LiaTemplates/NetSwarm-Simulator/master/README.md
           https://raw.githubusercontent.com/liaTemplates/DigiSim/master/README.md
+          https://github.com/LiaTemplates/AVR8js/main/README.md#10
 
 -->
 
@@ -24,12 +25,19 @@ Die interaktive Form ist unter diesem [Link](https://liascript.github.io/course/
 
 ---------------------------------------------------------------------
 
-```c HelloWorld.c
+<div>
+  <span id="simulation-time"></span>
+</div>
+```cpp       avrlibc.cpp
+// preprocessor definition
+#define F_CPU 16000000UL
 #define ANSWER_TO_LIFE 42
 
-void setup() {
+#include <avr/io.h>
+#include <util/delay.h>
+
+int main (void) {
   Serial.begin(9600);
-  Serial.println("Herzlich willkommen");
 
   volatile byte a;
 
@@ -37,13 +45,16 @@ void setup() {
       : "=r" (a)
       : "M" (ANSWER_TO_LIFE));
 
-  Serial.print("Antwort auf alle Fragen ist:");
+  Serial.print("Antwort auf die Frage, warum ich an dieser Vorlesung teilnehme: ");
   Serial.println(a);
-}
 
-void loop() {
+  while(1) {
+       _delay_ms(1000);
+  }
+  return 0;
 }
 ```
+@AVR8js.sketch
 
 
 ## Zielstellung
