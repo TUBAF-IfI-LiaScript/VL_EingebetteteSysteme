@@ -790,6 +790,10 @@ int main(void)
 }
 ```
 
+Mit dem Schreiben des Flags `ICF1` kann der Eintrag gelöscht werden.
+
+__This flag is set when a capture event occurs on the ICP1 pin. When the Input Capture Register (ICR1) is set by the WGM13:0 to be used as the TOP value, the ICF1 Flag is set when the counter reaches the TOP value. ICF1 is automatically cleared when the Input Capture Interrupt Vector is executed. Alternatively, ICF1 can be cleared by writing a logic one to its bit location._
+
 Entwicklung des Timerinhalts
 80000  |
        |                +                              
@@ -809,6 +813,10 @@ Zähler |    +       +
 > **Problem:** Wie große ist das maximal Darstellbare Zahlenintervall?
 
 ### Anwendungen
+
+![Bild](./images/15_Timer/16BitTimerAVR.png)<!-- style="width: 75%; max-width: 1000px" -->[^1]
+
+[^1]: Firma Microchip, megaAVR® Data Sheet, Seite 250, [Link](http://ww1.microchip.com/downloads/en/DeviceDoc/ATmega48A-PA-88A-PA-168A-PA-328-P-DS-DS40002061A.pdf)
 
 Wir wollen einen Eingangszähler entwerfen, der die Ereignisse als Zählerimpulse betrachtet und zusätzlich mit einem Schwellwert vergleicht.
 
