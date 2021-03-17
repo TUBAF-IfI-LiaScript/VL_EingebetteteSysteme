@@ -21,12 +21,12 @@ der Relevanz dieses Wissens bei der hardwarenahen Codeentwicklung.
 | 8     | 11  | 15. Dezember | Modell CPU                       |
 | 9     |     | 17. Dezember | Befehlsabarbeitung               |
 |       | 12  | 22. Dezember | RISC und Pipelining              |
-| 10    | 13  | 12. Januar   | Eingebettete Systeme             |
-| 11    | 16  | 14. Januar   |                                  |
-|       | 17  | 19. Januar   |                                  |
-| 12    | 18  | 26. Januar   |                                  |
-| 13    | 19  | 28. Januar   |                                  |
-|       | 20  |  2. Februar  |                                  |
-| 14    | 21  |  9. Februar  |                                  |
-| 15    | 22  | 11. Februar  |                                  |
+| 10    | 13  | 12. Januar   | AVR-CPU                          |
+| 11    | 16  | 14. Januar   | AVR-CPU                          |
+|       | 17  | 19. Januar   | Analog-Digitalwandler            |
+| 12    | 18  | 26. Januar   | Analog-Digitalwandler            |
+| 13    | 19  | 28. Januar   | Timer und Interrupts             |
+|       | 20  |  2. Februar  | Timer und Interrupts             |
+| 14    | 21  |  9. Februar  | Aktoren                          |
+| 15    | 22  | 11. Februar  | Prüfungsvorbereitung             |
 
