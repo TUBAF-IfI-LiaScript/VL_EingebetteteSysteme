@@ -18,13 +18,13 @@ import:   https://raw.githubusercontent.com/liascript-templates/plantUML/master/
 | Parameter                | Kursinformationen                                                                                                                                                                          |
 | ------------------------ | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------ |
 | **Veranstaltung:**       | `Eingebettete Systeme`                                                                                                                                                                     |
-| **Semester**             | `Sommersemester 2021`                                                                                                                                                                      |
+| **Semester**             | `Wintersemester 2021/20`                                                                                                                                                                      |
 | **Hochschule:**          | `Technische Universität Freiberg`                                                                                                                                                          |
 | **Inhalte:**             | `Motivation der Vorlesung "Eingebettete Systeme" und Beschreibung der Organisation der Veranstaltung`                                                                                      |
 | **Link auf den GitHub:** | [https://github.com/TUBAF-IfI-LiaScript/VL_Softwareentwicklung/blob/master/00_Einfuehrung.md](https://github.com/TUBAF-IfI-LiaScript/VL_EingebetteteSysteme/blob/master/00_Einfuehrung.md) |
 | **Autoren**              | @author                                                                                                                                                                                    |
 
-![](https://media.giphy.com/media/26tn33aiTi1jkl6H6/source.gif)
+![](https://media.giphy.com/media/10PNyg7YOcaBQA/giphy-downsized.gif)
 
 ---------------------------------------------------------------------
 
