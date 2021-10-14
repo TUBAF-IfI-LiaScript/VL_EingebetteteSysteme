@@ -23,7 +23,7 @@ import:   https://raw.githubusercontent.com/liascript-templates/plantUML/master/
 | **Semester**             | `Wintersemester 2021/20`                                                                                                                                                                      |
 | **Hochschule:**          | `Technische Universität Freiberg`                                                                                                                                                          |
 | **Inhalte:**             | `Motivation der Vorlesung "Eingebettete Systeme" und Beschreibung der Organisation der Veranstaltung`                                                                                      |
-| **Link auf den GitHub:** | [https://github.com/TUBAF-IfI-LiaScript/VL_Softwareentwicklung/blob/master/00_Einfuehrung.md](https://github.com/TUBAF-IfI-LiaScript/VL_EingebetteteSysteme/blob/master/00_Einfuehrung.md) |
+| **Link auf GitHub:** | [https://github.com/TUBAF-IfI-LiaScript/VL_Softwareentwicklung/blob/master/00_Einfuehrung.md](https://github.com/TUBAF-IfI-LiaScript/VL_EingebetteteSysteme/blob/master/00_Einfuehrung.md) |
 | **Autoren**              | @author                                                                                                                                                                                    |
 
 ![](https://media.giphy.com/media/10PNyg7YOcaBQA/giphy-downsized.gif)
