@@ -1,6 +1,6 @@
 <!--
 
-author:   Sebastian Zug & André Dietrich & Fabian Bär
+author:   Sebastian Zug, André Dietrich & `fjangfaragesh`, `FnHm`, `gjaeger`
 email:    sebastian.zug@informatik.tu-freiberg.de & andre.dietrich@informatik.tu-freiberg.de & fabian.baer@student.tu-freiberg.de
 version:  0.0.1
 language: de
@@ -13,48 +13,20 @@ import:   https://raw.githubusercontent.com/liascript-templates/plantUML/master/
 
 -->
 
-# Organisation und Motivation
+# Einführung
 
-**TU Bergakademie Freiberg - Wintersemester 2020 / 21**
+| Parameter                | Kursinformationen                                                                                                                                                                          |
+| ------------------------ | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------ |
+| **Veranstaltung:**       | `Eingebettete Systeme`                                                                                                                                                                     |
+| **Semester**             | `Sommersemester 2021`                                                                                                                                                                      |
+| **Hochschule:**          | `Technische Universität Freiberg`                                                                                                                                                          |
+| **Inhalte:**             | `Motivation der Vorlesung "Eingebettete Systeme" und Beschreibung der Organisation der Veranstaltung`                                                                                      |
+| **Link auf den GitHub:** | [https://github.com/TUBAF-IfI-LiaScript/VL_Softwareentwicklung/blob/master/00_Einfuehrung.md](https://github.com/TUBAF-IfI-LiaScript/VL_EingebetteteSysteme/blob/master/00_Einfuehrung.md) |
+| **Autoren**              | @author                                                                                                                                                                                    |
 
-Hier findet ihr den Link auf die aktuelle Vorlesung im Versionsmanagementsystem GitHub
-
-[https://github.com/TUBAF-IfI-LiaScript/VL_EingebetteteSysteme/blob/master/00_Einfuehrung.md](https://github.com/TUBAF-IfI-LiaScript/VL_EingebetteteSysteme/blob/master/00_Einfuehrung.md)
-
-Die interaktive Form ist unter diesem [Link](https://liascript.github.io/course/?https://raw.githubusercontent.com/TUBAF-IfI-LiaScript/VL_EingebetteteSysteme/master/00_Einfuehrung.md#1) zu finden.
+![](https://media.giphy.com/media/26tn33aiTi1jkl6H6/source.gif)
 
 ---------------------------------------------------------------------
-
-<div>
-  <span id="simulation-time"></span>
-</div>
-```cpp       avrlibc.cpp
-// preprocessor definition
-#define F_CPU 16000000UL
-#define ANSWER_TO_LIFE 42
-
-#include <avr/io.h>
-#include <util/delay.h>
-
-int main (void) {
-  Serial.begin(9600);
-
-  volatile byte a;
-
-  asm ("ldi %0, %1\n\t"
-      : "=r" (a)
-      : "M" (ANSWER_TO_LIFE));
-
-  Serial.print("Antwort auf die Frage, warum ich an dieser Vorlesung teilnehme: ");
-  Serial.println(a);
-
-  while(1) {
-       _delay_ms(1000);
-  }
-  return 0;
-}
-```
-@AVR8js.sketch
 
 
 ## Zielstellung
@@ -111,6 +83,38 @@ Am Ende des Compiliervorganges entsteht daraus der sogenannte Maschinencode. Die
 :0A010000279A2F98FFCFF894FFCF            45
 :00000001FF
 ```
+
+<div>
+  <span id="simulation-time"></span>
+</div>
+```cpp       avrlibc.cpp
+// preprocessor definition
+#define F_CPU 16000000UL
+#define ANSWER_TO_LIFE 42
+
+#include <avr/io.h>
+#include <util/delay.h>
+
+int main (void) {
+  Serial.begin(9600);
+
+  volatile byte a;
+
+  asm ("ldi %0, %1\n\t"
+      : "=r" (a)
+      : "M" (ANSWER_TO_LIFE));
+
+  Serial.print("Antwort auf die Frage, warum ich an dieser Vorlesung teilnehme: ");
+  Serial.println(a);
+
+  while(1) {
+       _delay_ms(1000);
+  }
+  return 0;
+}
+```
+@AVR8js.sketch
+
 
                                   {{3}}
 *******************************************************************************
