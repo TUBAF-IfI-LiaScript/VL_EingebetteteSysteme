@@ -9,8 +9,7 @@ narrator: Deutsch Female
 import:   https://raw.githubusercontent.com/liascript-templates/plantUML/master/README.md
           https://raw.githubusercontent.com/LiaTemplates/NetSwarm-Simulator/master/README.md
           https://raw.githubusercontent.com/liaTemplates/DigiSim/master/README.md
-          https://github.com/LiaTemplates/AVR8js/main/README.md#10
-
+          https://raw.githubusercontent.com/liaTemplates/AVR8js/main/README.md
 -->
 
 # Einführung
@@ -86,6 +85,7 @@ Am Ende des Compiliervorganges entsteht daraus der sogenannte Maschinencode. Die
 :00000001FF
 ```
 
+{{2}}
 <div>
   <span id="simulation-time"></span>
 </div>
@@ -94,10 +94,12 @@ Am Ende des Compiliervorganges entsteht daraus der sogenannte Maschinencode. Die
 #define F_CPU 16000000UL
 #define ANSWER_TO_LIFE 42
 
+// relevant header files
 #include <avr/io.h>
 #include <util/delay.h>
 
 int main (void) {
+  // relevant header files
   Serial.begin(9600);
 
   volatile byte a;
