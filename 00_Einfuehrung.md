@@ -19,7 +19,7 @@ import:   https://raw.githubusercontent.com/liascript-templates/plantUML/master/
 | Parameter                | Kursinformationen                                                                                                                                                                          |
 | ------------------------ | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------ |
 | **Veranstaltung:**       | `Eingebettete Systeme`                                                                                                                                                                     |
-| **Semester**             | `Wintersemester 2021/20`                                                                                                                                                                      |
+| **Semester**             | `Wintersemester 2021/22`                                                                                                                                                                      |
 | **Hochschule:**          | `Technische Universität Freiberg`                                                                                                                                                          |
 | **Inhalte:**             | `Motivation der Vorlesung "Eingebettete Systeme" und Beschreibung der Organisation der Veranstaltung`                                                                                      |
 | **Link auf GitHub:** | [https://github.com/TUBAF-IfI-LiaScript/VL_Softwareentwicklung/blob/master/00_Einfuehrung.md](https://github.com/TUBAF-IfI-LiaScript/VL_EingebetteteSysteme/blob/master/00_Einfuehrung.md) |
@@ -132,7 +132,7 @@ style="width: 80%; min-width: 420px; max-width: 720px;"
            +----------------------------+
 
            +----------------------------+
-  Ebene 3  | Istruktionsset             |     Maschinensprache
+  Ebene 3  | Instruktionsset            |     Maschinensprache
            +----------------------------+
 
            +----------------------------+  -.
