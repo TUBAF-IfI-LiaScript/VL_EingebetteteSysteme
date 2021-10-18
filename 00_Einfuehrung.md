@@ -47,24 +47,40 @@ _Mit der erfolgreichen Teilnahme an der Veranstaltung sollen die Studierenden in
 
 _Grundlegende Prinzipien der Modellierung digitaler Systeme: Boolsche Algebren und Funktionen, kombinatorische und sequentielle Schaltungen, Herleitung eines Modellrechners und Abbildung von dessen Funktionsweise, Einführung in die Entwicklung eingebetteter Systeme(Sensoren, Aktoren, elektrische Peripherie, Programmierkonzepte), Anwendungsfelder_
 
-{{1}}
+### Software
+
 **Und was heißt das nun konkret? Worum geht es?**
 
-{{1}}
 Nehmen wir an, Sie realisieren ein Arduino Beispielprogramm wie dieses:
 
-{{1}}
-```c
+<div id="example1">
+<wokwi-led color="red"   pin="13" label="13"></wokwi-led>
+<wokwi-led color="green" pin="12" label="12"></wokwi-led>
+<wokwi-led color="blue"  pin="11" label="11"></wokwi-led>
+<wokwi-led color="blue"  pin="10" label="10"></wokwi-led>
+<span id="simulation-time"></span>
+</div>
+
+```cpp
+byte leds[] = {13, 12, 11, 10};
 void setup() {
-  pinMode(13, OUTPUT);
+  Serial.begin(115200);
+  for (byte i = 0; i < sizeof(leds); i++) {
+    pinMode(leds[i], OUTPUT);
+  }
 }
+
+int i = 0;
 void loop() {
-  digitalWrite(13, HIGH);
-  delay(1000);
-  digitalWrite(13, LOW);
-  delay(1000);
+  Serial.print("LED: ");
+  Serial.println(i);
+  digitalWrite(leds[i], HIGH);
+  delay(250);
+  digitalWrite(leds[i], LOW);
+  i = (i + 1) % sizeof(leds);
 }
 ```
+@AVR8js.sketch
 
 {{2}}
 Am Ende des Compiliervorganges entsteht daraus der sogenannte Maschinencode. Dieses ist die Sprache, die der Rechner originär versteht und die entsprechend ausgeführt werden kann.
@@ -85,43 +101,7 @@ Am Ende des Compiliervorganges entsteht daraus der sogenannte Maschinencode. Die
 :00000001FF
 ```
 
-{{2}}
-<div>
-  <span id="simulation-time"></span>
-</div>
-```cpp       avrlibc.cpp
-// preprocessor definition
-#define F_CPU 16000000UL
-#define ANSWER_TO_LIFE 42
-
-// relevant header files
-#include <avr/io.h>
-#include <util/delay.h>
-
-int main (void) {
-  // relevant header files
-  Serial.begin(9600);
-
-  volatile byte a;
-
-  asm ("ldi %0, %1\n\t"
-      : "=r" (a)
-      : "M" (ANSWER_TO_LIFE));
-
-  Serial.print("Antwort auf die Frage, warum ich an dieser Vorlesung teilnehme: ");
-  Serial.println(a);
-
-  while(1) {
-       _delay_ms(1000);
-  }
-  return 0;
-}
-```
-@AVR8js.sketch
-
-
-                                  {{3}}
-*******************************************************************************
+### Hardware
 
 **Was heißt das denn nun der Rechner?**
 
@@ -131,47 +111,6 @@ int main (void) {
 
 + ATmega4808/4809
 + ATmega32
-
-*******************************************************************************
-
-                                 {{4}}
-*******************************************************************************
-
-**Und wie nützt mir das?**
-
-![Diagramme](./images/00_Einfuehrung/Wetterstation.png)<!-- width="70%" -->
-
-Wenn wir noch einen Schritt weitergehen können wir die Daten auch an einen Server übergeben. Dieser übernimmt die Aufbereitung und Visualisierung.
-
-<iframe width="450" height="260" style="border: 1px solid #cccccc;" src="https://thingspeak.com/channels/856893/charts/7?bgcolor=%23ffffff&color=%23d62020&days=3&dynamic=true&type=line"></iframe>
-
-Hier lassen sich dann die eigentlichen "Untersuchungen" realisieren und zum Beispiel die Frage beantworten, ob die Sonne am Wochenende häufiger scheint.
-
-![Diagramme](./images/00_Einfuehrung/AlleWetter.png)<!-- width="70%" -->
-
-Die roten Punkte stellen die Verteilung der Wochenendmessungen der vergangenen Woche dar, während die blauen Kreuze die Wochentage illustrieren. Dunkelheit wird durch einen Wert nahe 1023 ausgedrückt, während helle Messituationen durch kleine Werte dargestellt werden.
-*******************************************************************************
-
-## Organisation
-
-| Name                    | Email                                      |
-|:----------------------- |:------------------------------------------ |
-| Prof. Dr. Sebastian Zug | sebastian.zug@informatik.tu-freiberg.de    |
-| Dr. Martin Reinhardt    | martin.reinhardt@informatik.tu-freiberg.de |
-
-> Bitte melden Sie sich im OPAL unter [Eingebettete Systeme](https://bildungsportal.sachsen.de/opal/auth/RepositoryEntry/26860322818/CourseNode/102563572218999) für die Veranstaltung an. Dies ist im Kontext der Pandemiesituation Teil des Hygienekonzepts der Hochschule.
-
-### Zeitplan
-
-Die Veranstaltung wird sowohl für die Vorlesung als auch die Übung in Präsenz durchgeführt.
-
-| Veranstaltungen | Tag        | Zeitslot      | Ort      | Bemerkung       |
-| --------------- | ---------- | ------------- | -------- | --------------- |
-| Vorlesung I     | Dienstag   | 14:00 - 15:30 | WIN-1005 | wöchentlich     |
-| Vorlesung II    | Donnerstag | 14:00 - 15:30 | WIN-1005 | ungerade Wochen |
-| Übungen         | Dienstag   | 18:00 - 19:30 | KKB-2097 | ab Dezember     |
-
-Wir gehen gegenwärtig noch davon aus, dass die Übungen auch in Präsenz stattfinden. Dort haben Sie dann insbesondere ab Januar Gelegenheit anhand spezifischer Mikrocontrollerschaltungen Ihre Fähigkeiten zu vertiefen.
 
 <!--
 style="width: 80%; min-width: 420px; max-width: 720px;"
@@ -209,21 +148,23 @@ style="width: 80%; min-width: 420px; max-width: 720px;"
            +----------------------------+                                      .
 ```
 
+### Anwendungen
 
-### Prüfungsmodalitäten
+**Und wie nützt mir das?**
 
-> *Credit-Points:* 6
+![Diagramme](./images/00_Einfuehrung/Wetterstation.png)<!-- width="70%" -->
 
+Wenn wir noch einen Schritt weitergehen können wir die Daten auch an einen Server übergeben. Dieser übernimmt die Aufbereitung und Visualisierung.
 
-> *Arbeitsaufwand:* Der Zeitaufwand beträgt 180h und setzt sich zusammen aus 60h Präsenzzeit und 120h Selbststudium. Letzteres umfasst die Vor- undNachbereitung der Lehrveranstaltung, die eigenständige Lösung von Übungsaufgaben sowie die Prüfungsvorbereitung.
+<iframe width="450" height="260" style="border: 1px solid #cccccc;" src="https://thingspeak.com/channels/856893/charts/7?bgcolor=%23ffffff&color=%23d62020&days=3&dynamic=true&type=line"></iframe>
 
+Hier lassen sich dann die eigentlichen "Untersuchungen" realisieren und zum Beispiel die Frage beantworten, ob die Sonne am Wochenende häufiger scheint.
 
-> *Prüfungsform:* Die Veranstaltung wird mit einer schriftlichen Prüfung abgeschlossen.
+![Diagramme](./images/00_Einfuehrung/AlleWetter.png)<!-- width="70%" -->
 
+Die roten Punkte stellen die Verteilung der Wochenendmessungen der vergangenen Woche dar, während die blauen Kreuze die Wochentage illustrieren. Dunkelheit wird durch einen Wert nahe 1023 ausgedrückt, während helle Messituationen durch kleine Werte dargestellt werden.
 
-> *5 Fragen in 5 Minuten:* Teilnehmer stellen mit Blick auf die vergangen Lehrveranstaltung weitere Aufgaben vor und besprechen die Lösung kurz. Die Fragen gehen dann in Teilen in die Klausur ein.
-
-## ... und wozu brauche ich das überhaupt?
+**Aber ich will Webentwickler werden ... **
 
 **Antwort A:**
 Das Studium vermittelt ein Weltbild und keine eng zugeschnittene Sicht.
@@ -236,6 +177,40 @@ Arbeitens.
 Am Ende steht Ihnen das Rüstzeug zur Verfügung kleine eingebettete C-Projekte
 selbst anzugehen.
 
+## Organisation
+
+| Name                    | Email                                      |
+|:----------------------- |:------------------------------------------ |
+| Prof. Dr. Sebastian Zug | sebastian.zug@informatik.tu-freiberg.de    |
+| Dr. Martin Reinhardt    | martin.reinhardt@informatik.tu-freiberg.de |
+
+> Bitte melden Sie sich im OPAL unter [Eingebettete Systeme](https://bildungsportal.sachsen.de/opal/auth/RepositoryEntry/32295976976/CourseNode/102563572218999) für die Veranstaltung an. Dies ist im Kontext der Pandemiesituation Teil des Hygienekonzepts der Hochschule.
+
+### Zeitplan
+
+Die Veranstaltung wird sowohl für die Vorlesung als auch die Übung in Präsenz durchgeführt.
+
+<!-- data-type="none" -->
+| Veranstaltungen | Tag      | Zeitslot      | Ort      | Bemerkung     |
+| --------------- | -------- | ------------- | -------- | ------------- |
+| Vorlesung I     | Montag   | 16.00 - 17.30 | WIN-1005 | wöchentlich   |
+| Vorlesung II    | Dienstag | 16.00 - 17.30 | WIN-1005 | gerade Wochen |
+
+> Die zugehörigen Übungen starten am 8./9. Dezember und werden dann wöchentlich durchgeführt.
+
++ Übung 1 (Mm, ROB), Donnerstags, 14.00 - 15.30 Uhr, KKB-2097
++ Übung 2 (BAI), Mittwochs, 16.00-17.30 Uhr, KKB-2097
+
+Wir gehen gegenwärtig noch davon aus, dass die Übungen auch in Präsenz stattfinden. Dort haben Sie dann insbesondere ab Januar Gelegenheit anhand spezifischer Mikrocontrollerschaltungen Ihre Fähigkeiten zu vertiefen.
+
+
+### Prüfungsmodalitäten
+
+> *Credit-Points:* 6
+
+> *Arbeitsaufwand:* Der Zeitaufwand beträgt 180h und setzt sich zusammen aus **60h Präsenzzeit** und **120h Selbststudium**. Letzteres umfasst die Vor- undNachbereitung der Lehrveranstaltung, die eigenständige Lösung von Übungsaufgaben sowie die Prüfungsvorbereitung.
+
+> *Prüfungsform:* Die Veranstaltung wird mit einer schriftlichen Prüfung abgeschlossen. Diese wird als Open Book Klausur entworfen.
 
 ## Literaturempfehlungen
 
@@ -339,55 +314,7 @@ void loop() {
 ```
 @NetSwarm.loop
 
-```js
-// Init components
-AND(["and1", "and2"], ["and3"], "AND1");
-OR(["or1", "or2"], ["or3"], "OR1");
-XOR(["xor1", "xor2"], ["xor3"], "XOR1");
-Button("btn1", "BUTTON1");
-Button("btn2", "BUTTON2");
-Button("btn3", "BUTTON3");
-Button("btn4", "BUTTON4");
-Lamp("lmp1", "LAMP1");
-
-// IO IN
-wire("btn1", "and1");
-wire("btn2", "and2");
-wire("btn3", "or1");
-wire("btn4", "or2");
-
-// AND, OR -> XOR
-wire("and3", "xor1");
-wire("or3", "xor2");
-
-// IO OUT
-wire("xor3", "lmp1", "Main Output");
-```
-
-``` js @DigiSim.eval
-// Init components
-AND(["and1", "and2"], ["and3"], "AND1");
-OR(["or1", "or2"], ["or3"], "OR1");
-XOR(["xor1", "xor2"], ["xor3"], "XOR1");
-Button("btn1", "BUTTON1");
-Button("btn2", "BUTTON2");
-Button("btn3", "BUTTON3");
-Button("btn4", "BUTTON4");
-Lamp("lmp1", "LAMP1");
-
-// IO IN
-wire("btn1", "and1");
-wire("btn2", "and2");
-wire("btn3", "or1");
-wire("btn4", "or2");
-
-// AND, OR -> XOR
-wire("and3", "xor1");
-wire("or3", "xor2");
-
-// IO OUT
-wire("xor3", "lmp1", "Main Output");
-```
+??[Simulation: Noninverting Amplifier](https://www.falstad.com/circuit/circuitjs.html?ctz=CQAgzCAMB0l3BWEA2aB2ATAFi2TXIBODMARjUJAQA4Q0rIqBTAWlNICgBDEUyLFAPLJBvRkkZ94cFNCyEFipUqixk0uBlKF1yMGGpCN3MUNIZeaEewt8qUMRqpzlrhfRiR1GrTq-7DR3gTPiF1S2twuwkg+BAsFzdlWk9vaV9dAKNpEP4QDEhaYXzCsXtJDUYwRKTFag81Soz-A2zgnlD8hGsrLutxBylpfJrahVUvJu1M1tjIXIEwPOKlo3K5yVGxkVSpvz1ZobgF8ARbXrAzspijmRh5MZVdn2mWwNuOACc6C1pMKh2DHm33+3R+pkGwRBtjy-1IVwqx2hvCu-wKjERwPB6OxWBSQS+uL+FgwOkhSOxZP+YBw5Kx1Np1OIDgQxwASuDaGBfg5GAQ6LzVAgOAB3cFgzpg+ZiuHLOUCaXg+EwoQI0XYmSdHGKtF4iHYFLqtFkrVknUWGlGRa0xWdWVCApQdWdcwVMKGsUu5BFPJaHbO32kfoCDDIBUBkNhiFkCy2vIx6PhOMCe35cMcrVCQLYBwCVngdBIapoGIwYUAc3BYGZ-wIGKd8JD1C53tOFtbpAF4mdFyuK2ZtouzIwzfAA57IlWvECU9tM+WM8Cc8W2dHs0HIgwEuHUudO+szLw-s9h96I65vQ3JVoOIKHpKjDvD-ArcVOLArfPL-vxSDj9Kf5OmKT6AU+H4YuqYHhF+4FAREvDmPkQYIbGkHITYSGTmqwHIZcJJrth8FRhgOZRm+pEhjmlpwSR1pNlyNocI2+TUI+ZJ4fkJrgCyzrzk2VR5G+rGcZueqkseLGPqOW6bqOb5iWSBrXjRYmlLepRvmCX4yShNESohfq6fJN6lBxT6KhxH5clc3L3mZplXKG4ZYNo4BnlGWBaWR4DqmZUZHvkZG+Y57FnmawUWiObmTlF8wAPbgFUsbxEQPoTPAhBWN0W4OBaVQcAlyBFslBCELQCCwHANKKGgDxlSklWQJ2nYWEVPmFTFuapeUjVEFlyA5S1KCTgVKD0NyXVlT10iZUVA1IENyDjRwQA)
 
 Eine Reihe von Einführungsvideos findet sich unter [Youtube](https://www.youtube.com/channel/UCyiTe2GkW_u05HSdvUblGYg). Die Dokumentation von LiaScript ist hier [verlinkt](https://liascript.github.io/course/?https://raw.githubusercontent.com/liaScript/docs/master/README.md#1)
 
@@ -415,12 +342,12 @@ Eine Reihe von Einführungsvideos findet sich unter [Youtube](https://www.youtub
 
 ## Und wenn Sie dann immer noch programmieren wollen ...
 
-Dann wartet das TUFbots-Team auf Sie ...
+Dann wartet das __racetech__ Team auf Sie ... autonomes Fahren im Formular Student Kontext.
 
-![WALL-E](./images/00_Einfuehrung/RoboCup.jpeg)<!--
+![WALL-E](./images/00_Einfuehrung/RaceTech.jpg)<!--
 style="width: 80%; display: block; margin-left: auto; margin-right: auto;" -->
 
-Quelle: _Team RobOTTO_, OVGU Magdeburg
+
 
 ## Hausaufgabe
 
