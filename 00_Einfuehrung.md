@@ -83,7 +83,7 @@ void loop() {
 @AVR8js.sketch
 
 {{2}}
-Am Ende des Compiliervorganges entsteht daraus der sogenannte Maschinencode. Dieses ist die Sprache, die der Rechner originär versteht und die entsprechend ausgeführt werden kann.
+Am Ende des Compiliervorganges entsteht daraus der sogenannte Maschinencode. Dieser ist die Sprache, die der Rechner originär versteht und der entsprechend ausgeführt werden kann.
 
 {{2}}
 ```
@@ -154,7 +154,7 @@ style="width: 80%; min-width: 420px; max-width: 720px;"
 
 ![Diagramme](./images/00_Einfuehrung/Wetterstation.png)<!-- width="70%" -->
 
-Wenn wir noch einen Schritt weitergehen können wir die Daten auch an einen Server übergeben. Dieser übernimmt die Aufbereitung und Visualisierung.
+Wenn wir noch einen Schritt weitergehen, können wir die Daten auch an einen Server übergeben. Dieser übernimmt die Aufbereitung und Visualisierung.
 
 <iframe width="450" height="260" style="border: 1px solid #cccccc;" src="https://thingspeak.com/channels/856893/charts/7?bgcolor=%23ffffff&color=%23d62020&days=3&dynamic=true&type=line"></iframe>
 
@@ -167,10 +167,10 @@ Die roten Punkte stellen die Verteilung der Wochenendmessungen der vergangenen W
 **Aber ich will Webentwickler werden ... **
 
 **Antwort A:**
-Das Studium vermittelt ein Weltbild und keine eng zugeschnittene Sicht.
+Das Studium vermittelt ein breitgefächertes Weltbild und keine eng zugeschnittene Sicht.
 
 **Antwort B:**
-Die Fähigkeit in Algorithmen zu denken, ist eine Grundlage wissenschaftlichen
+Die Fähigkeit in Algorithmen zu denken ist eine Grundlage wissenschaftlichen
 Arbeitens.
 
 **Antwort C:**
@@ -208,7 +208,7 @@ Wir gehen gegenwärtig noch davon aus, dass die Übungen auch in Präsenz stattf
 
 > *Credit-Points:* 6
 
-> *Arbeitsaufwand:* Der Zeitaufwand beträgt 180h und setzt sich zusammen aus **60h Präsenzzeit** und **120h Selbststudium**. Letzteres umfasst die Vor- undNachbereitung der Lehrveranstaltung, die eigenständige Lösung von Übungsaufgaben sowie die Prüfungsvorbereitung.
+> *Arbeitsaufwand:* Der Zeitaufwand beträgt 180h und setzt sich zusammen aus **60h Präsenzzeit** und **120h Selbststudium**. Letzteres umfasst die Vor- und Nachbereitung der Lehrveranstaltung, die eigenständige Lösung von Übungsaufgaben sowie die Prüfungsvorbereitung.
 
 > *Prüfungsform:* Die Veranstaltung wird mit einer schriftlichen Prüfung abgeschlossen. Diese wird als Open Book Klausur entworfen.
 
@@ -222,7 +222,7 @@ Wir gehen gegenwärtig noch davon aus, dass die Übungen auch in Präsenz stattf
 
 2. Videos
 
-   + Youtube – „How computers works“ [Link](https://www.youtube.com/watch?v=cNN_tTXABUA)
+   + Youtube – „How a CPU Works“ [Link](https://www.youtube.com/watch?v=cNN_tTXABUA)
 
 Bei den jeweiligen Vorlesungsinhalten werden zusätzliche Materialien angegeben.
 
@@ -242,7 +242,7 @@ Die Unterlagen selbst sind in der Auszeichnungsprache LiaScipt verfasst und öff
                          {{1-2}}
 ****************************************************************************
 
-Markdown ist eine Auszeichnungssprache für die Gliederung und Formatierung von Texten und anderen Daten. Analog zu HTML oder LaTex werden die Eigenschaften und Organisation von Textelementen (Zeichen, Wörtern, Absätzen) beschrieben. Dazu werden entsprechende "Schlüsselworte", die sogenannten Tags verwandt.
+Markdown ist eine Auszeichnungssprache für die Gliederung und Formatierung von Texten und anderen Daten. Analog zu HTML oder LaTex werden die Eigenschaften und Organisation von Textelementen (Zeichen, Wörtern, Absätzen) beschrieben. Dazu werden entsprechende "Schlüsselworte", die sogenannten Tags, verwendet.
 
 Markdown wurde von John Gruber und Aaron Swartz mit dem Ziel entworfen, die Komplexität der Darstellung so weit zu reduzieren, dass schon der Code sehr einfach lesbar ist. Als Auszeichnungselemente werden entsprechend möglichst kompakte Darstellungen genutzt.
 
@@ -267,12 +267,12 @@ Und noch eine Zeile mit einer mathematischen Notation $a=cos(b)$!
 
 ----------------------------------------------------------------------------
 
-Eine gute Einführung zu Markdown finden Sie zum Beispiel unter
+Eine gute Einführung zu Markdown finden Sie zum Beispiel unter:
 
 * [MarkdownGuide](https://www.markdownguide.org/getting-started/)
 * [GitHubMarkdownIntro](https://guides.github.com/features/mastering-markdown/)
 
-Mit einem entsprechenden Editor und einigen Paketen macht das Ganze dann auch Spaß
+Mit einem entsprechenden Editor und einigen Paketen macht das Ganze dann auch Spaß.
 
 * Wichtigstes Element ist ein Previewer, der es Ihnen erlaubt "online" die Korrektheit der Eingaben zu prüfen
 * Tools zur Unterstützung komplexerer Eingaben wie zum Beispiel der Tabellen (zum Beispiel für Atom mit [markdown-table-editor](https://atom.io/packages/markdown-table-editor))
@@ -290,8 +290,8 @@ für die Anwendbarkeit in der (Informatik-)Lehre sprechen:
 
 * Ausführbarer Code
 * Möglichkeiten zur Visualisierung
-* Quizze Tests und Aufgaben
-* spezifische Tools für die Modellierung Simulation etc.
+* Quizze, Tests und Aufgaben
+* Spezifische Tools für die Modellierung, Simulationen etc.
 
 ```cpp     ArduinoSimulator.ino
 void setup() {
@@ -330,7 +330,7 @@ Eine Reihe von Einführungsvideos findet sich unter [Youtube](https://www.youtub
 
 * Stellen Sie Fragen, seinen Sie kommunikativ!
 
-> Hinweis auf OPAL Forum!
+> Hinweis auf dem OPAL Forum!
 
 * Organisieren Sie sich in Arbeitsgruppen!
 
