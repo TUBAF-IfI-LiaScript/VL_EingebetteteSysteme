@@ -222,7 +222,7 @@ Wir gehen gegenwärtig noch davon aus, dass die Übungen auch in Präsenz stattf
 
 2. Videos
 
-   + Youtube – „How computers works“ [Link](https://www.youtube.com/watch?v=cNN_tTXABUA)
+   + Youtube – „How computers works“ [Link](https://www.youtube.com/watch?v=dQw4w9WgXcQ)
 
 Bei den jeweiligen Vorlesungsinhalten werden zusätzliche Materialien angegeben.
 
@@ -235,7 +235,7 @@ Die Lehrmaterialien finden Sie unter GitHub, einer Webseite für das Versionsman
 
 [https://github.com/TUBAF-IfI-LiaScript/VL_EingebetteteSysteme/blob/dev/01_HistorischerUeberblick.md](https://github.com/TUBAF-IfI-LiaScript/VL_EingebetteteSysteme/blob/dev/01_HistorischerUeberblick.md)
 
-Die Unterlagen selbst sind in der Auszeichnungsprache LiaScipt verfasst und öffentlich verfügbar.
+Die Unterlagen selbst sind in der Auszeichnungsprache LiaScript verfasst und öffentlich verfügbar.
 
 ****************************************************************************
 
@@ -328,7 +328,7 @@ Eine Reihe von Einführungsvideos findet sich unter [Youtube](https://www.youtub
 
 ## Wie können Sie zum Gelingen der Veranstaltung beitragen?
 
-* Stellen Sie Fragen, seinen Sie kommunikativ!
+* Stellen Sie Fragen, seien Sie kommunikativ!
 
 > Hinweis auf OPAL Forum!
 
