@@ -1,6 +1,6 @@
 <!--
 
-author:   Sebastian Zug, André Dietrich & `fjangfaragesh`, `FnHm`, `gjaeger`
+author:   Sebastian Zug, André Dietrich & `fjangfaragesh`, `FnHm`, `gjaeger`, `ShyFlyGuy`, `Lalelele`
 email:    sebastian.zug@informatik.tu-freiberg.de & andre.dietrich@informatik.tu-freiberg.de & fabian.baer@student.tu-freiberg.de
 version:  0.0.1
 language: de
@@ -330,7 +330,7 @@ Eine Reihe von Einführungsvideos findet sich unter [Youtube](https://www.youtub
 
 * Stellen Sie Fragen, seien Sie kommunikativ!
 
-> Hinweis auf dem OPAL Forum!
+> Hinweis auf das OPAL Forum!
 
 * Organisieren Sie sich in Arbeitsgruppen!
 
