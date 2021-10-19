@@ -5,7 +5,7 @@ STK     = arduino
 
 CC      = avr-gcc
 OC      = avr-objcopy
-CPFLAGS = -mno-interrupts
+CPFLAGS = -mno-interrupts -fverbose-asm -save-temps
 LDFLAGS = -j .text -j .data
 
 AVRDUDE = avrdude
@@ -19,7 +19,7 @@ AVRDUDE_FLAGS += -v -D -U flash:w:$(TARGET).hex:i
 
 all:
 	@echo "compiling"
-	$(CC) -c -o $(TARGET).o  $(CPFLAGS) -Os -mmcu=$(CTRL) $(TARGET).c
+	$(CC) -c -o $(TARGET).o  $(CPFLAGS) -mmcu=$(CTRL) $(TARGET).c
 	@echo "linking"
 	@$(CC) -mmcu=$(CTRL) $(TARGET).o -o $(TARGET).elf
 	@echo "generate properly output format"
@@ -34,7 +34,7 @@ program: all
 asm:	all
 	@echo "Generating assembler code"
 	avr-objdump -d -S $(TARGET).elf >  $(TARGET).asm
-	
+
 clean:
 	@echo "Cleaning"
 	@rm -rf $(TARGET).hex $(TARGET).o $(TARGET).elf *~
