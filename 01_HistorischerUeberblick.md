@@ -167,7 +167,7 @@ Ausgangspunkt war die Konstruktion einer Rechenmaschine für die Lösung polynom
 + Eingabe der Daten und Befehle über Lochkarten
 + Nutzerinterface:  Drucker, ein Kurvenplotter und eine Glocke
 + Zahlendarstellung: dezimale Festkommazahlen, pro Stelle ein Zahnrad
-+ Arbeits“speicher zwischen 1,6 und 20 kB (umstritten)
++ Arbeitsspeicher zwischen 1,6 und 20 kB (umstritten)
 
 _The result of my reflections has been that numbers containing more than thirty places of figures will not be required for a long time to come. _
 
@@ -300,7 +300,7 @@ Diese wiederum fassen wir nun in entsprechenden ICs zusammen. Wir haben die elek
 
 [^Fairchild]: Datenblatt der Firma Fairchild, DM7408, August 1986
 
-### Intel 4040
+### Intel 4004
 
 Beispiel: Intel 4004-Architektur (1971)
 
@@ -351,7 +351,7 @@ style="width: 80%; display: block; margin-left: auto; margin-right: auto;"-->
 
     _Where a calculator as the ENIAC is equipped with 18000 vacuum tubes and weighs 30 tons, computers in the future may have only 1000 vaccum tubes and weigh 1 1/2 tons._ (Popular Mechanics, 1949)
 
-    _640 KBytes [of main memory]ought to be enough for anybody._ (Bill Gates, Microsoft, 1981)
+    _640 KBytes [of main memory] ought to be enough for anybody._ (Bill Gates, Microsoft, 1981)
 
 + Eine Einordnung der vielzitierten Pioniere einer Wissenschaft ist für deren objektive Bewertung zwingend notwendig.
 + Entwicklungen wiederholen sich ...
