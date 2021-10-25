@@ -19,7 +19,7 @@ import: https://raw.githubusercontent.com/LiaTemplates/NetSwarm-Simulator/master
 | **Veranstaltung:**       | `Eingebettete Systeme`                                                                                                                                                                     |
 | **Semester**             | `Wintersemester 2021/22`                                                                                                                                                                      |
 | **Hochschule:**          | `Technische Universität Freiberg`                                                                                                                                                          |
-| **Inhalte:**             | `Motivation der Vorlesung "Eingebettete Systeme" und Beschreibung der Organisation der Veranstaltung`                                                                                      |
+| **Inhalte:**             | `Übersicht der historischen Entwicklung von Rechentechnik`                                                                                      |
 | **Link auf GitHub:** | [https://github.com/TUBAF-IfI-LiaScript/VL_Softwareentwicklung/blob/master/00_Einfuehrung.md](https://github.com/TUBAF-IfI-LiaScript/VL_EingebetteteSysteme/blob/master/01_HistorischerUeberblick.md) |
 | **Autoren**              | @author                                                                                                                                                                                    |
 
