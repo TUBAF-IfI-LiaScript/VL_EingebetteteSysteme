@@ -25,7 +25,7 @@ for file in glob.glob("*.mdx"):
     with open(file, "w") as outfile:
         outfile.write("".join(filtered))
 
-blackList = ["{{", "******", "@Rextester", "@Tau", "@LIA.eval", "[![LiaScript]"]
+blackList = ["{{", "******", "@Rextester", "@Tau", "@LIA.eval", "[![LiaScript]", "!?["]
 for file in glob.glob("*.mdx"):
     content = open(file, 'r').readlines()
     filtered = []
