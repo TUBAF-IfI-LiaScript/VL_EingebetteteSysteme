@@ -193,8 +193,8 @@ Die Veranstaltung wird sowohl für die Vorlesung als auch die Übung in Präsenz
 <!-- data-type="none" -->
 | Veranstaltungen | Tag      | Zeitslot      | Ort      | Bemerkung     |
 | --------------- | -------- | ------------- | -------- | ------------- |
-| Vorlesung I     | Montag   | 16.00 - 17.30 | WIN-1005 | wöchentlich   |
-| Vorlesung II    | Dienstag | 16.00 - 17.30 | WIN-1005 | gerade Wochen |
+| Vorlesung I     | Montag   | 16.00 - 17.30 | SPQ-1301 | wöchentlich   |
+| Vorlesung II    | Dienstag | 16.00 - 17.30 | SPQ-1301 | gerade Wochen |
 
 > Die zugehörigen Übungen starten am 8./9. Dezember und werden dann wöchentlich durchgeführt.
 
