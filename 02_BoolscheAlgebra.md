@@ -541,9 +541,7 @@ Wir gehen bei der Frage der Schaltnetze in Vorlesung 04 nochmals auf die technis
    + Was bedeuten die Kreuze in der Wahrheitstafel (_Function table_)?
    + Können Sie mit dem Gatter auch eine Negation des Eingangssignals realisieren?
 
-3. Entwerfen Sie unter ausschließlicher Verwendung der Gatter UND, ODER und NICHT Schaltnetze, die die Ausgaben $P$ und $Q$ aus den Eingängen $X$, $Y$ und $Z$ generieren. Dabei ist
-
-   Stellen Sie mithilfe von Wahrheitstabellen eine Beziehung zwischen $P$ und $Q$ her.
+3. Entwerfen Sie unter ausschließlicher Verwendung der Gatter UND, ODER und NICHT Schaltnetze, die die Ausgaben $P$ und $Q$ aus den Eingängen $X$, $Y$ und $Z$ generieren. Stellen Sie mithilfe von Wahrheitstabellen eine Beziehung zwischen $P$ und $Q$ her.
 
 $$
 		\begin{aligned}
