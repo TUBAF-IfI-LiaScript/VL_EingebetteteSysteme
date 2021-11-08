@@ -724,7 +724,7 @@ Ablesen der KNF:
 
 > Da dies ein wenig durch die _Brust ins Auge_ gedacht ist, wird folgendes Vorgehen empfohlen, das die Negation der KDNF nutzt:
 
-- Zusammenfassen der Nullwerte als negierte DNF - $\overline{A}_{DNF} = \overline{w}\,\overline{x}z + x\overline{z} +  w\overline{x}y $
+- Zusammenfassen der Nullwerte als negierte DNF - $ \overline{A}_{DNF} = \overline{w}\,\overline{x}z + x\overline{z} +  w\overline{x}y $
 - Anwendung des de-morganschen Gesetzes - $A_{DNF} = \overline{ \overline{w}\,\overline{x}\,z +  x\overline{z} +  w\overline{x}y} = (w+x+\overline{z})(\overline{x} + z)(\overline{w}+x+\overline{y}) $
 
 > **Aufgabe:** Weisen Sie die Äquivalenz der Gleichungen für die KNF $A_{KNF} = (w+x+\overline{z})(\overline{x} + z)(\overline{w}+x+\overline{y})$  und die DNF $A_{DNF} = \overline{w}\,\overline{x}\,\overline{z}+xz+w\overline{x}\overline{z}$ nach.
