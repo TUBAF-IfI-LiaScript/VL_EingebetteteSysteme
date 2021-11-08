@@ -718,27 +718,14 @@ Nehmen wir folgende Wahrheitstafel an:
 
 Ablesen der KNF:
 
-- Zusammenfassung der Nullwerte (Summentermen)
+- Zusammenfassung der Nullwerte (Summentermen) - $\overline{w}+\overline{x}+z, x+\overline{z}, w+\overline{x}+y$
+- Invertieren der Eingangsvariablen - $w+x+\overline{z}, \overline{x}+z, \overline{w}+x+\overline{y}$
+- Aufstellen der KNF - $A = (w+x+\overline{z}) \cdot (\overline{x}+z) \cdot (\overline{w}+x+\overline{y})$
 
-  $\overline{w}+\overline{x}+z, x+\overline{z}, w+\overline{x}+y$
+> Da dies ein wenig durch die _Brust ins Auge_ gedacht ist, wird folgendes Vorgehen empfohlen, das die Negation der KDNF nutzt:
 
-- Invertieren der Eingangsvariablen
-
-  $w+x+\overline{z}, \overline{x}+z, \overline{w}+x+\overline{y}$
-
-- Aufstellen der KNF
-
-  $A = (w+x+\overline{z}) \cdot (\overline{x}+z) \cdot (\overline{w}+x+\overline{y})$
-
-> Da dies ein wenig durch die _Brust ins Auge_ gedacht ist, bietet sich folgendes Vorgehen an, die die Negation der KDNF nutzt:
-
-- Zusammenfassen der Nullwerte als negierte DNF
-
-   $\overline{A}_{DNF} = \overline{w}\,\overline{x}z + x\overline{z} +  w\overline{x}y $
-
-- Anwendung des de-morganschen Gesetzes
-
-   $A_{DNF} = \overline{ \overline{w}\,\overline{x}\,z +  x\overline{z} +  w\overline{x}y} = (w+x+\overline{z})(\overline{x} + z)(\overline{w}+x+\overline{y}) $
+- Zusammenfassen der Nullwerte als negierte DNF - $\overline{A}_{DNF} = \overline{w}\,\overline{x}z + x\overline{z} +  w\overline{x}y $
+- Anwendung des de-morganschen Gesetzes - $A_{DNF} = \overline{ \overline{w}\,\overline{x}\,z +  x\overline{z} +  w\overline{x}y} = (w+x+\overline{z})(\overline{x} + z)(\overline{w}+x+\overline{y}) $
 
 > **Aufgabe:** Weisen Sie die Äquivalenz der Gleichungen für die KNF $A_{KNF} = (w+x+\overline{z})(\overline{x} + z)(\overline{w}+x+\overline{y})$  und die DNF $A_{DNF} = \overline{w}\,\overline{x}\,\overline{z}+xz+w\overline{x}\overline{z}$ nach.
 
