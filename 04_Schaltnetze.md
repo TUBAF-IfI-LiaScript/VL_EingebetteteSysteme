@@ -610,7 +610,9 @@ Beispiel
 
 $y=f(x_0,x_1,x_2)$
 
-<!-- data-type="none" -->
+Die Funktion evaluiert die Parität der Variablen. Für eine ungerade Zahl von einsen wird eine "1" ausgegeben, sonst eine "0".
+
+<!-- data-type="none" style="table-layout: fixed; max-width:350px;"-->
 | $x_2$ | $x_1$ | $x_0$ | $y$ |
 | ----- | ----- | ----- | --- |
 | 0     | 0     | 0     | 0   |
