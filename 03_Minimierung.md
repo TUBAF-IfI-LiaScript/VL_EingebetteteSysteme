@@ -680,7 +680,7 @@ Variante 3: $\color{red} xz + \color{green}\overline{w}\,\overline{y}\,\overline
 
 ### Karnaugh-Veitch für Maxterme
 
-Das Karnaugh-Veitch Diagramm lässt sich analog für Produkte von Summen aufstellen. Im Unterschied zur Minterm-Variante werden hier aber die "0"en erfasst - diese entsprechen ja auch den resultierenden Maxtermen.
+Das Karnaugh-Veitch Diagramm lässt sich analog für Produkte von Summen aufstellen. Im Unterschied zur Minterm-Variante werden hier aber die Nullen erfasst - diese entsprechen ja auch den resultierenden Maxtermen.
 
 Nehmen wir folgende Wahrheitstafel an:
 
@@ -704,8 +704,9 @@ Nehmen wir folgende Wahrheitstafel an:
 | 1   | 1   | 1   | 0   | 0   |
 | 1   | 1   | 1   | 1   | 1   |
 
+6 Maxterme vs. 10 Minterme
 
-{{1}}
+
 <!-- data-type="none" -->
 |                              | $\overline{w}\,\overline{x}$                     | $\overline{w}x$                                  | $wx$                                             | $w\overline{x}$                                  |
 | ---------------------------- | ------------------------------------------------ | ------------------------------------------------ | ------------------------------------------------ | ------------------------------------------------ |
@@ -714,15 +715,32 @@ Nehmen wir folgende Wahrheitstafel an:
 | $y z$                        | <span style="background-color: #ff0000">0</span> | 1                                                | 1                                                | <span style="background-color: #0000ff">0</span> |
 | $y \overline{z}$             | 1                                                | <span style="background-color: #00ff00">0</span> | <span style="background-color: #00ff00">0</span> | <span style="background-color: #0000ff">0</span> |
 
-{{2}}
-$$
-\begin{aligned}
-\overline{A}_{KDNF} &= x\overline{z} + \overline{w}\,\overline{x}z +  w\overline{x}\,\overline{y} \\
-A_{KDNF} &= \overline{x\overline{z} + \overline{w}\,\overline{x}\,z +  w\overline{x}\,\overline{y}} \\
-A_{KKNF} &= (\overline{x} + z)(w+x+\overline{z})(\overline{w}+x+\overline{y}) \\
-\end{aligned}
-$$
 
+Ablesen der KNF:
+
+- Zusammenfassung der Nullwerte (Summentermen)
+
+  $\overline{w}+\overline{x}+z, x+\overline{z}, w+\overline{x}+y$
+
+- Invertieren der Eingangsvariablen
+
+  $w+x+\overline{z}, \overline{x}+z, \overline{w}+x+\overline{y}$
+
+- Aufstellen der KNF
+
+  $A = (w+x+\overline{z}) \cdot (\overline{x}+z) \cdot (\overline{w}+x+\overline{y})$
+
+> Da dies ein wenig durch die _Brust ins Auge_ gedacht ist, bietet sich folgendes Vorgehen an, die die Negation der KDNF nutzt:
+
+- Zusammenfassen der Nullwerte als negierte DNF
+
+   $\overline{A}_{DNF} = \overline{w}\,\overline{x}z + x\overline{z} +  w\overline{x}y $
+
+- Anwendung des de-morganschen Gesetzes
+
+   $A_{DNF} = \overline{ \overline{w}\,\overline{x}\,z +  x\overline{z} +  w\overline{x}y} = (w+x+\overline{z})(\overline{x} + z)(\overline{w}+x+\overline{y}) $
+
+> **Aufgabe:** Weisen Sie die Äquivalenz der Gleichungen für die KNF $A_{KNF} = (w+x+\overline{z})(\overline{x} + z)(\overline{w}+x+\overline{y})$  und die DNF $A_{DNF} = \overline{w}\,\overline{x}\,\overline{z}+xz+w\overline{x}\overline{z}$ nach.
 
 ## Dont-Care Einträge in der Wahrheitstafel
 
@@ -736,13 +754,9 @@ https://cdn-reichelt.de/documents/datenblatt/A500/SA52-11%23KIN.pdf
 
 Acht Eingänge pro Element würde die Zahl der verfügbaren Pins eines Controllers recht schnell aufbrauchen und ist auch nicht nötig. Wir wollen ja nur maximal die Zahlen von 0-9 darstellen. Diese können wir als 10 Zustände mit ... Leitungen abbilden
 
-
-      {{1}}
-********************************************************************************
-
 Folglich ergeben sich 6 Eingangskombinationen, die für unsere Ausgabe irrelevant sind.
 
-![Bild](./images/04_Schaltnetze/bcd_animation.gif)<!-- width="60%" -->
+![Bild](./images/04_Schaltnetze/bcd_animation.gif)<!-- width="50%" -->
 
 <!-- data-type="none" -->
 | $w$ | $x$ | $y$ | $z$ | $d$                                   |
@@ -764,9 +778,8 @@ Folglich ergeben sich 6 Eingangskombinationen, die für unsere Ausgabe irrelevan
 | 1   | 1   | 1   | 0   | <span style="color: #ff0000">D</span> |
 | 1   | 1   | 1   | 1   | <span style="color: #ff0000">D</span> |
 
-********************************************************************************
 
-      {{2}}
+      {{1}}
 ********************************************************************************
 
 <!-- data-type="none" -->
