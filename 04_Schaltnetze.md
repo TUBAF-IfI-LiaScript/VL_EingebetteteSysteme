@@ -744,26 +744,27 @@ $$
 {"devices":{"x3":{"label":"x3","type":"Button","propagation":0,"position":{"x":5,"y":-20}},"x2":{"label":"x2","type":"Button","propagation":0,"position":{"x":15,"y":65}},"x1":{"label":"x1","type":"Button","propagation":0,"position":{"x":15,"y":145}},"x0":{"label":"x0","type":"Button","propagation":0,"position":{"x":10,"y":230}},"y":{"label":"y","type":"Lamp","propagation":1,"position":{"x":560,"y":85}},"not1":{"label":"~x3","type":"Not","propagation":1,"bits":1,"position":{"x":135,"y":-40}},"not2":{"label":"~x2","type":"Not","propagation":1,"bits":1,"position":{"x":140,"y":60}},"not3":{"label":"~x1","type":"Not","propagation":1,"bits":1,"position":{"x":145,"y":140}},"not4":{"label":"~x0","type":"Not","propagation":1,"bits":1,"position":{"x":140,"y":225}},"and1":{"label":"~x3 and x2","type":"And","propagation":1,"bits":1,"position":{"x":300,"y":5}},"and2":{"label":"(~x3 and x2) and x1","type":"And","propagation":1,"bits":1,"position":{"x":350,"y":90}},"and3":{"label":"x3 and ~x2","type":"And","propagation":1,"bits":1,"position":{"x":365,"y":170}},"and4":{"label":"x3 and ~x1","type":"And","propagation":1,"bits":1,"position":{"x":360,"y":235}},"and5":{"label":"x3 and ~x0","type":"And","propagation":1,"bits":1,"position":{"x":365,"y":295}},"or1":{"label":"~x3*x2*x1 or x3*~x2","type":"Or","propagation":1,"bits":1,"position":{"x":470,"y":135}},"or2":{"label":"x3*~x1 or x3*~x0","type":"Or","propagation":1,"bits":1,"position":{"x":490,"y":260}},"or3":{"label":"","type":"Or","propagation":1,"bits":1,"position":{"x":530,"y":200}}},"connectors":[{"from":{"id":"not1","port":"out"},"to":{"id":"and1","port":"in1"}},{"from":{"id":"x3","port":"out"},"to":{"id":"not1","port":"in"}},{"from":{"id":"x2","port":"out"},"to":{"id":"not2","port":"in"}},{"from":{"id":"x2","port":"out"},"to":{"id":"and1","port":"in2"}},{"from":{"id":"x1","port":"out"},"to":{"id":"not3","port":"in"}},{"from":{"id":"x0","port":"out"},"to":{"id":"not4","port":"in"}},{"from":{"id":"x1","port":"out"},"to":{"id":"and2","port":"in2"}},{"from":{"id":"and1","port":"out"},"to":{"id":"and2","port":"in1"}},{"from":{"id":"x3","port":"out"},"to":{"id":"and3","port":"in1"},"vertices":[{"x":210,"y":15},{"x":310,"y":160}]},{"from":{"id":"not2","port":"out"},"to":{"id":"and3","port":"in2"},"vertices":[{"x":290,"y":160}]},{"from":{"id":"x3","port":"out"},"to":{"id":"and4","port":"in1"},"vertices":[{"x":110,"y":20},{"x":210,"y":20}]},{"from":{"id":"not3","port":"out"},"to":{"id":"and4","port":"in2"},"vertices":[{"x":275,"y":220}]},{"from":{"id":"not4","port":"out"},"to":{"id":"and5","port":"in2"}},{"from":{"id":"x3","port":"out"},"to":{"id":"and5","port":"in1"},"vertices":[{"x":80,"y":-5},{"x":210,"y":20},{"x":295,"y":100}]},{"from":{"id":"and2","port":"out"},"to":{"id":"or1","port":"in1"}},{"from":{"id":"and3","port":"out"},"to":{"id":"or1","port":"in2"}},{"from":{"id":"and4","port":"out"},"to":{"id":"or2","port":"in1"}},{"from":{"id":"and5","port":"out"},"to":{"id":"or2","port":"in2"}},{"from":{"id":"or2","port":"out"},"to":{"id":"or3","port":"in2"},"vertices":[{"x":545,"y":250}]},{"from":{"id":"or1","port":"out"},"to":{"id":"or3","port":"in1"}},{"from":{"id":"or3","port":"out"},"to":{"id":"y","port":"in"}}],"subcircuits":{}}
 ```
 
-<!-- data-type="none" -->
-| $x_3$ | $x_2$ | $x_1$ | $x_0$ | $y$ | Zustand                  |
-| ----- | ----- | ----- | ----- | --- | ------------------------ |
-| 0     | 0     | 0     | 0     | 0   | 0  - Initialisierung     |
-| 0     | 0     | 0     | 1     | 0   | 1  - Heizplatte erwärmen |
-| 0     | 0     | 1     | 0     | 0   | 2  - Wasserkocher an     |
-| 0     | 0     | 1     | 1     | 0   | 3  -                     |
-| 0     | 1     | 0     | 0     | 0   | 4  -                     |
-| 0     | 1     | 0     | 1     | 0   | 5  -                     |
-| 0     | 1     | 1     | 0     | 1   | 6  - Wasser fehlt        |
-| 0     | 1     | 1     | 1     | 1   | 7  - Kaffeefach geöffnet |
-| 1     | 0     | 0     | 0     | 1   | 8  - Druckabfall         |
-| 1     | 0     | 0     | 1     | 1   | 9  - ...                 |
-| 1     | 0     | 1     | 0     | 1   | 10  -                    |
-| 1     | 0     | 1     | 1     | 1   | 11  -                    |
-| 1     | 1     | 0     | 0     | 1   | 12  -                    |
-| 1     | 1     | 0     | 1     | 1   | 13  -                    |
-| 1     | 1     | 1     | 0     | 1   | 14  -  Wartung fällig    |
-| 1     | 1     | 1     | 1     | 0   | 15  -  Kaffee fertig     |
+Für die Zustände 6 bis 14 sollte ein Fehler ausgeben werden
 
+<!-- data-type="none" style="table-layout: fixed; max-width:330px;"-->
+| $x_3$ | $x_2$ | $x_1$ | $x_0$ | $y$ |
+| ----- | ----- | ----- | ----- | --- |
+| 0     | 0     | 0     | 0     | 0   |
+| ...   | ...   | ...   | ...   | 0   |
+| 0     | 1     | 0     | 1     | 0   |
+| 0     | 1     | 1     | 0     | 1   |
+| 0     | 1     | 1     | 1     | 1   |
+| 1     | 0     | 0     | 0     | 1   |
+| 1     | 0     | 0     | 1     | 1   |
+| 1     | 0     | 1     | 0     | 1   |
+| 1     | 0     | 1     | 1     | 1   |
+| 1     | 1     | 0     | 0     | 1   |
+| 1     | 1     | 0     | 1     | 1   |
+| 1     | 1     | 1     | 0     | 1   |
+| 1     | 1     | 1     | 1     | 0   |
+
+
+> Worin unterscheidet sich unsere minimale Form von der technischen Umsetzung?
 
 > Spielen Sie ein wenig mit der Simulation, um sich von der Wirksamkeit unserer Lösung zu überzeugen.
 
