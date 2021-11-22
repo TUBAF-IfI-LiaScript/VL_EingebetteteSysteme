@@ -6,9 +6,7 @@ version:  0.0.6
 language: de
 narrator: Deutsch Female
 
-import: https://raw.githubusercontent.com/liaTemplates/AVR8js/main/README.md
-        https://raw.githubusercontent.com/LiaTemplates/DigiSim/master/README.md
-        https://github.com/LiaTemplates/Pyodide
+import: https://raw.githubusercontent.com/LiaTemplates/DigiSim/master/README.md
         https://raw.githubusercontent.com/liascript-templates/plantUML/master/README.md
 
 mark: <span style="background-color: @0;
@@ -171,8 +169,45 @@ __Invertierte Wahrheitstafel__ zeigt die Eingaben, die notwendig sind, um eine b
                                 {{1-3}}
 *******************************************************************************
 
-> **Aufgabe:** Stellen Sie die invertierten Wahrheitstafeln für den flankengesteuerten JK- und den flankengesteuerten D-Flip-Flop auf!
+> **Aufgabe:** Stellen Sie die invertierten Wahrheitstafeln für ein D-Flip-Flop auf!
 
+
+__D-Wahrheitstafel__
+
+<!-- data-type="none" style="table-layout: fixed; max-width:480px;"-->
+| $D(t)$ | $Q(t+1)$ | Modus   |
+| ------ | -------- | ------- |
+| 0      | $0$      | Löschen |
+| 1      | $1$      | Setzen  |
+
+__D-Invertierte Wahrheitstafel__
+
+
+*******************************************************************************
+
+{{1-2}}
+<!-- data-type="none" style="table-layout: fixed; max-width:460px;"-->
+| $Q(t)$ | $Q(t+1)$ | $D$ |
+| ------ | -------- | --- |
+| $0$    | $0$      |     |
+| $0$    | $1$      |     |
+| $1$    | $0$      |     |
+| $1$    | $1$      |     |
+
+
+{{2-3}}
+<!-- data-type="none" style="table-layout: fixed; max-width:460px;"-->
+| $Q(t)$ | $Q(t+1)$ | $D$ |
+| ------ | -------- | --- |
+| $0$    | $0$      | $0$ |
+| $0$    | $1$      | $1$ |
+| $1$    | $0$      | $0$ |
+| $1$    | $1$      | $1$ |
+
+                      {{3-5}}
+*******************************************************************************
+
+> **Aufgabe:** ... und noch mal!
 
 __JK-Wahrheitstafel__
 
@@ -189,7 +224,7 @@ __JK-Invertierte Wahrheitstafel__
 
 *******************************************************************************
 
-{{1-2}}
+{{3-4}}
 <!-- data-type="none" style="table-layout: fixed; max-width:460px;"-->
 | $Q(t)$ | $Q(t+1)$ | $J$ | $K$ |
 | ------ | -------- | --- | --- |
@@ -198,8 +233,7 @@ __JK-Invertierte Wahrheitstafel__
 | $1$    | $0$      |     |     |
 | $1$    | $1$      |     |     |
 
-
-{{2-3}}
+{{4}}
 <!-- data-type="none" style="table-layout: fixed; max-width:460px;"-->
 | $Q(t)$ | $Q(t+1)$ | $J$ | $K$ |
 | ------ | -------- | --- | --- |
@@ -209,43 +243,10 @@ __JK-Invertierte Wahrheitstafel__
 | 1      | 1        | d   | $0$ |
 
 
-                      {{3-5}}
-*******************************************************************************
-
-> **Aufgabe:** ... und noch mal!
-
-__D-Wahrheitstafel__
-
-<!-- data-type="none" style="table-layout: fixed; max-width:480px;"-->
-| $D(t)$ | $Q(t+1)$ | Modus   |
-| ------ | -------- | ------- |
-| 0      | $0$      | Löschen |
-| 1      | $1$      | Setzen  |
-
-__D-Invertierte Wahrheitstafel__
-
-*******************************************************************************
-
-{{3-4}}
-<!-- data-type="none" style="table-layout: fixed; max-width:460px;"-->
-| $Q(t)$ | $Q(t+1)$ | $D$ |
-| ------ | -------- | --- |
-| $0$    | $0$      |     |
-| $0$    | $1$      |     |
-| $1$    | $0$      |     |
-| $1$    | $1$      |     |
-
-{{4}}
-<!-- data-type="none" style="table-layout: fixed; max-width:460px;"-->
-| $Q(t)$ | $Q(t+1)$ | $D$ |
-| ------ | -------- | --- |
-| $0$    | $0$      | $0$ |
-| $0$    | $1$      | $1$ |
-| $1$    | $0$      | $0$ |
-| $1$    | $1$      | $1$ |
-
-
 ### Grundkonzept
+
+                             {{0-1}}
+*******************************************************************************
 
 Wie kann man systematisch ein synchrones Schaltwerk ausgehend von
 der Problembeschreibung entwerfen ?
@@ -264,32 +265,17 @@ Mathematisch kann ein Deterministischer Endlicher Automat als Tupel $A = (Q, \Si
 + $q\in Q$ ist der Startzustand (auch Anfangszustand oder Initalzustand).
 + $F\subseteq Q$ ist die Menge der akzeptierenden Zustände, die sogenannten Finalzustände (oder Endzustände).
 
-Beispiele:
 
-__Zustand einer Tür__
+*******************************************************************************
+
+                          {{1-2}}
+*******************************************************************************
+
+>Beispiel I:  __Zustand einer Tür__
 
 Darstellung als Graph
 
-```text @plantUML
-@startuml
-digraph finite_state_machine {
-    rankdir=LR;
-
-    node [shape = point ]; qi
-    node[shape=circle]
-    A[label="zu"];
-    B[label="auf"];
-
-    qi -> A;
-    A  -> A  [ label = "schließen" ];
-    A  -> B  [ label = "öffnen" ];
-    B  -> B  [ label = "öffnen" ];
-    B  -> A  [ label = "schließen" ];
-}
-@enduml
-```
-@plantUML
-
+![StateMaschine](https://www.plantuml.com/plantuml/png/ZOqnJiGm44NxdEBBFITO6MrIKz565ZBs68zmPhEEtO0u2xVW0haOmH4eLD2CzDz_cdzUYisbJgdp_9Jj715OkD33nhSxMHTP2AyT06Ghpvwplhi_jImNJnYNQ6U2ndnXAJ0dNFcdtKljEBj4fk5-JFQHabOlLPdzp_2DR0rVhC4hu-OM_MxqQ04OqLHegCN5nBI-aoYOepRyqjQF4EJW3Fzn_fvxwyualaxf4m00)
 
 Darstellung in einer Übergangstabelle
 
@@ -298,37 +284,22 @@ Darstellung in einer Übergangstabelle
 | Zustand offen       | offen (unverändert) | geschlossen               |
 | Zustand geschlossen | offen               | geschlossen (unverändert) |
 
-__Codeschloss für die Erfassung der Sequenzfolge `7022`__
+
+*******************************************************************************
+
+                          {{2-4}}
+*******************************************************************************
 
 
-```text @plantUML
-@startuml
-digraph finite_state_machine {
-    node [shape = point ]; qi
-    node[shape=Mrecord]
-    A[label="{A|geschlossen}"];
-    B[label="{B|geschlossen}"];
-    C[label="{C|geschlossen}"];
-    D[label="{D|geschlossen}"];
-    E[label="{E|geöffnet}"];
+> Beispiel II:  __Codeschloss für die Erfassung der Sequenzfolge `7022`__
 
-    qi -> A;
-    A  -> A  [ label = "E != 7" ];
-    A  -> B  [ label = "E == 7" ];
-    B  -> A  [ label = "E != 0" ];
-    B  -> C  [ label = "E == 0" ];
-    C  -> D  [ label = "E == 2" ];
-    C  -> A  [ label = "E != 2" ];
-    D  -> E  [ label = "E == 2" ];
-    D  -> A  [ label = "E != 2" ];
-    E  -> A  [ label = "" ];
-}
-@enduml
-```
-@plantUML
+![StateMaschine](https://www.plantuml.com/plantuml/png/XSqnReCm5CRnFQVuobwfwj8XSXN07di2X2eN7i6ICGGxKvfhzGAzMD6Bv4J4RHSatk_Fnyu7FOVZO3UjsSzwwj4PPmAzB_VbEUYcDuvmsW206rj2vNiz4GIcqRY0Uek3YNf1yJPJCyvjpVUyilg3hCXE-UUUVDFRqNjovwpUiXVHYwINqSkao-WowIgwMlpxg-iS1LRcWy7ZA_9BcuDVW0hy4GGoXGU1bmprRLAi4d6R5B-jFAsIydxbcfISoFlaUPKaVdHD92VghnNv_ufA98pdpOvSUnpi3m00)
 
 Welche Beschränkungen sehen Sie in diesem Entwurf? Was passiert bei der Sequenzfolge `707022`?
 
+*******************************************************************************
+
+{{3}}
 > **Wie realisieren wir nun aber das theoretische Modell des endlichen Automaten mit realen Bauteilen?**
 
 ### Beispiel
@@ -354,7 +325,7 @@ Y     |                                                 | 1       1     | 0
 ```
 
 
-```text @plantUML
+```text @plantUML.png
 @startuml
 digraph finite_state_machine {
     rankdir=LR;
@@ -378,7 +349,6 @@ digraph finite_state_machine {
 }
 @enduml
 ```
-@plantUML
 
 - Zustand `A`: die letzte Eingabe war keine `1` (`0` oder Start)
 - Zustand `B`: die letzte Eingabe war `1`, die davor war nicht `1`
@@ -408,7 +378,7 @@ Für unsere digitalen Bauteile müssen wir diese Zustände aber mit `1` und `0` 
 <!-- data-type="none" style="table-layout: fixed; max-width:560px;"-->
 | Zustände | Flip-Flops | Mögliche Zustände | Ungenutzte Zustände |
 | -------- | ---------- | ----------------- | ------------------- |
-| 1        | 0          | 1                 | 0                   |
+| 1        | -          | -                 | -                   |
 | 2        | 1          | 2                 | 0                   |
 | 3        | 2          | 4                 | 1                   |
 | 4        | 2          | 4                 | 0                   |
@@ -455,7 +425,7 @@ Um die entsprechende Schaltfunktionen für die Änderung der Zustände und die A
 
 Zustandstabelle
 
-<!-- data-type="none" style="table-layout: fixed; max-width:320px;"-->
+<!-- data-type="none" style="table-layout: fixed; max-width:350px;"-->
 | F   | G   | E   | F'                                    | G'                                    |
 | --- | --- | --- | ------------------------------------- | ------------------------------------- |
 | 0   | 0   | 0   | 0                                     | 0                                     |
@@ -522,7 +492,7 @@ style="width: 80%; min-width: 420px; max-width: 720px;"
                                                                                .
 ```
 
-```text @plantUML
+```text @plantUML.png
 @startuml
 digraph finite_state_machine {
     rankdir=LR;
@@ -546,7 +516,6 @@ digraph finite_state_machine {
 }
 @enduml
 ```
-@plantUML
 
 > **Die Ausgabelogik bestimmt Ausgabe Y hängt nur vom aktuellen Zustand ab.**
 
@@ -570,7 +539,7 @@ style="width: 80%; min-width: 420px; max-width: 720px;"
                                                                                .
 ```
 
-```text @plantUML
+```text @plantUML.png
 @startuml
 digraph finite_state_machine {
     rankdir=LR;
@@ -593,10 +562,8 @@ digraph finite_state_machine {
     D  -> D  [ label = "E=1 \n A=1", fontcolor=blue ];
     D  -> A  [ label = "E=0 \n A=0", fontcolor=green];
 }
-
 @enduml
 ```
-@plantUML
 
 >**Die Ausgabe Y hängt jedoch die Ausgabelogik vom aktuellen Zustand und vom Eingabesignal E ab**
 
@@ -610,7 +577,7 @@ Der Mealy-Automat ist die generellere Form. Der Moore-Automat unterbindet den Ei
 
 Noch mal zurück zum Beispiel des Binärsequenzdetektors. Welche Konsequenzen hätte die Umsetzung als Mealy-Automat?
 
-```text @plantUML
+```text @plantUML.png
 @startuml
 digraph finite_state_machine {
     rankdir=LR;
@@ -633,14 +600,10 @@ digraph finite_state_machine {
     D  -> D  [ label = "E=1 \n A=1", fontcolor=blue ];
     D  -> A  [ label = "E=0 \n A=0", fontcolor=green];
 }
-
 @enduml
 ```
 
-
-
-
-```text @plantUML
+```text @plantUML.png
 @startuml
 digraph finite_state_machine {
     rankdir=LR;
@@ -659,11 +622,8 @@ digraph finite_state_machine {
     C1  -> A1  [ label = "E=0 \n A=0", fontcolor=green ];
     C1  -> C1  [ label = "E=1 \n A=1", fontcolor=blue ];
 }
-
 @enduml
 ```
-
-
 
 Zustandstabelle
 
@@ -950,7 +910,7 @@ style="width: 80%; min-width: 420px; max-width: 720px;"
 
 Für die Aufgabe ergibt sich folgender Graph:
 
-```text @plantUML
+```text @plantUML.png
 @startuml
 digraph finite_state_machine {
     rankdir=LR;
@@ -971,7 +931,6 @@ digraph finite_state_machine {
 }
 @enduml
 ```
-@plantUML
 
 Im Beispiel liegt ein Medwedew-Automat vor. Die Zustände werden direkt auf den Ausgang abgebildet.
 
@@ -979,7 +938,8 @@ Im Beispiel liegt ein Medwedew-Automat vor. Die Zustände werden direkt auf den 
 
 Hier wäre eine Zustandstabelle denkbar, die alle Eingangskombinationen mit allen Zuständen zeilenweise verknüpft.
 
-| aktueller Zustand | A   | B   | Folgezustand |
+<!-- data-type="none" style="table-layout: fixed; max-width:460px;"-->
+| aktueller Zustand | A   | B   | Folge-zustand |
 | ----------------- | --- | --- | ------------ |
 | E                 | 0   | 0   | E            |
 | E                 | 0   | 1   | L            |
@@ -998,14 +958,16 @@ Eine kompaktere Darstellung fasst die Kombinationen der Eingänge zusammen und o
 
 Insgesamt sind 3 Zustände zu kodieren, entsprechend werden wiederum 2 Flip-Flops benötigt. Dabei wird die Kodierung wie folgt vorgenommen:
 
+<!-- data-type="none" style="table-layout: fixed; max-width:460px;"-->
 | Zustand | F   | G   |
 | ------- | --- | --- |
 | E       | 0   | 0   |
 | G       | 0   | 1   |
 | L       | 1   | 0   |
 
-Damit ergibt sich folgende Binäre Zustandstabelle
+Damit ergibt sich folgende binäre Zustandstabelle
 
+<!-- data-type="none" style="table-layout: fixed; max-width:620px;"-->
 | aktueller Zustand | AB==00 | AB==01 | AB==10 | AB==11 |
 | ----------------- | ------ | ------ | ------ | ------ |
 | 00                | 00     | 10     | 01     | 00     |
@@ -1014,6 +976,7 @@ Damit ergibt sich folgende Binäre Zustandstabelle
 
 In der traditionellen Darstellung zeigt sich diese wie folgt:
 
+<!-- data-type="none" style="table-layout: fixed; max-width:460px;"-->
 | $F_{t}$ | $G_{t}$ | $A_{t}$ | $B_{t}$ | @gray($F_{t+1}$) | @gray($G_{t+1}$) |
 | ------- | ------- | ------- | ------- | ---------------- | ---------------- |
 | 0       | 0       | 0       | 0       | @gray(0)         | @gray(0)         |
@@ -1037,6 +1000,7 @@ In der traditionellen Darstellung zeigt sich diese wie folgt:
 
 Wir entscheiden uns für einen D Flip-Flop für die Realisierung. Die entsprechende invertierte Wahrheitstafel haben Sie zwischenzeitlich im Kopf:
 
+<!-- data-type="none" style="table-layout: fixed; max-width:460px;"-->
 | $Q(t)$ | $Q(t+1)$ | $D$ |
 | ------ | -------- | --- |
 | $0$    | $0$      | $0$ |
@@ -1046,6 +1010,7 @@ Wir entscheiden uns für einen D Flip-Flop für die Realisierung. Die entspreche
 
 Damit lässt sich die Zustandsübergangstabelle entsprechend einfach um die zugehörige Eingangsbelegung ergänzen. Für die D-Flip-Flops ist dies einfach eine Kopie der Zustandsspalten.
 
+<!-- data-type="none" style="table-layout: fixed; max-width:460px;"-->
 | $F_{t}$ | $G_{t}$ | $A_{t}$ | $B_{t}$ | @gray($F_{t+1}$) | @gray($G_{t+1}$) | $DF$    | $DG$     |
 | ------- | ------- | ------- | ------- | ---------------- | ---------------- | ------- | -------- |
 | 0       | 0       | 0       | 0       | @gray(0)         | @gray(0)         | 0       | 0        |
