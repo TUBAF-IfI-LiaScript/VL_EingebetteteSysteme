@@ -636,7 +636,9 @@ digraph finite_state_machine {
 
 @enduml
 ```
-@plantUML
+
+
+
 
 ```text @plantUML
 @startuml
@@ -660,7 +662,6 @@ digraph finite_state_machine {
 
 @enduml
 ```
-@plantUML
 
 
 
