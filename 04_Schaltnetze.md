@@ -70,7 +70,7 @@ style="width: 80%; min-width: 420px; max-width: 720px;"
            +----------------------------+
 
            +----------------------------+
-  Ebene 3  | Istruktionsset             |     Maschinensprache
+  Ebene 3  | Instruktionsset            |     Maschinensprache
            +----------------------------+
 
            +----------------------------+  -.
