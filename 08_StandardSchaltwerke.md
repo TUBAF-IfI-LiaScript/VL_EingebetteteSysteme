@@ -573,8 +573,6 @@ Im Ergbnis lässt sich das System mit entsprechenden XOR und AND Bausteinen Umse
                       {{3-4}}
 *******************************************************************************
 
-### asdfas
-
 **Alternative Implementierung mit erweiterter Funktionalität:**
 
 Der Zustand eines Zählerbits **wechselt**, wenn das nächst kleinere Bit **von 1 zu 0** springen wird.
