@@ -111,7 +111,7 @@ Es handelt sich um eine additive Zahlschrift, mit ergänzender Regel für die su
 | Majuskel | Ⅰ   | Ⅱ   | Ⅲ   | Ⅳ   | Ⅴ   | Ⅵ   | Ⅶ   | Ⅷ   | Ⅸ   | Ⅹ   | Ⅺ   | Ⅻ   | Ⅼ   | Ⅽ   | Ⅾ    | Ⅿ    | ↁ      | ↂ      | ↇ       | ↈ   |
 | Minuskel | ⅰ   | ⅱ   | ⅲ   | ⅳ   | ⅴ   | ⅵ   | ⅶ   | ⅷ   | ⅸ   | ⅹ   | ⅺ   | ⅻ   | ⅼ   | ⅽ   | ⅾ    | ⅿ    |        |        |         |     |
 
-![](https://upload.wikimedia.org/wikipedia/commons/thumb/6/6b/Colosseum-Entrance_LII.jpg/800px-Colosseum-Entrance_LII.jpg "Eingang des Kolosseums mit der römischen Zahl LII (52) [^1]")
+![](./images/09_Arithmetik/Colosseum-Entrance_LII.jpg "Eingang des Kolosseums mit der römischen Zahl LII (52) [^1]")
 
 [^1]: WarpFlyght, Eingang des Kolosseums mit der römischen Zahl LII (52), https://commons.wikimedia.org/wiki/File:Colosseum-Entrance_LII.jpg
 
