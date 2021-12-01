@@ -280,7 +280,7 @@ $$
 | ----- | ----- | ----- | ----- | ----- | ----- | ----- | ----- | -------- | -------- | -------- | -------- |
 | 128      |  64     |   32    | 16      |  8     |  4     |    2   | 1     | 0.5      | 0.25     | 0.125    | 0.0625   |
 
-Beispiel: $1011,1101 = 8 + 2 + 1 + 0.5 + 0.25 + 0.625 = 11.8125$
+Beispiel: $1011,1101 = 8 + 2 + 1 + 0.5 + 0.25 + 0.0625 = 11.8125$
 
 ```
 i=0
@@ -349,11 +349,11 @@ print("{0:50.50f}\n{1}".format(a, x))
 
 **Manuelle Vorgehensweise**
 
-
+<!-- data-type="none" -->
 | Binär - $2^1$ | Oktal - $2^3$     | Hexdezimal - $2^4$ |
 | ------------- | ----------------- | ------------------ |
 | $011,1011011$ | 011,101 101 1(00) | 0011,1011 011(0)   |
-|               | 3,558             | 3,B6               |
+|               | 3,554             | 3,B6               |
 | $1110,11011$  | 001 110,110 11(0) | 1110,1101 1(000)   |
 |               | 16,66             | E,D8               |
 
@@ -602,7 +602,7 @@ Entsprechend müssen Überschreitungen des Zahlenbereiches erkannt und behandelt
 
 Dafür werden die höchstrangigen Bits der Summanden und des Ergebnisses ausgewertet.
 
-## Schaltwerke für arithmetische Operationen
+## Schaltnetze für arithmetische Operationen
 
            {{0}}
 ********************************************************************************
