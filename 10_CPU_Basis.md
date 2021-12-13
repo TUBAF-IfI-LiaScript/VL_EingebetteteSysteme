@@ -385,9 +385,9 @@ Im Speicher stehen nun nicht nur Befehle für die Ausführung unserer ALU-Funkti
 | `OR_A`        | $0000$ bisher(!) | Logisches Oder                                      |
 |               | ....             |                                                     |
 | `LDA Adresse` | $10000$          | Laden der Daten von der Adresse X in das Register A |
-| `LDB Adresse` | $10001$          | Laden der Daten von der Adresse X in das Register A |
+| `LDB Adresse` | $10001$          | Laden der Daten von der Adresse X in das Register B |
 | `STA Adresse` | $10010$          | Speichern der Daten aus Register A an der Adresse X |
-| `STB Adresse` | $10011$          | Speichern der Daten aus Register A an der Adresse X |
+| `STB Adresse` | $10011$          | Speichern der Daten aus Register B an der Adresse X |
 
 Damit nimmt der Aufwand im Steuerwerk nochmals signifikant zu! Neben dem Adressbus besteht nun ein Datenbus als weiterer Kommunikationspfad.
 
