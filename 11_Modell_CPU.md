@@ -204,13 +204,14 @@ ditaa
 @enduml
 ```
 
+Negative Zahlen werden im Zweierkomplement dargestellt.
+
 ## Wie sieht ein Programm dann aus?
 
-**Beispiel Variabler Linksshift**
+**Beispiel Variabler Rechtsshift**
 
-Das Programm belegt 15 aufeinander folgende Speicherplätze. Die nächste Spalte gibt die binäre Repräsentation des
-Programms an. Die mnemotechnische Darstellung und ein Kommentarfeld sind in den
-folgenden Spalten dargestellt.
+Das eigentliche Programm belegt 16 aufeinander folgende Speicherplätze zwischen $0001000$ und $00011111$. Die nächste Spalte gibt die binäre Repräsentation des
+Programms an. Die mnemotechnische Darstellung und ein Kommentarfeld folgen.
 
 Unser Rechner wird nur ein echtes Register $A$ haben. Entsprechend müssen wir die Variablen im Speicher ablegen und von dort wieder laden. Das Programm besteht dann aus zwei Teilen
 
