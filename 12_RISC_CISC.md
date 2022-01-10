@@ -2,7 +2,7 @@
 
 author:   Sebastian Zug & André Dietrich & Fabian Bär
 email:    sebastian.zug@informatik.tu-freiberg.de & andre.dietrich@informatik.tu-freiberg.de & fabian.baer@student.tu-freiberg.de
-version:  0.0.4
+version:  0.0.5
 language: de
 narrator: Deutsch Female
 
@@ -584,9 +584,8 @@ style="width: 80%; min-width: 420px; max-width: 720px;"
 
 ![Fließbandverarbeitung](https://upload.wikimedia.org/wikipedia/commons/thumb/9/9e/Pipeline_MIPS.png/800px-Pipeline_MIPS.png "MIPS Pipeline [^MIPS]")
 
-********************************************************************************
-
 [^BP] State diagram of 2-bit saturating counter for branch predictor [Link](https://en.wikipedia.org/wiki/Branch_predictor#/media/File:Branch_prediction_2bit_saturating_counter-dia.svg)
+********************************************************************************
 
 ## CISC vs RISC
 
@@ -613,6 +612,7 @@ Limitierungen für eine Pipeline:
 + Nachladen von Operatoren (unterschiedliche Größe)
 + Lange Ausführungs-Phasen (nicht vorhersagbar)
 
+<!-- data-type="none" -->
 | Platz | Befehl             | Häufigkeit in % | CumSum |
 | ----- | ------------------ | --------------- | ------ |
 | 1     | LOAD               | 22              | 22     |
