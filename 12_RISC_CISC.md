@@ -165,6 +165,8 @@ Pipline Abarbeitung
 
 > Im idealen Zustand ist die Arbeit so zerlegt worden, dass alle Pipeline-Stufen die gleiche Zeitdauer haben.
 
+Wie können wir den Performancegewinn $S$ einer Pipeline beschreiben?
+
 Gegen wir davon aus, dass $n$ Operationen ausgeführt werden sollen. Die Tiefe der Pipeline ergibt sich zu $k$. Entsprechend sind bei der sequenziellen Arbeit also $n \cdot k$ Zeitslots notwendig. Im Pipelinemodus werden lediglich $(n-1)$ Schritte zum Befüllen der Pipeline gebraucht. Danach folgt mit jedem Takt eine abgeschlossene Operation.
 
 $$
@@ -239,9 +241,17 @@ Verschiedenste Vorgänge können als Pipeline Prozesse betrachtet werden. So wer
 colspan: <!--colspan="@0" style="text-align: center; vertical-align: middle;"-->
 -->
 
+                                  {{0-1}}
+********************************************************************************
+
 > **Piplining** Zerlegung einer Maschinenoperation in verschiedene Phasen, die von einer an sich serialisierten Verarbeitungskette taktsynchron bearbeitet werden, wobei jede Stufe zu jedem Zeitpunkt aktiv ist.
 
 > **Pipeline-Stufe** Die k abtrennbaren Elemente einer Pipeline, die Pipeline-Stufen werden durch den Pipeline-Maschinentakt getriggert.
+
+********************************************************************************
+
+                                   {{1-2}}
+********************************************************************************
 
 Unser bisheriger Modellrechner kombiniert 2 Phasen, die Fetch und die Execute Phase. Können wir das Pipeliningkonzept darauf anwenden?
 
@@ -274,6 +284,10 @@ Dagegen spricht:
 | <!-- style="background-color: #898AE3;" --> $CP7$     | | | | | | | | | | | | $A \leftarrow Sum(MBR, Z)$| $A \leftarrow MBR \oplus Z$| $A \leftarrow MBR \cdot Z$| $A \leftarrow MBR + Z$| |
 | <!-- style="background-color: #898AE3;" --> $CP8$     |  |  |  |  |  | $MAR \leftarrow PC, SF \leftarrow F$ |  |  | @colspan(7) $ MAR \leftarrow PC, SF \leftarrow F$ |  |
 
+********************************************************************************
+
+                                      {{2-3}}
+********************************************************************************
 
 Entsprechend schauen wir uns die Frage des Pipelining an einem alternativen System an. Die MIPS-Architektur (englisch Microprocessor without interlocked pipeline stages) ist eine Befehlssatzarchitektur im RISC-Stil, die ab 1981 von John L. Hennessy. Wir wollen an dieser Stelle nur die Pipeline des Systems untersuchen, dass eine aufwändigere Struktur als unser Modellrechner hat.
 
@@ -283,15 +297,32 @@ Das Schaubild entstammt dem Open Source Projekt MIPS-Simulators des Autors _Tech
 
 + Typ R Befehle: Register-Register Befehle (add, sub, ...)
 
-| 31-26  | 25-21 | 20-16 | 15-11 | 10-6  | 5-0     |
-| ------ | ----- | ----- | ----- | ----- | ------- |
-| OPCODE | rs    | rt    | rd    | shamt | aluFunc |
+| 31-26  | 25-21    | 20-16    | 15-11 | 10-6       | 5-0                    |
+| ------ | -------- | -------- | ----- | ---------- | ---------------------- |
+| OPCODE | rs       | rt       | rd    | shamt      | aluFunc                |
+|        | Quelle 1 | Quelle 2 | Ziel  | Shiftweite | spezifische Funktionen |
+
+Wie setzen wir also damit die Gleichung $f=g+h-i$ um?
+
 
 ```
-add $t0, $s1, $s2 # t0=g+h
-add $t1, $s3, $s4 # t1=i+j
-sub $s0, $t0, $t1 # f=t0-t1
+add $t0, $s1, $s2 # t0=g+h (g=>s1, h=>s2)
+sub $s0, $t0, $s3 # s0=t0-i (i=>s3, f in s0)
 ```
+
+<!-- data-type="none" -->
+|                     | 31-26 | 25-21 | 20-16 | 15-11 | 10-6 | 5-0 |
+| ------------------- | ----- | ----- | ----- | ----- | ---- | --- |
+| `add $t0, $s1, $s2` | 0     | 17    | 18    | 8     | 0    | 32  |
+| `sub $s0, $t0, $s3` | 0     | 8     | 19    | 16    | 0    | 34  |
+
+In der Maschinensprache heißt dass dann:
+
+```
+00000 10001 10010 01000 00000 10000
+00000 01000 10011 10000 00000 10010
+```
+
 
 + Typ I Befehle: Imediate-Register Befehle (addi, lw, ...)
 
@@ -300,10 +331,14 @@ sub $s0, $t0, $t1 # f=t0-t1
 | OPCODE | rs    | rt    | immediate |
 
 ```
-lw $t0, 32($s3)
+addi $s0, $s1, 5
 ```
 
+> __Aufgabe:__ Recherchieren Sie den Aufbau der MIPS I Befehle und leiten Sie den zugehörigen Maschinencode für den oben genannten Befehl ab.
+
 Eine weitergehendere Beschäftigung mit dem eigentlichen Befehlssatz ist an dieser Stelle nicht notwendig. Für Interessierte Hörer sei ein Blick auf eine zugehörige Simulation der Uni-Hamburg empfohlen (https://tams.informatik.uni-hamburg.de/applets/hades/webdemos/76-mips/01-intro/chapter.html)
+
+********************************************************************************
 
 ### Umsetzung der Pipeline
 
@@ -315,9 +350,9 @@ Eine weitergehendere Beschäftigung mit dem eigentlichen Befehlssatz ist an dies
 | MA        | Memory Access                           | Daten werden aus dem Speicher geladen oder in den Speicher geschrieben                                         |
 | WB        | Write Back                              | Resultat der Berechnung wird in ein Zielregister übertragen                                                    |
 
-![Fließbandverarbeitung](https://upload.wikimedia.org/wikipedia/commons/thumb/9/9e/Pipeline_MIPS.png/800px-Pipeline_MIPS.png)<!-- width="60%" --> [^2]
+![Fließbandverarbeitung](https://upload.wikimedia.org/wikipedia/commons/thumb/9/9e/Pipeline_MIPS.png/800px-Pipeline_MIPS.png "MIPS Pipeline [^MIPS]")
 
-[^2]: Autor: Hellisp, Pipelined MIPS Microprocessor, https://commons.wikimedia.org/wiki/File:Pipeline_MIPS.png
+![Fließbandverarbeitung](./images/12_Pipeline/MipsPipeline.png "MIPS Pipeline [^MIPS]")
 
 > Nach unserer Rechnung ließe sich mit einem solchen System eine Beschleunigung von
 > $$ S = lim \frac{n \cdot 5}{5 + (n-1)} = 5 $$
@@ -328,6 +363,8 @@ Eine weitergehendere Beschäftigung mit dem eigentlichen Befehlssatz ist an dies
 1. Ressourcenkonflikte
 2. Kontrollabhängigkeiten
 3. Datenflussabhängigkeiten
+
+[^MIPS]: Autor: Hellisp, Pipelined MIPS Microprocessor, https://commons.wikimedia.org/wiki/File:Pipeline_MIPS.png
 
 ### Pipelining Hindernisse
 
@@ -341,9 +378,9 @@ Ressourcenkonflikte treten auf, wenn auf bestimmte Elemente gleichermaßen zugeg
 Steuerkonflikte treten bei Instruktionen auf, die den Befehlszähler verändern, bei bedingten oder unbedingten Sprungbefehlen. Da der "richtige" Befehl erst am Ende des Auslesens des Sprungbefehls bekannt ist, muss die Pipeline ggf. komplett geleert werden.
 
 ```
-add r1, r2, r3    // r3 = r1 + r2
-beq r4, r5, 100   // if r4 == r5 springe nach PC + 100
-sub r4, r5, r6    // sonst r6 = r4 - r5
+add $s3, $s1, $s2   // s3 = s1 + s2
+beq $s4, $s5, 100   // if s4 == s5 springe nach PC + 100
+sub $s6, $s4, $s5   // sonst s6 = s4 - s5
 ```
 
 
@@ -372,8 +409,8 @@ Datenkonflikte ergeben sich aus Datenabhängigkeiten zwischen Befehlen im Progra
 1. _Read after Write (RAW) oder Echte Abhängigkeit_ - Ein Operand wurde verändert und kurz darauf gelesen. Da der erste Befehl den Operanden evtl. noch nicht fertiggeschrieben hat (Pipeline-Stufe „store“ ist weit hinten), würde der zweite Befehl falsche Daten verwenden.
 
 ```
-R1 = R2+R3
-R4 = R1+1
+s1 = s2+s3
+s4 = s1+1
 ```
 
 
@@ -382,19 +419,19 @@ style="width: 80%; min-width: 420px; max-width: 720px;"
 -->
 ```ascii
 
-                Hier wird r1 zur      |  | Hier ist r1 im Register File bereit
+                Hier wird s1 zur      |  | Hier ist s1 im Register File bereit
                 Berechnung entnommen  |  v
                    +----+----+----+---|+----+
-1) load r1, A      | IF | ID | EX | MA|| WB |
+1) load s1, A      | IF | ID | EX | MA|| WB |
                    +----+----+----+---|+----+----+
-2) load r2, B           | IF | ID | EX|| MA | WB |
+2) load s2, B           | IF | ID | EX|| MA | WB |
                         +----+----+---v+----+----+----+
-3) add r2, r1, r2            | IF | ID | EX | MA | WB |
+3) add s2, s1, s2            | IF | ID | EX | MA | WB |
                              +----+----+----+----+---^+----+
-4) mul r1, r2, r1                 | IF | ID | EX | MA|| WB |
+4) mul s1, s2, s1                 | IF | ID | EX | MA|| WB |
                                   +----+----+----+---|+----+
                                           ^          |
-                    Hier wird r2 für die  |          | Hier liegt das Ergebnis von
+                    Hier wird s2 für die  |          | Hier liegt das Ergebnis von
                     Berechnung von 4)                  3) vor
                     entnommen.
 ```
@@ -402,15 +439,15 @@ style="width: 80%; min-width: 420px; max-width: 720px;"
 2. _Write after Read (WAR) oder Gegenabhängigkeit_ - Ein Operand wird gelesen und kurz danach überschrieben. Da das Schreiben bereits vor dem Lesen vollendet sein könnte, könnte der Lese-Befehl die neu geschriebenen Werte erhalten.
 
 ```
-   R1 = R2+R3
-   R2 = 2
+   s1 = s2+s3    # Steht möglicherweise 2 schon in s2?
+   s2 = 2         
 ```
 
 3. _Write after Write (WAW) oder Ausgabeabhängigkeit_ - Zwei Befehle schreiben auf denselben Operanden. Der zweite könnte vor dem ersten Befehl beendet werden und somit den Operanden mit einem falschen Wert belassen.
 
 ```
-   R1 = R2+R3
-   R1 = 2
+   s1 = s2+s3
+   s1 = 2        # Wird die zwei möglicherweise durch s2+s3 überschrieben?
 ```
 
 Die beiden letztgenannten Datenkonflikte sind für die beschriebene Pipeline nicht relevant.
@@ -473,9 +510,7 @@ style="width: 80%; min-width: 420px; max-width: 720px;"
 
     Wenn ein Zweig ausgewertet wird, wird der entsprechende Zustandsautomat aktualisiert. Zweige, die als nicht belegt bewertet werden, ändern den Zustand in Richtung stark nicht belegt, und Zweige, die als belegt bewertet werden, ändern den Zustand in Richtung stark belegt. Der Vorteil des Zwei-Bit-Zählerschemas gegenüber einem Ein-Bit-Schema ist, dass ein bedingter Sprung zweimal von dem abweichen muss, was er in der Vergangenheit am meisten getan hat, bevor sich die Vorhersage ändert. Zum Beispiel wird ein schleifenschließender bedingter Sprung einmal und nicht zweimal falsch vorhergesagt.
 
-![BranchPrediction](https://upload.wikimedia.org/wikipedia/commons/thumb/c/c8/Branch_prediction_2bit_saturating_counter-dia.svg/1920px-Branch_prediction_2bit_saturating_counter-dia.svg.png)<!--style="width: 80%; min-width: 420px; max-width: 720px;"--> [^3]
-
-[^3] State diagram of 2-bit saturating counter for branch predictor, https://en.wikipedia.org/wiki/Branch_predictor#/media/File:Branch_prediction_2bit_saturating_counter-dia.svg
+![BranchPrediction](https://upload.wikimedia.org/wikipedia/commons/thumb/c/c8/Branch_prediction_2bit_saturating_counter-dia.svg/1920px-Branch_prediction_2bit_saturating_counter-dia.svg.png "2-bit branch predictor [^BP]")<!--style="width: 80%; min-width: 420px; max-width: 720px;"-->
 
 ********************************************************************************
 
@@ -485,7 +520,7 @@ style="width: 80%; min-width: 420px; max-width: 720px;"
 Lösungsansätze für Datenkonflikte
 -----------------------------------------
 
-1. Softwarelösungen - Einfügen fvon NOP Befehlen zur Auflösung
+1. Softwarelösungen - Einfügen von NOP Befehlen zur Auflösung
 
 <!--
 style="width: 80%; min-width: 420px; max-width: 720px;"
@@ -509,10 +544,10 @@ style="width: 80%; min-width: 420px; max-width: 720px;"
 2. Softwarelösungen - Umsortieren der Abarbeitung
 
 ```asm
-add r0, r1, r2
-add r4, r2, r3
-mul r5, r6, r7
-mul r7, r5, r9
+add r2, r0, r1    # r2 = r0 + r1
+add r3, r4, r2
+mul r7, r5, r6
+mul r9, r7, r5
 ```
 
 > **Aufgabe:** Bringen Sie die oben genannte Folge von Befehlen in eine konfliktfreie Reihung.
@@ -527,15 +562,15 @@ style="width: 80%; min-width: 420px; max-width: 720px;"
 -->
 ```ascii
                         +----+----+----+----+----+
-1) add r0, r1, r2       | IF | ID | EX | MA | WB |
+1) add r2, r0, r1       | IF | ID | EX | MA | WB |
                         +----+----+----+----+----+----+
-2) mul r5, r6, r7            | IF | ID | EX | MA | WB |
+2) mul r7, r5, r6            | IF | ID | EX | MA | WB |
                              +----+----+----+----+----+---+
 3) nop                           | IF | ID | EX | MA | WB |
                                   +----+----+----+----+----+----+
-4) add r4, r2, r3                      | IF | ID | EX | MA | WB |
+4) add r3, r4, r2                      | IF | ID | EX | MA | WB |
                                        +----+----+----+----+----+----+
-4) mul r7, r5, r9                           | IF | ID | EX | MA | WB |
+4) mul r9, r7, r5                           | IF | ID | EX | MA | WB |
                                             +----+----+----+----+----+
 
 ```
@@ -545,9 +580,13 @@ style="width: 80%; min-width: 420px; max-width: 720px;"
 4. Hardwarelösungen - _Forwarding_
 
      + Rückführung von ALU-Ausgaben auf deren Eingabe (ME->ME)
-     + Load Forwarding (WB ->ID)
+     + Load Forwarding (WB->ID)
+
+![Fließbandverarbeitung](https://upload.wikimedia.org/wikipedia/commons/thumb/9/9e/Pipeline_MIPS.png/800px-Pipeline_MIPS.png "MIPS Pipeline [^MIPS]")
 
 ********************************************************************************
+
+[^BP] State diagram of 2-bit saturating counter for branch predictor [Link](https://en.wikipedia.org/wiki/Branch_predictor#/media/File:Branch_prediction_2bit_saturating_counter-dia.svg)
 
 ## CISC vs RISC
 
@@ -637,16 +676,13 @@ Womit haben wir es also bei unserem Modellrechner zu tuen?
 
 Und wie geht es insgesamt weiter?
 
-![atmega](./images/12_Pipeline/AtmegaArchitektur.png)<!--style="width: 80%; min-width: 420px; max-width: 720px;"--> [^4]
+![atmega](./images/12_Pipeline/AtmegaArchitektur.png "AVR Handbuch Block Diagramm [^AVR_Handbuch]")
 
-[^4]: Firma Microchip, Handbuch Atmega, https://ww1.microchip.com/downloads/en/DeviceDoc/Atmel-7810-Automotive-Microcontrollers-ATmega328P_Datasheet.pdf
+![atmega](./images/12_Pipeline/AtmegaPipline.png "AVR Handbuch Pipelining [^AVR_Handbuch]")
 
-![atmega](./images/12_Pipeline/AtmegaPipline.png)<!--style="width: 80%; min-width: 420px; max-width: 720px;"--> [^4]
+[^AVR_Handbuch]: Firma Microchip, Handbuch Atmega, https://ww1.microchip.com/downloads/en/DeviceDoc/Atmel-7810-Automotive-Microcontrollers-ATmega328P_Datasheet.pdf
 
-[^4]: Firma Microchip, Handbuch Atmega, https://ww1.microchip.com/downloads/en/DeviceDoc/Atmel-7810-Automotive-Microcontrollers-ATmega328P_Datasheet.pdf
+### Hausaufgaben
 
-### Vorbereitung der praktischen Aufgaben
-
-Wer von Ihnen hat bereits Erfahrung bei der Arbeit mit Arduino?
-
-Wer von Ihnen hat Zugriff auf einen Arduino Uno, einen Nano oder einen anderen Mikrocontroller?
+1. Recherchieren Sie, was es mit der Byte-Order auf sich hat.
+2. Welche Unterschiede werden beim Vergleich der Intel und der AT&T Syntax deutlich?
