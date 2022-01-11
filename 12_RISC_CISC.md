@@ -112,9 +112,9 @@ Enstehungsgründe für umfangreiche Maschinenbefehlssätze:
 
 Ransom Eli Olds verwendete bereits 1902 für die Produktion seiner „Oldsmobile“ bewegliche Holzgestelle, auf denen die Fahrgestelle von Station zu Station geschoben wurden. Henry Ford mechanisierte und verfeinerte dieses Prinzip, indem er mit Hilfe seines Ingenieurs Charles E. Sorensen und des Vorarbeiters Lewis im Jahr 1913 ein permanentes Fließband aufbaute und so die erste „moving assembly line“ installierte.
 
-![Fließbandverarbeitung](https://upload.wikimedia.org/wikipedia/commons/d/d6/A-line1913.jpg)<!-- width="50%" --> [^1]
+![Fließbandverarbeitung](./images/12_Pipeline/A-line1913.jpg "[^WikipediaPipeline]")
 
-[^1]: 1913 photograph Ford company, USA, https://commons.wikimedia.org/wiki/File:A-line1913.jpg
+[^WikipediaPipeline]: 1913 photograph Ford company, USA, https://commons.wikimedia.org/wiki/File:A-line1913.jpg
 
 ```text @plantUML.png
 @startuml
@@ -350,7 +350,7 @@ Eine weitergehendere Beschäftigung mit dem eigentlichen Befehlssatz ist an dies
 | MA        | Memory Access                           | Daten werden aus dem Speicher geladen oder in den Speicher geschrieben                                         |
 | WB        | Write Back                              | Resultat der Berechnung wird in ein Zielregister übertragen                                                    |
 
-![Fließbandverarbeitung](https://upload.wikimedia.org/wikipedia/commons/thumb/9/9e/Pipeline_MIPS.png/800px-Pipeline_MIPS.png "MIPS Pipeline [^MIPS]")
+![Fließbandverarbeitung](./images/12_Pipeline/Pipeline_MIPS.png "MIPS Pipeline [^MIPS]")
 
 ![Fließbandverarbeitung](./images/12_Pipeline/MipsPipeline.png "MIPS Pipeline [^MIPS]")
 
@@ -510,7 +510,9 @@ style="width: 80%; min-width: 420px; max-width: 720px;"
 
     Wenn ein Zweig ausgewertet wird, wird der entsprechende Zustandsautomat aktualisiert. Zweige, die als nicht belegt bewertet werden, ändern den Zustand in Richtung stark nicht belegt, und Zweige, die als belegt bewertet werden, ändern den Zustand in Richtung stark belegt. Der Vorteil des Zwei-Bit-Zählerschemas gegenüber einem Ein-Bit-Schema ist, dass ein bedingter Sprung zweimal von dem abweichen muss, was er in der Vergangenheit am meisten getan hat, bevor sich die Vorhersage ändert. Zum Beispiel wird ein schleifenschließender bedingter Sprung einmal und nicht zweimal falsch vorhergesagt.
 
-![BranchPrediction](https://upload.wikimedia.org/wikipedia/commons/thumb/c/c8/Branch_prediction_2bit_saturating_counter-dia.svg/1920px-Branch_prediction_2bit_saturating_counter-dia.svg.png "2-bit branch predictor [^BP]")<!--style="width: 80%; min-width: 420px; max-width: 720px;"-->
+![BranchPrediction](./images/12_Pipeline/Branch_prediction_2bit.png "2-bit branch predictor [^BP]")
+
+[^BP] State diagram of 2-bit saturating counter for branch predictor [Link](https://en.wikipedia.org/wiki/Branch_predictor#/media/File:Branch_prediction_2bit_saturating_counter-dia.svg)
 
 ********************************************************************************
 
@@ -566,7 +568,7 @@ style="width: 80%; min-width: 420px; max-width: 720px;"
                         +----+----+----+----+----+----+
 2) mul r7, r5, r6            | IF | ID | EX | MA | WB |
                              +----+----+----+----+----+---+
-3) nop                           | IF | ID | EX | MA | WB |
+3) nop                            | IF | ID | EX | MA | WB |
                                   +----+----+----+----+----+----+
 4) add r3, r4, r2                      | IF | ID | EX | MA | WB |
                                        +----+----+----+----+----+----+
@@ -582,9 +584,8 @@ style="width: 80%; min-width: 420px; max-width: 720px;"
      + Rückführung von ALU-Ausgaben auf deren Eingabe (ME->ME)
      + Load Forwarding (WB->ID)
 
-![Fließbandverarbeitung](https://upload.wikimedia.org/wikipedia/commons/thumb/9/9e/Pipeline_MIPS.png/800px-Pipeline_MIPS.png "MIPS Pipeline [^MIPS]")
+![Fließbandverarbeitung](./images/12_Pipeline/Pipeline_MIPS.png "MIPS Pipeline [^MIPS]")
 
-[^BP] State diagram of 2-bit saturating counter for branch predictor [Link](https://en.wikipedia.org/wiki/Branch_predictor#/media/File:Branch_prediction_2bit_saturating_counter-dia.svg)
 ********************************************************************************
 
 ## CISC vs RISC
@@ -682,7 +683,7 @@ Und wie geht es insgesamt weiter?
 
 [^AVR_Handbuch]: Firma Microchip, Handbuch Atmega, https://ww1.microchip.com/downloads/en/DeviceDoc/Atmel-7810-Automotive-Microcontrollers-ATmega328P_Datasheet.pdf
 
-### Hausaufgaben
+## Hausaufgaben
 
 1. Recherchieren Sie, was es mit der Byte-Order auf sich hat.
 2. Welche Unterschiede werden beim Vergleich der Intel und der AT&T Syntax deutlich?
