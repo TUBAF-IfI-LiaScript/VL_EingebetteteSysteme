@@ -508,7 +508,7 @@ Der EEPROM ist nicht Bestandteil des _Mapped Memory IO_ Konzepts! Vielmehr exist
 
 ### Reset-System
 
-![Bild](./images/13_AVR_CPU/ResetSystem.png "Resetsystem des Controllers, Seite 57, [^megaAVR]")<!-- style="width: 75%; max-width: 1000px" -->[^11]
+![Bild](./images/13_AVR_CPU/ResetSystem.png "Resetsystem des Controllers, Seite 57, [^megaAVR]")<!-- style="width: 75%; max-width: 1000px" -->
 
 Quellen für Reset
 
@@ -690,7 +690,8 @@ Die Generierung der Warteschleife von 1s ist dem Delay-Generator http://darcy.rs
 int main (void) {
    DDRB |= (1 << PB5);
    while(1) {
-       // PINB = (1 << PB5);   // Dieses Feature ist im Simulator
+       // PINB = (1 << PB5);   // Dieses Feature ist im Simulator nicht
+                               // implementiert
        PORTB ^= ( 1 << PB5 );
        _delay_ms(1000);
    }
