@@ -64,13 +64,13 @@ style="width: 80%; min-width: 420px; max-width: 720px;"
 
            +----------------------------+
   Ebene 4  | Betriebssystem             |     Systemsoftware
-           +----------------------------+
-
-           +----------------------------+
-  Ebene 3  | Istruktionsset             |     Maschinensprache
            +----------------------------+         ╔═══════════════╗
-                                               ◀══║ HIER SIND WIR!║
-           +----------------------------+  -.     ╚═══════════════╝
+                                               ◀══║ HIER SIND WIR!║    
+           +----------------------------+         ╚═══════════════╝
+  Ebene 3  | Istruktionsset             |     Maschinensprache
+           +----------------------------+     
+
+           +----------------------------+  -.
   Ebene 2  | Mikroarchitektur           |   |
            +----------------------------+   |
                                             ⎬ Automaten, Speicher, Logik
