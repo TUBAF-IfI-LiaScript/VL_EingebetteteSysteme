@@ -8,7 +8,7 @@ narrator: Deutsch Female
 
 import:  https://raw.githubusercontent.com/liascript-templates/plantUML/master/README.md
          https://github.com/LiaTemplates/Pyodide
-         import: https://fjangfaragesh.github.io/AVR8js-mem/INCLUDE.md
+         https://fjangfaragesh.github.io/AVR8js-mem/INCLUDE.md
 
 script:   https://cdn.jsdelivr.net/chartist.js/latest/chartist.min.js
          link: https://cdn.jsdelivr.net/chartist.js/latest/chartist.min.css
