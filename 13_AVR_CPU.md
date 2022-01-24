@@ -2,32 +2,7 @@
 
 author:   Sebastian Zug & André Dietrich & Fabian Bär
 email:    sebastian.zug@informatik.tu-freiberg.de & andre.dietrich@informatik.tu-freiberg.de & fabian.baer@student.tu-freiberg.de
-version:  0.1.4
-language: de
-narrator: Deutsch Female
-
-import:  https://raw.githubusercontent.com/liascript-templates/plantUML/master/README.md
-         https://github.com/LiaTemplates/Pyodide
-         https://github.com/LiaTemplates/AVR8js/main/README.md#10
-         https://github.com/liascript/CodeRunner
-
-mark: <span style="background-color: @0;
-                                  display: flex;
-                                  width: calc(100% + 32px);
-                                  margin: -16px;
-                                  padding: 6px 16px 6px 16px;
-                                  ">@1</span>
-red:  @mark(#FF888888,@0)
-blue: @mark(#898AE3,@0)
-gray: @mark(gray,@0)
--->
-
-
-<!--
-
-author:   Sebastian Zug & André Dietrich & Fabian Bär
-email:    sebastian.zug@informatik.tu-freiberg.de & andre.dietrich@informatik.tu-freiberg.de & fabian.baer@student.tu-freiberg.de
-version:  0.0.5
+version:  0.0.6
 language: de
 narrator: Deutsch Female
 
