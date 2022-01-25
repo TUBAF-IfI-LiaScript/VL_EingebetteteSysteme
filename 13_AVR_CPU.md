@@ -8,6 +8,7 @@ narrator: Deutsch Female
 
 import:  https://raw.githubusercontent.com/liascript-templates/plantUML/master/README.md
          https://github.com/LiaTemplates/Pyodide
+         https://raw.githubusercontent.com/liaTemplates/AVR8js/main/README.md
 
 mark: <span style="background-color: @0;
                                   display: flex;
