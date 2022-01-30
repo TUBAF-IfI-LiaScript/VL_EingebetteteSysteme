@@ -8,9 +8,10 @@ narrator: Deutsch Female
 
 import:  https://raw.githubusercontent.com/liascript-templates/plantUML/master/README.md
          https://github.com/LiaTemplates/Pyodide
+         https://raw.githubusercontent.com/liaTemplates/AVR8js/main/README.md
          https://fjangfaragesh.github.io/AVR8js-mem/INCLUDE.md
 
-script:   https://cdn.jsdelivr.net/chartist.js/latest/chartist.min.js
+script:  https://cdn.jsdelivr.net/chartist.js/latest/chartist.min.js
          link: https://cdn.jsdelivr.net/chartist.js/latest/chartist.min.css
          link: https://cdnjs.cloudflare.com/ajax/libs/animate.css/3.7.0/animate.min.css
 
@@ -577,9 +578,7 @@ Der AtMega328 bringt 4 unabhängige Timersysteme mit:
 
 Dabei soll die Aufmerksamkeit zunächst auf dem 16-bit Timer/Zähler liegen.
 
-![Bild](./images/15_Timer/16BitTimerAVR.png)<!-- style="width: 75%; max-width: 1000px" -->[^1]
-
-[^1]: Firma Microchip, megaAVR® Data Sheet, Seite 250, [Link](http://ww1.microchip.com/downloads/en/DeviceDoc/ATmega48A-PA-88A-PA-168A-PA-328-P-DS-DS40002061A.pdf)
+![Bild](./images/15_Timer/16BitTimerAVR.png "Timer Baustein im AVR Controller, Seite 250 [^megaAVR]")<!-- style="width: 75%; max-width: 1000px" -->
 
 Folgende Fragen müssen wir die Nutzung des Timers beantwortet werden:
 
@@ -588,13 +587,15 @@ Folgende Fragen müssen wir die Nutzung des Timers beantwortet werden:
 + Welche maximalen und die minimalen Schranken des Zähler werden definiert?
 + Wird ein Ausgang geschaltet?
 
+[^megaAVR]: Firma Microchip, megaAVR® Data Sheet, [Link](http://ww1.microchip.com/downloads/en/DeviceDoc/ATmega48A-PA-88A-PA-168A-PA-328-P-DS-DS40002061A.pdf)
+
 #### Timer Modi
 
 Timer-Modi bestimmen das Verhalten des Zählers und der angeschlossenen Ausgänge / Interrupts. Neben dem als Normal-Mode bezeichneten Mechanismus existieren weitere Konfigurationen, die unterschiedliche Anwendungsfelder bedienen.
 
 **Clear to Compare Mode (CTC)**
 
-![Bild](./images/15_Timer/CTC_mode.png)<!-- style="width: 75%; max-width: 1000px" -->[^4]
+![Bild](./images/15_Timer/CTC_mode.png "CTC mode, Seite 141 [^megaAVR]")<!-- style="width: 75%; max-width: 1000px" -->
 
 Die Periode über eine `OCnA` Ausgang ergibt sich entsprechend zu
 
@@ -606,7 +607,7 @@ Der Counter läuft zwei mal durch die Werte bis zum Vergleichsregister `OCRnA`. 
 
 **Fast PWM**
 
-![Bild](./images/15_Timer/FastPWM.png)<!-- style="width: 75%; max-width: 1000px" -->[^4]
+![Bild](./images/15_Timer/FastPWM.png "Fast PWM generation, Seite 141 [^megaAVR]")<!-- style="width: 75%; max-width: 1000px" -->
 
 Die Periode des Signals an `OCRnA` wechselt während eines Hochzählens des Counters. Damit kann eine größere Frequenz bei gleicher Auflösung des Timers verglichen mit CTC erreicht werden.
 
@@ -616,13 +617,13 @@ $$
 
 **Phase Correct PWM**
 
-![Bild](./images/15_Timer/PhaseCorrectPWM.png)<!-- style="width: 75%; max-width: 1000px" -->[^4]
-
-[^4]: Firma Microchip, megaAVR® Data Sheet, Seite 141, [Link](http://ww1.microchip.com/downloads/en/DeviceDoc/ATmega48A-PA-88A-PA-168A-PA-328-P-DS-DS40002061A.pdf)
+![Bild](./images/15_Timer/PhaseCorrectPWM.png "Phase correct PWM generation, Seite 141 [^megaAVR]")<!-- style="width: 75%; max-width: 1000px" -->
 
 $$
 f_{OCnA} = \frac{f_{clk_i/o}}{2 \cdot N \ cdot TOP)}
 $$
+
+[^megaAVR]: Firma Microchip, megaAVR® Data Sheet, [Link](http://ww1.microchip.com/downloads/en/DeviceDoc/ATmega48A-PA-88A-PA-168A-PA-328-P-DS-DS40002061A.pdf)
 
 #### Timer-Funktionalität (Normal-Mode)
 
@@ -630,9 +631,8 @@ Für die Umsetzung eines einfachen Timers, der wie im nachfolgenden Beispiel jed
 Sekunde aktiv wird, genügt es einen entsprechenden Vergleichswert zu bestimmen,
 den der Zähler erreicht haben muss.
 
-![Bild](./images/15_Timer/AVRSimpleCounter.png)<!-- style="width: 75%; max-width: 1000px" -->[^2]
+![Bild](./images/15_Timer/AVRSimpleCounter.png "Counter implementation, Seite 126 [^megaAVR]")<!-- style="width: 75%; max-width: 1000px" -->
 
-[^2]: Firma Microchip, megaAVR® Data Sheet, Seite 126, [Link](http://ww1.microchip.com/downloads/en/DeviceDoc/ATmega48A-PA-88A-PA-168A-PA-328-P-DS-DS40002061A.pdf)
 
 <div>
   <wokwi-led color="red" pin="13" port="B" label="13"></wokwi-led>
@@ -672,13 +672,13 @@ int main(void)
 
 Wir lassen den Controller den Vergleichswert kontinuierlich auslesen. Damit haben wir noch nichts gewonnen, weil der Einsatz der Hardware unser eigentliches System nicht entlastet. Günstiger wäre es, wenn wir ausgehend von unseren Zählerzuständen gleich eine Schaltung des Ausganges vornehmen würden.
 
+[^megaAVR]: Firma Microchip, megaAVR® Data Sheet, [Link](http://ww1.microchip.com/downloads/en/DeviceDoc/ATmega48A-PA-88A-PA-168A-PA-328-P-DS-DS40002061A.pdf)
+
 #### Compare Mode
 
 Wir verknüpfen unseren Timer im Comparemodus mit einem entsprechenden Ausgang und stellen damit sicher, dass wir die Ausgabe ohne entsprechende Ansteuerung im Hauptprogramm aktivieren.
 
-![Bild](./images/15_Timer/AVR_CompareOutput.png)<!-- style="width: 75%; max-width: 1000px" -->[^2]
-
-[^2]: Firma Microchip, megaAVR® Data Sheet, Seite 126, [Link](http://ww1.microchip.com/downloads/en/DeviceDoc/ATmega48A-PA-88A-PA-168A-PA-328-P-DS-DS40002061A.pdf)
+![Bild](./images/15_Timer/AVR_CompareOutput.png "Outputmode des Timerbausteins, Seite 126, [^megaAVR]")<!-- style="width: 75%; max-width: 1000px" -->
 
 > **Frage:** Welchen physischen Pin des Controllers können wir mit unserem Timer 1 ansteuern?
 
@@ -761,11 +761,12 @@ int main(void){
 }
 ```
 
+[^megaAVR]: Firma Microchip, megaAVR® Data Sheet, [Link](http://ww1.microchip.com/downloads/en/DeviceDoc/ATmega48A-PA-88A-PA-168A-PA-328-P-DS-DS40002061A.pdf)
+
 #### Capture Mode
 
-![Bild](./images/15_Timer/AVR_Capture_Unit.png)<!-- style="width: 75%; max-width: 1000px" -->[^2]
+![Bild](./images/15_Timer/AVR_Capture_Unit.png "Capture Mode, Seite, 126, [^megaAVR]")<!-- style="width: 75%; max-width: 1000px" -->
 
-[^2]: Firma Microchip, megaAVR® Data Sheet, Seite 126, [Link](http://ww1.microchip.com/downloads/en/DeviceDoc/ATmega48A-PA-88A-PA-168A-PA-328-P-DS-DS40002061A.pdf)
 
 ```cpp       avrlibc.cpp
 #include <avr/io.h>
@@ -820,11 +821,16 @@ Zähler |    +       +
 
 > **Problem:** Wie große ist das maximal Darstellbare Zahlenintervall?
 
+[^megaAVR]: Firma Microchip, megaAVR® Data Sheet, [Link](http://ww1.microchip.com/downloads/en/DeviceDoc/ATmega48A-PA-88A-PA-168A-PA-328-P-DS-DS40002061A.pdf)
+
 ### Anwendungen
 
-![Bild](./images/15_Timer/16BitTimerAVR.png)<!-- style="width: 75%; max-width: 1000px" -->[^1]
+                                          {{0-1}}
+********************************************************************************
 
-[^1]: Firma Microchip, megaAVR® Data Sheet, Seite 250, [Link](http://ww1.microchip.com/downloads/en/DeviceDoc/ATmega48A-PA-88A-PA-168A-PA-328-P-DS-DS40002061A.pdf)
+**Eingangszähler**
+
+![Bild](./images/15_Timer/16BitTimerAVR.png "Übersicht Timermodul Seite 250, [^megaAVR]")<!-- style="width: 75%; max-width: 1000px" -->
 
 Wir wollen einen Eingangszähler entwerfen, der die Ereignisse als Zählerimpulse betrachtet und zusätzlich mit einem Schwellwert vergleicht.
 
@@ -857,3 +863,71 @@ int main(void)
   return  0;
 }
 ```
+
+********************************************************************************
+
+                                   {{1-2}}
+********************************************************************************
+
+**Glimmeffekt einer LED**
+
+<lia-keep>
+<div id="example4_div_id">
+    <span id="simulation-time"></span><br>
+    <wokwi-led color="green" pin="9" label="B1"></wokwi-led><br>
+    <!-- memout web komponenten -->
+    <!-- Textausgaben -->
+    <b>PORTB: </b> <memout-element type="bin" address="0x25"></memout-element>
+    <b>DDRB: </b> <memout-element type="bin" address="0x24"></memout-element>
+    <b>PINB: </b> <memout-element type="bin" address="0x23"></memout-element><br>
+    <b>TCCR1: </b> <memout-element type="bin" address="0x80" bytes="2" endian="little"></memout-element><br>
+    <b>TCNT1: </b> <memout-element type="bin" address="0x84" bytes="2" endian="little"></memout-element><br>
+    <b>OCR1A: </b> <memout-element type="bin" address="0x88" bytes="2" endian="little"></memout-element><br>
+            <!-- Diagramm -->
+    <memout-element
+        type="diagram2"
+        outputs="[bytesToInt(data[0x84],data[0x85]), bytesToInt(data[0x88],data[0x89]), extractBit(data[0x23],1)*35 + 260]"
+        color="blue"
+        min="0"
+        max="300"
+        width="800"
+        height="600"
+        interval="1000000"
+        title="TCNT1 und OCR1A"
+        colors='["red","blue","green"]'
+        labels='["TCNT1","OCR1A","LED"]'
+    ></memout-element><br>
+</div>
+</lia-keep>
+
+``` cpp
+#ifndef F_CPU
+#define F_CPU 16000000UL // 16 MHz clock speed
+#endif
+
+int main(void){
+  DDRB |=  (1 << PORTB1); //Define OCR1A as Output
+  TCCR1A |= (1 << COM1A1) | (1 << WGM10);  //Set Timer Register
+  TCCR1B |= (1 << CS12) | (1 << CS10) | (1 << WGM12);
+  OCR1A = 0;
+  int timerCompareValue = 0;
+  while(1) {
+   while(timerCompareValue < 255){ //Fade from low to high
+    timerCompareValue++;
+    OCR1A = timerCompareValue;
+    _delay_ms(4);
+
+  }
+   while(timerCompareValue > 0){ //Fade from high to low
+    timerCompareValue--;
+    OCR1A = timerCompareValue;
+    _delay_ms(4);
+    }
+   }
+}
+```
+@AVR8jsMem.sketch(example4_div_id,3000,1)
+
+********************************************************************************
+
+[^megaAVR]: Firma Microchip, megaAVR® Data Sheet, [Link](http://ww1.microchip.com/downloads/en/DeviceDoc/ATmega48A-PA-88A-PA-168A-PA-328-P-DS-DS40002061A.pdf)
