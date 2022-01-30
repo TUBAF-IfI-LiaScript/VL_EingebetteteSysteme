@@ -192,7 +192,7 @@ style="width: 80%; min-width: 420px; max-width: 720px;"
 Im AVR findet sich ein Komperator, der unterschiedliche Eingänge miteinander vergleichen kann:
 Für "+" sind dies die `BANDGAP Reference` und der Eingang `AIN0` und für "-" der Pin `AIN1` sowie alle analogen Eingänge.  
 
-![Bild](./images/14_ADC/AnalogCompAVR.png "Analog Comperator, Seite 243, [^megaAVR]")<!-- style="width: 85%; max-width: 1000px" -->
+![Bild](./images/14_ADC/AnalogCompAVR.png "Analog Comperator, Seite 243 [^megaAVR]")<!-- style="width: 85%; max-width: 1000px" -->
 
 Die grundlegende Konfiguration erfolgt über die Konfiguration der Bits / Register :
 
