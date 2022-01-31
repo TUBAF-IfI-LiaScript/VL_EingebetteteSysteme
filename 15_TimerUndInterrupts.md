@@ -645,7 +645,7 @@ Timer-Modi bestimmen das Verhalten des Zählers und der angeschlossenen Ausgäng
 Die Periode über eine `OCnA` Ausgang ergibt sich entsprechend zu
 
 $$
-f_{OCnA} = \frac{f_{clk_i/o}}{2 \cdot N \ cdot (1 + OCRnA)}
+f_{OCnA} = \frac{f_{clk_i/o}}{2 \cdot N \cdot (1 + OCRnA)}
 $$
 
 Der Counter läuft zwei mal durch die Werte bis zum Vergleichsregister `OCRnA`. Die Frequenz kann durch das Setzen eine Prescalers korrigiert werden.
@@ -657,7 +657,7 @@ Der Counter läuft zwei mal durch die Werte bis zum Vergleichsregister `OCRnA`. 
 Die Periode des Signals an `OCRnA` wechselt während eines Hochzählens des Counters. Damit kann eine größere Frequenz bei gleicher Auflösung des Timers verglichen mit CTC erreicht werden.
 
 $$
-f_{OCnA} = \frac{f_{clk_i/o}}{N \ cdot (1 + TOP)}
+f_{OCnA} = \frac{f_{clk_i/o}}{N \cdot (1 + TOP)}
 $$
 
 **Phase Correct PWM**
@@ -665,7 +665,7 @@ $$
 ![Bild](./images/15_Timer/PhaseCorrectPWM.png "Phase correct PWM generation, Seite 141 [^megaAVR]")<!-- style="width: 75%; max-width: 1000px" -->
 
 $$
-f_{OCnA} = \frac{f_{clk_i/o}}{2 \cdot N \ cdot TOP)}
+f_{OCnA} = \frac{f_{clk_i/o}}{2 \cdot N \cdot (TOP)}
 $$
 
 [^megaAVR]: Firma Microchip, megaAVR® Data Sheet, [Link](http://ww1.microchip.com/downloads/en/DeviceDoc/ATmega48A-PA-88A-PA-168A-PA-328-P-DS-DS40002061A.pdf)
