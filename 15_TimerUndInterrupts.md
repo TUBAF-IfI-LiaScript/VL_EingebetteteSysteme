@@ -2,13 +2,12 @@
 
 author:   Sebastian Zug & André Dietrich & Fabian Bär
 email:    sebastian.zug@informatik.tu-freiberg.de & andre.dietrich@informatik.tu-freiberg.de & fabian.baer@student.tu-freiberg.de
-version:  0.0.6
+version:  0.0.7
 language: de
 narrator: Deutsch Female
 
 import:  https://raw.githubusercontent.com/liascript-templates/plantUML/master/README.md
          https://github.com/LiaTemplates/Pyodide
-         https://raw.githubusercontent.com/liaTemplates/AVR8js/main/README.md
          https://fjangfaragesh.github.io/AVR8js-mem/INCLUDE.md
 
 script:  https://cdn.jsdelivr.net/chartist.js/latest/chartist.min.js
@@ -323,13 +322,58 @@ int main (void) {
 }
 ```
 
+
+> Im Unterschied dazu sei im nachfolgenden Beispiel eine Implementierung des Polling-Mechanismus vorgestellt. Damit soll der Unterschied zwischen dem Interrupt-Modus und der kontinuierlichen Abfrage verdeutlicht werden.
+
+<lia-keep>
+    <div id="example_div6_id">
+        <span id="simulation-time"></span><br>
+        <wokwi-led color="yellow" pin="13" label="13"></wokwi-led><br>
+        <wokwi-pushbutton color="red" pin="2" label="2"></wokwi-pushbutton><br>
+        <memout-element type="bin" address="PORTB"></memout-element> <memout-element type="bin" address="DDRB"></memout-element> <memout-element type="bin" address="PINB"></memout-element><br>
+    </div>
+</lia-keep>
+
+``` cpp  ToggleLED.cpp
+// preprocessor definition
+#define F_CPU 16000000UL
+
+#include <avr/io.h>
+#include <util/delay.h>
+
+int main (void) {
+   DDRB |= (1 << PB5);
+   int state = 0;
+   // aktives überwachen des Pins
+   while(1) {
+   	   if (state ^ ((PIND >> PD2) & 1)) {
+      		state ^= 1;
+      		if (state) {
+      			PORTB ^= ( 1 << PB5 );
+      		}
+   	   }
+       _delay_ms(1);
+   }
+   return 0;
+}
+```
+@AVR8jsMem.sketch(example_div6_id,100000,1)
+
+> **Frage:** Erklären Sie den Ablauf der Aktualisierung der Zustandsvariablen in Zeile 12 und 13.
+
 **Analog Digitalwandler**
 
 Das folgende Beispiel nutzt den Analog-Digital-Wandler in einem teilautonomen Betrieb. Innerhalb der Interrupt-Routine wird das Ergebnis ausgewertet und jeweils eine neue Wandlung aktiviert.
 
-Als Demonstrator dient ein Spannungsteiler über einen lichtabhängigen Widerstand.
+<lia-keep>
+    <div id="example_div8_id">
+        <span id="simulation-time"></span><br>
+        <wokwi-led color="yellow" pin="13" label="13"></wokwi-led><br>
+        <voltage-slider-element min="0.0" max="5.0" value="1.0" analogPinNumber="0"></voltage-slider-element><br>
+    </div>
+</lia-keep>
 
-```c
+``` cpp     AnalogViaInterrupts.cpp
 #include <avr/io.h>
 #include <avr/interrupt.h>
 
@@ -356,14 +400,15 @@ int main(void){
 
     int i = 0;
     while (1) {
-       Serial.print("Ich rechne fleißig ... ");
-       Serial.println(i++);
-       _delay_ms(50);
+        // Ich rechner fleißig!
+       _delay_ms(5000);
     }
 
     return 0;
 }
 ```
+@AVR8jsMem.sketch(example_div8_id,100000,1)
+
 
 ### Interrupt-Vektortabelle im AVR Programm
 
@@ -834,6 +879,8 @@ Zähler |    +       +
 
 Wir wollen einen Eingangszähler entwerfen, der die Ereignisse als Zählerimpulse betrachtet und zusätzlich mit einem Schwellwert vergleicht.
 
+
+
 ```cpp       avrlibc.cpp
 #include <avr/io.h>
 #include <util/delay.h>
@@ -900,7 +947,7 @@ int main(void)
 </div>
 </lia-keep>
 
-``` cpp
+``` cpp   Dimmer.cpp
 #ifndef F_CPU
 #define F_CPU 16000000UL // 16 MHz clock speed
 #endif
