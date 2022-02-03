@@ -313,7 +313,7 @@ ISR(INT0_vect) {
 int main (void) {
    DDRB |= (1 << PB5);
    DDRD &= ~(1 << DDD2);       // Pin als Eingang
-   PORTD |= (1 << PORTD2);     // Pullup-Konfiguration
+   PORTD |= (1 << PD2);     // Pullup-Konfiguration
    EIMSK |= ( 1 << INT0);
    EICRA |= ( 1 << ISC01);
    sei();
@@ -429,7 +429,7 @@ ISR(INT0_vect) {
 int main (void) {
    DDRB |= (1 << PB5);
    DDRD &= ~(1 << DDD2);
-   PORTD |= (1 << PORTD2);
+   PORTD |= (1 << PD2);
    EIMSK |= ( 1 << INT0);
    EICRA |= ( 1 << ISC01);
    sei();
