@@ -679,10 +679,15 @@ den der Zähler erreicht haben muss.
 ![Bild](./images/15_Timer/AVRSimpleCounter.png "Counter implementation, Seite 126 [^megaAVR]")<!-- style="width: 75%; max-width: 1000px" -->
 
 
-<div>
-  <wokwi-led color="red" pin="13" port="B" label="13"></wokwi-led>
-  <span id="simulation-time"></span>
+<lia-keep>
+<div id="example3_div_id">
+    <span id="simulation-time"></span><br>
+    <wokwi-led color="red" pin="13" port="B" label="13"></wokwi-led>
+    <!-- memout web komponenten -->
+    <!-- Textausgaben -->
+    <b>TCNT1: </b> <memout-element type="bin" address="0x84" bytes="2" endian="little"></memout-element><br>
 </div>
+</lia-keep>
 ```cpp       avrlibc.cpp
 #ifndef F_CPU
 #define F_CPU 16000000UL // 16 MHz clock speed
@@ -692,7 +697,6 @@ den der Zähler erreicht haben muss.
 
 int main(void)
 {
-  Serial.begin(9600);
   DDRB |= (1 << PB5);  // Ausgabe LED festlegen
   // Timer 1 Konfiguration
   //         keine Pins verbunden
@@ -700,7 +704,7 @@ int main(void)
   TCCR1B  = 0;
   // Timerwert
   TCNT1   = 0;
-  TCCR1B |= (1 << CS12) | (1 <<CS10);  // 1024 als Prescale-Wert
+  TCCR1B |= (1 << CS12) | (1 <<CS10);  // 1024 als Prescaler-Wert
 
   while (1) //infinite loop
   {
@@ -711,7 +715,7 @@ int main(void)
   }
 }
 ```
-@AVR8js.sketch
+@AVR8jsMem.sketch(example3_div_id,100000,1)
 
 > Was stört Sie an dieser Umsetzung?
 
@@ -732,10 +736,25 @@ Hardware und unser Hauptprogramm könnte eigenständige Aufgaben wahrnehmen.
 
 **Normal Mode Konfiguration**
 
-<div>
-  <wokwi-led color="green" pin="9" port="B" label="B1"></wokwi-led>
-  <span id="simulation-time"></span>
+<lia-keep>
+<div id="example2_div_id">
+<wokwi-led color="green" pin="9" port="B" label="B1"></wokwi-led>
+<span id="simulation-time"></span>
+<memout-element
+        type="diagram2"
+        outputs="[bytesToInt(data[0x84],data[0x85]), 15625, extractBit(data[0x23],1)*30000 + 260]"
+        color="blue"
+        min="0"
+        max="65536"
+        width="800"
+        height="300"
+        interval="58000000"
+        title="TCNT1 und OCR1A"
+        colors='["red","blue","green"]'
+        labels='["TCNT1","OCR1A","LED"]'
+    ></memout-element><br>
 </div>
+</lia-keep>
 ```cpp       avrlibc.cpp
 #ifndef F_CPU
 #define F_CPU 16000000UL // 16 MHz clock speed
@@ -753,7 +772,7 @@ int main(void)
   while (1) _delay_ms(500);
 }
 ```
-@AVR8js.sketch
+@AVR8jsMem.sketch(example2_div_id,100000,1)
 
 Was passiert, wenn die Aktivierung und Deaktivierung mit einer höheren Frequenz vorgenommen wird? Die effektiv wirkende Spannung wird durch den Mittelwert repräsentiert. Damit ist eine Quasi-Digital-Analoge Ausgabe ohne eine entsprechende Hardware möglich.
 
@@ -864,7 +883,7 @@ Zähler |    +       +
 
 > **Frage:** Sie wollen die Ausgabe in Ticks in eine Darstellung in ms überführen. Welche Kalkulation ist dafür notwendig?
 
-> **Problem:** Wie große ist das maximal Darstellbare Zahlenintervall?
+> **Problem:** Wie groß ist das maximal darstellbare Zahlenintervall?
 
 [^megaAVR]: Firma Microchip, megaAVR® Data Sheet, [Link](http://ww1.microchip.com/downloads/en/DeviceDoc/ATmega48A-PA-88A-PA-168A-PA-328-P-DS-DS40002061A.pdf)
 
