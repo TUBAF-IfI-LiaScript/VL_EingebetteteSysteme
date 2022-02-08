@@ -195,15 +195,11 @@ Gleichstrommotor
 
 An dieser Stelle konzentrieren wir uns auf eine spezifische Variante des Gleichstrommotors und seine Ansteuerung mittels PWM.
 
-![Gleichstrom](https://upload.wikimedia.org/wikipedia/commons/thumb/a/a8/Gleichstrommaschine.svg/1280px-Gleichstrommaschine.svg.png)<!-- style="width: 65%; max-width: 750px" --> [^4]
-
-[^4]: Wikipedia, Autor Honina, Schematische Darstellung der Arbeitsweise einer permanenterregten Gleichstrommaschine, [Link](https://commons.wikimedia.org/wiki/File:Gleichstrommaschine.svg)
+![Gleichstrom](./images/16_Aktoren/1280px-Gleichstrommaschine.svg.png "Prinzipskizze eines Gleichstrommotors [^WikiGleichstromMaschine]")<!-- style="width: 65%; max-width: 750px" -->
 
 Welche Kernparameter bestimmen das Verhalten unseres Motors?
 
-![Gleichstrom](./images/16_Aktoren/Kennlinie.png)<!-- style="width: 75%; max-width: 750px" --> [^5]
-
-[^5]: Firma Dunker Motoren, Handbuch, [Link](http://www.dunkermotoren.de/default.asp?id=18&lang=1)
+![Gleichstrom](./images/16_Aktoren/Kennlinie.png "Beispielhafte Kennlinie eines Gleichstrommotors [^Dunker]")
 
 Wie erfolgt der Betrieb aus Sicht des Mikrocontrollers? Wir haben zwei vorgaben, die wir umsetzen wollen, die Drehrichtung und die Geschwindigkeit.
 
@@ -214,19 +210,23 @@ Die Drehgeschwindigkeit ergibt sich aus der Vorgabe eines PWM Signals.
 
 ![Gleichstrom](./images/16_Aktoren/PWM.png)<!-- style="width: 75%; max-width: 750px" -->
 
-![Gleichstrom](./images/16_Aktoren/L293D.png)<!-- style="width: 75%; max-width: 750px" --> [^6]
+![Gleichstrom](./images/16_Aktoren/L293D.png "Beschaltung eines Motortreibers L293D [^TI_L293]")
 
-[^6]: Firma Texas Instruments, Datenblatt L293D, [Link](https://www.ti.com/lit/ds/symlink/l293.pdf)
+[^WikiGleichstromMaschine]: Wikipedia, Autor Honina, Schematische Darstellung der Arbeitsweise einer permanenterregten Gleichstrommaschine, [Link](https://commons.wikimedia.org/wiki/File:Gleichstrommaschine.svg)
+
+[^Dunker]: Firma Dunker Motoren, Handbuch, [Link](http://www.dunkermotoren.de/default.asp?id=18&lang=1)
+
+[^TI_L293]: Firma Texas Instruments, Datenblatt L293D, [Link](https://www.ti.com/lit/ds/symlink/l293.pdf)
 
 ### Schrittmotoren
 
 Ein Schrittmotor ist ein Synchronmotor, bei dem der Rotor (ein drehbares Motorteil mit Welle) durch ein gesteuertes, schrittweise rotierendes, elektromagnetisches Feld der Statorspulen um einen kleinen Winkel (Schritt) oder sein Vielfaches gedreht werden kann.
 
-![Schrittmotor](https://upload.wikimedia.org/wikipedia/commons/7/74/Schrittmotor.PNG "Schrittmotor Wirkprinzip [^Schrittmotor]")<!-- style="width: 65%; max-width: 750px" -->
+![Schrittmotor](./images/16_Aktoren/Schrittmotor.PNG "Schrittmotor Wirkprinzip [^Schrittmotor]")<!-- style="width: 65%; max-width: 750px" -->
 
 Die technische Realsierung kann dabei zwei grundlegenden Mustern folgen. Man unterscheidet uni- und bipolare Schrittmotoren.
 
-![SchrittmotorVarianten](https://upload.wikimedia.org/wikipedia/commons/thumb/4/48/Stepmotscheme.jpg/1024px-Stepmotscheme.jpg "Schrittmotorvarianten [^StepperVariants]")<!-- style="width: 65%; max-width: 750px" -->
+![SchrittmotorVarianten](./images/16_Aktoren/Stepmotscheme.jpg "Schrittmotorvarianten [^StepperVariants]")<!-- style="width: 65%; max-width: 750px" -->
 
 ```c
 uint8_t pattern[4]={9,5,6,10};
@@ -261,9 +261,7 @@ Eine sehr schöne Erklärung zur Funktionsweise von Schrittmotoren liefert das f
 
 Als Servomotor werden Elektromotoren bezeichnet, die die Kontrolle der Winkelposition ihrer Motorwelle sowie der Drehgeschwindigkeit und Beschleunigung erlauben. Sie integrieren neben dem eigentlichen Elektromotor, eine Sensorik zur Positionsbestimmung und eine Regelelektronik. Damit kann die Bewegung des Motors entsprechend einem oder mehreren einstellbaren Sollwerten – wie etwa Soll-Winkelposition der Welle oder Solldrehzahl – bestimmt werden.
 
-![ServoMotor](https://upload.wikimedia.org/wikipedia/commons/9/9e/Rc-receiver-servo-battery_b.jpg)<!-- style="width: 65%; max-width: 750px" --> [^5]
-
-[^5]: Wikipedia, Autor Bernd vdB, Servo and receiver connections, [Link](https://commons.wikimedia.org/wiki/File:Rc-receiver-servo-battery_b.jpg)
+![ServoMotor](./images/16_Aktoren/Rc-receiver-servo-battery_b.jpg "Setting eines Servomotors für den Modellbau [^Wiki_Servo]")<!-- style="width: 65%; max-width: 750px" -->
 
 <!--
 style="width: 80%; min-width: 420px; max-width: 720px;"
@@ -373,6 +371,7 @@ OC1A       |          | |       |
 
 ********************************************************************************
 
+[^Wiki_Servo]: Wikipedia, Autor Bernd vdB, Servo and receiver connections, [Link](https://commons.wikimedia.org/wiki/File:Rc-receiver-servo-battery_b.jpg)
 
 ## Finales Anwendungsbeispiel
 
