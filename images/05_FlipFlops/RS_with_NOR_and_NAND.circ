@@ -92,8 +92,16 @@
       <a name="text" val="Q"/>
       <a name="font" val="SansSerif plain 22"/>
     </comp>
-    <comp lib="6" loc="(1060,427)" name="Text">
-      <a name="text" val="Q"/>
+    <comp lib="6" loc="(869,396)" name="Text">
+      <a name="text" val="_"/>
+      <a name="font" val="SansSerif bold 20"/>
+    </comp>
+    <comp lib="6" loc="(1064,577)" name="Text">
+      <a name="text" val="_"/>
+      <a name="font" val="SansSerif bold 20"/>
+    </comp>
+    <comp lib="6" loc="(868,608)" name="Text">
+      <a name="text" val="R"/>
       <a name="font" val="SansSerif plain 22"/>
     </comp>
     <comp lib="1" loc="(600,570)" name="NOR Gate"/>
@@ -101,28 +109,36 @@
       <a name="text" val="Q"/>
       <a name="font" val="SansSerif plain 22"/>
     </comp>
-    <comp lib="6" loc="(498,608)" name="Text">
-      <a name="text" val="R"/>
-      <a name="font" val="SansSerif plain 22"/>
-    </comp>
     <comp lib="6" loc="(690,427)" name="Text">
       <a name="text" val="Q"/>
-      <a name="font" val="SansSerif plain 22"/>
-    </comp>
-    <comp lib="1" loc="(980,440)" name="NAND Gate"/>
-    <comp lib="1" loc="(600,440)" name="NOR Gate"/>
-    <comp lib="6" loc="(868,608)" name="Text">
-      <a name="text" val="R"/>
       <a name="font" val="SansSerif plain 22"/>
     </comp>
     <comp lib="6" loc="(502,415)" name="Text">
       <a name="text" val="S"/>
       <a name="font" val="SansSerif plain 22"/>
     </comp>
+    <comp lib="6" loc="(867,584)" name="Text">
+      <a name="text" val="_"/>
+      <a name="font" val="SansSerif bold 20"/>
+    </comp>
+    <comp lib="6" loc="(498,608)" name="Text">
+      <a name="text" val="R"/>
+      <a name="font" val="SansSerif plain 22"/>
+    </comp>
+    <comp lib="1" loc="(980,440)" name="NAND Gate"/>
+    <comp lib="1" loc="(980,570)" name="NAND Gate"/>
     <comp lib="6" loc="(870,420)" name="Text">
       <a name="text" val="S"/>
       <a name="font" val="SansSerif plain 22"/>
     </comp>
-    <comp lib="1" loc="(980,570)" name="NAND Gate"/>
+    <comp lib="6" loc="(1060,427)" name="Text">
+      <a name="text" val="Q"/>
+      <a name="font" val="SansSerif plain 22"/>
+    </comp>
+    <comp lib="1" loc="(600,440)" name="NOR Gate"/>
+    <comp lib="6" loc="(690,403)" name="Text">
+      <a name="text" val="_"/>
+      <a name="font" val="SansSerif bold 20"/>
+    </comp>
   </circuit>
 </project>
