@@ -334,7 +334,7 @@ $$
 > Erkenntnisse:
 >
 > + Das Karnaugh-Veitch Diagramm zeigt mögliche Minimierungspotentiale auf, hinsichtlich der Bildung der Schleifen können unterschiedliche Strategien zum tragen kommen.
-> + Offenkundig brauchen wir ein systematischeres Vorgehen bei der Vereinfachung, dass alle Kombinationen möglicher Terme berücksichtigt.
+> + Offenkundig brauchen wir ein systematischeres Vorgehen bei der Vereinfachung, das alle Kombinationen möglicher Terme berücksichtigt.
 
 ********************************************************************************
 
