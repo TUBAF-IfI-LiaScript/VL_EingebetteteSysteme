@@ -410,6 +410,7 @@ $A= \overline{x} \cdot \overline{y} + \overline{x} \cdot y + x \cdot \overline{y
 Mit dieser verschobenen Wahrheittafel lässt sich der Fingerabdruck einer boolschen Funktion darstellen.
 
 Bespiel 1: $f= x \cdot \overline{y} + x \cdot y$
+
 <!-- data-type="none" -->
 |                | $\overline{x}$ | $x$ |
 | -------------- | -------------- | --- |
@@ -418,6 +419,7 @@ Bespiel 1: $f= x \cdot \overline{y} + x \cdot y$
 
 
 Bespiel 2: $f= x \cdot \overline{y} + \overline{x} \cdot y$
+
 <!-- data-type="none" -->
 |                | $\overline{x}$ | $x$ |
 | -------------- | -------------- | --- |
