@@ -253,7 +253,13 @@ Markdown wurde von John Gruber und Aaron Swartz mit dem Ziel entworfen, die Komp
 # Überschrift
 
 __eine__ Betonung __in kursiver Umgebung__
-@AVR8js.sketch
+
++ Punkt 1
++ Punkt 2
+
+Und noch eine Zeile mit einer mathematischen Notation $a=cos(b)$!
+
+```
 
 ----------------------------------------------------------------------------<h1>Überschrift</h1>
 <i>eine <em>Betonung</em> in kursiver Umgebung</i>
@@ -264,6 +270,7 @@ __eine__ Betonung __in kursiver Umgebung__
 Und noch eine Zeile mit einer mathematischen Notation $a=cos(b)$!
 
 ----------------------------------------------------------------------------
+
 
 Eine gute Einführung zu Markdown finden Sie zum Beispiel unter:
 
