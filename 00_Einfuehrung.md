@@ -18,11 +18,11 @@ import:   https://raw.githubusercontent.com/liascript-templates/plantUML/master/
 
 | Parameter                | Kursinformationen                                                                                                                                                                          |
 | ------------------------ | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------ |
-| **Veranstaltung:**       | `Eingebettete Systeme`                                                                                                                                                                     |
-| **Semester**             | `Wintersemester 2021/22`                                                                                                                                                                      |
+| **Veranstaltung:**       | `Digitale Systeme / Eingebettete Systeme`                                                                                                                                                                     |
+| **Semester**             | `Wintersemester 2022/23`                                                                                                                                                                      |
 | **Hochschule:**          | `Technische Universität Freiberg`                                                                                                                                                          |
 | **Inhalte:**             | `Motivation der Vorlesung "Eingebettete Systeme" und Beschreibung der Organisation der Veranstaltung`                                                                                      |
-| **Link auf GitHub:** | [https://github.com/TUBAF-IfI-LiaScript/VL_Softwareentwicklung/blob/master/00_Einfuehrung.md](https://github.com/TUBAF-IfI-LiaScript/VL_EingebetteteSysteme/blob/master/00_Einfuehrung.md) |
+| **Link auf GitHub:**     | [https://github.com/TUBAF-IfI-LiaScript/VL_Softwareentwicklung/blob/master/00_Einfuehrung.md](https://github.com/TUBAF-IfI-LiaScript/VL_EingebetteteSysteme/blob/master/00_Einfuehrung.md) |
 | **Autoren**              | @author                                                                                                                                                                                    |
 
 ![](https://media.giphy.com/media/10PNyg7YOcaBQA/giphy-downsized.gif)
@@ -30,26 +30,77 @@ import:   https://raw.githubusercontent.com/liascript-templates/plantUML/master/
 ---------------------------------------------------------------------
 
 
-## Zielstellung
-
-Was steht im Modulhandbuch über diesen Kurs?
+## Zielstellung aus dem Modulhandbuch
 
 **Qualifikationsziele /Kompetenzen:**
 
 _Mit der erfolgreichen Teilnahme an der Veranstaltung sollen die Studierenden in der Lage sein:_
 
-+ _die Teilkomponenten eines Rechners ausgehend von der Boolschen Algebra sowie kombinatorischen und sequentiellen Schaltungen zu beschreiben und ausschnitthafte Teilelemente selbstständig entwerfen zu können._
-+ _die Integration der Elemente und die Abläufe bei der Programmabarbeitung in verschiedenen Modellrechnern zu beherrschen und die Vor- und Nachteile verschiedener Konfigurationen bewerten zu können,_
-+ _Architekturentwürfe auf reale Controller zu übertragen, die resultierenden Programmierkonzepte zu verstehen und anzuwenden_
-+ _die konkrete Realisierung von eingebetteten Systemen in entsprechenden Anwendungen aus den Schaltplänen zu erfassen und die softwareseitigen Realisierungen daraus abzuleiten_
++ die Teilkomponenten eines Rechners ausgehend von der Schaltnetzen/-werken zu beschreiben und ausschnitthafte Teilelemente selbstständig entwerfen zu können,
++ die Integration der Elemente und die Abläufe bei der Programmabarbeitung in verschiedenen Modellrechnern zu beherrschen und die Vor- und Nachteile verschiedener Konfigurationen bewerten zu können,
++ die konkrete Realisierung von eingebetteten Systemen in entsprechenden Anwendungen aus den Schaltplänen zu erfassen und die softwareseitige Umsetzungen daraus abzuleiten
++ einfache, eingebettete Systeme zu entwerfen und zu realisieren
 
 **Inhalte**
 
 _Grundlegende Prinzipien der Modellierung digitaler Systeme: Boolsche Algebren und Funktionen, kombinatorische und sequentielle Schaltungen, Herleitung eines Modellrechners und Abbildung von dessen Funktionsweise, Einführung in die Entwicklung eingebetteter Systeme(Sensoren, Aktoren, elektrische Peripherie, Programmierkonzepte), Anwendungsfelder_
 
+> **Etwas weniger abstrakt bitte!**
+
+### Hardware
+
+Was sind die Bausteine des Rechners
+===================================
+
+![Diagramme](./images/00_Einfuehrung/IOpin.png "Darstellung der Input/Output Beschaltung eines Microcontrollers")<!-- width="60%" -->
+
+**Auf welche konkreten Systeme schauen wir dabei insbesondere?**
+
++ ATmega4808/4809
++ ATmega32
+
+Wie kann ich die Perspektiven systematisieren
+===================================
+
+<!--
+style="width: 80%; min-width: 420px; max-width: 720px;"
+-->
+```ascii
+
+                Abstraktionsebenen
+
+           +----------------------------+ -.
+  Ebene 6  | Problemorientierte Sprache |  |
+           +----------------------------+  |
+                                           ⎬ Anwendungssoftware
+           +----------------------------+  |
+  Ebene 5  | Assemblersprache           |  |
+           +----------------------------+ -.
+
+           +----------------------------+
+  Ebene 4  | Betriebssystem             |     Systemsoftware
+           +----------------------------+
+
+           +----------------------------+
+  Ebene 3  | Instruktionsset            |     Maschinensprache
+           +----------------------------+
+
+           +----------------------------+  -.
+  Ebene 2  | Mikroarchitektur           |   |
+           +----------------------------+   |
+                                            ⎬ Automaten, Speicher, Logik
+           +----------------------------+   |       ╔══════════════════╗
+  Ebene 1  | Digitale Logik             |   |    ◀══║ HIER STARTEN WIR!║
+           +----------------------------+  -.       ╚══════════════════╝
+
+           +----------------------------+
+  Ebene 0  | E-Technik, Physik          |     Analoge Phänomene
+           +----------------------------+                                      .
+```
+
 ### Software
 
-**Und was heißt das nun konkret? Worum geht es?**
+**Und wie wirkt sich das auf die Software aus?**
 
 Nehmen wir an, Sie realisieren ein Arduino Beispielprogramm wie dieses:
 
@@ -101,52 +152,6 @@ Am Ende des Compiliervorganges entsteht daraus der sogenannte Maschinencode. Die
 :00000001FF
 ```
 
-### Hardware
-
-**Was heißt das denn nun der Rechner?**
-
-![Diagramme](./images/00_Einfuehrung/IOpin.png)<!-- width="60%" -->
-
-**Auf welche konkreten Systeme schauen wir dabei insbesondere?**
-
-+ ATmega4808/4809
-+ ATmega32
-
-<!--
-style="width: 80%; min-width: 420px; max-width: 720px;"
--->
-```ascii
-
-                Abstraktionsebenen
-
-           +----------------------------+ -.
-  Ebene 6  | Problemorientierte Sprache |  |
-           +----------------------------+  |
-                                           ⎬ Anwendungssoftware
-           +----------------------------+  |
-  Ebene 5  | Assemblersprache           |  |
-           +----------------------------+ -.
-
-           +----------------------------+
-  Ebene 4  | Betriebssystem             |     Systemsoftware
-           +----------------------------+
-
-           +----------------------------+
-  Ebene 3  | Instruktionsset            |     Maschinensprache
-           +----------------------------+
-
-           +----------------------------+  -.
-  Ebene 2  | Mikroarchitektur           |   |
-           +----------------------------+   |
-                                            ⎬ Automaten, Speicher, Logik
-           +----------------------------+   |       ╔══════════════════╗
-  Ebene 1  | Digitale Logik             |   |    ◀══║ HIER STARTEN WIR!║
-           +----------------------------+  -.       ╚══════════════════╝
-
-           +----------------------------+
-  Ebene 0  | E-Technik, Physik          |     Analoge Phänomene
-           +----------------------------+                                      .
-```
 
 ### Anwendungen
 
@@ -156,8 +161,6 @@ style="width: 80%; min-width: 420px; max-width: 720px;"
 
 Wenn wir noch einen Schritt weitergehen, können wir die Daten auch an einen Server übergeben. Dieser übernimmt die Aufbereitung und Visualisierung.
 
-<iframe width="450" height="260" style="border: 1px solid #cccccc;" src="https://thingspeak.com/channels/856893/charts/7?bgcolor=%23ffffff&color=%23d62020&days=3&dynamic=true&type=line"></iframe>
-
 Hier lassen sich dann die eigentlichen "Untersuchungen" realisieren und zum Beispiel die Frage beantworten, ob die Sonne am Wochenende häufiger scheint.
 
 ![Diagramme](./images/00_Einfuehrung/AlleWetter.png)<!-- width="70%" -->
@@ -166,7 +169,7 @@ Die roten Punkte stellen die Verteilung der Wochenendmessungen der vergangenen W
 
 **Aber ich will Webentwickler werden ... **
 
-**Antwort A:**
+**Antwort A:**@AVR8js.sketch
 Das Studium vermittelt ein breitgefächertes Weltbild und keine eng zugeschnittene Sicht.
 
 **Antwort B:**
@@ -182,9 +185,9 @@ selbst anzugehen.
 | Name                    | Email                                      |
 |:----------------------- |:------------------------------------------ |
 | Prof. Dr. Sebastian Zug | sebastian.zug@informatik.tu-freiberg.de    |
-| Dr. Martin Reinhardt    | martin.reinhardt@informatik.tu-freiberg.de |
+| Bastian Zötzl           | Bastian-Gabriel.Zoetzl@student.tu-freiberg.de |
 
-> Bitte melden Sie sich im OPAL unter [Eingebettete Systeme](https://bildungsportal.sachsen.de/opal/auth/RepositoryEntry/32295976976/CourseNode/102563572218999) für die Veranstaltung an. Dies ist im Kontext der Pandemiesituation Teil des Hygienekonzepts der Hochschule.
+> Bitte melden Sie sich im OPAL unter [Digitale Systeme](https://bildungsportal.sachsen.de/opal/auth/RepositoryEntry/37204033543/CourseNode/1665541981269900003) für die Veranstaltung an. Dies ist im Kontext der Pandemiesituation Teil des Hygienekonzepts der Hochschule.
 
 ### Zeitplan
 
@@ -193,13 +196,13 @@ Die Veranstaltung wird sowohl für die Vorlesung als auch die Übung in Präsenz
 <!-- data-type="none" -->
 | Veranstaltungen | Tag      | Zeitslot      | Ort      | Bemerkung     |
 | --------------- | -------- | ------------- | -------- | ------------- |
-| Vorlesung I     | Montag   | 16.00 - 17.30 | SPQ-1301 | wöchentlich   |
-| Vorlesung II    | Dienstag | 16.00 - 17.30 | SPQ-1301 | gerade Wochen |
+| Vorlesung I     | Mittwoch | 16.00 - 17.30 | SPQ-1301 | wöchentlich   |
+| Vorlesung II    | Donnerstag | 16.00 - 17.30 | SPQ-1301 | gerade Wochen |
 
-> Die zugehörigen Übungen starten am 8./9. Dezember und werden dann wöchentlich durchgeführt.
+> Die zugehörigen Übungen starten im Dezember und werden dann wöchentlich durchgeführt.
 
-+ Übung 1 (Mm, ROB), Donnerstags, 14.00 - 15.30 Uhr, KKB-2097
-+ Übung 2 (BAI), Mittwochs, 16.00-17.30 Uhr, KKB-2097
++ Übung 1 (ROB), Mittwochs, 14.00 - 15.30 Uhr, KKB-2097
++ Übung 2 (BM, Mm, BAI), Freitags, 14.00 - 15.30 Uhr, KKB-2097
 
 Wir gehen gegenwärtig noch davon aus, dass die Übungen auch in Präsenz stattfinden. Dort haben Sie dann insbesondere ab Januar Gelegenheit anhand spezifischer Mikrocontrollerschaltungen Ihre Fähigkeiten zu vertiefen.
 
@@ -250,12 +253,7 @@ Markdown wurde von John Gruber und Aaron Swartz mit dem Ziel entworfen, die Komp
 # Überschrift
 
 __eine__ Betonung __in kursiver Umgebung__
-
-* Punkt 1
-* Punkt 2
-
-Und noch eine Zeile mit einer mathematischen Notation $a=cos(b)$!
-```
+@AVR8js.sketch
 
 ----------------------------------------------------------------------------<h1>Überschrift</h1>
 <i>eine <em>Betonung</em> in kursiver Umgebung</i>
@@ -312,7 +310,7 @@ void loop() {
   thing(random(4));
 }
 ```
-@NetSwarm.loop
+@AVR8js.sketch
 
 ??[Simulation: Noninverting Amplifier](https://www.falstad.com/circuit/circuitjs.html?ctz=CQAgzCAMB0l3BWEA2aB2ATAFi2TXIBODMARjUJAQA4Q0rIqBTAWlNICgBDEUyLFAPLJBvRkkZ94cFNCyEFipUqixk0uBlKF1yMGGpCN3MUNIZeaEewt8qUMRqpzlrhfRiR1GrTq-7DR3gTPiF1S2twuwkg+BAsFzdlWk9vaV9dAKNpEP4QDEhaYXzCsXtJDUYwRKTFag81Soz-A2zgnlD8hGsrLutxBylpfJrahVUvJu1M1tjIXIEwPOKlo3K5yVGxkVSpvz1ZobgF8ARbXrAzspijmRh5MZVdn2mWwNuOACc6C1pMKh2DHm33+3R+pkGwRBtjy-1IVwqx2hvCu-wKjERwPB6OxWBSQS+uL+FgwOkhSOxZP+YBw5Kx1Np1OIDgQxwASuDaGBfg5GAQ6LzVAgOAB3cFgzpg+ZiuHLOUCaXg+EwoQI0XYmSdHGKtF4iHYFLqtFkrVknUWGlGRa0xWdWVCApQdWdcwVMKGsUu5BFPJaHbO32kfoCDDIBUBkNhiFkCy2vIx6PhOMCe35cMcrVCQLYBwCVngdBIapoGIwYUAc3BYGZ-wIGKd8JD1C53tOFtbpAF4mdFyuK2ZtouzIwzfAA57IlWvECU9tM+WM8Cc8W2dHs0HIgwEuHUudO+szLw-s9h96I65vQ3JVoOIKHpKjDvD-ArcVOLArfPL-vxSDj9Kf5OmKT6AU+H4YuqYHhF+4FAREvDmPkQYIbGkHITYSGTmqwHIZcJJrth8FRhgOZRm+pEhjmlpwSR1pNlyNocI2+TUI+ZJ4fkJrgCyzrzk2VR5G+rGcZueqkseLGPqOW6bqOb5iWSBrXjRYmlLepRvmCX4yShNESohfq6fJN6lBxT6KhxH5clc3L3mZplXKG4ZYNo4BnlGWBaWR4DqmZUZHvkZG+Y57FnmawUWiObmTlF8wAPbgFUsbxEQPoTPAhBWN0W4OBaVQcAlyBFslBCELQCCwHANKKGgDxlSklWQJ2nYWEVPmFTFuapeUjVEFlyA5S1KCTgVKD0NyXVlT10iZUVA1IENyDjRwQA)
 
@@ -346,8 +344,6 @@ Dann wartet das __racetech__ Team auf Sie ... autonomes Fahren im Formular Stude
 
 ![WALL-E](./images/00_Einfuehrung/RaceTech.jpg)<!--
 style="width: 80%; display: block; margin-left: auto; margin-right: auto;" -->
-
-
 
 ## Hausaufgabe
 

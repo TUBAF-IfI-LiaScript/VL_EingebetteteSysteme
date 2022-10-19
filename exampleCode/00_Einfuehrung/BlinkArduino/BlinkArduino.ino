@@ -1,9 +1,8 @@
-char led_id=A2;
+char led_id=13;
 
 void setup() {
   pinMode(led_id, OUTPUT);
 }
-
 
 void loop() {
   digitalWrite(led_id, HIGH); 

@@ -16,8 +16,8 @@ import: https://raw.githubusercontent.com/LiaTemplates/NetSwarm-Simulator/master
 
 | Parameter                | Kursinformationen                                                                                                                                                                          |
 | ------------------------ | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------ |
-| **Veranstaltung:**       | `Eingebettete Systeme`                                                                                                                                                                     |
-| **Semester**             | `Wintersemester 2021/22`                                                                                                                                                                      |
+| **Veranstaltung:**       | `Digitale Systeme / Eingebettete Systeme`                                                                                                                                                                     |
+| **Semester**             | `Wintersemester 2022/23`                                                                                                                                                                      |
 | **Hochschule:**          | `Technische Universität Freiberg`                                                                                                                                                          |
 | **Inhalte:**             | `Übersicht der historischen Entwicklung von Rechentechnik`                                                                                      |
 | **Link auf GitHub:** | [https://github.com/TUBAF-IfI-LiaScript/VL_Softwareentwicklung/blob/master/00_Einfuehrung.md](https://github.com/TUBAF-IfI-LiaScript/VL_EingebetteteSysteme/blob/master/01_HistorischerUeberblick.md) |
@@ -119,7 +119,7 @@ Eine weitreichendere Unterstützung beim eigentlichen Rechenprozess bieten die N
 !?[Napirsche Rechenstäbe](https://www.youtube.com/watch?v=P_dKOtHjc3o)
 
 {{3-4}}
-Die notwendige manuelle Addition bei größeren Faktoren löste die Rechenmaschine von Wilhelm Schickard. Die Automatisierung der Addition ist mechanisch gelöst und zum Beispiel unter [Link](https://www.rechenwerkzeug.de/schickar.htm)
+Die notwendige manuelle Addition bei größeren Faktoren löste die Rechenmaschine von Wilhelm Schickard. Die Automatisierung der Addition ist mechanisch gelöst und zum Beispiel unter [Link](https://www.rechenwerkzeug.de/schickar.htm).
 
 {{3-4}}
 ![Schickard](./images/01_Historie/Schickardmaschine.jpg "Nachbau der Rechenmaschine von Wilhelm Schickard [^Schickard]") <!-- width="60%" -->
@@ -201,11 +201,13 @@ Das System für die Erfassung von Daten auf Lochkartenbestand aus der Tabellierm
 
       {{1-2}}
 *******************************************************************************
+
 Nicht nur auf der Ebene der Datenerfassung, auch für die Datenspeicherung eröffnete sich auf der Basis des elektrischen Stromes eine Revolution. Relais konnten Zustände nun speichern und logische Operationen abbilden. Damit manifestierte sich aber auch die Festlegung auf eine binäre Informationsdarstellung - An, Aus (1 und 0).
 
 ![instruction-set](./images/01_Historie/RelaisMitSpeicher.png)<!-- width="100%" -->
 
 ![instruction-set](./images/01_Historie/RelaisOhneSpeicher.png)<!-- width="100%" -->
+
 *******************************************************************************
 
       {{2-3}}
@@ -346,7 +348,7 @@ style="width: 80%; display: block; margin-left: auto; margin-right: auto;"-->
 
 + Die historische Entwicklung der Rechentechnik ist eine Übersicht über erfolgreiche und vergangene Trends oder korrekte und weniger korrekte Prognosen.
 
-    _I thinkthere is a world market for about five computers._ (Thomas J. Watson Jr., chairman of IBM, 1943)
+    _I think there is a world market for about five computers._ (Thomas J. Watson Jr., chairman of IBM, 1943)
 
     _Where a calculator as the ENIAC is equipped with 18000 vacuum tubes and weighs 30 tons, computers in the future may have only 1000 vaccum tubes and weigh 1 1/2 tons._ (Popular Mechanics, 1949)
 
