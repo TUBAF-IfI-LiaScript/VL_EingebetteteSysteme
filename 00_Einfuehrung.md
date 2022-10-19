@@ -354,4 +354,4 @@ style="width: 80%; display: block; margin-left: auto; margin-right: auto;" -->
 
 ## Hausaufgabe
 
-+ Legen Sie sich einen GitHub Account an ... und seien Sie der erste, der einen Typo in den Unterlagen findet und diesen als _Contributer_ korrigiert :-)
++ Legen Sie sich einen GitHub Account an ... und seien Sie der Erste, der einen Typo in den Unterlagen findet und diesen als Contributor korrigiert :-)
