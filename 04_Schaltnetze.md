@@ -8,7 +8,7 @@ narrator: Deutsch Female
 
 import: https://raw.githubusercontent.com/LiaTemplates/NetSwarm-Simulator/master/README.md
         https://raw.githubusercontent.com/LiaTemplates/DigiSim/master/README.md
-        https://github.com/LiaTemplates/Pyodide
+        https://raw.githubusercontent.com/liaTemplates/PyScript/main/README.md
 
 mark: <span style="background-color: @0;
                            display: flex;
@@ -28,8 +28,8 @@ gray: @mark(gray,@0)
 
 | Parameter                | Kursinformationen                                                                                                                                                                          |
 | ------------------------ | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------ |
-| **Veranstaltung:**       | `Eingebettete Systeme`                                                                                                                                                                     |
-| **Semester**             | `Wintersemester 2021/22`                                                                                                                                                                      |
+| **Veranstaltung:**       | `Digitale Systeme / Eingebettete Systeme`                                                                                                                                                                     |
+| **Semester**             | `Wintersemester 2022/23`                                                                                                                                                                      |
 | **Hochschule:**          | `Technische Universität Freiberg`                                                                                                                                                          |
 | **Inhalte:**             | `Verfahren von Quine-McCluskey, Realisierung von Schaltnetzen`                                                                                      |
 | **Link auf GitHub:** | [https://github.com/TUBAF-IfI-LiaScript/VL_Softwareentwicklung/blob/master/04_Schaltnetze.md](https://github.com/TUBAF-IfI-LiaScript/VL_EingebetteteSysteme/blob/master/04_Schaltnetze.md) |
@@ -259,8 +259,11 @@ $$
 
 **Gegenprobe I**
 
+``` python @PyScript.env
+- sympy
+```
 
-```python   Optimization.py
+``` python @PyScript.repl
 from sympy.logic import SOPform
 from sympy import symbols
 x3, x2, x1, x0 = symbols('x3 x2 x1 x0')
@@ -276,10 +279,7 @@ minterms = [[0, 1, 1, 0],
             [1, 1, 1, 0]]
 result = SOPform([x3, x2, x1, x0], minterms)
 print(result)
-
-sys.version
 ```
-@Pyodide.eval
 
 Überrascht? Offenbar gelingt es dem Minimierungsansatz von _sympy_ eine kompaktere Form zu finden.
 
@@ -406,8 +406,7 @@ In einem zweiten Schritt werden die sortierten Minterme evaluiert. Dabei können
 | @gray($m_{12} ⋅ m_{13}$) | @gray($1$) | @gray($1$) | @gray($0$) | @gray($-$) | .   |
 | @gray($m_{12} ⋅ m_{14}$) | @gray($1$) | @gray($1$) | @gray($-$) | @gray($0$) | .   |
 
-
-```python   Optimization.py
+``` python @PyScript.repl
 import numpy as np
 minterms = [[0, 1, 1, 0],
             [0, 1, 1, 1],
@@ -429,10 +428,7 @@ print("Distanzen der Minterme")
 for j in range(0, len(distances)):
     print(distances[j])
 print("Kombinationen mit Distanz 1: {}".format(np.count_nonzero(distances == 1)))
-
-sys.version
 ```
-@Pyodide.eval
 
 Die zweite Stufe wiederholt die Vorgänge - Sortierung und Evaluation erneut.
 
