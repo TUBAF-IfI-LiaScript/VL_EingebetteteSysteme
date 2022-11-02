@@ -527,7 +527,7 @@ zur Realisierung einer Funktion $Y = f (A,B,C,...)$
 
 [^XOR]:  Autor "Rk sTEk",  XOR in Relais-Logik - berichtigte Version, https://de.m.wikipedia.org/wiki/Datei:Relay_xor.svg
 
-Wir gehen bei der Frage der Schaltnetze in Vorlesung 04 nochmals auf die technische Realsierung ein.
+Wir gehen bei der Frage der Schaltnetze in Vorlesung 04 nochmals auf die technische Realisierung ein.
 
 ## Hausaufgaben
 
