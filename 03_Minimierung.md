@@ -2,12 +2,12 @@
 
 author:   Sebastian Zug & André Dietrich & Fabian Bär
 email:    sebastian.zug@informatik.tu-freiberg.de & andre.dietrich@informatik.tu-freiberg.de & fabian.baer@student.tu-freiberg.de
-version:  0.0.1
+version:  0.0.2
 language: de
 narrator: Deutsch Female
 
 import: https://raw.githubusercontent.com/LiaTemplates/NetSwarm-Simulator/master/README.md
-        https://github.com/LiaTemplates/Pyodide
+        https://raw.githubusercontent.com/liaTemplates/PyScript/main/README.md
 -->
 
 [![LiaScript](https://raw.githubusercontent.com/LiaScript/LiaScript/master/badges/course.svg)](https://liascript.github.io/course/?https://raw.githubusercontent.com/TUBAF-IfI-LiaScript/VL_EingebetteteSysteme/master/03_Minimierung.md#1)
@@ -16,8 +16,8 @@ import: https://raw.githubusercontent.com/LiaTemplates/NetSwarm-Simulator/master
 
 | Parameter                | Kursinformationen                                                                                                                                                                          |
 | ------------------------ | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------ |
-| **Veranstaltung:**       | `Eingebettete Systeme`                                                                                                                                                                     |
-| **Semester**             | `Wintersemester 2021/22`                                                                                                                                                                      |
+| **Veranstaltung:**       | `Digitale Systeme / Eingebettete Systeme`                                                                                                                                                                     |
+| **Semester**             | `Wintersemester 2022/23`                                                                                                                                                                      |
 | **Hochschule:**          | `Technische Universität Freiberg`                                                                                                                                                          |
 | **Inhalte:**             | `Minimierung boolscher Funktionen`                                                                                      |
 | **Link auf GitHub:** | [https://github.com/TUBAF-IfI-LiaScript/VL_Softwareentwicklung/blob/master/00_Einfuehrung.md](https://github.com/TUBAF-IfI-LiaScript/VL_EingebetteteSysteme/blob/master/03_Minimierung.md) |
@@ -798,8 +798,11 @@ Regeln zur Bildung der Schleifen:
 
 
 **Und wie geht es weiter?**
+``` python @PyScript.env
+- sympy
+```
 
-```python   Optimization.py
+``` python @PyScript.repl
 from sympy.logic import SOPform
 from sympy import symbols
 x3, x2, x1, x0 = symbols('x3 x2 x1 x0')
@@ -814,12 +817,9 @@ minterms = [[0, 1, 1, 0],
 [1, 1, 0, 1],
 [1, 1, 1, 0]]
 result = SOPform([x3, x2, x1, x0], minterms)
+print("Minimized result:")
 print(result)
-
-sys.version
 ```
-@Pyodide.eval
-
 
 ## Hausaufgaben
 
