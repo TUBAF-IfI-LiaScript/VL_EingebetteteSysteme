@@ -406,7 +406,7 @@ In einem zweiten Schritt werden die sortierten Minterme evaluiert. Dabei können
 | @gray($m_{12} ⋅ m_{13}$) | @gray($1$) | @gray($1$) | @gray($0$) | @gray($-$) | .   |
 | @gray($m_{12} ⋅ m_{14}$) | @gray($1$) | @gray($1$) | @gray($-$) | @gray($0$) | .   |
 
-``` python @PyScript.repl
+```python @PyScript.repl
 import numpy as np
 minterms = [[0, 1, 1, 0],
             [0, 1, 1, 1],
