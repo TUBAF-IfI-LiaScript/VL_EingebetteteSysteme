@@ -2,13 +2,13 @@
 
 author:   Sebastian Zug & André Dietrich & Fabian Bär
 email:    sebastian.zug@informatik.tu-freiberg.de & andre.dietrich@informatik.tu-freiberg.de & fabian.baer@student.tu-freiberg.de
-version:  0.0.6
+version:  0.0.7
 language: de
 narrator: Deutsch Female
 
 import: https://raw.githubusercontent.com/liaTemplates/AVR8js/main/README.md
         https://raw.githubusercontent.com/LiaTemplates/DigiSim/master/README.md
-        https://github.com/LiaTemplates/Pyodide
+        https://raw.githubusercontent.com/liaTemplates/PyScript/main/README.md
 
 mark: <span style="background-color: @0;
                            display: flex;
@@ -26,14 +26,14 @@ gray: @mark(gray,@0)
 
 # Standardschaltnetze
 
-| Parameter                | Kursinformationen                                                                                                                                                                          |
-| ------------------------ | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------ |
-| **Veranstaltung:**       | `Eingebettete Systeme`                                                                                                                                                                     |
-| **Semester**             | `Wintersemester 2021/22`                                                                                                                                                                      |
-| **Hochschule:**          | `Technische Universität Freiberg`                                                                                                                                                          |
-| **Inhalte:**             | `Realisierung von Schaltnetzen, Standardschaltnetze`                                                                                      |
+| Parameter            | Kursinformationen                                                                                                                                                                                          |
+|----------------------|------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
+| **Veranstaltung:**   | `Digitale Systeme / Eingebettete Systeme`                                                                                                                                                                  |
+| **Semester**         | `Wintersemester 2022/23`                                                                                                                                                                                   |
+| **Hochschule:**      | `Technische Universität Freiberg`                                                                                                                                                                          |
+| **Inhalte:**         | `Realisierung von Schaltnetzen, Standardschaltnetze`                                                                                                                                                       |
 | **Link auf GitHub:** | [https://github.com/TUBAF-IfI-LiaScript/VL_Softwareentwicklung/blob/master/05_Standardschaltnetze.md](https://github.com/TUBAF-IfI-LiaScript/VL_EingebetteteSysteme/blob/master/05_Standardschaltnetze.md) |
-| **Autoren**              | @author                                                                                                                                                                                    |
+| **Autoren**          | @author                                                                                                                                                                                                    |
 
 ![](https://media.giphy.com/media/10PNyg7YOcaBQA/giphy-downsized.gif)
 
@@ -90,8 +90,6 @@ style="width: 80%; min-width: 420px; max-width: 720px;"
 
 In der digitalen Elektronik ist ein Binärdecoder eine kombinatorische Logikschaltung, die binäre Informationen von den $n$ codierten Eingängen in maximal $k = 2^n$ eindeutige Ausgänge umwandelt. Sie werden zum Beispiel für die Ansteuerung von Siebensegmentanzeigen und als Adressdecoder für Speicher und Port-mapped I/O genutzt.
 
-
-
 <!--
 style="width: 80%; min-width: 420px; max-width: 720px;"
 -->
@@ -111,7 +109,7 @@ Input   --> |  | ---------------> |  | --->  Output
                +                  +                                            .
 ```
 
-So kann z.B. ein NOT Gatter als 1:2-Binärdecoder mit 1-Eingang und 2-Ausgänge  klassifiziert werden, da er mit einem Eingang A zwei Ausgänge $A$ und $\overline{A}$ hat.
+So kann z.B. ein abgewandeltes NOT Gatter als 1:2-Binärdecoder mit 1-Eingang und 2-Ausgänge  klassifiziert werden, da er mit einem Eingang A zwei Ausgänge $A$ und $\overline{A}$ hat.
 
 ### n-zu-k Dekodierer
 
@@ -119,7 +117,7 @@ So kann z.B. ein NOT Gatter als 1:2-Binärdecoder mit 1-Eingang und 2-Ausgänge 
 
 <!-- data-type="none" style="table-layout: fixed; max-width:580px;"-->
 | $A$ | $B$ | $C$ | $y_0$ | $y_1$ | $y_2$ | $y_3$ | $y_4$ | ... |
-| --- | --- | --- | ----- | ----- | ----- | ----- | ----- | --- |
+|-----|-----|-----|-------|-------|-------|-------|-------|-----|
 | 0   | 0   | 0   | 1     | 0     | 0     | 0     | 0     | ... |
 | 0   | 0   | 1   | 0     | 1     | 0     | 0     | 0     | ... |
 | 0   | 1   | 0   | 0     | 0     | 1     | 0     | 0     | ... |
@@ -141,7 +139,7 @@ y_3 &= \overline{A} \cdot B \cdot C
 \end{aligned}
 $$
 
-``` json @DigiSim.evalJson
+```json @DigiSim.evalJson
 {"devices":{"a":{"label":"A","type":"Button","propagation":0,"position":{"x":-90,"y":65}},"b":{"label":"B","type":"Button","propagation":0,"position":{"x":-90,"y":115}},"c":{"label":"C","type":"Button","propagation":0,"position":{"x":-100,"y":210}},"y0":{"label":"y0","type":"Lamp","propagation":0,"position":{"x":590,"y":45}},"y1":{"label":"y1","type":"Lamp","propagation":0,"position":{"x":590,"y":105}},"y2":{"label":"y2","type":"Lamp","propagation":0,"position":{"x":595,"y":175}},"y3":{"label":"y3","type":"Lamp","propagation":0,"position":{"x":590,"y":230}},"y4":{"label":"y4","type":"Lamp","propagation":0,"position":{"x":595,"y":285}},"y5":{"label":"y5","type":"Lamp","propagation":0,"position":{"x":590,"y":345}},"y6":{"label":"y6","type":"Lamp","propagation":0,"position":{"x":595,"y":415}},"y7":{"label":"y7","type":"Lamp","propagation":0,"position":{"x":595,"y":480}},"notA":{"label":"NOT a","type":"Not","propagation":0,"bits":1,"position":{"x":55,"y":90}},"notB":{"label":"NOT b","type":"Not","propagation":0,"bits":1,"position":{"x":40,"y":165}},"notC":{"label":"NOT c","type":"Not","propagation":0,"bits":1,"position":{"x":35,"y":375}},"and1":{"label":"~A and ~B","type":"And","propagation":0,"bits":1,"position":{"x":230,"y":95}},"and2":{"label":"~A and B","type":"And","propagation":0,"bits":1,"position":{"x":230,"y":195}},"and3":{"label":"A and ~B","type":"And","propagation":0,"bits":1,"position":{"x":235,"y":290}},"and4":{"label":"A and B","type":"And","propagation":0,"bits":1,"position":{"x":230,"y":410}},"and5":{"label":"~A and ~B and ~C","type":"And","propagation":0,"bits":1,"position":{"x":420,"y":40}},"and6":{"label":"~A and ~B and C","type":"And","propagation":0,"bits":1,"position":{"x":430,"y":100}},"and7":{"label":"~A and B and ~C","type":"And","propagation":0,"bits":1,"position":{"x":435,"y":170}},"and8":{"label":"~A and B and C","type":"And","propagation":0,"bits":1,"position":{"x":440,"y":225}},"and9":{"label":"A and ~B and ~C","type":"And","propagation":0,"bits":1,"position":{"x":430,"y":280}},"and10":{"label":"A and ~B and C","type":"And","propagation":0,"bits":1,"position":{"x":430,"y":340}},"and11":{"label":"A and B and ~C","type":"And","propagation":0,"bits":1,"position":{"x":435,"y":410}},"and12":{"label":"A and B and C","type":"And","propagation":0,"bits":1,"position":{"x":445,"y":475}}},"connectors":[{"from":{"id":"a","port":"out"},"to":{"id":"notA","port":"in"}},{"from":{"id":"b","port":"out"},"to":{"id":"notB","port":"in"}},{"from":{"id":"c","port":"out"},"to":{"id":"notC","port":"in"}},{"from":{"id":"and1","port":"out"},"to":{"id":"and5","port":"in1"}},{"from":{"id":"and1","port":"out"},"to":{"id":"and6","port":"in1"}},{"from":{"id":"and2","port":"out"},"to":{"id":"and7","port":"in1"}},{"from":{"id":"and2","port":"out"},"to":{"id":"and8","port":"in1"}},{"from":{"id":"and3","port":"out"},"to":{"id":"and9","port":"in1"}},{"from":{"id":"and3","port":"out"},"to":{"id":"and10","port":"in1"}},{"from":{"id":"and4","port":"out"},"to":{"id":"and11","port":"in1"}},{"from":{"id":"and4","port":"out"},"to":{"id":"and12","port":"in1"}},{"from":{"id":"notA","port":"out"},"to":{"id":"and1","port":"in1"}},{"from":{"id":"notB","port":"out"},"to":{"id":"and1","port":"in2"}},{"from":{"id":"notA","port":"out"},"to":{"id":"and2","port":"in1"}},{"from":{"id":"b","port":"out"},"to":{"id":"and2","port":"in2"},"vertices":[{"x":130,"y":160}]},{"from":{"id":"a","port":"out"},"to":{"id":"and3","port":"in1"},"vertices":[{"x":10,"y":215}]},{"from":{"id":"notB","port":"out"},"to":{"id":"and3","port":"in2"}},{"from":{"id":"a","port":"out"},"to":{"id":"and4","port":"in1"},"vertices":[{"x":10,"y":225},{"x":155,"y":395}]},{"from":{"id":"b","port":"out"},"to":{"id":"and4","port":"in2"},"vertices":[{"x":130,"y":160}]},{"from":{"id":"c","port":"out"},"to":{"id":"and6","port":"in2"},"vertices":[{"x":295,"y":265}]},{"from":{"id":"notC","port":"out"},"to":{"id":"and5","port":"in2"},"vertices":[{"x":330,"y":335}]},{"from":{"id":"c","port":"out"},"to":{"id":"and8","port":"in2"},"vertices":[{"x":310,"y":275}]},{"from":{"id":"notC","port":"out"},"to":{"id":"and7","port":"in2"},"vertices":[{"x":330,"y":335},{"x":370,"y":295}]},{"from":{"id":"notC","port":"out"},"to":{"id":"and9","port":"in2"},"vertices":[{"x":335,"y":335}]},{"from":{"id":"notC","port":"out"},"to":{"id":"and11","port":"in2"},"vertices":[{"x":320,"y":345}]},{"from":{"id":"c","port":"out"},"to":{"id":"and10","port":"in2"}},{"from":{"id":"c","port":"out"},"to":{"id":"and12","port":"in2"},"vertices":[{"x":360,"y":370}]},{"from":{"id":"and5","port":"out"},"to":{"id":"y0","port":"in"}},{"from":{"id":"and6","port":"out"},"to":{"id":"y1","port":"in"}},{"from":{"id":"and7","port":"out"},"to":{"id":"y2","port":"in"}},{"from":{"id":"and8","port":"out"},"to":{"id":"y3","port":"in"}},{"from":{"id":"and9","port":"out"},"to":{"id":"y4","port":"in"}},{"from":{"id":"and10","port":"out"},"to":{"id":"y5","port":"in"}},{"from":{"id":"and11","port":"out"},"to":{"id":"y6","port":"in"}},{"from":{"id":"and12","port":"out"},"to":{"id":"y7","port":"in"}}],"subcircuits":{}}
 ```
 
@@ -260,9 +258,9 @@ Jeder Eingangsleitung ist genau eine Kombination der möglichen Belegungen der A
 
 **8-3 Kodierer**
 
-<!-- data-type="none" style="table-layout: fixed; max-width:400px;"-->
+<!-- data-type="none" style="table-layout: fixed; max-width:800px;"-->
 | $x_0$    | $x_1$    | $x_2$    | $x_3$    | $x_4$    | $x_5$    | $x_6$    | $x_7$    | $y_2$ | $y_1$ | $y_0$ |
-| -------- | -------- | -------- | -------- | -------- | -------- | -------- | -------- | ----- | ----- | ----- |
+|----------|----------|----------|----------|----------|----------|----------|----------|-------|-------|-------|
 | @blue(1) | 0        | 0        | 0        | 0        | 0        | 0        | 0        | 0     | 0     | 0     |
 | 0        | @blue(1) | 0        | 0        | 0        | 0        | 0        | 0        | 0     | 0     | 1     |
 | 0        | 0        | @blue(1) | 0        | 0        | 0        | 0        | 0        | 0     | 1     | 0     |
@@ -296,7 +294,7 @@ Abhilfe schafft der Prioritätsencoder. Hier wird eine explizite Auswahl für ve
 
 <!-- data-type="none" -->
 | $x_3$ | $x_2$    | $x_1$    | $x_0$    | $y_1$ | $y_0$ | Bemerkung |
-| ----- | -------- | -------- | -------- | ----- | ----- | --------- |
+|-------|----------|----------|----------|-------|-------|-----------|
 | 0     | 0        | 0        | 0        | 0     | 0     | ungültig  |
 | 0     | 0        | 0        | 1        | 0     | 0     |           |
 | 0     | 0        | 1        | @gray(X) | 0     | 1     |           |
@@ -328,7 +326,7 @@ $$
 
 Wir werden dem Encoder bei der Diskussion der Perepherie eines Mikrocontrollers sehr häufig wiederbegegnen. Das Video zeigt einen Anwendungsfall - das mapping der Ergebnisse eines Analog-Digital-Wandlers auf eine binäre Ausgabe.
 
-![BCD Dekoder](./images/04_Schaltnetze/FlashWandler.png)<!-- width="70%" --> [^2]
+![BCD Dekoder](./images/04_Schaltnetze/FlashWandler.png)<!-- width="80%" --> [^2]
 
 [^2]: Autor: Always Be Positive, Youtube Video - Flash or Parallel ADC (Analog to Digital Converter)
 
@@ -358,7 +356,7 @@ style="width: 80%; min-width: 420px; max-width: 720px;"
 ```
 
 | Multiplexer                                       | Dekoder                                                      |
-| ------------------------------------------------- | ------------------------------------------------------------ |
+|---------------------------------------------------|--------------------------------------------------------------|
 | mehrere Eingänge, ein Ausgang                     | mehrere Eingänge, mehrere Ausgänge                           |
 | Steuerleitungen konfiguriereren die Weiterleitung | das Mapping wird allerdings durch die interne Logik bestimmt |
 | wandelt den unären Code in einen binären Code um  | wandelt den binären Code in einen unären Code um             |
@@ -376,10 +374,9 @@ Generelle Konfiguration eines 1-aus-k Multiplexer:
 
 Eine Wahrheitstabelle mit 4 Eingangsvariablen und 2 Steuersignalen würde eine entsprechende Größe aufweisen. Allerdings kann die Funktion auch sehr einfach hergeleitet werden. Ein Inputsignal wird nur dann durchgeleitet, wenn die zugehörige Kombination von Steuersignalen anliegt.
 
-
 <!-- data-type="none" style="table-layout: fixed; max-width:400px;"-->
 | $a_1$ | $a_2$ | Signal |
-| ----- | ----- | ------ |
+|-------|-------|--------|
 | 0     | 0     | $x_0$  |
 | 0     | 1     | $x_1$  |
 | 1     | 0     | $x_2$  |
@@ -399,11 +396,10 @@ $y = \overline{a_1} \cdot \overline {a_0} \cdot x_0 + \overline{a_1} \cdot a_0 \
 
 **Multiplexer als universelle boolsche Funktionsrepräsentation**
 
-<table><tr>
-<td>
+
 <!-- data-type="none" -->
 | $x_2$ | $x_1$ | $x_0$ | $y$ |
-| ----- | ----- | ----- | --- |
+|-------|-------|-------|-----|
 | 0     | 0     | 0     | 1   |
 | 0     | 0     | 1     | 0   |
 | 0     | 1     | 0     | 0   |
@@ -412,12 +408,9 @@ $y = \overline{a_1} \cdot \overline {a_0} \cdot x_0 + \overline{a_1} \cdot a_0 \
 | 1     | 0     | 1     | 0   |
 | 1     | 1     | 0     | 1   |
 | 1     | 1     | 1     | 1   |
-</td>
-<td>
-![BCD Dekoder](./images/04_Schaltnetze/MultiplexerAlsWahrheitstabelle.png)<!-- width="50%" -->
-</td>
-</tr>
-</table>
+
+![BCD Dekoder](./images/04_Schaltnetze/MultiplexerAlsWahrheitstabelle.png)<!-- width="30%" -->
+
 
 
 ### Demultiplexer
@@ -433,7 +426,7 @@ Generelle Konfiguration eines 1-aus-k Multiplexer:
 
 <!-- data-type="none" -->
 | $a_0$ | $a_1$ | $x$ | $y_0$ | $y_1$ | $y_2$ | $y_3$ |
-| ----- | ----- | --- | ----- | ----- | ----- | ----- |
+|-------|-------|-----|-------|-------|-------|-------|
 | 0     | 0     | 0   |       |       |       |       |
 | 0     | 0     | 1   | 1     |       |       |       |
 | 0     | 1     | 0   |       |       |       |       |
