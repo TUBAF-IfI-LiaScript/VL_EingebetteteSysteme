@@ -2,7 +2,7 @@
 
 author:   Sebastian Zug & André Dietrich & Fabian Bär
 email:    sebastian.zug@informatik.tu-freiberg.de & andre.dietrich@informatik.tu-freiberg.de & fabian.baer@student.tu-freiberg.de
-version:  0.0.6
+version:  0.0.7
 language: de
 narrator: Deutsch Female
 
@@ -25,14 +25,14 @@ gray: @mark(gray,@0)
 
 # Schaltwerke
 
-| Parameter                | Kursinformationen                                                                                                                                                                          |
-| ------------------------ | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------ |
-| **Veranstaltung:**       | `Eingebettete Systeme`                                                                                                                                                                     |
-| **Semester**             | `Wintersemester 2021/22`                                                                                                                                                                      |
-| **Hochschule:**          | `Technische Universität Freiberg`                                                                                                                                                          |
-| **Inhalte:**             | `Konzepte und Methodik bei der Erstellung von Schaltwerken`                                                                                      |
+| Parameter            | Kursinformationen                                                                                                                                                                          |
+|----------------------|--------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
+| **Veranstaltung:**   | `Digitale Systeme / Eingebettete Systeme`                                                                                                                                                  |
+| **Semester**         | `Wintersemester 2022/23`                                                                                                                                                                   |
+| **Hochschule:**      | `Technische Universität Freiberg`                                                                                                                                                          |
+| **Inhalte:**         | `Konzepte und Methodik bei der Erstellung von Schaltwerken`                                                                                                                                |
 | **Link auf GitHub:** | [https://github.com/TUBAF-IfI-LiaScript/VL_Softwareentwicklung/blob/master/07_Schaltwerke.md](https://github.com/TUBAF-IfI-LiaScript/VL_EingebetteteSysteme/blob/master/07_Schaltwerke.md) |
-| **Autoren**              | @author                                                                                                                                                                                    |
+| **Autoren**          | @author                                                                                                                                                                                    |
 
 ![](https://media.giphy.com/media/10PNyg7YOcaBQA/giphy-downsized.gif)
 
@@ -143,9 +143,9 @@ Eingaben       +------------------+           Ausgaben
 
 __Wahrheitstafel__ zeigt die Eingaben, die notwendig sind, um eine bestimmte Zustandsänderung herbeizuführen.
 
-<!-- data-type="none" style="table-layout: fixed; max-width:480px;"-->
+<!-- data-type="none" style="table-layout: fixed; max-width:580px;"-->
 | $R(t)$ | $S(t)$ | $Q(t+1)$  |
-| ------ | ------ | --------- |
+|--------|--------|-----------|
 | 0      | 0      | $Q$       |
 | 0      | 1      | 1         |
 | 1      | 0      | 0         |
@@ -153,9 +153,9 @@ __Wahrheitstafel__ zeigt die Eingaben, die notwendig sind, um eine bestimmte Zus
 
 __Invertierte Wahrheitstafel__ zeigt die Eingaben, die notwendig sind, um eine bestimmte Zustandsänderung herbeizuführen.
 
-<!-- data-type="none" style="table-layout: fixed; max-width:460px;"-->
+<!-- data-type="none" style="table-layout: fixed; max-width:620px;"-->
 | $Q(t)$ | $Q(t+1)$ | $S$ | $R$ |
-| ------ | -------- | --- | --- |
+|--------|----------|-----|-----|
 | 0      | 0        | 0   | d   |
 | 0      | 1        | 1   | 0   |
 | 1      | 0        | 0   | 1   |
@@ -176,7 +176,7 @@ __D-Wahrheitstafel__
 
 <!-- data-type="none" style="table-layout: fixed; max-width:480px;"-->
 | $D(t)$ | $Q(t+1)$ | Modus   |
-| ------ | -------- | ------- |
+|--------|----------|---------|
 | 0      | $0$      | Löschen |
 | 1      | $1$      | Setzen  |
 
@@ -188,7 +188,7 @@ __D-Invertierte Wahrheitstafel__
 {{1-2}}
 <!-- data-type="none" style="table-layout: fixed; max-width:460px;"-->
 | $Q(t)$ | $Q(t+1)$ | $D$ |
-| ------ | -------- | --- |
+|--------|----------|-----|
 | $0$    | $0$      |     |
 | $0$    | $1$      |     |
 | $1$    | $0$      |     |
@@ -198,7 +198,7 @@ __D-Invertierte Wahrheitstafel__
 {{2-3}}
 <!-- data-type="none" style="table-layout: fixed; max-width:460px;"-->
 | $Q(t)$ | $Q(t+1)$ | $D$ |
-| ------ | -------- | --- |
+|--------|----------|-----|
 | $0$    | $0$      | $0$ |
 | $0$    | $1$      | $1$ |
 | $1$    | $0$      | $0$ |
@@ -211,9 +211,9 @@ __D-Invertierte Wahrheitstafel__
 
 __JK-Wahrheitstafel__
 
-<!-- data-type="none" style="table-layout: fixed; max-width:540px;"-->
+<!-- data-type="none" style="table-layout: fixed; max-width:760px;"-->
 | $J(t)$ | $K(t)$ | $Q(t+1)$       | Modus       |
-| ------ | ------ | -------------- | ----------- |
+|--------|--------|----------------|-------------|
 | 0      | 0      | $Q$            | Beibehalten |
 | 0      | 1      | $0$            | Löschen     |
 | 1      | 0      | $1$            | Setzen      |
@@ -225,22 +225,22 @@ __JK-Invertierte Wahrheitstafel__
 *******************************************************************************
 
 {{3-4}}
-<!-- data-type="none" style="table-layout: fixed; max-width:460px;"-->
+<!-- data-type="none" style="table-layout: fixed; max-width:640px;"-->
 | $Q(t)$ | $Q(t+1)$ | $J$ | $K$ |
-| ------ | -------- | --- | --- |
+|--------|----------|-----|-----|
 | $0$    | $0$      |     |     |
 | $0$    | $1$      |     |     |
 | $1$    | $0$      |     |     |
 | $1$    | $1$      |     |     |
 
 {{4}}
-<!-- data-type="none" style="table-layout: fixed; max-width:460px;"-->
+<!-- data-type="none" style="table-layout: fixed; max-width:640px;"-->
 | $Q(t)$ | $Q(t+1)$ | $J$ | $K$ |
-| ------ | -------- | --- | --- |
+|--------|----------|-----|-----|
 | 0      | 0        | 0   | $d$ |
 | 0      | 1        | 1   | $d$ |
-| 1      | 0        | d   | $1$ |
-| 1      | 1        | d   | $0$ |
+| 1      | 0        | $d$ | $1$ |
+| 1      | 1        | $d$ | $0$ |
 
 
 ### Grundkonzept
@@ -280,14 +280,14 @@ Darstellung als Graph
 Darstellung in einer Übergangstabelle
 
 |                     | "Öffnen"            | "Schließen"               |
-| ------------------- | ------------------- | ------------------------- |
+|---------------------|---------------------|---------------------------|
 | Zustand offen       | offen (unverändert) | geschlossen               |
 | Zustand geschlossen | offen               | geschlossen (unverändert) |
 
 
 *******************************************************************************
 
-                          {{2-4}}
+                          {{2-5}}
 *******************************************************************************
 
 
@@ -295,11 +295,14 @@ Darstellung in einer Übergangstabelle
 
 ![StateMaschine](https://www.plantuml.com/plantuml/png/XSqnReCm5CRnFQVuobwfwj8XSXN07di2X2eN7i6ICGGxKvfhzGAzMD6Bv4J4RHSatk_Fnyu7FOVZO3UjsSzwwj4PPmAzB_VbEUYcDuvmsW206rj2vNiz4GIcqRY0Uek3YNf1yJPJCyvjpVUyilg3hCXE-UUUVDFRqNjovwpUiXVHYwINqSkao-WowIgwMlpxg-iS1LRcWy7ZA_9BcuDVW0hy4GGoXGU1bmprRLAi4d6R5B-jFAsIydxbcfISoFlaUPKaVdHD92VghnNv_ufA98pdpOvSUnpi3m00)
 
-Welche Beschränkungen sehen Sie in diesem Entwurf? Was passiert bei der Sequenzfolge `707022`?
+Welche Beschränkungen sehen Sie in diesem Entwurf? 
 
 *******************************************************************************
 
 {{3}}
+Was passiert bei der Sequenzfolge `707022`?
+
+{{4}}
 > **Wie realisieren wir nun aber das theoretische Modell des endlichen Automaten mit realen Bauteilen?**
 
 ### Beispiel
@@ -358,9 +361,9 @@ digraph finite_state_machine {
 
 Zustandsübergänge
 
-<!-- data-type="none" style="table-layout: fixed; max-width:460px;"-->
+<!-- data-type="none" style="table-layout: fixed; max-width:560px;"-->
 | aktueller Zustand | Eingabe E | neuer Zustand |
-| ----------------- | --------- | ------------- |
+|-------------------|-----------|---------------|
 | A                 | 0         | A             |
 | B                 | 0         | A             |
 | C                 | 0         | A             |
@@ -375,9 +378,9 @@ Kodierung
 
 Für unsere digitalen Bauteile müssen wir diese Zustände aber mit `1` und `0` kodieren.
 
-<!-- data-type="none" style="table-layout: fixed; max-width:560px;"-->
+<!-- data-type="none" style="table-layout: fixed; max-width:799px;"-->
 | Zustände | Flip-Flops | Mögliche Zustände | Ungenutzte Zustände |
-| -------- | ---------- | ----------------- | ------------------- |
+|----------|------------|-------------------|---------------------|
 | 1        | -          | -                 | -                   |
 | 2        | 1          | 2                 | 0                   |
 | 3        | 2          | 4                 | 1                   |
@@ -395,7 +398,7 @@ Mit unserem Schaltwerk wollen wir also eine Funktion abbilden, die die Ausgabe `
 
 <!-- data-type="none" style="table-layout: fixed; max-width:420px;"-->
 | Zustand | Flip-Flop F | Flip-Flop G |
-| ------- | ----------- | ----------- |
+|---------|-------------|-------------|
 | A       | 0           | 0           |
 | B       | 0           | 1           |
 | C       | 1           | 0           |
@@ -404,16 +407,16 @@ Mit unserem Schaltwerk wollen wir also eine Funktion abbilden, die die Ausgabe `
 Damit ergibt sich dann eine neue Zustandstabelle
 
 <!-- data-type="none" style="table-layout: fixed; max-width:820px;"-->
-| Zustand | F   | G   | E   | Zustand' | F'  | G'  |
-| ------- | --- | --- | --- | -------- | --- | --- |
-| A       | 0   | 0   | 0   | A        | 0   | 0   |
-| B       | 0   | 1   | 0   | A        | 0   | 0   |
-| C       | 1   | 0   | 0   | A        | 0   | 0   |
-| D       | 1   | 1   | 0   | A        | 0   | 0   |
-| A       | 0   | 0   | 1   | B        | 0   | 1   |
-| B       | 0   | 1   | 1   | C        | 1   | 0   |
-| C       | 1   | 0   | 1   | D        | 1   | 1   |
-| D       | 1   | 1   | 1   | D        | 1   | 1   |
+| Zustand | F | G | E | Zustand' | F' | G' |
+|---------|---|---|---|----------|----|----|
+| A       | 0 | 0 | 0 | A        | 0  | 0  |
+| B       | 0 | 1 | 0 | A        | 0  | 0  |
+| C       | 1 | 0 | 0 | A        | 0  | 0  |
+| D       | 1 | 1 | 0 | A        | 0  | 0  |
+| A       | 0 | 0 | 1 | B        | 0  | 1  |
+| B       | 0 | 1 | 1 | C        | 1  | 0  |
+| C       | 1 | 0 | 1 | D        | 1  | 1  |
+| D       | 1 | 1 | 1 | D        | 1  | 1  |
 
 Realisierung der Schaltfunktion
 
@@ -425,27 +428,28 @@ Um die entsprechende Schaltfunktionen für die Änderung der Zustände und die A
 
 Zustandstabelle
 
-<!-- data-type="none" style="table-layout: fixed; max-width:350px;"-->
-| F   | G   | E   | F'                                    | G'                                    |
-| --- | --- | --- | ------------------------------------- | ------------------------------------- |
-| 0   | 0   | 0   | 0                                     | 0                                     |
-| 0   | 1   | 0   | 0                                     | 0                                     |
-| 1   | 0   | 0   | 0                                     | 0                                     |
-| 1   | 1   | 0   | 0                                     | 0                                     |
-| 0   | 0   | 1   | 0                                     | <span style="color: #ff0000">1</span> |
-| 0   | 1   | 1   | <span style="color: #ff0000">1</span> | 0                                     |
-| 1   | 0   | 1   | <span style="color: #ff0000">1</span> | <span style="color: #ff0000">1</span> |
-| 1   | 1   | 1   | <span style="color: #ff0000">1</span> | <span style="color: #ff0000">1</span> |
+<!-- data-type="none" style="table-layout: fixed; max-width:380px;"-->
+| F | G | E | F'                                    | G'                                    |
+|---|---|---|---------------------------------------|---------------------------------------|
+| 0 | 0 | 0 | 0                                     | 0                                     |
+| 0 | 1 | 0 | 0                                     | 0                                     |
+| 1 | 0 | 0 | 0                                     | 0                                     |
+| 1 | 1 | 0 | 0                                     | 0                                     |
+| 0 | 0 | 1 | 0                                     | <span style="color: #ff0000">1</span> |
+| 0 | 1 | 1 | <span style="color: #ff0000">1</span> | 0                                     |
+| 1 | 0 | 1 | <span style="color: #ff0000">1</span> | <span style="color: #ff0000">1</span> |
+| 1 | 1 | 1 | <span style="color: #ff0000">1</span> | <span style="color: #ff0000">1</span> |
 
 
 Ausgaben
+
 <!-- data-type="none" style="table-layout: fixed; max-width:320px;"-->
-| F   | G   | A                                     |
-| --- | --- | ------------------------------------- |
-| 0   | 0   | 0                                     |
-| 0   | 1   | 0                                     |
-| 1   | 0   | 0                                     |
-| 1   | 1   | <span style="color: #ff0000">1</span> |
+| F | G | A                                     |
+|---|---|---------------------------------------|
+| 0 | 0 | 0                                     |
+| 0 | 1 | 0                                     |
+| 1 | 0 | 0                                     |
+| 1 | 1 | <span style="color: #ff0000">1</span> |
 
 
 $$
@@ -464,7 +468,7 @@ Bitte mit Eingabe 0 starten, um Startzustand korrekt zu setzen!
 {"devices":{"e":{"label":"E","type":"Button","propagation":0,"position":{"x":-160,"y":10}},"clk":{"label":"Clk","type":"Button","propagation":0,"position":{"x":-160,"y":-50}},"not":{"label":"~G","type":"Not","propagation":0,"bits":1,"position":{"x":-135,"y":110}},"and1":{"label":"FE","type":"And","propagation":0,"bits":1,"position":{"x":30,"y":190}},"and2":{"label":"GE","type":"And","propagation":0,"bits":1,"position":{"x":10,"y":20}},"and3":{"label":"(~G)E","type":"And","propagation":0,"bits":1,"position":{"x":20,"y":100}},"and4":{"label":"FG","type":"And","propagation":0,"bits":1,"position":{"x":245,"y":175}},"or1":{"label":"GE + FE","type":"Or","propagation":0,"bits":1,"position":{"x":165,"y":15}},"or2":{"label":"(~G)E + FE","type":"Or","propagation":0,"bits":1,"position":{"x":175,"y":90}},"fff":{"label":"F FlipFlop","type":"Dff","propagation":0,"polarity":{"clock":true},"bits":1,"initial":"x","position":{"x":335,"y":30}},"ffg":{"label":"G FlipFlop","type":"Dff","propagation":0,"polarity":{"clock":true},"bits":1,"initial":"x","position":{"x":340,"y":95}},"a":{"label":"A","type":"Lamp","propagation":0,"position":{"x":395,"y":180}}},"connectors":[{"from":{"id":"or1","port":"out"},"to":{"id":"fff","port":"in"}},{"from":{"id":"or2","port":"out"},"to":{"id":"ffg","port":"in"}},{"from":{"id":"not","port":"out"},"to":{"id":"and3","port":"in2"}},{"from":{"id":"e","port":"out"},"to":{"id":"and2","port":"in1"}},{"from":{"id":"e","port":"out"},"to":{"id":"and3","port":"in1"}},{"from":{"id":"and2","port":"out"},"to":{"id":"or1","port":"in1"}},{"from":{"id":"and3","port":"out"},"to":{"id":"or2","port":"in1"}},{"from":{"id":"and1","port":"out"},"to":{"id":"or2","port":"in2"}},{"from":{"id":"and1","port":"out"},"to":{"id":"or1","port":"in2"}},{"from":{"id":"e","port":"out"},"to":{"id":"and1","port":"in1"}},{"from":{"id":"ffg","port":"out"},"to":{"id":"not","port":"in"},"vertices":[{"x":410.95,"y":240},{"x":325,"y":240}]},{"from":{"id":"ffg","port":"out"},"to":{"id":"and2","port":"in2"},"vertices":[{"x":440,"y":210},{"x":405,"y":240},{"x":-90,"y":195},{"x":-145,"y":140},{"x":-120,"y":85}]},{"from":{"id":"fff","port":"out"},"to":{"id":"and1","port":"in2"},"vertices":[{"x":460,"y":255}]},{"from":{"id":"clk","port":"out"},"to":{"id":"fff","port":"clk"},"vertices":[{"x":270,"y":-35}]},{"from":{"id":"clk","port":"out"},"to":{"id":"ffg","port":"clk"},"vertices":[{"x":275,"y":-35}]},{"from":{"id":"and4","port":"out"},"to":{"id":"a","port":"in"}},{"from":{"id":"fff","port":"out"},"to":{"id":"and4","port":"in1"},"vertices":[{"x":460,"y":165}]},{"from":{"id":"ffg","port":"out"},"to":{"id":"and4","port":"in2"},"vertices":[{"x":390,"y":240},{"x":225,"y":240}]}],"subcircuits":{}}
 ```
 
-## Allgemeine Vorgehensweise
+## Vorgehensweise
 
 1. Schritt: Spezifikation des Zustandsdiagramms
 2. Schritt: Transformation in eine Zustandstabelle
@@ -570,10 +574,10 @@ digraph finite_state_machine {
 
 Der Mealy-Automat ist die generellere Form. Der Moore-Automat unterbindet den Einfluss des Einganges. Eine weitere Spezialisierung ist der sogenannte Medwedew-Automat, bei dem ganz auf die Ausgabelogik verzichtet wird.
 
-|          | Mealy-Automat                                            | Moore-Automat                                                                                           |
-| -------- | -------------------------------------------------------- | ------------------------------------------------------------------------------------------------------- |
-| Vorteile | schnellere Reaktion auf Veränderung der Eingabesignale E | taktsynchrone Ausgabe A, asynchron auftretende Störungen der Eingabesignale wirken sich nicht auf A aus |
-|          | Realisierung ist mit einer kleineren Anzahl an Zuständen möglich, wenn mehrere Zustandsübergänge zu einem Zustand verschiedene Ausgaben erfordern                                                          |  geringerer Schaltungsaufwand für Ausgabelogik, wenn Ausgabe A eigentlich nur vom Zustand abhängt                                                                                                       |
+|          | Mealy-Automat                                                                                                                                     | Moore-Automat                                                                                           |
+|----------|---------------------------------------------------------------------------------------------------------------------------------------------------|---------------------------------------------------------------------------------------------------------|
+| Vorteile | schnellere Reaktion auf Veränderung der Eingabesignale E                                                                                          | taktsynchrone Ausgabe A, asynchron auftretende Störungen der Eingabesignale wirken sich nicht auf A aus |
+|          | Realisierung ist mit einer kleineren Anzahl an Zuständen möglich, wenn mehrere Zustandsübergänge zu einem Zustand verschiedene Ausgaben erfordern | geringerer Schaltungsaufwand für Ausgabelogik, wenn Ausgabe A eigentlich nur vom Zustand abhängt        |
 
 Noch mal zurück zum Beispiel des Binärsequenzdetektors. Welche Konsequenzen hätte die Umsetzung als Mealy-Automat?
 
@@ -628,29 +632,29 @@ digraph finite_state_machine {
 Zustandstabelle
 
 <!-- data-type="none" style="table-layout: fixed; max-width:780px;"-->
-| Zustand | F   | G   | E   | Zustand'  | F'  | G'  |
-| ------- | --- | --- | --- | --------- | --- | --- |
-| A       | 0   | 0   | 0   | A         | 0   | 0   |
-| B       | 0   | 1   | 0   | A         | 0   | 0   |
-| C       | 1   | 0   | 0   | A         | 0   | 0   |
-| D       | 1   | 1   | 0   | dont care | d   | d   |
-| A       | 0   | 0   | 1   | B         | 0   | 1   |
-| B       | 0   | 1   | 1   | C         | 1   | 0   |
-| C       | 1   | 0   | 1   | C         | 1   | 0   |
-| D       | 1   | 1   | 1   | dont care | d   | d   |
+| Zustand | F | G | E | Zustand'  | F' | G' |
+|---------|---|---|---|-----------|----|----|
+| A       | 0 | 0 | 0 | A         | 0  | 0  |
+| B       | 0 | 1 | 0 | A         | 0  | 0  |
+| C       | 1 | 0 | 0 | A         | 0  | 0  |
+| D       | 1 | 1 | 0 | dont care | d  | d  |
+| A       | 0 | 0 | 1 | B         | 0  | 1  |
+| B       | 0 | 1 | 1 | C         | 1  | 0  |
+| C       | 1 | 0 | 1 | C         | 1  | 0  |
+| D       | 1 | 1 | 1 | dont care | d  | d  |
 
 Ausgaben
 <!-- data-type="none" style="table-layout: fixed; max-width:320px;"-->
-| F   | G   | E   | A   |
-| --- | --- | --- | --- |
-| 0   | 0   | 0   | 0   |
-| 0   | 1   | 0   | 0   |
-| 1   | 0   | 0   | 0   |
-| 1   | 1   | 0   | d   |
-| 0   | 0   | 1   | 0   |
-| 0   | 1   | 1   | 0   |
-| 1   | 0   | 1   | 1   |
-| 1   | 1   | 1   | d   |
+| F | G | E | A |
+|---|---|---|---|
+| 0 | 0 | 0 | 0 |
+| 0 | 1 | 0 | 0 |
+| 1 | 0 | 0 | 0 |
+| 1 | 1 | 0 | d |
+| 0 | 0 | 1 | 0 |
+| 0 | 1 | 1 | 0 |
+| 1 | 0 | 1 | 1 |
+| 1 | 1 | 1 | d |
 
 $$
 \begin{aligned}
@@ -709,7 +713,7 @@ Nehmen wir an, dass die Realisierung nicht mit einem D sondern einen JK-Flip-Flo
 
 <!-- data-type="none" style="table-layout: fixed; max-width:420px;"-->
 | $J$ | $K$ | $Q(t+1)$          |
-| --- | --- | ----------------- |
+|-----|-----|-------------------|
 | 0   | 0   | $Q(t)$            |
 | 0   | 1   | 0                 |
 | 1   | 0   | 1                 |
@@ -719,7 +723,7 @@ Der JK-Flip-Flop wechselt beim setzen von $J$ in einen 1 Zustand und kann mit K 
 
 <!-- data-type="none" style="table-layout: fixed; max-width:480px;"-->
 | $Q(t)$ | $Q(t+1)$ | $J$ | $K$ |
-| ------ | -------- | --- | --- |
+|--------|----------|-----|-----|
 | 0      | 0        | 0   | $d$ |
 | 0      | 1        | 1   | $d$ |
 | 1      | 0        | $d$ | 1   |
@@ -732,30 +736,30 @@ Zwar haben wir es nun mit jeweils zwei Eingängen für den Flip-Flop zu tuen (im
 Wie muss also die Beschaltung vorgenommen werden, um die bereits bekannte Zustandsübergangstabelle mit dem JK-Flip-Flop umzusetzen? Beginnen wir zunächst mit unserem ersten Flip-Flop F und seinen Eingängen JF und KF.
 
 <!-- data-type="none" style="table-layout: fixed; max-width:660px;"-->
-| F                                     | G   | E   | F'                                    | G'  | JF  | KF  | JG  | KG  |
-| ------------------------------------- | --- | --- | ------------------------------------- | --- | --- | --- | --- | --- |
-| <span style="color: #ff0000">0</span> | 0   | 0   | <span style="color: #00ff00">0</span> | 0   | 0   | d   |     |     |
-| <span style="color: #ff0000">0</span> | 1   | 0   | <span style="color: #00ff00">0</span> | 0   | 0   | d   |     |     |
-| <span style="color: #ff0000">1</span> | 0   | 0   | <span style="color: #00ff00">0</span> | 0   | d   | 1   |     |     |
-| <span style="color: #ff0000">1</span> | 1   | 0   | <span style="color: #00ff00">0</span> | 0   | d   | 1   |     |     |
-| <span style="color: #ff0000">0</span> | 0   | 1   | <span style="color: #00ff00">0</span> | 1   | 0   | d   |     |     |
-| <span style="color: #ff0000">0</span> | 1   | 1   | <span style="color: #00ff00">1</span> | 0   | 1   | d   |     |     |
-| <span style="color: #ff0000">1</span> | 0   | 1   | <span style="color: #00ff00">1</span> | 1   | d   | 0   |     |     |
-| <span style="color: #ff0000">1</span> | 1   | 1   | <span style="color: #00ff00">1</span> | 1   | d   | 0   |     |     |
+| F                                     | G | E | F'                                    | G' | JF | KF | JG | KG |
+|---------------------------------------|---|---|---------------------------------------|----|----|----|----|----|
+| <span style="color: #ff0000">0</span> | 0 | 0 | <span style="color: #00ff00">0</span> | 0  | 0  | d  |    |    |
+| <span style="color: #ff0000">0</span> | 1 | 0 | <span style="color: #00ff00">0</span> | 0  | 0  | d  |    |    |
+| <span style="color: #ff0000">1</span> | 0 | 0 | <span style="color: #00ff00">0</span> | 0  | d  | 1  |    |    |
+| <span style="color: #ff0000">1</span> | 1 | 0 | <span style="color: #00ff00">0</span> | 0  | d  | 1  |    |    |
+| <span style="color: #ff0000">0</span> | 0 | 1 | <span style="color: #00ff00">0</span> | 1  | 0  | d  |    |    |
+| <span style="color: #ff0000">0</span> | 1 | 1 | <span style="color: #00ff00">1</span> | 0  | 1  | d  |    |    |
+| <span style="color: #ff0000">1</span> | 0 | 1 | <span style="color: #00ff00">1</span> | 1  | d  | 0  |    |    |
+| <span style="color: #ff0000">1</span> | 1 | 1 | <span style="color: #00ff00">1</span> | 1  | d  | 0  |    |    |
 
 Analog wird die Zustandsübergangstabelle für JG und KG befüllt.
 
 <!-- data-type="none" style="table-layout: fixed; max-width:660px;"-->
-| F   | G                                     | E   | F'  | G'                                    | JF  | KF  | JG  | KG  |
-| --- | ------------------------------------- | --- | --- | ------------------------------------- | --- | --- | --- | --- |
-| 0   | <span style="color: #ff0000">0</span> | 0   | 0   | <span style="color: #00ff00">0</span> | 0   | d   | 0   | d   |
-| 0   | <span style="color: #ff0000">1</span> | 0   | 0   | <span style="color: #00ff00">0</span> | 0   | d   | d   | 1   |
-| 1   | <span style="color: #ff0000">0</span> | 0   | 0   | <span style="color: #00ff00">0</span> | d   | 1   | 0   | d   |
-| 1   | <span style="color: #ff0000">1</span> | 0   | 0   | <span style="color: #00ff00">0</span> | d   | 1   | d   | 1   |
-| 0   | <span style="color: #ff0000">0</span> | 1   | 0   | <span style="color: #00ff00">1</span> | 0   | d   | 1   | d   |
-| 0   | <span style="color: #ff0000">1</span> | 1   | 0   | <span style="color: #00ff00">0</span> | 1   | d   | d   | 1   |
-| 1   | <span style="color: #ff0000">0</span> | 1   | 0   | <span style="color: #00ff00">1</span> | d   | 0   | 1   | d   |
-| 1   | <span style="color: #ff0000">1</span> | 1   | 0   | <span style="color: #00ff00">1</span> | d   | 0   | d   | 0   |
+| F | G                                     | E | F' | G'                                    | JF | KF | JG | KG |
+|---|---------------------------------------|---|----|---------------------------------------|----|----|----|----|
+| 0 | <span style="color: #ff0000">0</span> | 0 | 0  | <span style="color: #00ff00">0</span> | 0  | d  | 0  | d  |
+| 0 | <span style="color: #ff0000">1</span> | 0 | 0  | <span style="color: #00ff00">0</span> | 0  | d  | d  | 1  |
+| 1 | <span style="color: #ff0000">0</span> | 0 | 0  | <span style="color: #00ff00">0</span> | d  | 1  | 0  | d  |
+| 1 | <span style="color: #ff0000">1</span> | 0 | 0  | <span style="color: #00ff00">0</span> | d  | 1  | d  | 1  |
+| 0 | <span style="color: #ff0000">0</span> | 1 | 0  | <span style="color: #00ff00">1</span> | 0  | d  | 1  | d  |
+| 0 | <span style="color: #ff0000">1</span> | 1 | 0  | <span style="color: #00ff00">0</span> | 1  | d  | d  | 1  |
+| 1 | <span style="color: #ff0000">0</span> | 1 | 0  | <span style="color: #00ff00">1</span> | d  | 0  | 1  | d  |
+| 1 | <span style="color: #ff0000">1</span> | 1 | 0  | <span style="color: #00ff00">1</span> | d  | 0  | d  | 0  |
 
 <!--
 style="width: 80%; min-width: 420px; max-width: 720px;"
@@ -939,17 +943,17 @@ Im Beispiel liegt ein Medwedew-Automat vor. Die Zustände werden direkt auf den 
 Hier wäre eine Zustandstabelle denkbar, die alle Eingangskombinationen mit allen Zuständen zeilenweise verknüpft.
 
 <!-- data-type="none" style="table-layout: fixed; max-width:460px;"-->
-| aktueller Zustand | A   | B   | Folge-zustand |
-| ----------------- | --- | --- | ------------ |
-| E                 | 0   | 0   | E            |
-| E                 | 0   | 1   | L            |
-| E                 | 1   | 0   | G            |
-| ...               |     |     |              |
+| aktueller Zustand | A | B | Folge-zustand |
+|-------------------|---|---|---------------|
+| E                 | 0 | 0 | E             |
+| E                 | 0 | 1 | L             |
+| E                 | 1 | 0 | G             |
+| ...               |   |   |               |
 
 Eine kompaktere Darstellung fasst die Kombinationen der Eingänge zusammen und ordnet sie den Folgezuständen zu.
 
 | aktueller Zustand | AB==00 | AB==01 | AB==10 | AB==11 |
-| ----------------- | ------ | ------ | ------ | ------ |
+|-------------------|--------|--------|--------|--------|
 | E                 | E      | L      | G      | E      |
 | G                 | G      | G      | G      | G      |
 | L                 | L      | L      | L      | L      |
@@ -959,17 +963,17 @@ Eine kompaktere Darstellung fasst die Kombinationen der Eingänge zusammen und o
 Insgesamt sind 3 Zustände zu kodieren, entsprechend werden wiederum 2 Flip-Flops benötigt. Dabei wird die Kodierung wie folgt vorgenommen:
 
 <!-- data-type="none" style="table-layout: fixed; max-width:460px;"-->
-| Zustand | F   | G   |
-| ------- | --- | --- |
-| E       | 0   | 0   |
-| G       | 0   | 1   |
-| L       | 1   | 0   |
+| Zustand | F | G |
+|---------|---|---|
+| E       | 0 | 0 |
+| G       | 0 | 1 |
+| L       | 1 | 0 |
 
 Damit ergibt sich folgende binäre Zustandstabelle
 
 <!-- data-type="none" style="table-layout: fixed; max-width:620px;"-->
 | aktueller Zustand | AB==00 | AB==01 | AB==10 | AB==11 |
-| ----------------- | ------ | ------ | ------ | ------ |
+|-------------------|--------|--------|--------|--------|
 | 00                | 00     | 10     | 01     | 00     |
 | 01                | 01     | 01     | 01     | 01     |
 | 10                | 10     | 10     | 10     | 10     |
@@ -978,7 +982,7 @@ In der traditionellen Darstellung zeigt sich diese wie folgt:
 
 <!-- data-type="none" style="table-layout: fixed; max-width:460px;"-->
 | $F_{t}$ | $G_{t}$ | $A_{t}$ | $B_{t}$ | @gray($F_{t+1}$) | @gray($G_{t+1}$) |
-| ------- | ------- | ------- | ------- | ---------------- | ---------------- |
+|---------|---------|---------|---------|------------------|------------------|
 | 0       | 0       | 0       | 0       | @gray(0)         | @gray(0)         |
 | 0       | 0       | 0       | 1       | @gray(1)         | @gray(0)         |
 | 0       | 0       | 1       | 0       | @gray(0)         | @gray(1)         |
@@ -1002,7 +1006,7 @@ Wir entscheiden uns für einen D Flip-Flop für die Realisierung. Die entspreche
 
 <!-- data-type="none" style="table-layout: fixed; max-width:460px;"-->
 | $Q(t)$ | $Q(t+1)$ | $D$ |
-| ------ | -------- | --- |
+|--------|----------|-----|
 | $0$    | $0$      | $0$ |
 | $0$    | $1$      | $1$ |
 | $1$    | $0$      | $0$ |
@@ -1012,7 +1016,7 @@ Damit lässt sich die Zustandsübergangstabelle entsprechend einfach um die zuge
 
 <!-- data-type="none" style="table-layout: fixed; max-width:460px;"-->
 | $F_{t}$ | $G_{t}$ | $A_{t}$ | $B_{t}$ | @gray($F_{t+1}$) | @gray($G_{t+1}$) | $DF$    | $DG$     |
-| ------- | ------- | ------- | ------- | ---------------- | ---------------- | ------- | -------- |
+|---------|---------|---------|---------|------------------|------------------|---------|----------|
 | 0       | 0       | 0       | 0       | @gray(0)         | @gray(0)         | 0       | 0        |
 | 0       | 0       | 0       | 1       | @gray(1)         | @gray(0)         | @red(1) | 0        |
 | 0       | 0       | 1       | 0       | @gray(0)         | @gray(1)         | 0       | @blue(1) |
