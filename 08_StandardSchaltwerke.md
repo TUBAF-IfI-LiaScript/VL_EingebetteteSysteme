@@ -2,7 +2,7 @@
 
 author:   Sebastian Zug & André Dietrich & Fabian Bär
 email:    sebastian.zug@informatik.tu-freiberg.de & andre.dietrich@informatik.tu-freiberg.de & fabian.baer@student.tu-freiberg.de
-version:  0.0.5
+version:  0.0.6
 language: de
 narrator: Deutsch Female
 
@@ -27,8 +27,8 @@ gray: @mark(gray,@0)
 
 | Parameter            | Kursinformationen                                                                                                                                                                                          |
 | -------------------- | ---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
-| **Veranstaltung:**   | `Eingebettete Systeme`                                                                                                                                                                                     |
-| **Semester**         | `Wintersemester 2021/22`                                                                                                                                                                                   |
+| **Veranstaltung:**   | `Digitale Systeme / Eingebettete Systeme`                                                                                                                                                  |
+| **Semester**         | `Wintersemester 2022/23`                                                                                                                                                                   |
 | **Hochschule:**      | `Technische Universität Freiberg`                                                                                                                                                                          |
 | **Inhalte:**         | `Diskussion von Standardschaltwerken als Basiskomponenten eines Rechners`                                                                                                                                  |
 | **Link auf GitHub:** | [https://github.com/TUBAF-IfI-LiaScript/VL_Softwareentwicklung/blob/master/08_StandardSchaltwerke.md](https://github.com/TUBAF-IfI-LiaScript/VL_EingebetteteSysteme/blob/master/08_StandardSchaltwerke.md) |
@@ -271,6 +271,13 @@ Schauen wir zunächst auf den Flip-Flop G, dessen Eingangsbelegung muss also auf
 | 1   | 1   | 0   | d   | 0   | d   | 0   |
 | 1   | 1   | 1   | d   | 1   | d   | 1   |
 
+> **Aufgabe:** Lesen Sie die minimierten Funktionen für die Flip-Flop-Eingänge ab!
+
+*******************************************************************************
+
+                              {{6-7}}
+*******************************************************************************
+
 <!--
 style="width: 80%; min-width: 420px; max-width: 720px;"
 -->
@@ -291,14 +298,6 @@ KG       GF    GF   GF   GF         KF     GF   GF   GF   GF
      E  | d  | d  |  1 |    |         E  | d  | 1  | 1  | d  |
         +----+----+----+----+            +----+----+----+----+                .
 ```
-
-
-> **Aufgabe:** Lesen Sie die minimierten Funktionen für die Flip-Flop-Eingänge ab!
-
-*******************************************************************************
-
-                              {{6-7}}
-*******************************************************************************
 
 Damit lassen sich folgende Funktionen ablesen:
 
