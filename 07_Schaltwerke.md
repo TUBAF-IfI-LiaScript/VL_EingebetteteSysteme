@@ -711,7 +711,7 @@ In der Simulation sehen Sie dass wir gegenüber dem Moore-Automaten ...
 
 Nehmen wir an, dass die Realisierung nicht mit einem D sondern einen JK-Flip-Flop erfolgen soll.
 
-<!-- data-type="none" style="table-layout: fixed; max-width:420px;"-->
+<!-- data-type="none" style="table-layout: fixed; max-width:480px;"-->
 | $J$ | $K$ | $Q(t+1)$          |
 |-----|-----|-------------------|
 | 0   | 0   | $Q(t)$            |
@@ -721,7 +721,7 @@ Nehmen wir an, dass die Realisierung nicht mit einem D sondern einen JK-Flip-Flo
 
 Der JK-Flip-Flop wechselt beim setzen von $J$ in einen 1 Zustand und kann mit K resetet werden. Eine gleichzeitige Aktivierung beider Eingänge führt zu einem Togglen des Zustandes.
 
-<!-- data-type="none" style="table-layout: fixed; max-width:480px;"-->
+<!-- data-type="none" style="table-layout: fixed; max-width:680px;"-->
 | $Q(t)$ | $Q(t+1)$ | $J$ | $K$ |
 |--------|----------|-----|-----|
 | 0      | 0        | 0   | $d$ |
@@ -735,7 +735,7 @@ Zwar haben wir es nun mit jeweils zwei Eingängen für den Flip-Flop zu tuen (im
 
 Wie muss also die Beschaltung vorgenommen werden, um die bereits bekannte Zustandsübergangstabelle mit dem JK-Flip-Flop umzusetzen? Beginnen wir zunächst mit unserem ersten Flip-Flop F und seinen Eingängen JF und KF.
 
-<!-- data-type="none" style="table-layout: fixed; max-width:660px;"-->
+<!-- data-type="none" style="table-layout: fixed; max-width:790px;"-->
 | F                                     | G | E | F'                                    | G' | JF | KF | JG | KG |
 |---------------------------------------|---|---|---------------------------------------|----|----|----|----|----|
 | <span style="color: #ff0000">0</span> | 0 | 0 | <span style="color: #00ff00">0</span> | 0  | 0  | d  |    |    |
@@ -749,7 +749,7 @@ Wie muss also die Beschaltung vorgenommen werden, um die bereits bekannte Zustan
 
 Analog wird die Zustandsübergangstabelle für JG und KG befüllt.
 
-<!-- data-type="none" style="table-layout: fixed; max-width:660px;"-->
+<!-- data-type="none" style="table-layout: fixed; max-width:790px;"-->
 | F | G                                     | E | F' | G'                                    | JF | KF | JG | KG |
 |---|---------------------------------------|---|----|---------------------------------------|----|----|----|----|
 | 0 | <span style="color: #ff0000">0</span> | 0 | 0  | <span style="color: #00ff00">0</span> | 0  | d  | 0  | d  |
@@ -847,13 +847,29 @@ $$
 Bauteile
 </td>
 <td style="border-left: 1px solid black;">
-+ Negation von E,
-+ 2 x AND,
-+ 1 x OR
+Negation von E,
 </td>
 <td style="border-left: 1px solid black;">
-+ 3 x AND,
-+ 2 x OR
+3 x AND,
+</td>
+</tr>
+<tr>
+<td>
+</td>
+<td style="border-left: 1px solid black;">
+2 x AND,
+</td>
+<td style="border-left: 1px solid black;">
+2 x OR
+</td>
+</tr>
+<tr>
+<td>
+</td>
+<td style="border-left: 1px solid black;">
+1 x OR
+</td>
+<td style="border-left: 1px solid black;">
 </td>
 </tr>
 </table>
@@ -942,7 +958,7 @@ Im Beispiel liegt ein Medwedew-Automat vor. Die Zustände werden direkt auf den 
 
 Hier wäre eine Zustandstabelle denkbar, die alle Eingangskombinationen mit allen Zuständen zeilenweise verknüpft.
 
-<!-- data-type="none" style="table-layout: fixed; max-width:460px;"-->
+<!-- data-type="none" style="table-layout: fixed; max-width:660px;"-->
 | aktueller Zustand | A | B | Folge-zustand |
 |-------------------|---|---|---------------|
 | E                 | 0 | 0 | E             |
@@ -952,6 +968,7 @@ Hier wäre eine Zustandstabelle denkbar, die alle Eingangskombinationen mit alle
 
 Eine kompaktere Darstellung fasst die Kombinationen der Eingänge zusammen und ordnet sie den Folgezuständen zu.
 
+<!-- data-type="none" style="table-layout: fixed; max-width:860px;"-->
 | aktueller Zustand | AB==00 | AB==01 | AB==10 | AB==11 |
 |-------------------|--------|--------|--------|--------|
 | E                 | E      | L      | G      | E      |
@@ -962,7 +979,7 @@ Eine kompaktere Darstellung fasst die Kombinationen der Eingänge zusammen und o
 
 Insgesamt sind 3 Zustände zu kodieren, entsprechend werden wiederum 2 Flip-Flops benötigt. Dabei wird die Kodierung wie folgt vorgenommen:
 
-<!-- data-type="none" style="table-layout: fixed; max-width:460px;"-->
+<!-- data-type="none" style="table-layout: fixed; max-width:520px;"-->
 | Zustand | F | G |
 |---------|---|---|
 | E       | 0 | 0 |
@@ -971,7 +988,7 @@ Insgesamt sind 3 Zustände zu kodieren, entsprechend werden wiederum 2 Flip-Flop
 
 Damit ergibt sich folgende binäre Zustandstabelle
 
-<!-- data-type="none" style="table-layout: fixed; max-width:620px;"-->
+<!-- data-type="none" style="table-layout: fixed; max-width:820px;"-->
 | aktueller Zustand | AB==00 | AB==01 | AB==10 | AB==11 |
 |-------------------|--------|--------|--------|--------|
 | 00                | 00     | 10     | 01     | 00     |
@@ -980,7 +997,7 @@ Damit ergibt sich folgende binäre Zustandstabelle
 
 In der traditionellen Darstellung zeigt sich diese wie folgt:
 
-<!-- data-type="none" style="table-layout: fixed; max-width:460px;"-->
+<!-- data-type="none" style="table-layout: fixed; max-width:560px;"-->
 | $F_{t}$ | $G_{t}$ | $A_{t}$ | $B_{t}$ | @gray($F_{t+1}$) | @gray($G_{t+1}$) |
 |---------|---------|---------|---------|------------------|------------------|
 | 0       | 0       | 0       | 0       | @gray(0)         | @gray(0)         |
@@ -1014,7 +1031,7 @@ Wir entscheiden uns für einen D Flip-Flop für die Realisierung. Die entspreche
 
 Damit lässt sich die Zustandsübergangstabelle entsprechend einfach um die zugehörige Eingangsbelegung ergänzen. Für die D-Flip-Flops ist dies einfach eine Kopie der Zustandsspalten.
 
-<!-- data-type="none" style="table-layout: fixed; max-width:460px;"-->
+<!-- data-type="none" style="table-layout: fixed; max-width:560px;"-->
 | $F_{t}$ | $G_{t}$ | $A_{t}$ | $B_{t}$ | @gray($F_{t+1}$) | @gray($G_{t+1}$) | $DF$    | $DG$     |
 |---------|---------|---------|---------|------------------|------------------|---------|----------|
 | 0       | 0       | 0       | 0       | @gray(0)         | @gray(0)         | 0       | 0        |
