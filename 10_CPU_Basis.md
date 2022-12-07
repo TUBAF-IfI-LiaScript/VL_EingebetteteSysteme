@@ -2,7 +2,7 @@
 
 author:   Sebastian Zug & André Dietrich & Fabian Bär
 email:    sebastian.zug@informatik.tu-freiberg.de & andre.dietrich@informatik.tu-freiberg.de & fabian.baer@student.tu-freiberg.de
-version:  0.0.2
+version:  0.0.3
 language: de
 narrator: Deutsch Female
 
@@ -25,8 +25,8 @@ gray: @mark(gray,@0)
 
 | Parameter            | Kursinformationen                                                                                                                                                                                          |
 | -------------------- | ---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
-| **Veranstaltung:**   | `Eingebettete Systeme`                                                                                                                                                                                     |
-| **Semester**         | `Wintersemester 2021/22`                                                                                                                                                                                   |
+| **Veranstaltung:**   | `Digitale Systeme / Eingebettete Systeme`                                                                                                                                                  |
+| **Semester**         | `Wintersemester 2022/23`                                                                                                                                                                   |
 | **Hochschule:**      | `Technische Universität Freiberg`                                                                                                                                                                          |
 | **Inhalte:**         | `Realisierung grundlegender arithmetischer Operationen im Rechner`                                                                                                                                  |
 | **Link auf GitHub:** | [https://github.com/TUBAF-IfI-LiaScript/VL_Softwareentwicklung/blob/master/10_CPU_Basis.md](https://github.com/TUBAF-IfI-LiaScript/VL_EingebetteteSysteme/blob/master/10_CPU_Basis.md) |
