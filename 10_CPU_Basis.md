@@ -23,14 +23,14 @@ gray: @mark(gray,@0)
 
 # Von mathematischen Operationen zur CPU
 
-| Parameter            | Kursinformationen                                                                                                                                                                                          |
-| -------------------- | ---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
-| **Veranstaltung:**   | `Eingebettete Systeme`                                                                                                                                                                                     |
-| **Semester**         | `Wintersemester 2021/22`                                                                                                                                                                                   |
-| **Hochschule:**      | `Technische Universität Freiberg`                                                                                                                                                                          |
-| **Inhalte:**         | `Realisierung grundlegender arithmetischer Operationen im Rechner`                                                                                                                                  |
+| Parameter            | Kursinformationen                                                                                                                                                                      |
+|----------------------|----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
+| **Veranstaltung:**   | `Digitale Systeme / Eingebettete Systeme`                                                                                                                                              |
+| **Semester**         | `Wintersemester 2022/23`                                                                                                                                                               |
+| **Hochschule:**      | `Technische Universität Freiberg`                                                                                                                                                      |
+| **Inhalte:**         | `Realisierung grundlegender arithmetischer Operationen im Rechner`                                                                                                                     |
 | **Link auf GitHub:** | [https://github.com/TUBAF-IfI-LiaScript/VL_Softwareentwicklung/blob/master/10_CPU_Basis.md](https://github.com/TUBAF-IfI-LiaScript/VL_EingebetteteSysteme/blob/master/10_CPU_Basis.md) |
-| **Autoren**          | @author                                                                                                                                                                                                    |
+| **Autoren**          | @author                                                                                                                                                                                |
 
 ![](https://media.giphy.com/media/10PNyg7YOcaBQA/giphy-downsized.gif)
 
@@ -112,10 +112,10 @@ Synchroner 3-Bit-Zähler auf der Basis von JK Flip-Flops
 
 Zwischenstand
 
-| Stufe | Funktionalität                  | Wunschzettel                            |
-| ----- | ----------------------------------------- | --------------------------------------- |
-| 0     | Addition/Subtraktion von einzelnen Werten $\color{green} \mathbf{✓}$ |                                         |
-| 1     |                                           | Flexibles Handling mehrerer Operationen $\color{red} \mathbf{?}$  |
+| Stufe | Funktionalität                                                       | Wunschzettel                                                     |
+|-------|----------------------------------------------------------------------|------------------------------------------------------------------|
+| 0     | Addition/Subtraktion von einzelnen Werten $\color{green} \mathbf{✓}$ |                                                                  |
+| 1     |                                                                      | Flexibles Handling mehrerer Operationen $\color{red} \mathbf{?}$ |
 
 Logische Funktionen: NOT, AND, NOR, XOR
 
@@ -188,19 +188,19 @@ Der Status S umfasst eine Zusammenstellung der Resultate der Operationen codiert
 Wie "programmieren" wir unser System?
 
 <!-- data-type="none" -->
-| F_0 | F_1 | F_2 | Z   | Bezeichnung |
-| --- | --- | --- | --- | ----------- |
-| 0   | 0   | 0   | 0   | `OR_A`      |
-| 0   | 0   | 0   | 1   | `OR_B`      |
-| ... |     |     |     |             |
-| 0   | 1   | 1   | 0   | `ADD_A`     |
-| 0   | 1   | 1   | 1   | `ADD_B`     |
-| ... |     |     |     |             |
+| F_0 | F_1 | F_2 | Z | Bezeichnung |
+|-----|-----|-----|---|-------------|
+| 0   | 0   | 0   | 0 | `OR_A`      |
+| 0   | 0   | 0   | 1 | `OR_B`      |
+| ... |     |     |   |             |
+| 0   | 1   | 1   | 0 | `ADD_A`     |
+| 0   | 1   | 1   | 1 | `ADD_B`     |
+| ... |     |     |   |             |
 
 Beispielanwendungen
 
 |              | Inkrementieren   | Togglen          |
-| ------------ | ---------------- | ---------------- |
+|--------------|------------------|------------------|
 | Vorbereitung | A <- 1, B <-0    | A <- 1           |
 | "Programm"   | `ADD_B` $(0111)$ | `EOR_A` $(0101)$ |
 |              | `ADD_B` $(0111)$ | `EOR_A` $(0101)$ |
@@ -211,11 +211,11 @@ Beispielanwendungen
 
 Zwischenstand
 
-| Stufe | Funktionalität                                                                                             | Wunschzettel                                            |
-| ----- | ---------------------------------------------------------------------------------------------------------- | ------------------------------------------------------- |
-| 0     | Addition/Subtraktion von einzelnen Werten $\color{green} \mathbf{✓}$                                       |                                                         |
-| 1     | Arithmetische Einheit mit mehren Funktionen und wählbarem Ergebnisregister      $\color{green} \mathbf{✓}$ |                                                         |
-| 2     |                                                                                                            | Sequenz von Berechnungsfolgen  $\color{red} \mathbf{?}$ $$\begin{aligned} & Reg\_A \leftarrow 3 \\ & Reg\_B \leftarrow 2 \\ & ADD\_B \\ & Reg\_A \leftarrow -3 \\ & MUL\_B  \\ & ... \end{aligned}$$  |
+| Stufe | Funktionalität                                                                                             | Wunschzettel                                                                                                                                                                                         |
+|-------|------------------------------------------------------------------------------------------------------------|------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
+| 0     | Addition/Subtraktion von einzelnen Werten $\color{green} \mathbf{✓}$                                       |                                                                                                                                                                                                      |
+| 1     | Arithmetische Einheit mit mehren Funktionen und wählbarem Ergebnisregister      $\color{green} \mathbf{✓}$ |                                                                                                                                                                                                      |
+| 2     |                                                                                                            | Sequenz von Berechnungsfolgen  $\color{red} \mathbf{?}$ $$\begin{aligned} & Reg\_A \leftarrow 3 \\ & Reg\_B \leftarrow 2 \\ & ADD\_B \\ & Reg\_A \leftarrow -3 \\ & MUL\_B  \\ & ... \end{aligned}$$ |
 
 Für diesen Schritt fassen wir das obige Schaltbild unserer hypothetischen ALU mit 8 Funktionen in einem abstrakteren Schaubild zusammen.
 
@@ -239,7 +239,7 @@ ditaa
 
 
 | Bezeichnung | Bedeutung                               |
-| ----------- | --------------------------------------- |
+|-------------|-----------------------------------------|
 | A, B        | Datenregister                           |
 | Daten       | Zugriff auf die Datenregister           |
 | Kontrolle   | Steuerleitungen $F_0$ bis $F_2$ und $Z$ |
@@ -344,12 +344,12 @@ Wir lösen uns von dem Zugriff auf die Kontrollbits und etablieren abstrakte Bef
 
 Zwischenstand
 
-| Stufe | Funktionalität                                                                                             | Wunschzettel                                                                                                                                 |
-| ----- | ---------------------------------------------------------------------------------------------------------- | -------------------------------------------------------------------------------------------------------------------------------------------- |
-| 0     | Addition/Subtraktion von einzelnen Werten $\color{green} \mathbf{✓}$                                       |                                                                                                                                              |
-| 1     | Arithmetische Einheit mit mehren Funktionen und wählbarem Ergebnisregister      $\color{green} \mathbf{✓}$ |                                                                                                                                              |
-| 2     | Sequenz von Berechnungsfolgen    $\color{green} \mathbf{✓}$                     | |
-| 3      |                                                                                                 |       Freie Definition von Operanden  $\color{red} \mathbf{?}$     $$\begin{aligned} & \color{red}{Reg\_A \leftarrow 3}  \\ & \color{red}{Reg\_B \leftarrow 2} \\ & ADD\_B \\ & \color{red}{Reg\_A \leftarrow -3} \\ & MUL\_B  \\ & ... \end{aligned}$$                                                                                                                                               |
+| Stufe | Funktionalität                                                                                             | Wunschzettel                                                                                                                                                                                                                                      |
+|-------|------------------------------------------------------------------------------------------------------------|---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
+| 0     | Addition/Subtraktion von einzelnen Werten $\color{green} \mathbf{✓}$                                       |                                                                                                                                                                                                                                                   |
+| 1     | Arithmetische Einheit mit mehren Funktionen und wählbarem Ergebnisregister      $\color{green} \mathbf{✓}$ |                                                                                                                                                                                                                                                   |
+| 2     | Sequenz von Berechnungsfolgen    $\color{green} \mathbf{✓}$                                                |                                                                                                                                                                                                                                                   |
+| 3     |                                                                                                            | Freie Definition von Operanden  $\color{red} \mathbf{?}$     $$\begin{aligned} & \color{red}{Reg\_A \leftarrow 3}  \\ & \color{red}{Reg\_B \leftarrow 2} \\ & ADD\_B \\ & \color{red}{Reg\_A \leftarrow -3} \\ & MUL\_B  \\ & ... \end{aligned}$$ |
 
 Wo kommen aber die Daten her? Bislang haben wir uns damit begnügt anzunehmen, dass diese auf "magische" Art und Weise in unseren Registern stehen.
 
@@ -381,7 +381,7 @@ Im Speicher stehen nun nicht nur Befehle für die Ausführung unserer ALU-Funkti
 
 <!-- data-type="none" -->
 | Befehle       | Codierung        | Bedeutung                                           |
-| ------------- | ---------------- | --------------------------------------------------- |
+|---------------|------------------|-----------------------------------------------------|
 | `OR_A`        | $0000$ bisher(!) | Logisches Oder                                      |
 |               | ....             |                                                     |
 | `LDA Adresse` | $10000$          | Laden der Daten von der Adresse X in das Register A |
@@ -392,7 +392,7 @@ Im Speicher stehen nun nicht nur Befehle für die Ausführung unserer ALU-Funkti
 Damit nimmt der Aufwand im Steuerwerk nochmals signifikant zu! Neben dem Adressbus besteht nun ein Datenbus als weiterer Kommunikationspfad.
 
 | Schritt | Vorgang                                                                               |
-| ------- | ------------------------------------------------------------------------------------- |
+|---------|---------------------------------------------------------------------------------------|
 | 0       | Lesen eines Befehls aus dem Speicher                                                  |
 | 1       | Erkennen, dass es sich um ein `LDA` handelt - Eine Berechnung ist nicht erforderlich. |
 | 2       | Verschieben des Adresszählers auf die nächste Speicherstelle                          |
@@ -406,12 +406,12 @@ Damit nimmt der Aufwand im Steuerwerk nochmals signifikant zu! Neben dem Adressb
 Zwischenstand
 
 | Stufe | Funktionalität                                                                                             | Wunschzettel                                                   |
-| ----- | ---------------------------------------------------------------------------------------------------------- | -------------------------------------------------------------- |
+|-------|------------------------------------------------------------------------------------------------------------|----------------------------------------------------------------|
 | 0     | Addition/Subtraktion von einzelnen Werten $\color{green} \mathbf{✓}$                                       |                                                                |
 | 1     | Arithmetische Einheit mit mehren Funktionen und wählbarem Ergebnisregister      $\color{green} \mathbf{✓}$ |                                                                |
 | 2     | Sequenz von Berechnungsfolgen    $\color{green} \mathbf{✓}$                                                |                                                                |
-|     | Darstellung von Programmen als Sequenzen abstrakter Befehle  $\color{green} \mathbf{✓}$               |                                                                |
-| 3      | Flexibler Zugriff auf Daten und Programme im Speicher     $\color{green} \mathbf{✓}$                       |                                                                |
+|       | Darstellung von Programmen als Sequenzen abstrakter Befehle  $\color{green} \mathbf{✓}$                    |                                                                |
+| 3     | Flexibler Zugriff auf Daten und Programme im Speicher     $\color{green} \mathbf{✓}$                       |                                                                |
 |       |                                                                                                            | Ein- und Ausgabe von Daten wäre schön $\color{red} \mathbf{?}$ |
 
 

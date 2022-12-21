@@ -23,14 +23,14 @@ gray: @mark(gray,@0)
 
 # Modell CPU
 
-| Parameter            | Kursinformationen                                                                                                                                                                                          |
-| -------------------- | ---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
-| **Veranstaltung:**   | `Eingebettete Systeme`                                                                                                                                                                                     |
-| **Semester**         | `Wintersemester 2021/22`                                                                                                                                                                                   |
-| **Hochschule:**      | `Technische Universität Freiberg`                                                                                                                                                                          |
-| **Inhalte:**         | `Realisierung grundlegender arithmetischer Operationen im Rechner`                                                                                                                                  |
+| Parameter            | Kursinformationen                                                                                                                                                                        |
+|----------------------|------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
+| **Veranstaltung:**   | `Digitale Systeme / Eingebettete Systeme`                                                                                                                                                  |
+| **Semester**         | `Wintersemester 2022/23`                                                                                                                                                                   |
+| **Hochschule:**      | `Technische Universität Freiberg`                                                                                                                                                        |
+| **Inhalte:**         | `Realisierung grundlegender arithmetischer Operationen im Rechner`                                                                                                                       |
 | **Link auf GitHub:** | [https://github.com/TUBAF-IfI-LiaScript/VL_Softwareentwicklung/blob/master/11_Modell_CPU.md](https://github.com/TUBAF-IfI-LiaScript/VL_EingebetteteSysteme/blob/master/11_Modell_CPU.md) |
-| **Autoren**          | @author                                                                                                                                                                                                    |
+| **Autoren**          | @author                                                                                                                                                                                  |
 
 ![](https://media.giphy.com/media/10PNyg7YOcaBQA/giphy-downsized.gif)
 
@@ -134,7 +134,7 @@ Das Steuerwerk besteht im wesentlichen aus einem Befehlsdecoder und einer Ablauf
 
 <!-- data-type="none" -->
 | Befehl | Codierung | $F_0-F_2$ | $Z$ | $S_0-S_1$ |
-| ------ | --------- | --------- | --- | --------- |
+|--------|-----------|-----------|-----|-----------|
 | ADD_B  | 0110      | 011       | 0   | 11        |
 
 Der Programmzähler berechnet welcher Befehl im nächsten Schritt bearbeitet werden soll. Die Ablaufsteuerung erzeugt, entsprechend dem auszuführenden Befehl, die Steuer- oder Kontrollsignale, um Daten zu lesen, im Datenpfad zu bearbeiten und die Resultate zu speichern.
@@ -208,7 +208,9 @@ Negative Zahlen werden im Zweierkomplement dargestellt.
 
 ## Wie sieht ein Programm dann aus?
 
-**Beispiel Variabler Rechtsshift**
+> __Aufgabe:__ Implementieren Sie einen variablen Rechtsshift - der Nutzer gibt bis zu 15 Shiftschritte an, die ausgeführt werden sollen.**
+
+> __Herausforderung:__ Wir haben nur einen 1-Schritt zyklischen Linksschift auf dem Modellrechner vorgesehen. Die Lösung muss in Software realisiert werden.
 
 Das eigentliche Programm belegt 16 aufeinander folgende Speicherplätze zwischen $0001000$ und $00011111$. Die nächste Spalte gibt die binäre Repräsentation des
 Programms an. Die mnemotechnische Darstellung und ein Kommentarfeld folgen.
@@ -217,34 +219,34 @@ Unser Rechner wird nur ein echtes Register $A$ haben. Entsprechend müssen wir d
 
 <!-- data-type="none" -->
 | Adresse  | Speicherinhalt    |                      Programmzeilen                      | Kommentar                                                               |
-| -------- | ----------------- |:--------------------------------------------------------:| ----------------------------------------------------------------------- |
+|----------|-------------------|:--------------------------------------------------------:|-------------------------------------------------------------------------|
 | 00010000 | $1001$ $10000001$ | `         LDA 10000001`<!-- style="white-space: pre;"--> | Lade Anzahl der Rechts-Shifts aus dem Speicher $10000001$ in Register a |
-| 00010001 | $1000$ $ -------$ | `         NOT         `<!-- style="white-space: pre;"--> | Komplementieren von a                                                   |
+| 00010001 | $1000$ XXXXXXXXX  | `         NOT         `<!-- style="white-space: pre;"--> | Komplementieren von a                                                   |
 | 00010010 | $1011$ $10000010$ | `         ADD 10000010`<!-- style="white-space: pre;"--> | 2-Komplement                                                            |
 | 00010011 | $1011$ $10000100$ | `         ADD 10000100`<!-- style="white-space: pre;"--> | Berechne : 16 + (-AR)                                                   |
 | 00010100 | $1010$ $10000011$ | `         STA 10000011`<!-- style="white-space: pre;"--> | Speichere Anzahl der Links-Shifts                                       |
 | 00010101 | $1001$ $10000000$ | ` NEXT:   LDA 10000000`<!-- style="white-space: pre;"--> | Lade Datum                                                              |
-| 00010110 | $0101$ $ -------$ | `         RAL         `<!-- style="white-space: pre;"--> | Links-Shift                                                             |
+| 00010110 | $0101$ XXXXXXXXX  | `         RAL         `<!-- style="white-space: pre;"--> | Links-Shift                                                             |
 | 00010111 | $1010$ $10000000$ | `         STA 10000000`<!-- style="white-space: pre;"--> | Speichere Datum                                                         |
 | 00011000 | $1001$ $10000010$ | `         LDA 10000010`<!-- style="white-space: pre;"--> | Lade  Konstante “1“                                                     |
-| 00011001 | $1000$ $ -------$ | `         NOT         `<!-- style="white-space: pre;"--> | Komplementieren von a                                                   |
+| 00011001 | $1000$ XXXXXXXXX  | `         NOT         `<!-- style="white-space: pre;"--> | Komplementieren von a                                                   |
 | 00011010 | $1011$ $10000010$ | `         ADD 10000010`<!-- style="white-space: pre;"--> | 2-Komplement                                                            |
 | 00011011 | $1011$ $10000011$ | `         ADD 10000011`<!-- style="white-space: pre;"--> | Decrementiere Anzahl der L-Shifts                                       |
 | 00011100 | $1010$ $10000011$ | `         STA 10000011`<!-- style="white-space: pre;"--> | Speichere verbleibende Anzahl der L-Shifts                              |
 | 00011101 | $0001$ $00011111$ | `         JMA DONE    `<!-- style="white-space: pre;"--> | Bed. Sprung, wenn alle L-Shifts ausgeführt wurden                       |
 | 00011110 | $0010$ $00010101$ | `         JMP NEXT    `<!-- style="white-space: pre;"--> | Unbed. Sprung zum Anfang der Schleife                                   |
-| 00011111 | $0000$ $ -------$ | ` DONE:   HLT         `<!-- style="white-space: pre;"--> |                                                                         |
+| 00011111 | $0000$ XXXXXXXXXX | ` DONE:   HLT         `<!-- style="white-space: pre;"--> |                                                                         |
 
 Der entsprechende Speicherauszug dazu:
 
 <!-- data-type="none" -->
-| Adresse  | Daten                            | Bemerkung                          |
-| -------- | -------------------------------- | ---------------------------------- |
-| 10000000 | 0 0 0 0 0 0 0 0 0 0 0 0 1 1 0 1  | D: Zu shiftender Wert              |
-| 10000001 | 0 0 0 0 0 0 0 0 0 0 0 0 0 1 0 1  | AR: Anzahl der Rechts-Shifts       |
-| 10000010 | 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 1  | “1“: Konstante “1“                 |
-| 10000011 | 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0  | TMP: Temp. Anzahl der Links-Shifts |
-| 10000100 | 0 0 0 0 0 0 0 0 0 0 0 1 0 0 0 0  | “16“: Konstante “16“               |
+| Adresse  | Daten                           | Bemerkung                          |
+|----------|---------------------------------|------------------------------------|
+| 10000000 | 0 0 0 0 0 0 0 0 0 0 0 0 1 1 0 1 | D: Zu shiftender Wert              |
+| 10000001 | 0 0 0 0 0 0 0 0 0 0 0 0 0 1 0 1 | AR: Anzahl der Rechts-Shifts       |
+| 10000010 | 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 1 | “1“: Konstante “1“                 |
+| 10000011 | 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 | TMP: Temp. Anzahl der Links-Shifts |
+| 10000100 | 0 0 0 0 0 0 0 0 0 0 0 1 0 0 0 0 | “16“: Konstante “16“               |
 
 Da wir als Befehl nur den zyklischen Linksshift (`RAL`) um 1 Stelle zur Vefügung haben, müssen wir den zyklischen Rechtsshift um eine beliebige Anzahl von Stellen durch ein Programm simulieren. Im Modellrechner kann in einem Befehl kein Direktoperand angegeben werden. Deshalb werden alle Konstanten und Variablen im Speicher ablegen.
 
@@ -270,18 +272,18 @@ else
 {{1}}
 <!-- data-type="none" -->
 | Adresse  | Speicherinhalt    |                      Programmzeilen                      | Kommentar                                                       |
-| -------- | ----------------- |:--------------------------------------------------------:| --------------------------------------------------------------- |
+|----------|-------------------|:--------------------------------------------------------:|-----------------------------------------------------------------|
 | 00010000 | $1001$ $10000001$ | `         LDA 10000001`<!-- style="white-space: pre;"--> | Lade den Wert von var aus dem Speicher $10000001$ in Register A |
 | 00010001 | $0001$ $10000010$ | `         JMA 00010011`<!-- style="white-space: pre;"--> | Wenn ein negativer Wert vorliegt, springe zu AddrIf             |
 | 00010010 | $0000$ $ -------$ | `         HLT         `<!-- style="white-space: pre;"--> | Stoppe die Abarbeitung                                          |
 | 00010011 | $1011$ $10000010$ | `AddrIf   ADD 10000010`<!-- style="white-space: pre;"--> | Inkrementiere A                                                 |
 | 00010100 | $0100$ $ -------$ | `         SWR         `<!-- style="white-space: pre;"--> | Zeige A auf dem LED Streifen an                                 |
-| 00011100 | $1010$ $10000011$ | `         STA 10000001`<!-- style="white-space: pre;"--> | Speichere A                               |
+| 00011100 | $1010$ $10000011$ | `         STA 10000001`<!-- style="white-space: pre;"--> | Speichere A                                                     |
 
 {{1}}
 <!-- data-type="none" -->
 | Adresse  | Speicherinhalt | Bedeutung     |
-| -------- | -------------- | ------------- |
+|----------|----------------|---------------|
 | 00010000 | $100110000001$ |               |
 | 00010001 | $000110000010$ |               |
 | 00010010 | $000000000000$ |               |
@@ -475,12 +477,12 @@ ditaa
 ## Beschreibung der prozessorinternen Vorgänge
 
 | Schritt                        | Bedeutung                                                                                   |
-| ------------------------------ | ------------------------------------------------------------------------------------------- |
+|--------------------------------|---------------------------------------------------------------------------------------------|
 | 1. Befehl holen                | Befehl entsprechend der Adressvorgabe aus dem MAR aus dem Speicher lesen und in MBR ablegen |
 | 2. Befehl dekodieren           | aktuellen Befehl aus MBR nach IR verschieben und dekodieren                                 |
 | 3. ggf Operanden bereitstellen | Daten entsprechend dem weiterbewegten PC (MAR) lesen und im MBR ablegen                     |
 | 4. Befehl ausführen            | Kontrolleinheit definiert die entsprechenden Steuerleitungen                                |
-|  5. ggf Ergebnis speichern                              |  Sichere den Inhalt von A ins MBR, Manipuliere den Inhalt des MBR                                                                                       |
+| 5. ggf Ergebnis speichern      | Sichere den Inhalt von A ins MBR, Manipuliere den Inhalt des MBR                            |
 
 ```text @plantUML.png
 @startuml
@@ -521,17 +523,17 @@ Die hier verwendete Register-Transfer Sprache wurde von T.C. Bartee, I.L. Lebow,
 
 **Grundelemente von RTL**
 
-| Element     | Darstellung  | Bedeutung                                                     |
-| ----------- | ------------ | ------------------------------------------------------------- |
-| Register    | $R_n$        | bezeichnet die Bitstellen $n,n-1,. . . , 0$ des Registers $R$, eine Slicing wird über die Indizes beschrieben $R_{5-11}$ |
-| Transfer    | $\leftarrow$ |   $A \leftarrow B$ bezeichnet den Transfer des Inhalts von Register B nach A                                                            |
-| Speicher    | $M[addr]$    |  bezeichnet den Inhalt der Speicherzelle mit der Adresse "addr"                                                             |
-| Bedingungen | $B:$         |     bezeichnet den Inhalt der Speicherzelle mit d z.B. $R = 0: A \leftarrow B,$ oder  $CP7 \cdot RAL: A \leftarrow Z                                 $                           |
+| Element     | Darstellung  | Bedeutung                                                                                                                                          |
+|-------------|--------------|----------------------------------------------------------------------------------------------------------------------------------------------------|
+| Register    | $R_n$        | bezeichnet die Bitstellen $n,n-1,. . . , 0$ des Registers $R$, eine Slicing wird über die Indizes beschrieben $R_{5-11}$                           |
+| Transfer    | $\leftarrow$ | $A \leftarrow B$ bezeichnet den Transfer des Inhalts von Register B nach A                                                                         |
+| Speicher    | $M[addr]$    | bezeichnet den Inhalt der Speicherzelle mit der Adresse "addr"                                                                                     |
+| Bedingungen | $B:$         | bezeichnet den Inhalt der Speicherzelle mit d z.B. $R = 0: A \leftarrow B,$ oder  $CP7 \cdot RAL: A \leftarrow Z                                 $ |
 
 **Beispiele**
 
 | Kategorie             | Beispiel                                                     | Bedeutung                                                                                                                                             |
-| --------------------- | ------------------------------------------------------------ | ----------------------------------------------------------------------------------------------------------------------------------------------------- |
+|-----------------------|--------------------------------------------------------------|-------------------------------------------------------------------------------------------------------------------------------------------------------|
 | Zwingende Operationen | $a_{3-0}\leftarrow b_{7-4}$                                  | Inhalt der Bits 4-7 werden aus Register b auf die Stellen 0-3 des Registers a übertragen.                                                             |
 |                       | $a\leftarrow SUM (a, b)$                                     |                                                                                                                                                       |
 |                       | $a\leftarrow SUM (a, 1)$                                     |                                                                                                                                                       |
@@ -555,9 +557,9 @@ Bei den Befehlen, zu deren Ausführung die EX-Phase benötigt wird, wird in CP8 
 In der EX-Phase werden die arithmetisch/logischen Operationen, sowie Speicherbefehle LOAD/STORE und Ein/Ausgabebefehle ausgeführt.
 
 <!--data-type="None"-->
-| OPCode | 0000           | 0001  | 0010  | 0011  | 0100  | 0101  | 0110  | 0111  | 1000  | 1001  | 1010  | 1011  | 1100  | 1101  | 1110  | 1111  |
-| ------ | -------------- | ----- | ----- | ----- | ----- | ----- | ----- | ----- | ----- | ----- | ----- | ----- | ----- | ----- | ----- | ----- |
-|        | `HLT`          | `JMA` | `JMP` | `JSR` | `SWR` | `RAL` | `INP` | `OUT` | `NOT` | `LDA` | `STA` | `ADD` | `XOR` | `AND` | `IOR` | `NOP` |
+| OPCode | 0000  | 0001  | 0010  | 0011  | 0100  | 0101  | 0110  | 0111  | 1000  | 1001  | 1010  | 1011  | 1100  | 1101  | 1110  | 1111  |
+|--------|-------|-------|-------|-------|-------|-------|-------|-------|-------|-------|-------|-------|-------|-------|-------|-------|
+|        | `HLT` | `JMA` | `JMP` | `JSR` | `SWR` | `RAL` | `INP` | `OUT` | `NOT` | `LDA` | `STA` | `ADD` | `XOR` | `AND` | `IOR` | `NOP` |
 | CP1    | @colspan(16) $MBR \leftarrow M[MAR]$ |
 | CP2    |                |       |       |       |       |       |       |       |       |       |       |       |       |       |       |       |
 | CP3    | @colspan(16) $PC \leftarrow PC + 1$     |
@@ -795,7 +797,7 @@ ditaa
 
 {{0-1}}
 | Aspekt                      | Kombinatorische Logik                  |
-| --------------------------- | -------------------------------------- |
+|-----------------------------|----------------------------------------|
 | Grundlegende Repräsentation | Endlicher Automat                      |
 | Fortschaltung der Kontrolle | Expliziter Folgezustand                |
 | Logische Repräsentation     | Boolsche Gleichungen                   |
@@ -842,7 +844,7 @@ ditaa
 
 {{1-2}}
 | Aspekt                      | Kombinatorische Logik                  | Mikroprogramm     |
-| --------------------------- | -------------------------------------- | ----------------- |
+|-----------------------------|----------------------------------------|-------------------|
 | Grundlegende Repräsentation | Endlicher Automat                      | Programm          |
 | Fortschaltung der Kontrolle | Expliziter Folgezustand                | Programmzähler    |
 | Logische Repräsentation     | Boolsche Gleichungen                   | Wahrheitstabelle  |
@@ -968,7 +970,7 @@ Und wie sieht das nun konkret aus?
 
 
 |          | Horizontale Mikroprogrammierung                                            | Vertikale Mikroprogrammierung                                                                |
-| -------- | -------------------------------------------------------------------------- | -------------------------------------------------------------------------------------------- |
+|----------|----------------------------------------------------------------------------|----------------------------------------------------------------------------------------------|
 | Idee     | Jedes Bit des Mikroinstruktionswortes steuert direkt eine Kontroll-Leitung | Mikroinstruktionswort ist in Felder aufgeteilt, die codierte Steuerinformation enthalten     |
 | Vorteil  | maximale Flexibilität, Geschwindigkeit                                     | Kurzes Mikroinstruktionswort, kleiner Mikroprogrammspeicher , übersichtlicher Mikroprogramme |
 | Nachteil | sehr langes Mikroinstruktionswort, großer Mikroprogrammspeicher            | Zusätzliche Dekodierungshardware, Flexibilität, Geschwindigkeit                              |
