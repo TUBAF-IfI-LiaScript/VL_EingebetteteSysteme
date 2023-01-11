@@ -2,7 +2,7 @@
 
 author:   Sebastian Zug & André Dietrich & Fabian Bär
 email:    sebastian.zug@informatik.tu-freiberg.de & andre.dietrich@informatik.tu-freiberg.de & fabian.baer@student.tu-freiberg.de
-version:  0.0.4
+version:  0.0.5
 language: de
 narrator: Deutsch Female
 
@@ -356,27 +356,30 @@ Sie setzen voraus, daß der eine Operand in A steht, der zweite Operand muss aus
 ```text @plantUML.png
 @startuml
 ditaa
-+---------------------------------+
-|  Datenpfadbezogene Komponenten  |
-|  c88F                           |
-| +-----------------------------+ |
-| |        Z-Register           | |
-| +-----------------------------+ |
-| |                             | |
-| |             ALU             | |
-| |                             | |
-| +-----------+-----------------+ |
-|             |     ^             |
-|             v     |             |
-| +-----------------+-----------+ |
-| |              A              | |
-| +-----------------------------+ |
-|             |     ^             |
-|             V     |             |
-| +-----------------+-----------+ |
-| |              SWR            | |
-| +-----------------------------+ |
-+---------------------------------+
+-----+  +---------------------------------+
+     |  |  Datenpfadbezogene Komponenten  |
+     |  |  c88F                           |
+     |  | +-----------------------------+ |
+     |  | |        Z-Register           | |
+     |  | +-----------------------------+ |
+     |  | |                             | |
+     |  | |             ALU             | |
+     |  | |                             | |
+--+  |  | +-----------+-----------------+ |
+  |  |  |             |     ^             |
+  |  |  |             v     |             |
+--+  |  | +-----------------+-----------+ |
+-----+  | |              A              | |
+        | +-----------------------------+ |
+-----+  |             |     ^             |
+     |  |             V     |             |
+     |  | +-----------------+-----------+ |
+     |  | |              SWR            | |
+     |  | +-----------------------------+ |
+     |  +---------------------------------+
+     |
+
+-----+
 @enduml
 ```
 
@@ -498,7 +501,7 @@ digraph finite_state_machine {
     G[label="{Execute}",style=filled,color=".7 .3 1.0"];
 
     qi -> A;
-    A  -> B  [ label = "E == 7" ];
+    A  -> B  [ label = "" ];
     B  -> C  [ label = "Zusätzlicher Operand \n notwendig" ];
     B  -> D  [ label = "kein Operand \n erforderlich" ];
     C  -> D  [ label = "" ];
