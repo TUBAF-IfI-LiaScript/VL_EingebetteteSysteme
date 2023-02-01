@@ -7,7 +7,7 @@ language: de
 narrator: Deutsch Female
 
 import:  https://raw.githubusercontent.com/liascript-templates/plantUML/master/README.md
-         https://github.com/LiaTemplates/Pyodide
+         https://github.com/liascript/CodeRunner
          https://fjangfaragesh.github.io/AVR8js-mem/INCLUDE.md
 
 script:   https://cdn.jsdelivr.net/chartist.js/latest/chartist.min.js
@@ -33,7 +33,7 @@ gray: @mark(gray,@0)
 | Parameter            | Kursinformationen                                                                                                                                                                      |
 | -------------------- | -------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
 | **Veranstaltung:**   | `Eingebettete Systeme`                                                                                                                                                                 |
-| **Semester**         | `Wintersemester 2021/22`                                                                                                                                                               |
+| **Semester**         | `Wintersemester 2022/23`                                                                                                                                                               |
 | **Hochschule:**      | `Technische Universität Freiberg`                                                                                                                                                      |
 | **Inhalte:**         | `Grundlagen und Verwendung des Analog-Digital-Wandlers`                                                                                                                                                           |
 | **Link auf GitHub:** | [https://github.com/TUBAF-IfI-LiaScript/VL_Softwareentwicklung/blob/master/14_ADC.md](https://github.com/TUBAF-IfI-LiaScript/VL_EingebetteteSysteme/blob/master/14_ADC.md) |
@@ -279,12 +279,10 @@ ax.grid(True, linestyle='-.')
 ax.tick_params(labelcolor='r', labelsize='medium', width=3)
 ax.set_xlim([-0.15, 0.15])
 
-plt.show()
-
-plot(fig) # <- this is required to plot the fig also on the LiaScript canvas
+#plt.show()
+plt.savefig('foo.png')
 ```
-@Pyodide.eval
-
+@LIA.eval(`["main.py"]`, `none`, `python3 main.py`)s
 Wenn ein kontinuierliches Signal, das keine Frequenzkomponenten hat, die über einer Frequenz  $f_c$ liegen mit einer Häufigkeit von größer $2f_c$ abgetatstet wird, kann das Originalsignal aus den gewonnenen Punkten unverzerrt rekonstruiert werden.
 
 Falls dieses Kriterium nicht eingehalten wird, entstehen nichtlineare Verzerrungen, die auch als Alias-Effekt bezeichnet werden (vgl. Python Beispiel).  Die untere Grenze für eine Alias-freie Abtastung wird auch als _Nyquist-Rate_ bezeichnet.  
@@ -359,7 +357,7 @@ Vorteil
 
 > **Merke:** Die Fehlerparameter hängen in starkem Maße von der Konfiguration des Wandlers (Sample Frequenz, Arbeitsbreite, Umgebungstemperatur) ab!
 
-![Bild](./images/14_ADC/Linearitätsfehler.png "Datenblatt AD-Wandler 8 Bit DIL-8, TLC0831, TLC0831IP [^Texas_TLC]")<!-- style="width: 55%; max-width: 1000px" -->
+![Bild](./images/14_ADC/Linearitaetsfehler.png "Datenblatt AD-Wandler 8 Bit DIL-8, TLC0831, TLC0831IP [^Texas_TLC]")<!-- style="width: 55%; max-width: 1000px" -->
 
 [^Texas_TLC]: Firma Texas Instruments, Datenblatt AD-Wandler 8 Bit DIL-8, TLC0831, TLC0831IP
 

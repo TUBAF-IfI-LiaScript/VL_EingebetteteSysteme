@@ -24,9 +24,9 @@ gray: @mark(gray,@0)
 # Modell CPU
 
 | Parameter            | Kursinformationen                                                                                                                                                                        |
-|----------------------|------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
-| **Veranstaltung:**   | `Digitale Systeme / Eingebettete Systeme`                                                                                                                                                  |
-| **Semester**         | `Wintersemester 2022/23`                                                                                                                                                                   |
+| -------------------- | ---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| **Veranstaltung:**   | `Digitale Systeme / Eingebettete Systeme`                                                                                                                                                |
+| **Semester**         | `Wintersemester 2022/23`                                                                                                                                                                 |
 | **Hochschule:**      | `Technische Universität Freiberg`                                                                                                                                                        |
 | **Inhalte:**         | `Realisierung grundlegender arithmetischer Operationen im Rechner`                                                                                                                       |
 | **Link auf GitHub:** | [https://github.com/TUBAF-IfI-LiaScript/VL_Softwareentwicklung/blob/master/11_Modell_CPU.md](https://github.com/TUBAF-IfI-LiaScript/VL_EingebetteteSysteme/blob/master/11_Modell_CPU.md) |

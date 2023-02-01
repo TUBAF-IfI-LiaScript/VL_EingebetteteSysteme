@@ -30,14 +30,14 @@ gray: @mark(gray,@0)
 
 # Ansteuerung von peripheren Komponenten
 
-| Parameter            | Kursinformationen                                                                                                                                                                      |
-| -------------------- | -------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
-| **Veranstaltung:**   | `Eingebettete Systeme`                                                                                                                                                                 |
-| **Semester**         | `Wintersemester 2021/22`                                                                                                                                                               |
-| **Hochschule:**      | `Technische Universität Freiberg`                                                                                                                                                      |
-| **Inhalte:**         | `Konzepte und Nutzung von Timern und Interrupts`                                                                                                                                                           |
+| Parameter            | Kursinformationen                                                                                                                                                                  |
+| -------------------- | ---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| **Veranstaltung:**   | `Digitale Systeme / Eingebettete Systeme`                                                                                                                                          |
+| **Semester**         | `Wintersemester 2022/23`                                                                                                                                                           |
+| **Hochschule:**      | `Technische Universität Freiberg`                                                                                                                                                  |
+| **Inhalte:**         | `Konzepte und Nutzung von Timern und Interrupts`                                                                                                                                   |
 | **Link auf GitHub:** | [https://github.com/TUBAF-IfI-LiaScript/VL_Softwareentwicklung/blob/master/16_Aktoren.md](https://github.com/TUBAF-IfI-LiaScript/VL_EingebetteteSysteme/blob/master/16_Aktoren.md) |
-| **Autoren**          | @author                                                                                                                                                                                |
+| **Autoren**          | @author                                                                                                                                                                            |
 
 ![](https://media.giphy.com/media/10PNyg7YOcaBQA/giphy-downsized.gif)
 
