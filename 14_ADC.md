@@ -30,14 +30,14 @@ gray: @mark(gray,@0)
 
 # Analog-Digital-Wandler
 
-| Parameter            | Kursinformationen                                                                                                                                                                      |
-| -------------------- | -------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
-| **Veranstaltung:**   | `Eingebettete Systeme`                                                                                                                                                                 |
-| **Semester**         | `Wintersemester 2022/23`                                                                                                                                                               |
-| **Hochschule:**      | `Technische Universität Freiberg`                                                                                                                                                      |
-| **Inhalte:**         | `Grundlagen und Verwendung des Analog-Digital-Wandlers`                                                                                                                                                           |
+| Parameter            | Kursinformationen                                                                                                                                                          |
+| -------------------- | -------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| **Veranstaltung:**   | `Digitale Systeme / Eingebettete Systeme`                                                                                                                                  |
+| **Semester**         | `Wintersemester 2022/23`                                                                                                                                                   |
+| **Hochschule:**      | `Technische Universität Freiberg`                                                                                                                                          |
+| **Inhalte:**         | `Grundlagen und Verwendung des Analog-Digital-Wandlers`                                                                                                                    |
 | **Link auf GitHub:** | [https://github.com/TUBAF-IfI-LiaScript/VL_Softwareentwicklung/blob/master/14_ADC.md](https://github.com/TUBAF-IfI-LiaScript/VL_EingebetteteSysteme/blob/master/14_ADC.md) |
-| **Autoren**          | @author                                                                                                                                                                                |
+| **Autoren**          | @author                                                                                                                                                                    |
 
 ![](https://media.giphy.com/media/10PNyg7YOcaBQA/giphy-downsized.gif)
 
