@@ -97,8 +97,7 @@ Für unseren Modellrechner haben wir anhand der Von-Neumann-Architektur 4 versch
 + Eingabe/Ausgabe
 
 ```text @plantUML.png
-@startuml
-ditaa
+@startditaa
                +------------------+
                |c88F              |
                |     Speicher     |
@@ -130,7 +129,7 @@ ditaa
                |    Ein/Ausgabe    |
                |                   |
                +-------------------+
-@enduml
+@endditaa
 ```
 
 
@@ -194,8 +193,7 @@ Mit den farblich hervorgehobenen Elementen lässt sich aber nur wenig anfangen. 
   + Spannungsversorgung
 
 ```text @plantUML.png
-@startuml
-ditaa
+@startditaa
 
 +---------------------------------------------------------------------+
 | Mikrocontroller                                                     |
@@ -214,7 +212,7 @@ ditaa
 | |                   |  |                   |  | z.B. Seriell      | |
 | +-------------------+  +-------------------+  +-------------------+ |
 +---------------------------------------------------------------------+
-@enduml
+@endditaa
 ```
 > **Merke:** Der Übergang zwischen Mikrocontrollern und Mikroprozessoren ist fließend!
 
@@ -343,8 +341,7 @@ Beschriebene Parameter:
 ## Inbetriebnahme
 
 ```text @plantUML.png
-@startuml
-ditaa
+@startditaa
                                Komponenten
 +---------------------------------+     +---------------------------------+
 : Obligatorisch                   |     : Anwendungsspezifisch            |
@@ -368,7 +365,7 @@ ditaa
 |  |   Digitale I/O{o}   |        |     |                                 |
 |  +---------------------+        |     |                                 |
 +---------------------------------+     +---------------------------------+
-@enduml
+@endditaa
 ```
 
 ### Energieversorgung
@@ -569,8 +566,7 @@ Entsprechend können Sie in den Übungen die Tools der Arduino IDE nutzen, die P
 ## Programmierung des Hello-World Beispiels
 
 ```text @plantUML.png
-@startuml
-ditaa
+@startditaa
 
 +-----------------------------------------------------------------------------------------+
 :  Entwicklungsrechner                                                                    |                  
@@ -621,7 +617,7 @@ ditaa
 | +---------------+        +---------------+         +---------------+                    |    
 | Mikrocontroller                                                                         |
 +-----------------------------------------------------------------------------------------+
-@enduml
+@endditaa
 ```
 ### Assembler
 

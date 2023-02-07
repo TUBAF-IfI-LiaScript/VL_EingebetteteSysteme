@@ -89,8 +89,7 @@ style="width: 80%; min-width: 420px; max-width: 720px;"
 ## Ausgangspunkt
 
 ```text @plantUML.png
-@startuml
-ditaa
+@startditaa
                +------------------+
                |c88F              |
                |     Speicher     |
@@ -122,7 +121,7 @@ ditaa
                |    Ein/Ausgabe    |
                |                   |
                +-------------------+
-@enduml
+@endditaa
 ```
 
 Der Prozessor ist die Einheit eines Rechners, die Daten nach einem vom Anwender spezifizierten Programm manipuliert. Das Programm wird als eine Folge von Anweisungen oder Befehlen für die CPU formuliert. Die CPU besteht daher:
@@ -183,25 +182,23 @@ Nun muss die Aufteilung ein Befehlswort in ein Feld für den Operationscode und 
 Befehlsformat:
 
 ```text @plantUML.png
-@startuml
-ditaa
+@startditaa
 15         12 11                             0
 +------------+-------------------------------+
 |c00F OPCODE | cFF0 Operantenaddresse        |
 +------------+-------------------------------+
-@enduml
+@endditaa
 ```
 
 Datenformat:
 
 ```text @plantUML.png
-@startuml
-ditaa
+@startditaa
 15                                           0
 +--------------------------------------------+
 | cFF0 Datensatz                             |
 +--------------------------------------------+
-@enduml
+@endditaa
 ```
 
 Negative Zahlen werden im Zweierkomplement dargestellt.
@@ -314,8 +311,7 @@ zu finden.
 ### Speicherbezogene Komponente
 
 ```text @plantUML.png
-@startuml
-ditaa
+@startditaa
 +-----------------------------------------------------+
 | Speicherbezogene Komponenten                        |
 | c88F                                                |
@@ -331,15 +327,15 @@ ditaa
 | +----------------------+ +-----------------------+  |
 +-----------------------------------------------------+
 
-@enduml
+@endditaa
 ```
 
 
 In einem Speicherzyklus muss der Prozessor zunächst eine Adresse liefern, die während des gesamten Speicherzyklus anliegen muss. Für einen Schreibzyklus betrifft dies auch das entsprechend abzulegende Datum. Bei einem Lesezyklus steht das gewünschte Wort erst mit einer gewissen Verzögerung an der Schnittstelle zur Verfügung. Da der Speicher sowohl zum Schreiben als auch zum Auslesen eines Wortes länger braucht als die Zeit, in der der Prozessor eine elementare Operation ausführen kann, sind zwei Pufferregister vorgesehen:
 
-1. Das Speicher-Adress-Register (MAR : Memory Address Register), in das die Adresse zu Beginn des Speicherzyklus geschrieben wird. In unserem Fall ist das MAR 16 Bit breit.
+1. Das Speicher-Adress-Register (MAR : Memory Address Register), in das die Adresse zu Beginn des Speicherzyklus geschrieben wird. In unserem Fall ist das MAR 11 Bit breit.
 
-2. Das Speicher-Puffer-Register (MBR : Memory Buffer Register). Bei einer Schreiboperation legt der Prozessor ein Datenwort hier ab, so dass es durch den (langsamen) Schreibvorgang im Speicher unter der Adresse abgespeichert wird, die im MAR spezifiziert ist. Beim Lesen stößt der Prozessor den Lesevorgang an und kann später das adressierte Wort aus dem MBR auslesen. Die Adresse ist bei uns 11Bit breit. Wir können also 2^11 Adressen ansprechen, die jeweils 16 Bit Daten repräsentieren.
+2. Das Speicher-Puffer-Register (MBR : Memory Buffer Register). Bei einer Schreiboperation legt der Prozessor ein Datenwort hier ab, so dass es durch den (langsamen) Schreibvorgang im Speicher unter der Adresse abgespeichert wird, die im MAR spezifiziert ist. Beim Lesen stößt der Prozessor den Lesevorgang an und kann später das adressierte Wort aus dem MBR auslesen. Die Adresse ist bei uns 11 Bit breit. Wir können also 2^11 Adressen ansprechen, die jeweils 16 Bit Daten repräsentieren.
 
 Durch MBR und MAR sind Prozessor und Speicher bezüglich ihrer Zykluszeiten weitgehend entkoppelt.
 
@@ -354,8 +350,7 @@ Der Datenpfad besteht aus der ALU, dem allgemeinen Register A (Akkumulator), ein
 Sie setzen voraus, daß der eine Operand in A steht, der zweite Operand muss aus dem Speicher von Adresse `addr` gelesen wird. Dabei gehen wir davon aus, dass der Operand im MBR zur Verfügung steht. Da die ALU rein kombinatorisch aufgebaut werden soll, müssen beide Operanden während der Verarbeitungszeit an den Eingängen anliegen. Das Ergebnis der Operation wird in A verfügbar gemacht. Damit das Ergebnis der Operation nicht einen der Operanden in A überschreibt, ist das Hilfsregister Z vorgesehen. Während der Befehlsausführung wird der Operand aus A nach Z transferiert, damit das Ergebnis in A gespeichert werden kann.
 
 ```text @plantUML.png
-@startuml
-ditaa
+@startditaa
 -----+  +---------------------------------+
      |  |  Datenpfadbezogene Komponenten  |
      |  |  c88F                           |
@@ -380,7 +375,7 @@ ditaa
      |
 
 -----+
-@enduml
+@endditaa
 ```
 
 [Link auf den Simulator](https://tubaf-ifi-liascript.github.io/VL_EingebetteteSysteme/programs/rechenwerk/index.html)
@@ -396,8 +391,7 @@ Die Kontrolleinheit besteht aus:
 5. dem Automaten, der die der sequentiellen Kontrolle realisiert.
 
 ```text @plantUML.png
-@startuml
-ditaa
+@startditaa
 +-------------------------------------------------+
 | 11                             0                |
 | +-------------------------------+               |
@@ -419,7 +413,7 @@ ditaa
 | +-----------------+   +-------------+           |
 | Kontrolleinheit bezogene Komponenten   c88F     |
 +-------------------------------------------------+
-@enduml
+@endditaa
 ```
 
 Der Prozessor liest eine neue Instruktution aus dem MBR in das Instruction Register. Die Control Unit interpretiert den Operationscode und startet die Ausführung, währenddessen wird der Programmzähler bereits auf die Adresse der Instruktion gesetzt, die als nächste ausgeführt werden soll. Über den Programmzähler wird also die Sequenzierung der Instruktionen bei der Abarbeitung eines Programms gesteuert. Das State FF  übernimmt die unterschiedliche Abarbeitung von Befehlen, die in einem Zyklus und zwei Zyklen umgesetzt werden können (HLT vs ADD).
@@ -429,8 +423,7 @@ Der Prozessor liest eine neue Instruktution aus dem MBR in das Instruction Regis
 ### Und jetzt alles zusammen
 
 ```text @plantUML.png
-@startuml
-ditaa
+@startditaa
 +-----------------------------------------------------+  +---------------------------------+
 | Speicherbezogene Komponenten                        |  |  Datenpfadbezogene Komponenten  |
 | c88F                                                |  |  c88F                           |
@@ -467,7 +460,7 @@ ditaa
 | +-----------------+   +-------------+               |
 | Kontrolleinheit bezogene Komponenten          c88F  |
 +-----------------------------------------------------+
-@enduml
+@endditaa
 ```
 
 1. Der Akkumulator (`Register A`). In dem Modellrechner ist der Akkumulator das einzige allgemeine Register. Alle arithmetischen und logischen Befehle arbeiten auf diesem Register.
@@ -625,8 +618,7 @@ Jsr2 --> Fetch1
 ## Umsetzung als Schaltnetz / Schaltwerk
 
 ```text @plantUML.png
-@startuml
-ditaa
+@startditaa
                            Instruction Register
                         +---------+------------+
                         |OPCODE   |            |
@@ -651,7 +643,7 @@ Clock--->|             Sequentielles Schaltnetz                            |    
          |                                                                 |  Flags:
          |                                                                 |<--- Signum, Zero, Overflow, Carry, ...
          +-----------------------------------------------------------------+
-@enduml
+@endditaa
 ```
 
 ### Taktvorgabe
@@ -659,8 +651,7 @@ Clock--->|             Sequentielles Schaltnetz                            |    
 Die Kontrolleinheit benötigt einen Trigger für die Abarbeitung der Instruktionen. Grundlage für den Zeitablauf einer Maschinenoperation ist der Speicherzyklus und der Prozessortakt. Im Modellrechner wird der Ablauf in Phasen zu 8 Taktintervalle unterteilt. In jedem dieser Taktintervalle kann eine Instruktion vollständig oder zur Hälfte ausgeführt werden.
 
 ```text @plantUML.png
-@startuml
-ditaa
+@startditaa
                                 Dauer einer Phase Fetch/Execute
       RUN/HLT        3 Bit             |<-------------->|
           |          Zähler  +---+
@@ -690,7 +681,7 @@ Oscillator           |---|   |   |
                              |   |
                              +---+
                            3 zu 8 Decoder
-@enduml
+@endditaa
 ```
 
 ### Integrierung der Taktvorgabe in Steuerwerk
@@ -703,8 +694,7 @@ Die folgende Abbildung gibt die Kontrolleinheit im schematische Aufbau wieder.  
 4.  das kombinatorische Schaltnetz zu Erzeugung der Steuersignale.
 
 ```text @plantUML.png
-@startuml
-ditaa
+@startditaa
                                                        Instruction Register
                                                     +---------+------------+
                                                     |OPCODE   |            |
@@ -748,7 +738,7 @@ Oscillator           |---|   |   |   |                                          
                              |   |   |                                                                 |
                              +---+   +-----------------------------------------------------------------+
                       3 zu 8 Decoder
-@enduml
+@endditaa
 ```
 
 ### Realsierung der kombinatorischen Logik in der Kontrolleinheit
@@ -766,8 +756,7 @@ Oscillator           |---|   |   |   |                                          
 ## Beschränkungen der aktuellen Lösung
 
 ```text @plantUML.png
-@startuml
-ditaa
+@startditaa
 +----------------------------------+
 |c42C                              +------->
 |                                  |
@@ -795,7 +784,7 @@ ditaa
                        |      Neuer Zustand
                        |
                      Clock
-@enduml
+@endditaa
 ```
 
 {{0-1}}
@@ -808,8 +797,7 @@ ditaa
 
 {{1-2}}
 ```text @plantUML.png
-@startuml
-ditaa
+@startditaa
          +----------------------------------+
          |c8C2                              +------->
          |                                  |
@@ -842,7 +830,7 @@ ditaa
                      Opcodes            +-----------+
                                         Folgezustands
                                           Kontrolle
-@enduml
+@endditaa
 ```
 
 {{1-2}}
@@ -898,8 +886,7 @@ style="width: 80%; min-width: 420px; max-width: 720px;"
 Das Mikroprogrammwortes umfasst alle Steuersignale für Register, ALU, Speicher, usw., die jeweils durch ein Bit in der repräsentiert sind. Eine Steuerleitung wird aktiviert, wenn dieses Bit auf "1" gesetzt ist. Wird das Bit auf "0" gesetzt, wird die Steuerleitung deaktiviert. Der erste Teil des Mikroprogrammwortes wird entsprechend als Steuerwort bezeichnet.
 
 ```text @plantUML.png
-@startuml
-ditaa
+@startditaa
                              Instruction Register
                          +---------+-------------------+
       A_15               | OPCODE  |                   |
@@ -933,7 +920,7 @@ ditaa
       | Read | Write |       | on Bus | off Bus |       |     |     |       |     |     |       |
       |cC42  | cC42  | cC42  |cC42    | cC42    |cC42   |cC42 |cC42 |cC42   |cC42 |cC42 |cC42   |
       +------+-------+-------+--------+---------+-------+-----+-----+-------+-----+-----+-------+
-@enduml
+@endditaa
 ```
 
 Das Mikroprogrammwort enthält außer dem Steuerteil noch den Adressteil. Der Adressteil eines Mikroprogrammwortes enthält direkt die Adresse des nächsten Mikroprogrammwortes. Allerdings muss der Modellrechner auch auf Statusinformation der ALU und auf den Inhalt des OPCODE-Feldes des IR reagieren, so dass der Ablauf des Mikroprogramms nicht immer gleich ist.
