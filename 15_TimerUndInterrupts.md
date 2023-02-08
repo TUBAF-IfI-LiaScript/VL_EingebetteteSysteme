@@ -97,8 +97,7 @@ style="width: 80%; min-width: 420px; max-width: 720px;"
 Ein Interrupt beschreibt die kurzfristige Unterbrechung der normalen Programmausführung, um einen, in der Regel kurzen, aber zeitlich kritischen, Vorgang abzuarbeiten.
 
 ```text @plantUML.png
-@startuml
-ditaa
+@startditaa
                          Hauptprogramm              Interrupt-Routine
                        +---------------+
                        : ...           |
@@ -120,7 +119,7 @@ Interrupt tritt auf -> : Instruktion 2 |      |             v
                        : ...           |
                        +---------------+
 
-@enduml
+@endditaa
 ```
 
 Beispiele
@@ -516,8 +515,7 @@ Aufgaben von Timer/Counter Lösungen in einem Mikrocontroller:
 Die Grundstruktur eines Zählerbaustein ergibt sich aus folgenden Komponenten:
 
 ```text @plantUML.png
-@startuml
-ditaa
+@startditaa
 +------------+
 |            |
 |            v
@@ -537,7 +535,7 @@ ditaa
 |   +-------------------+
 |            |
 +------------+
-@enduml
+@endditaa
 ```
 
 Capture/Compare-Einheiten Nutzen die Basis-Timerimplementierung. Sie können externe Signale aufnehmen und vergleichen, aber beispielsweise auch Pulsmuster erzeugen.
@@ -549,8 +547,7 @@ Sie besitzt meist mehrere Betriebsmodi:
 + Capture-Modus: Beim Auftreten eines externen Signals wird der Inhalt des zugeordneten (laufenden) Timers gespeichert. Auch hier kann ein Interrupt ausgelöst werden.
 
 ```text @plantUML.png
-@startuml
-ditaa
+@startditaa
 +------------+
 |            |
 |            v                             +-------------------+
@@ -573,14 +570,13 @@ ditaa
                 +--------------------+
                 |Captureregister cFF4|
                 +--------------------+
-@enduml
+@endditaa
 ```
 
 + Compare-Modus: Der Zählerstand des zugeordneten Timers wird mit dem eines Registers verglichen. Bei Übereinstimmung kann ein Interrupt ausgelöst werden.
 
 ```text @plantUML.png
-@startuml
-ditaa
+@startditaa
 +------------+
 |            |
 |            v                             +-------------------+
@@ -601,7 +597,7 @@ ditaa
 |            |                   +--------------------+
 +------------+                   |Compareregister cFF4|
                                  +--------------------+
-@enduml
+@endditaa
 ```
 
 > **Merke:** Diese Vorgänge laufen ausschließlich in der Peripherie-Hardware ab, beanspruchen also, abgesehen von eventuellen Interrupts, keine Rechenzeit.
