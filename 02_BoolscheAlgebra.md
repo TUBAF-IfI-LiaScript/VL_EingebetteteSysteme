@@ -145,9 +145,9 @@ Die Abtastung und Bildung des Digitalsignals erfolgt üblicherweise in konstante
 
 [^AnalogRechner]: Wuselig, Deutsch: Analogrechner MEDA 42TA Aritma Prag, Tschechoslowakei, um 1970, https://commons.wikimedia.org/wiki/File:Analogrechner_MEDA_42TA-DSC4445.jpg [Link](http://www.analogmuseum.org/deutsch/collection/meda/43/)
 
-Die Eingabe erfolgte durch verbinden der Komponenten des  mittels Programmierschnüren, Steckern und Rechenimpedanzen (Widerstände für die Summatoren und Integratoren) auf der Programmiertafel.
+Die Eingabe erfolgte durch Verbinden der Komponenten mittels Programmierschnüren, Steckern und Rechenimpedanzen (Widerstände für die Summatoren und Integratoren) auf der Programmiertafel.
 
-> Wem jetzt gleich die Parallelität zu der Stecker-basierten Programmierung des ENIAC einfällt ... Vorsicht dieser war ein Digitalrechner!
+> Wem jetzt gleich die Parallelität zu der Stecker-basierten Programmierung des ENIAC einfällt ... Vorsicht, dieser war ein Digitalrechner!
 
 Zur Auswertung stand zurVerfügung:
 
@@ -165,7 +165,7 @@ Zur Auswertung stand zurVerfügung:
 |           | Präzision nur bei ca. 6 - 8 Bit                  |                                          |
 |           | Langzeitspeicherung von Daten schwierig          |                                          |
 
-> Digitaltechnik ermöglicht eine einfache Realisierung robuster Hardware
+> Digitaltechnik ermöglicht eine einfache Realisierung robuster Hardware.
 
 ### Pegel
 
