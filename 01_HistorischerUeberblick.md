@@ -141,7 +141,7 @@ Bisher stand die Berechnung von einzelnen Ergebnissen auf der Basis einer Sequen
 
 Diesen Aspekt kann man auf technischer und theoretischer Ebene betrachten.
 
-Die Grundlagen moderner Rechner legten die Arbeiten von Georg Boole (1815 - 1864), der eine boolesche Algebra (oder ein boolescher Verband) definierte, die die Eigenschaften der logischen Operatoren UND, ODER, NICHT sowie die Eigenschaften der mengentheoretischen Verknüpfungen Durchschnitt, Vereinigung, Komplement verallgemeinert. Gleichwertig zu booleschen Algebren sind boolesche Ringe, die von UND und ENTWEDER-ODER (exklusiv-ODER) beziehungsweise Durchschnitt und symmetrischer Differenz ausgehen.
+Die Grundlagen moderner Rechner legten die Arbeiten von Georg Boole (1815 - 1864), der eine boolesche Algebra (oder einen booleschen Verband) definierte, die die Eigenschaften der logischen Operatoren UND, ODER, NICHT sowie die Eigenschaften der mengentheoretischen Verknüpfungen Durchschnitt, Vereinigung, Komplement verallgemeinert. Gleichwertig zu booleschen Algebren sind boolesche Ringe, die von UND und ENTWEDER-ODER (exklusiv-ODER) beziehungsweise Durchschnitt und symmetrischer Differenz ausgehen.
 
 ![Boole](./images/01_Historie/George_Boole_color.jpg "Georg Boole [^Boole]")<!-- width="40%" -->
 
@@ -170,7 +170,7 @@ Ausgangspunkt war die Konstruktion einer Rechenmaschine für die Lösung polynom
 
 _The result of my reflections has been that numbers containing more than thirty places of figures will not be required for a long time to come. _
 
-Die Maschine wurde zu Lebzeiten von Babbage nicht realisiert und nur in Teilen durch seinen Sohn implementiert. Aktuell exisitieren in verschiednene Museen unterschiedliche Neubauten.
+Die Maschine wurde zu Lebzeiten von Babbage nicht realisiert und nur in Teilen durch seinen Sohn implementiert. Aktuell exisitieren in verschiedenen Museen unterschiedliche Neubauten.
 
 ![Analytical Engine](./images/01_Historie/Analytical_Engine.jpg "Rekonstruktionsversuch der Analytical Engine im Science Museum London  [^AnalyticalEngine]")<!-- width="60%" -->
 
@@ -189,7 +189,7 @@ Der Verfügbarkeit des elektrische Stromes als Energiequelle löste einige der t
 
 Herman Hollerith (1860 - 1929) interpretierte die Lochkarten als Medium neu. Sein Konzept für die Lösung/Auswertung von organisatorischen Problemstellungen sah diese als Basis für die Datenerfassung.
 
-Das System für die Erfassung von Daten auf Lochkartenbestand aus der Tabelliermaschine, dem Lochkartensortierer, dem Lochkartenlocher und dem Lochkartenleser. Damit konnte die Volkszählung in den USA 1890 innerhalb von 2 Jahren auszuwerten.
+Das System für die Erfassung von Daten auf Lochkarten bestand aus der Tabelliermaschine, dem Lochkartensortierer, dem Lochkartenlocher und dem Lochkartenleser. Damit konnte die Volkszählung in den USA 1890 innerhalb von 2 Jahren ausgewertet werden.
 
 1924 wurde die von ihm gegründete Firma schließlich in International Business Machines Corporation (IBM) umbenannt.
 
@@ -202,7 +202,7 @@ Das System für die Erfassung von Daten auf Lochkartenbestand aus der Tabellierm
       {{1-2}}
 *******************************************************************************
 
-Nicht nur auf der Ebene der Datenerfassung, auch für die Datenspeicherung eröffnete sich auf der Basis des elektrischen Stromes eine Revolution. Relais konnten Zustände nun speichern und logische Operationen abbilden. Damit manifestierte sich aber auch die Festlegung auf eine binäre Informationsdarstellung - An, Aus (1 und 0).
+Nicht nur auf der Ebene der Datenerfassung, sondern auch für die Datenspeicherung eröffnete sich auf der Basis des elektrischen Stromes eine Revolution. Relais konnten Zustände nun speichern und logische Operationen abbilden. Damit manifestierte sich aber auch die Festlegung auf eine binäre Informationsdarstellung - An, Aus (1 und 0).
 
 ![instruction-set](./images/01_Historie/RelaisMitSpeicher.png)<!-- width="100%" -->
 
@@ -212,7 +212,7 @@ Nicht nur auf der Ebene der Datenerfassung, auch für die Datenspeicherung eröf
 
       {{2-3}}
 *******************************************************************************
-Bis in die 80er Jahre bildeten Analogrechner einen alternativen Ansatz. Anders als bei den diskret arbeitenden Digitalrechnern wurde hier im Werte- und Zeitverlauf kontinuierlich gearbeitete. Dabei wurde das Systemverhalten von komplexen Systemen mit elektrischen Schaltungen nachgebildet.
+Bis in die 80er Jahre bildeten Analogrechner einen alternativen Ansatz. Anders als bei den diskret arbeitenden Digitalrechnern wurde hier im Werte- und Zeitverlauf kontinuierlich gearbeitet. Dabei wurde das Systemverhalten von komplexen Systemen mit elektrischen Schaltungen nachgebildet.
 
 ![AnalogRechner](./images/01_Historie/Analogrechner_HW-in-Loop_Ausschnitt.jpg "Analogrechneranwendung für die Simulation der Regelstrecke für einen Regelkreis [^AnalogRechner]")<!-- width="80%" -->
 
@@ -272,10 +272,10 @@ Ein großes Problem bei der Entwicklung des ENIAC war die Fehleranfälligkeit de
 
 In seinem Papier _First Draft on the Report of EDVAC_ beschreibt John von Neumann 1945 die Basiskomponenten eines Rechners:
 
-+ ALU (Arithmetic Logic Unit) – Rechenwerk für die Durchführung mathematisch/logischer Operationen
++ ALU (Arithmetic Logic Unit) – Rechenwerk für die Durchführung mathematischer/logischer Operationen
 + Control Unit – Steuerwerk für die Interpretation der Anweisungen eines Programmes
 + BUS – Bus System, dient zur Kommunikation zwischen den einzelnen Komponenten (Steuerbus, Adressbus, Datenbus)
-+ Memory – Speicherwerk für Programme als auch Daten
++ Memory – Speicherwerk sowohl für Programme als auch für Daten
 + Ein-/Ausgabe – Nutzerinterface
 
 ![Neumann](./images/01_Historie/von_Neumann_Architektur.png "Von-Neumann Architektur [^Neumann]")<!-- width="60%" -->
