@@ -86,7 +86,7 @@ style="width: 80%; min-width: 420px; max-width: 720px;"
 
 Ein Digitalsignal ist ein Signal, welches durch diskrete Werte repräsentiert
 wird und seine zeitliche Entwicklung beschreibt. Es kann aus einem Analogsignal
-heraus abgeleitet werden, dass einen zeitlich-kontinuierlichen Verlauf einer
+heraus abgeleitet werden, das einen zeitlich-kontinuierlichen Verlauf einer
 physikalischen Größe repräsentiert:
 
 + Temperatur im Tagesverlauf
