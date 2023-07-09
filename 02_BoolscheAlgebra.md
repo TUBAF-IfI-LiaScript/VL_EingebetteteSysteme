@@ -451,19 +451,19 @@ Die möglichen 4 Kombinationen einer Schaltfunktion mit einem Eingang lassen sic
 | $x = 1$ | 0            | 1         | 0                   | 1            |
 |         | $f(x)=0$     | $f(x)=x$  | $f(x)=\overline{x}$ | $f(x)=1$     |
 
-### Schaltfunktionen mit zwei Eingänge
+### Schaltfunktionen mit zwei Eingängen
 
 Die möglichen 4 Kombinationen einer Schaltfunktion mit einem Eingang lassen sich wie folgt gliedern:
 
 Konjunktion == UND == AND
 
 <!-- data-type="none" -->
-| Eingang x | Eingang y | Nullfunktion | Konjuktion        |                              |            |
+| Eingang x | Eingang y | Nullfunktion | Konjunktion        |                              |            |
 | --------- | --------- | ------------ | ----------------- | ---------------------------- | ---------- |
-| $x = 0$   | $x = 0$   | 0            | 0                 | 0                            | 0          |
-| $x = 0$   | $x = 1$   | 0            | 0                 | 0                            | 0          |
-| $x = 1$   | $x = 0$   | 0            | 0                 | 1                            | 1          |
-| $x = 1$   | $x = 1$   | 0            | 1                 | 0                            | 1          |
+| $x = 0$   | $y = 0$   | 0            | 0                 | 0                            | 0          |
+| $x = 0$   | $y = 1$   | 0            | 0                 | 0                            | 0          |
+| $x = 1$   | $y = 0$   | 0            | 0                 | 1                            | 1          |
+| $x = 1$   | $y = 1$   | 0            | 1                 | 0                            | 1          |
 |           |           | $f(x,y)=0$   | $f(x,y)=x\cdot y$ | $f(x,y)=x\cdot \overline{y}$ | $f(x,y)=x$ |
 
 Disjunktion == ODER == OR
@@ -494,10 +494,10 @@ negiertes UND == NAND == Sheffer-Funktion genannt
 <!-- data-type="none" -->
 | Eingang x | Eingang y |                       | Implikation                | negiertes UND                 | Einsfunktion |
 | --------- | --------- | --------------------- | -------------------------- | ----------------------------- | ------------ |
-| $x = 0$   | $x = 0$   | 1                     | 1                          | 1                             | 1            |
-| $x = 0$   | $x = 1$   | 1                     | 1                          | 1                             | 1            |
-| $x = 1$   | $x = 0$   | 0                     | 0                          | 1                             | 1            |
-| $x = 1$   | $x = 1$   | 0                     | 1                          | 0                             | 1            |
+| $x = 0$   | $y = 0$   | 1                     | 1                          | 1                             | 1            |
+| $x = 0$   | $y = 1$   | 1                     | 1                          | 1                             | 1            |
+| $x = 1$   | $y = 0$   | 0                     | 0                          | 1                             | 1            |
+| $x = 1$   | $y = 1$   | 0                     | 1                          | 0                             | 1            |
 |           |           | $f(x,y)=\overline{x}$ | $f(x,y)= \overline{x} + y$ | $f(x,y)=\overline{x \cdot y}$ | $f(x,y)=1$   |
 
 ### Exkurs: Technische Realisierung
