@@ -531,7 +531,7 @@ Wir gehen bei der Frage der Schaltnetze in Vorlesung 04 nochmals auf die technis
 
 ## Hausaufgaben
 
-1. Geben Sie für die nachfolgende dargestellt Schaltung eine boolsche Funktion an. Bilden Sie diese in einer Wahrheitstafel ab.
+1. Geben Sie für die nachfolgend dargestellte Schaltung eine boolsche Funktion an. Bilden Sie diese in einer Wahrheitstafel ab.
 
 ![instruction-set](./images/02_BoolscheAlgebra/Schaltwerk2.png)<!-- width="65%" -->
 
