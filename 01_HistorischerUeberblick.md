@@ -272,10 +272,10 @@ Ein großes Problem bei der Entwicklung des ENIAC war die Fehleranfälligkeit de
 
 In seinem Papier _First Draft on the Report of EDVAC_ beschreibt John von Neumann 1945 die Basiskomponenten eines Rechners:
 
-+ ALU (Arithmetic Logic Unit) – Rechenwerk für die Durchführung mathematisch/logischer Operationen
++ ALU (Arithmetic Logic Unit) – Rechenwerk für die Durchführung mathematischer/logischer Operationen
 + Control Unit – Steuerwerk für die Interpretation der Anweisungen eines Programmes
 + BUS – Bus System, dient zur Kommunikation zwischen den einzelnen Komponenten (Steuerbus, Adressbus, Datenbus)
-+ Memory – Speicherwerk für Programme als auch Daten
++ Memory – Speicherwerk sowohl für Programme als auch für Daten
 + Ein-/Ausgabe – Nutzerinterface
 
 ![Neumann](./images/01_Historie/von_Neumann_Architektur.png "Von-Neumann Architektur [^Neumann]")<!-- width="60%" -->
