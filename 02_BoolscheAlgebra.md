@@ -404,7 +404,7 @@ $$
   + durch einen booleschen Ausdruck (gebildet durch Boolesche Variablen und Operationen aus der Booleschen Algebra)
   + ein Schaltwerk aus logischen Gattern
 
-+ Es gibt $2^{2^n}$ verschieden $n$-stellige Boolesche Funktionen (also 16 zweistellige, 256 dreistellige, 65536 vierstellige, ...)
++ Es gibt $2^{2^n}$ verschiedene $n$-stellige Boolesche Funktionen (also 16 zweistellige, 256 dreistellige, 65536 vierstellige, ...)
 
 {{1}}
 > Stellen Sie eine Wahrheitstafel für folgende Schaltfunktion auf:
