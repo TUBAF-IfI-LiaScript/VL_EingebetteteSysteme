@@ -170,7 +170,7 @@ Ausgangspunkt war die Konstruktion einer Rechenmaschine für die Lösung polynom
 
 _The result of my reflections has been that numbers containing more than thirty places of figures will not be required for a long time to come. _
 
-Die Maschine wurde zu Lebzeiten von Babbage nicht realisiert und nur in Teilen durch seinen Sohn implementiert. Aktuell exisitieren in verschiednene Museen unterschiedliche Neubauten.
+Die Maschine wurde zu Lebzeiten von Babbage nicht realisiert und nur in Teilen durch seinen Sohn implementiert. Aktuell exisitieren in verschiedenen Museen unterschiedliche Neubauten.
 
 ![Analytical Engine](./images/01_Historie/Analytical_Engine.jpg "Rekonstruktionsversuch der Analytical Engine im Science Museum London  [^AnalyticalEngine]")<!-- width="60%" -->
 
