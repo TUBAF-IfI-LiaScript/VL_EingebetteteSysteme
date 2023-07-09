@@ -189,7 +189,7 @@ Der Verfügbarkeit des elektrische Stromes als Energiequelle löste einige der t
 
 Herman Hollerith (1860 - 1929) interpretierte die Lochkarten als Medium neu. Sein Konzept für die Lösung/Auswertung von organisatorischen Problemstellungen sah diese als Basis für die Datenerfassung.
 
-Das System für die Erfassung von Daten auf Lochkartenbestand aus der Tabelliermaschine, dem Lochkartensortierer, dem Lochkartenlocher und dem Lochkartenleser. Damit konnte die Volkszählung in den USA 1890 innerhalb von 2 Jahren auszuwerten.
+Das System für die Erfassung von Daten auf Lochkarten bestand aus der Tabelliermaschine, dem Lochkartensortierer, dem Lochkartenlocher und dem Lochkartenleser. Damit konnte die Volkszählung in den USA 1890 innerhalb von 2 Jahren ausgewertet werden.
 
 1924 wurde die von ihm gegründete Firma schließlich in International Business Machines Corporation (IBM) umbenannt.
 
@@ -202,7 +202,7 @@ Das System für die Erfassung von Daten auf Lochkartenbestand aus der Tabellierm
       {{1-2}}
 *******************************************************************************
 
-Nicht nur auf der Ebene der Datenerfassung, auch für die Datenspeicherung eröffnete sich auf der Basis des elektrischen Stromes eine Revolution. Relais konnten Zustände nun speichern und logische Operationen abbilden. Damit manifestierte sich aber auch die Festlegung auf eine binäre Informationsdarstellung - An, Aus (1 und 0).
+Nicht nur auf der Ebene der Datenerfassung, sondern auch für die Datenspeicherung eröffnete sich auf der Basis des elektrischen Stromes eine Revolution. Relais konnten Zustände nun speichern und logische Operationen abbilden. Damit manifestierte sich aber auch die Festlegung auf eine binäre Informationsdarstellung - An, Aus (1 und 0).
 
 ![instruction-set](./images/01_Historie/RelaisMitSpeicher.png)<!-- width="100%" -->
 
@@ -212,7 +212,7 @@ Nicht nur auf der Ebene der Datenerfassung, auch für die Datenspeicherung eröf
 
       {{2-3}}
 *******************************************************************************
-Bis in die 80er Jahre bildeten Analogrechner einen alternativen Ansatz. Anders als bei den diskret arbeitenden Digitalrechnern wurde hier im Werte- und Zeitverlauf kontinuierlich gearbeitete. Dabei wurde das Systemverhalten von komplexen Systemen mit elektrischen Schaltungen nachgebildet.
+Bis in die 80er Jahre bildeten Analogrechner einen alternativen Ansatz. Anders als bei den diskret arbeitenden Digitalrechnern wurde hier im Werte- und Zeitverlauf kontinuierlich gearbeitet. Dabei wurde das Systemverhalten von komplexen Systemen mit elektrischen Schaltungen nachgebildet.
 
 ![AnalogRechner](./images/01_Historie/Analogrechner_HW-in-Loop_Ausschnitt.jpg "Analogrechneranwendung für die Simulation der Regelstrecke für einen Regelkreis [^AnalogRechner]")<!-- width="80%" -->
 
