@@ -327,7 +327,7 @@ $$
 
 Regeln zur Umformung Boolscher Gleichungen
 
-+ Unabhängige Auswertung: Jeder Ausdruck auf der linken oder rechten Seite einer Gleichung kann durch einen anderen ersetzt werden, der mit ihm identisch ist, d.h. man kann die Ausdrücke links und rechtes unabhängig voneinander vereinfachen.
++ Unabhängige Auswertung: Jeder Ausdruck auf der linken oder rechten Seite einer Gleichung kann durch einen anderen ersetzt werden, der mit ihm identisch ist, d.h. man kann die Ausdrücke links und rechts unabhängig voneinander vereinfachen.
 
 + Komplementbildung: Die rechte und die linke Seite einer Gleichung können gleichzeitig durch ihre Komplemente ersetzt werden.
 
