@@ -35,7 +35,7 @@ import: https://raw.githubusercontent.com/LiaTemplates/NetSwarm-Simulator/master
 + Geben Sie das de Morgansche Gesetz wieder.
 + Welchem Grundkonzept folgt das Diagramm von Karnaugh?
 + Welche Areale können im Diagramm zusammengefasst werden?
-+ Worin unterscheidet sich das Vorgehen mit dem Karnaugh Diagramm für Min- und Maxterme.
++ Worin unterscheidet sich das Vorgehen mit dem Karnaugh-Diagramm für Min- und Maxterme?
 
 ---------------------------------------------------------------------
 

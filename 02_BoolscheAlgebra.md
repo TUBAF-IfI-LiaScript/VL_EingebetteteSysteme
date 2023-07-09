@@ -85,8 +85,8 @@ style="width: 80%; min-width: 420px; max-width: 720px;"
 ********************************************************************************
 
 Ein Digitalsignal ist ein Signal, welches durch diskrete Werte repräsentiert
-wird und seine zeitliche Entwicklung beschreibt. Es kann aus einem Analogsignal
-heraus abgeleitet werden, dass einen zeitlich-kontinuierlichen Verlauf einer
+wird und dessen zeitliche Entwicklung durch diese beschrieben wird. Es kann aus einem Analogsignal
+heraus abgeleitet werden, das einen zeitlich-kontinuierlichen Verlauf einer
 physikalischen Größe repräsentiert:
 
 + Temperatur im Tagesverlauf
@@ -145,9 +145,9 @@ Die Abtastung und Bildung des Digitalsignals erfolgt üblicherweise in konstante
 
 [^AnalogRechner]: Wuselig, Deutsch: Analogrechner MEDA 42TA Aritma Prag, Tschechoslowakei, um 1970, https://commons.wikimedia.org/wiki/File:Analogrechner_MEDA_42TA-DSC4445.jpg [Link](http://www.analogmuseum.org/deutsch/collection/meda/43/)
 
-Die Eingabe erfolgte durch verbinden der Komponenten des  mittels Programmierschnüren, Steckern und Rechenimpedanzen (Widerstände für die Summatoren und Integratoren) auf der Programmiertafel.
+Die Eingabe erfolgte durch Verbinden der Komponenten mittels Programmierschnüren, Steckern und Rechenimpedanzen (Widerstände für die Summatoren und Integratoren) auf der Programmiertafel.
 
-> Wem jetzt gleich die Parallelität zu der Stecker-basierten Programmierung des ENIAC einfällt ... Vorsicht dieser war ein Digitalrechner!
+> Wem jetzt gleich die Parallelität zu der Stecker-basierten Programmierung des ENIAC einfällt ... Vorsicht, dieser war ein Digitalrechner!
 
 Zur Auswertung stand zurVerfügung:
 
@@ -165,7 +165,7 @@ Zur Auswertung stand zurVerfügung:
 |           | Präzision nur bei ca. 6 - 8 Bit                  |                                          |
 |           | Langzeitspeicherung von Daten schwierig          |                                          |
 
-> Digitaltechnik ermöglicht eine einfache Realisierung robuster Hardware
+> Digitaltechnik ermöglicht eine einfache Realisierung robuster Hardware.
 
 ### Pegel
 
@@ -202,7 +202,7 @@ Nehmen wir folgende einfache Schaltung an:
 
 ![Meda42](./images/02_BoolscheAlgebra/Circut.png)<!-- width="60%" -->
 
-Wir betrachten den Schalter mit seinen 2 Zuständen als Input und die Glühlampe als Output. Das Übergangsverhalten wird ignoiert.
+Wir betrachten den Schalter mit seinen 2 Zuständen als Input und die Glühlampe als Output. Das Übergangsverhalten wird ignoriert.
 
 | Input                | Output               |
 | -------------------- | -------------------- |
@@ -212,12 +212,12 @@ Wir betrachten den Schalter mit seinen 2 Zuständen als Input und die Glühlampe
 
                       {{1}}
 ****************************************************************
-Für zwei Schalter (Inputs) lassen sich darauf aufbauen zwei grundlegende Schaltungsmuster entwerfen:
+Für zwei Schalter (Inputs) lassen sich darauf aufbauend zwei grundlegende Schaltungsmuster entwerfen:
 
 | Reihenschaltung | Parallelschaltung |
 | --------------- | ----------------- |
 | ![Meda42](./images/02_BoolscheAlgebra/CircutSerial.png) <!-- width="80%" -->            | ![Meda42](./images/02_BoolscheAlgebra/CircutParallel.png) <!-- width="80%" -->                    |
-| Die Lampe leuchtet, wenn der erste und der zweite Schalter geschlossen werden               | Lampe leuchtet, wenn der erste oder der zweite Schalter geschlossen wird            |
+| Die Lampe leuchtet, wenn der erste und der zweite Schalter geschlossen werden               | Lampe leuchtet, wenn der erste oder der zweite Schalter geschlossen. wird.            |
 
 ****************************************************************
 
@@ -228,7 +228,7 @@ Für zwei Schalter (Inputs) lassen sich darauf aufbauen zwei grundlegende Schalt
 
 > Es gibt verschiedene Lösungen, um die Lampe mit drei geschlossenen Schaltern zum Leuchten zu bringen. Wie viele? Wieviele Kombinationen von Schalterbelegungen sind möglich?
 
-> Wir brauchen eine Abstraktion, um die Abbidlung von digitalen Eingängen E auf einen digitalen Ausgang A repräsentieren und analysieren zu können.
+> Wir brauchen eine Abstraktion, um die Abbildung von digitalen Eingängen E auf einen digitalen Ausgang A repräsentieren und analysieren zu können.
 
 Dazu beschreiben wir die Wirkung des elektrischen Stromes
 
@@ -242,7 +242,7 @@ Dazu beschreiben wir die Wirkung des elektrischen Stromes
 + 1 / 0
 + 0 / 1
 
-> Wie aber können logische Grundverknüpfungen identifiziert werden? Auf welchem Wege lassen diese sich praktisch realsieren?
+> Wie aber können logische Grundverknüpfungen identifiziert werden? Auf welchem Wege lassen diese sich praktisch realisieren?
 
 ****************************************************************
 
@@ -327,7 +327,7 @@ $$
 
 Regeln zur Umformung Boolscher Gleichungen
 
-+ Unabhängige Auswertung: Jeder Ausdruck auf der linken oder rechten Seite einer Gleichung kann durch einen anderen ersetzt werden, der mit ihm identisch ist, d.h. man kann die Ausdrücke links und rechtes unabhängig voneinander vereinfachen.
++ Unabhängige Auswertung: Jeder Ausdruck auf der linken oder rechten Seite einer Gleichung kann durch einen anderen ersetzt werden, der mit ihm identisch ist, d.h. man kann die Ausdrücke links und rechts unabhängig voneinander vereinfachen.
 
 + Komplementbildung: Die rechte und die linke Seite einer Gleichung können gleichzeitig durch ihre Komplemente ersetzt werden.
 
@@ -404,7 +404,7 @@ $$
   + durch einen booleschen Ausdruck (gebildet durch Boolesche Variablen und Operationen aus der Booleschen Algebra)
   + ein Schaltwerk aus logischen Gattern
 
-+ Es gibt $2^{2^n}$ verschieden $n$-stellige Boolesche Funktionen (also 16 zweistellige, 256 dreistellige, 65536 vierstellige, ...)
++ Es gibt $2^{2^n}$ verschiedene $n$-stellige Boolesche Funktionen (also 16 zweistellige, 256 dreistellige, 65536 vierstellige, ...)
 
 {{1}}
 > Stellen Sie eine Wahrheitstafel für folgende Schaltfunktion auf:
@@ -451,19 +451,19 @@ Die möglichen 4 Kombinationen einer Schaltfunktion mit einem Eingang lassen sic
 | $x = 1$ | 0            | 1         | 0                   | 1            |
 |         | $f(x)=0$     | $f(x)=x$  | $f(x)=\overline{x}$ | $f(x)=1$     |
 
-### Schaltfunktionen mit zwei Eingänge
+### Schaltfunktionen mit zwei Eingängen
 
 Die möglichen 4 Kombinationen einer Schaltfunktion mit einem Eingang lassen sich wie folgt gliedern:
 
 Konjunktion == UND == AND
 
 <!-- data-type="none" -->
-| Eingang x | Eingang y | Nullfunktion | Konjuktion        |                              |            |
+| Eingang x | Eingang y | Nullfunktion | Konjunktion        |                              |            |
 | --------- | --------- | ------------ | ----------------- | ---------------------------- | ---------- |
-| $x = 0$   | $x = 0$   | 0            | 0                 | 0                            | 0          |
-| $x = 0$   | $x = 1$   | 0            | 0                 | 0                            | 0          |
-| $x = 1$   | $x = 0$   | 0            | 0                 | 1                            | 1          |
-| $x = 1$   | $x = 1$   | 0            | 1                 | 0                            | 1          |
+| $x = 0$   | $y = 0$   | 0            | 0                 | 0                            | 0          |
+| $x = 0$   | $y = 1$   | 0            | 0                 | 0                            | 0          |
+| $x = 1$   | $y = 0$   | 0            | 0                 | 1                            | 1          |
+| $x = 1$   | $y = 1$   | 0            | 1                 | 0                            | 1          |
 |           |           | $f(x,y)=0$   | $f(x,y)=x\cdot y$ | $f(x,y)=x\cdot \overline{y}$ | $f(x,y)=x$ |
 
 Disjunktion == ODER == OR
@@ -494,10 +494,10 @@ negiertes UND == NAND == Sheffer-Funktion genannt
 <!-- data-type="none" -->
 | Eingang x | Eingang y |                       | Implikation                | negiertes UND                 | Einsfunktion |
 | --------- | --------- | --------------------- | -------------------------- | ----------------------------- | ------------ |
-| $x = 0$   | $x = 0$   | 1                     | 1                          | 1                             | 1            |
-| $x = 0$   | $x = 1$   | 1                     | 1                          | 1                             | 1            |
-| $x = 1$   | $x = 0$   | 0                     | 0                          | 1                             | 1            |
-| $x = 1$   | $x = 1$   | 0                     | 1                          | 0                             | 1            |
+| $x = 0$   | $y = 0$   | 1                     | 1                          | 1                             | 1            |
+| $x = 0$   | $y = 1$   | 1                     | 1                          | 1                             | 1            |
+| $x = 1$   | $y = 0$   | 0                     | 0                          | 1                             | 1            |
+| $x = 1$   | $y = 1$   | 0                     | 1                          | 0                             | 1            |
 |           |           | $f(x,y)=\overline{x}$ | $f(x,y)= \overline{x} + y$ | $f(x,y)=\overline{x \cdot y}$ | $f(x,y)=1$   |
 
 ### Exkurs: Technische Realisierung
@@ -510,7 +510,7 @@ zur Realisierung einer Funktion $Y = f (A,B,C,...)$
 ![instruction-set](./images/02_BoolscheAlgebra/TransistorAND.png)<!-- width="45%" -->
 
 {{1}}
-> Und das exclusive ODER, hätten Sie eine Idee?
+> Und das exklusive ODER, hätten Sie eine Idee?
 
 {{1}}
 <!-- data-type="none" -->
@@ -531,7 +531,7 @@ Wir gehen bei der Frage der Schaltnetze in Vorlesung 04 nochmals auf die technis
 
 ## Hausaufgaben
 
-1. Geben Sie für die nachfolgende dargestellt Schaltung eine boolsche Funktion an. Bilden Sie diese in einer Wahrheitstafel ab.
+1. Geben Sie für die nachfolgend dargestellte Schaltung eine boolsche Funktion an. Bilden Sie diese in einer Wahrheitstafel ab.
 
 ![instruction-set](./images/02_BoolscheAlgebra/Schaltwerk2.png)<!-- width="65%" -->
 
