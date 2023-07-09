@@ -202,7 +202,7 @@ Nehmen wir folgende einfache Schaltung an:
 
 ![Meda42](./images/02_BoolscheAlgebra/Circut.png)<!-- width="60%" -->
 
-Wir betrachten den Schalter mit seinen 2 Zuständen als Input und die Glühlampe als Output. Das Übergangsverhalten wird ignoiert.
+Wir betrachten den Schalter mit seinen 2 Zuständen als Input und die Glühlampe als Output. Das Übergangsverhalten wird ignoriert.
 
 | Input                | Output               |
 | -------------------- | -------------------- |
@@ -212,12 +212,12 @@ Wir betrachten den Schalter mit seinen 2 Zuständen als Input und die Glühlampe
 
                       {{1}}
 ****************************************************************
-Für zwei Schalter (Inputs) lassen sich darauf aufbauen zwei grundlegende Schaltungsmuster entwerfen:
+Für zwei Schalter (Inputs) lassen sich darauf aufbauend zwei grundlegende Schaltungsmuster entwerfen:
 
 | Reihenschaltung | Parallelschaltung |
 | --------------- | ----------------- |
 | ![Meda42](./images/02_BoolscheAlgebra/CircutSerial.png) <!-- width="80%" -->            | ![Meda42](./images/02_BoolscheAlgebra/CircutParallel.png) <!-- width="80%" -->                    |
-| Die Lampe leuchtet, wenn der erste und der zweite Schalter geschlossen werden               | Lampe leuchtet, wenn der erste oder der zweite Schalter geschlossen wird            |
+| Die Lampe leuchtet, wenn der erste und der zweite Schalter geschlossen werden               | Lampe leuchtet, wenn der erste oder der zweite Schalter geschlossen. wird.            |
 
 ****************************************************************
 
@@ -228,7 +228,7 @@ Für zwei Schalter (Inputs) lassen sich darauf aufbauen zwei grundlegende Schalt
 
 > Es gibt verschiedene Lösungen, um die Lampe mit drei geschlossenen Schaltern zum Leuchten zu bringen. Wie viele? Wieviele Kombinationen von Schalterbelegungen sind möglich?
 
-> Wir brauchen eine Abstraktion, um die Abbidlung von digitalen Eingängen E auf einen digitalen Ausgang A repräsentieren und analysieren zu können.
+> Wir brauchen eine Abstraktion, um die Abbildung von digitalen Eingängen E auf einen digitalen Ausgang A repräsentieren und analysieren zu können.
 
 Dazu beschreiben wir die Wirkung des elektrischen Stromes
 
@@ -242,7 +242,7 @@ Dazu beschreiben wir die Wirkung des elektrischen Stromes
 + 1 / 0
 + 0 / 1
 
-> Wie aber können logische Grundverknüpfungen identifiziert werden? Auf welchem Wege lassen diese sich praktisch realsieren?
+> Wie aber können logische Grundverknüpfungen identifiziert werden? Auf welchem Wege lassen diese sich praktisch realisieren?
 
 ****************************************************************
 
