@@ -510,7 +510,7 @@ zur Realisierung einer Funktion $Y = f (A,B,C,...)$
 ![instruction-set](./images/02_BoolscheAlgebra/TransistorAND.png)<!-- width="45%" -->
 
 {{1}}
-> Und das exclusive ODER, hätten Sie eine Idee?
+> Und das exklusive ODER, hätten Sie eine Idee?
 
 {{1}}
 <!-- data-type="none" -->
