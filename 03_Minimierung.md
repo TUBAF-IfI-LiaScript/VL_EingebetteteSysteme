@@ -330,6 +330,7 @@ f(x_1, x_2, x_3, x_4) =& x_4+x_3+x_2+x_1 \cdot \\
                 &x_4+x_3+x_2+\overline{x}_1 \cdot \\
                 & x_4+x_3+\overline{x}_2+x_1 \cdot \\
                 & x_4+x_3+\overline{x}_2+\overline{x}_1 \cdot \\
+                & x_4+\overline{x}_3+x_2+\overline{x}_1 \cdot \\
                 & x_4+\overline{x}_3+\overline{x}_2+\overline{x}_1 \cdot \\
                 & \overline{x}_4+x_3+\overline{x}_2+x_1 \cdot \\
                 & \overline{x}_4+x_3+\overline{x}_2+\overline{x}_1 \cdot\\
