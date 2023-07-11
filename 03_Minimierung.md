@@ -104,7 +104,7 @@ Mmmmh, scheinbar keine weitere Vereinfachung möglich ... sollten die beiden Gle
        {{2}}
 ********************************************************************************
 
-Alternativ können wir den Nachweis der Äquivalenz auch über die Wertetabellen darstellen. Das funktioniert natürlich nur bis zu einer gewissen Größe. Aber, die Wertetabelle macht auch deutlich, dass wir mit unseren schon minimierten Termen $x_3\overline{x}_1$ deutlich mehr Terme einschließen!
+Alternativ können wir den Nachweis der Äquivalenz auch über die Wertetabellen darstellen. Das funktioniert natürlich nur bis zu einer gewissen Größe. Aber die Wertetabelle macht auch deutlich, dass wir mit unseren schon minimierten Termen $x_3\overline{x}_1$ deutlich mehr Terme einschließen!
 
 <!-- data-type="none" -->
 | $x_4$                                 | $x_3$ | $x_2$                                 | $x_1$ | $f$ |                                                           |
