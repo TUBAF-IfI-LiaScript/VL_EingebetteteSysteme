@@ -408,7 +408,7 @@ $A= \overline{x} \cdot \overline{y} + \overline{x} \cdot y + x \cdot \overline{y
 | $\overline{y}$ | $\overline{x} \cdot \overline{y}$ | $x \cdot \overline{y}$ |
 | $y$            | $\overline{x} \cdot y$            | $x \cdot y$            |
 
-Mit dieser verschobenen Wahrheittafel lässt sich der Fingerabdruck einer boolschen Funktion darstellen.
+Mit dieser verschobenen Wahrheitstafel lässt sich der Fingerabdruck einer boolschen Funktion darstellen.
 
 Bespiel 1: $f= x \cdot \overline{y} + x \cdot y$
 
@@ -439,7 +439,7 @@ Dieses Konzept lässt sich auch auf Funktionen mit bis zu 4 Variablen übertrage
 | $\overline{z}$ | $\overline{x}\cdot\overline{y}\cdot\overline{z}$ | $\overline{x}\cdot y\cdot\overline{z}$ | $x\cdot y\cdot\overline{z}$     |    $x\cdot\overline{y}\cdot\overline{z}$             |
 | $z$ | $\overline{x}\cdot\overline{y}\cdot z$ | $\overline{x}\cdot y\cdot z$ | $x\cdot y\cdot z$     |    $x\cdot\overline{y}\cdot z$             |
 
-> Jeweils nur ein Wechsel von einer Variable pro Zeilen/Spaltenübergang! Karnaugh-Veitch_Diagramme werden dabei geometrisch als Torus interpretiert !
+> Jeweils nur ein Wechsel von einer Variable pro Zeilen-/Spaltenübergang! Karnaugh-Veitch-Diagramme werden dabei geometrisch als Torus interpretiert!
 
 ********************************************************************************
 
@@ -455,7 +455,7 @@ Vorgehen zur Minimierung der KDNF einer $n$-stelligen Funktion $f$
    + jeder Bereich aus $2^k$ Elementen (mit $0 \leq k \leq n$) besteht;
    + alle Einsen überdeckt werden müssen;
 
-4. die markierten Bereiche nach der Resolutionsregel zu Produkttermen zusammengefasst werden, die summiert werden.
+4. werden die markierten Bereiche nach der Resolutionsregel zu Produkttermen zusammengefasst, die summiert werden.
 
 <!-- data-type="none" -->
 |                              | $\overline{w}\,\overline{x}$ | $\overline{w}x$                     | $wx$ | $w\overline{x}$ |
