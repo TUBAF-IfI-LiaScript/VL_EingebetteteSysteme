@@ -368,7 +368,7 @@ KKNF: $f =x+y$
 
 ********************************************************************************
 
-## Minimierung von Schaltfunktionen mit dem KF-Diagramm
+## Minimierung von Schaltfunktionen mit dem KV-Diagramm
 
 + Wann heißt eine Darstellung minimal ?
 
