@@ -41,11 +41,11 @@ gray: @mark(gray,@0)
 
 ** Fragen an die Veranstaltung**
 
-+ Erläutern Sie das Verfahren von Quine-McCluskey
++ Erläutern Sie das Verfahren von Quine-McCluskey.
 + Grenzen Sie die Begriffe Schaltnetz und Schaltfunktion voneinander ab.
 + Erklären Sie die Idee von Multiplexern und Kodierern.
-+ Welche Besonderheit besteht bei der Ableitung der Schaltfunktionen für einen Dekodierer? Was ist ein SLPD und welche Ausprägungen kennen Sie davon.
-+ Welche Gatterkombinationen sind geeignet um beliebige Schaltfunktionen damit umzusetzen?
++ Welche Besonderheit besteht bei der Ableitung der Schaltfunktionen für einen Dekodierer? Was ist ein SLPD und welche Ausprägungen kennen Sie davon?
++ Welche Gatterkombinationen sind geeignet, um beliebige Schaltfunktionen damit umzusetzen?
 + Was ist ein Glitch?
 
 ---------------------------------------------------------------------
