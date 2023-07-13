@@ -104,7 +104,7 @@ Mmmmh, scheinbar keine weitere Vereinfachung möglich ... sollten die beiden Gle
        {{2}}
 ********************************************************************************
 
-Alternativ können wir den Nachweis der Äquivalenz auch über die Wertetabellen darstellen. Das funktioniert natürlich nur bis zu einer gewissen Größe. Aber, die Wertetabelle macht auch deutlich, dass wir mit unseren schon minimierten Termen $x_3\overline{x}_1$ deutlich mehr Terme einschließen!
+Alternativ können wir den Nachweis der Äquivalenz auch über die Wertetabellen darstellen. Das funktioniert natürlich nur bis zu einer gewissen Größe. Aber die Wertetabelle macht auch deutlich, dass wir mit unseren schon minimierten Termen $x_3\overline{x}_1$ deutlich mehr Terme einschließen!
 
 <!-- data-type="none" -->
 | $x_4$                                 | $x_3$ | $x_2$                                 | $x_1$ | $f$ |                                                           |
@@ -330,6 +330,7 @@ f(x_1, x_2, x_3, x_4) =& x_4+x_3+x_2+x_1 \cdot \\
                 &x_4+x_3+x_2+\overline{x}_1 \cdot \\
                 & x_4+x_3+\overline{x}_2+x_1 \cdot \\
                 & x_4+x_3+\overline{x}_2+\overline{x}_1 \cdot \\
+                & x_4+\overline{x}_3+x_2+\overline{x}_1 \cdot \\
                 & x_4+\overline{x}_3+\overline{x}_2+\overline{x}_1 \cdot \\
                 & \overline{x}_4+x_3+\overline{x}_2+x_1 \cdot \\
                 & \overline{x}_4+x_3+\overline{x}_2+\overline{x}_1 \cdot\\
@@ -367,7 +368,7 @@ KKNF: $f =x+y$
 
 ********************************************************************************
 
-## Minimierung von Schaltfunktionen mit dem KF-Diagramm
+## Minimierung von Schaltfunktionen mit dem KV-Diagramm
 
 + Wann heißt eine Darstellung minimal ?
 
@@ -407,7 +408,7 @@ $A= \overline{x} \cdot \overline{y} + \overline{x} \cdot y + x \cdot \overline{y
 | $\overline{y}$ | $\overline{x} \cdot \overline{y}$ | $x \cdot \overline{y}$ |
 | $y$            | $\overline{x} \cdot y$            | $x \cdot y$            |
 
-Mit dieser verschobenen Wahrheittafel lässt sich der Fingerabdruck einer boolschen Funktion darstellen.
+Mit dieser verschobenen Wahrheitstafel lässt sich der Fingerabdruck einer boolschen Funktion darstellen.
 
 Bespiel 1: $f= x \cdot \overline{y} + x \cdot y$
 
@@ -438,7 +439,7 @@ Dieses Konzept lässt sich auch auf Funktionen mit bis zu 4 Variablen übertrage
 | $\overline{z}$ | $\overline{x}\cdot\overline{y}\cdot\overline{z}$ | $\overline{x}\cdot y\cdot\overline{z}$ | $x\cdot y\cdot\overline{z}$     |    $x\cdot\overline{y}\cdot\overline{z}$             |
 | $z$ | $\overline{x}\cdot\overline{y}\cdot z$ | $\overline{x}\cdot y\cdot z$ | $x\cdot y\cdot z$     |    $x\cdot\overline{y}\cdot z$             |
 
-> Jeweils nur ein Wechsel von einer Variable pro Zeilen/Spaltenübergang! Karnaugh-Veitch_Diagramme werden dabei geometrisch als Torus interpretiert !
+> Jeweils nur ein Wechsel von einer Variable pro Zeilen-/Spaltenübergang! Karnaugh-Veitch-Diagramme werden dabei geometrisch als Torus interpretiert!
 
 ********************************************************************************
 
@@ -454,7 +455,7 @@ Vorgehen zur Minimierung der KDNF einer $n$-stelligen Funktion $f$
    + jeder Bereich aus $2^k$ Elementen (mit $0 \leq k \leq n$) besteht;
    + alle Einsen überdeckt werden müssen;
 
-4. die markierten Bereiche nach der Resolutionsregel zu Produkttermen zusammengefasst werden, die summiert werden.
+4. werden die markierten Bereiche nach der Resolutionsregel zu Produkttermen zusammengefasst, die summiert werden.
 
 <!-- data-type="none" -->
 |                              | $\overline{w}\,\overline{x}$ | $\overline{w}x$                     | $wx$ | $w\overline{x}$ |
@@ -682,7 +683,7 @@ Variante 3: $\color{red} xz + \color{green}\overline{w}\,\overline{y}\,\overline
 
 ### Karnaugh-Veitch für Maxterme
 
-Das Karnaugh-Veitch Diagramm lässt sich analog für Produkte von Summen aufstellen. Im Unterschied zur Minterm-Variante werden hier aber die Nullen erfasst - diese entsprechen ja auch den resultierenden Maxtermen.
+Das Karnaugh-Veitch-Diagramm lässt sich analog für Produkte von Summen aufstellen. Im Unterschied zur Minterm-Variante werden hier aber die Nullen erfasst - diese entsprechen ja auch den resultierenden Maxtermen.
 
 Nehmen wir folgende Wahrheitstafel an:
 
@@ -706,7 +707,7 @@ Nehmen wir folgende Wahrheitstafel an:
 | 1   | 1   | 1   | 0   | 0   |
 | 1   | 1   | 1   | 1   | 1   |
 
-6 Maxterme vs. 10 Minterme
+8 Maxterme vs. 8 Minterme
 
 
 <!-- data-type="none" -->
@@ -729,14 +730,14 @@ Ablesen der KNF:
 - Zusammenfassen der Nullwerte als negierte DNF - $\overline{A}_{DNF} = \overline{w}\,\overline{x}z + x\overline{z} +  w\overline{x}y$
 - Anwendung des de-morganschen Gesetzes - $A_{DNF} = \overline{ \overline{w}\,\overline{x}\,z +  x\overline{z} +  w\overline{x}y} = (w+x+\overline{z})(\overline{x} + z)(\overline{w}+x+\overline{y})$
 
-> **Aufgabe:** Weisen Sie die Äquivalenz der Gleichungen für die KNF $A_{KNF} = (w+x+\overline{z})(\overline{x} + z)(\overline{w}+x+\overline{y})$  und die DNF $A_{DNF} = \overline{w}\,\overline{x}\,\overline{z}+xz+w\overline{x}\overline{z}$ nach.
+> **Aufgabe:** Weisen Sie die Äquivalenz der Gleichungen für die KNF $A_{KNF} = (w+x+\overline{z})(\overline{x} + z)(\overline{w}+x+\overline{y})$  und die DNF $A_{DNF} = \overline{w}\,\overline{x}\,\overline{z}+xz+w\overline{x}\overline{y}$ nach.
 
-## Dont-Care Einträge in der Wahrheitstafel
+## Dont-Care-Einträge in der Wahrheitstafel
 
 In einigen Fällen bildet die Wahrheitstafel Kombinationen der Eingangswerte ab,
 die für die Ausgabe gar nicht relevant sind. In diesem Fall spricht man von sogenannten `don't care` Ausgaben. Letztendlich ist uns das Funktionsergebnis für diese Fälle egal. Aus den `don't care` Fällen können entsprechend weitere Minimierungen hergeleitet werden.
 
-Ein sehr anschauliches Anwendungsbeispiel dafür sind Sieben-Segementanzeigen,
+Ein sehr anschauliches Anwendungsbeispiel dafür sind Sieben-Segment-Anzeigen,
 die aus 7 + 1 (Punkt) Leds bestehen und insbesondere zur Darstellung von Zahlenwerten genutzt werden.
 
 https://cdn-reichelt.de/documents/datenblatt/A500/SA52-11%23KIN.pdf
@@ -779,7 +780,7 @@ Folglich ergeben sich 6 Eingangskombinationen, die für unsere Ausgabe irrelevan
 | $y z$                        | 1                            | 0               | D    | D               |
 | $y \overline{z}$             | 1                            | 1               | D    | D               |
 
-Welche Gleichung für `d` lesen Sie draus ab?
+Welche Gleichung für `d` lesen Sie daraus ab?
 
 ********************************************************************************
 
@@ -792,7 +793,7 @@ Regeln zur Bildung der Schleifen:
 
 + Fangen Sie mit isolierten Zellen an. Die entsprechenden Minterme können nicht mehr vereinfacht werden.
 + Falls keine isolierten Zellen existieren, fange bei denen mit den wenigsten gleichwertigen Nachbarzellen an.
-+ Suche die Schleifen mit der größten Überdeckung von Zellen. Die Schleifen umfassen jeweils $2^n$ mit $(n= 0,1,2,...)$ benachbarte Zellen. Starten Sie mit den kleinsten Schleifen an.
++ Suche die Schleifen mit der größten Überdeckung von Zellen. Die Schleifen umfassen jeweils $2^n$ mit $(n= 0,1,2,...)$ benachbarte Zellen. Starten Sie mit den kleinsten Schleifen.
 + Überlappungen führen nur dann zu minimaleren Ausdrücken, wenn dadurch größere Schleifen gebildet werden können.
 + Die minimale Funktion besteht aus der kleinsten Schleifenmenge, die alle individuell möglichst groß sind.
 
@@ -823,6 +824,6 @@ print(result)
 
 ## Hausaufgaben
 
-+ Lösen Sie das Minimierungsproblem der Einstiegsaufgabe mit dem Karnaugh-Veitch Diagramm.
++ Lösen Sie das Minimierungsproblem der Einstiegsaufgabe mit dem Karnaugh-Veitch-Diagramm.
 + Stellen Sie die Wahrheitstafel für ein weiteres Element der Sieben-Segmentanzeige auf. Minimieren Sie den Ausdruck.
-+ Erstellen Sie mit dem Python-Beispiel eine eigene (willkürliche) Wahrheitstafel und vereinfachen Sie diese mit dem Karnaugh-Veit Diagramm und auf analytischem Wege.
++ Erstellen Sie mit dem Python-Beispiel eine eigene (willkürliche) Wahrheitstafel und vereinfachen Sie diese mit dem Karnaugh-Veitch-Diagramm und auf analytischem Wege.
