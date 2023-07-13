@@ -191,7 +191,7 @@ y =&  \overline{x_3}   x_2   x_1   \overline{x_0} +  \overline{x_3}   x_2   x_1 
 $$
 
 {{0-1}}
-Wie gehen Sie vor? Wir suchen Paare von Mintermen, die sich lediglich in einer Variablen unterscheiden und fassen diese entsprech dem Distributivgesetz und Idempotenzgesetz zusammen.
+Wie gehen Sie vor? Wir suchen Paare von Mintermen, die sich lediglich in einer Variablen unterscheiden, und fassen diese entsprech dem Distributivgesetz und Idempotenzgesetz zusammen.
 
 {{0-1}}
 $$
@@ -281,7 +281,7 @@ result = SOPform([x3, x2, x1, x0], minterms)
 print(result)
 ```
 
-Überrascht? Offenbar gelingt es dem Minimierungsansatz von _sympy_ eine kompaktere Form zu finden.
+Überrascht? Offenbar gelingt es dem Minimierungsansatz von _sympy_, eine kompaktere Form zu finden.
 
 Schauen wir uns die Funktion im Karnaugh-Diagramm an!
 
@@ -310,8 +310,8 @@ $$
 \begin{aligned}
 y =&  \overline{x_3}   x_2   x_1   \overline{x_0} +  \overline{x_3}   x_2   x_1   x_0 +\\
   &  \textcolor{green}{ x_3   \overline{x_2 }\,\overline{x_1 }\,\overline{x_0}} +  x_3   \overline{x_2 }\,\overline{x_1}   x_0 +\\
-  &  \textcolor{green}{  x_3 \overline{x_2}   x_1   \overline{x_0}} + x_3   \overline{x_2}   x_1   x_0 +\\
-  & x_3   x_2   \overline{x_1 }\,\overline{x_0} +  x_3   x_2   \overline{x_1}   x_0 + \\
+  &  x_3 \overline{x_2}   x_1   \overline{x_0} + x_3   \overline{x_2}   x_1   x_0 +\\
+  &  \textcolor{green}{x_3   x_2   \overline{x_1 }\,\overline{x_0}} +  x_3   x_2   \overline{x_1}   x_0 + \\
   & x_3 \overline{x_2}   x_1   \overline{x_0} + x_3   x_2   x_1   \overline{x_0}
 \end{aligned}
 $$
@@ -333,7 +333,7 @@ $$
 
 > Erkenntnisse:
 >
-> + Das Karnaugh-Veitch Diagramm zeigt mögliche Minimierungspotentiale auf, hinsichtlich der Bildung der Schleifen können unterschiedliche Strategien zum tragen kommen.
+> + Das Karnaugh-Veitch-Diagramm zeigt mögliche Minimierungspotentiale auf, hinsichtlich der Bildung der Schleifen können unterschiedliche Strategien zum Tragen kommen.
 > + Offenkundig brauchen wir ein systematischeres Vorgehen bei der Vereinfachung, das alle Kombinationen möglicher Terme berücksichtigt.
 
 ********************************************************************************
