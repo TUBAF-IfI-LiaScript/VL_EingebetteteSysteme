@@ -793,7 +793,7 @@ Regeln zur Bildung der Schleifen:
 
 + Fangen Sie mit isolierten Zellen an. Die entsprechenden Minterme können nicht mehr vereinfacht werden.
 + Falls keine isolierten Zellen existieren, fange bei denen mit den wenigsten gleichwertigen Nachbarzellen an.
-+ Suche die Schleifen mit der größten Überdeckung von Zellen. Die Schleifen umfassen jeweils $2^n$ mit $(n= 0,1,2,...)$ benachbarte Zellen. Starten Sie mit den kleinsten Schleifen an.
++ Suche die Schleifen mit der größten Überdeckung von Zellen. Die Schleifen umfassen jeweils $2^n$ mit $(n= 0,1,2,...)$ benachbarte Zellen. Starten Sie mit den kleinsten Schleifen.
 + Überlappungen führen nur dann zu minimaleren Ausdrücken, wenn dadurch größere Schleifen gebildet werden können.
 + Die minimale Funktion besteht aus der kleinsten Schleifenmenge, die alle individuell möglichst groß sind.
 
