@@ -732,12 +732,12 @@ Ablesen der KNF:
 
 > **Aufgabe:** Weisen Sie die Äquivalenz der Gleichungen für die KNF $A_{KNF} = (w+x+\overline{z})(\overline{x} + z)(\overline{w}+x+\overline{y})$  und die DNF $A_{DNF} = \overline{w}\,\overline{x}\,\overline{z}+xz+w\overline{x}\overline{y}$ nach.
 
-## Dont-Care Einträge in der Wahrheitstafel
+## Dont-Care-Einträge in der Wahrheitstafel
 
 In einigen Fällen bildet die Wahrheitstafel Kombinationen der Eingangswerte ab,
 die für die Ausgabe gar nicht relevant sind. In diesem Fall spricht man von sogenannten `don't care` Ausgaben. Letztendlich ist uns das Funktionsergebnis für diese Fälle egal. Aus den `don't care` Fällen können entsprechend weitere Minimierungen hergeleitet werden.
 
-Ein sehr anschauliches Anwendungsbeispiel dafür sind Sieben-Segementanzeigen,
+Ein sehr anschauliches Anwendungsbeispiel dafür sind Sieben-Segment-Anzeigen,
 die aus 7 + 1 (Punkt) Leds bestehen und insbesondere zur Darstellung von Zahlenwerten genutzt werden.
 
 https://cdn-reichelt.de/documents/datenblatt/A500/SA52-11%23KIN.pdf
@@ -780,7 +780,7 @@ Folglich ergeben sich 6 Eingangskombinationen, die für unsere Ausgabe irrelevan
 | $y z$                        | 1                            | 0               | D    | D               |
 | $y \overline{z}$             | 1                            | 1               | D    | D               |
 
-Welche Gleichung für `d` lesen Sie draus ab?
+Welche Gleichung für `d` lesen Sie daraus ab?
 
 ********************************************************************************
 
