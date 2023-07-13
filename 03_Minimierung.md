@@ -683,7 +683,7 @@ Variante 3: $\color{red} xz + \color{green}\overline{w}\,\overline{y}\,\overline
 
 ### Karnaugh-Veitch für Maxterme
 
-Das Karnaugh-Veitch Diagramm lässt sich analog für Produkte von Summen aufstellen. Im Unterschied zur Minterm-Variante werden hier aber die Nullen erfasst - diese entsprechen ja auch den resultierenden Maxtermen.
+Das Karnaugh-Veitch-Diagramm lässt sich analog für Produkte von Summen aufstellen. Im Unterschied zur Minterm-Variante werden hier aber die Nullen erfasst - diese entsprechen ja auch den resultierenden Maxtermen.
 
 Nehmen wir folgende Wahrheitstafel an:
 
@@ -707,7 +707,7 @@ Nehmen wir folgende Wahrheitstafel an:
 | 1   | 1   | 1   | 0   | 0   |
 | 1   | 1   | 1   | 1   | 1   |
 
-6 Maxterme vs. 10 Minterme
+8 Maxterme vs. 8 Minterme
 
 
 <!-- data-type="none" -->
@@ -730,7 +730,7 @@ Ablesen der KNF:
 - Zusammenfassen der Nullwerte als negierte DNF - $\overline{A}_{DNF} = \overline{w}\,\overline{x}z + x\overline{z} +  w\overline{x}y$
 - Anwendung des de-morganschen Gesetzes - $A_{DNF} = \overline{ \overline{w}\,\overline{x}\,z +  x\overline{z} +  w\overline{x}y} = (w+x+\overline{z})(\overline{x} + z)(\overline{w}+x+\overline{y})$
 
-> **Aufgabe:** Weisen Sie die Äquivalenz der Gleichungen für die KNF $A_{KNF} = (w+x+\overline{z})(\overline{x} + z)(\overline{w}+x+\overline{y})$  und die DNF $A_{DNF} = \overline{w}\,\overline{x}\,\overline{z}+xz+w\overline{x}\overline{z}$ nach.
+> **Aufgabe:** Weisen Sie die Äquivalenz der Gleichungen für die KNF $A_{KNF} = (w+x+\overline{z})(\overline{x} + z)(\overline{w}+x+\overline{y})$  und die DNF $A_{DNF} = \overline{w}\,\overline{x}\,\overline{z}+xz+w\overline{x}\overline{y}$ nach.
 
 ## Dont-Care Einträge in der Wahrheitstafel
 
