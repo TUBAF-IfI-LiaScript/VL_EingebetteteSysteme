@@ -41,10 +41,10 @@ gray: @mark(gray,@0)
 
 ** Fragen an die Veranstaltung**
 
-+ Erläutern Sie die Notwendigkeit von Speicherelementen für die Umsetzung eines Rechners?
++ Erläutern Sie die Notwendigkeit von Speicherelementen für die Umsetzung eines Rechners.
 + Worin besteht der Unterschied zwischen Schaltfunktionen/Schaltnetzen und Schaltwerken?
 + Beschreiben Sie die Eingangsbelegungen und korrespondierenden Zustandsänderungen am RS-Flip-Flop.
-+ Welche anderen Flip-Flop-Typen kennen sie, vor liegen die Vorteile gegenüber dem RS-Flip-Flop?
++ Welche anderen Flip-Flop-Typen kennen sie, wo liegen die Vorteile gegenüber dem RS-Flip-Flop?
 + Erläutern Sie die Begriffe „zustandsgesteuert“ und „flankengesteuert“.
 + Welche Kernelemente hat ein Schaltwerk? Worin unterscheiden sich die Varianten von Mealy und Moore?
 + Welches Vorgehen ist für die Umsetzung eines Schaltwerkes notwendig?
