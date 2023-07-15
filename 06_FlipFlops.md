@@ -107,7 +107,7 @@ Frage: Können wir die bisherigen Konzepte und Techniken der logischen Schaltung
 
 > Merke: Es fehlt ein Speicher!
 
-Was geschieht in einer digitalen Schaltung bei der Rückkopplung eines Gatterausganges ?
+Was geschieht in einer digitalen Schaltung bei der Rückkopplung eines Gatterausganges?
 
 ### Erster Ansatz
 
@@ -160,7 +160,7 @@ __Verwendung eines rückgekoppelten OR-Bausteins.__
 ### Dritter Ansatz (SR-Latch)
 __Gesteuerte Rückkopplung über OR-Baustein.__
 
-Wir fügen eine weitere Eingangsgröße hinzu, die die Logik des Speichers auf der Basis des rückgekoppelten OR vervollständigt. Durch die Einbettung des AND Gatters können wir die Rückkopplung kontrollieren! Die Rückkopplung einer 1 erfolgt nur dann, wenn unser `R` Eingang nicht selbst eine 1 abbildet. Sobald wir an S eine 1 anlegen, wird diese auf Y sichtbar und gespeichert.
+Wir fügen eine weitere Eingangsgröße hinzu, die die Logik des Speichers auf der Basis des rückgekoppelten OR vervollständigt. Durch die Einbettung des AND-Gatters können wir die Rückkopplung kontrollieren! Die Rückkopplung einer 1 erfolgt nur dann, wenn unser `R` Eingang nicht selbst eine 1 abbildet. Sobald wir an S eine 1 anlegen, wird diese auf Y sichtbar und gespeichert.
 
 ![Bild](./images/05_FlipFlops/rs_latch.png)
 
@@ -178,7 +178,7 @@ Wir fügen eine weitere Eingangsgröße hinzu, die die Logik des Speichers auf d
 
 Die mit * markierten Einträge werden jeweils aus dem benachbarten Zustand erreicht. Wenn wir zum Beispiel von einem Zustand $Y=0$ beim Setzen ausgehen, generieren wir mit $S==1$ ein $Y(t+2\Delta t)$ einen 1-Pegel. Dies entspricht der Zeile 4 der Wahrheitstabelle.
 
-Der Zeitversatz von $2\Delta t$ ergibt sich aus dem Schaltverhalten der beiden Bauteile. In obigem Schaubild sind noch drei Typen (OR, AND und NOT) im folgenden wird diese Konfiguration auf NAND und NOR Gatter vereinheitlicht. Entsprechend kann dann von einem einheitlichen $\Delta t$ ausgegangen werden.
+Der Zeitversatz von $2\Delta t$ ergibt sich aus dem Schaltverhalten der beiden Bauteile. In obigem Schaubild sind noch drei Typen (OR, AND und NOT), im folgenden wird diese Konfiguration auf NAND- und NOR-Gatter vereinheitlicht. Entsprechend kann dann von einem einheitlichen $\Delta t$ ausgegangen werden.
 
 Werden beide Eingänge auf 1-Pegel gesetzt, führen beide Ausgänge 1-Pegel. Dieser Zustand kann nicht gespeichert werden. In der Literatur wird dieser Zustand als "unbestimmt" oder "verboten" bezeichnet. Doch die Unbestimmtheit tritt nur in dem Fall ein, wenn beide Eingänge nach diesem Zustand gleichzeitig 0-Pegel erhalten. Dieser Folgezustand ist "unbestimmt", weil nicht klar ist, welcher Ausgang 1-Pegel führt.
 
@@ -187,7 +187,7 @@ Werden beide Eingänge auf 1-Pegel gesetzt, führen beide Ausgänge 1-Pegel. Die
 ```
 
 
-Daraus folgt die Wertetabelle eines RS-Flip-Flops. Anhand dieser Darstellung wird klar, dass die Eingangsgrößen $R$ und $S$ ihre Kürzel aus gutem Grund tragen `Reset` und `Set`.
+Daraus folgt die Wertetabelle eines RS-Flip-Flops. Anhand dieser Darstellung wird klar, dass die Eingangsgrößen $R$ und $S$ ihre Kürzel aus gutem Grund tragen: `Reset` und `Set`.
 
 <!-- data-type="none" -->
 | $R(t)$ | $S(t)$ | $Y'(t) = Y(t+2\Delta t)$ |
@@ -203,11 +203,11 @@ $$\begin{aligned} Y' &= (Y + S) \cdot \overline{R} \\
                      &= \overline{\overline{Y+S} + R}
 \end{aligned}$$
 
-Damit sind wir in der Lage unseren bistabilen Speicher mit zwei Gattern gleichen Typs zu realisieren.
+Damit sind wir in der Lage, unseren bistabilen Speicher mit zwei Gattern gleichen Typs zu realisieren.
 
 ![Bild](./images/05_FlipFlops/asynchronous_latch.png)
 
-Die Darstellung des Flip-Flops kann auch mit Hilfe von NAND Bausteinen erfolgen. Beachten Sie dabei die entsprechend Anpassung der Einganggrößen.
+Die Darstellung des Flip-Flops kann auch mit Hilfe von NAND-Bausteinen erfolgen. Beachten Sie dabei die entsprechende Anpassung der Eingangsgrößen.
 
 ![Bild](./images/05_FlipFlops/RS_with_NOR_and_NAND.png)
 
