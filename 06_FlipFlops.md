@@ -215,11 +215,11 @@ Die Darstellung des Flip-Flops kann auch mit Hilfe von NAND-Bausteinen erfolgen.
 {"devices":{"s":{"label":"S","type":"Button","propagation":0,"position":{"x":0,"y":0}},"r":{"label":"R","type":"Button","propagation":0,"position":{"x":0,"y":95}},"nots":{"label":"~S","type":"Button","propagation":0,"position":{"x":0,"y":180}},"notr":{"label":"~R","type":"Button","propagation":0,"position":{"x":0,"y":285}},"q1":{"label":"Q","type":"Lamp","propagation":0,"position":{"x":365,"y":85}},"notq1":{"label":"~Q","type":"Lamp","propagation":0,"position":{"x":370,"y":10}},"q2":{"label":"Q","type":"Lamp","propagation":0,"position":{"x":370,"y":205}},"notq2":{"label":"~Q","type":"Lamp","propagation":0,"position":{"x":365,"y":295}},"nor1":{"label":"nor","type":"Nor","propagation":0,"bits":1,"position":{"x":180,"y":80}},"nor2":{"label":"nor","type":"Nor","propagation":0,"bits":1,"position":{"x":175,"y":5}},"nand1":{"label":"nand","type":"Nand","propagation":0,"bits":1,"position":{"x":185,"y":185}},"nand2":{"label":"nand","type":"Nand","propagation":0,"bits":1,"position":{"x":185,"y":270}}},"connectors":[{"from":{"id":"s","port":"out"},"to":{"id":"nor2","port":"in1"}},{"from":{"id":"r","port":"out"},"to":{"id":"nor1","port":"in2"}},{"from":{"id":"nor2","port":"out"},"to":{"id":"notq1","port":"in"}},{"from":{"id":"nor1","port":"out"},"to":{"id":"q1","port":"in"}},{"from":{"id":"nor2","port":"out"},"to":{"id":"nor1","port":"in1"},"vertices":[{"x":255,"y":75}]},{"from":{"id":"nor1","port":"out"},"to":{"id":"nor2","port":"in2"},"vertices":[{"x":260,"y":55}]},{"from":{"id":"nots","port":"out"},"to":{"id":"nand1","port":"in1"}},{"from":{"id":"notr","port":"out"},"to":{"id":"nand2","port":"in2"}},{"from":{"id":"nand1","port":"out"},"to":{"id":"nand2","port":"in1"},"vertices":[{"x":265,"y":245}]},{"from":{"id":"nand2","port":"out"},"to":{"id":"nand1","port":"in2"},"vertices":[{"x":265,"y":260}]},{"from":{"id":"nand1","port":"out"},"to":{"id":"q2","port":"in"}},{"from":{"id":"nand2","port":"out"},"to":{"id":"notq2","port":"in"}}],"subcircuits":{}}
 ```
 
-Diese Kombination wird in einem eignen Symbol abstrahiert. Dabei wird unser Ausgang Y nun mit Q bezeichnet.
+Diese Kombination wird in einem eigenen Symbol abstrahiert. Dabei wird unser Ausgang Y nun mit Q bezeichnet.
 
 ![Bild](./images/05_FlipFlops/SR_Latch_Symbol.svg.png)<!-- style="width: 15%; max-width: 500px" -->
 
-### D Latch
+### D-Latch
 
 Der D-Latch macht sich die Tatsache zunutze, dass in den beiden aktiven Eingangskombinationen (01 und 10) eines gattergesteuerten SR-Latch R das Komplement von S ist.
 
@@ -227,6 +227,7 @@ Der D-Latch macht sich die Tatsache zunutze, dass in den beiden aktiven Eingangs
 <tr>
 <td>
 RS-Latch
+
 <!-- data-type="none" -->
 | $R(t)$ | $S(t)$ | $Y'(t) = Y(t+2\Delta t)$ |
 | ------ | ------ | ------------------------ |
@@ -237,6 +238,7 @@ RS-Latch
 </td>
 <td>
 D-Latch
+
 <!-- data-type="none" -->
 | $E(t)$ | $D(t)$ | $Y'(t) = Y(t+2\Delta t)$ |
 | ------ | ------ | ------------------------ |
@@ -259,7 +261,7 @@ D-Latch auf der Basis eines NOR-RS-Gatters
 ![Bild](./images/05_FlipFlops/DLatch_NOR.png)<!-- style="max-width: 300px" -->
 </td>
 <td>
-D-Latch auf mit NAND-RS-Gatters
+D-Latch auf der Basis eines NAND-RS-Gatters
 
 ![Bild](./images/05_FlipFlops/DLatch_NAND.png)<!-- style="max-width: 300px" -->
 </td>
@@ -273,7 +275,7 @@ D-Latch auf mit NAND-RS-Gatters
 
 ![Bild](./images/05_FlipFlops/DLatch_Symbol.svg.png)<!-- style="width: 15%; max-width: 500px" -->
 
-> Das D-Latch kann auch als synchrones Flip-Flop verstanden werden. In diesem Fall würde `E` den Takt betrachtet werden.
+> Das D-Latch kann auch als synchrones Flip-Flop verstanden werden. In diesem Fall würde `E` als Takt betrachtet werden.
 
 ## Anwendungsbeispiele
 
