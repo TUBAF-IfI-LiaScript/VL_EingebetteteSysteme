@@ -355,7 +355,7 @@ Für die Realisierung eines synchronisierten Zustandswechsels wird der Eingang u
 | 1                                     | 0                                     | 1        | 0             |
 | 1                                     | 1                                     | 1        | nicht erlaubt |
 
-Beachten Sie, dass sich mit dem <span style="color: #ff0000">d</span> Zustand die Wertetabelle deutlich verkürzt.
+Beachten Sie, dass sich mit dem <span style="color: #ff0000">d</span>-Zustand die Wertetabelle deutlich verkürzt.
 
 <!--
 style="width: 80%; min-width: 420px; max-width: 720px;"
@@ -394,11 +394,11 @@ Q   |       :  |            :  |          :  |:  |
 </table>
 
 
-> Merke: Durch die Möglichkeit mehrerer Zustandsänderungen in einer Taktphase ist das zustandsgesteuerte RS Flip-Flop für viele Anwendungen ungeeignet.
+> Merke: Durch die Möglichkeit mehrerer Zustandsänderungen in einer Taktphase ist das zustandsgesteuerte RS-Flip-Flop für viele Anwendungen ungeeignet.
 
 ![Bild](./images/05_FlipFlops/ZustandsgesteuertesShiftRegister.png)<!-- style="width: 95%; max-width: 800px" -->
 
-Gewünscht: Flip-Flop Variante, die Änderungen nur zu einem definierten Zeitpunkt zulässt
+Gewünscht: Flip-Flop-Variante, die Änderungen nur zu einem definierten Zeitpunkt zulässt
 
 ### Master-Slave Flip-Flops
 
