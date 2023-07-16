@@ -275,7 +275,7 @@ D-Latch auf der Basis eines NAND-RS-Gatters
 
 ![Bild](./images/05_FlipFlops/DLatch_Symbol.svg.png)<!-- style="width: 15%; max-width: 500px" -->
 
-> Das D-Latch kann auch als synchrones Flip-Flop verstanden werden. In diesem Fall würde `E` als Takt betrachtet werden.
+> Der D-Latch kann auch als synchrones Flip-Flop verstanden werden. In diesem Fall würde `E` als Takt betrachtet werden.
 
 ## Anwendungsbeispiele
 
@@ -283,7 +283,7 @@ __Anwendungsbeispiel 1__
 
 ![Bild](./images/05_FlipFlops/latch_temperature_monitoring.png)
 
-Der Temperatursensor hat einen digitalen Ausgang, der mit dem Überschreiten einen High-Pegel annimmt. Dieser wird in unserem Flip-Flop gespeichert `Q` bis der Zustand mit `R` wieder auf einen Low-Pegel geführt wird.
+Der Temperatursensor hat einen digitalen Ausgang, der mit dem Überschreiten einen High-Pegel annimmt. Dieser wird in unserem Flip-Flop gespeichert `Q`, bis der Zustand mit `R` wieder auf einen Low-Pegel geführt wird.
 
 <!--
 style="width: 80%; min-width: 420px; max-width: 720px;"
@@ -305,7 +305,7 @@ Q          |         |                                       |
 
 __Anwendungsbeispiel 2__
 
-Ein Taster schaltet bei der Aktivierung nicht zu einem definierten Zeitpunkt sondern ist durch eine Übergangsphase gekennzeichnet.
+Ein Taster schaltet bei der Aktivierung nicht zu einem definierten Zeitpunkt, sondern ist durch eine Übergangsphase gekennzeichnet.
 
 ![Bild](./images/05_FlipFlops/EntprellterTaster.png)<!-- style="width: 35%; max-width: 500px" -->
 
