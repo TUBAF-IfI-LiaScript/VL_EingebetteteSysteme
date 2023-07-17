@@ -437,6 +437,7 @@ Wie lässt sich ein Flankendetektor umsetzen? Wir machen uns das Laufzeitverhalt
 
 ![Bild](./images/05_FlipFlops/FlankenDetektor.png)<!-- style="width: 95%; max-width: 800px;" -->
 </td>
+
 <td>
 
 <!--
@@ -468,7 +469,7 @@ A   |     |  |
 </tr>
 </table>
 
-Die Signallaufzeiten sind für die ansteigende und fallende Signalflanke unterschiedlich und variieren mit den Schaltkreisfamilien (3 - 30ns)
+Die Signallaufzeiten sind für die ansteigende und fallende Signalflanke unterschiedlich und variieren mit den Schaltkreisfamilien (3 - 30ns).
 
 Welches Verhalten ergibt sich für ein (positiv) flankengetriggertes RS-FlipFlop daraus?
 
