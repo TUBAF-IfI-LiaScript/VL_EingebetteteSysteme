@@ -249,7 +249,7 @@ __JK-Invertierte Wahrheitstafel__
 *******************************************************************************
 
 Wie kann man systematisch ein synchrones Schaltwerk ausgehend von
-der Problembeschreibung entwerfen ?
+der Problembeschreibung entwerfen?
 
 Automat ist gekennzeichnet durch:
 
@@ -257,7 +257,7 @@ Automat ist gekennzeichnet durch:
 + Zustandsübergänge in jedem Takt abhängig von Eingangssignalen
 + Ausgangssignale werden durch ein Schaltnetz generiert
 
-Mathematisch kann ein Deterministischer Endlicher Automat als Tupel $A = (Q, \Sigma, \delta, q_0, F)$
+Mathematisch kann ein Deterministischer Endlicher Automat als Tupel $A = (Q, \Sigma, \delta, q_0, F)$ dargestellt werden.
 
 + Q ist eine endliche Zustandsmenge.
 + $\Sigma$ ist das endliche Eingabealphabet, also die Menge erlaubter Eingabesymbole.
@@ -307,7 +307,7 @@ Was passiert bei der Sequenzfolge `707022`?
 
 ### Beispiel
 
-Binärsequenzdetektor der drei aufeinander folgende `1` erkennt. Dabei gehen wir davon aus, dass die Übernahme der Werte mit den steigenden Flanken des Taktsignales erfolgt.
+Binärsequenzdetektor, der drei aufeinander folgende `1` erkennt. Dabei gehen wir davon aus, dass die Übernahme der Werte mit den steigenden Flanken des Taktsignales erfolgt.
 
 <!--
 style="width: 80%; min-width: 420px; max-width: 720px;"
@@ -391,10 +391,10 @@ Für unsere digitalen Bauteile müssen wir diese Zustände aber mit `1` und `0` 
 | 9        | 4          | 16                | 7                   |
 | ...      |            |                   |                     |
 
-Da wir insgesamt 4 Zustände haben braucht es $\lceil log_2(4)\rceil = 2$ Speicherelemente, also Flip-Flops.
+Da wir insgesamt 4 Zustände haben, braucht es $\lceil log_2(4)\rceil = 2$ Speicherelemente, also Flip-Flops.
 Die zwei Flip-Flops werden im folgenden als `F` und `G` bezeichnet. Die Ausgabe bezeichnen wir mit `X`.
 
-Mit unserem Schaltwerk wollen wir also eine Funktion abbilden, die die Ausgabe `X` in Abhängigkeit von (historischen) `E` Eingaben generiert. Um letztgenannten Anteil zu integrieren, braucht es die Zustände die in `F` und `G` erfasst sind.
+Mit unserem Schaltwerk wollen wir also eine Funktion abbilden, die die Ausgabe `X` in Abhängigkeit von (historischen) `E` Eingaben generiert. Um letztgenannten Anteil zu integrieren, braucht es die Zustände, die in `F` und `G` erfasst sind.
 
 <!-- data-type="none" style="table-layout: fixed; max-width:420px;"-->
 | Zustand | Flip-Flop F | Flip-Flop G |
@@ -404,7 +404,7 @@ Mit unserem Schaltwerk wollen wir also eine Funktion abbilden, die die Ausgabe `
 | C       | 1           | 0           |
 | D       | 1           | 1           |
 
-Damit ergibt sich dann eine neue Zustandstabelle
+Damit ergibt sich dann eine neue Zustandstabelle:
 
 <!-- data-type="none" style="table-layout: fixed; max-width:820px;"-->
 | Zustand | F | G | E | Zustand' | F' | G' |
