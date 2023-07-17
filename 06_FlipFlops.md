@@ -402,13 +402,13 @@ Gewünscht: Flip-Flop-Variante, die Änderungen nur zu einem definierten Zeitpun
 
 ### Master-Slave Flip-Flops
 
-Ein Master-Slave RS Flip-Flop besteht aus 2 hintereinander-geschalteten zustandsgesteuerten RS Flip-Flops (als „Master“ und als „Slave“ bezeichnet) zusätzlicher Inverter negiert Taktsignal für „Slave“.
+Ein Master-Slave RS-Flip-Flop besteht aus 2 hintereinander-geschalteten zustandsgesteuerten RS-Flip-Flops (als „Master“ und als „Slave“ bezeichnet); zusätzlicher Inverter negiert Taktsignal für „Slave“.
 
 ![Bild](./images/05_FlipFlops/MasterSlave.png)
 
 Ablauf einer Periode:
 
-1. „Master“ übernimmt Eingangswerte bei Clk = 1 („Slave“ ändert sich nicht
+1. „Master“ übernimmt Eingangswerte bei Clk = 1 („Slave“ ändert sich nicht)
 2. „Slave“ übernimmt Werte vom „Master“ bei Clk = 0 („Master“ ändert sich nicht)
 
 ![Bild](./images/05_FlipFlops/timeLineMasterSlave.png)<!-- style="width: 75%; max-width: 800px;" -->
