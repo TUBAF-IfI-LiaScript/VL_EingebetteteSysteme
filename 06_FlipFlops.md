@@ -579,13 +579,13 @@ Das synchrone T-Flipflop besitzt neben dem Clk-Takteingang einen T-Eingang. T st
 
 ### Anwendungen
 
-**Asynchroner 3-Bit Zähler / Frequenzteiler**
+**Asynchroner 3-Bit-Zähler / Frequenzteiler**
 
 ![Bild](./images/05_FlipFlops/AsynchronerBinaerZaehler.png)<!-- style="width: 80%; max-width: 800px;" -->
 
 ![Bild](./images/05_FlipFlops/AsynchronerBinaerZaehlerTiming.png)<!-- style="width: 80%; max-width: 1200px;" -->
 
-> Beachten Sie die Verzögerung der flanken-getriggerten JK-Flipflops - diese bestimmt die maximale Taktfrequenz
+> Beachten Sie die Verzögerung der flanken-getriggerten JK-Flipflops - diese bestimmt die maximale Taktfrequenz.
 
 
 **4 Bit-Speicher Array**
@@ -608,7 +608,7 @@ http://www.datasheet-pdf.com/PDF/DM74LS194A-Datasheet-FairchildSemiconductor-518
 
 ## Einsatzbeispiel
 
-Konfiguration eines einzelnen IO Pins eines AVR Mikrocontrollers mit Hilfe von 4 Flip-Flops.
+Konfiguration eines einzelnen IO-Pins eines AVR-Mikrocontrollers mit Hilfe von 4 Flip-Flops.
 
 ![Bild](./images/05_FlipFlops/DFlipFlopsImAVR.png)
 
@@ -629,4 +629,4 @@ Aufbauen:
 ## Übungsaufgaben
 
 + Weisen Sie nach, dass der zweite Ausgang P am RS-Flip-Flop den invertierten Wert von Q realisiert.
-+ Experimentieren Sie mit der Elektroniksimulation TinkerCAD und einem vorgefertigen Beispiel für ein SR Flip-Flop [Link](https://www.tinkercad.com/things/2u00e0a3qoq-sr-flip-flop-using-nand-gate)
++ Experimentieren Sie mit der Elektroniksimulation TinkerCAD und einem vorgefertigen Beispiel für ein SR-Flip-Flop. [Link](https://www.tinkercad.com/things/2u00e0a3qoq-sr-flip-flop-using-nand-gate)
