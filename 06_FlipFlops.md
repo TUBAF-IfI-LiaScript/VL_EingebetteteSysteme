@@ -528,9 +528,9 @@ Q   |       :  |                        :  |
 </tr>
 </table>
 
-### Weitere Flip-Flop Konfigurationen
+### Weitere Flip-Flop-Konfigurationen
 
-**JK Flip-Flop**
+**JK-Flip-Flop**
 
 JK-Flipflops wurden wahrscheinlich nach Jack Kilby benannt. Sie basieren auf dem asynchronen RS-Flipflop, sind aber flankengesteuert oder als Master-Slave-Flipflop ausgeführt. Mit dem Taktsignal und der Eingangsbelegung J = 1 und K = 0 wird am Ausgang eine 1 erzeugt und gespeichert, alternativ bei K = 1 und J = 0 eine 0. Der Zustand J = K = 1 ist erlaubt; in diesem Fall wechselt der Ausgangspegel mit jeder wirksamen Flanke des Taktsignals. Dieses Verhalten lässt die Bezeichnung als Toggle-Flipflop zu.
 
@@ -565,9 +565,9 @@ Q   |       :  |          :  |          :  |          :  |
              2t                          2t
 ```
 
-**T Flip-Flop**
+**T-Flip-Flop**
 
-Das synchrone T-Flipflop besitzt neben dem Clk-Takteingang einen T-Eingang. T steht dabei für toggle – hin- und herschalten. Es zeigt ein Wechselverhalten synchron zur aktiven Flanke immer dann und nur dann, wenn T = 1 ist. Er kann aus einem flankengesteuerten JK-Flipflop gebildet werden, indem J- und K-Eingang verbunden werden und gemeinsam als T-Eingang fungieren.
+Das synchrone T-Flipflop besitzt neben dem Clk-Takteingang einen T-Eingang. T steht dabei für toggle – hin- und herschalten. Es zeigt ein Wechselverhalten synchron zur aktiven Flanke immer dann und nur dann, wenn T = 1 ist. Es kann aus einem flankengesteuerten JK-Flipflop gebildet werden, indem J- und K-Eingang verbunden werden und gemeinsam als T-Eingang fungieren.
 
 ![Bild](./images/05_FlipFlops/T_Flip-flop.svg.png)<!-- style="width: 20%; max-width: 800px;" -->
 
