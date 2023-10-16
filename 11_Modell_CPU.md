@@ -6,7 +6,8 @@ version:  0.0.5
 language: de
 narrator: Deutsch Female
 
-import:  https://raw.githubusercontent.com/liascript-templates/plantUML/master/README.md
+import:   https://raw.githubusercontent.com/liascript-templates/plantUML/master/README.md
+          https://raw.githubusercontent.com/TUBAF-IfI-LiaScript/VL_EingebetteteSysteme/master/config.md
 
 mark: <span style="background-color: @0;
                                   display: flex;
@@ -25,11 +26,11 @@ gray: @mark(gray,@0)
 
 | Parameter            | Kursinformationen                                                                                                                                                                        |
 | -------------------- | ---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
-| **Veranstaltung:**   | `Digitale Systeme / Eingebettete Systeme`                                                                                                                                                |
-| **Semester**         | `Wintersemester 2022/23`                                                                                                                                                                 |
+| **Veranstaltung:**   | @config.lecture                                                                                                                                                                          |
+| **Semester**         | @config.semester                                                                                                                                                                         |
 | **Hochschule:**      | `Technische Universität Freiberg`                                                                                                                                                        |
 | **Inhalte:**         | `Realisierung grundlegender arithmetischer Operationen im Rechner`                                                                                                                       |
-| **Link auf GitHub:** | [https://github.com/TUBAF-IfI-LiaScript/VL_Softwareentwicklung/blob/master/11_Modell_CPU.md](https://github.com/TUBAF-IfI-LiaScript/VL_EingebetteteSysteme/blob/master/11_Modell_CPU.md) |
+| **Link auf GitHub:** | [https://github.com/TUBAF-IfI-LiaScript/VL_EingebetteteSysteme/blob/master/11_Modell_CPU.md](https://github.com/TUBAF-IfI-LiaScript/VL_EingebetteteSysteme/blob/master/11_Modell_CPU.md) |
 | **Autoren**          | @author                                                                                                                                                                                  |
 
 ![](https://media.giphy.com/media/10PNyg7YOcaBQA/giphy-downsized.gif)

@@ -9,6 +9,7 @@ narrator: Deutsch Female
 import:  https://raw.githubusercontent.com/liascript-templates/plantUML/master/README.md
          https://github.com/liascript/CodeRunner
          https://fjangfaragesh.github.io/AVR8js-mem/INCLUDE.md
+        https://raw.githubusercontent.com/TUBAF-IfI-LiaScript/VL_EingebetteteSysteme/master/config.md
 
 script:   https://cdn.jsdelivr.net/chartist.js/latest/chartist.min.js
          link: https://cdn.jsdelivr.net/chartist.js/latest/chartist.min.css
@@ -32,11 +33,11 @@ gray: @mark(gray,@0)
 
 | Parameter            | Kursinformationen                                                                                                                                                          |
 | -------------------- | -------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
-| **Veranstaltung:**   | `Digitale Systeme / Eingebettete Systeme`                                                                                                                                  |
-| **Semester**         | `Wintersemester 2022/23`                                                                                                                                                   |
+| **Veranstaltung:**   | @config.lecture                                                                                                                                                            |
+| **Semester**         | @config.semester                                                                                                                                                           |
 | **Hochschule:**      | `Technische Universität Freiberg`                                                                                                                                          |
 | **Inhalte:**         | `Grundlagen und Verwendung des Analog-Digital-Wandlers`                                                                                                                    |
-| **Link auf GitHub:** | [https://github.com/TUBAF-IfI-LiaScript/VL_Softwareentwicklung/blob/master/14_ADC.md](https://github.com/TUBAF-IfI-LiaScript/VL_EingebetteteSysteme/blob/master/14_ADC.md) |
+| **Link auf GitHub:** | [https://github.com/TUBAF-IfI-LiaScript/VL_EingebetteteSysteme/blob/master/14_ADC.md](https://github.com/TUBAF-IfI-LiaScript/VL_EingebetteteSysteme/blob/master/14_ADC.md) |
 | **Autoren**          | @author                                                                                                                                                                    |
 
 ![](https://media.giphy.com/media/10PNyg7YOcaBQA/giphy-downsized.gif)

@@ -10,27 +10,39 @@ import:   https://raw.githubusercontent.com/liascript-templates/plantUML/master/
           https://raw.githubusercontent.com/LiaTemplates/NetSwarm-Simulator/master/README.md
           https://raw.githubusercontent.com/liaTemplates/DigiSim/master/README.md
           https://raw.githubusercontent.com/liaTemplates/AVR8js/main/README.md
+          https://raw.githubusercontent.com/TUBAF-IfI-LiaScript/VL_EingebetteteSysteme/master/config.md
+
 -->
 
-# Einführung
+# Einführung 
 
 [![LiaScript](https://raw.githubusercontent.com/LiaScript/LiaScript/master/badges/course.svg)](https://liascript.github.io/course/?https://raw.githubusercontent.com/TUBAF-IfI-LiaScript/VL_EingebetteteSysteme/master/00_Einfuehrung.md#1)
 
 | Parameter                | Kursinformationen                                                                                                                                                                          |
 | ------------------------ | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------ |
-| **Veranstaltung:**       | `Digitale Systeme / Eingebettete Systeme`                                                                                                                                                                     |
-| **Semester**             | `Wintersemester 2022/23`                                                                                                                                                                      |
+| **Veranstaltung:**        | @config.lecture                                                                                                                                              |
+| **Semester**              | @config.semester                                                                                                                                             |
 | **Hochschule:**          | `Technische Universität Freiberg`                                                                                                                                                          |
 | **Inhalte:**             | `Motivation der Vorlesung "Eingebettete Systeme" und Beschreibung der Organisation der Veranstaltung`                                                                                      |
-| **Link auf GitHub:**     | [https://github.com/TUBAF-IfI-LiaScript/VL_Softwareentwicklung/blob/master/00_Einfuehrung.md](https://github.com/TUBAF-IfI-LiaScript/VL_EingebetteteSysteme/blob/master/00_Einfuehrung.md) |
+| **Link auf GitHub:**     | [https://github.com/TUBAF-IfI-LiaScript/VL_EingebetteteSysteme/blob/master/00_Einfuehrung.md](https://github.com/TUBAF-IfI-LiaScript/VL_EingebetteteSysteme/blob/master/00_Einfuehrung.md) |
 | **Autoren**              | @author                                                                                                                                                                                    |
 
 ![](https://media.giphy.com/media/10PNyg7YOcaBQA/giphy-downsized.gif)
 
 ---------------------------------------------------------------------
 
+<font size="6"> Herzlich willkommen im neuen Semester! </font>
 
-## Zielstellung aus dem Modulhandbuch
+## Motivation und Zielstellung
+
+Worum geht es in der Veranstaltung und was sollte ich mitnehmen?
+
++ Perspektive 1: Modulhandbuch
++ Perspektive 2: Hardware 
++ Perspektive 3: Software
++ Perspektive 4: Anwendungen
+
+### Modulhandbuch 
 
 **Qualifikationsziele /Kompetenzen:**
 
@@ -45,19 +57,65 @@ _Mit der erfolgreichen Teilnahme an der Veranstaltung sollen die Studierenden in
 
 _Grundlegende Prinzipien der Modellierung digitaler Systeme: Boolsche Algebren und Funktionen, kombinatorische und sequentielle Schaltungen, Herleitung eines Modellrechners und Abbildung von dessen Funktionsweise, Einführung in die Entwicklung eingebetteter Systeme(Sensoren, Aktoren, elektrische Peripherie, Programmierkonzepte), Anwendungsfelder_
 
-> **Etwas weniger abstrakt bitte!**
 
 ### Hardware
 
-Was sind die Bausteine des Rechners
+Was sind die Bausteine des Rechners?
 ===================================
 
+{{0-1}}
+```text @plantUML.png
+@startditaa
+               +------------------+
+               |c88F              |
+               |     Speicher     |
+               |                  |
+               +---------+-+------+
+                       ^ | ^
+                       | | |
++----------+  Adresse  | | |               +-----+-----+
+|cF88      +-----------+ | |               |  A  |  B  |
+|          |             | |        Daten  +-----+-----+
+|          |   Befehl    | +-------------->+cFF4       |
+|  Steuer- |<------------+                 |           |
+|   werk   |                     Kontrolle |    ALU    |
+|          +------------------------------>+           |
+|          |                               |           |
+|          |                       Status  |           |
+|          |<------------------------------+           |
+|          |                               |           |
+|          | Kontrolle                     |           |
+|          +-------------+         Daten   |           |
+|          |             | +-------------->|           |
+|          |  Status     | |               |           |
+|          |<----------+ | |               |           |
++----------+           | | |               +-----------+
+                       | | |
+                       | V V
+               +-------+-----------+
+               |c8F8               |
+               |    Ein/Ausgabe    |
+               |                   |
+               +-------------------+
+@endditaa
+```
+
+                                     {{1-2}}
+**************************************************************************
+
 ![Diagramme](./images/00_Einfuehrung/IOpin.png "Darstellung der Input/Output Beschaltung eines Microcontrollers")<!-- width="60%" -->
+
 
 **Auf welche konkreten Systeme schauen wir dabei insbesondere?**
 
 + ATmega4808/4809
 + ATmega32
+
+**************************************************************************
+
+
+                                     {{2-3}}
+**************************************************************************
 
 Wie kann ich die Perspektiven systematisieren
 ===================================
@@ -98,6 +156,8 @@ style="width: 80%; min-width: 420px; max-width: 720px;"
            +----------------------------+                                      .
 ```
 
+**************************************************************************
+
 ### Software
 
 **Und wie wirkt sich das auf die Software aus?**
@@ -112,7 +172,7 @@ Nehmen wir an, Sie realisieren ein Arduino Beispielprogramm wie dieses:
 <span id="simulation-time"></span>
 </div>
 
-```cpp
+```cpp helloWord.ino
 byte leds[] = {13, 12, 11, 10};
 void setup() {
   Serial.begin(115200);
@@ -152,6 +212,7 @@ Am Ende des Compiliervorganges entsteht daraus der sogenannte Maschinencode. Die
 :00000001FF
 ```
 
+> Worin unterscheiden wir uns also von einem Arduino-Kurs?
 
 ### Anwendungen
 
@@ -165,12 +226,15 @@ Hier lassen sich dann die eigentlichen "Untersuchungen" realisieren und zum Beis
 
 ![Diagramme](./images/00_Einfuehrung/AlleWetter.png)<!-- width="70%" -->
 
-Die roten Punkte stellen die Verteilung der Wochenendmessungen der vergangenen Woche dar, während die blauen Kreuze die Wochentage illustrieren. Dunkelheit wird durch einen Wert nahe 1023 ausgedrückt, während helle Messituationen durch kleine Werte dargestellt werden.
+Die roten Punkte stellen die Verteilung der Wochenendmessungen der vergangenen Woche dar, während die blauen Kreuze die Wochentage illustrieren. Dunkelheit wird durch einen Wert nahe 1023 ausgedrückt, während helle Messsituationen durch kleine Werte dargestellt werden.
+
+                                 {{1-2}}
+**************************************************************************
 
 **Aber ich will Webentwickler werden ... **
 
-**Antwort A:**@AVR8js.sketch
-Das Studium vermittelt ein breitgefächertes Weltbild und keine eng zugeschnittene Sicht.
+**Antwort A:**
+Was macht Sie da so sicher? Das Studium vermittelt ein breitgefächertes Weltbild und keine eng zugeschnittene Sicht.
 
 **Antwort B:**
 Die Fähigkeit in Algorithmen zu denken ist eine Grundlage wissenschaftlichen
@@ -180,14 +244,16 @@ Arbeitens.
 Am Ende steht Ihnen das Rüstzeug zur Verfügung kleine eingebettete C-Projekte
 selbst anzugehen.
 
+**************************************************************************
+
 ## Organisation
 
-| Name                    | Email                                      |
-|:----------------------- |:------------------------------------------ |
-| Prof. Dr. Sebastian Zug | sebastian.zug@informatik.tu-freiberg.de    |
-| Bastian Zötzl           | Bastian-Gabriel.Zoetzl@student.tu-freiberg.de |
+| Name                    | Email                                   |
+| :---------------------- | :-------------------------------------- |
+| Prof. Dr. Sebastian Zug | sebastian.zug@informatik.tu-freiberg.de |
+| Adrian Köppen           | adrian.koeppen@student.tu-freiberg.de   |
 
-> Bitte melden Sie sich im OPAL unter [Digitale Systeme](https://bildungsportal.sachsen.de/opal/auth/RepositoryEntry/37204033543/CourseNode/1665541981269900003) für die Veranstaltung an. Dies ist im Kontext der Pandemiesituation Teil des Hygienekonzepts der Hochschule.
+> Bitte melden Sie sich im OPAL unter [Digitale Systeme](https://bildungsportal.sachsen.de/opal/auth/RepositoryEntry/37204033543/CourseNode/1665541981269900003) für die Veranstaltung an. Dort finden Sie auch die aktuellen Informationen zur Veranstaltung.
 
 ### Zeitplan
 
@@ -196,26 +262,25 @@ Die Veranstaltung wird sowohl für die Vorlesung als auch die Übung in Präsenz
 <!-- data-type="none" -->
 | Veranstaltungen | Tag      | Zeitslot      | Ort      | Bemerkung     |
 | --------------- | -------- | ------------- | -------- | ------------- |
-| Vorlesung I     | Mittwoch | 16.00 - 17.30 | SPQ-1301 | wöchentlich   |
-| Vorlesung II    | Donnerstag | 16.00 - 17.30 | SPQ-1301 | gerade Wochen |
+| Vorlesung I     | Montag   | 14.30 - 16.00 | HUM-1115 | wöchentlich   |
+| Vorlesung II    | Mittwoch | 11:30 - 13.00 | HUM-1115 | gerade Wochen |
 
 > Die zugehörigen Übungen starten im Dezember und werden dann wöchentlich durchgeführt.
 
-+ Übung 1 (ROB), Mittwochs, 14.00 - 15.30 Uhr, KKB-2097
-+ Übung 2 (BM, Mm, BAI), Freitags, 14.00 - 15.30 Uhr, KKB-2097
++ Übung 1 (ROB), Dienstags, 14.30 - 16.00 Uhr, RAM-2119
++ Übung 2 (BM, Mm, BAI), Mittwochs, 14.30 - 16.00 Uhr, KKB-2097
 
-Wir gehen gegenwärtig noch davon aus, dass die Übungen auch in Präsenz stattfinden. Dort haben Sie dann insbesondere ab Januar Gelegenheit anhand spezifischer Mikrocontrollerschaltungen Ihre Fähigkeiten zu vertiefen.
-
+Die Übungen werden ab Dezember stattfinden stattfinden. Dort haben Sie dann insbesondere ab Januar Gelegenheit anhand spezifischer Mikrocontrollerschaltungen Ihre Kenntnisse praktisch zu vertiefen.
 
 ### Prüfungsmodalitäten
 
 > *Credit-Points:* 6
 
-> *Arbeitsaufwand:* Der Zeitaufwand beträgt 180h und setzt sich zusammen aus **60h Präsenzzeit** und **120h Selbststudium**. Letzteres umfasst die Vor- und Nachbereitung der Lehrveranstaltung, die eigenständige Lösung von Übungsaufgaben sowie die Prüfungsvorbereitung.
+> *Prüfungsform:* Die Veranstaltung wird mit einer schriftlichen Prüfung abgeschlossen. Diese wird als Open Book Klausur entworfen. Sie dürfen dazu alle schriftlichen, nicht-digitalen Materialien verwenden.
 
-> *Prüfungsform:* Die Veranstaltung wird mit einer schriftlichen Prüfung abgeschlossen. Diese wird als Open Book Klausur entworfen.
+Im Laufe der Übungen werden wir "alte" Übungsaufgaben durchspielen, die Ihnen einen Eindruck von der Prüfung vermitteln sollen.
 
-## Literaturempfehlungen
+### Literaturempfehlungen
 
 1. Umfassende Lehrbücher
 
@@ -229,14 +294,18 @@ Wir gehen gegenwärtig noch davon aus, dass die Übungen auch in Präsenz stattf
 
 Bei den jeweiligen Vorlesungsinhalten werden zusätzliche Materialien angegeben.
 
-## Schreiben Sie an den Materialien mit!
+## Engagement und Motivation
+
+> *Arbeitsaufwand:* Der Zeitaufwand beträgt 180h und setzt sich zusammen aus **60h Präsenzzeit** und **120h Selbststudium**. Letzteres umfasst die Vor- und Nachbereitung der Lehrveranstaltung, die eigenständige Lösung von Übungsaufgaben sowie die Prüfungsvorbereitung.
+
+### Open Educational Resources
 
                               {{0-1}}
 ****************************************************************************
 
 Die Lehrmaterialien finden Sie unter GitHub, einer Webseite für das Versionsmanagement und die Projektverwaltung.
 
-[https://github.com/TUBAF-IfI-LiaScript/VL_EingebetteteSysteme/blob/dev/01_HistorischerUeberblick.md](https://github.com/TUBAF-IfI-LiaScript/VL_EingebetteteSysteme/blob/dev/01_HistorischerUeberblick.md)
+[https://github.com/TUBAF-IfI-LiaScript/VL_EingebetteteSysteme](https://github.com/TUBAF-IfI-LiaScript/VL_EingebetteteSysteme)
 
 Die Unterlagen selbst sind in der Auszeichnungsprache LiaScript verfasst und öffentlich verfügbar.
 
@@ -325,13 +394,13 @@ Eine Reihe von Einführungsvideos findet sich unter [Youtube](https://www.youtub
 
 ***************************************************************************
 
-## Trotz Simulation und Virtuellem ...
+### Trotz Simulation und Virtuellem ...
 
 ... braucht es aber auch immer etwas zum anfassen.
 
 > Blick hinter eine Arduino-Anwendung
 
-## Wie können Sie zum Gelingen der Veranstaltung beitragen?
+### Generelles Engagement
 
 * Stellen Sie Fragen, seien Sie kommunikativ!
 
@@ -345,7 +414,7 @@ Eine Reihe von Einführungsvideos findet sich unter [Youtube](https://www.youtub
 
 * Bringen Sie sich mit Implementierungen in die Veranstaltung ein.
 
-## Und wenn Sie dann immer noch programmieren wollen ...
+### Und wenn Sie dann immer noch programmieren wollen ...
 
 Dann wartet das __racetech__ Team auf Sie ... autonomes Fahren im Formular Student Kontext.
 

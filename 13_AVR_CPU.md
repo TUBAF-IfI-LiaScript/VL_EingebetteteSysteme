@@ -6,10 +6,10 @@ version:  0.0.8
 language: de
 narrator: Deutsch Female
 
-import:  https://raw.githubusercontent.com/liascript-templates/plantUML/master/README.md
-         https://github.com/LiaTemplates/Pyodide
-         https://raw.githubusercontent.com/liaTemplates/AVR8js/main/README.md
-         https://github.com/liascript/CodeRunner
+import:   https://raw.githubusercontent.com/liascript-templates/plantUML/master/README.md
+          https://raw.githubusercontent.com/liaTemplates/AVR8js/main/README.md
+          https://github.com/liascript/CodeRunner
+          https://raw.githubusercontent.com/TUBAF-IfI-LiaScript/VL_EingebetteteSysteme/master/config.md
 
 mark: <span style="background-color: @0;
                                   display: flex;
@@ -26,14 +26,14 @@ gray: @mark(gray,@0)
 
 # Programmierung CPU
 
-| Parameter            | Kursinformationen                                                                                                                                                                      |
-| -------------------- | -------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
-| **Veranstaltung:**   | `Digitale Systeme / Eingebettete Systeme`                                                                                                                                                  |
-| **Semester**         | `Wintersemester 2022/23`                                                                                                                                                                   |
-| **Hochschule:**      | `Technische Universität Freiberg`                                                                                                                                                      |
-| **Inhalte:**         | `Einführung AVR Architektur`                                                                                                                                                           |
-| **Link auf GitHub:** | [https://github.com/TUBAF-IfI-LiaScript/VL_Softwareentwicklung/blob/master/13_AVR_CPU.md](https://github.com/TUBAF-IfI-LiaScript/VL_EingebetteteSysteme/blob/master/13_AVR_CPU.md) |
-| **Autoren**          | @author                                                                                                                                                                                |
+| Parameter            | Kursinformationen                                                                                                                                                                  |
+| -------------------- | ---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| **Veranstaltung:**   | @config.lecture                                                                                                                                                                    |
+| **Semester**         | @config.semester                                                                                                                                                                   |
+| **Hochschule:**      | `Technische Universität Freiberg`                                                                                                                                                  |
+| **Inhalte:**         | `Einführung AVR Architektur`                                                                                                                                                       |
+| **Link auf GitHub:** | [https://github.com/TUBAF-IfI-LiaScript/VL_EingebetteteSysteme/blob/master/13_AVR_CPU.md](https://github.com/TUBAF-IfI-LiaScript/VL_EingebetteteSysteme/blob/master/13_AVR_CPU.md) |
+| **Autoren**          | @author                                                                                                                                                                            |
 
 ![](https://media.giphy.com/media/10PNyg7YOcaBQA/giphy-downsized.gif)
 

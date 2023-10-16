@@ -6,13 +6,15 @@ version:  0.0.5
 language: de
 narrator: Deutsch Female
 
-import:  https://raw.githubusercontent.com/liascript-templates/plantUML/master/README.md
-         https://github.com/LiaTemplates/Pyodide
-         https://fjangfaragesh.github.io/AVR8js-mem/INCLUDE.md
+import:   https://raw.githubusercontent.com/liascript-templates/plantUML/master/README.md
+          https://github.com/LiaTemplates/Pyodide
+          https://fjangfaragesh.github.io/AVR8js-mem/INCLUDE.md
+          https://raw.githubusercontent.com/TUBAF-IfI-LiaScript/VL_EingebetteteSysteme/master/config.md
 
-script:  https://cdn.jsdelivr.net/chartist.js/latest/chartist.min.js
-         link: https://cdn.jsdelivr.net/chartist.js/latest/chartist.min.css
-         link: https://cdnjs.cloudflare.com/ajax/libs/animate.css/3.7.0/animate.min.css
+script:   https://cdn.jsdelivr.net/chartist.js/latest/chartist.min.js
+         
+link:     https://cdn.jsdelivr.net/chartist.js/latest/chartist.min.css
+link:     https://cdnjs.cloudflare.com/ajax/libs/animate.css/3.7.0/animate.min.css
 
 
 mark: <span style="background-color: @0;
@@ -32,11 +34,11 @@ gray: @mark(gray,@0)
 
 | Parameter            | Kursinformationen                                                                                                                                                                  |
 | -------------------- | ---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
-| **Veranstaltung:**   | `Digitale Systeme / Eingebettete Systeme`                                                                                                                                          |
-| **Semester**         | `Wintersemester 2022/23`                                                                                                                                                           |
+| **Veranstaltung:**   | @config.lecture                                                                                                                                                                    |
+| **Semester**         | @config.semester                                                                                                                                                                   |
 | **Hochschule:**      | `Technische Universität Freiberg`                                                                                                                                                  |
 | **Inhalte:**         | `Konzepte und Nutzung von Timern und Interrupts`                                                                                                                                   |
-| **Link auf GitHub:** | [https://github.com/TUBAF-IfI-LiaScript/VL_Softwareentwicklung/blob/master/16_Aktoren.md](https://github.com/TUBAF-IfI-LiaScript/VL_EingebetteteSysteme/blob/master/16_Aktoren.md) |
+| **Link auf GitHub:** | [https://github.com/TUBAF-IfI-LiaScript/VL_EingebetteteSysteme/blob/master/16_Aktoren.md](https://github.com/TUBAF-IfI-LiaScript/VL_EingebetteteSysteme/blob/master/16_Aktoren.md) |
 | **Autoren**          | @author                                                                                                                                                                            |
 
 ![](https://media.giphy.com/media/10PNyg7YOcaBQA/giphy-downsized.gif)

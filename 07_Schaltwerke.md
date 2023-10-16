@@ -6,8 +6,9 @@ version:  0.0.7
 language: de
 narrator: Deutsch Female
 
-import: https://raw.githubusercontent.com/LiaTemplates/DigiSim/master/README.md
-        https://raw.githubusercontent.com/liascript-templates/plantUML/master/README.md
+import:   https://raw.githubusercontent.com/LiaTemplates/DigiSim/master/README.md
+          https://raw.githubusercontent.com/liascript-templates/plantUML/master/README.md
+          https://raw.githubusercontent.com/TUBAF-IfI-LiaScript/VL_EingebetteteSysteme/master/config.md
 
 mark: <span style="background-color: @0;
                            display: flex;
@@ -26,12 +27,12 @@ gray: @mark(gray,@0)
 # Schaltwerke
 
 | Parameter            | Kursinformationen                                                                                                                                                                          |
-|----------------------|--------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
-| **Veranstaltung:**   | `Digitale Systeme / Eingebettete Systeme`                                                                                                                                                  |
-| **Semester**         | `Wintersemester 2022/23`                                                                                                                                                                   |
+| -------------------- | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------ |
+| **Veranstaltung:**   | @config.lecture                                                                                                                                                                            |
+| **Semester**         | @config.semester                                                                                                                                                                           |
 | **Hochschule:**      | `Technische Universität Freiberg`                                                                                                                                                          |
 | **Inhalte:**         | `Konzepte und Methodik bei der Erstellung von Schaltwerken`                                                                                                                                |
-| **Link auf GitHub:** | [https://github.com/TUBAF-IfI-LiaScript/VL_Softwareentwicklung/blob/master/07_Schaltwerke.md](https://github.com/TUBAF-IfI-LiaScript/VL_EingebetteteSysteme/blob/master/07_Schaltwerke.md) |
+| **Link auf GitHub:** | [https://github.com/TUBAF-IfI-LiaScript/VL_EingebetteteSysteme/blob/master/07_Schaltwerke.md](https://github.com/TUBAF-IfI-LiaScript/VL_EingebetteteSysteme/blob/master/07_Schaltwerke.md) |
 | **Autoren**          | @author                                                                                                                                                                                    |
 
 ![](https://media.giphy.com/media/10PNyg7YOcaBQA/giphy-downsized.gif)

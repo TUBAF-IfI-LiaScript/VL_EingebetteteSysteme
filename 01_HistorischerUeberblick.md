@@ -6,7 +6,8 @@ version:  0.0.1
 language: de
 narrator: Deutsch Female
 
-import: https://raw.githubusercontent.com/LiaTemplates/NetSwarm-Simulator/master/README.md
+import:   https://raw.githubusercontent.com/LiaTemplates/NetSwarm-Simulator/master/README.md
+          https://raw.githubusercontent.com/TUBAF-IfI-LiaScript/VL_EingebetteteSysteme/master/config.md
 
 -->
 
@@ -16,11 +17,11 @@ import: https://raw.githubusercontent.com/LiaTemplates/NetSwarm-Simulator/master
 
 | Parameter                | Kursinformationen                                                                                                                                                                          |
 | ------------------------ | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------ |
-| **Veranstaltung:**       | `Digitale Systeme / Eingebettete Systeme`                                                                                                                                                                     |
-| **Semester**             | `Wintersemester 2022/23`                                                                                                                                                                      |
+| **Veranstaltung:**        | @config.lecture                                                                                                                                              |
+| **Semester**              | @config.semester                                                                                                                                             |
 | **Hochschule:**          | `Technische Universität Freiberg`                                                                                                                                                          |
 | **Inhalte:**             | `Übersicht der historischen Entwicklung von Rechentechnik`                                                                                      |
-| **Link auf GitHub:** | [https://github.com/TUBAF-IfI-LiaScript/VL_Softwareentwicklung/blob/master/00_Einfuehrung.md](https://github.com/TUBAF-IfI-LiaScript/VL_EingebetteteSysteme/blob/master/01_HistorischerUeberblick.md) |
+| **Link auf GitHub:** | [https://github.com/TUBAF-IfI-LiaScript/VL_EingebetteteSysteme/blob/master/00_Einfuehrung.md](https://github.com/TUBAF-IfI-LiaScript/VL_EingebetteteSysteme/blob/master/01_HistorischerUeberblick.md) |
 | **Autoren**              | @author                                                                                                                                                                                    |
 
 ![](https://media.giphy.com/media/10PNyg7YOcaBQA/giphy-downsized.gif)

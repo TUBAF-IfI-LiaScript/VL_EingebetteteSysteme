@@ -6,9 +6,10 @@ version:  0.0.7
 language: de
 narrator: Deutsch Female
 
-import: https://raw.githubusercontent.com/liaTemplates/AVR8js/main/README.md
-        https://raw.githubusercontent.com/LiaTemplates/DigiSim/master/README.md
-        https://raw.githubusercontent.com/liaTemplates/PyScript/main/README.md
+import:   https://raw.githubusercontent.com/liaTemplates/AVR8js/main/README.md
+          https://raw.githubusercontent.com/LiaTemplates/DigiSim/master/README.md
+          https://raw.githubusercontent.com/liaTemplates/PyScript/main/README.md
+          https://raw.githubusercontent.com/TUBAF-IfI-LiaScript/VL_EingebetteteSysteme/master/config.md
 
 mark: <span style="background-color: @0;
                            display: flex;
@@ -28,11 +29,11 @@ gray: @mark(gray,@0)
 
 | Parameter            | Kursinformationen                                                                                                                                                                                          |
 |----------------------|------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
-| **Veranstaltung:**   | `Digitale Systeme / Eingebettete Systeme`                                                                                                                                                                  |
-| **Semester**         | `Wintersemester 2022/23`                                                                                                                                                                                   |
+| **Veranstaltung:**        | @config.lecture                                                                                                                                              |
+| **Semester**              | @config.semester                                                                                                                                             |
 | **Hochschule:**      | `Technische Universität Freiberg`                                                                                                                                                                          |
 | **Inhalte:**         | `Realisierung von Schaltnetzen, Standardschaltnetze`                                                                                                                                                       |
-| **Link auf GitHub:** | [https://github.com/TUBAF-IfI-LiaScript/VL_Softwareentwicklung/blob/master/05_Standardschaltnetze.md](https://github.com/TUBAF-IfI-LiaScript/VL_EingebetteteSysteme/blob/master/05_Standardschaltnetze.md) |
+| **Link auf GitHub:** | [https://github.com/TUBAF-IfI-LiaScript/VL_EingebetteteSysteme/blob/master/05_Standardschaltnetze.md](https://github.com/TUBAF-IfI-LiaScript/VL_EingebetteteSysteme/blob/master/05_Standardschaltnetze.md) |
 | **Autoren**          | @author                                                                                                                                                                                                    |
 
 ![](https://media.giphy.com/media/10PNyg7YOcaBQA/giphy-downsized.gif)
