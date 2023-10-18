@@ -100,7 +100,7 @@ _Rechenanlage (Computer) ...  Die Gesamtheit der Baueinheiten, aus denen ein Dat
 ## Rechenmaschinen
 
 {{0-1}}
-Ausgangspunkt für die Vereinfachung des Rechnens ist das Konzept des Stellenwertsystems. In einer positionsunabhängigen Darstellung bedarf es immer neuer Symbole um größere Zahlen auszudrücken. Im römischen Zahlensystem sind dies die bekannten Formate `MDCCLXV`. Können SIe den Zahlenwert rekonstruieren - es ist das Gründungsjahr der Bergakademie.
+Ausgangspunkt für die Vereinfachung des Rechnens ist das Konzept des Stellenwertsystems. In einer positionsunabhängigen Darstellung bedarf es immer neuer Symbole um größere Zahlen auszudrücken. Im römischen Zahlensystem sind dies die bekannten Formate `MDCCLXV`. Können Sie den Zahlenwert rekonstruieren - es ist das Gründungsjahr der Bergakademie.
 
 {{0-1}}
 > Die Idee, den Wert einer Ziffer von ihrer Position innerhalb der ganzen Zahl abhängig zu machen, geht auf den indischen Kulturkreis zurück. Die sogenannten "arabischen" Zahlen integrieren dafür einen zentrale Voraussetzung, die "0". Ohne die Null ist es nicht möglich, den Wert einer einzelnen Ziffer zu vervielfachen.
@@ -114,7 +114,7 @@ Der Abakus greift diesen Ansatz auf und strukturiert den Rechenprozess. Dabei un
 [^Abakus]: Dietmar Rabich, Abakus des Wissenschaftspfads, Lübeck, Schleswig-Holstein, Deutschland, https://commons.wikimedia.org/wiki/File:L%C3%BCbeck,_Wissenschaftspfad,_Abakus_--_2017_--_0373.jpg
 
 {{2-3}}
-Eine weitreichendere Unterstützung beim eigentlichen Rechenprozess bieten die Napierschen Rechenstäbe (John Napier 1550 - 1617), die insbesondere die Multiplikation einer Ziffer mit einem beliebig großen Zahl unterstützen.
+Eine weitreichendere Unterstützung beim eigentlichen Rechenprozess bieten die Napierschen Rechenstäbe (John Napier 1550 - 1617), die insbesondere die Multiplikation einer Ziffer mit einer beliebig großen Zahl unterstützen.
 
 {{2-3}}
 !?[Napirsche Rechenstäbe](https://www.youtube.com/watch?v=P_dKOtHjc3o)
@@ -185,14 +185,14 @@ Eine der zentralen Persönlichkeiten, die die Möglichkeiten der Analytical Engi
 
 > _„[Die Analytical Engine] könnte auf andere Dinge als Zahlen angewandt werden, wenn man Objekte finden könnte, deren Wechselwirkungen durch die abstrakte Wissenschaft der Operationen dargestellt werden können und die sich für die Bearbeitung durch die Anweisungen und Mechanismen des Gerätes eignen.“_
 
-Ada Lovelace legte in den Notes zu einem Vortrag von Bagage einen schriftlichen Plan zur Berechnung der Bernoulli-Zahlen in Diagrammform vor, welcher als das erste veröffentlichte formale Computerprogramm gelten kann.
+Ada Lovelace legte in den Notes zu einem Vortrag von Babbage einen schriftlichen Plan zur Berechnung der Bernoulli-Zahlen in Diagrammform vor, welcher als das erste veröffentlichte formale Computerprogramm gelten kann.
 
 ## Es werde Licht ... elektrische Systeme
 
 {{0-1}}
 *******************************************************************************
 
-Der Verfügbarkeit des elektrische Stromes als Energiequelle löste einige der technischen Hürden bei den mechanischen Rechenmaschinen, eröffnete aber auch neue Möglichkeiten bei der Eingabe von Daten.
+Der Verfügbarkeit des elektrischen Stromes als Energiequelle löste einige der technischen Hürden bei den mechanischen Rechenmaschinen, eröffnete aber auch neue Möglichkeiten bei der Eingabe von Daten.
 
 Herman Hollerith (1860 - 1929) interpretierte die Lochkarten als Medium neu. Sein Konzept für die Lösung/Auswertung von organisatorischen Problemstellungen sah diese als Basis für die Datenerfassung.
 
