@@ -270,7 +270,7 @@ Die Veranstaltung wird sowohl für die Vorlesung als auch die Übung in Präsenz
 + Übung 1 (ROB), Dienstags, 14.30 - 16.00 Uhr, RAM-2119
 + Übung 2 (BM, Mm, BAI), Mittwochs, 14.30 - 16.00 Uhr, KKB-2097
 
-Die Übungen werden ab Dezember stattfinden stattfinden. Dort haben Sie dann insbesondere ab Januar Gelegenheit anhand spezifischer Mikrocontrollerschaltungen Ihre Kenntnisse praktisch zu vertiefen.
+Die Übungen werden ab Dezember stattfinden. Dort haben Sie dann insbesondere ab Januar Gelegenheit anhand spezifischer Mikrocontrollerschaltungen Ihre Kenntnisse praktisch zu vertiefen.
 
 ### Prüfungsmodalitäten
 
