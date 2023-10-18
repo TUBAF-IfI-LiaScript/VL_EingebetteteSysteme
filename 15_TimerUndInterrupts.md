@@ -48,7 +48,7 @@ gray: @mark(gray,@0)
 ** Fragen an die Veranstaltung**
 
 + Für welche Aufgaben werden die Timerfunktionen des Mikrocontrollers herangezogen?
-+ Wie sind ein Timer grundlegend aufgebaut (Capture&Compare)?
++ Wie ist ein Timer grundlegend aufgebaut (Capture&Compare)?
 + Was ist PWM? Welche Arten der PWM Generierung gibt es?
 + Welche Schritte werden bei der Abarbeitung von Interrupts durchlaufen?
 + Welche Folgen können verpasste Interrupts haben? Beziehen Sie sich dabei insbesondere auf verschiedene Sensortypen, mit denen Sie in der Übung gearbeitet haben.
