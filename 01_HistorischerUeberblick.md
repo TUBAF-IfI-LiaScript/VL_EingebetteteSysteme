@@ -100,10 +100,10 @@ _Rechenanlage (Computer) ...  Die Gesamtheit der Baueinheiten, aus denen ein Dat
 ## Rechenmaschinen
 
 {{0-1}}
-Ausgangspunkt für die Vereinfachung des Rechnens ist das Konzept des Stellenwertsystems. In einer positionsunabhängigen Darstellung bedarf es immer neuer Symbole um größere Zahlen auszudrücken. Im römischen Zahlensystem sind dies die bekannten Formate `MDCCLXV`. Dabei bedeutet `V` immer 5.
+Ausgangspunkt für die Vereinfachung des Rechnens ist das Konzept des Stellenwertsystems. In einer positionsunabhängigen Darstellung bedarf es immer neuer Symbole um größere Zahlen auszudrücken. Im römischen Zahlensystem sind dies die bekannten Formate `MDCCLXV`. Können SIe den Zahlenwert rekonstruieren - es ist das Gründungsjahr der Bergakademie.
 
 {{0-1}}
-Die Idee, den Wert einer Ziffer von ihrer Position innerhalb der ganzen Zahl abhängig zu machen, geht auf den indischen Kulturkreis zurück. Die sogenannten "arabischen" Zahlen integrieren dafür einen zentrale Voraussetzung, die "0". Ohne die Null ist es nicht möglich, den Wert einer einzelnen Ziffer zu vervielfachen.
+> Die Idee, den Wert einer Ziffer von ihrer Position innerhalb der ganzen Zahl abhängig zu machen, geht auf den indischen Kulturkreis zurück. Die sogenannten "arabischen" Zahlen integrieren dafür einen zentrale Voraussetzung, die "0". Ohne die Null ist es nicht möglich, den Wert einer einzelnen Ziffer zu vervielfachen.
 
 {{1-2}}
 Der Abakus greift diesen Ansatz auf und strukturiert den Rechenprozess. Dabei unterscheidet man verschiedene Systeme. Es exisitieren Vorgehensmuster für die Umsetzung der Grundrechenarten und des Wurzelziehens.
@@ -120,7 +120,7 @@ Eine weitreichendere Unterstützung beim eigentlichen Rechenprozess bieten die N
 !?[Napirsche Rechenstäbe](https://www.youtube.com/watch?v=P_dKOtHjc3o)
 
 {{3-4}}
-Die notwendige manuelle Addition bei größeren Faktoren löste die Rechenmaschine von Wilhelm Schickard. Die Automatisierung der Addition ist mechanisch gelöst und zum Beispiel unter [Link](https://www.rechenwerkzeug.de/schickar.htm).
+Die notwendige manuelle Addition bei größeren Faktoren löste die Rechenmaschine von Wilhelm Schickard. Die Automatisierung der Addition ist mechanisch gelöst und zum Beispiel unter [Link](https://www.rechenwerkzeug.de/schickar.htm) beschrieben.
 
 {{3-4}}
 ![Schickard](./images/01_Historie/Schickardmaschine.jpg "Nachbau der Rechenmaschine von Wilhelm Schickard [^Schickard]") <!-- width="60%" -->
@@ -163,7 +163,7 @@ Auf den Karte waren Informationen über das in einem Schritt zu webende Muster e
 Ausgangspunkt war die Konstruktion einer Rechenmaschine für die Lösung polynomialer Funktionen.  Dabei entstand die Vision einer universellen Rechenapperatur, die auf der Basis eines programmierbaren Systems Berechnungen löst. Die erste Beschreibung wurde 1837 veröffentlicht.
 
 + Energiebereitstellung über eine Dampfmaschine
-+ 55000 mechanische Komponenten
++ 8000 mechanische Komponenten
 + Eingabe der Daten und Befehle über Lochkarten
 + Nutzerinterface:  Drucker, ein Kurvenplotter und eine Glocke
 + Zahlendarstellung: dezimale Festkommazahlen, pro Stelle ein Zahnrad
@@ -180,6 +180,12 @@ Die Maschine wurde zu Lebzeiten von Babbage nicht realisiert und nur in Teilen d
 !?[Analytical Engine](https://www.youtube.com/watch?v=_fyUtU6LVNY&feature=emb_logo)
 
 !?[Analytical Engine](https://www.youtube.com/watch?v=XSkGY6LchJs)
+
+Eine der zentralen Persönlichkeiten, die die Möglichkeiten der Analytical Engine erkannte, war Ada Lovelace. 
+
+> _„[Die Analytical Engine] könnte auf andere Dinge als Zahlen angewandt werden, wenn man Objekte finden könnte, deren Wechselwirkungen durch die abstrakte Wissenschaft der Operationen dargestellt werden können und die sich für die Bearbeitung durch die Anweisungen und Mechanismen des Gerätes eignen.“_
+
+Ada Lovelace legte in den Notes zu einem Vortrag von Bagage einen schriftlichen Plan zur Berechnung der Bernoulli-Zahlen in Diagrammform vor, welcher als das erste veröffentlichte formale Computerprogramm gelten kann.
 
 ## Es werde Licht ... elektrische Systeme
 
