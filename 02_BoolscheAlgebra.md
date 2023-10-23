@@ -2,7 +2,7 @@
 
 author:   Sebastian Zug & André Dietrich & Fabian Bär
 email:    sebastian.zug@informatik.tu-freiberg.de & andre.dietrich@informatik.tu-freiberg.de & fabian.baer@student.tu-freiberg.de
-version:  0.0.1
+version:  0.0.3
 language: de
 narrator: Deutsch Female
 
@@ -273,7 +273,8 @@ __Lösung:__ Boolesche Algebra basierend auf den Vorarbeiten von G. Boole aus de
 + drei Boolesche Operationen: + , $\cdot$ sowie „not"
 + vier Axiome
 
-Die Boolesche Algebra basiert nach Huntington auf einer Trägermenge
+
+Die Boolesche Algebra basiert nach [Huntington](https://de.wikipedia.org/wiki/Edward_Vermilye_Huntington) auf einer Trägermenge
 $B \{0,1\}$ (Zuständen) mit zwei Verknüpfungen auf $B$ für deren Element $a\in B$, $b\in B$ und $c\in B$ gilt:
 
 | Axiom                             | Definition |
@@ -404,7 +405,7 @@ $$
   + durch einen booleschen Ausdruck (gebildet durch Boolesche Variablen und Operationen aus der Booleschen Algebra)
   + ein Schaltwerk aus logischen Gattern
 
-+ Es gibt $2^{2^n}$ verschiedene $n$-stellige Boolesche Funktionen (also 16 zweistellige, 256 dreistellige, 65536 vierstellige, ...)
++ Es gibt $2^{2^n}$ verschiedene $n$-stellige Boolesche Funktionen (also 16 zweistellige, 256 dreistellige, 65536 fünfstellige, ...)
 
 {{1}}
 > Stellen Sie eine Wahrheitstafel für folgende Schaltfunktion auf:
