@@ -2,7 +2,7 @@
 
 author:   Sebastian Zug & André Dietrich & Fabian Bär
 email:    sebastian.zug@informatik.tu-freiberg.de & andre.dietrich@informatik.tu-freiberg.de & fabian.baer@student.tu-freiberg.de
-version:  0.0.1
+version:  0.0.3
 language: de
 narrator: Deutsch Female
 
@@ -76,6 +76,10 @@ style="width: 80%; min-width: 420px; max-width: 720px;"
 ```
 
 ---------------------------------------------------------------------
+
+## Exkurs: Arbeit mit Git
+
+> Dieser Abschnitt soll verschwinden. Er dient nur als Beispiel für die Arbeit mit Git.
 
 ## Digital vs. Analog
 
@@ -273,7 +277,7 @@ __Lösung:__ Boolesche Algebra basierend auf den Vorarbeiten von G. Boole aus de
 + drei Boolesche Operationen: + , $\cdot$ sowie „not"
 + vier Axiome
 
-Die Boolsche Algebra basiert nach Huntington auf einer Trägermenge
+Die Boolsche Algebra basiert nach [Huntington](https://de.wikipedia.org/wiki/Edward_Vermilye_Huntington) auf einer Trägermenge
 $B \{0,1\}$ (Zuständen) mit zwei Verknüpfungen auf $B$ für deren Element $a\in B$, $b\in B$ und $c\in B$ gilt:
 
 | Axiom                             | Definition |
