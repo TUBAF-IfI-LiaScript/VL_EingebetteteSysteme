@@ -12,14 +12,14 @@ import:   https://raw.githubusercontent.com/LiaTemplates/NetSwarm-Simulator/mast
 
 [![LiaScript](https://raw.githubusercontent.com/LiaScript/LiaScript/master/badges/course.svg)](https://liascript.github.io/course/?https://raw.githubusercontent.com/TUBAF-IfI-LiaScript/VL_EingebetteteSysteme/master/02_BoolscheAlgebra.md#1)
 
-# Boolsche Algebra
+# Boolesche Algebra
 
 | Parameter                | Kursinformationen                                                                                                                                                                          |
 | ------------------------ | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------ |
 | **Veranstaltung:**        | @config.lecture                                                                                                                                              |
 | **Semester**              | @config.semester                                                                                                                                             |
 | **Hochschule:**          | `Technische Universität Freiberg`                                                                                                                                                          |
-| **Inhalte:**             | `Boolsche Algebra`                                                                                      |
+| **Inhalte:**             | `Boolesche Algebra`                                                                                      |
 | **Link auf GitHub:** | [https://github.com/TUBAF-IfI-LiaScript/VL_EingebetteteSysteme/blob/master/02_BoolscheAlgebra.md](https://github.com/TUBAF-IfI-LiaScript/VL_EingebetteteSysteme/blob/master/02_BoolscheAlgebra.md) |
 | **Autoren**              | @author                                                                                                                                                                                    |
 
@@ -29,8 +29,8 @@ import:   https://raw.githubusercontent.com/LiaTemplates/NetSwarm-Simulator/mast
 
 ** Fragen an die Veranstaltung**
 
-+ Nennen Sie die Axiome der Boolschen Algebra.
-+ Erläutern Sie das Dualitätsprinzip der Boolschen Algebra.
++ Nennen Sie die Axiome der Booleschen Algebra.
++ Erläutern Sie das Dualitätsprinzip der Booleschen Algebra.
 + Wie viele Schaltfunktionen existieren für 2 Eingangsvariablen?
 + Nennen Sie 3 Beispiele, wie eine Schaltfunktion technisch umgesetzt werden kann.
 + Welcher Unterschied besteht zwischen der DNF und der KDNF?
@@ -149,7 +149,7 @@ Die Eingabe erfolgte durch Verbinden der Komponenten mittels Programmierschnüre
 
 > Wem jetzt gleich die Parallelität zu der Stecker-basierten Programmierung des ENIAC einfällt ... Vorsicht, dieser war ein Digitalrechner!
 
-Zur Auswertung stand zurVerfügung:
+Zur Auswertung stand zur Verfügung:
 
 + 6-Strahl-Oszilloskop OPD 280 U
 + X-Y-Schreiber BAK 5 T
@@ -171,7 +171,7 @@ Zur Auswertung stand zurVerfügung:
 
 > Digitalisierung: Aufteilung des kontinuierlichen Spektrums in erlaubte und verbotene Bereiche
 
-Verschiedene Standards definieren unterschiedliche Spannungspotentiale für einen High- und einen Low-Pegel. Dazwischen
+Verschiedene Standards definieren unterschiedliche Spannungspotentiale für einen High- und einen Low-Pegel. Dazwischen befindet sich der verbotene Bereich.
 
 <!--
 style="width: 80%; min-width: 420px; max-width: 720px;"
@@ -246,14 +246,14 @@ Dazu beschreiben wir die Wirkung des elektrischen Stromes
 
 ****************************************************************
 
-## Boolsche Algebra
+## Boolesche Algebra
 
 Historische Entwicklung:
 
-+ Aristoteles 384-322 v.Chr.  begründet „Syllogistik“ Lehre von den logischen Schlussformen
++ Aristoteles (384-322 v.Chr.) begründet „Syllogistik“ Lehre von den logischen Schlussformen
 + Später bilden die Stoiker die Syllogistik als Aussagenlogik weiter aus. Im Mittelalter → Scholastik
 + George Boole (1815-1864) 1854 mathematische Formalisierung in _„An Investigation of the Laws of Thought on which are founded the Mathematical Theories of Logic and Probabilities"_.
-+ Claude Shannon (1916-2001) hat im Rahmen seiner Masterarbeit: _„On the Symbolic Analysis of Relay and Switching Circuits (1940)“_, gezeigt, dass man die Boolsche Algebra zur Beschreibung von Schaltkreisen anwenden kann.
++ Claude Shannon (1916-2001) hat im Rahmen seiner Masterarbeit _„On the Symbolic Analysis of Relay and Switching Circuits (1940)“_, gezeigt, dass man die Boolsche Algebra zur Beschreibung von Schaltkreisen anwenden kann.
 
 ![Shannon](./images/02_BoolscheAlgebra/ClaudeShannon_MFO3807.jpg "Claude Shannon [^Shannon]")<!-- width="40%" -->
 
@@ -273,7 +273,8 @@ __Lösung:__ Boolesche Algebra basierend auf den Vorarbeiten von G. Boole aus de
 + drei Boolesche Operationen: + , $\cdot$ sowie „not"
 + vier Axiome
 
-Die Boolsche Algebra basiert nach [Huntington](https://de.wikipedia.org/wiki/Edward_Vermilye_Huntington) auf einer Trägermenge
+
+Die Boolesche Algebra basiert nach [Huntington](https://de.wikipedia.org/wiki/Edward_Vermilye_Huntington) auf einer Trägermenge
 $B \{0,1\}$ (Zuständen) mit zwei Verknüpfungen auf $B$ für deren Element $a\in B$, $b\in B$ und $c\in B$ gilt:
 
 | Axiom                             | Definition |
@@ -281,12 +282,12 @@ $B \{0,1\}$ (Zuständen) mit zwei Verknüpfungen auf $B$ für deren Element $a\i
 | Kommutativität                   | $\begin{aligned} a + b &= b + a \\ a \cdot b &= b \cdot a\end{aligned}$            |
 | Distributivität                   | $\begin{aligned} a \cdot (b + c) &= (a \cdot b) + (a \cdot c) \\ a + (b \cdot c) &= (a + b) \cdot (a+c) \end{aligned}$            |
 | Existenz eines neutralen Elements | $\begin{aligned}  0 + a &= a \\ 1\cdot a &= a\end{aligned}$           |
-| Exisitenz von Komplementen        |  $\begin{aligned}  a + \overline{a} &= 1 \\ a \cdot \overline{a} &= 0   \end{aligned}$      |
+| Existenz von Komplementen        |  $\begin{aligned}  a + \overline{a} &= 1 \\ a \cdot \overline{a} &= 0   \end{aligned}$      |
 
                                     {{1}}
 ****************************************************************
 
-Aus dieser Definition lassen sich die zugehörigen Gesetze der boolschen Algebra ableiten:
+Aus dieser Definition lassen sich die zugehörigen Gesetze der booleschen Algebra ableiten:
 
 | Gesetz               | Definition                                                                                                                                 |
 | -------------------- | ------------------------------------------------------------------------------------------------------------------------------------------ |
@@ -302,7 +303,7 @@ Aus dieser Definition lassen sich die zugehörigen Gesetze der boolschen Algebra
                                      {{2}}
 ****************************************************************
 
-> Dualitätsprinzip der Boolschen Algebra ... Ersetzt man gleichzeitig in einem Axiom UND durch ODER und ODER durch UND sowie 1 durch 0 und 0 durch 1, so erhält man das zu diesem Axiom gehörige duale Axiom. Führt man diese Ersetzung in einem Theorem aus, so erhält man das zu diesem Theorem gehörige duale Theorem.
+> Dualitätsprinzip der Booleschen Algebra ... Ersetzt man gleichzeitig in einem Axiom UND durch ODER und ODER durch UND sowie 1 durch 0 und 0 durch 1, so erhält man das zu diesem Axiom gehörige duale Axiom. Führt man diese Ersetzung in einem Theorem aus, so erhält man das zu diesem Theorem gehörige duale Theorem.
 
 <!-- data-type="none" -->
 | Form 1                 | Form 2                     |
@@ -325,7 +326,7 @@ $$
 
 ## Anwendung
 
-Regeln zur Umformung Boolscher Gleichungen
+Regeln zur Umformung Boolescher Gleichungen
 
 + Unabhängige Auswertung: Jeder Ausdruck auf der linken oder rechten Seite einer Gleichung kann durch einen anderen ersetzt werden, der mit ihm identisch ist, d.h. man kann die Ausdrücke links und rechts unabhängig voneinander vereinfachen.
 
@@ -531,7 +532,7 @@ Wir gehen bei der Frage der Schaltnetze in Vorlesung 04 nochmals auf die technis
 
 ## Hausaufgaben
 
-1. Geben Sie für die nachfolgend dargestellte Schaltung eine boolsche Funktion an. Bilden Sie diese in einer Wahrheitstafel ab.
+1. Geben Sie für die nachfolgend dargestellte Schaltung eine boolesche Funktion an. Bilden Sie diese in einer Wahrheitstafel ab.
 
 ![instruction-set](./images/02_BoolscheAlgebra/Schaltwerk2.png)<!-- width="65%" -->
 
