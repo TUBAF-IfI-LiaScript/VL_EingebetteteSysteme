@@ -77,10 +77,6 @@ style="width: 80%; min-width: 420px; max-width: 720px;"
 
 ---------------------------------------------------------------------
 
-## Exkurs: Arbeit mit Git
-
-> Dieser Abschnitt soll verschwinden. Er dient nur als Beispiel für die Arbeit mit Git.
-
 ## Digital vs. Analog
 
 > __Frage:__ Was bedeutet der Übergang von der Ebene der physikalischen Phänomene (0) auf die Ebene der digitalen Logik (2)?
