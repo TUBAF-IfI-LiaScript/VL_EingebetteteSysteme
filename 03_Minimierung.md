@@ -532,6 +532,8 @@ Richtig - $f = \overline{w}\,\overline{y} + \overline{w}xz$
 | $y z$                       | 0                           | <span style="background-color: #00ff00">1</span>                |0    | 0               |
 | $y \overline{z}$            | 0                           | 0               | 0    | 0               |
 
+> Die Uni Marburg bietet eine gute Online Visualisierung des KV-Diagrammes an: https://www.mathematik.uni-marburg.de/~thormae/lectures/ti1/code/karnaughmap/
+
 ********************************************************************************
 
 ### Beispiele
