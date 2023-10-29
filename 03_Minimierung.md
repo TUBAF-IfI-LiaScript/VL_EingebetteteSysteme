@@ -433,7 +433,8 @@ Bespiel 2: $f= x \cdot \overline{y} + \overline{x} \cdot y$
 
        {{1-2}}
 ********************************************************************************
-Dieses Konzept lässt sich auch auf Funktionen mit bis zu 4 Variablen übertragen.
+Dieses Konzept lässt sich auf Funktionen mit beliebig vielen Variablen übertragen. 
+Wichtig dabei ist, dass benachbarte Kombinationen von Variablen sich nur in **einer** Variable unterscheiden. (Siehe [Gray-Code](https://itwissen.info/Gray-Code-Gray-code.html))
 
 |                | $\overline{x}\,\overline{y}$                      | $\overline{x}y$                        | $xy$ | $x\overline{y}$ |
 | -------------- | ------------------------------------------------ | -------------------------------------- | ---- | --------------- |
