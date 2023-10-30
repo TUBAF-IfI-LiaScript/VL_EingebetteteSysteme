@@ -6,8 +6,7 @@ version:  0.0.2
 language: de
 narrator: Deutsch Female
 
-import:   https://raw.githubusercontent.com/LiaTemplates/NetSwarm-Simulator/master/README.md
-          https://raw.githubusercontent.com/liaTemplates/PyScript/main/README.md
+import:   https://raw.githubusercontent.com/liaTemplates/PyScript/main/README.md
           https://raw.githubusercontent.com/TUBAF-IfI-LiaScript/VL_EingebetteteSysteme/master/config.md
 -->
 
@@ -33,10 +32,10 @@ import:   https://raw.githubusercontent.com/LiaTemplates/NetSwarm-Simulator/mast
 + Nennen Sie 3 Beispiele, wie eine Schaltfunktion technisch umgesetzt werden kann.
 + Welcher Unterschied besteht zwischen der DNF und der KDNF?
 + Welcher Unterschied besteht zwischen der DNF und der KNF?
-+ Geben Sie das de Morgansche Gesetz wieder.
-+ Welchem Grundkonzept folgt das Diagramm von Karnaugh?
++ Geben Sie das De-Morgansche Gesetz wieder.
++ Welchem Grundkonzept folgt das Diagramm von Karnaugh-Veitch?
 + Welche Areale können im Diagramm zusammengefasst werden?
-+ Worin unterscheidet sich das Vorgehen mit dem Karnaugh-Diagramm für Min- und Maxterme?
++ Worin unterscheidet sich das Vorgehen mit dem Karnaugh-Veitch-Diagramm für Min- und Maxterme?
 
 ---------------------------------------------------------------------
 
@@ -386,9 +385,6 @@ Lösungsmöglichkeiten:
 Ausgangspunkt für die Minimierung von Boolschen Ausdrücken ist das neutrale
 Element einer Operation. Für eine `ODER` Verknüpfung bewirkt eine falsche Aussage und für eine `UND` Operation eine wahre Aussage keine Veränderung des Gesamtausdruckes.
 
-_"Wenn es regnet UND WAHR"_  hängt nur von der Wettersituation ab
-
-
 | Disjunktive Normalform | Konjunktive Normalform |
 |------------------------|------------------------|
 | $\begin{aligned} f(x,y)&= x \cdot y + x \cdot \overline{y} \\ &=  x \cdot (y + \overline{y}) \\ &= x\cdot (1) \end{aligned}$  |   $\begin{aligned} f(x,y) &= (x + y) \cdot (x + \overline{y}) \\ &= x + (y \cdot \overline{y}) \\ &=x+(0)\end{aligned}$ |
@@ -435,6 +431,17 @@ Bespiel 2: $f= x \cdot \overline{y} + \overline{x} \cdot y$
 ********************************************************************************
 Dieses Konzept lässt sich auf Funktionen mit beliebig vielen Variablen übertragen. 
 Wichtig dabei ist, dass benachbarte Kombinationen von Variablen sich nur in **einer** Variable unterscheiden. (Siehe [Gray-Code](https://itwissen.info/Gray-Code-Gray-code.html))
+
+> Der Gray-Code ist ein stetiger Code, bei dem sich benachbarte Codewörter nur in einer einzigen binären Ziffer unterscheiden.
+>
+><!-- data-type="none" -->
+> | Dezimalzahl | Binärcode | Gray-Code |
+> | ----------- | --------- | --------- |
+> | 0           | 000       | 000       |
+> | 1           | 001       | 001       |
+> | 2           | 010       | 011       |
+> | 3           | 011       | 010       |
+
 
 |                | $\overline{x}\,\overline{y}$                      | $\overline{x}y$                        | $xy$ | $x\overline{y}$ |
 | -------------- | ------------------------------------------------ | -------------------------------------- | ---- | --------------- |
@@ -738,6 +745,9 @@ Ablesen der KNF:
 
 ## Dont-Care-Einträge in der Wahrheitstafel
 
+                               {{0-2}}
+********************************************************************************
+
 In einigen Fällen bildet die Wahrheitstafel Kombinationen der Eingangswerte ab,
 die für die Ausgabe gar nicht relevant sind. In diesem Fall spricht man von sogenannten `don't care` Ausgaben. Letztendlich ist uns das Funktionsergebnis für diese Fälle egal. Aus den `don't care` Fällen können entsprechend weitere Minimierungen hergeleitet werden.
 
@@ -751,6 +761,13 @@ Acht Eingänge pro Element würde die Zahl der verfügbaren Pins eines Controlle
 Folglich ergeben sich 6 Eingangskombinationen, die für unsere Ausgabe irrelevant sind.
 
 ![Bild](./images/04_Schaltnetze/bcd_animation.gif)<!-- width="50%" -->
+
+********************************************************************************
+
+                               {{1-3}}
+********************************************************************************
+
+Betrachten wir die Wahrheitstafel für das "d" Element.
 
 <!-- data-type="none" -->
 | $w$ | $x$ | $y$ | $z$ | $d$                                   |
@@ -772,8 +789,9 @@ Folglich ergeben sich 6 Eingangskombinationen, die für unsere Ausgabe irrelevan
 | 1   | 1   | 1   | 0   | <span style="color: #ff0000">D</span> |
 | 1   | 1   | 1   | 1   | <span style="color: #ff0000">D</span> |
 
+********************************************************************************
 
-      {{1}}
+                               {{2-6}}
 ********************************************************************************
 
 <!-- data-type="none" -->
@@ -788,8 +806,25 @@ Welche Gleichung für `d` lesen Sie daraus ab?
 
 ********************************************************************************
 
-{{3}}
+                               {{3-6}}
+********************************************************************************
+
 $d = w + y\overline{z} + \overline{x}y +  x\overline{y}z + \overline{x}\,\overline{z}$
+
+********************************************************************************
+
+                                {{5-6}}
+********************************************************************************
+
+Die Korrektheit unserer Lösung können Sie in einer Simulationsumgebung evaluieren.
+
+https://goldi-labs.net/BEAST.php#
+
+![7 Segementanzeige](./images/03_Minimierung/7_segement_Anzeige.png)
+
+Die gezeigte Lösung findet sich im Projektrepository.
+
+********************************************************************************
 
 ## Zusammenfassung
 
@@ -806,7 +841,6 @@ Regeln zur Bildung der Schleifen:
 ``` python @PyScript.env
 - sympy
 ```
-
 ``` python @PyScript.repl
 from sympy.logic import SOPform
 from sympy import symbols
@@ -825,6 +859,8 @@ result = SOPform([x3, x2, x1, x0], minterms)
 print("Minimized result:")
 print(result)
 ```
+
+Die Dokumentation zum Sympy Paket von Python finden Sie unter https://docs.sympy.org/latest/modules/logic.html 
 
 ## Hausaufgaben
 
