@@ -433,7 +433,8 @@ Bespiel 2: $f= x \cdot \overline{y} + \overline{x} \cdot y$
 
        {{1-2}}
 ********************************************************************************
-Dieses Konzept lässt sich auch auf Funktionen mit bis zu 4 Variablen übertragen.
+Dieses Konzept lässt sich auf Funktionen mit beliebig vielen Variablen übertragen. 
+Wichtig dabei ist, dass benachbarte Kombinationen von Variablen sich nur in **einer** Variable unterscheiden. (Siehe [Gray-Code](https://itwissen.info/Gray-Code-Gray-code.html))
 
 |                | $\overline{x}\,\overline{y}$                      | $\overline{x}y$                        | $xy$ | $x\overline{y}$ |
 | -------------- | ------------------------------------------------ | -------------------------------------- | ---- | --------------- |
@@ -530,6 +531,8 @@ Richtig - $f = \overline{w}\,\overline{y} + \overline{w}xz$
 | $\overline{y} z$            | <span style="background-color: #ff0000">1</span>                           |   <span style="background-color: #ff0000">1</span>   <span style="background-color: #00ff00">1</span>          | 0    | 0               |
 | $y z$                       | 0                           | <span style="background-color: #00ff00">1</span>                |0    | 0               |
 | $y \overline{z}$            | 0                           | 0               | 0    | 0               |
+
+> Die Uni Marburg bietet eine gute Online Visualisierung des KV-Diagrammes an: https://www.mathematik.uni-marburg.de/~thormae/lectures/ti1/code/karnaughmap/
 
 ********************************************************************************
 
