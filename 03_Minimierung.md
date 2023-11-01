@@ -12,7 +12,7 @@ import:   https://raw.githubusercontent.com/liaTemplates/PyScript/main/README.md
 
 [![LiaScript](https://raw.githubusercontent.com/LiaScript/LiaScript/master/badges/course.svg)](https://liascript.github.io/course/?https://raw.githubusercontent.com/TUBAF-IfI-LiaScript/VL_EingebetteteSysteme/master/03_Minimierung.md#1)
 
-# Minimierung von boolschen Funktionen
+# Minimierung von Boolesche Funktionen
 
 | Parameter                | Kursinformationen                                                                                                                                                                          |
 | ------------------------ | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------ |
@@ -867,3 +867,10 @@ Die Dokumentation zum Sympy Paket von Python finden Sie unter https://docs.sympy
 + Lösen Sie das Minimierungsproblem der Einstiegsaufgabe mit dem Karnaugh-Veitch-Diagramm.
 + Stellen Sie die Wahrheitstafel für ein weiteres Element der Sieben-Segmentanzeige auf. Minimieren Sie den Ausdruck.
 + Erstellen Sie mit dem Python-Beispiel eine eigene (willkürliche) Wahrheitstafel und vereinfachen Sie diese mit dem Karnaugh-Veitch-Diagramm und auf analytischem Wege.
+
+> Für das Training oder die Probe bei der Erledigung der Hausaufgaben können Sie die Werkzeuge der TU Ilmenau verwenden, die die besprochenen Inhalte wunderbar zusammenfasst.
+>
+> https://www.goldi-labs.de/SANE/view3
+>
+> ![SANE](./images/03_Minimierung/SANE.png)
+

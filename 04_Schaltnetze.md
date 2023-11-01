@@ -25,7 +25,7 @@ gray: @mark(gray,@0)
 
 [![LiaScript](https://raw.githubusercontent.com/LiaScript/LiaScript/master/badges/course.svg)](https://liascript.github.io/course/?https://raw.githubusercontent.com/TUBAF-IfI-LiaScript/VL_EingebetteteSysteme/master/04_Schaltnetze.md#1)
 
-# Minimierung von boolschen Funktionen / Schaltnetze
+# Minimierung von Boolesche Funktionen / Schaltnetze
 
 | Parameter                | Kursinformationen                                                                                                                                                                          |
 | ------------------------ | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------ |
@@ -192,7 +192,7 @@ y =&  \overline{x_3}   x_2   x_1   \overline{x_0} +  \overline{x_3}   x_2   x_1 
 $$
 
 {{0-1}}
-Wie gehen Sie vor? Wir suchen Paare von Mintermen, die sich lediglich in einer Variablen unterscheiden, und fassen diese entsprech dem Distributivgesetz und Idempotenzgesetz zusammen.
+Wie gehen Sie vor? Wir suchen Paare von Mintermen, die sich lediglich in einer Variablen unterscheiden, und fassen diese entsprechd dem Distributivgesetz und Idempotenzgesetz zusammen.
 
 {{0-1}}
 $$
@@ -287,11 +287,11 @@ print(result)
 Schauen wir uns die Funktion im Karnaugh-Diagramm an!
 
 <!-- data-type="none" style="table-layout: fixed; max-width:400px;"-->
-|                              | $\overline{x}_1\,\overline{x}_0$ | $\overline{x}_1x_0$ | $x_1x_0$ | $x_1\overline{x}_0$ |
-| ---------------------------- | -------------------------------- | ------------------- | -------- | ------------------- |
+|                                  | $\overline{x}_1\,\overline{x}_0$ | $\overline{x}_1x_0$ | $x_1x_0$ | $x_1\overline{x}_0$ |
+| -------------------------------- | -------------------------------- | ------------------- | -------- | ------------------- |
 | $\overline{x}_3\,\overline{x}_2$ | 0                                | 0                   | 0        | 0                   |
 | $\overline{x}_3 x_2$             | 0                                | 0                   | 1        | 1                   |
-| $x_3 x_2$                        | 1                               | 1                   | 0        | 1                   |
+| $x_3 x_2$                        | 1                                | 1                   | 0        | 1                   |
 | $x_3 \overline{x}_2$             | 1                                | 1                   | 1        | 1                   |
 
 $$
@@ -426,8 +426,8 @@ for i in range(0, len(minterms)):
         distances[i,k] = dist
 
 print("Distanzen der Minterme")
-for j in range(0, len(distances)):
-    print(distances[j])
+for j in range(0, len(distances)):  # Requiered instead print(distances)
+    print(distances[j])             # due to pyscript output constraints
 print("Kombinationen mit Distanz 1: {}".format(np.count_nonzero(distances == 1)))
 ```
 
@@ -497,12 +497,12 @@ P_5=& m_6∙m_{14} \\
 $$
 
 <!-- data-type="none" -->
-|                                  | $\overline{x}_1\,\overline{x}_0$ | $\overline{x}_1x_0$ | $x_1x_0$  | $x_1\overline{x}_0$ |
-| -------------------------------- | -------------------------------- | ------------------- | --------- | ------------------- |
-| $\overline{x}_3\,\overline{x}_2$ | 0                                | 0                   | 0         | 0                   |
-| $\overline{x}_3 x_2$             | 0                                | 0                   | 1 ($m_7$) | 1 ($m_6$) |
-| $x_3 x_2$                        | 1 ($m_{12}$)              | 1 ($m_{13}$)            | 0         | 1 ($m_{14}$)    |
-| $x_3 \overline{x}_2$             | 1 ($m_{8}$)       | 1  ($m_{9}$)    | 1 ($m_{11}$)  | 1 ($m_{10}$)    |
+|                                  | $\overline{x}_1\,\overline{x}_0$ | $\overline{x}_1x_0$ | $x_1x_0$     | $x_1\overline{x}_0$ |
+| -------------------------------- | -------------------------------- | ------------------- | ------------ | ------------------- |
+| $\overline{x}_3\,\overline{x}_2$ | 0                                | 0                   | 0            | 0                   |
+| $\overline{x}_3 x_2$             | 0                                | 0                   | 1 ($m_7$)    | 1 ($m_6$)           |
+| $x_3 x_2$                        | 1 ($m_{12}$)                     | 1 ($m_{13}$)        | 0            | 1 ($m_{14}$)        |
+| $x_3 \overline{x}_2$             | 1 ($m_{8}$)                      | 1  ($m_{9}$)        | 1 ($m_{11}$) | 1 ($m_{10}$)        |
 
 
 Visualisierung der generierten Primimplikanten
