@@ -216,7 +216,7 @@ y =&  \overline{x_3}   x_2   x_1   \overline{x_0} +  \overline{x_3}   x_2   x_1 
   &  \textcolor{red}{ x_3 \overline{x_2}   x_1   \overline{x_0}}+ x_3   \overline{x_2}   x_1   x_0 +\\
   & x_3   x_2   \overline{x_1 }\,\overline{x_0} +  x_3   x_2   \overline{x_1}   x_0 + \\
   & \textcolor{red}{ x_3 \overline{x_2}   x_1   \overline{x_0}} + x_3   x_2   x_1   \overline{x_0}
-\end{aligned}0, 8:	-	0	0	0	○				○					(x̄2x̄1x̄0)
+\end{aligned}
 {{2-3}}
 $$
 \begin{aligned}
@@ -372,7 +372,7 @@ Die Minterme werden in tabellarischer Form entsprechend der Zahl der "1"en sorti
 | $m_x$           | $x_3$      | $x_2$      | $x_1$      | $x_0$      | OK  |
 | --------------- | ---------- | ---------- | ---------- | ---------- | --- |
 | @blue($m_8$)    | @blue($1$) | @blue($0$) | @blue($0$) | @blue($0$) |.   |
-| $m_6$           | $0$        | 1          | 1          |0, 8:	-	0	0	0	○				○					(x̄2x̄1x̄0) 0          |.   |
+| $m_6$           | $0$        | 1          | 1          | 0          |.   |
 | $m_9$           | 1          | 0          | 0          | 1          |.   |
 | $m_{10}$        | 1          | 0          | 1          | 0          |.   |
 | $m_{12}$        | 1          | 1          | 0          | 0          |.   |
