@@ -217,12 +217,21 @@ y =&  \overline{x_3}   x_2   x_1   \overline{x_0} +  \overline{x_3}   x_2   x_1 
   & x_3   x_2   \overline{x_1 }\,\overline{x_0} +  x_3   x_2   \overline{x_1}   x_0 + \\
   & \textcolor{red}{ x_3 \overline{x_2}   x_1   \overline{x_0}} + x_3   x_2   x_1   \overline{x_0}
 \end{aligned}
+$$
+
+Damit ergibt sich die oben genannten Gleichung in der ersten Vereinfachungsstufe zu
+
+********************************************************************************
+
+
 {{2-3}}
 $$
 \begin{aligned}
 y =& \overline{x}_3 x_2 x_1 + x_3 \overline{x}_2\, \overline{x}_1  + x_3 \overline{x}_2 x_1 + x_3 x_2\overline{x}_1 +  x_3 x_1\overline{x}_0
 \end{aligned}
 $$
+
+
 
       {{3-5}}
 ********************************************************************************
@@ -725,9 +734,9 @@ Beispiel:
 | 0   | 0   | 1   | 0   |
 | 0   | 1   | 0   | 0   |
 | 0   | 1   | 1   | 1   |
-| 1   | 1   | 0   | 1   |
+| 1   | 0   | 0   | 1   |
 | 1   | 0   | 1   | 0   |
-| 1   | 0   | 1   | 0   |
+| 1   | 1   | 0   | 0   |
 | 1   | 1   | 1   | 0   |
 
 
