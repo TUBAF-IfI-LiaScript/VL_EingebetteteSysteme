@@ -613,7 +613,7 @@ Man vergleicht die Zeilen (Primterme) der Tabelle paarweise, ob nicht eine Zeile
 
 ## Schaltungssynthese
 
-> Schaltungssynthese beschreibt die Umsetzung einer boolschen Funktion in eine Hardware-Schaltung. Grundlage sind Logikgatter, die als spezifische Schaltnetze industriell gefertigt werden.
+> Schaltungssynthese beschreibt die Umsetzung einer booleschen Funktion in eine Hardware-Schaltung. Grundlage sind Logikgatter, die als spezifische Schaltnetze industriell gefertigt werden.
 
 Beispiel
 

@@ -14,14 +14,14 @@ import:   https://raw.githubusercontent.com/liaTemplates/PyScript/main/README.md
 
 # Minimierung von Boolesche Funktionen
 
-| Parameter                | Kursinformationen                                                                                                                                                                          |
-| ------------------------ | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------ |
-| **Veranstaltung:**        | @config.lecture                                                                                                                                              |
-| **Semester**              | @config.semester                                                                                                                                             |
-| **Hochschule:**          | `Technische Universität Freiberg`                                                                                                                                                          |
-| **Inhalte:**             | `Minimierung boolscher Funktionen`                                                                                      |
+| Parameter            | Kursinformationen                                                                                                                                                                          |
+| -------------------- | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------ |
+| **Veranstaltung:**   | @config.lecture                                                                                                                                                                            |
+| **Semester**         | @config.semester                                                                                                                                                                           |
+| **Hochschule:**      | `Technische Universität Freiberg`                                                                                                                                                          |
+| **Inhalte:**         | `Minimierung boolescher Funktionen`                                                                                                                                                        |
 | **Link auf GitHub:** | [https://github.com/TUBAF-IfI-LiaScript/VL_EingebetteteSysteme/blob/master/00_Einfuehrung.md](https://github.com/TUBAF-IfI-LiaScript/VL_EingebetteteSysteme/blob/master/03_Minimierung.md) |
-| **Autoren**              | @author                                                                                                                                                                                    |
+| **Autoren**          | @author                                                                                                                                                                                    |
 
 ![](https://media.giphy.com/media/10PNyg7YOcaBQA/giphy-downsized.gif)
 
@@ -171,12 +171,12 @@ geendet. Allerdings kann die manuelle Lösung der Gleichungen kein Lösungsansat
    {{0-1}}
 ********************************************************************************
 
-| Format                                         | Bedeutung   |
-| ---------------------------------------------- | ----------- |
-| Wahrheitstafel                                 | eindeutig   |
-| allgemeine Boolsche Funktion                   | uneindeutig |
-| Normalformdarstellung einer Boolschen Funktion | eindeutig   |
-| Schaltnetz                                     | uneindeutig |
+| Format                                          | Bedeutung   |
+| ----------------------------------------------- | ----------- |
+| Wahrheitstafel                                  | eindeutig   |
+| allgemeine Boolesche Funktion                   | uneindeutig |
+| Normalformdarstellung einer Booleschen Funktion | eindeutig   |
+| Schaltnetz                                      | uneindeutig |
 
 ********************************************************************************
 
@@ -239,9 +239,9 @@ Und nun in der Kombination ....
 
 > "KDNF = Disjunktion von Mintermen"
 
->  Jede Boolsche Funktion läßt sich als genau eine KDNF darstellen!
+>  Jede Boolesche Funktion läßt sich als genau eine KDNF darstellen!
 
-Bildung der KDNF für n -stellige Boolsche Funktion $f$:
+Bildung der KDNF für n -stellige Boolesche Funktion $f$:
 
 + für jede Zeile der Wahrheitstabelle mit $f(x_1, x_2, ..., x_n) = 1$ wird ein Minterm aufgestellt
 + hierin wird jede Variable $x_i$ negiert, wenn in der entsprechenden Zeile der Wert der Variablen 0 ist
@@ -293,9 +293,9 @@ Vergleichen Sie die Darstellung mit dem Resultat der Einstiegsübung!
 
 > "KKNF = Konjunktion von Maxtermen"
 
->  Jede Boolsche Funktion läßt sich als genau eine KKNF darstellen!
+>  Jede Boolesche Funktion läßt sich als genau eine KKNF darstellen!
 
-Bildung der KKNF für n -stellige Boolsche Funktion $f$:
+Bildung der KKNF für n -stellige Boolesche Funktion $f$:
 
 + für jede Zeile der Wahrheitstabelle mit $f(x_1, x_2, ..., x_n) = 0$ wird ein Maxterm aufgestellt
 + hierin wird jede Variable $x_i$ negiert, wenn in der entsprechenden Zeile der Wert der Variablen 1 ist
@@ -382,7 +382,7 @@ Lösungsmöglichkeiten:
 2.  Einsatz eines graphischen Verfahrens (z.B. ein Karnaugh-Veith-Diagramm), nur möglich bei Schaltfunktionen mit wenigen Variablen
 3. algorithmisches Minimieren (z.B. Verfahren nach Quine-Mc-Cluskey), geeignet auch für Schaltfunktionen mit vielen Variablen
 
-Ausgangspunkt für die Minimierung von Boolschen Ausdrücken ist das neutrale
+Ausgangspunkt für die Minimierung von Booleschen Ausdrücken ist das neutrale
 Element einer Operation. Für eine `ODER` Verknüpfung bewirkt eine falsche Aussage und für eine `UND` Operation eine wahre Aussage keine Veränderung des Gesamtausdruckes.
 
 | Disjunktive Normalform | Konjunktive Normalform |
@@ -395,7 +395,7 @@ Element einer Operation. Für eine `ODER` Verknüpfung bewirkt eine falsche Auss
        {{0-2}}
 ********************************************************************************
 
-Jede zweistellige Boolsche Funktion lässt sich  mit den Kombinationen ihrer Variablen in einer tabellarischen Darstellung visualisieren:
+Jede zweistellige Boolesche Funktion lässt sich  mit den Kombinationen ihrer Variablen in einer tabellarischen Darstellung visualisieren:
 
 $A= \overline{x} \cdot \overline{y} + \overline{x} \cdot y + x \cdot \overline{y} + x \cdot y$
 
@@ -405,7 +405,7 @@ $A= \overline{x} \cdot \overline{y} + \overline{x} \cdot y + x \cdot \overline{y
 | $\overline{y}$ | $\overline{x} \cdot \overline{y}$ | $x \cdot \overline{y}$ |
 | $y$            | $\overline{x} \cdot y$            | $x \cdot y$            |
 
-Mit dieser verschobenen Wahrheitstafel lässt sich der Fingerabdruck einer boolschen Funktion darstellen.
+Mit dieser verschobenen Wahrheitstafel lässt sich der Fingerabdruck einer booleschen Funktion darstellen.
 
 Bespiel 1: $f= x \cdot \overline{y} + x \cdot y$
 
