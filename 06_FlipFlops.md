@@ -216,7 +216,7 @@ Die Darstellung des Flip-Flops kann auch mit Hilfe von NAND-Bausteinen erfolgen.
 {"devices":{"s":{"label":"S","type":"Button","propagation":0,"position":{"x":0,"y":0}},"r":{"label":"R","type":"Button","propagation":0,"position":{"x":0,"y":95}},"nots":{"label":"~S","type":"Button","propagation":0,"position":{"x":0,"y":180}},"notr":{"label":"~R","type":"Button","propagation":0,"position":{"x":0,"y":285}},"q1":{"label":"Q","type":"Lamp","propagation":0,"position":{"x":365,"y":85}},"notq1":{"label":"~Q","type":"Lamp","propagation":0,"position":{"x":370,"y":10}},"q2":{"label":"Q","type":"Lamp","propagation":0,"position":{"x":370,"y":205}},"notq2":{"label":"~Q","type":"Lamp","propagation":0,"position":{"x":365,"y":295}},"nor1":{"label":"nor","type":"Nor","propagation":0,"bits":1,"position":{"x":180,"y":80}},"nor2":{"label":"nor","type":"Nor","propagation":0,"bits":1,"position":{"x":175,"y":5}},"nand1":{"label":"nand","type":"Nand","propagation":0,"bits":1,"position":{"x":185,"y":185}},"nand2":{"label":"nand","type":"Nand","propagation":0,"bits":1,"position":{"x":185,"y":270}}},"connectors":[{"from":{"id":"s","port":"out"},"to":{"id":"nor2","port":"in1"}},{"from":{"id":"r","port":"out"},"to":{"id":"nor1","port":"in2"}},{"from":{"id":"nor2","port":"out"},"to":{"id":"notq1","port":"in"}},{"from":{"id":"nor1","port":"out"},"to":{"id":"q1","port":"in"}},{"from":{"id":"nor2","port":"out"},"to":{"id":"nor1","port":"in1"},"vertices":[{"x":255,"y":75}]},{"from":{"id":"nor1","port":"out"},"to":{"id":"nor2","port":"in2"},"vertices":[{"x":260,"y":55}]},{"from":{"id":"nots","port":"out"},"to":{"id":"nand1","port":"in1"}},{"from":{"id":"notr","port":"out"},"to":{"id":"nand2","port":"in2"}},{"from":{"id":"nand1","port":"out"},"to":{"id":"nand2","port":"in1"},"vertices":[{"x":265,"y":245}]},{"from":{"id":"nand2","port":"out"},"to":{"id":"nand1","port":"in2"},"vertices":[{"x":265,"y":260}]},{"from":{"id":"nand1","port":"out"},"to":{"id":"q2","port":"in"}},{"from":{"id":"nand2","port":"out"},"to":{"id":"notq2","port":"in"}}],"subcircuits":{}}
 ```
 
-Diese Kombination wird in einem eigenen Symbol abstrahiert. Dabei wird unser Ausgang Y nun mit Q bezeichnet.
+R-S Flip-Flops werden in einem eigenen Symbol abstrahiert. Dabei wird unser Ausgang Y nun mit Q bezeichnet.
 
 ![Bild](./images/05_FlipFlops/SR_Latch_Symbol.svg.png)<!-- style="width: 15%; max-width: 500px" -->
 
@@ -395,7 +395,7 @@ Q   |       :  |            :  |          :  |:  |
 </table>
 
 
-> Merke: Durch die Möglichkeit mehrerer Zustandsänderungen in einer Taktphase ist das zustandsgesteuerte RS-Flip-Flop für viele Anwendungen ungeeignet.
+> Merke: Durch die Möglichkeit mehrerer Zustandsänderungen in einer Taktphase ist das zustandsgesteuerte RS-Flip-Flop für viele Anwendungen ungeeignet. Welche Idee hat die nachfolgende Schaltung und warum wird sie nicht funktionieren?
 
 ![Bild](./images/05_FlipFlops/ZustandsgesteuertesShiftRegister.png)<!-- style="width: 95%; max-width: 800px" -->
 
@@ -421,10 +421,10 @@ Ablauf einer Periode:
 Durch eine spezielle Schaltungstechnik kann erreicht werden, dass auch die Eingangsleitungen nur
 
 + bei steigender Flanke (positive Flanke),
-![Bild](./images/05_FlipFlops/SR_Flanken_Symbol.svg.png)<!-- style="width: 20%; max-width: 300px;" -->
+![Bild](./images/05_FlipFlops/SR_Flanken_Symbol.svg.png)<!-- style="width: 10%; max-width: 300px;" -->
 
 + bei fallender Flanke (negative Flanke),
-![Bild](./images/05_FlipFlops/SR_Flanken2_Symbol.svg.png)<!-- style="width: 20%; max-width: 300px;" -->
+![Bild](./images/05_FlipFlops/SR_Flanken2_Symbol.svg.png)<!-- style="width: 10%; max-width: 300px;" -->
 
 + in beiden Fällen berücksichtigt werden!
 
@@ -543,7 +543,7 @@ JK-Flipflops wurden wahrscheinlich nach Jack Kilby benannt. Sie basieren auf dem
 | 1                                     | 0                                     | 1             |
 | 1                                     | 1                                     | <span style="color: #ff0000">$\overline{Q}$</span>  |
 
-![Bild](./images/05_FlipFlops/JK_FlipFlop.png)<!-- style="width: 75%; max-width: 800px;" -->
+![Bild](./images/05_FlipFlops/JK_FlipFlop.png)<!-- style="width: 55%; max-width: 800px;" -->
 
 <!--
 style="width: 100%; min-width: 420px; max-width: 720px;"
@@ -570,7 +570,7 @@ Q   |       :  |          :  |          :  |          :  |
 
 Das synchrone T-Flipflop besitzt neben dem Clk-Takteingang einen T-Eingang. T steht dabei für toggle – hin- und herschalten. Es zeigt ein Wechselverhalten synchron zur aktiven Flanke immer dann und nur dann, wenn T = 1 ist. Es kann aus einem flankengesteuerten JK-Flipflop gebildet werden, indem J- und K-Eingang verbunden werden und gemeinsam als T-Eingang fungieren.
 
-![Bild](./images/05_FlipFlops/T_Flip-flop.svg.png)<!-- style="width: 20%; max-width: 800px;" -->
+![Bild](./images/05_FlipFlops/T_Flip-flop.svg.png)<!-- style="width: 10%; max-width: 800px;" -->
 
 | $T(t)$ | $Q'(t)$ bei Flankenwechsel |
 | ------ | -------------------------- |
@@ -598,14 +598,14 @@ http://www.datasheet-pdf.com/PDF/DM74LS194A-Datasheet-FairchildSemiconductor-518
 
 ### Zusammenfassung
 
-| Parameter                     | Latch                        | Flip-Flop                                    |
-| ----------------------------- | ---------------------------- | -------------------------------------------- |
-| Eingangssignal                | `Enable`                     | `Clock`                                      |
-| Trigger                       | Pegelgetrieben               | Flankengesteuert                             |
-| Reaktionszeit `R`             | kleiner oder gleich dem Takt | entspricht Implementierung der Periodendauer |
-| Komplexität                   | einfach                      | aufwändigere Flankenerkennung                |
-| Robustheit gegenüber Rauschen | kann Probleme generieren     |                                              |
-| Anwendungen                   | Speichern einzelner Bytes    | Register, Counter, Frequenzteiler Register   |
+| Parameter                     | Zustandsgesteuertes FF (Latch) | Flankengesteuertes FF                        |
+| ----------------------------- | ------------------------------ | -------------------------------------------- |
+| Eingangssignal                | `Enable`                       | `Clock`                                      |
+| Trigger                       | Pegelgetrieben                 | Flankengesteuert                             |
+| Reaktionszeit `R`             | kleiner oder gleich dem Takt   | entspricht Implementierung der Periodendauer |
+| Komplexität                   | einfach                        | aufwändigere Flankenerkennung                |
+| Robustheit gegenüber Rauschen | kann Probleme generieren       |                                              |
+| Anwendungen                   | Speichern einzelner Bytes      | Register, Counter, Frequenzteiler Register   |
 
 ## Einsatzbeispiel
 
