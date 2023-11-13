@@ -43,9 +43,9 @@ gray: @mark(gray,@0)
 ** Fragen an die Veranstaltung**
 
 + Unterscheiden Sie Multiplexer und Demultiplexer.
-+ Wie lassen sich mit einem Multiplexer beliebige Wahrheitstafeln abbilden. Welche Grenzen hat dieser Ansatz?
++ Wie lassen sich mit einem Multiplexer beliebige Wahrheitstafeln abbilden? Welche Grenzen hat dieser Ansatz?
 + Welche Aufgaben realisieren Dekoder?
-+ Nennen Sie Anwendungsbeispiele für einen Muliplexer.
++ Nennen Sie Anwendungsbeispiele für einen Multiplexer.
 
 ---------------------------------------------------------------------
 
@@ -282,7 +282,7 @@ $$
 
 > Achtung: Die Wahrheitstafel ist unvollständig !
 
-1. Falsche Ausgangs-zustände sind möglich!
+1. Falsche Ausgangszustände sind möglich!
 2. Was passiert wenn alle Pegel 0 sind?
 
 ``` json @DigiSim.evalJson
@@ -325,7 +325,7 @@ $$
 
 **Analog Digitalwandler**
 
-Wir werden dem Encoder bei der Diskussion der Perepherie eines Mikrocontrollers sehr häufig wiederbegegnen. Das Video zeigt einen Anwendungsfall - das mapping der Ergebnisse eines Analog-Digital-Wandlers auf eine binäre Ausgabe.
+Wir werden dem Encoder bei der Diskussion der Peripherie eines Mikrocontrollers sehr häufig wiederbegegnen. Das Video zeigt einen Anwendungsfall - das Mapping der Ergebnisse eines Analog-Digital-Wandlers auf eine binäre Ausgabe.
 
 ![BCD Dekoder](./images/04_Schaltnetze/FlashWandler.png)<!-- width="80%" --> [^2]
 
@@ -456,7 +456,7 @@ $y_3 = x \cdot a_1 \cdot a_0$
 
 ## Ausblick
 
-Nunmehr können boolsche Funktionen als Schaltnetze abbilden? Was fehlt für den Rechner? Zwei Dinge ... Speicher und arithmetische Operationen.
+Nunmehr können boolesche Funktionen als Schaltnetze abbilden? Was fehlt für den Rechner? Zwei Dinge ... Speicher und arithmetische Operationen.
 
 ## Hausaufgaben
 
