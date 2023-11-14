@@ -800,7 +800,7 @@ Aufwändigere Schaltnetze greifen auf ICs zurück, die zwei Ebenen AND-Array und
 | Adressdekoder entspricht einer festen UND-Matrix, Koppelelemente bilden eine programmierbare ODER-Matrix | programmierbare UND-Matrix,  Produktterme werden mit fester ODER-Matrix verknüpft |
 
 
-PROM realisiert unmittelbar die Wahrheitstabelle in Hardware!Ein PROM mit $2^m$ $n$-Bit Worten  kann jede beliebige Schaltfunktion   $f:\{0,1\}^n \rightarrow \{0,1\}^m$  ohne Minimierung implementieren.
+PROM realisiert unmittelbar die Wahrheitstabelle in Hardware! Ein PROM mit $2^m$ $n$-Bit Worten  kann jede beliebige Schaltfunktion   $f:\{0,1\}^n \rightarrow \{0,1\}^m$  ohne Minimierung implementieren.
 
 PAL / GAL („Programmable / Generic Array Logic“ kann jede (ggf. minimierte) DNF realisieren, wenn Zahl der Produktterme je ODER ausreicht.
 
