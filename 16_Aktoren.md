@@ -386,7 +386,7 @@ https://www.tinkercad.com/things/lu1Gt48hNsL-gleichstrommotor-mit-encoder/editel
 
 Welche Themenfelder sind wir in den vergangenen Monaten durchlaufen?
 
-+ Boolsche Algebra
++ Boolesche Algebra
 + Minimierung von Schaltfunktionen
 + Standardschaltnetze
 + Flip-Flop Konzepte

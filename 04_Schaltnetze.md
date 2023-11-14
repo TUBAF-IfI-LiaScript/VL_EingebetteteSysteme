@@ -25,7 +25,7 @@ gray: @mark(gray,@0)
 
 [![LiaScript](https://raw.githubusercontent.com/LiaScript/LiaScript/master/badges/course.svg)](https://liascript.github.io/course/?https://raw.githubusercontent.com/TUBAF-IfI-LiaScript/VL_EingebetteteSysteme/master/04_Schaltnetze.md#1)
 
-# Minimierung von boolschen Funktionen / Schaltnetze
+# Minimierung von Boolesche Funktionen / Schaltnetze
 
 | Parameter                | Kursinformationen                                                                                                                                                                          |
 | ------------------------ | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------ |
@@ -192,7 +192,7 @@ y =&  \overline{x_3}   x_2   x_1   \overline{x_0} +  \overline{x_3}   x_2   x_1 
 $$
 
 {{0-1}}
-Wie gehen Sie vor? Wir suchen Paare von Mintermen, die sich lediglich in einer Variablen unterscheiden, und fassen diese entsprech dem Distributivgesetz und Idempotenzgesetz zusammen.
+Wie gehen Sie vor? Wir suchen Paare von Mintermen, die sich lediglich in einer Variablen unterscheiden, und fassen diese entsprechd dem Distributivgesetz und Idempotenzgesetz zusammen.
 
 {{0-1}}
 $$
@@ -223,12 +223,15 @@ Damit ergibt sich die oben genannten Gleichung in der ersten Vereinfachungsstufe
 
 ********************************************************************************
 
+
 {{2-3}}
 $$
 \begin{aligned}
 y =& \overline{x}_3 x_2 x_1 + x_3 \overline{x}_2\, \overline{x}_1  + x_3 \overline{x}_2 x_1 + x_3 x_2\overline{x}_1 +  x_3 x_1\overline{x}_0
 \end{aligned}
 $$
+
+
 
       {{3-5}}
 ********************************************************************************
@@ -287,11 +290,11 @@ print(result)
 Schauen wir uns die Funktion im Karnaugh-Diagramm an!
 
 <!-- data-type="none" style="table-layout: fixed; max-width:400px;"-->
-|                              | $\overline{x}_1\,\overline{x}_0$ | $\overline{x}_1x_0$ | $x_1x_0$ | $x_1\overline{x}_0$ |
-| ---------------------------- | -------------------------------- | ------------------- | -------- | ------------------- |
+|                                  | $\overline{x}_1\,\overline{x}_0$ | $\overline{x}_1x_0$ | $x_1x_0$ | $x_1\overline{x}_0$ |
+| -------------------------------- | -------------------------------- | ------------------- | -------- | ------------------- |
 | $\overline{x}_3\,\overline{x}_2$ | 0                                | 0                   | 0        | 0                   |
 | $\overline{x}_3 x_2$             | 0                                | 0                   | 1        | 1                   |
-| $x_3 x_2$                        | 1                               | 1                   | 0        | 1                   |
+| $x_3 x_2$                        | 1                                | 1                   | 0        | 1                   |
 | $x_3 \overline{x}_2$             | 1                                | 1                   | 1        | 1                   |
 
 $$
@@ -426,8 +429,8 @@ for i in range(0, len(minterms)):
         distances[i,k] = dist
 
 print("Distanzen der Minterme")
-for j in range(0, len(distances)):
-    print(distances[j])
+for j in range(0, len(distances)):  # Requiered instead print(distances)
+    print(distances[j])             # due to pyscript output constraints
 print("Kombinationen mit Distanz 1: {}".format(np.count_nonzero(distances == 1)))
 ```
 
@@ -497,12 +500,12 @@ P_5=& m_6∙m_{14} \\
 $$
 
 <!-- data-type="none" -->
-|                                  | $\overline{x}_1\,\overline{x}_0$ | $\overline{x}_1x_0$ | $x_1x_0$  | $x_1\overline{x}_0$ |
-| -------------------------------- | -------------------------------- | ------------------- | --------- | ------------------- |
-| $\overline{x}_3\,\overline{x}_2$ | 0                                | 0                   | 0         | 0                   |
-| $\overline{x}_3 x_2$             | 0                                | 0                   | 1 ($m_7$) | 1 ($m_6$) |
-| $x_3 x_2$                        | 1 ($m_{12}$)              | 1 ($m_{13}$)            | 0         | 1 ($m_{14}$)    |
-| $x_3 \overline{x}_2$             | 1 ($m_{8}$)       | 1  ($m_{9}$)    | 1 ($m_{11}$)  | 1 ($m_{10}$)    |
+|                                  | $\overline{x}_1\,\overline{x}_0$ | $\overline{x}_1x_0$ | $x_1x_0$     | $x_1\overline{x}_0$ |
+| -------------------------------- | -------------------------------- | ------------------- | ------------ | ------------------- |
+| $\overline{x}_3\,\overline{x}_2$ | 0                                | 0                   | 0            | 0                   |
+| $\overline{x}_3 x_2$             | 0                                | 0                   | 1 ($m_7$)    | 1 ($m_6$)           |
+| $x_3 x_2$                        | 1 ($m_{12}$)                     | 1 ($m_{13}$)        | 0            | 1 ($m_{14}$)        |
+| $x_3 \overline{x}_2$             | 1 ($m_{8}$)                      | 1  ($m_{9}$)        | 1 ($m_{11}$) | 1 ($m_{10}$)        |
 
 
 Visualisierung der generierten Primimplikanten
@@ -517,8 +520,6 @@ Visualisierung der generierten Primimplikanten
 
 Offenbar werden die Minterme bis auf zwei Ausnahmen mehrfach durch die Primimplikaten abgedeckt. Hier ist eine weitere Minimierung notwendig.
 
-### Primimplikatentafel und minimale Überdeckung
-
 Die als zweite Quine'sche Tabelle bezeichnete Primimplikatentafel fasst die Primimplikanten und die zugehörigen Minterme zusammen.
 
 <!-- data-type="none" style="table-layout: fixed; max-width:600px;"-->
@@ -530,32 +531,42 @@ Die als zweite Quine'sche Tabelle bezeichnete Primimplikatentafel fasst die Prim
 | $P_4$ |          |          |          |          |          |         |         | x       | x       |
 | $P_5$ | x        |          |          |          |          |         |         |         | x       |
 
-Zielstellung ist nun die Generierung einer minimalen Überlappung.
 
-**Spaltendominanzprüfung**
+### Lösung der minimalen Überdeckung
 
-Die Spalten werden paarweise darauf verglichen, ob nicht eine Spalte existiert, in der die markierten Primterme eine Teilmenge der markierten Primterme der anderen Spalte sind. Ist dies der Fall, so kann die Spalte mit der Obermenge gestrichen werden, denn es müssen alle Konjunktionen erfasst werden und daher ist die Konjunktion mit der Obermenge durch Auswahl der Konjunktion mit der Teilmenge ebenfalls erfasst.
+> Ziel: Die Minterme sollen nur noch in einer Zeile erscheinen.
 
-Beginnen wir mit $m_{13}$. Hier kann $m_{12}$ gestrichen werden, weil $m_{13}$ den Minterm $m_{12}$ vollständig dominiert.
+                                              {{0-1}}
+*******************************************************************
+
+__1. Intuitiver Ansatz__
+
+Die Minterme $m_{13}$, $m_{11}$ und $m_{7}$ kommen nun in jeweils einem Primimplikanten vor. Folglich sind diese sogenannte essentielle Primimplikanten ($P_1, P_2, P_4$).
 
 <!-- data-type="none" style="table-layout: fixed; max-width:600px;"-->
 |       | $m_{14}$ | $m_{13}$ | $m_{12}$ | $m_{11}$ | $m_{10}$ | $m_{9}$  | $m_{8}$  | $m_{7}$ | $m_{6}$ |
 | ----- | -------- | -------- | -------- | -------- | -------- | -------- | -------- | ------- | ------- |
-| $P_1$ |          |          |          | x        | x        | @blue(x) | @blue(x) |         |         |
-| $P_2$ |          | @gray(x) | @blue(x) |          |          | @blue(x) | @blue(x) |         |         |
-| $P_3$ | x        |          | @blue(x) |          | x        |          | @blue(x) |         |         |
-| $P_4$ |          |          |          |          |          |          |          | x       | x       |
+| @blue($P_1$) |          |          |          | @gray(x) | x        | x        | x        |         |         |
+| @blue($P_2$) |          | @gray(x) |        x |          |          | x        | x        |         |         |
+| $P_3$ | x        |          |        x |          | x        |          | x        |         |         |
+| @blue($P_4$) |          |          |          |          |          |          |          | @gray(x)| x       |
 | $P_5$ | x        |          |          |          |          |          |          |         | x       |
 
 
-<!-- data-type="none" style="table-layout: fixed; max-width:600px;"-->
-|       | $m_{14}$ | $m_{13}$ | $m_{11}$ | $m_{10}$ | $m_{9}$  | $m_{8}$  | $m_{7}$ | $m_{6}$ |
-| ----- | -------- | -------- | -------- | -------- | -------- | -------- | ------- | ------- |
-| $P_1$ |          |          | @gray(x) | x        | @blue(x) | @blue(x) |         |         |
-| $P_2$ |          | @blue(x) |          |          | @blue(x) | @blue(x) |         |         |
-| $P_3$ | x        |          |          | x        |          | @blue(x) |         |         |
-| $P_4$ |          |          |          |          |          |          | x       | x       |
-| $P_5$ | x        |          |          |          |          |          |         | x       |
+<!-- data-type="none" -->
+|                                  | $\overline{x}_1\,\overline{x}_0$ | $\overline{x}_1x_0$   | $x_1x_0$         | $x_1\overline{x}_0$ |
+| -------------------------------- | -------------------------------- | -------------------   | ---------------- | ------------------- |
+| $\overline{x}_3\,\overline{x}_2$ | 0                                | 0                     | 0                | 0                   |
+| $\overline{x}_3 x_2$             | 0                                | 0                     | $m_7$ ($P_4$)    | $m_6$    ($P_4$, $P_5$) |
+| $x_3 x_2$                        | $m_{12}$ ($P_2$, $P_3$)          | $m_{13}$ ($P_2$)      | 0                | $m_{14}$ ($P_3$, $P_5$)    |
+| $x_3 \overline{x}_2$             | $m_{8}$ ($P_1$, $P_2$, $P_3$)  | $m_{9}$ ($P_1$, $P_2$)| $m_{11}$ ($P_1$) | $m_{10}$ ($P_1$, $P_3$)    |
+
+
+> Statement 1: $m_2$ ist in $P_2$ enthalten. Wenn $P_2$ essentiell ist, dann ist die Weiterführung der Spalte für $m_{13}$ nicht notwendig. Es ist automatisch abgedeckt.
+
+> Statement 2: $m_{11}$ ist nur in $P_1$ enthalten und schließt damit $m_{10}$, $m_{9}$ und $m_{8}$ ein. Die  zwei letztgenannten werden aber auch schon durch $P_2$ abgedeckt.
+
+> Statement 3: $P_4$ deckt automatisch $m_6$ ab. 
 
 <!-- data-type="none" style="table-layout: fixed; max-width:330px;"-->
 |       | $m_{14}$ | $m_{13}$ | $m_{11}$ | $m_{7}$ |
@@ -566,20 +577,7 @@ Beginnen wir mit $m_{13}$. Hier kann $m_{12}$ gestrichen werden, weil $m_{13}$ d
 | $P_4$ |          |          |          | x       |
 | $P_5$ | x        |          |          |         |
 
-**Zeilendominanzprüfung**
-
-Jetzt vergleicht man die Zeilen (Primterme) der Tabelle paarweise, ob nicht eine Zeile existiert, in denen die markierten Minterme eine Teilmenge der markierten Minterme der anderen Zeile sind. Ist dies der Fall, so kann der Primterm mit der Teilmenge gestrichen werden, denn man kann für jede Markierung des gestrichenen Primterms den anderen Primterm als Ersatz nehmen. Die Relation ist hier also genau umgekehrt wie bei der Spaltendominanz.
-
-<!-- data-type="none" style="table-layout: fixed; max-width:320px;"-->
-|       | $m_{14}$ | $m_{13}$ | $m_{11}$ | $m_{7}$ |
-| ----- | -------- | -------- | -------- | ------- |
-| $P_1$ |          |          | x        |         |
-| $P_2$ |          | x        |          |         |
-| $P_3$ | @gray(x) |          |          |         |
-| $P_4$ |          |          |          | x       |
-| $P_5$ | @gray(x) |          |          |         |
-
-Keine dominanten Zeilen aber Dopplung eines  Minterms - Welchen sollen wir entfernen?
+$P_3$ und $P_5$ decken ein und den selben Minterm ab. Welcher sollte gewählt werden?
 
 $$
 \begin{aligned}
@@ -593,11 +591,29 @@ $$
 
 > Ergebnis: Unsere relevanten Primimplikanten sind $y = P_1 + P_2 + P_3 + P_4 = \overline{x}_3 x_2 x_1 +  x_3\,\overline{x}_2 +  x_3 \overline{x}_1 + x_3 \overline{x}_0$.
 
-> Für das Verfahren von Quine-McCluskey exisitieren webbasierte Lösungen [Link Uni Marburg](https://www.mathematik.uni-marburg.de/~thormae/lectures/ti1/code/qmc/), die zum Ausprobieren einladen.
+
+*******************************************************************
+
+                              {{1-2}}
+*******************************************************************
+
+2. Formeller
+
+**Spaltendominanzprüfung**
+
+Die Spalten werden paarweise darauf verglichen, ob nicht eine Spalte existiert, in der die markierten Primterme eine Teilmenge der markierten Primterme der anderen Spalte sind. Ist dies der Fall, so kann die Spalte mit der Obermenge gestrichen werden, denn es müssen alle Konjunktionen erfasst werden und daher ist die Konjunktion mit der Obermenge durch Auswahl der Konjunktion mit der Teilmenge ebenfalls erfasst.
+
+**Zeilendominanzprüfung**
+
+Man vergleicht die Zeilen (Primterme) der Tabelle paarweise, ob nicht eine Zeile existiert, in denen die markierten Minterme eine Teilmenge der markierten Minterme der anderen Zeile sind. Ist dies der Fall, so kann der Primterm mit der Teilmenge gestrichen werden, denn man kann für jede Markierung des gestrichenen Primterms den anderen Primterm als Ersatz nehmen. Die Relation ist hier also genau umgekehrt wie bei der Spaltendominanz.
+
+> Für das Verfahren von Quine-McCluskey exisitieren webbasierte Lösungen [Link Uni Marburg](https://www.mathematik.uni-marburg.de/~thormae/lectures/ti1/code/qmc/), die zum Ausprobieren einladen. Hier ist aber das Vorgehen etwas anders - die final identifizierten essentiellen Primimplikanten werden extrahiert.
+
+*******************************************************************
 
 ## Schaltungssynthese
 
-> Schaltungssynthese beschreibt die Umsetzung einer boolschen Funktion in eine Hardware-Schaltung. Grundlage sind Logikgatter, die als spezifische Schaltnetze industriell gefertigt werden.
+> Schaltungssynthese beschreibt die Umsetzung einer booleschen Funktion in eine Hardware-Schaltung. Grundlage sind Logikgatter, die als spezifische Schaltnetze industriell gefertigt werden.
 
 Beispiel
 
@@ -718,9 +734,9 @@ Beispiel:
 | 0   | 0   | 1   | 0   |
 | 0   | 1   | 0   | 0   |
 | 0   | 1   | 1   | 1   |
-| 1   | 1   | 0   | 1   |
+| 1   | 0   | 0   | 1   |
 | 1   | 0   | 1   | 0   |
-| 1   | 0   | 1   | 0   |
+| 1   | 1   | 0   | 0   |
 | 1   | 1   | 1   | 0   |
 
 

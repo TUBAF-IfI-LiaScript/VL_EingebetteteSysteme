@@ -6,23 +6,22 @@ version:  0.0.2
 language: de
 narrator: Deutsch Female
 
-import:   https://raw.githubusercontent.com/LiaTemplates/NetSwarm-Simulator/master/README.md
-          https://raw.githubusercontent.com/liaTemplates/PyScript/main/README.md
+import:   https://raw.githubusercontent.com/liaTemplates/PyScript/main/README.md
           https://raw.githubusercontent.com/TUBAF-IfI-LiaScript/VL_EingebetteteSysteme/master/config.md
 -->
 
 [![LiaScript](https://raw.githubusercontent.com/LiaScript/LiaScript/master/badges/course.svg)](https://liascript.github.io/course/?https://raw.githubusercontent.com/TUBAF-IfI-LiaScript/VL_EingebetteteSysteme/master/03_Minimierung.md#1)
 
-# Minimierung von boolschen Funktionen
+# Minimierung von Boolesche Funktionen
 
-| Parameter                | Kursinformationen                                                                                                                                                                          |
-| ------------------------ | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------ |
-| **Veranstaltung:**        | @config.lecture                                                                                                                                              |
-| **Semester**              | @config.semester                                                                                                                                             |
-| **Hochschule:**          | `Technische Universität Freiberg`                                                                                                                                                          |
-| **Inhalte:**             | `Minimierung boolscher Funktionen`                                                                                      |
+| Parameter            | Kursinformationen                                                                                                                                                                          |
+| -------------------- | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------ |
+| **Veranstaltung:**   | @config.lecture                                                                                                                                                                            |
+| **Semester**         | @config.semester                                                                                                                                                                           |
+| **Hochschule:**      | `Technische Universität Freiberg`                                                                                                                                                          |
+| **Inhalte:**         | `Minimierung boolescher Funktionen`                                                                                                                                                        |
 | **Link auf GitHub:** | [https://github.com/TUBAF-IfI-LiaScript/VL_EingebetteteSysteme/blob/master/00_Einfuehrung.md](https://github.com/TUBAF-IfI-LiaScript/VL_EingebetteteSysteme/blob/master/03_Minimierung.md) |
-| **Autoren**              | @author                                                                                                                                                                                    |
+| **Autoren**          | @author                                                                                                                                                                                    |
 
 ![](https://media.giphy.com/media/10PNyg7YOcaBQA/giphy-downsized.gif)
 
@@ -33,10 +32,10 @@ import:   https://raw.githubusercontent.com/LiaTemplates/NetSwarm-Simulator/mast
 + Nennen Sie 3 Beispiele, wie eine Schaltfunktion technisch umgesetzt werden kann.
 + Welcher Unterschied besteht zwischen der DNF und der KDNF?
 + Welcher Unterschied besteht zwischen der DNF und der KNF?
-+ Geben Sie das de Morgansche Gesetz wieder.
-+ Welchem Grundkonzept folgt das Diagramm von Karnaugh?
++ Geben Sie das De-Morgansche Gesetz wieder.
++ Welchem Grundkonzept folgt das Diagramm von Karnaugh-Veitch?
 + Welche Areale können im Diagramm zusammengefasst werden?
-+ Worin unterscheidet sich das Vorgehen mit dem Karnaugh-Diagramm für Min- und Maxterme?
++ Worin unterscheidet sich das Vorgehen mit dem Karnaugh-Veitch-Diagramm für Min- und Maxterme?
 
 ---------------------------------------------------------------------
 
@@ -172,12 +171,12 @@ geendet. Allerdings kann die manuelle Lösung der Gleichungen kein Lösungsansat
    {{0-1}}
 ********************************************************************************
 
-| Format                                         | Bedeutung   |
-| ---------------------------------------------- | ----------- |
-| Wahrheitstafel                                 | eindeutig   |
-| allgemeine Boolsche Funktion                   | uneindeutig |
-| Normalformdarstellung einer Boolschen Funktion | eindeutig   |
-| Schaltnetz                                     | uneindeutig |
+| Format                                          | Bedeutung   |
+| ----------------------------------------------- | ----------- |
+| Wahrheitstafel                                  | eindeutig   |
+| allgemeine Boolesche Funktion                   | uneindeutig |
+| Normalformdarstellung einer Booleschen Funktion | eindeutig   |
+| Schaltnetz                                      | uneindeutig |
 
 ********************************************************************************
 
@@ -240,9 +239,9 @@ Und nun in der Kombination ....
 
 > "KDNF = Disjunktion von Mintermen"
 
->  Jede Boolsche Funktion läßt sich als genau eine KDNF darstellen!
+>  Jede Boolesche Funktion läßt sich als genau eine KDNF darstellen!
 
-Bildung der KDNF für n -stellige Boolsche Funktion $f$:
+Bildung der KDNF für n -stellige Boolesche Funktion $f$:
 
 + für jede Zeile der Wahrheitstabelle mit $f(x_1, x_2, ..., x_n) = 1$ wird ein Minterm aufgestellt
 + hierin wird jede Variable $x_i$ negiert, wenn in der entsprechenden Zeile der Wert der Variablen 0 ist
@@ -294,9 +293,9 @@ Vergleichen Sie die Darstellung mit dem Resultat der Einstiegsübung!
 
 > "KKNF = Konjunktion von Maxtermen"
 
->  Jede Boolsche Funktion läßt sich als genau eine KKNF darstellen!
+>  Jede Boolesche Funktion läßt sich als genau eine KKNF darstellen!
 
-Bildung der KKNF für n -stellige Boolsche Funktion $f$:
+Bildung der KKNF für n -stellige Boolesche Funktion $f$:
 
 + für jede Zeile der Wahrheitstabelle mit $f(x_1, x_2, ..., x_n) = 0$ wird ein Maxterm aufgestellt
 + hierin wird jede Variable $x_i$ negiert, wenn in der entsprechenden Zeile der Wert der Variablen 1 ist
@@ -383,11 +382,8 @@ Lösungsmöglichkeiten:
 2.  Einsatz eines graphischen Verfahrens (z.B. ein Karnaugh-Veith-Diagramm), nur möglich bei Schaltfunktionen mit wenigen Variablen
 3. algorithmisches Minimieren (z.B. Verfahren nach Quine-Mc-Cluskey), geeignet auch für Schaltfunktionen mit vielen Variablen
 
-Ausgangspunkt für die Minimierung von Boolschen Ausdrücken ist das neutrale
+Ausgangspunkt für die Minimierung von Booleschen Ausdrücken ist das neutrale
 Element einer Operation. Für eine `ODER` Verknüpfung bewirkt eine falsche Aussage und für eine `UND` Operation eine wahre Aussage keine Veränderung des Gesamtausdruckes.
-
-_"Wenn es regnet UND WAHR"_  hängt nur von der Wettersituation ab
-
 
 | Disjunktive Normalform | Konjunktive Normalform |
 |------------------------|------------------------|
@@ -399,7 +395,7 @@ _"Wenn es regnet UND WAHR"_  hängt nur von der Wettersituation ab
        {{0-2}}
 ********************************************************************************
 
-Jede zweistellige Boolsche Funktion lässt sich  mit den Kombinationen ihrer Variablen in einer tabellarischen Darstellung visualisieren:
+Jede zweistellige Boolesche Funktion lässt sich  mit den Kombinationen ihrer Variablen in einer tabellarischen Darstellung visualisieren:
 
 $A= \overline{x} \cdot \overline{y} + \overline{x} \cdot y + x \cdot \overline{y} + x \cdot y$
 
@@ -409,7 +405,7 @@ $A= \overline{x} \cdot \overline{y} + \overline{x} \cdot y + x \cdot \overline{y
 | $\overline{y}$ | $\overline{x} \cdot \overline{y}$ | $x \cdot \overline{y}$ |
 | $y$            | $\overline{x} \cdot y$            | $x \cdot y$            |
 
-Mit dieser verschobenen Wahrheitstafel lässt sich der Fingerabdruck einer boolschen Funktion darstellen.
+Mit dieser verschobenen Wahrheitstafel lässt sich der Fingerabdruck einer booleschen Funktion darstellen.
 
 Bespiel 1: $f= x \cdot \overline{y} + x \cdot y$
 
@@ -433,7 +429,19 @@ Bespiel 2: $f= x \cdot \overline{y} + \overline{x} \cdot y$
 
        {{1-2}}
 ********************************************************************************
-Dieses Konzept lässt sich auch auf Funktionen mit bis zu 4 Variablen übertragen.
+Dieses Konzept lässt sich auf Funktionen mit beliebig vielen Variablen übertragen. 
+Wichtig dabei ist, dass benachbarte Kombinationen von Variablen sich nur in **einer** Variable unterscheiden. (Siehe [Gray-Code](https://itwissen.info/Gray-Code-Gray-code.html))
+
+> Der Gray-Code ist ein stetiger Code, bei dem sich benachbarte Codewörter nur in einer einzigen binären Ziffer unterscheiden.
+>
+><!-- data-type="none" -->
+> | Dezimalzahl | Binärcode | Gray-Code |
+> | ----------- | --------- | --------- |
+> | 0           | 000       | 000       |
+> | 1           | 001       | 001       |
+> | 2           | 010       | 011       |
+> | 3           | 011       | 010       |
+
 
 |                | $\overline{x}\,\overline{y}$                      | $\overline{x}y$                        | $xy$ | $x\overline{y}$ |
 | -------------- | ------------------------------------------------ | -------------------------------------- | ---- | --------------- |
@@ -530,6 +538,8 @@ Richtig - $f = \overline{w}\,\overline{y} + \overline{w}xz$
 | $\overline{y} z$            | <span style="background-color: #ff0000">1</span>                           |   <span style="background-color: #ff0000">1</span>   <span style="background-color: #00ff00">1</span>          | 0    | 0               |
 | $y z$                       | 0                           | <span style="background-color: #00ff00">1</span>                |0    | 0               |
 | $y \overline{z}$            | 0                           | 0               | 0    | 0               |
+
+> Die Uni Marburg bietet eine gute Online Visualisierung des KV-Diagrammes an: https://www.mathematik.uni-marburg.de/~thormae/lectures/ti1/code/karnaughmap/
 
 ********************************************************************************
 
@@ -735,6 +745,9 @@ Ablesen der KNF:
 
 ## Dont-Care-Einträge in der Wahrheitstafel
 
+                               {{0-2}}
+********************************************************************************
+
 In einigen Fällen bildet die Wahrheitstafel Kombinationen der Eingangswerte ab,
 die für die Ausgabe gar nicht relevant sind. In diesem Fall spricht man von sogenannten `don't care` Ausgaben. Letztendlich ist uns das Funktionsergebnis für diese Fälle egal. Aus den `don't care` Fällen können entsprechend weitere Minimierungen hergeleitet werden.
 
@@ -748,6 +761,13 @@ Acht Eingänge pro Element würde die Zahl der verfügbaren Pins eines Controlle
 Folglich ergeben sich 6 Eingangskombinationen, die für unsere Ausgabe irrelevant sind.
 
 ![Bild](./images/04_Schaltnetze/bcd_animation.gif)<!-- width="50%" -->
+
+********************************************************************************
+
+                               {{1-3}}
+********************************************************************************
+
+Betrachten wir die Wahrheitstafel für das "d" Element.
 
 <!-- data-type="none" -->
 | $w$ | $x$ | $y$ | $z$ | $d$                                   |
@@ -769,8 +789,9 @@ Folglich ergeben sich 6 Eingangskombinationen, die für unsere Ausgabe irrelevan
 | 1   | 1   | 1   | 0   | <span style="color: #ff0000">D</span> |
 | 1   | 1   | 1   | 1   | <span style="color: #ff0000">D</span> |
 
+********************************************************************************
 
-      {{1}}
+                               {{2-6}}
 ********************************************************************************
 
 <!-- data-type="none" -->
@@ -785,8 +806,25 @@ Welche Gleichung für `d` lesen Sie daraus ab?
 
 ********************************************************************************
 
-{{3}}
+                               {{3-6}}
+********************************************************************************
+
 $d = w + y\overline{z} + \overline{x}y +  x\overline{y}z + \overline{x}\,\overline{z}$
+
+********************************************************************************
+
+                                {{5-6}}
+********************************************************************************
+
+Die Korrektheit unserer Lösung können Sie in einer Simulationsumgebung evaluieren.
+
+https://goldi-labs.net/BEAST.php#
+
+![7 Segementanzeige](./images/03_Minimierung/7_segement_Anzeige.png)
+
+Die gezeigte Lösung findet sich im Projektrepository.
+
+********************************************************************************
 
 ## Zusammenfassung
 
@@ -803,7 +841,6 @@ Regeln zur Bildung der Schleifen:
 ``` python @PyScript.env
 - sympy
 ```
-
 ``` python @PyScript.repl
 from sympy.logic import SOPform
 from sympy import symbols
@@ -823,8 +860,17 @@ print("Minimized result:")
 print(result)
 ```
 
+Die Dokumentation zum Sympy Paket von Python finden Sie unter https://docs.sympy.org/latest/modules/logic.html 
+
 ## Hausaufgaben
 
 + Lösen Sie das Minimierungsproblem der Einstiegsaufgabe mit dem Karnaugh-Veitch-Diagramm.
 + Stellen Sie die Wahrheitstafel für ein weiteres Element der Sieben-Segmentanzeige auf. Minimieren Sie den Ausdruck.
 + Erstellen Sie mit dem Python-Beispiel eine eigene (willkürliche) Wahrheitstafel und vereinfachen Sie diese mit dem Karnaugh-Veitch-Diagramm und auf analytischem Wege.
+
+> Für das Training oder die Probe bei der Erledigung der Hausaufgaben können Sie die Werkzeuge der TU Ilmenau verwenden, die die besprochenen Inhalte wunderbar zusammenfasst.
+>
+> https://www.goldi-labs.de/SANE/view3
+>
+> ![SANE](./images/03_Minimierung/SANE.png)
+

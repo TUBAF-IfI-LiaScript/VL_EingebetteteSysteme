@@ -253,7 +253,7 @@ Historische Entwicklung:
 + Aristoteles (384-322 v.Chr.) begründet „Syllogistik“ Lehre von den logischen Schlussformen
 + Später bilden die Stoiker die Syllogistik als Aussagenlogik weiter aus. Im Mittelalter → Scholastik
 + George Boole (1815-1864) 1854 mathematische Formalisierung in _„An Investigation of the Laws of Thought on which are founded the Mathematical Theories of Logic and Probabilities"_.
-+ Claude Shannon (1916-2001) hat im Rahmen seiner Masterarbeit _„On the Symbolic Analysis of Relay and Switching Circuits (1940)“_, gezeigt, dass man die Boolsche Algebra zur Beschreibung von Schaltkreisen anwenden kann.
++ Claude Shannon (1916-2001) hat im Rahmen seiner Masterarbeit _„On the Symbolic Analysis of Relay and Switching Circuits (1940)“_, gezeigt, dass man die Boolesche Algebra zur Beschreibung von Schaltkreisen anwenden kann.
 
 ![Shannon](./images/02_BoolscheAlgebra/ClaudeShannon_MFO3807.jpg "Claude Shannon [^Shannon]")<!-- width="40%" -->
 

@@ -790,10 +790,10 @@ Oscillator           |---|   |   |   |                                          
 
 {{0-1}}
 | Aspekt                      | Kombinatorische Logik                  |
-|-----------------------------|----------------------------------------|
+| --------------------------- | -------------------------------------- |
 | Grundlegende Repräsentation | Endlicher Automat                      |
 | Fortschaltung der Kontrolle | Expliziter Folgezustand                |
-| Logische Repräsentation     | Boolsche Gleichungen                   |
+| Logische Repräsentation     | Boolesche Gleichungen                  |
 | Implementierungstechnik     | Gatter, Programmierbare Logikbausteine |
 
 {{1-2}}
@@ -836,10 +836,10 @@ Oscillator           |---|   |   |   |                                          
 
 {{1-2}}
 | Aspekt                      | Kombinatorische Logik                  | Mikroprogramm     |
-|-----------------------------|----------------------------------------|-------------------|
+| --------------------------- | -------------------------------------- | ----------------- |
 | Grundlegende Repräsentation | Endlicher Automat                      | Programm          |
 | Fortschaltung der Kontrolle | Expliziter Folgezustand                | Programmzähler    |
-| Logische Repräsentation     | Boolsche Gleichungen                   | Wahrheitstabelle  |
+| Logische Repräsentation     | Boolesche Gleichungen                  | Wahrheitstabelle  |
 | Implementierungstechnik     | Gatter, Programmierbare Logikbausteine | R/W-Speicher, ROM |
 
 
