@@ -2,7 +2,7 @@
 
 author:   Sebastian Zug & André Dietrich & Fabian Bär
 email:    sebastian.zug@informatik.tu-freiberg.de & andre.dietrich@informatik.tu-freiberg.de & fabian.baer@student.tu-freiberg.de
-version:  0.0.7
+version:  0.0.8
 language: de
 narrator: Deutsch Female
 
@@ -379,7 +379,7 @@ Kodierung
 
 Für unsere digitalen Bauteile müssen wir diese Zustände aber mit `1` und `0` kodieren.
 
-<!-- data-type="none" style="table-layout: fixed; max-width:799px;"-->
+<!-- data-type="none" style="table-layout: fixed; max-width:899px;"-->
 | Zustände | Flip-Flops | Mögliche Zustände | Ungenutzte Zustände |
 |----------|------------|-------------------|---------------------|
 | 1        | -          | -                 | -                   |
@@ -397,7 +397,7 @@ Die zwei Flip-Flops werden im folgenden als `F` und `G` bezeichnet. Die Ausgabe 
 
 Mit unserem Schaltwerk wollen wir also eine Funktion abbilden, die die Ausgabe `X` in Abhängigkeit von (historischen) `E` Eingaben generiert. Um letztgenannten Anteil zu integrieren, braucht es die Zustände, die in `F` und `G` erfasst sind.
 
-<!-- data-type="none" style="table-layout: fixed; max-width:420px;"-->
+<!-- data-type="none" style="table-layout: fixed; max-width:620px;"-->
 | Zustand | Flip-Flop F | Flip-Flop G |
 |---------|-------------|-------------|
 | A       | 0           | 0           |
@@ -645,6 +645,7 @@ Zustandstabelle
 | D       | 1 | 1 | 1 | dont care | d  | d  |
 
 Ausgaben
+
 <!-- data-type="none" style="table-layout: fixed; max-width:320px;"-->
 | F | G | E | A |
 |---|---|---|---|
@@ -669,7 +670,7 @@ $$
 Wir nutzen die `dont care` Zustände noch weiter aus und ermöglichen eine zusätzliche Vereinfachung.
 
 <!--
-style="width: 80%; min-width: 420px; max-width: 720px;"
+style="width: 80%; min-width: 620px; max-width: 720px;"
 -->
 ```ascii
          __   _          _                        __   _          _
@@ -692,7 +693,7 @@ $$
 \begin{aligned}
 F` &= \overline{F}GE + F\overline{G}E \\
    &= GE + FE \\
-G` &= \overline{F}\overline{G}E  \\
+G` &= \overline{F}E\overline{G}  \\
 A  &= F\overline{G}E + FGE = FE
 \end{aligned}
 $$
@@ -706,6 +707,14 @@ Bitte mit Eingabe 0 starten, um Flipflops zurück zu setzen!
 ```
 
 In der Simulation sehen Sie dass wir gegenüber dem Moore-Automaten ...
+
+$$
+\begin{aligned}
+F` &= GE + FE \\
+G` &= \overline{G}E + FE \\
+A  &= FG
+\end{aligned}
+$$
 
 
 ### Bedeutung des Flip-Flop Typs
@@ -1063,6 +1072,7 @@ $$
 
 > **Aufgabe:** Setzen Sie die Gleichungen mit einem PAL um!
 
+{{0-1}}
 ![Bild](./images/07_Schaltwerke/PAL_example_vorlage.png) <!--style="width: 80%;"-->
 
 {{1}}
