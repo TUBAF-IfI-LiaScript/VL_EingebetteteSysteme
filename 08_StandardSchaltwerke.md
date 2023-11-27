@@ -8,6 +8,7 @@ narrator: Deutsch Female
 
 import:   https://raw.githubusercontent.com/liascript-templates/plantUML/master/README.md
           https://raw.githubusercontent.com/LiaTemplates/DigiSim/master/README.md
+          https://raw.githubusercontent.com/liaTemplates/AVR8js/main/README.md
           https://raw.githubusercontent.com/TUBAF-IfI-LiaScript/VL_EingebetteteSysteme/master/config.md
 
 mark: <span style="background-color: @0;
@@ -338,6 +339,73 @@ $$
 
 *******************************************************************************
 
+                              {{8-9}}
+*******************************************************************************
+
+> Wie sehen alternative Umsetzungen aus?
+
+<div>
+  <wokwi-led color="red" pin="13" port="B" label="13"></wokwi-led>
+  <wokwi-led color="yellow" pin="12" port="B" label="12"></wokwi-led>
+  <wokwi-led color="green" pin="11" port="B" label="11"></wokwi-led>
+  <span id="simulation-time"></span>
+</div>
+
+```cpp       statemachine.cpp
+typedef struct {
+    int state;
+    int next;
+    int A_red;
+    int A_yellow;
+    int A_green;
+    int timer;
+} tl_state_t;    // Traffic light state
+
+tl_state_t states[4] = {
+// state     A_red             timer
+//  |   next  |  A_yellow       |
+//  |    |    |   |    A_green  |
+//----------------------------------------------
+{   0,   1,   1,  0,    0,      3},
+{   1,   2,   1,  1,    0,      1 },
+{   2,   3,   0,  0,    1,      3},
+{   3,   0,   0,  1,    0,      1,}
+};
+
+const int greenPin = 11;
+const int yellowPin = 12;
+const int redPin = 13;
+int state = 0;
+
+void setup() {
+  pinMode(greenPin, OUTPUT);
+  pinMode(yellowPin, OUTPUT);
+  pinMode(redPin, OUTPUT);
+}
+
+void loop() {
+  if (states[state].A_red == 1) digitalWrite(redPin, HIGH);
+  else digitalWrite(redPin, LOW);
+  if (states[state].A_yellow == 1) digitalWrite(yellowPin, HIGH);
+  else digitalWrite(yellowPin, LOW);
+  if (states[state].A_green == 1) digitalWrite(greenPin, HIGH);
+  else digitalWrite(greenPin, LOW);
+  delay(states[state].timer*1000);
+  state =  states[state].next;
+}
+```
+@AVR8js.sketch
+
+
+| Methode                         | Bauteilkosten | Entwurf      | Variabilität |
+| :------------------------------ | :------------ | :----------- | :----------- |
+| Analoge Schaltung               | minimal       | aufwändig    | gering       |
+| Digitale Logik                  | gering        | einfach      | mittel       |
+| Software (eingebetteter $\mu$C) | überschaubar  | einfach      | hoch         |
+| Software (PC)                   | hoch          | sehr einfach | hoch         |
+
+*******************************************************************************
+
 ## Register
 
 > **Merke** Register bilden das Zusammenspiel mehrerer Flip-Flops.
@@ -460,7 +528,7 @@ write     | |            |        |       +----------------+   |  |  |  |
 enable ---------+                   ------| clear          |   |  |  |  +--- Q_3
 out          Register-                    +----------------+
              Lese-
-          Auswahl
+             Auswahl
                                                     ....                 .
 ```
 
@@ -557,11 +625,31 @@ Im Ergbnis lässt sich das System mit entsprechenden XOR und AND Bausteinen Umse
 
 ![Bild](./images/08_StandardSchaltwerke/Zaehler.svg.png)<!-- style="width: 80%; max-width: 800px;" -->
 
-> **Aufgabe:** Leiten Sie die Im Schaltwerk gezeigte Realsisierung aus den oben genannten Gleichungen her.
+> **Aufgabe:** Leiten Sie die Im Schaltwerk gezeigte Realisierung aus den oben genannten Gleichungen her.
 
 ********************************************************************************
 
                       {{2-3}}
+********************************************************************************
+
+> **Aufgabe:** Leiten Sie die Im Schaltwerk gezeigte Realisierung aus den oben genannten Gleichungen her.
+
+![Bild](./images/08_StandardSchaltwerke/Zaehler.svg.png)<!-- style="width: 80%; max-width: 800px;" -->
+
+Für $DI$ und $DH$ ist die Lösung trivial, für DG müssen wir den Term etwas umstellen. Die Schaltung drückt die Gleichung  $DG = IH\oplus G$ aus.
+
+$$
+\begin{aligned}
+DG &= IH\oplus G \\
+   &=  \overline{IH}G + IH\overline{G}\\
+   &=  (\overline{I}+\overline{H})G + IH\overline{G}\\
+DG &= \overline{I}G + \overline{H}G + IH\overline{G}\\
+\end{aligned}
+$$
+
+********************************************************************************
+
+                      {{3-4}}
 ********************************************************************************
 
 > **Merke** Aus der Kombination der genannten Klassifkationsmerkmale für Zähler lassen sich spezifische Umsetzungen realisieren.
@@ -570,7 +658,7 @@ Im Ergbnis lässt sich das System mit entsprechenden XOR und AND Bausteinen Umse
 
 *******************************************************************************
 
-                      {{3-4}}
+                      {{4-5}}
 *******************************************************************************
 
 **Alternative Implementierung mit erweiterter Funktionalität:**
