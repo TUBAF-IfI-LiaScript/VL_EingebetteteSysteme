@@ -578,45 +578,8 @@ In der EX-Phase werden die arithmetisch/logischen Operationen, sowie Speicherbef
 
 Der folgende Automat bildet die Abarbeitung der Instruktionen `HLT`, `JMP`, `JMA` und `JSR` in einem Automaten ab.
 
-![kombinatorik1](./images/11_Modell_CPU/StateMachine.png)
+![](https://www.plantuml.com/plantuml/png/RLBDZjCm4BxxAKOzxO8gDMaBQBLRRQbOjHM1A4NYi5sjJ6DAmN4YnrdW0U32XMViap1sCfeIjPTuvllnUBxUravQrnHQuC4f62IgAErFi4hc0v0rt2ct-nB15IIlCpZ-_Wl9VJBF7eZ-KHuSV2uj5ETqCUeklYFbalWhixEgKCP1kc3U6AwmzlRuUHunkNQssRb3QK2NfyOJ5Ap2F7wkS_nSxShyOFQicRxeJnCu2gV_1jVN_ZERaTLIkwsvs2W7IwaTr8UzaVeoc264HjbTk7r9WjIgIbeLTk6NG5VZWZmTTzOzZmJheW9NWiojgkj0nGxlOPKzHj5mrB6_5lA_CP7tvadgncFpnsXAfXlvf6YpwzhwtERTlMo7l8NK6ZRDfygMUoiBuiUKCm-mDMS76cIgLhYYe0nd7dtqOuG_s9gJHulxPmym7CvQhcWLMFF_Qv56eYsu7uT-BDg2--FG7uksuFuaz2UYAx3FqICm5LHvXDCFu4l13OztEPSLtDp0yks7Fep1ClxkVNhyyskHlkgpVAP4MYTf7wPScJ8Nr6EvJzYZ4M4y08EZlhVFduqtcV0F8g50Pow25QSXl9GyOb_5f-YjCdbJw7y0)
 
-```text @plantUML.png
-@startuml
-  state "Memory read" as Fetch1 : MBR ← M[MAR]
-  state "Wait for memory read" as Fetch2 : (wait)
-  state "Increment PC" as Fetch3 : PC ← PC+1
-  state "Instruction load" as Fetch4 : IR ← MBR
-  state "Instruction decoding" as Fetch56 : (wait)
-  state decodefork <<fork>>
-  state "Hlt\n(Set Halt signal)" as Hlt : RF ← H
-  state "Prepare for reading" as Wait : MAR ← PC
-  state "Jmp to adress" as Jmp : PC ← IR_11-0
-  state jmafork <<fork>> : Evaluate A_15
-  state "Save PC" as Jsr1 : A ← PC_11-0
-  state "Call Subprogram" as Jsr2 : MBR ← IR_11-0\nPC ← IR_11-0
-  state "Reset\n" as Reset : PC ← 0x0000 \nMAR ← PC
-  
-  [*] --> Reset
-  Reset --> Fetch1 : CP1
-  Fetch1 --> Fetch2 : CP2
-  Fetch2 --> Fetch3 : CP3
-  Fetch3 --> Fetch4 : CP4
-  Fetch4 --> Fetch56 : CP5
-  Fetch56 --> decodefork : CP7
-  decodefork --> Hlt : op == HLT
-  decodefork --> Wait : op == NOP⋅CP8
-  decodefork --> Jmp : op == JMP
-  decodefork --> jmafork : op == JMA
-  jmafork --> Jmp : A_15 == 1
-  jmafork --> Wait : A_15 == 0
-  decodefork --> Jsr1 : op == JSR
-  Hlt --> Wait
-  Jmp --> Wait
-  Wait --> Fetch1
-  Jsr1 --> Jsr2
-  Jsr2 --> Fetch1
-@enduml
-```
 
 ## Umsetzung als Schaltnetz / Schaltwerk
 
