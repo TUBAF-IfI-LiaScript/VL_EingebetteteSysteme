@@ -2,7 +2,7 @@
 
 author:   Sebastian Zug & André Dietrich & Fabian Bär
 email:    sebastian.zug@informatik.tu-freiberg.de & andre.dietrich@informatik.tu-freiberg.de & fabian.baer@student.tu-freiberg.de
-version:  0.0.8
+version:  0.0.9
 language: de
 narrator: Deutsch Female
 
@@ -516,6 +516,7 @@ Wie ist das Ganze konkret am AVR umgesetzt?
 
 ![Bild](./images/13_AVR_CPU/IO_ATmega.png "Speicherstruktur des Controllers, Seite 85, [^megaAVR]")<!-- style="width: 75%; max-width: 1000px" -->
 
+<!-- data-type="none" -->
 | DDRx       | PORTx | Zustand des Pin            |
 | ---------- | ----- | -------------------------- |
 | 0 (input)  | 0     | Eingang ohne Pull-Up       |
@@ -523,7 +524,7 @@ Wie ist das Ganze konkret am AVR umgesetzt?
 | 1 (output) | 0     | Push-Pull Ausgang auf Low  |
 | 1 (output) | 1     | Push-Pull Ausgang auf High |
 
-https://www.youtube.com/watch?v=bDPdrWS-YUc&feature=emb_logo
+!?[Video Pull-Ups](https://www.youtube.com/watch?v=bDPdrWS-YUc&feature=emb_logo)
 
 Das Latch entkoppelt die Eingangsspannung und deren Erfassung, bewirkt aber eine Verzögerung. Im schlimmsten Fall beträgt diese 1.5 Clockzyklen im besten 1 Clockzyklus.
 
@@ -537,11 +538,16 @@ Und wie setzen wir das Ganze in einer konkreten Schaltung um?
 
 ![Bild](./images/13_AVR_CPU/ArduinoDrawing.png "Schaltplan eines Arduino Uno Boards [^14]")<!-- style="width: 85%; max-width: 1000px" -->
 
-[^14]: Arduino Webseite [Link](https://content.arduino.cc/assets/UNO-TH_Rev3e_sch.pdf)
+https://content.arduino.cc/assets/A000066-full-pinout.pdf
 
 ![Bild](./images/13_AVR_CPU/ArduinoBoard.jpeg "Arduino Uno Board [^15]")<!-- style="width: 55%; max-width: 1000px" -->
 
+[^14]: Arduino Webseite [Link](https://content.arduino.cc/assets/UNO-TH_Rev3e_sch.pdf)
+
 [^15]: Arduino Webseite [Link](https://store.arduino.cc/arduino-uno-rev3)
+
+> Das wichtigste Dokument ist der [Pinout-Plan des Arduino Uno](https://content.arduino.cc/assets/A000066-full-pinout.pdf) Boards. Er zeigt die Anschlüsse des Mikrocontrollers und die Verbindungen zu den Steckern des Boards.
+
 
 **Arduino Hardware/Software Cosmos**
 
@@ -609,8 +615,9 @@ Entsprechend können Sie in den Übungen die Tools der Arduino IDE nutzen, die P
 |                          +---------------+                                              |     
 +-----------------------------------------------------------------------------------------+
                                    |
-                                   +-------------------------+                                    
-+----------------------------------|-------------------------|----------------------------+
+                                   +-------------------------+    
+                                   |                         |                                
++----------------------------------|-=-----------------------|----------------------------+
 :                                  v                         v                            |
 : +---------------+        +---------------+         +---------------+                    |
 | |c2F8 SRAM      |<------ |c2F8 Flash     |         |c2F8 EEPROM    |                    |
@@ -619,7 +626,12 @@ Entsprechend können Sie in den Übungen die Tools der Arduino IDE nutzen, die P
 +-----------------------------------------------------------------------------------------+
 @endditaa
 ```
+
 ### Assembler
+
+Die Adressregister sind im Handbuch des Controllers aufgeführt [ab Seite 621](http://ww1.microchip.com/downloads/en/DeviceDoc/ATmega48A-PA-88A-PA-168A-PA-328-P-DS-DS40002061A.pdf)
+
+Die Assemblerbefehle des AVR sind in der [AVR Instruction Set Summary](https://ww1.microchip.com/downloads/en/devicedoc/atmel-0856-avr-instruction-set-manual.pdf) beschrieben.
 
 ```as
 main:  ; ------- INIT -------------------
@@ -647,6 +659,8 @@ avr-gcc -mmcu=atmega328p -nostdlib as_code.S -o as_code.elf
 
 Die Generierung der Warteschleife von 1s ist dem Delay-Generator http://darcy.rsgc.on.ca/ACES/TEI4M/AVRdelay.html entnommen.
 
+
+
 ### C++ / C
 
 <div>
@@ -663,8 +677,7 @@ Die Generierung der Warteschleife von 1s ist dem Delay-Generator http://darcy.rs
 int main (void) {
    DDRB |= (1 << PB5);
    while(1) {
-       // PINB = (1 << PB5);   // Dieses Feature ist im Simulator nicht
-                               // implementiert
+       // PINB = (1 << PB5);    // alternative Umsetzung mit PIN Register
        PORTB ^= ( 1 << PB5 );
        _delay_ms(1000);
    }
@@ -772,6 +785,7 @@ Wie können wir die Inhalte interpretieren?
 
 Die erste Zeile wird im Speicher wie folgt dargestellt:
 
+<!-- data-type="none" -->
 | Adresse | Inhalt |
 | ------- | ------ |
 | 0x0000  | 0C     |
@@ -830,6 +844,7 @@ Im Programmspeicher steht auf den ersten 8 Byte `jmp 0xe4`
 
 **Bitoperationen in C**
 
+<!-- data-type="none" -->
 | Operation | Bedeutung               |
 | --------- | ----------------------- |
 | `>>`      | Rechts schieben         |
@@ -837,6 +852,8 @@ Im Programmspeicher steht auf den ersten 8 Byte `jmp 0xe4`
 | `|`       | binäres, bitweises ODER |
 | `&`       | binäres, bitweises UND  |
 | `^`       | binäres, bitweises XOR  |
+
+> Im Folgenden werden für die Illustration der Wirkung der Bitweisen Operatoren C++ Funktionen genutzt. Diese dienen aber nur der Veranschaulichung.
 
 ```cpp                     Bitshifting.cpp
 #include <iostream>
@@ -929,9 +946,9 @@ int main()
   std::cout << std::bitset<8>(PORTB) << std::endl;
 
   if (PORTB & (1 << PB0))
-       std::cout << "Bit 2 gesetzt" << std::endl;
+       std::cout << "Bit 0 gesetzt" << std::endl;
   if (!(PORTB & (1 << PB0)))
-       std::cout << "Bit 2 nicht gesetzt" << std::endl;
+       std::cout << "Bit 0 nicht gesetzt" << std::endl;
   // Ist PB0 ODER PB2 gesetzt?
   if (PORTB & ((1 << PB0) | (1 << PB2)))
      std::cout << "Bit 0 oder 2 gesetzt" << std::endl;
