@@ -2,7 +2,7 @@
 
 author:   Sebastian Zug, André Dietrich & `fjangfaragesh`, `FnHm`, `gjaeger`, `ShyFlyGuy`, `Lalelele`
 email:    sebastian.zug@informatik.tu-freiberg.de & andre.dietrich@informatik.tu-freiberg.de & fabian.baer@student.tu-freiberg.de
-version:  0.0.1
+version:  0.0.2
 language: de
 narrator: Deutsch Female
 
@@ -262,15 +262,24 @@ Die Veranstaltung wird sowohl für die Vorlesung als auch die Übung in Präsenz
 <!-- data-type="none" -->
 | Veranstaltungen | Tag      | Zeitslot      | Ort      | Bemerkung     |
 | --------------- | -------- | ------------- | -------- | ------------- |
-| Vorlesung I     | Montag   | 14.30 - 16.00 | HUM-1115 | wöchentlich   |
-| Vorlesung II    | Mittwoch | 11:30 - 13.00 | HUM-1115 | gerade Wochen |
+| Vorlesung I     | Montag   | 14.30 - 16.00 | FOR-0270 | wöchentlich   |
+| Vorlesung II    | Dienstag | 14.30 - 16.00 | FOR-0270 | gerade Wochen |
 
 > Die zugehörigen Übungen starten im Dezember und werden dann wöchentlich durchgeführt.
 
-+ Übung 1 (ROB), Dienstags, 14.30 - 16.00 Uhr, RAM-2119
-+ Übung 2 (BM, Mm, BAI), Mittwochs, 14.30 - 16.00 Uhr, KKB-2097
++ Übung 1 Mittwochs, 16.15 - 17.45 Uhr, KKB-2097
++ Übung 2 Freitags, 8:00 - 9.30 Uhr, KKB-2097
 
 Die Übungen werden ab Dezember stattfinden. Dort haben Sie dann insbesondere ab Januar Gelegenheit anhand spezifischer Mikrocontrollerschaltungen Ihre Kenntnisse praktisch zu vertiefen.
+
+> Daneben gibt es weiterführende Angebote, sich mit der Materie auseinanderzusetzen:
+
++ Einsteiger-Tutorials zur Programmierung, "Elektronik rund um Mikrocontroller" (Adrian Köppen)
++ Bits & Bytes Vorträge im RoboLab 
+
+    + Am Donnerstag (24.10.) Fahrend und Schwimmend Roboterforschungsprojekte in Freiberg.
+
+> Remote-Labore werden etwa Dezember bereitstehen, um einzelne Aspekte der Lehrveranstaltung zu vertiefen.
 
 ### Prüfungsmodalitäten
 
@@ -404,15 +413,9 @@ Eine Reihe von Einführungsvideos findet sich unter [Youtube](https://www.youtub
 
 * Stellen Sie Fragen, seien Sie kommunikativ!
 
-> Hinweis auf das OPAL Forum!
-
 * Organisieren Sie sich in Arbeitsgruppen!
 
-> Hinweis auf Repl.it
-
-> Hinweis auf ThinkerCAD
-
-* Bringen Sie sich mit Implementierungen in die Veranstaltung ein.
+* Bringen Sie sich mit Implementierungen als Vortragende in die Veranstaltung ein.
 
 ### Und wenn Sie dann immer noch programmieren wollen ...
 
@@ -421,6 +424,13 @@ Dann wartet das __racetech__ Team auf Sie ... autonomes Fahren im Formular Stude
 ![WALL-E](./images/00_Einfuehrung/RaceTech.jpg)<!--
 style="width: 80%; display: block; margin-left: auto; margin-right: auto;" -->
 
+### Schauen Sie im RoboLab vorbei!
+
+Lion und Caio warten auf Sie ...
+
+![](https://www.saxeed.net/wp-content/uploads/2024/04/IMG_5898-scaled.jpg)
+
 ## Hausaufgabe
 
 + Legen Sie sich einen GitHub Account an ... und seien Sie der Erste, der einen Typo in den Unterlagen findet und diesen als Contributor korrigiert :-)
++ Organisieren Sie sich alle in einer Chatgruppe! Niemand verlässt den Raum, bevor er dort nicht Mitglied ist.
