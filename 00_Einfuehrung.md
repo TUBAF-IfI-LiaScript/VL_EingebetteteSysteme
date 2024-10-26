@@ -48,7 +48,7 @@ Worum geht es in der Veranstaltung und was sollte ich mitnehmen?
 
 _Mit der erfolgreichen Teilnahme an der Veranstaltung sollen die Studierenden in der Lage sein:_
 
-+ die Teilkomponenten eines Rechners ausgehend von der Schaltnetzen/-werken zu beschreiben und ausschnitthafte Teilelemente selbstständig entwerfen zu können,
++ die Teilkomponenten eines Rechners ausgehend von Schaltnetzen/-werken zu beschreiben und ausschnitthafte Teilelemente selbstständig entwerfen zu können,
 + die Integration der Elemente und die Abläufe bei der Programmabarbeitung in verschiedenen Modellrechnern zu beherrschen und die Vor- und Nachteile verschiedener Konfigurationen bewerten zu können,
 + die konkrete Realisierung von eingebetteten Systemen in entsprechenden Anwendungen aus den Schaltplänen zu erfassen und die softwareseitige Umsetzungen daraus abzuleiten
 + einfache, eingebettete Systeme zu entwerfen und zu realisieren
