@@ -2,7 +2,7 @@
 
 author:   Sebastian Zug & André Dietrich & Fabian Bär
 email:    sebastian.zug@informatik.tu-freiberg.de & andre.dietrich@informatik.tu-freiberg.de & fabian.baer@student.tu-freiberg.de
-version:  0.0.3
+version:  0.0.4
 language: de
 narrator: Deutsch Female
 
@@ -97,6 +97,8 @@ style="width: 80%; min-width: 420px; max-width: 720px;"
 | Verbesserungsvorschlag   | 1                       | 0                            |
 | Fragen                   | 0                       | 0                            |
 | generelle Hinweise       | 0                       | 0                            |
+
+Die Informatik wird gewinnen!!!
 
 ## Begrifflichkeiten
 
