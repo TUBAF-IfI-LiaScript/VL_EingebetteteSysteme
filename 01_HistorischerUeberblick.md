@@ -87,6 +87,17 @@ style="width: 80%; min-width: 420px; max-width: 720px;"
 
 ---------------------------------------------------------------------
 
+## Reflexion Ihrer Fragen
+
+> Partizipative Materialentwicklung mit den Informatikern ...
+
+<!-- data-type="none" -->
+| Format                   | Informatik Studierende  | Nicht-Informatik Studierende |
+|--------------------------|-------------------------|------------------------------|
+| Verbesserungsvorschlag   | 1                       | 0                            |
+| Fragen                   | 0                       | 0                            |
+| generelle Hinweise       | 0                       | 0                            |
+
 ## Begrifflichkeiten
 
 _Ein Computer oder Digitalrechner ist eine Maschine, die Probleme für den Menschen lösen kann, indem sie die ihr gegebenen Befehle ausführt._ (Tannenbaum, Computerarchitektur)
@@ -144,7 +155,7 @@ Diesen Aspekt kann man auf technischer und theoretischer Ebene betrachten.
 
 Die Grundlagen moderner Rechner legten die Arbeiten von Georg Boole (1815 - 1864), der eine boolesche Algebra (oder einen booleschen Verband) definierte, die die Eigenschaften der logischen Operatoren UND, ODER, NICHT sowie die Eigenschaften der mengentheoretischen Verknüpfungen Durchschnitt, Vereinigung, Komplement verallgemeinert. Gleichwertig zu booleschen Algebren sind boolesche Ringe, die von UND und ENTWEDER-ODER (exklusiv-ODER) beziehungsweise Durchschnitt und symmetrischer Differenz ausgehen.
 
-![Boole](./images/01_Historie/George_Boole_color.jpg "Georg Boole [^Boole]")<!-- width="40%" -->
+![Boole](./images/01_Historie/George_Boole_color.jpg "Georg Boole [^Boole]")<!-- width="30%" -->
 
 [^Boole]: Autor unbekannt, George Boole, https://commons.wikimedia.org/wiki/File:George_Boole_color.jpg
 
@@ -211,9 +222,9 @@ Das System für die Erfassung von Daten auf Lochkarten bestand aus der Tabellier
 
 Nicht nur auf der Ebene der Datenerfassung, sondern auch für die Datenspeicherung eröffnete sich auf der Basis des elektrischen Stromes eine Revolution. Relais konnten Zustände nun speichern und logische Operationen abbilden. Damit manifestierte sich aber auch die Festlegung auf eine binäre Informationsdarstellung - An, Aus (1 und 0).
 
-![instruction-set](./images/01_Historie/RelaisMitSpeicher.png)<!-- width="100%" -->
+![instruction-set](./images/01_Historie/RelaisOhneSpeicher.png)<!-- width="60%" -->
 
-![instruction-set](./images/01_Historie/RelaisOhneSpeicher.png)<!-- width="100%" -->
+![instruction-set](./images/01_Historie/RelaisMitSpeicher.png)<!-- width="60%" -->
 
 *******************************************************************************
 
@@ -334,17 +345,24 @@ set beschreibt:
 
 ### Weitere Entwicklung
 
-| Jahr | Entwicklung                                              |
-| ---- | -------------------------------------------------------- |
-| 1974 | Intel 8080 erste universelle 8-Bit CPU auf einem Chip    |
-| 1978 | Intel 8086 erste 16-Bit CPU auf einem Chip               |
-| 1979 | Motorola 68000 mit 32-Bit interner Architektur           |
-| 1981 | Einführung des IBM PC                                    |
-| 1985 | Intel 80386 (32-Bit CPU)                                 |
-| 1989 | Intel 80486 Cache + FPU auf dem Chip                     |
-| 1993 | Intel Pentium (zwei Pipelines)                           |
-| 1995 | Intel Pentium Pro (bis zu fünf Operationen gleichzeitig) |
-| 2002 | Intel Pentium 4 (Trace-Cache)                            |
+| Jahr | Entwicklung                                               | Beschreibung                                                                                                      |
+|------|-----------------------------------------------------------|-------------------------------------------------------------------------------------------------------------------|
+| 1971 | Intel 4004                                                | Erste kommerzielle CPU auf einem einzigen Chip (4-Bit).                                                          |
+| 1978 | Intel 8086                                                | 16-Bit-Architektur und Grundlage für die x86-Architektur.                                                        |
+| 1979 | Motorola 68000 mit 32-Bit interner Architektur            |
+| 1985 | RISC-Architektur                                          | Einführung der RISC (Reduced Instruction Set Computer)-Architektur für effizientere CPU-Designs.                 |
+| 1989 | Intel i860 und erste GPUs                                 | Erste Grafikprozessoren (GPUs) für 3D-Beschleunigung und spezielle Berechnungen.                                 |
+| 1993 | Intel Pentium                                             | Einführung von Super-Skalaren und schnellerer Rechenleistung bei x86-Prozessoren.                                |
+| 1999 | Nvidia GeForce 256                                        | Erste „GPU“ zur Hardware-Beschleunigung von 3D-Grafikberechnungen.                                               |
+| 2000 | AMD Athlon 64                                             | Erste 64-Bit-Desktop-CPU.                                                |
+| 2006 | Mehrkernprozessoren (Intel Core, AMD Athlon X2)           | Einführung von Mehrkernprozessoren für verbesserte Leistung und parallele Verarbeitung.                          |
+| 2010 | Nvidia Fermi-Architektur                                  | CUDA-Architektur für Parallelverarbeitung und GPGPU (General Purpose GPU Computing).                             |
+| 2011 | Intel Sandy Bridge                                        | Einführung der integrierten Grafik mit CPU und GPU auf demselben Chip für höhere Effizienz.                      |
+| 2015 | AMD HBM (High Bandwidth Memory)                           | Einführung von HBM für schnelle und effiziente Speichernutzung bei GPUs.                                         |
+| 2016 | Nvidia Pascal-Architektur und Deep Learning               | GPUs mit optimierter Leistung für KI und Deep Learning (Tesla P100).                                             |
+| 2020 | Apple M1 SoC                                              | Erster ARM-basierter Desktop-Prozessor von Apple                         |
+| 2022 | Nvidia Ada Lovelace-Architektur                           | Fortschrittliche Architektur für Raytracing und KI-Beschleunigung mit DLSS 3-Technologie.                        |
+
 
 ![Moore](./images/01_Historie/Moore's_Law_Transistor_Count_1971-2018.png "Moore's Law [^MooresLaw]")<!--
 style="width: 80%; display: block; margin-left: auto; margin-right: auto;"-->
