@@ -6,7 +6,7 @@ version:  0.0.2
 language: de
 narrator: Deutsch Female
 
-import:   https://raw.githubusercontent.com/liaTemplates/PyScript/main/README.md
+import:   https://github.com/liascript/CodeRunner
           https://raw.githubusercontent.com/TUBAF-IfI-LiaScript/VL_EingebetteteSysteme/master/config.md
 -->
 
@@ -67,7 +67,7 @@ style="width: 80%; min-width: 420px; max-width: 720px;"
            +----------------------------+   |
                                             ⎬ Automaten, Speicher, Logik
            +----------------------------+   |       ╔═══════════════╗
-  Ebene 1  | Digitale Logik             |   |    ◀══║ HIER SIND WIR!║
+  Ebene 1  | Digitale Logik             |   |   ◀══║ HIER SIND WIR!║
            +----------------------------+  -.       ╚═══════════════╝
 
            +----------------------------+
@@ -106,7 +106,7 @@ Mmmmh, scheinbar keine weitere Vereinfachung möglich ... sollten die beiden Gle
 
 Alternativ können wir den Nachweis der Äquivalenz auch über die Wertetabellen darstellen. Das funktioniert natürlich nur bis zu einer gewissen Größe. Aber die Wertetabelle macht auch deutlich, dass wir mit unseren schon minimierten Termen $x_3\overline{x}_1$ deutlich mehr Terme einschließen!
 
-<!-- data-type="none" -->
+<!-- data-type="none" style="table-layout: fixed; max-width:800px;"-->
 | $x_4$                                 | $x_3$ | $x_2$                                 | $x_1$ | $f$ |                                                           |
 | ------------------------------------- | ----- | ------------------------------------- | ----- | --- | --------------------------------------------------------- |
 | 0                                     | 0     | 0                                     | 0     | 0   |                                                           |
@@ -248,7 +248,7 @@ Bildung der KDNF für n -stellige Boolesche Funktion $f$:
 
 Am Beispiel der Übungsaufgabe vom Begin der Vorlesung ergibt sich daraus:
 
-<!-- data-type="none" -->
+<!-- data-type="none" style="table-layout: fixed; max-width:700px;"-->
 | $x_4$ | $x_3$ | $x_2$ | $x_1$ | $f$ | Minterme                                        |
 | ----- | ----- | ----- | ----- | --- | ----------------------------------------------- |
 | 0     | 0     | 0     | 0     | 0   |                                                 |
@@ -302,7 +302,7 @@ Bildung der KKNF für n -stellige Boolesche Funktion $f$:
 
 Am Beispiel der Übungsaufgabe vom Begin der Vorlesung ergibt sich daraus:
 
-<!-- data-type="none" -->
+<!-- data-type="none"-->
 | $x_4$ | $x_3$ | $x_2$ | $x_1$ | $f$ | Maxterme                                                      |
 | ----- | ----- | ----- | ----- | --- | ------------------------------------------------------------- |
 | 0     | 0     | 0     | 0     | 0   | $x_4+x_3+x_2+x_1$                                             |
@@ -354,7 +354,7 @@ Eine KDNF ist günstiger als eine KKNF, wenn nur für wenige Kombinationen der E
 
 Für die `OR` Funktion bedeutet das (wenig überraschend):
 
-<!-- data-type="none" -->
+<!-- data-type="none" style="table-layout: fixed; max-width:300px;"-->
 | $x$ | $y$ | $f$ |
 | --- | --- | --- |
 | 0   | 0   | 0   |
@@ -399,7 +399,7 @@ Jede zweistellige Boolesche Funktion lässt sich  mit den Kombinationen ihrer Va
 
 $A= \overline{x} \cdot \overline{y} + \overline{x} \cdot y + x \cdot \overline{y} + x \cdot y$
 
-<!-- data-type="none" -->
+<!-- data-type="none" style="table-layout: fixed; max-width:300px;"-->
 |                | $\overline{x}$                    | $x$                    |
 | -------------- | --------------------------------- | ---------------------- |
 | $\overline{y}$ | $\overline{x} \cdot \overline{y}$ | $x \cdot \overline{y}$ |
@@ -409,7 +409,7 @@ Mit dieser verschobenen Wahrheitstafel lässt sich der Fingerabdruck einer boole
 
 Bespiel 1: $f= x \cdot \overline{y} + x \cdot y$
 
-<!-- data-type="none" -->
+<!-- data-type="none" style="table-layout: fixed; max-width:300px;"-->
 |                | $\overline{x}$ | $x$ |
 | -------------- | -------------- | --- |
 | $\overline{y}$ | 0              | 1   |
@@ -418,7 +418,7 @@ Bespiel 1: $f= x \cdot \overline{y} + x \cdot y$
 
 Bespiel 2: $f= x \cdot \overline{y} + \overline{x} \cdot y$
 
-<!-- data-type="none" -->
+<!-- data-type="none" style="table-layout: fixed; max-width:300px;"-->
 |                | $\overline{x}$ | $x$ |
 | -------------- | -------------- | --- |
 | $\overline{y}$ | 0              | 1   |
@@ -442,7 +442,7 @@ Wichtig dabei ist, dass benachbarte Kombinationen von Variablen sich nur in **ei
 > | 2           | 010       | 011       |
 > | 3           | 011       | 010       |
 
-
+<!-- data-type="none" style="table-layout: fixed; max-width:700px;"-->
 |                | $\overline{x}\,\overline{y}$                      | $\overline{x}y$                        | $xy$ | $x\overline{y}$ |
 | -------------- | ------------------------------------------------ | -------------------------------------- | ---- | --------------- |
 | $\overline{z}$ | $\overline{x}\cdot\overline{y}\cdot\overline{z}$ | $\overline{x}\cdot y\cdot\overline{z}$ | $x\cdot y\cdot\overline{z}$     |    $x\cdot\overline{y}\cdot\overline{z}$             |
@@ -466,7 +466,7 @@ Vorgehen zur Minimierung der KDNF einer $n$-stelligen Funktion $f$
 
 4. werden die markierten Bereiche nach der Resolutionsregel zu Produkttermen zusammengefasst, die summiert werden.
 
-<!-- data-type="none" -->
+<!-- data-type="none" style="table-layout: fixed; max-width:300px;"-->
 |                              | $\overline{w}\,\overline{x}$ | $\overline{w}x$                     | $wx$ | $w\overline{x}$ |
 | ---------------------------- | ---------------------------- | ----------------------------------- | ---- | --------------- |
 | $\overline{y}\,\overline{z}$ | 0                            | <!-- style="background: red" --> 1 | 0    | 0               |
@@ -493,7 +493,7 @@ $$
 
 Beispiel 1: $\overline{w}\,\overline{y}$
 
-<!-- data-type="none" -->
+<!-- data-type="none" style="table-layout: fixed; max-width:300px;"-->
 |                              | $\overline{w}\,\overline{x}$       | $\overline{w}x$                    | $wx$ | $w\overline{x}$ |
 | ---------------------------- | ---------------------------------- | ---------------------------------- | ---- | --------------- |
 | $\overline{y}\,\overline{z}$ | <!-- style="background: red" --> 1 | <!-- style="background: red" --> 1 | 0    | 0               |
@@ -504,7 +504,7 @@ Beispiel 1: $\overline{w}\,\overline{y}$
 
 Beispiel 2: $wxy$
 
-<!-- data-type="none" -->
+<!-- data-type="none" style="table-layout: fixed; max-width:300px;"-->
 |                              | $\overline{w}\,\overline{x}$ | $\overline{w}x$ | $wx$                               | $w\overline{x}$ |
 | ---------------------------- | ---------------------------- | --------------- | ---------------------------------- | --------------- |
 | $\overline{y}\,\overline{z}$ | 1                            | 1               | 0                                  | 0               |
@@ -521,7 +521,7 @@ Wählen Sie immer die größtmöglichen Schleifen und vermeiden Sie "Einzeleleme
 
 Falsch - $f =\overline{w}\,\overline{y} + \overline{w}xyz$
 
-<!-- data-type="none" -->
+<!-- data-type="none" style="table-layout: fixed; max-width:300px;"-->
 |                             | $\overline{w}\,\overline{x}$ | $\overline{w}x$ | $wx$ | $w\overline{x}$ |
 | --------------------------- | --------------------------- | --------------- | ---- | --------------- |
 | $\overline{y}\,\overline{z}$ | <span style="background-color: #ff0000">1</span>                           | <span style="background-color: #ff0000">1</span>                 | 0    | 0               |
@@ -531,7 +531,7 @@ Falsch - $f =\overline{w}\,\overline{y} + \overline{w}xyz$
 
 Richtig - $f = \overline{w}\,\overline{y} + \overline{w}xz$
 
-<!-- data-type="none" -->
+<!-- data-type="none" style="table-layout: fixed; max-width:300px;"-->
 |                             | $\overline{w}\,\overline{x}$ | $\overline{w}x$ | $wx$ | $w\overline{x}$ |
 | --------------------------- | --------------------------- | --------------- | ---- | --------------- |
 | $\overline{y}\,\overline{z}$ | <span style="background-color: #ff0000">1</span>                          | <span style="background-color: #ff0000">1</span>               | 0    | 0               |
@@ -548,7 +548,7 @@ Richtig - $f = \overline{w}\,\overline{y} + \overline{w}xz$
      {{0-5}}
 ********************************************************************************
 
-<!-- data-type="none" -->
+<!-- data-type="none" style="table-layout: fixed; max-width:300px;"-->
 |                | $\overline{w}\,\overline{x}$ | $\overline{w}x$                    | $wx$ | $w\overline{x}$ |
 | -------------- | ---------------------------- | ---------------------------------- | ---- | --------------- |
 | $\overline{z}$ | 0                            | <!-- style="background: red" --> 1 | 0    | 0               |
@@ -561,7 +561,7 @@ Richtig - $f = \overline{w}\,\overline{y} + \overline{w}xz$
 
  $f = \overline{w}x$
 
-<!-- data-type="none" -->
+<!-- data-type="none" style="table-layout: fixed; max-width:300px;"-->
 |                | $\overline{w}\,\overline{x}$            | $\overline{w}x$                     | $wx$                                | $w\overline{x}$                    |
 | -------------- | --------------------------------------- | ----------------------------------- | ----------------------------------- | ---------------------------------- |
 | $\overline{z}$ | 0                                       | 0                                   | 0                                   | 0                                  |
@@ -574,7 +574,7 @@ Richtig - $f = \overline{w}\,\overline{y} + \overline{w}xz$
 
 $f = z$
 
-<!-- data-type="none" -->
+<!-- data-type="none" style="table-layout: fixed; max-width:300px;"-->
 |                             | $\overline{w}\,\overline{x}$ | $\overline{w}x$                                  | $wx$                                             | $w\overline{x}$ |
 | --------------------------- | --------------------------- | ------------------------------------------------ | ------------------------------------------------ | --------------- |
 | $\overline{y}\,\overline{z}$ | 0                           | <!-- style="background: red" -->  1 | <!-- style="background: red" -->  1 | 0               |
@@ -589,7 +589,7 @@ $f = z$
 
  $f = x\overline{z}$
 
-<!-- data-type="none" -->
+<!-- data-type="none" style="table-layout: fixed; max-width:300px;"-->
 |                             | $\overline{w}\,\overline{x}$                      | $\overline{w}x$ | $wx$ | $w\overline{x}$ |
 | --------------------------- | ------------------------------------------------ | --------------- | ---- | --------------- |
 | $\overline{y}\,\overline{z}$ | <!-- style="background: red" -->  1|    0             | 0    | <!-- style="background: red" -->  1              |
@@ -604,7 +604,7 @@ $f = z$
  ********************************************************************************
  $f = \overline{x}\,\overline{z}$
 
-<!-- data-type="none" -->
+<!-- data-type="none" style="table-layout: fixed; max-width:300px;"-->
 |                              | $\overline{w}\,\overline{x}$ | $\overline{w}x$ | $wx$ | $w\overline{x}$ |
 | ---------------------------- | ---------------------------- | --------------- | ---- | --------------- |
 | $\overline{y}\,\overline{z}$ | 1                            | 0               | 0    | 1               |
@@ -621,7 +621,7 @@ $f = z$
 
 Und jetzt Sie!
 
-<!-- data-type="none" -->
+<!-- data-type="none" style="table-layout: fixed; max-width:300px;"-->
 | A   | B   | C   | Y   |
 | --- | --- | --- | --- |
 | 0   | 0   | 0   | 1   |
@@ -638,7 +638,7 @@ Und jetzt Sie!
         {{6}}
 ********************************************************************************
 
-<!-- data-type="none" -->
+<!-- data-type="none" style="table-layout: fixed; max-width:300px;"-->
 |                | $\overline{A}\,\overline{B}$ | $\overline{A}B$ | $AB$ | $A\overline{B}$ |
 | -------------- | ---------------------------- | --------------- | ---- | --------------- |
 | $\overline{C}$ | 1                            | 1               | 0    | 1               |
@@ -650,7 +650,7 @@ $\overline{A}\,\overline{B} + \overline{A}\,\overline{C} + \overline{B}\,\overli
 
 ### Optimierungskriterien
 
-<!-- data-type="none" -->
+<!-- data-type="none" style="table-layout: fixed; max-width:300px;"-->
 |                              | $\overline{w}\,\overline{x}$ | $\overline{w}x$                     | $wx$                                | $w\overline{x}$ |
 | ---------------------------- | ---------------------------- | ----------------------------------- | ----------------------------------- | --------------- |
 | $\overline{y}\,\overline{z}$ | 1                            | 1                                   | 0                                   | 1               |
@@ -662,7 +662,7 @@ Welche Möglichkeiten haben wir ausgehend von der ersten Gruppe?
 
 Variante 1: $\color{red} xz + \color{green}\overline{x}\,\overline{y}\,\overline{z} + \color{blue}\overline{w}x\overline{y} + \color{magenta}w\overline{x}\,\overline{y}$ (10 Operationen)
 
-<!-- data-type="none" -->
+<!-- data-type="none" style="table-layout: fixed; max-width:300px;"-->
 |                              | $\overline{w}\,\overline{x}$                     | $\overline{w}x$                                                                       | $wx$                                | $w\overline{x}$                                                                                     |
 | ---------------------------- | ------------------------------------------------ | ------------------------------------------------------------------------------------- | ----------------------------------- | --------------------------------------------------------------------------------------------------- |
 | $\overline{y}\,\overline{z}$ | <span style="background-color: #00ff00">1</span> | <span style="background-color: #0000ff">1</span>                                      | 0                                   | <span style="background-color: #00ff00">1</span>   <span style="background-color: #ff00ff">_</span> |
@@ -672,7 +672,7 @@ Variante 1: $\color{red} xz + \color{green}\overline{x}\,\overline{y}\,\overline
 
 Variante 2: $\color{red} xz + \color{green}\overline{x}\,\overline{y}\,\overline{z} + \color{blue}\overline{w}x\overline{y} + \color{magenta}w\overline{y}z$ (10 Operationen)
 
-<!-- data-type="none" -->
+<!-- data-type="none" style="table-layout: fixed; max-width:300px;"-->
 |                              | $\overline{w}\,\overline{x}$                     | $\overline{w}x$                                                                     | $wx$                                                                                 | $w\overline{x}$                                  |
 | ---------------------------- | ------------------------------------------------ | ----------------------------------------------------------------------------------- | ------------------------------------------------------------------------------------ | ------------------------------------------------ |
 | $\overline{y}\,\overline{z}$ | <span style="background-color: #00ff00">1</span> | <span style="background-color: #0000ff">1</span>                                    | 0                                                                                    | <span style="background-color: #00ff00">1</span> |
@@ -682,7 +682,7 @@ Variante 2: $\color{red} xz + \color{green}\overline{x}\,\overline{y}\,\overline
 
 Variante 3: $\color{red} xz + \color{green}\overline{w}\,\overline{y}\,\overline{z} +  \color{magenta}w\overline{x}\,\overline{y}$ (7 Operationen)
 
-<!-- data-type="none" -->
+<!-- data-type="none" style="table-layout: fixed; max-width:300px;"-->
 |                              | $\overline{w}\,\overline{x}$                     | $\overline{w}x$                                  | $wx$                                | $w\overline{x}$                                  |
 | ---------------------------- | ------------------------------------------------ | ------------------------------------------------ | ----------------------------------- | ------------------------------------------------ |
 | $\overline{y}\,\overline{z}$ | <span style="background-color: #00ff00">1</span> | <span style="background-color: #00ff00">1</span> | 0                                   | <span style="background-color: #ff00ff">1</span> |
@@ -698,7 +698,7 @@ Das Karnaugh-Veitch-Diagramm lässt sich analog für Produkte von Summen aufstel
 
 Nehmen wir folgende Wahrheitstafel an:
 
-<!-- data-type="none" -->
+<!-- data-type="none" style="table-layout: fixed; max-width:300px;"-->
 | $w$ | $x$ | $y$ | $z$ | $A$ |
 | --- | --- | --- | --- | --- |
 | 0   | 0   | 0   | 0   | 1   |
@@ -721,7 +721,7 @@ Nehmen wir folgende Wahrheitstafel an:
 8 Maxterme vs. 8 Minterme
 
 
-<!-- data-type="none" -->
+<!-- data-type="none" style="table-layout: fixed; max-width:300px;"-->
 |                              | $\overline{w}\,\overline{x}$                     | $\overline{w}x$                                  | $wx$                                             | $w\overline{x}$                                  |
 | ---------------------------- | ------------------------------------------------ | ------------------------------------------------ | ------------------------------------------------ | ------------------------------------------------ |
 | $\overline{y}\,\overline{z}$ | 1                                                | <span style="background-color: #00ff00">0</span> | <span style="background-color: #00ff00">0</span> | 1                                                |
@@ -769,7 +769,7 @@ Folglich ergeben sich 6 Eingangskombinationen, die für unsere Ausgabe irrelevan
 
 Betrachten wir die Wahrheitstafel für das "d" Element.
 
-<!-- data-type="none" -->
+<!-- data-type="none" style="table-layout: fixed; max-width:300px;"-->
 | $w$ | $x$ | $y$ | $z$ | $d$                                   |
 | --- | --- | --- | --- | ------------------------------------- |
 | 0   | 0   | 0   | 0   | 1                                     |
@@ -794,7 +794,7 @@ Betrachten wir die Wahrheitstafel für das "d" Element.
                                {{2-6}}
 ********************************************************************************
 
-<!-- data-type="none" -->
+<!-- data-type="none" style="table-layout: fixed; max-width:300px;"-->
 |                              | $\overline{w}\,\overline{x}$ | $\overline{w}x$ | $wx$ | $w\overline{x}$ |
 | ---------------------------- | ---------------------------- | --------------- | ---- | --------------- |
 | $\overline{y}\,\overline{z}$ | 1                            | 0               | D    | 1               |
@@ -838,10 +838,10 @@ Regeln zur Bildung der Schleifen:
 
 
 **Und wie geht es weiter?**
-``` python @PyScript.env
-- sympy
-```
-``` python @PyScript.repl
+
+Wir brauchen offensichtlich eine Möglichkeit, die Minimierung automatisiert durchzuführen. Hierzu gibt es verschiedene Methoden, die wir in den nächsten Kapiteln kennenlernen werden.
+
+```python Minimize.py
 from sympy.logic import SOPform
 from sympy import symbols
 x3, x2, x1, x0 = symbols('x3 x2 x1 x0')
@@ -859,6 +859,7 @@ result = SOPform([x3, x2, x1, x0], minterms)
 print("Minimized result:")
 print(result)
 ```
+@LIA.eval(`["main.py"]`, `none`, `python3 main.py`)
 
 Die Dokumentation zum Sympy Paket von Python finden Sie unter https://docs.sympy.org/latest/modules/logic.html 
 
