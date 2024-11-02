@@ -67,7 +67,7 @@ style="width: 80%; min-width: 420px; max-width: 720px;"
            +----------------------------+   |
                                             ⎬ Automaten, Speicher, Logik
            +----------------------------+   |       ╔═══════════════╗
-  Ebene 1  | Digitale Logik             |   |    ◀══║ HIER SIND WIR!║
+  Ebene 1  | Digitale Logik             |   |   ◀══║ HIER SIND WIR!║
            +----------------------------+  -.       ╚═══════════════╝
 
            +----------------------------+
