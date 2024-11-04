@@ -2,7 +2,7 @@
 
 author:   Sebastian Zug & André Dietrich & Fabian Bär
 email:    sebastian.zug@informatik.tu-freiberg.de & andre.dietrich@informatik.tu-freiberg.de & fabian.baer@student.tu-freiberg.de
-version:  0.0.2
+version:  0.0.3
 language: de
 narrator: Deutsch Female
 
@@ -226,12 +226,12 @@ Und nun in der Kombination ....
 **Kanonische Disjunktive Normalform (KDNF)**
 
 + eindeutige Darstellung einer booleschen Funktion f als Disjunktion von Mintermen
-+ Beispiel: $( x \cdot y \cdot z ) + ( x \cdot y \cdot z ) + ( x \cdot y \cdot z )$ ist KDNF von $f(x,y,z)$
++ Beispiel: $( \overline{x} \cdot y \cdot z ) + ( x \cdot \overline{y} \cdot \overline{z} ) + ( \overline{x} \cdot y \cdot \overline{z} )$ ist KDNF von $f(x,y,z)$
 
 **Kanonische Konjunktive Normalform (KKNF)**
 
 + eindeutige Darstellung einer booleschen Funktion f als Konjunktion von Maxtermen
-+ Beispiel: $( x + y ) \cdot ( x + y ) \cdot ( x + y )$ ist KKNF von $f(x,y)$
++ Beispiel: $( x + \overline{y} ) \cdot ( \overline{x} + y ) \cdot ( \overline{x} + \overline{y} )$ ist KKNF von $f(x,y)$
 ********************************************************************************
 
        {{3-4}}
