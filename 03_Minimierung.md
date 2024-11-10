@@ -2,7 +2,7 @@
 
 author:   Sebastian Zug & André Dietrich & Fabian Bär
 email:    sebastian.zug@informatik.tu-freiberg.de & andre.dietrich@informatik.tu-freiberg.de & fabian.baer@student.tu-freiberg.de
-version:  0.0.2
+version:  0.0.3
 language: de
 narrator: Deutsch Female
 
@@ -92,8 +92,8 @@ Weisen Sie nach, dass die Terme äquivalent sind. Wie gehen Sie vor?
 $$
 \begin{aligned}
 f(x_1, x_2, x_3, x_4) &= x_3\overline{x}_1+ x_4\overline{x}_3\overline{x}_2 + \overline{x}_4x_3x_2\overline{x}_1 + x_4x_3\overline{x}_2x_1 \\
-&= x_3\overline{x}_1  + \overline{x}_4x_3x_2\overline{x}_1 + x_4x_3\overline{x}_2x_1   + x_4\overline{x}_3\overline{x}_2 & (Kommutativgesetzt) \\
-&= x_3\overline{x}_1 + x_4x_3\overline{x}_2x_1   + x_4\overline{x}_3\overline{x}_2 & (Absorbtionsgesetz) \\
+&= x_3\overline{x}_1  + \overline{x}_4x_3x_2\overline{x}_1 + x_4x_3\overline{x}_2x_1   + x_4\overline{x}_3\overline{x}_2 & (Kommutativgesetz) \\
+&= x_3\overline{x}_1 + x_4x_3\overline{x}_2x_1   + x_4\overline{x}_3\overline{x}_2 & (Absorptionsgesetz) \\
 \end{aligned}
 $$
 
@@ -226,12 +226,12 @@ Und nun in der Kombination ....
 **Kanonische Disjunktive Normalform (KDNF)**
 
 + eindeutige Darstellung einer booleschen Funktion f als Disjunktion von Mintermen
-+ Beispiel: $( x \cdot y \cdot z ) + ( x \cdot y \cdot z ) + ( x \cdot y \cdot z )$ ist KDNF von $f(x,y,z)$
++ Beispiel: $( \overline{x} \cdot y \cdot z ) + ( x \cdot \overline{y} \cdot \overline{z} ) + ( \overline{x} \cdot y \cdot \overline{z} )$ ist KDNF von $f(x,y,z)$
 
 **Kanonische Konjunktive Normalform (KKNF)**
 
 + eindeutige Darstellung einer booleschen Funktion f als Konjunktion von Maxtermen
-+ Beispiel: $( x + y ) \cdot ( x + y ) \cdot ( x + y )$ ist KKNF von $f(x,y)$
++ Beispiel: $( x + \overline{y} ) \cdot ( \overline{x} + y ) \cdot ( \overline{x} + \overline{y} )$ ist KKNF von $f(x,y)$
 ********************************************************************************
 
        {{3-4}}
