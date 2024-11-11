@@ -2,13 +2,12 @@
 
 author:   Sebastian Zug & André Dietrich & Fabian Bär
 email:    sebastian.zug@informatik.tu-freiberg.de & andre.dietrich@informatik.tu-freiberg.de & fabian.baer@student.tu-freiberg.de
-version:  0.0.6
+version:  0.0.7
 language: de
 narrator: Deutsch Female
 
-import:   https://raw.githubusercontent.com/LiaTemplates/NetSwarm-Simulator/master/README.md
-          https://raw.githubusercontent.com/LiaTemplates/DigiSim/master/README.md
-          https://raw.githubusercontent.com/liaTemplates/PyScript/main/README.md
+import:   https://raw.githubusercontent.com/LiaTemplates/DigiSim/master/README.md
+          https://github.com/liascript/CodeRunner
           https://raw.githubusercontent.com/TUBAF-IfI-LiaScript/VL_EingebetteteSysteme/master/config.md
 
 mark: <span style="background-color: @0;
@@ -88,6 +87,17 @@ style="width: 80%; min-width: 420px; max-width: 720px;"
 ```
 
 ---------------------------------------------------------------------
+
+## Feedbacks/Ergänzungen
+
++ Logikgattersimulator https://sebastian.itch.io/digital-logic-sim
++ Codebeispiel für Karnaugh-Veit Diagramm im Projektordner
+
+https://github.com/TUBAF-IfI-LiaScript/VL_EingebetteteSysteme/tree/master/exampleCode/03_Minimierung
+
+!?[](./exampleCode/03_Minimierung/KarnaughVeitch4Var.mp4)
+
+> Was gefällt Ihnen daran, wo sehen Sie ggf. Verbesserungsbedarf?
 
 ## Beispielanwendung
 
@@ -263,11 +273,8 @@ $$
 
 **Gegenprobe I**
 
-``` python @PyScript.env
-- sympy
-```
 
-``` python @PyScript.repl
+``` python Minimize.py
 from sympy.logic import SOPform
 from sympy import symbols
 x3, x2, x1, x0 = symbols('x3 x2 x1 x0')
@@ -284,6 +291,7 @@ minterms = [[0, 1, 1, 0],
 result = SOPform([x3, x2, x1, x0], minterms)
 print(result)
 ```
+@LIA.eval(`["main.py"]`, `none`, `python3 main.py`)
 
 Überrascht? Offenbar gelingt es dem Minimierungsansatz von _sympy_, eine kompaktere Form zu finden.
 
@@ -410,7 +418,7 @@ In einem zweiten Schritt werden die sortierten Minterme evaluiert. Dabei können
 | @gray($m_{12} ⋅ m_{13}$) | @gray($1$) | @gray($1$) | @gray($0$) | @gray($-$) | .   |
 | @gray($m_{12} ⋅ m_{14}$) | @gray($1$) | @gray($1$) | @gray($-$) | @gray($0$) | .   |
 
-```python @PyScript.repl
+```python Kombinations.py
 import numpy as np
 minterms = [[0, 1, 1, 0],
             [0, 1, 1, 1],
@@ -433,6 +441,7 @@ for j in range(0, len(distances)):  # Requiered instead print(distances)
     print(distances[j])             # due to pyscript output constraints
 print("Kombinationen mit Distanz 1: {}".format(np.count_nonzero(distances == 1)))
 ```
+@LIA.eval(`["main.py"]`, `none`, `python3 main.py`)
 
 Die zweite Stufe wiederholt die Vorgänge - Sortierung und Evaluation erneut.
 
@@ -562,9 +571,19 @@ Die Minterme $m_{13}$, $m_{11}$ und $m_{7}$ kommen nun in jeweils einem Primimpl
 | $x_3 \overline{x}_2$             | $m_{8}$ ($P_1$, $P_2$, $P_3$)  | $m_{9}$ ($P_1$, $P_2$)| $m_{11}$ ($P_1$) | $m_{10}$ ($P_1$, $P_3$)    |
 
 
-> Statement 1: $m_2$ ist in $P_2$ enthalten. Wenn $P_2$ essentiell ist, dann ist die Weiterführung der Spalte für $m_{13}$ nicht notwendig. Es ist automatisch abgedeckt.
+> Statement 1: $m_{13}$ ist in $P_2$ enthalten und schließt damit $m_{12}$, $m_{9}$ und $m_{8}$ ein. Diese können gestrichen werden.
 
-> Statement 2: $m_{11}$ ist nur in $P_1$ enthalten und schließt damit $m_{10}$, $m_{9}$ und $m_{8}$ ein. Die  zwei letztgenannten werden aber auch schon durch $P_2$ abgedeckt.
+<!-- data-type="none" style="table-layout: fixed; max-width:500px;"-->
+|              | $m_{14}$ | $m_{13}$ | $m_{11}$ | $m_{10}$ | $m_{7}$  | $m_{6}$ |
+| ------------ | -------- | -------- | -------- | -------- | -------- | ------- |
+| @blue($P_1$) |          |          | @gray(x) | x        |          |         |
+| @blue($P_2$) |          | @gray(x) |          |          |          |         |
+| $P_3$        | x        |          |          | x        |          |         |
+| @blue($P_4$) |          |          |          |          | @gray(x) | x       |
+| $P_5$        | x        |          |          |          |          | x       |
+
+
+> Statement 2: $m_{11}$ ist nur in $P_1$ enthalten und schließt damit $m_{10}$ ein. 
 
 > Statement 3: $P_4$ deckt automatisch $m_6$ ab. 
 
@@ -608,6 +627,8 @@ Die Spalten werden paarweise darauf verglichen, ob nicht eine Spalte existiert, 
 Man vergleicht die Zeilen (Primterme) der Tabelle paarweise, ob nicht eine Zeile existiert, in denen die markierten Minterme eine Teilmenge der markierten Minterme der anderen Zeile sind. Ist dies der Fall, so kann der Primterm mit der Teilmenge gestrichen werden, denn man kann für jede Markierung des gestrichenen Primterms den anderen Primterm als Ersatz nehmen. Die Relation ist hier also genau umgekehrt wie bei der Spaltendominanz.
 
 > Für das Verfahren von Quine-McCluskey exisitieren webbasierte Lösungen [Link Uni Marburg](https://www.mathematik.uni-marburg.de/~thormae/lectures/ti1/code/qmc/), die zum Ausprobieren einladen. Hier ist aber das Vorgehen etwas anders - die final identifizierten essentiellen Primimplikanten werden extrahiert.
+
+Evaluieren Sie den Ablauf mit https://www.goldi-labs.de/SANE/view6
 
 *******************************************************************
 
