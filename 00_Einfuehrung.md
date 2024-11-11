@@ -419,7 +419,7 @@ Eine Reihe von Einführungsvideos findet sich unter [Youtube](https://www.youtub
 
 ### Und wenn Sie dann immer noch programmieren wollen ...
 
-Dann wartet das __racetech__ Team auf Sie ... autonomes Fahren im Formular Student Kontext.
+Dann wartet das __racetech__ Team auf Sie ... autonomes Fahren im Formula Student Kontext.
 
 ![WALL-E](./images/00_Einfuehrung/RaceTech.jpg)<!--
 style="width: 80%; display: block; margin-left: auto; margin-right: auto;" -->
