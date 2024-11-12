@@ -2,13 +2,12 @@
 
 author:   Sebastian Zug & André Dietrich & Fabian Bär
 email:    sebastian.zug@informatik.tu-freiberg.de & andre.dietrich@informatik.tu-freiberg.de & fabian.baer@student.tu-freiberg.de
-version:  0.0.8
+version:  0.0.9
 language: de
 narrator: Deutsch Female
 
 import:   https://raw.githubusercontent.com/liaTemplates/AVR8js/main/README.md
           https://raw.githubusercontent.com/LiaTemplates/DigiSim/master/README.md
-          https://raw.githubusercontent.com/liaTemplates/PyScript/main/README.md
           https://raw.githubusercontent.com/TUBAF-IfI-LiaScript/VL_EingebetteteSysteme/master/config.md
 
 mark: <span style="background-color: @0;
@@ -185,7 +184,7 @@ prozessor|          | Dekoder| D_2     +--------------+       |
 <wokwi-7segment port="D" digits="1" pin="7"></wokwi-7segment>
 </div>
 
-``` cpp
+``` cpp  sevenSegmentDisplay.ino
 const int PINS[] = {0, 1, 2, 3, 4, 5, 6, 7, 8, 9};
 const int PAUSE = 1000;
 byte segDigits[10][8] = {
@@ -307,7 +306,7 @@ $$
 
 Und im echten Leben? Kommen noch einige Spezialeingänge / -ausgänge dazu [Link](https://www.onsemi.com/pub/Collateral/MC14532B-D.PDF).
 
-![BCD Dekoder](./images/04_Schaltnetze/Prioritätsencoder.png "MC14532B - 8-Bit Priority Encoder [^1]")<!-- width="70%" -->
+![BCD Dekoder](./images/04_Schaltnetze/Prioritaetsencoder.png "MC14532B - 8-Bit Priority Encoder [^1]")<!-- width="70%" -->
 
 [^1]: Datenblatt MC14532B - 8-Bit Priority Encoder, Firma ON Semiconductor
 
