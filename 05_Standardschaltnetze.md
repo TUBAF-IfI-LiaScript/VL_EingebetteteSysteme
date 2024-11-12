@@ -31,7 +31,7 @@ gray: @mark(gray,@0)
 | **Veranstaltung:**        | @config.lecture                                                                                                                                              |
 | **Semester**              | @config.semester                                                                                                                                             |
 | **Hochschule:**      | `Technische Universität Freiberg`                                                                                                                                                                          |
-| **Inhalte:**         | `Realisierunrtragen Sie die Funktion in ein Karnaugh-Veitch-Dig von Schaltnetzen, Standardschaltnetze`                                                                                                                                                       |
+| **Inhalte:**         | `Realisierung von Schaltnetzen, Standardschaltnetze`                                                                                                                                                       |
 | **Link auf GitHub:** | [https://github.com/TUBAF-IfI-LiaScript/VL_EingebetteteSysteme/blob/master/05_Standardschaltnetze.md](https://github.com/TUBAF-IfI-LiaScript/VL_EingebetteteSysteme/blob/master/05_Standardschaltnetze.md) |
 | **Autoren**          | @author                                                                                                                                                                                                    |
 
