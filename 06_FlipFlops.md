@@ -2,7 +2,7 @@
 
 author:   Sebastian Zug & André Dietrich & Fabian Bär
 email:    sebastian.zug@informatik.tu-freiberg.de & andre.dietrich@informatik.tu-freiberg.de & fabian.baer@student.tu-freiberg.de
-version:  0.0.7
+version:  0.0.8
 language: de
 narrator: Deutsch Female
 
@@ -282,6 +282,9 @@ D-Latch auf der Basis eines NAND-RS-Gatters
 
 __Anwendungsbeispiel 1__
 
+<!--
+style="width: 60%;"
+-->
 ![Bild](./images/05_FlipFlops/latch_temperature_monitoring.png)
 
 Der Temperatursensor hat einen digitalen Ausgang, der mit dem Überschreiten einen High-Pegel annimmt. Dieser wird in unserem Flip-Flop gespeichert `Q`, bis der Zustand mit `R` wieder auf einen Low-Pegel geführt wird.
