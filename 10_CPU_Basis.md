@@ -2,7 +2,7 @@
 
 author:   Sebastian Zug & André Dietrich & Fabian Bär
 email:    sebastian.zug@informatik.tu-freiberg.de & andre.dietrich@informatik.tu-freiberg.de & fabian.baer@student.tu-freiberg.de
-version:  0.0.3
+version:  0.0.4
 language: de
 narrator: Deutsch Female
 
@@ -124,17 +124,16 @@ Arithmetische Funktionen: ADD, SUB, (MUL), (DIV)
 
 Sonstige: SHIFT LEFT (arithmetisch, logisch), SHIFT RIGHT (arithmetisch, logisch)
 
-```text @plantUML.png
-@startditaa
+```ascii
              Daten                 Daten
                |                     |
                |                     |
 +--------------|---------------+     |
 | +------+     |               |     |     Funktionsauswahl
-| |      |     |               :     |        F_0 F_1 F_2
+| |      |     |               :     |        F0 F_1 F_2
 | |      V     V               V     V         |   |   | Zielregister
 | | +----+-----+-----+    +----+-----+-----+   |   |   |  auswahl
-| | |cBFB Register A |    |cBFB Register B |   |   |   |     Z
+| | |   Register A   |    |  Register B    |   |   |   |     Z
 | | +---+------------+    +---------+------+   |   |   |     |
 | |     |                           |          |   |   |     |
 | |     |        +------------------+          |   |   |     |
@@ -143,7 +142,7 @@ Sonstige: SHIFT LEFT (arithmetisch, logisch), SHIFT RIGHT (arithmetisch, logisch
 | |     |        |           |      |          |   |   |     |
 | |     V        V           V      V          |   |   |     |
 | | +----------------+    +----------------+   |   |   |     |
-| | |c808            |<-  |c808            |<--+   |   |     |
+| | |                |<-  |                |<--+   |   |     |
 | | | Demultiplexer  |<-  | Demultiplexer  |<------+   |     |
 | | |                |<-  |                |<----------+     |
 | | ++-+-+-+-+-+-+-+-+    ++-+-+-+-+-+-+-+-+                 |
@@ -161,21 +160,20 @@ Sonstige: SHIFT LEFT (arithmetisch, logisch), SHIFT RIGHT (arithmetisch, logisch
 | |  V  V   V  V   V  V   V  V   V  V   V  V   V  V   V  V   |
 | | +----+ +----+ +----+ +----+ +----+ +----+ +----+ +----+  |
 | | | 000| | 001| | 010| | 011| | 100| | 101| | 110| | 111|  |
-| | |cFF4| |cFF4| |cFF4| |cFF4| |cFF4| |cFF4| |cFF4| |cFF4|  |
 | | | OR | |AND | |EXOR| |ADD | |SUB | |MUL | |DIV | | SL |  |
 | | +-+--+ +-+--+ +-+--+ +-+--+ +-+--+ +-+--+ +-+--+ +-+--+  |
-| |   :      :      :      :      :      :      :      :     |
+| |                                                          |
+| |   |      |      |      |      |      |      |      |     |
 | |   +------+------+------+---+--+------+------+------+     |
 | |                            |                             |
 | |                            V                             |
 | |                 +----------+----------+                  |
-| |                 |cCCB DeMuxer/Selektor|<-----------------+
+| |                 |   DeMuxer/Selektor  |<-----------------+
 | |                 +---+-+---------------+
-| |                     : :                     |      |
+| |                     | |                     |      |
 | +---------------------+ |                   --+---+--+
 |                         |                         | Status
-+-------------------------+                         v S
-@endditaa
++-------------------------+                         v S                                                                 .
 ```
 
 Der Status S umfasst eine Zusammenstellung der Resultate der Operationen codiert als 1-Bit Werte:
