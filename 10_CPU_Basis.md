@@ -186,14 +186,14 @@ Der Status S umfasst eine Zusammenstellung der Resultate der Operationen codiert
 Wie "programmieren" wir unser System?
 
 <!-- data-type="none" -->
-| F_0 | F_1 | F_2 | Z | Bezeichnung |
-|-----|-----|-----|---|-------------|
-| 0   | 0   | 0   | 0 | `OR_A`      |
-| 0   | 0   | 0   | 1 | `OR_B`      |
-| ... |     |     |   |             |
-| 0   | 1   | 1   | 0 | `ADD_A`     |
-| 0   | 1   | 1   | 1 | `ADD_B`     |
-| ... |     |     |   |             |
+| $F_0$ | $F_1$ | $F_2$ | $Z$ | Bezeichnung |
+| ----- | ----- | ----- | --- | ----------- |
+| 0     | 0     | 0     | 0   | `OR_A`      |
+| 0     | 0     | 0     | 1   | `OR_B`      |
+| ...   |       |       |     |             |
+| 0     | 1     | 1     | 0   | `ADD_A`     |
+| 0     | 1     | 1     | 1   | `ADD_B`     |
+| ...   |       |       |     |             |
 
 Beispielanwendungen
 
