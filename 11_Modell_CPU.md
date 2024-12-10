@@ -2,7 +2,7 @@
 
 author:   Sebastian Zug & André Dietrich & Fabian Bär
 email:    sebastian.zug@informatik.tu-freiberg.de & andre.dietrich@informatik.tu-freiberg.de & fabian.baer@student.tu-freiberg.de
-version:  0.0.6
+version:  0.0.7
 language: de
 narrator: Deutsch Female
 
@@ -659,8 +659,7 @@ Die folgende Abbildung gibt die Kontrolleinheit im schematische Aufbau wieder.  
 3.  die Status-Flip-Flops
 4.  das kombinatorische Schaltnetz zu Erzeugung der Steuersignale.
 
-```text @plantUML.png
-@startditaa
+```ascii
                                                        Instruction Register
                                                     +---------+------------+
                                                     |OPCODE   |            |
@@ -704,7 +703,6 @@ Oscillator           |---|   |   |   |                                          
                              |   |   |                                                                 |
                              +---+   +-----------------------------------------------------------------+
                       3 zu 8 Decoder
-@endditaa
 ```
 
 ### Realsierung der kombinatorischen Logik in der Kontrolleinheit
