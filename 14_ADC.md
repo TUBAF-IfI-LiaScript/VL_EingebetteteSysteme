@@ -388,7 +388,7 @@ Eine Herausforderung liegt in der stabilen Bereitstellung der Referenzspannung f
 | Up to 76.9kSPS (Up to 15kSPS at Maximum Resolution) |                                                                                                 |
 | 0 - V CC ADC Input Voltage Range                    |  Es sind keine negativen Spannungen möglich.                                                                                               |
 | Temperature Sensor Input Channel                    |                                                                                                 |
-| Sleep Mode Noise Canceler                                                    |    Reduzierung des Steuquellen durch einen "Sleepmode" für die CPU                                                                                             |
+| Sleep Mode Noise Canceler                                                    |    Reduzierung des Streuquellen durch einen "Sleepmode" für die CPU                                                                                             |
 
 ![Bild](./images/14_ADC/AVR_ADC.png "megaAVR® Data Sheet, Seite 247 [^megaAVR]")<!-- style="width: 75%; max-width: 1000px" -->
 
