@@ -233,7 +233,7 @@ int main()
 }
 ```
 
-> **Einschränkung von Tinkercad** 2. The ANALOG COMPARE feature, which is a possible interrupt source on the mega328P, does not work at all (output compare result ACO in register ACSR does not seem to change, no matter what voltages are presented at pins 6,7).
+> **Hinweis** Um der Diskussion der Interupts nicht vorzugreifen wurde an dieser Stelle per Polling auf das Ergebnis des Comperators zugegriffen. Üblicherweise würde diese mit einer Interupt Service Routine (ISR) realisiert.
 
 [^megaAVR]: Firma Microchip, megaAVR® Data Sheet, [Link](http://ww1.microchip.com/downloads/en/DeviceDoc/ATmega48A-PA-88A-PA-168A-PA-328-P-DS-DS40002061A.pdf)
 
