@@ -388,7 +388,7 @@ Eine Herausforderung liegt in der stabilen Bereitstellung der Referenzspannung f
 | Up to 76.9kSPS (Up to 15kSPS at Maximum Resolution) |                                                                                                 |
 | 0 - V CC ADC Input Voltage Range                    |  Es sind keine negativen Spannungen möglich.                                                                                               |
 | Temperature Sensor Input Channel                    |                                                                                                 |
-| Sleep Mode Noise Canceler                                                    |    Reduzierung des Steuquellen durch einen "Sleepmode" für die CPU                                                                                             |
+| Sleep Mode Noise Canceler                                                    |    Reduzierung des Streuquellen durch einen "Sleepmode" für die CPU                                                                                             |
 
 ![Bild](./images/14_ADC/AVR_ADC.png "megaAVR® Data Sheet, Seite 247 [^megaAVR]")<!-- style="width: 75%; max-width: 1000px" -->
 
@@ -530,7 +530,7 @@ Die Bedeutung ergibt sich beim Blick ins Datenblatt des Sensors GP2D, dessen Max
 
 ```c
 #ifndef F_CPU
-#define F_CPU 16000000UL // 16 MHz clock speed
+#define F_CPU 16000000UL // 16 MHz Taktrate
 #endif
 
 #include <avr/io.h>
@@ -547,7 +547,7 @@ int readADC(int channel) {
   while(ADCSRA & (1<<ADSC));
   ADCSRA |= (1<<ADSC);
   while(ADCSRA & (1<<ADSC)); // Auf Ergebnis warten...
-  // Lesen des egisters "ADCW" takes care of how to read ADCL and ADCH.
+  // Lesen des Registers "ADCW" kümmert sich um das Lesen von ADCL und ADCH.
   result = ADCW;
   // ADC wieder deaktivieren
   ADCSRA = 0;
@@ -557,12 +557,12 @@ int readADC(int channel) {
 int main(void)
 {
   Serial.begin(9600);
-  while (1) //infinite loop
+  while (1) // Unendliche Schleife
   {
     int result_individual = readADC(0);
     Serial.println(result_individual);
     Serial.flush();
-    _delay_ms(10); //1 second delay
+    _delay_ms(10); // Verzögerung von 1 Sekunde
   }
   return  0; // wird nie erreicht
 }
