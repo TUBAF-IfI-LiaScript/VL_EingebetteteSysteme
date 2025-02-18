@@ -393,7 +393,7 @@ abgestimmt werden.
 
 ![Bild](./images/13_AVR_CPU/SleepModes.png "Sleep Modes des Mikrocontrollers, Seite 47, [^megaAVR]")<!-- style="width: 85%; max-width: 1000px" -->
 
-**Idle Mode** Die CPU stoppt die Abarbeitung, die Timer, UART, ADC arbeiten aber weiter. Der Controller kann damit zum Beispiel auf ein Ereignis abwarten ohne selbst Energie zu verbrauchen. Der Stromverbrauch sinkt auf ca. 0,04 mA, Aus diesem Modus kann jeder Interrupt die CPU wieder wecken.
+**Idle Mode** Die CPU stoppt die Abarbeitung, aber die Timer, UART, ADC arbeiten aber weiter. Der Controller kann damit zum Beispiel auf ein Ereignis abwarten ohne selbst Energie zu verbrauchen, der Stromverbrauch sinkt auf ca. 0,04 mA. Aus diesem Modus kann jeder Interrupt die CPU wieder wecken.
 
 **ADC Noise Reduction Mode** Dieser Mode schränkt die aktivien Module noch weiter ein, der Takt für die IO-Module abgeschaltet. Nur noch der AD-Wandler, die externen Interrupts, das TWI und der Watchdog sind funktionsfähig (wenn man sie nutzen will). Zielstellung ist die reduzierung potentieller Störungen für die Analog-Digital-Wandlung.
 
