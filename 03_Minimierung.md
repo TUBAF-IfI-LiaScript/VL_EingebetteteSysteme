@@ -458,7 +458,7 @@ Wichtig dabei ist, dass benachbarte Kombinationen von Variablen sich nur in **ei
 Vorgehen zur Minimierung der KDNF einer $n$-stelligen Funktion $f$
 
 1. wird für jeden Minterm mit $f(x_1,...,x_n) = 1$ eine 1 im Diagramm eingetragen
-2. wird für jeden Minterm mit $f(x_1,...,x_n) = 0$ eine 0 im Diagramm eingetragen;
+2. wird für jeden Maxterm mit $f(x_1,...,x_n) = 0$ eine 0 im Diagramm eingetragen;
 3. werden möglichst wenige und möglichst große zusammenhängende Bereiche (Schleifen) aus Einsen markiert, wobei
 
    + jeder Bereich aus $2^k$ Elementen (mit $0 \leq k \leq n$) besteht;
