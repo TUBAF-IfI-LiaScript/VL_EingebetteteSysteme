@@ -27,18 +27,18 @@ blue: @mark(#898AE3,@0)
 gray: @mark(gray,@0)
 -->
 
-[![LiaScript](https://raw.githubusercontent.com/LiaScript/LiaScript/master/badges/course.svg)](https://liascript.github.io/course/?https://raw.githubusercontent.com/TUBAF-IfI-LiaScript/VL_EingebetteteSysteme/master/14_ADC.md)
+[![LiaScript](https://raw.githubusercontent.com/LiaScript/LiaScript/master/badges/course.svg)](https://liascript.github.io/course/?https://raw.githubusercontent.com/TUBAF-IfI-LiaScript/VL_EingebetteteSysteme/master/14_ADC.md#1)
 
 # Analog-Digital-Wandler
 
-| Parameter            | Kursinformationen                                                                                                                                                          |
-| -------------------- | -------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
-| **Veranstaltung:**   | @config.lecture                                                                                                                                                            |
-| **Semester**         | @config.semester                                                                                                                                                           |
-| **Hochschule:**      | `Technische Universität Freiberg`                                                                                                                                          |
-| **Inhalte:**         | `Grundlagen und Verwendung des Analog-Digital-Wandlers`                                                                                                                    |
-| **Link auf GitHub:** | [https://github.com/TUBAF-IfI-LiaScript/VL_EingebetteteSysteme/blob/master/14_ADC.md](https://github.com/TUBAF-IfI-LiaScript/VL_EingebetteteSysteme/blob/master/14_ADC.md) |
-| **Autoren**          | @author                                                                                                                                                                    |
+| Parameter                | Kursinformationen                                                                                                                                                                          |
+| ------------------------ | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------ |
+| **Veranstaltung:**       | @config.lecture                                                                                          |
+| **Semester:**            | @config.semester                                                                                         |
+| **Hochschule:**          | `Technische Universität Freiberg`                                                                        |
+| **Inhalte:**             | `Grundlagen und Verwendung des Analog-Digital-Wandlers`                                                 |
+| **Link auf GitHub:**     | https://github.com/TUBAF-IfI-LiaScript/VL_EingebetteteSysteme/blob/master/14_ADC.md                    |
+| **Autoren:**             | @author                                                                                                  |
 
 ![](https://media.giphy.com/media/10PNyg7YOcaBQA/giphy-downsized.gif)
 

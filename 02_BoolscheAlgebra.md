@@ -16,12 +16,12 @@ import:   https://raw.githubusercontent.com/LiaTemplates/NetSwarm-Simulator/mast
 
 | Parameter                | Kursinformationen                                                                                                                                                                          |
 | ------------------------ | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------ |
-| **Veranstaltung:**        | @config.lecture                                                                                                                                              |
-| **Semester**              | @config.semester                                                                                                                                             |
-| **Hochschule:**          | `Technische Universität Freiberg`                                                                                                                                                          |
-| **Inhalte:**             | `Boolesche Algebra`                                                                                      |
-| **Link auf GitHub:** | [https://github.com/TUBAF-IfI-LiaScript/VL_EingebetteteSysteme/blob/master/02_BoolscheAlgebra.md](https://github.com/TUBAF-IfI-LiaScript/VL_EingebetteteSysteme/blob/master/02_BoolscheAlgebra.md) |
-| **Autoren**              | @author                                                                                                                                                                                    |
+| **Veranstaltung:**       | @config.lecture                                                                                          |
+| **Semester:**            | @config.semester                                                                                         |
+| **Hochschule:**          | `Technische Universität Freiberg`                                                                        |
+| **Inhalte:**             | `Boolesche Algebra, Axiome, Schaltfunktionen und technische Realisierung`                              |
+| **Link auf GitHub:**     | https://github.com/TUBAF-IfI-LiaScript/VL_EingebetteteSysteme/blob/master/02_BoolscheAlgebra.md        |
+| **Autoren:**             | @author                                                                                                  |
 
 ![](https://media.giphy.com/media/10PNyg7YOcaBQA/giphy-downsized.gif)
 

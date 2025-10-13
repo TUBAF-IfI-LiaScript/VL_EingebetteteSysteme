@@ -27,14 +27,14 @@ gray: @mark(gray,@0)
 
 # Standardschaltwerke
 
-| Parameter            | Kursinformationen                                                                                                                                                                                          |
-| -------------------- | ---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
-| **Veranstaltung:**   | @config.lecture                                                                                                                                                                                            |
-| **Semester**         | @config.semester                                                                                                                                                                                           |
-| **Hochschule:**      | `Technische Universität Freiberg`                                                                                                                                                                          |
-| **Inhalte:**         | `Diskussion von Standardschaltwerken als Basiskomponenten eines Rechners`                                                                                                                                  |
-| **Link auf GitHub:** | [https://github.com/TUBAF-IfI-LiaScript/VL_EingebetteteSysteme/blob/master/08_StandardSchaltwerke.md](https://github.com/TUBAF-IfI-LiaScript/VL_EingebetteteSysteme/blob/master/08_StandardSchaltwerke.md) |
-| **Autoren**          | @author                                                                                                                                                                                                    |
+| Parameter                | Kursinformationen                                                                                                                                                                                          |
+| ------------------------ | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------ |
+| **Veranstaltung:**       | @config.lecture                                                                                          |
+| **Semester:**            | @config.semester                                                                                         |
+| **Hochschule:**          | `Technische Universität Freiberg`                                                                        |
+| **Inhalte:**             | `Register, Schieberegister, Zähler und deren Anwendungen als Rechner-Basiskomponenten`                 |
+| **Link auf GitHub:**     | https://github.com/TUBAF-IfI-LiaScript/VL_EingebetteteSysteme/blob/master/08_StandardSchaltwerke.md    |
+| **Autoren:**             | @author                                                                                                  |
 
 ![](https://media.giphy.com/media/10PNyg7YOcaBQA/giphy-downsized.gif)
 

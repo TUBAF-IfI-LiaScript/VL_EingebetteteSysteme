@@ -28,18 +28,18 @@ blue: @mark(#898AE3,@0)
 gray: @mark(gray,@0)
 -->
 
-[![LiaScript](https://raw.githubusercontent.com/LiaScript/LiaScript/master/badges/course.svg)](https://liascript.github.io/course/?https://raw.githubusercontent.com/TUBAF-IfI-LiaScript/VL_EingebetteteSysteme/master/16_Aktoren.md)
+[![LiaScript](https://raw.githubusercontent.com/LiaScript/LiaScript/master/badges/course.svg)](https://liascript.github.io/course/?https://raw.githubusercontent.com/TUBAF-IfI-LiaScript/VL_EingebetteteSysteme/master/16_Aktoren.md#1)
 
 # Ansteuerung von peripheren Komponenten
 
-| Parameter            | Kursinformationen                                                                                                                                                                  |
-| -------------------- | ---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
-| **Veranstaltung:**   | @config.lecture                                                                                                                                                                    |
-| **Semester**         | @config.semester                                                                                                                                                                   |
-| **Hochschule:**      | `Technische Universität Freiberg`                                                                                                                                                  |
-| **Inhalte:**         | `Konzepte und Nutzung von Timern und Interrupts`                                                                                                                                   |
-| **Link auf GitHub:** | [https://github.com/TUBAF-IfI-LiaScript/VL_EingebetteteSysteme/blob/master/16_Aktoren.md](https://github.com/TUBAF-IfI-LiaScript/VL_EingebetteteSysteme/blob/master/16_Aktoren.md) |
-| **Autoren**          | @author                                                                                                                                                                            |
+| Parameter                | Kursinformationen                                                                                                                                                                          |
+| ------------------------ | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------ |
+| **Veranstaltung:**       | @config.lecture                                                                                          |
+| **Semester:**            | @config.semester                                                                                         |
+| **Hochschule:**          | `Technische Universität Freiberg`                                                                        |
+| **Inhalte:**             | `Servo-, Schrittmotor- und PWM-Ansteuerung`                                                             |
+| **Link auf GitHub:**     | https://github.com/TUBAF-IfI-LiaScript/VL_EingebetteteSysteme/blob/master/16_Aktoren.md                |
+| **Autoren:**             | @author                                                                                                  |
 
 ![](https://media.giphy.com/media/10PNyg7YOcaBQA/giphy-downsized.gif)
 

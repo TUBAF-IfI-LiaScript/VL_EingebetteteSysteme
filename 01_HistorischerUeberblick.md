@@ -17,12 +17,12 @@ import:   https://raw.githubusercontent.com/LiaTemplates/NetSwarm-Simulator/mast
 
 | Parameter                | Kursinformationen                                                                                                                                                                          |
 | ------------------------ | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------ |
-| **Veranstaltung:**        | @config.lecture                                                                                                                                              |
-| **Semester**              | @config.semester                                                                                                                                             |
-| **Hochschule:**          | `Technische Universität Freiberg`                                                                                                                                                          |
-| **Inhalte:**             | `Übersicht der historischen Entwicklung von Rechentechnik`                                                                                      |
-| **Link auf GitHub:** | [https://github.com/TUBAF-IfI-LiaScript/VL_EingebetteteSysteme/blob/master/00_Einfuehrung.md](https://github.com/TUBAF-IfI-LiaScript/VL_EingebetteteSysteme/blob/master/01_HistorischerUeberblick.md) |
-| **Autoren**              | @author                                                                                                                                                                                    |
+| **Veranstaltung:**       | @config.lecture                                                                                          |
+| **Semester:**            | @config.semester                                                                                         |
+| **Hochschule:**          | `Technische Universität Freiberg`                                                                        |
+| **Inhalte:**             | `Übersicht der historischen Entwicklung von Rechentechnik`                                              |
+| **Link auf GitHub:**     | https://github.com/TUBAF-IfI-LiaScript/VL_EingebetteteSysteme/blob/master/01_HistorischerUeberblick.md |
+| **Autoren:**             | @author                                                                                                  |
 
 ![](https://media.giphy.com/media/10PNyg7YOcaBQA/giphy-downsized.gif)
 

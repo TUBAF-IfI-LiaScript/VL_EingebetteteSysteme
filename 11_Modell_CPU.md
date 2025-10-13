@@ -24,14 +24,14 @@ gray: @mark(gray,@0)
 
 # Modell CPU
 
-| Parameter            | Kursinformationen                                                                                                                                                                        |
-| -------------------- | ---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
-| **Veranstaltung:**   | @config.lecture                                                                                                                                                                          |
-| **Semester**         | @config.semester                                                                                                                                                                         |
-| **Hochschule:**      | `Technische Universität Freiberg`                                                                                                                                                        |
-| **Inhalte:**         | `Realisierung grundlegender arithmetischer Operationen im Rechner`                                                                                                                       |
-| **Link auf GitHub:** | [https://github.com/TUBAF-IfI-LiaScript/VL_EingebetteteSysteme/blob/master/11_Modell_CPU.md](https://github.com/TUBAF-IfI-LiaScript/VL_EingebetteteSysteme/blob/master/11_Modell_CPU.md) |
-| **Autoren**          | @author                                                                                                                                                                                  |
+| Parameter                | Kursinformationen                                                                                                                                                                          |
+| ------------------------ | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------ |
+| **Veranstaltung:**       | @config.lecture                                                                                          |
+| **Semester:**            | @config.semester                                                                                         |
+| **Hochschule:**          | `Technische Universität Freiberg`                                                                        |
+| **Inhalte:**             | `Modell-CPU-Implementierung, Instruktionszyklus, praktische CPU-Simulation`                            |
+| **Link auf GitHub:**     | https://github.com/TUBAF-IfI-LiaScript/VL_EingebetteteSysteme/blob/master/11_Modell_CPU.md             |
+| **Autoren:**             | @author                                                                                                  |
 
 ![](https://media.giphy.com/media/10PNyg7YOcaBQA/giphy-downsized.gif)
 

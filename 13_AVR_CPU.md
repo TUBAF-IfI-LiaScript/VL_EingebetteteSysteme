@@ -26,14 +26,14 @@ gray: @mark(gray,@0)
 
 # Programmierung CPU
 
-| Parameter            | Kursinformationen                                                                                                                                                                  |
-| -------------------- | ---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
-| **Veranstaltung:**   | @config.lecture                                                                                                                                                                    |
-| **Semester**         | @config.semester                                                                                                                                                                   |
-| **Hochschule:**      | `Technische Universität Freiberg`                                                                                                                                                  |
-| **Inhalte:**         | `Einführung AVR Architektur`                                                                                                                                                       |
-| **Link auf GitHub:** | [https://github.com/TUBAF-IfI-LiaScript/VL_EingebetteteSysteme/blob/master/13_AVR_CPU.md](https://github.com/TUBAF-IfI-LiaScript/VL_EingebetteteSysteme/blob/master/13_AVR_CPU.md) |
-| **Autoren**          | @author                                                                                                                                                                            |
+| Parameter                | Kursinformationen                                                                                                                                                                          |
+| ------------------------ | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------ |
+| **Veranstaltung:**       | @config.lecture                                                                                          |
+| **Semester:**            | @config.semester                                                                                         |
+| **Hochschule:**          | `Technische Universität Freiberg`                                                                        |
+| **Inhalte:**             | `Einführung AVR-Architektur, Assembler-Programmierung, Register und Speicher`                          |
+| **Link auf GitHub:**     | https://github.com/TUBAF-IfI-LiaScript/VL_EingebetteteSysteme/blob/master/13_AVR_CPU.md                |
+| **Autoren:**             | @author                                                                                                  |
 
 ![](https://media.giphy.com/media/10PNyg7YOcaBQA/giphy-downsized.gif)
 

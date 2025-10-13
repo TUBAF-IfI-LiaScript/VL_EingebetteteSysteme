@@ -26,14 +26,14 @@ gray: @mark(gray,@0)
 
 # Schaltwerke
 
-| Parameter            | Kursinformationen                                                                                                                                                                          |
-| -------------------- | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------ |
-| **Veranstaltung:**   | @config.lecture                                                                                                                                                                            |
-| **Semester**         | @config.semester                                                                                                                                                                           |
-| **Hochschule:**      | `Technische Universität Freiberg`                                                                                                                                                          |
-| **Inhalte:**         | `Konzepte und Methodik bei der Erstellung von Schaltwerken`                                                                                                                                |
-| **Link auf GitHub:** | [https://github.com/TUBAF-IfI-LiaScript/VL_EingebetteteSysteme/blob/master/07_Schaltwerke.md](https://github.com/TUBAF-IfI-LiaScript/VL_EingebetteteSysteme/blob/master/07_Schaltwerke.md) |
-| **Autoren**          | @author                                                                                                                                                                                    |
+| Parameter                | Kursinformationen                                                                                                                                                                          |
+| ------------------------ | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------ |
+| **Veranstaltung:**       | @config.lecture                                                                                          |
+| **Semester:**            | @config.semester                                                                                         |
+| **Hochschule:**          | `Technische Universität Freiberg`                                                                        |
+| **Inhalte:**             | `Endliche Automaten, Zustandsdiagramme, Mealy- und Moore-Automaten`                                    |
+| **Link auf GitHub:**     | https://github.com/TUBAF-IfI-LiaScript/VL_EingebetteteSysteme/blob/master/07_Schaltwerke.md            |
+| **Autoren:**             | @author                                                                                                  |
 
 ![](https://media.giphy.com/media/10PNyg7YOcaBQA/giphy-downsized.gif)
 

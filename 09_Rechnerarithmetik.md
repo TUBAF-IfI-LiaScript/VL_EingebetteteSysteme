@@ -27,14 +27,14 @@ gray: @mark(gray,@0)
 
 # Rechnerarithmetik
 
-| Parameter            | Kursinformationen                                                                                                                                                                                      |
-| -------------------- | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------ |
-| **Veranstaltung:**   | @config.lecture                                                                                                                                                                                        |
-| **Semester**         | @config.semester                                                                                                                                                                                       |
-| **Hochschule:**      | `Technische Universität Freiberg`                                                                                                                                                                      |
-| **Inhalte:**         | `Realisierung grundlegender arithmetischer Operationen im Rechner`                                                                                                                                     |
-| **Link auf GitHub:** | [https://github.com/TUBAF-IfI-LiaScript/VL_EingebetteteSysteme/blob/master/09_Rechnerarithmetik.md](https://github.com/TUBAF-IfI-LiaScript/VL_EingebetteteSysteme/blob/master/09_Rechnerarithmetik.md) |
-| **Autoren**          | @author                                                                                                                                                                                                |
+| Parameter                | Kursinformationen                                                                                        |
+| ------------------------ | -------------------------------------------------------------------------------------------------------- |
+| **Veranstaltung:**       | @config.lecture                                                                                          |
+| **Semester:**            | @config.semester                                                                                         |
+| **Hochschule:**          | `Technische Universität Freiberg`                                                                        |
+| **Inhalte:**             | `Zahlendarstellung, binäre Arithmetik, Addierer und ALU-Grundlagen`                                    |
+| **Link auf GitHub:**     | https://github.com/TUBAF-IfI-LiaScript/VL_EingebetteteSysteme/blob/master/09_Rechnerarithmetik.md      |
+| **Autoren:**             | @author                                                                                                  |
 
 ![](https://media.giphy.com/media/10PNyg7YOcaBQA/giphy-downsized.gif)
 

@@ -24,14 +24,14 @@ gray: @mark(gray,@0)
 
 # Von mathematischen Operationen zur CPU
 
-| Parameter            | Kursinformationen                                                                                                                                                                      |
-| -------------------- | -------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
-| **Veranstaltung:**   | @config.lecture                                                                                                                                                                        |
-| **Semester**         | @config.semester                                                                                                                                                                       |
-| **Hochschule:**      | `Technische Universität Freiberg`                                                                                                                                                      |
-| **Inhalte:**         | `Realisierung grundlegender arithmetischer Operationen im Rechner`                                                                                                                     |
-| **Link auf GitHub:** | [https://github.com/TUBAF-IfI-LiaScript/VL_EingebetteteSysteme/blob/master/10_CPU_Basis.md](https://github.com/TUBAF-IfI-LiaScript/VL_EingebetteteSysteme/blob/master/10_CPU_Basis.md) |
-| **Autoren**          | @author                                                                                                                                                                                |
+| Parameter                | Kursinformationen                                                                                                                                                                          |
+| ------------------------ | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------ |
+| **Veranstaltung:**       | @config.lecture                                                                                          |
+| **Semester:**            | @config.semester                                                                                         |
+| **Hochschule:**          | `Technische Universität Freiberg`                                                                        |
+| **Inhalte:**             | `ALU-Grundlagen, Steuerwerk-Konzepte, Von-Neumann-Architektur`                                         |
+| **Link auf GitHub:**     | https://github.com/TUBAF-IfI-LiaScript/VL_EingebetteteSysteme/blob/master/10_CPU_Basis.md              |
+| **Autoren:**             | @author                                                                                                  |
 
 ![](https://media.giphy.com/media/10PNyg7YOcaBQA/giphy-downsized.gif)
 
