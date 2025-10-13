@@ -2,6 +2,26 @@
 
 Alle wesentlichen Änderungen an diesem Kurs werden in dieser Datei dokumentiert.
 
+## [0.3.0] - 2025-10-13
+
+### Perfect
+- **DIDAKTISCHE REORGANISATION**: Komplette strukturelle Neuorganisation der Einführung
+  * Klarer Einstieg: "Worum geht es?" mit interaktiven Fragen am Arduino-Code
+  * Logische Steigerung: Code → Hex → Mission → Journey → Beispiele → Anwendungen
+  * Zwei getrennte Lehr-Beispiele für optimale Verständnis-Entwicklung:
+    1. **Mikroarchitektur**: System-Überblick mit Von-Neumann-Diagramm (PlantUML)
+    2. **pinMode()-Sezierung**: 4-Ebenen-Transformation mit Real-World-Details
+  * **Real-World-Komplexität**: Echte Arduino pinMode() Implementation mit Interrupt-Schutz
+  * **Race-Condition-Erklärung**: Warum cli()/sei() und kritische Bereiche nötig sind
+  * Streamlined Journey-Tabelle ohne redundante Arduino-Bezüge
+  * 8 präzise messbare Lernziele (erweitert um pinMode()-Verständnis)
+
+### Impact
+- **Perfekte didaktische Sequenz**: Konkret → Abstract → Anwendung
+- **Zwei Lern-Perspektiven**: System-Überblick + Detail-Transformation
+- **Echte Embedded-Herausforderungen**: Interrupt-Sicherheit und Race Conditions
+- **Professional Real-World-Bezug**: Von Arduino-Spielerei zu Embedded-Engineering
+
 ## [0.2.0] - 2025-10-13
 
 ### Enhanced
