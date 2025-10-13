@@ -27,7 +27,7 @@ import:   https://raw.githubusercontent.com/LiaTemplates/NetSwarm-Simulator/mast
 
 ---------------------------------------------------------------------
 
-** Fragen an die Veranstaltung**
+**Fragen an die Veranstaltung**
 
 + Nennen Sie die Axiome der Booleschen Algebra.
 + Erläutern Sie das Dualitätsprinzip der Booleschen Algebra.

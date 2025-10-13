@@ -39,7 +39,7 @@ gray: @mark(gray,@0)
 
 ---------------------------------------------------------------------
 
-** Fragen an die Veranstaltung**
+**Fragen an die Veranstaltung**
 
 + Erläutern Sie den Unterschied zwischen Mikroprozessor und Mikrocontroller!
 + Welche Speichertypen werden bei Mikrocontrollern eingesetzt?

@@ -45,11 +45,16 @@ gray: @mark(gray,@0)
 
 ---------------------------------------------------------------------
 
-** Fragen an die Veranstaltung**
+**Fragen an die Veranstaltung**
 
 + Charakterisieren Sie die Merkmale eines eingebetteten Systems!
 + Beschreiben Sie aktuelle Entwicklungstendenzen eingebetteter Systeme.
 + Erklären Sie an einem Beispiel die Notwendigkeit für die interdisziplinäre Arbeit bei der Entwicklung von Sensor-Aktor-Systemen!
++ Welche Arten von Aktoren kennen Sie und wie werden sie angesteuert?
++ Was müssen Sie bei der PWM-Ansteuerung von Motoren beachten?
++ Wie funktioniert die Ansteuerung von Servo-Motoren?
++ Welche Schutzmaßnahmen sind beim Schalten induktiver Lasten erforderlich?
++ Wie können Sie die Leistung von Aktoren über Mikrocontroller-Pins steuern?
 
 <!--
 style="width: 80%; min-width: 420px; max-width: 720px;"

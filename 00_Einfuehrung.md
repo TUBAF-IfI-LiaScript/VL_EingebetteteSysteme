@@ -2,7 +2,7 @@
 
 author:   Sebastian Zug, André Dietrich & `fjangfaragesh`, `FnHm`, `gjaeger`, `ShyFlyGuy`, `Lalelele`
 email:    sebastian.zug@informatik.tu-freiberg.de & andre.dietrich@informatik.tu-freiberg.de & fabian.baer@student.tu-freiberg.de
-version:  0.3.0
+version:  0.4.0
 language: de
 narrator: Deutsch Female
 
@@ -26,6 +26,19 @@ import:   https://raw.githubusercontent.com/liascript-templates/plantUML/master/
 | **Inhalte:**             | `Motivation der Vorlesung "Eingebettete Systeme" und Beschreibung der Organisation der Veranstaltung`   |
 | **Link auf GitHub:**     | https://github.com/TUBAF-IfI-LiaScript/VL_EingebetteteSysteme/blob/master/00_Einfuehrung.md             |
 | **Autoren:**             | @author                                                                                                  |
+
+---------------------------------------------------------------------
+
+**Fragen an die Veranstaltung**
+
++ Welche Abstraktionsebenen durchlaufen wir vom Arduino-Code bis zur Hardware-Ebene?
++ Warum ist das Verständnis eingebetteter Systeme für Informatiker wichtig?
++ Welche Rolle spielen Mikrocontroller in modernen digitalen Systemen?
++ Wie unterscheiden sich eingebettete Systeme von herkömmlichen Computersystemen?
++ Welche praktischen Anwendungsgebiete finden Sie für eingebettete Systeme in Ihrem Alltag?
++ Was bedeutet „Real-Time" im Kontext eingebetteter Systeme?
++ Welche Herausforderungen ergeben sich beim Debugging auf Hardware-Ebene?
++ Wie wirken sich Ressourcenbeschränkungen auf die Programmierung aus?
 
 ---------------------------------------------------------------------
 

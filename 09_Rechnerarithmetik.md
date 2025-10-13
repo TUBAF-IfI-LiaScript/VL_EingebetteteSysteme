@@ -40,7 +40,7 @@ gray: @mark(gray,@0)
 
 ---------------------------------------------------------------------
 
-** Fragen an die Veranstaltung**
+**Fragen an die Veranstaltung**
 
 + Was ist der Unterschied zwischen einem Stellenwertsystem und einem additiv-wirkenden Zahlensystem?
 + Zu welcher Basis werden duale, oktale, hexadezimale Zahlen gebildet?

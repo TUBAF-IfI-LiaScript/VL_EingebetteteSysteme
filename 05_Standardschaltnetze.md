@@ -39,12 +39,16 @@ gray: @mark(gray,@0)
 
 ---------------------------------------------------------------------
 
-** Fragen an die Veranstaltung**
+**Fragen an die Veranstaltung**
 
 + Unterscheiden Sie Multiplexer und Demultiplexer.
 + Wie lassen sich mit einem Multiplexer beliebige Wahrheitstafeln abbilden? Welche Grenzen hat dieser Ansatz?
 + Welche Aufgaben realisieren Dekoder?
 + Nennen Sie Anwendungsbeispiele für einen Multiplexer.
++ Was ist der Unterschied zwischen einem Kodierer und einem Prioritätskodierer?
++ Wie funktioniert die Adressierung bei einem Speicherbaustein mittels Dekoder?
++ Welche Rolle spielen Tri-State-Buffer in Bus-Systemen?
++ Erklären Sie die Funktionsweise eines 7-Segment-Displays mit vorgeschaltetem Dekoder.
 
 ---------------------------------------------------------------------
 

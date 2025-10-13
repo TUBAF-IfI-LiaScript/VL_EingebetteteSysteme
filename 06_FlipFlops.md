@@ -40,7 +40,7 @@ gray: @mark(gray,@0)
 
 ---------------------------------------------------------------------
 
-** Fragen an die Veranstaltung**
+**Fragen an die Veranstaltung**
 
 + Erläutern Sie die Notwendigkeit von Speicherelementen für die Umsetzung eines Rechners.
 + Worin besteht der Unterschied zwischen Schaltfunktionen/Schaltnetzen und Schaltwerken?

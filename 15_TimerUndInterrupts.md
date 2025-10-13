@@ -45,7 +45,7 @@ gray: @mark(gray,@0)
 
 ---------------------------------------------------------------------
 
-** Fragen an die Veranstaltung**
+**Fragen an die Veranstaltung**
 
 + Für welche Aufgaben werden die Timerfunktionen des Mikrocontrollers herangezogen?
 + Wie ist ein Timer grundlegend aufgebaut (Capture&Compare)?

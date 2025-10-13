@@ -37,11 +37,16 @@ gray: @mark(gray,@0)
 
 ---------------------------------------------------------------------
 
-** Fragen an die Veranstaltung**
+**Fragen an die Veranstaltung**
 
 + Welche Funktionalität sollte eine ALU bereitstellen?
 + Wie werden Programmierbefehle umgesetzt und im Speicher abgebildet?
 + Welche Aufgaben hat das Steuerwerk?
++ Wie entwickelt sich ein einfacher Addierer zu einer vollständigen CPU?
++ Was ist der Unterschied zwischen Harvard- und von-Neumann-Architektur?
++ Welche Komponenten sind für die Ausführung von Befehlen mindestens erforderlich?
++ Wie funktioniert die Adressierung von Speicher und I/O-Geräten?
++ Welche Rolle spielt der Programmzähler (Program Counter) bei der Befehlsausführung?
 
 --------------------------------------------------------------------
 

@@ -37,14 +37,16 @@ gray: @mark(gray,@0)
 
 ---------------------------------------------------------------------
 
-** Fragen an die Veranstaltung**
+**Fragen an die Veranstaltung**
 
 + Welche Funktionalität sollte eine ALU bereitstellen?
-+ Welcher Trade-Off ist mit der Entscheidung über die Wortbreite einer
-+ CPU und der Breite des möglichen OP-Codes verbunden?
++ Welcher Trade-Off ist mit der Entscheidung über die Wortbreite einer CPU und der Breite des möglichen OP-Codes verbunden?
 + Welche Register gehören zum Programmiermodell eines Rechners?
-+ Welche Register sind für das Laden der Programmbefehle erforderlich und wir arbeiten sie zusammen?
++ Welche Register sind für das Laden der Programmbefehle erforderlich und wie arbeiten sie zusammen?
 + Erklären Sie die Vorgänge in der Fetch- und Execute-Phase der Befehlsabarbeitung.
++ Wie funktioniert die Interrupt-Behandlung in einer CPU?
++ Was versteht man unter dem Begriff "Instruktionsset-Architektur" (ISA)?
++ Welche Adressierungsarten kennen Sie und wofür werden sie verwendet?
 
 --------------------------------------------------------------------
 

@@ -39,12 +39,16 @@ gray: @mark(gray,@0)
 
 ---------------------------------------------------------------------
 
-** Fragen an die Veranstaltung**
+**Fragen an die Veranstaltung**
 
 + Welche Kernelemente hat ein Schaltwerk?
 + Worin unterscheiden sich die Varianten von Mealy und Moore?
 + Welches Vorgehen ist für die Umsetzung eines Schaltwerkes notwendig?
 + An welcher Stelle ist die invertierte Wahrheitstabelle eines Flip-Flops wichtig?
++ Wie erstellen Sie ein Zustandsdiagramm für ein gegebenes Problem?
++ Was verstehen Sie unter einem deterministischen endlichen Automaten?
++ Welche Rolle spielt die Zustandskodierung bei der Schaltwerksynthese?
++ Wie können Sie die Anzahl der benötigten Flip-Flops für ein Schaltwerk bestimmen?
 
 --------------------------------------------------------------------
 

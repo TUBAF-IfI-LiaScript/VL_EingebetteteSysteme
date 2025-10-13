@@ -40,12 +40,16 @@ gray: @mark(gray,@0)
 
 ---------------------------------------------------------------------
 
-** Fragen an die Veranstaltung**
+**Fragen an die Veranstaltung**
 
-+ Welche Kernelemente hat ein Schaltwerk?
-+ Worin unterscheiden sich die Varianten von Mealy und Moore?
-+ Welches Vorgehen ist für die Umsetzung eines Schaltwerkes notwendig?
-+ An welcher Stelle ist die invertierte Wahrheitstabelle eines Flip-Flops wichtig?
++ Welche Funktionalität bieten Standard-Schaltwerke wie Zähler und Register?
++ Wie unterscheiden sich synchrone und asynchrone Zähler?
++ Welche Vorteile bietet ein Gray-Code-Zähler gegenüber einem Binärzähler?
++ Was ist ein Schieberegister und welche Betriebsarten kennen Sie?
++ Wie funktioniert ein FIFO-Speicher (First-In-First-Out)?
++ Welche Arten von Speicherbausteinen kennen Sie (SRAM, DRAM, ROM)?
++ Was verstehen Sie unter einer Pipeline in der Datenverarbeitung?
++ Wie werden Multiplexer zur Datenweiterleitung in komplexen Systemen eingesetzt?
 
 --------------------------------------------------------------------
 

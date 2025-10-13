@@ -2,6 +2,21 @@
 
 Alle wesentlichen Änderungen an diesem Kurs werden in dieser Datei dokumentiert.
 
+## [0.4.0] - 2025-10-13
+
+### Enhanced
+- **LERNZIEL-SYSTEMATISIERUNG**: Vollständige Überarbeitung aller "Fragen an die Veranstaltung"
+  * **00_Einführung**: Kompletter Abschnitt neu erstellt (8 Arduino-fokussierte Fragen)
+  * **Alle Vorlesungen**: Erweitert auf mindestens 8 aussagekräftige Lernkontrollfragen
+  * **Copy-Paste-Fehler korrigiert**: 07_Schaltwerke & 08_StandardSchaltwerke individualisiert
+  * **Didaktische Progression**: Von Grundlagen zu Anwendungen, Verständnis zu Transfer
+  * **Formatierung standardisiert**: Einheitliche `**Fragen an die Veranstaltung**` Überschriften
+
+### Impact
+- **Perfekte Prüfungsvorbereitung**: 16 × 8 = 128 systematische Lernkontrollfragen
+- **Einheitliche Qualität**: Alle Vorlesungen mit vollständigen Lernzielen
+- **Didaktisch fundiert**: Ausgewogene Mischung aus Verständnis-, Anwendungs- und Transferfragen
+
 ## [0.3.0] - 2025-10-13
 
 ### Perfect

@@ -1,6 +1,15 @@
 <!--
 
-author:   Sebastian Zug & André Dietrich & Fabian Bär
+author:   Sebastian Zug **Fragen an die Veranstaltung**
+
++ Worin lag der „große Wurf" des Intel 4004?
++ Was bedeutet die Angabe 8bit, 16bit usw. ?
++ Erklären Sie die Schichten der Rechnerstruktur.
++ Worin unterschieden sich ENIAC und die Z3?
++ Welche technologischen Durchbrüche ermöglichten die Miniaturisierung von Computern?
++ Warum war die Harvard-Architektur für frühe Computer wichtig?
++ Welche Rolle spielte die Erfindung des Transistors für die Computerentwicklung?
++ Wie entwickelten sich Speichertechnologien im Laufe der Computergeschichte? Dietrich & Fabian Bär
 email:    sebastian.zug@informatik.tu-freiberg.de & andre.dietrich@informatik.tu-freiberg.de & fabian.baer@student.tu-freiberg.de
 version:  0.0.4
 language: de

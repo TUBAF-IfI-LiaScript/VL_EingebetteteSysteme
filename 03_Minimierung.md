@@ -27,7 +27,7 @@ import:   https://github.com/liascript/CodeRunner
 
 ---------------------------------------------------------------------
 
-** Fragen an die Veranstaltung**
+**Fragen an die Veranstaltung**
 
 + Nennen Sie 3 Beispiele, wie eine Schaltfunktion technisch umgesetzt werden kann.
 + Welcher Unterschied besteht zwischen der DNF und der KDNF?

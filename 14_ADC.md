@@ -44,13 +44,16 @@ gray: @mark(gray,@0)
 
 ---------------------------------------------------------------------
 
-** Fragen an die Veranstaltung**
+**Fragen an die Veranstaltung**
 
 + Was bedeutet der Begriff Auflösung im Zusammenhang mit einem Analog-Digital-Wandler?
 + Welche Wandlungsmethoden kennen Sie, worin unterscheiden sich diese?
 + Welches Wandlungskonzept ist im AVR-Core implementiert?
 + Welche Störungen entstehen ggf. bei der Analog-Digital-Wandlung?
-+ Wovon hängt die Wandlungsdauer beim AVR ab? Durch welche Paramter können Sie diese beeinflussen?
++ Wovon hängt die Wandlungsdauer beim AVR ab? Durch welche Parameter können Sie diese beeinflussen?
++ Was ist das Nyquist-Shannon-Abtasttheorem und wie beeinflusst es die ADC-Anwendung?
++ Wie können Sie das Signal-Rausch-Verhältnis bei der AD-Wandlung verbessern?
++ Welche Rolle spielt die Referenzspannung bei der Genauigkeit der Wandlung?
 
 <!--
 style="width: 80%; min-width: 420px; max-width: 720px;"
