@@ -1,12 +1,22 @@
 # Changelog - Digitale Systeme / Eingebettete Systeme
 
-Alle wesentlic### 📊 Repository-Statistiken
-- **Gesamte Commits**: 542 (Zeitraum: 2020-08-28 bis 2025-06-24)
-- **Einzigartige Autoren**: 30 verschiedene Mitwirkende (nach Zusammenführung)
-- **Hauptautor**: Sebastian Zug (356 Commits = 65,7% aller Commits)
-- **Community-Beiträge**: 186 Commits von 29 verschiedenen Mitwirkenden
+Alle wesentlichen Änderungen an diesem Kurs werden in dieser Datei dokumentiert.
 
-### 📋 Autorschafts-Verteilung (Datei-Header)erungen an diesem Kurs werden in dieser Datei dokumentiert.
+## [0.2.0] - 2025-10-13
+
+### Enhanced
+- **REVOLUTIONÄRE EINFÜHRUNG**: Arduino-zu-Maschinencode-Leitmotiv implementiert
+  * Direkter emotionaler Hook mit Arduino-Code → Maschinencode-Transformation
+  * 16-Stationen-Journey-Map mit konkreten Arduino-Bezügen zu jeder Vorlesung
+  * 7 präzise messbare Lernziele (von `digitalWrite()` bis `analogRead()`)
+  * Bottom-Up-Erklärung der Abstraktionsebenen mit visueller Darstellung
+  * Motivierende Antworten auf "Warum brauche ich das?"-Fragen
+  * Klare Abgrenzung zu oberflächlichen Arduino-Kursen
+
+### Impact
+- **Massive Motivationssteigerung**: Von "Ich muss das halt lernen" zu "Ich WILL verstehen!"
+- **Klarer roter Faden**: Jede Vorlesung hat erkennbaren Bezug zum Arduino-Verständnis
+- **Konkrete Erfolgsmessung**: 7 Fragen definieren messbare Lernerfolge
 
 ## [0.1.0] - 2025-10-13
 
