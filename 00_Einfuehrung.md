@@ -2,7 +2,7 @@
 
 author:   Sebastian Zug, André Dietrich & `fjangfaragesh`, `FnHm`, `gjaeger`, `ShyFlyGuy`, `Lalelele`
 email:    sebastian.zug@informatik.tu-freiberg.de & andre.dietrich@informatik.tu-freiberg.de & fabian.baer@student.tu-freiberg.de
-version:  0.4.0
+version:  0.5.0
 language: de
 narrator: Deutsch Female
 
@@ -15,6 +15,9 @@ import:   https://raw.githubusercontent.com/liascript-templates/plantUML/master/
 -->
 
 # Einführung 
+
+    --{{0}}--
+Bevor wir starten: Haben Sie schon einmal darüber nachgedacht, wie aus einem Hochsprachen-Programm ein tatsächliches Verhalten eines Computers wird? Der Idee liegt darin, die Komplexität dieser Frage in handhabbare Schichten zu unterteilen. Wie diese Schichten genau aussehen, werden wir in dieser Vorlesung systematisch erarbeiten.
 
 [![LiaScript](https://raw.githubusercontent.com/LiaScript/LiaScript/master/badges/course.svg)](https://liascript.github.io/course/?https://raw.githubusercontent.com/TUBAF-IfI-LiaScript/VL_EingebetteteSysteme/master/00_Einfuehrung.md#1)
 
@@ -76,11 +79,20 @@ void loop() {
 ```
 @AVR8js.sketch
 
-> Welche Funktion hat der Code?
+      {{1}}
+> **Frage:** Welche Funktion hat der Code?
 
-> Was ist notwendig, damit dieses Programm auf einem Mikrocontroller läuft?
+    --{{1}}--
+Die Funktion des Codes besteht darin, nacheinander vier LEDs an den Pins 10 bis 13 des Arduino-Boards ein- und auszuschalten. Dabei wird jede LED für 250 Millisekunden aktiviert, bevor die nächste LED eingeschaltet wird. Schlagen Sie ggf. die Dokumentation der Befehle unter https://www.arduino.cc/reference/en/ nach. Interessant an diesem Code: Er ist nur 20 Zeilen lang, aber dahinter verbergen sich tausende von Zeilen Arduino-Bibliothekscode, Compiler-Optimierungen, und am Ende Millionen von Transistor-Schaltoperationen. Die `digitalWrite()`-Funktion allein ruft über sieben weitere Funktionen auf, bevor sie einen einzigen Pin schaltet.
 
-{{1-2}}
+      {{2}}
+> **Frage:** Was ist notwendig, damit dieses Programm auf einem Mikrocontroller ausgeführt werden kann?
+
+    --{{2}}--
+Der Code muss zunächst übersetzt und in eine für den Mikrocontroller verständliche Form gebracht werden. Dies geschieht in mehreren Schritten: 1. **Kompilierung:** Der C++-Code wird in Assembler-Code übersetzt, der spezifisch für die AVR-Architektur des Mikrocontrollers ist. 2. **Assemblierung:** Der Assembler-Code wird in Maschinencode umgewandelt, der aus binären Instruktionen besteht, die der Mikrocontroller direkt ausführen kann.
+
+      {{3}}
+******************************************************
 
 ```hex
 :100000000C9472000C947E000C947E000C947E0084
@@ -102,14 +114,17 @@ void loop() {
 :0A010000279A2F98FFCFF894FFCF45
 :00000001FF
 ```
-{{2-3}}
 
 > **Am Ende des Semesters können Sie jeden Schritt dieser Transformation verstehen und erklären!**
 
-Sie werden die komplette Reise von Ihrem Arduino-Code bis zur Ausführung im ATmega328P-Mikrocontroller nachvollziehen können – von der ersten `digitalWrite()`-Funktion bis zum letzten Transistor, der eine LED zum Leuchten bringt.
+******************************************************
+
+    --{{3}}--
+Das Faszinierende: Wenn Sie diese Hex-Datei verstehen können - und das werden Sie am Ende des Semesters - dann können Sie jeden Computer der Welt verstehen. Die Grundprinzipien sind universell, egal ob es sich um einen Arduino, einen Smartphone-Prozessor oder einen Supercomputer handelt. Schauen Sie genau hin: Die erste gepunktete Zeile beginnt mit "0C 94 72 00". Das sind vier Bytes, die einen einzigen Maschinenbefehl darstellen - einen Jump-Befehl zur Adresse 0x0072. Dort steht der Interrupt-Vektor für den Reset.
 
 ### 🗺️ Die Reise: 16 Stationen zum Verständnis
 
+<!-- data-type="none" -->
 | Station | Vorlesung                                           | Was lernen Sie hier?        |
 | ------- | --------------------------------------------------- | --------------------------- |
 | 🏁     | [00 Einführung](00_Einfuehrung.md)                  | Die große Vision            |
@@ -134,15 +149,18 @@ Sie werden die komplette Reise von Ihrem Arduino-Code bis zur Ausführung im ATm
 
 ### Was steht am Ende?
 
+    --{{0}}--
+Ein kleiner Reality-Check: Diese acht Fragen würden viele Kommmilitonen der höheren Semester zum Schwitzen bringen. Nach diesem Kurs gehören Sie zu den wenigen, die wirklich verstehen, was unter der Haube passiert. Das macht Sie unglaublich wertvoll auf dem Arbeitsmarkt.
+
 **Sie können diese 8 Fragen fundiert beantworten:**
 
 1. **"Wie wird `pinMode(13, OUTPUT)` zu Hardware-Konfiguration?"**  
    *Von Arduino-Funktion über AVR-libc zu Assembler zu DDRB-Register zu Tri-State-Logik*
 
-2. **"Wie wird `digitalWrite(13, HIGH)` zu Spannung am Pin 13?"**  
-   *Von C-Funktion über Compiler zu Register-Manipulation zu Transistor-Schaltung*
+2. **"Was bedeutet, das `Serial.begin(9600)`?"**  
+   *UART ist eine asynchrone Kommunikationsschnittstelle, wir vereinbaren zu Beginn die "Sprechgeschwindigkeit".*
 
-3. **"Warum braucht `delay(1000)` genau 16.000.000 Taktzyklen?"**  
+3. **"Ist eine `delay(1000)` tatsächlich genau 16.000.000 Taktzyklen lang?"**  
    *Taktfrequenz, Befehlszyklen und Timer-Hardware verstehen*
 
 4. **"Was passiert im ATmega328P während `analogRead(A0)`?"**  
@@ -157,17 +175,23 @@ Sie werden die komplette Reise von Ihrem Arduino-Code bis zur Ausführung im ATm
 7. **"Wie kann ein 8-bit-Mikrocontroller 16-bit-Zahlen addieren?"**  
    *Multi-Precision-Arithmetik, Carry-Flag, ALU-Design*
 
-8. **"Welche Hardware-Komponenten arbeiten parallel zu Ihrem `loop()`?"**  
+8. **"Welche Hardware-Komponenten arbeiten parallel zur `loop()`?"**  
    *Interrupts, Timer, UART, SPI - das komplette AVR-Ökosystem*
 
 
 ## 🔬 Der Unterschied zu einem "Arduino-Kurs"
+
+    --{{0}}--
+Hier ist ein wichtiger Punkt: Nach einem typischen Arduino-Workshop können Sie LEDs blinken lassen. Nach diesem Kurs können Sie erklären, warum die `digitalWrite()`-Funktion exakt 12 Taktzyklen benötigt und welche vier Hardware-Register dabei beschrieben werden. Der Unterschied zwischen "es funktioniert" und "ich verstehe warum es funktioniert".
 
 **Arduino-Kurs:** "Drücke diesen Button, LEDs blinken" ✨ *Magie!*
 
 **Unser Kurs:** "Warum passiert das und wie funktioniert es bis hinunter zum Transistor?"
 
 ### 🧭 Unsere Bottom-Up-Reise
+
+    --{{0}}--
+Schauen Sie sich diese Abstraktionsebenen an: Die meisten Programmierer arbeiten nur auf Ebene 6 und 5. Wir steigen bis auf Ebene 1 hinab und arbeiten uns systematisch nach oben.
 
 <!--
 style="width: 80%; min-width: 420px; max-width: 720px;"
@@ -208,9 +232,8 @@ style="width: 80%; min-width: 420px; max-width: 720px;"
 
 ### Beispiel 1: Mikroarchitektur
 
-> Ein Rechner ist eine ziemlich komplizierte Maschine. Der AVR-Mikrocontroller in Ihrem Arduino besteht aus über 30 Millionen Transistoren! Wir brauchen ein methodisches Verständnis und mehrere Abstraktionsebenen, um das zu verstehen.
+> Ein Rechner ist eine ziemlich komplizierte Maschine. Moderne CPUs oder GPUs umfassen Milliarden von Transistoren! Wir brauchen ein methodisches Verständnis und mehrere Abstraktionsebenen, um das zu verstehen.
 
-{{0-1}}
 ```text @plantUML.png
 @startditaa
                +------------------+
@@ -247,18 +270,36 @@ style="width: 80%; min-width: 420px; max-width: 720px;"
 @endditaa
 ```
 
+    --{{0}}--
+Der ATmega328P hat "nur" etwa 100.000 Transistoren. Aber auch das ist schon gewaltig - stellen Sie sich vor, Sie müssten 100.000 Schalter von Hand verkabeln!
+
+    --{{1}}--
+Fun Fact: Diese Struktur wurde 1945 von John von Neumann beschrieben und ist heute noch gültig. Ihr Mobiltelefons hat die gleiche Grundarchitektur wie dieser Arduino - nur mit ein paar Milliarden Transistoren mehr. Die Kunst liegt darin, diese Komplexität in verständliche Module zu unterteilen.
+
+
 ### 🔬 Beispiel 2: Quer über alle Ebenene
+
+    --{{0}}--
+Hier wird's richtig interessant: Wir verfolgen eine einzige Arduino-Zeile durch vier Abstraktionsebenen. Das ist wie ein CSI für Programmierer - wir verfolgen jeden Beweis, bis wir den echten Täter finden: den Transistor, der die Arbeit macht.
 
 **Wir bauen von den Grundlagen nach oben!** Jede Ebene erklärt die nächste, bis Sie verstehen, wie Ihr `digitalWrite()` am Ende einen Transistor schaltet.
 
 **Schauen wir uns konkret an, was in diesen 4 Abstraktionsebenen passiert:**
 
 **🎯 Ebene 6 - Ihr Arduino-Code:**
+
+    --{{1}}--
+Ebene sechs sieht harmlos aus, aber diese eine Zeile triggert eine Kaskade von 50+ Funktionsaufrufen in der Arduino-Laufzeitumgebung. Pin 13 ist übrigens kein Zufall - das ist der eingebaute LED-Pin auf den meisten Arduino-Boards.
+
 ```cpp
 pinMode(13, OUTPUT);  // Pin 13 als Ausgang konfigurieren
 ```
 
 **⚙️ Ebene 5 - AVR-libc Implementation (echte Arduino-Version):**
+
+    --{{2}}--
+Hier wird's professionell: Die Arduino-Entwickler müssen Interrupts abschalten, weil ein anderer Interrupt-Handler zur falschen Zeit das gleiche Register manipulieren könnte. Das nennt man Race Condition - ein klassisches Problem in der Embedded-Programmierung.
+
 ```c
 void pinMode(uint8_t pin, uint8_t mode) {
   uint8_t bit = digitalPinToBitMask(pin);    // Pin 13 → Bit 5
@@ -276,6 +317,10 @@ void pinMode(uint8_t pin, uint8_t mode) {
 ```
 
 **🔧 Ebene 3 - AVR-Assembler Code:**
+
+    --{{3}}--
+Jetzt sind wir bei der Maschinensprache angekommen. "CLI" schaltet global alle Interrupts ab - ein drastischer Schritt! "OUT 0x04, r24" schreibt direkt ins Hardware-Register DDRB. Diese 0x04 ist eine magische Zahl - die Speicheradresse des Data Direction Register B im AVR-Chip.
+
 ```asm
 ; uint8_t oldSREG = SREG; cli();
 in   r25, 0x3F    ; Lade SREG (Status Register)
@@ -292,13 +337,20 @@ out  0x3F, r25    ; Restore SREG → Interrupts wieder AN
 
 **⚡ Ebene 1 - Hardware-Konfiguration:**
 
+    --{{4}}--
+Endlich am Ziel: echte Hardware! Das DDRB-Register besteht aus acht Flip-Flops, jedes steuert einen Pin. Wenn Sie Bit 5 setzen, öffnet sich ein Transistor-Paar am Pin 13. Der obere Transistor kann dann +5V durchschalten, der untere 0V. Das ist der Moment, wo Software zu Physik wird.
+
 ![Diagramme](./images/00_Einfuehrung/IOpin.png "Darstellung der Input/Output Beschaltung eines Microcontrollers")<!-- width="60%" -->
 
 Das `DDRB`-Register steuert direkt die **Tri-State-Logik** des I/O-Pins:
+
 - **DDRB[5] = 1**: Ausgangstreiber wird aktiviert → Pin kann HIGH/LOW ausgeben
 - **DDRB[5] = 0**: Hochohmig → Pin kann Eingangssignale lesen
 
 ## 🚀 Was können Sie damit bauen?
+
+    --{{0}}--
+Mit diesem tiefen Verständnis können Sie Systeme optimieren, die andere nur benutzen können. Sie wissen, warum der ADC-Wandler manchmal "rauscht", wie Sie Timer-Interrupts für präzises Timing einsetzen, und warum manche Sensoren 5V brauchen und andere mit 3.3V auskommen.
 
 **Von einfachen LEDs zu echten Projekten:**
 
@@ -311,6 +363,9 @@ Nach diesem Kurs wissen Sie nicht nur, wie man Sensordaten ausliest, sondern **w
 Sie verstehen, warum die Messwerte (1023 = dunkel, niedrige Werte = hell) genau so aussehen und können die ADC-Referenzspannung für präzisere Messungen optimieren.
 
 ### 🤔 "Aber ich will doch Webentwickler/Data Scientist/KI-Entwickler werden..."
+
+    --{{0}}--
+Hier ist ein Geheimnis der Tech-Industrie: Die wertvollsten Entwickler sind die, die eine Schicht tiefer schauen können als ihre Kollegen. Wenn Ihre Webanwendung langsam ist und andere raten, wissen Sie genau, welche CPU-Zyklen verschwendet werden. Das macht den Unterschied zwischen Senior- und Junior-Entwickler aus.
 
 **🎯 Perfekt! Denn Sie werden ein BESSERER Entwickler in JEDEM Bereich:**
 

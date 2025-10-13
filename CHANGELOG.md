@@ -2,6 +2,25 @@
 
 Alle wesentlichen Änderungen an diesem Kurs werden in dieser Datei dokumentiert.
 
+## [0.5.0] - 2025-10-13
+
+### Enhanced
+- **TTS-OPTIMIERUNG**: Professionelle Text-to-Speech-Integration in der Einführung
+  * **15 strategische Sprachkommentare** mit echten Mehrwerten statt Textwiederholungen
+  * **Korrekte LiaScript-Animationssyntax** (abschnittsweise `--{{0}}--` bis `--{{n}}--`)
+  * **Insider-Wissen ergänzt**: Race Conditions, Hardware-Spezifika, Industrie-Geheimnisse
+  * **Didaktische Mehrschichtigkeit**: Visueller Text + auditive Profi-Tipps
+  * **Accessibility verbessert**: Multimodale Lernerfahrung für verschiedene Lerntypen
+
+### Technical Details
+- **Arduino-Code-Analyse**: pinMode() → 50+ Funktionsaufrufe, digitalWrite = 12 Taktzyklen
+- **Hardware-Einblicke**: DDRB = 0x04, Tri-State-Logik, 100.000 Transistoren im ATmega328P
+- **Professional Context**: Senior vs. Junior Developer, "Eine Schicht tiefer schauen"
+
+### Impact
+- **Interaktive Vorlesung**: Von statischer Präsentation zu lebendiger, geführter Lernerfahrung
+- **Expertenwissen zugänglich**: Komplexe Embedded-Konzepte verständlich vermittelt
+
 ## [0.4.0] - 2025-10-13
 
 ### Enhanced
