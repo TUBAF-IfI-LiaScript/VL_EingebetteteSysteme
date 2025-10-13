@@ -14,14 +14,14 @@ import:   https://github.com/liascript/CodeRunner
 
 # Minimierung von Boolesche Funktionen
 
-| Parameter            | Kursinformationen                                                                                                                                                                          |
-| -------------------- | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------ |
-| **Veranstaltung:**   | @config.lecture                                                                                                                                                                            |
-| **Semester**         | @config.semester                                                                                                                                                                           |
-| **Hochschule:**      | `Technische Universität Freiberg`                                                                                                                                                          |
-| **Inhalte:**         | `Minimierung boolescher Funktionen`                                                                                                                                                        |
-| **Link auf GitHub:** | [https://github.com/TUBAF-IfI-LiaScript/VL_EingebetteteSysteme/blob/master/00_Einfuehrung.md](https://github.com/TUBAF-IfI-LiaScript/VL_EingebetteteSysteme/blob/master/03_Minimierung.md) |
-| **Autoren**          | @author                                                                                                                                                                                    |
+| Parameter                | Kursinformationen                                                                                                                                                                          |
+| ------------------------ | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------ |
+| **Veranstaltung:**       | @config.lecture                                                                                          |
+| **Semester:**            | @config.semester                                                                                         |
+| **Hochschule:**          | `Technische Universität Freiberg`                                                                        |
+| **Inhalte:**             | `Verfahren zur Minimierung Boolescher Funktionen, Karnaugh-Veitch-Diagramme`                           |
+| **Link auf GitHub:**     | https://github.com/TUBAF-IfI-LiaScript/VL_EingebetteteSysteme/blob/master/03_Minimierung.md            |
+| **Autoren:**             | @author                                                                                                  |
 
 ![](https://media.giphy.com/media/10PNyg7YOcaBQA/giphy-downsized.gif)
 

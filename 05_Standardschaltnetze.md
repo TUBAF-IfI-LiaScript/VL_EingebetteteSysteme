@@ -26,14 +26,14 @@ gray: @mark(gray,@0)
 
 # Standardschaltnetze
 
-| Parameter            | Kursinformationen                                                                                                                                                                                          |
-|----------------------|------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
-| **Veranstaltung:**        | @config.lecture                                                                                                                                              |
-| **Semester**              | @config.semester                                                                                                                                             |
-| **Hochschule:**      | `Technische Universität Freiberg`                                                                                                                                                                          |
-| **Inhalte:**         | `Realisierung von Schaltnetzen, Standardschaltnetze`                                                                                                                                                       |
-| **Link auf GitHub:** | [https://github.com/TUBAF-IfI-LiaScript/VL_EingebetteteSysteme/blob/master/05_Standardschaltnetze.md](https://github.com/TUBAF-IfI-LiaScript/VL_EingebetteteSysteme/blob/master/05_Standardschaltnetze.md) |
-| **Autoren**          | @author                                                                                                                                                                                                    |
+| Parameter                | Kursinformationen                                                                                                                                                                                          |
+| ------------------------ | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------ |
+| **Veranstaltung:**       | @config.lecture                                                                                          |
+| **Semester:**            | @config.semester                                                                                         |
+| **Hochschule:**          | `Technische Universität Freiberg`                                                                        |
+| **Inhalte:**             | `Multiplexer, Demultiplexer, Encoder, Decoder und programmierbare Logikbausteine`                      |
+| **Link auf GitHub:**     | https://github.com/TUBAF-IfI-LiaScript/VL_EingebetteteSysteme/blob/master/05_Standardschaltnetze.md    |
+| **Autoren:**             | @author                                                                                                  |
 
 ![](https://media.giphy.com/media/10PNyg7YOcaBQA/giphy-downsized.gif)
 
