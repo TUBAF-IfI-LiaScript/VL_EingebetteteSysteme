@@ -29,7 +29,9 @@ import:   https://raw.githubusercontent.com/liascript-templates/plantUML/master/
 
 ---------------------------------------------------------------------
 
-## 🚀 Von diesem vertrauten Code...
+## Worum geht es in dieser Vorlesung?
+
+> Starten wir mit etwas Code ... 
 
 <div id="example1">
 <wokwi-led color="red"   pin="13" label="13"></wokwi-led>
@@ -61,7 +63,11 @@ void loop() {
 ```
 @AVR8js.sketch
 
-## 🔬 ...zu diesem rätselhaften Maschinencode
+> Welche Funktion hat der Code?
+
+> Was ist notwendig, damit dieses Programm auf einem Mikrocontroller läuft?
+
+{{1-2}}
 
 ```hex
 :100000000C9472000C947E000C947E000C947E0084
@@ -83,58 +89,62 @@ void loop() {
 :0A010000279A2F98FFCFF894FFCF45
 :00000001FF
 ```
+{{2-3}}
 
-## 🎯 Ihre Mission in diesem Kurs
-
-**Am Ende des Semesters können Sie jeden Schritt dieser Transformation verstehen und erklären!**
+> **Am Ende des Semesters können Sie jeden Schritt dieser Transformation verstehen und erklären!**
 
 Sie werden die komplette Reise von Ihrem Arduino-Code bis zur Ausführung im ATmega328P-Mikrocontroller nachvollziehen können – von der ersten `digitalWrite()`-Funktion bis zum letzten Transistor, der eine LED zum Leuchten bringt.
 
 ### 🗺️ Die Reise: 16 Stationen zum Verständnis
 
-| Station | Vorlesung | Was lernen Sie hier? | Bezug zu Ihrem Arduino-Code |
-|---------|-----------|----------------------|------------------------------|
-| 🏁 | [00 Einführung](00_Einfuehrung.md) | Die große Vision | "Warum ist das relevant?" |
-| 📚 | [01 Historie](01_HistorischerUeberblick.md) | Von Zuse zu Arduino | "Wo kommen wir her?" |
-| ⚡ | [02 Boolesche Algebra](02_BoolscheAlgebra.md) | 0 und 1 verstehen | "Wie werden AND/OR zu Gattern?" |
-| 🔧 | [03 Minimierung](03_Minimierung.md) | Effizienz in Logik | "Warum ist mein Code schnell?" |
-| 🧩 | [04 Schaltnetze](04_Schaltnetze.md) | Logik wird Hardware | "`if (x && y)` als Schaltung" |
-| 🎛️ | [05 Standardschaltnetze](05_Standardschaltnetze.md) | Decoder & Multiplexer | "Wie wählt der Pin-Mux aus?" |
-| 💾 | [06 FlipFlops](06_FlipFlops.md) | Speicher entsteht | "`int i = 0;` im Register" |
-| 🔄 | [07 Schaltwerke](07_Schaltwerke.md) | Zustandsmaschinen | "`loop()` als Automat" |
-| 📊 | [08 Standardschaltwerke](08_StandardSchaltwerke.md) | Counter & Register | "Wie zählt `millis()`?" |
-| 🧮 | [09 Rechnerarithmetik](09_Rechnerarithmetik.md) | Addition in Hardware | "`i++` in der ALU" |
-| 🏗️ | [10 CPU-Basis](10_CPU_Basis.md) | Der erste Prozessor | "Von-Neumann trifft Arduino" |
-| 🖥️ | [11 Modell-CPU](11_Modell_CPU.md) | CPU-Simulation | "Befehle Schritt für Schritt" |
-| ⚡ | [12 Pipeline](12_Pipeline.md) | Geschwindigkeit | "Warum läuft es mit 16MHz?" |
-| 🎯 | [13 AVR-CPU](13_AVR_CPU.md) | **IHR Arduino-Chip!** | "ATmega328P von innen" |
-| 📡 | [14 ADC](14_ADC.md) | Analog trifft Digital | "`analogRead()` verstehen" |
-| ⏰ | [15 Timer & Interrupts](15_TimerUndInterrupts.md) | Multitasking | "`delay()` vs. Timer" |
-| 🤖 | [16 Aktoren](16_Aktoren.md) | Hardware ansteuern | "Servo-Ansteuerung perfekt" |
+| Station | Vorlesung                                           | Was lernen Sie hier?        |
+| ------- | --------------------------------------------------- | --------------------------- |
+| 🏁     | [00 Einführung](00_Einfuehrung.md)                  | Die große Vision            |
+| 📚     | [01 Historie](01_HistorischerUeberblick.md)         | Von Zuse zu Arduino         |
+| ⚡      | [02 Boolesche Algebra](02_BoolscheAlgebra.md)       | 0 und 1 verstehen           |
+| 🔧     | [03 Minimierung](03_Minimierung.md)                 | Effizienz in Logik          |
+| 🧩     | [04 Schaltnetze](04_Schaltnetze.md)                 | Logik wird Hardware         |
+| 🎛️   | [05 Standardschaltnetze](05_Standardschaltnetze.md) | Decoder & Multiplexer       |
+| 💾     | [06 FlipFlops](06_FlipFlops.md)                     | Speicher entsteht           |
+| 🔄     | [07 Schaltwerke](07_Schaltwerke.md)                 | Zustandsmaschinen           |
+| 📊     | [08 Standardschaltwerke](08_StandardSchaltwerke.md) | Counter & Register          |
+| 🧮     | [09 Rechnerarithmetik](09_Rechnerarithmetik.md)     | Addition in Hardware        |
+| 🏗️   | [10 CPU-Basis](10_CPU_Basis.md)                     | Der erste Prozessor         |
+| 🖥️   | [11 Modell-CPU](11_Modell_CPU.md)                   | CPU-Simulation              |
+| ⚡      | [12 Pipeline](12_Pipeline.md)                       | Geschwindigkeit             |
+| 🎯     | [13 AVR-CPU](13_AVR_CPU.md)                         | **IHR Arduino-Chip!**       |
+| 📡     | [14 ADC](14_ADC.md)                                 | Analog trifft Digital       |
+| ⏰       | [15 Timer & Interrupts](15_TimerUndInterrupts.md)   | Multitasking                |
+| 🤖     | [16 Aktoren](16_Aktoren.md)                         | Hardware ansteuern          |
+
+> Wir haben nominell 21 Vorlesungen, an einigen Stellen werden wir aber länger verweilen und an anderen Stellen schneller vorankommen. Diese Aufzählung ist also eher ein Leitfaden, denn ein strikter Plan.
 
 ### Was steht am Ende?
 
-**Sie können diese 7 Fragen fundiert beantworten:**
+**Sie können diese 8 Fragen fundiert beantworten:**
 
-1. **"Wie wird `digitalWrite(13, HIGH)` zu Spannung am Pin 13?"**  
+1. **"Wie wird `pinMode(13, OUTPUT)` zu Hardware-Konfiguration?"**  
+   *Von Arduino-Funktion über AVR-libc zu Assembler zu DDRB-Register zu Tri-State-Logik*
+
+2. **"Wie wird `digitalWrite(13, HIGH)` zu Spannung am Pin 13?"**  
    *Von C-Funktion über Compiler zu Register-Manipulation zu Transistor-Schaltung*
 
-2. **"Warum braucht `delay(1000)` genau 16.000.000 Taktzyklen?"**  
+3. **"Warum braucht `delay(1000)` genau 16.000.000 Taktzyklen?"**  
    *Taktfrequenz, Befehlszyklen und Timer-Hardware verstehen*
 
-3. **"Was passiert im ATmega328P während `analogRead(A0)`?"**  
+4. **"Was passiert im ATmega328P während `analogRead(A0)`?"**  
    *ADC-Wandlung, Sampling, Quantisierung und Speicherung*
 
-4. **"Wie führt die CPU den Maschinenbefehl `0C 94 72 00` aus?"**  
+5. **"Wie führt die CPU den Maschinenbefehl `0C 94 72 00` aus?"**  
    *Instruction Decode, Fetch-Execute-Cycle, Register-Operationen*
 
-5. **"Warum ist `if (digitalRead(2) && digitalRead(3))` als Schaltung effizienter?"**  
+6. **"Warum ist `if (digitalRead(2) && digitalRead(3))` als Schaltung effizienter?"**  
    *Boolesche Algebra, Gatter-Optimierung, Hardware-Software-Grenze*
 
-6. **"Wie kann ein 8-bit-Mikrocontroller 16-bit-Zahlen addieren?"**  
+7. **"Wie kann ein 8-bit-Mikrocontroller 16-bit-Zahlen addieren?"**  
    *Multi-Precision-Arithmetik, Carry-Flag, ALU-Design*
 
-7. **"Welche Hardware-Komponenten arbeiten parallel zu Ihrem `loop()`?"**  
+8. **"Welche Hardware-Komponenten arbeiten parallel zu Ihrem `loop()`?"**  
    *Interrupts, Timer, UART, SPI - das komplette AVR-Ökosystem*
 
 
@@ -182,11 +192,10 @@ style="width: 80%; min-width: 420px; max-width: 720px;"
            +----------------------------+                                      .
 ```
 
-**Wir bauen von den Grundlagen nach oben!** Jede Ebene erklärt die nächste, bis Sie verstehen, wie Ihr `digitalWrite()` am Ende einen Transistor schaltet.
 
-### 🎮 Warum dieser Bottom-Up-Ansatz?
+### Beispiel 1: Mikroarchitektur
 
-Ein Rechner ist eine ziemlich komplizierte Maschine. Der AVR-Mikrocontroller in Ihrem Arduino besteht aus über 30 Millionen Transistoren! Wir brauchen ein methodisches Verständnis und mehrere Abstraktionsebenen, um das zu verstehen.
+> Ein Rechner ist eine ziemlich komplizierte Maschine. Der AVR-Mikrocontroller in Ihrem Arduino besteht aus über 30 Millionen Transistoren! Wir brauchen ein methodisches Verständnis und mehrere Abstraktionsebenen, um das zu verstehen.
 
 {{0-1}}
 ```text @plantUML.png
@@ -225,8 +234,56 @@ Ein Rechner ist eine ziemlich komplizierte Maschine. Der AVR-Mikrocontroller in 
 @endditaa
 ```
 
-{{1-2}}
+### 🔬 Beispiel 2: Quer über alle Ebenene
+
+**Wir bauen von den Grundlagen nach oben!** Jede Ebene erklärt die nächste, bis Sie verstehen, wie Ihr `digitalWrite()` am Ende einen Transistor schaltet.
+
+**Schauen wir uns konkret an, was in diesen 4 Abstraktionsebenen passiert:**
+
+**🎯 Ebene 6 - Ihr Arduino-Code:**
+```cpp
+pinMode(13, OUTPUT);  // Pin 13 als Ausgang konfigurieren
+```
+
+**⚙️ Ebene 5 - AVR-libc Implementation (echte Arduino-Version):**
+```c
+void pinMode(uint8_t pin, uint8_t mode) {
+  uint8_t bit = digitalPinToBitMask(pin);    // Pin 13 → Bit 5
+  uint8_t port = digitalPinToPort(pin);      // Pin 13 → PORTB
+  volatile uint8_t *reg = portModeRegister(port); // → &DDRB
+  
+  if (mode == OUTPUT) {
+    uint8_t oldSREG = SREG;  // ⚠️ INTERRUPT-SCHUTZ!
+    cli();                   // Interrupts AUS
+    *reg |= bit;            // DDRB |= (1 << 5)
+    SREG = oldSREG;         // Interrupts wieder AN
+  }
+  // INPUT und INPUT_PULLUP analog...
+}
+```
+
+**🔧 Ebene 3 - AVR-Assembler Code:**
+```asm
+; uint8_t oldSREG = SREG; cli();
+in   r25, 0x3F    ; Lade SREG (Status Register)
+cli               ; Clear Interrupt Flag → Interrupts AUS
+
+; *reg |= bit;  (DDRB |= (1 << 5))
+in   r24, 0x04    ; Lade DDRB Register (I/O-Adresse 0x04)
+ori  r24, 0x20    ; OR mit 0x20 (Bit 5 setzen)
+out  0x04, r24    ; Schreibe zurück zu DDRB
+
+; SREG = oldSREG;
+out  0x3F, r25    ; Restore SREG → Interrupts wieder AN
+```
+
+**⚡ Ebene 1 - Hardware-Konfiguration:**
+
 ![Diagramme](./images/00_Einfuehrung/IOpin.png "Darstellung der Input/Output Beschaltung eines Microcontrollers")<!-- width="60%" -->
+
+Das `DDRB`-Register steuert direkt die **Tri-State-Logik** des I/O-Pins:
+- **DDRB[5] = 1**: Ausgangstreiber wird aktiviert → Pin kann HIGH/LOW ausgeben
+- **DDRB[5] = 0**: Hochohmig → Pin kann Eingangssignale lesen
 
 ## 🚀 Was können Sie damit bauen?
 
@@ -266,24 +323,17 @@ Sie verstehen, warum die Messwerte (1023 = dunkel, niedrige Werte = hell) genau 
 Die Veranstaltung wird sowohl für die Vorlesung als auch die Übung in Präsenz durchgeführt.
 
 <!-- data-type="none" -->
-| Veranstaltungen | Tag      | Zeitslot      | Ort      | Bemerkung     |
-| --------------- | -------- | ------------- | -------- | ------------- |
-| Vorlesung I     | Montag   | 14.30 - 16.00 | FOR-0270 | wöchentlich   |
-| Vorlesung II    | Dienstag | 14.30 - 16.00 | FOR-0270 | gerade Wochen |
+| Veranstaltungen | Tag        | Zeitslot      | Ort      | Bemerkung     |
+| --------------- | ---------- | ------------- | -------- | ------------- |
+| Vorlesung I     | Mittwoch   | 16:15 - 17:45 | FOR-0270 | wöchentlich   |
+| Vorlesung II    | Donnerstag | 09:45 - 11:15 | FOR-0270 | gerade Wochen |
 
-> Die zugehörigen Übungen starten im Dezember und werden dann wöchentlich durchgeführt.
-
-+ Übung 1 Mittwochs, 16.15 - 17.45 Uhr, KKB-2097
-+ Übung 2 Freitags, 8:00 - 9.30 Uhr, KKB-2097
-
-Die Übungen werden ab Dezember stattfinden. Dort haben Sie dann insbesondere ab Januar Gelegenheit anhand spezifischer Mikrocontrollerschaltungen Ihre Kenntnisse praktisch zu vertiefen.
+> Die zugehörigen Übungen starten im Dezember und werden dann wöchentlich durchgeführt. Dort haben Sie dann insbesondere ab Januar Gelegenheit anhand spezifischer Mikrocontrollerschaltungen Ihre Kenntnisse praktisch zu vertiefen.
 
 > Daneben gibt es weiterführende Angebote, sich mit der Materie auseinanderzusetzen:
 
-+ Einsteiger-Tutorials zur Programmierung, "Elektronik rund um Mikrocontroller" (Adrian Köppen)
++ Einsteiger-Tutorials zur Programmierung
 + Bits & Bytes Vorträge im RoboLab 
-
-    + Am Donnerstag (24.10.) Fahrend und Schwimmend Roboterforschungsprojekte in Freiberg.
 
 > Remote-Labore werden etwa Dezember bereitstehen, um einzelne Aspekte der Lehrveranstaltung zu vertiefen.
 
