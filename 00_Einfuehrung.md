@@ -27,41 +27,166 @@ import:   https://raw.githubusercontent.com/liascript-templates/plantUML/master/
 | **Link auf GitHub:**     | https://github.com/TUBAF-IfI-LiaScript/VL_EingebetteteSysteme/blob/master/00_Einfuehrung.md             |
 | **Autoren:**             | @author                                                                                                  |
 
-![](https://media.giphy.com/media/10PNyg7YOcaBQA/giphy-downsized.gif)
-
 ---------------------------------------------------------------------
 
-<font size="6"> Herzlich willkommen im neuen Semester! </font>
+## 🚀 Von diesem vertrauten Code...
 
-## Motivation und Zielstellung
+<div id="example1">
+<wokwi-led color="red"   pin="13" label="13"></wokwi-led>
+<wokwi-led color="green" pin="12" label="12"></wokwi-led>
+<wokwi-led color="blue"  pin="11" label="11"></wokwi-led>
+<wokwi-led color="blue"  pin="10" label="10"></wokwi-led>
+<span id="simulation-time"></span>
+</div>
 
-Worum geht es in der Veranstaltung und was sollte ich mitnehmen?
+```cpp BlinkLEDs.ino
+byte leds[] = {13, 12, 11, 10};
 
-+ Perspektive 1: Modulhandbuch
-+ Perspektive 2: Hardware 
-+ Perspektive 3: Software
-+ Perspektive 4: Anwendungen
+void setup() {
+  Serial.begin(115200);
+  for (byte i = 0; i < sizeof(leds); i++) {
+    pinMode(leds[i], OUTPUT);
+  }
+}
 
-### Modulhandbuch 
+int i = 0;
+void loop() {
+  Serial.print("LED: ");
+  Serial.println(i);
+  digitalWrite(leds[i], HIGH);
+  delay(250);
+  digitalWrite(leds[i], LOW);
+  i = (i + 1) % sizeof(leds);
+}
+```
+@AVR8js.sketch
 
-**Qualifikationsziele /Kompetenzen:**
+## 🔬 ...zu diesem rätselhaften Maschinencode
 
-_Mit der erfolgreichen Teilnahme an der Veranstaltung sollen die Studierenden in der Lage sein:_
+```hex
+:100000000C9472000C947E000C947E000C947E0084
+:100010000C947E000C947E000C947E000C947E0068
+:100020000C947E000C947E000C947E000C947E0058
+:100030000C947E000C947E000C947E000C947E0048
+:100040000C947E000C947E000C947E000C947E0038
+:100050000C947E000C947E000C947E000C947E0028
+:100060000C947E000C947E000C947E000C947E0018
+:100070000C947E000C947E000C947E000C947E0008
+:100080000C947E000C947E000C947E000C947E00F8
+:100090000C947E000C947E000C947E000C947E00E8
+:1000A0000C947E000C947E000C947E000C947E00D8
+:1000B0000C947E000C947E000C947E000C947E00C8
+:1000C0000C947E000C947E000C947E000C947E00B8
+:1000D0000C947E000C947E000C947E000C947E00A8
+:1000E0000C947E0011241FBECFEFD1E2DEBFCDBF46
+:1000F00000E00CBF0E9480000C9483000C94000070
+:0A010000279A2F98FFCFF894FFCF45
+:00000001FF
+```
 
-+ die Teilkomponenten eines Rechners ausgehend von Schaltnetzen/-werken zu beschreiben und ausschnitthafte Teilelemente selbstständig entwerfen zu können,
-+ die Integration der Elemente und die Abläufe bei der Programmabarbeitung in verschiedenen Modellrechnern zu beherrschen und die Vor- und Nachteile verschiedener Konfigurationen bewerten zu können,
-+ die konkrete Realisierung von eingebetteten Systemen in entsprechenden Anwendungen aus den Schaltplänen zu erfassen und die softwareseitige Umsetzungen daraus abzuleiten
-+ einfache, eingebettete Systeme zu entwerfen und zu realisieren
+## 🎯 Ihre Mission in diesem Kurs
 
-**Inhalte**
+**Am Ende des Semesters können Sie jeden Schritt dieser Transformation verstehen und erklären!**
 
-_Grundlegende Prinzipien der Modellierung digitaler Systeme: Boolesche Algebren und Funktionen, kombinatorische und sequentielle Schaltungen, Herleitung eines Modellrechners und Abbildung von dessen Funktionsweise, Einführung in die Entwicklung eingebetteter Systeme(Sensoren, Aktoren, elektrische Peripherie, Programmierkonzepte), Anwendungsfelder_
+Sie werden die komplette Reise von Ihrem Arduino-Code bis zur Ausführung im ATmega328P-Mikrocontroller nachvollziehen können – von der ersten `digitalWrite()`-Funktion bis zum letzten Transistor, der eine LED zum Leuchten bringt.
+
+### 🗺️ Die Reise: 16 Stationen zum Verständnis
+
+| Station | Vorlesung | Was lernen Sie hier? | Bezug zu Ihrem Arduino-Code |
+|---------|-----------|----------------------|------------------------------|
+| 🏁 | [00 Einführung](00_Einfuehrung.md) | Die große Vision | "Warum ist das relevant?" |
+| 📚 | [01 Historie](01_HistorischerUeberblick.md) | Von Zuse zu Arduino | "Wo kommen wir her?" |
+| ⚡ | [02 Boolesche Algebra](02_BoolscheAlgebra.md) | 0 und 1 verstehen | "Wie werden AND/OR zu Gattern?" |
+| 🔧 | [03 Minimierung](03_Minimierung.md) | Effizienz in Logik | "Warum ist mein Code schnell?" |
+| 🧩 | [04 Schaltnetze](04_Schaltnetze.md) | Logik wird Hardware | "`if (x && y)` als Schaltung" |
+| 🎛️ | [05 Standardschaltnetze](05_Standardschaltnetze.md) | Decoder & Multiplexer | "Wie wählt der Pin-Mux aus?" |
+| 💾 | [06 FlipFlops](06_FlipFlops.md) | Speicher entsteht | "`int i = 0;` im Register" |
+| 🔄 | [07 Schaltwerke](07_Schaltwerke.md) | Zustandsmaschinen | "`loop()` als Automat" |
+| 📊 | [08 Standardschaltwerke](08_StandardSchaltwerke.md) | Counter & Register | "Wie zählt `millis()`?" |
+| 🧮 | [09 Rechnerarithmetik](09_Rechnerarithmetik.md) | Addition in Hardware | "`i++` in der ALU" |
+| 🏗️ | [10 CPU-Basis](10_CPU_Basis.md) | Der erste Prozessor | "Von-Neumann trifft Arduino" |
+| 🖥️ | [11 Modell-CPU](11_Modell_CPU.md) | CPU-Simulation | "Befehle Schritt für Schritt" |
+| ⚡ | [12 Pipeline](12_Pipeline.md) | Geschwindigkeit | "Warum läuft es mit 16MHz?" |
+| 🎯 | [13 AVR-CPU](13_AVR_CPU.md) | **IHR Arduino-Chip!** | "ATmega328P von innen" |
+| 📡 | [14 ADC](14_ADC.md) | Analog trifft Digital | "`analogRead()` verstehen" |
+| ⏰ | [15 Timer & Interrupts](15_TimerUndInterrupts.md) | Multitasking | "`delay()` vs. Timer" |
+| 🤖 | [16 Aktoren](16_Aktoren.md) | Hardware ansteuern | "Servo-Ansteuerung perfekt" |
+
+### Was steht am Ende?
+
+**Sie können diese 7 Fragen fundiert beantworten:**
+
+1. **"Wie wird `digitalWrite(13, HIGH)` zu Spannung am Pin 13?"**  
+   *Von C-Funktion über Compiler zu Register-Manipulation zu Transistor-Schaltung*
+
+2. **"Warum braucht `delay(1000)` genau 16.000.000 Taktzyklen?"**  
+   *Taktfrequenz, Befehlszyklen und Timer-Hardware verstehen*
+
+3. **"Was passiert im ATmega328P während `analogRead(A0)`?"**  
+   *ADC-Wandlung, Sampling, Quantisierung und Speicherung*
+
+4. **"Wie führt die CPU den Maschinenbefehl `0C 94 72 00` aus?"**  
+   *Instruction Decode, Fetch-Execute-Cycle, Register-Operationen*
+
+5. **"Warum ist `if (digitalRead(2) && digitalRead(3))` als Schaltung effizienter?"**  
+   *Boolesche Algebra, Gatter-Optimierung, Hardware-Software-Grenze*
+
+6. **"Wie kann ein 8-bit-Mikrocontroller 16-bit-Zahlen addieren?"**  
+   *Multi-Precision-Arithmetik, Carry-Flag, ALU-Design*
+
+7. **"Welche Hardware-Komponenten arbeiten parallel zu Ihrem `loop()`?"**  
+   *Interrupts, Timer, UART, SPI - das komplette AVR-Ökosystem*
 
 
-### Hardware
+## 🔬 Der Unterschied zu einem "Arduino-Kurs"
 
-Was sind die Bausteine des Rechners?
-===================================
+**Arduino-Kurs:** "Drücke diesen Button, LEDs blinken" ✨ *Magie!*
+
+**Unser Kurs:** "Warum passiert das und wie funktioniert es bis hinunter zum Transistor?"
+
+### 🧭 Unsere Bottom-Up-Reise
+
+<!--
+style="width: 80%; min-width: 420px; max-width: 720px;"
+-->
+```ascii
+
+                Abstraktionsebenen
+
+           +----------------------------+ -.
+  Ebene 6  | Problemorientierte Sprache |  |
+           +----------------------------+  |
+                                           ⎬ Anwendungssoftware
+           +----------------------------+  |
+  Ebene 5  | Assemblersprache           |  |
+           +----------------------------+ -.
+
+           +----------------------------+
+  Ebene 4  | Betriebssystem             |     Systemsoftware (brauchen wir nicht :-) )
+           +----------------------------+
+
+           +----------------------------+
+  Ebene 3  | Instruktionsset            |     Maschinensprache
+           +----------------------------+
+
+           +----------------------------+  -.
+  Ebene 2  | Mikroarchitektur           |   |
+           +----------------------------+   |
+                                            ⎬ Automaten, Speicher, Logik
+           +----------------------------+   |       ╔══════════════════╗
+  Ebene 1  | Digitale Logik             |   |    ◀══║ HIER STARTEN WIR!║
+           +----------------------------+  -.       ╚══════════════════╝
+
+           +----------------------------+
+  Ebene 0  | E-Technik, Physik          |     Analoge Phänomene
+           +----------------------------+                                      .
+```
+
+**Wir bauen von den Grundlagen nach oben!** Jede Ebene erklärt die nächste, bis Sie verstehen, wie Ihr `digitalWrite()` am Ende einen Transistor schaltet.
+
+### 🎮 Warum dieser Bottom-Up-Ansatz?
+
+Ein Rechner ist eine ziemlich komplizierte Maschine. Der AVR-Mikrocontroller in Ihrem Arduino besteht aus über 30 Millionen Transistoren! Wir brauchen ein methodisches Verständnis und mehrere Abstraktionsebenen, um das zu verstehen.
 
 {{0-1}}
 ```text @plantUML.png
@@ -100,151 +225,32 @@ Was sind die Bausteine des Rechners?
 @endditaa
 ```
 
-                                     {{1-2}}
-**************************************************************************
-
+{{1-2}}
 ![Diagramme](./images/00_Einfuehrung/IOpin.png "Darstellung der Input/Output Beschaltung eines Microcontrollers")<!-- width="60%" -->
 
+## 🚀 Was können Sie damit bauen?
 
-**Auf welche konkreten Systeme schauen wir dabei insbesondere?**
-
-+ ATmega4808/4809
-+ ATmega32
-
-**************************************************************************
-
-
-                                     {{2-3}}
-**************************************************************************
-
-Wie kann ich die Perspektiven systematisieren
-===================================
-
-<!--
-style="width: 80%; min-width: 420px; max-width: 720px;"
--->
-```ascii
-
-                Abstraktionsebenen
-
-           +----------------------------+ -.
-  Ebene 6  | Problemorientierte Sprache |  |
-           +----------------------------+  |
-                                           ⎬ Anwendungssoftware
-           +----------------------------+  |
-  Ebene 5  | Assemblersprache           |  |
-           +----------------------------+ -.
-
-           +----------------------------+
-  Ebene 4  | Betriebssystem             |     Systemsoftware
-           +----------------------------+
-
-           +----------------------------+
-  Ebene 3  | Instruktionsset            |     Maschinensprache
-           +----------------------------+
-
-           +----------------------------+  -.
-  Ebene 2  | Mikroarchitektur           |   |
-           +----------------------------+   |
-                                            ⎬ Automaten, Speicher, Logik
-           +----------------------------+   |       ╔══════════════════╗
-  Ebene 1  | Digitale Logik             |   |    ◀══║ HIER STARTEN WIR!║
-           +----------------------------+  -.       ╚══════════════════╝
-
-           +----------------------------+
-  Ebene 0  | E-Technik, Physik          |     Analoge Phänomene
-           +----------------------------+                                      .
-```
-
-**************************************************************************
-
-### Software
-
-**Und wie wirkt sich das auf die Software aus?**
-
-Nehmen wir an, Sie realisieren ein Arduino Beispielprogramm wie dieses:
-
-<div id="example1">
-<wokwi-led color="red"   pin="13" label="13"></wokwi-led>
-<wokwi-led color="green" pin="12" label="12"></wokwi-led>
-<wokwi-led color="blue"  pin="11" label="11"></wokwi-led>
-<wokwi-led color="blue"  pin="10" label="10"></wokwi-led>
-<span id="simulation-time"></span>
-</div>
-
-```cpp helloWord.ino
-byte leds[] = {13, 12, 11, 10};
-void setup() {
-  Serial.begin(115200);
-  for (byte i = 0; i < sizeof(leds); i++) {
-    pinMode(leds[i], OUTPUT);
-  }
-}
-
-int i = 0;
-void loop() {
-  Serial.print("LED: ");
-  Serial.println(i);
-  digitalWrite(leds[i], HIGH);
-  delay(250);
-  digitalWrite(leds[i], LOW);
-  i = (i + 1) % sizeof(leds);
-}
-```
-@AVR8js.sketch
-
-{{2}}
-Am Ende des Compiliervorganges entsteht daraus der sogenannte Maschinencode. Dieser ist die Sprache, die der Rechner originär versteht und der entsprechend ausgeführt werden kann.
-
-{{2}}
-```
-:100000000C9472000C947E000C947E000C947E0084
-:100010000C947E000C947E000C947E000C947E0068
-:100020000C947E000C947E000C947E000C947E0058
-…
-:1000A0000C947E000C947E000C947E000C947E00D8
-:1000B0000C947E000C947E000C947E000C947E00C8
-:1000C0000C947E000C947E000C947E000C947E00B8
-:1000D0000C947E000C947E000C947E000C947E00A8
-:1000E0000C947E0011241FBECFEFD1E2DEBFCDBF46
-:1000F00000E00CBF0E9480000C9483000C94000070
-:0A010000279A2F98FFCFF894FFCF            45
-:00000001FF
-```
-
-> Worin unterscheiden wir uns also von einem Arduino-Kurs?
-
-### Anwendungen
-
-**Und wie nützt mir das?**
+**Von einfachen LEDs zu echten Projekten:**
 
 ![Diagramme](./images/00_Einfuehrung/Wetterstation.png)<!-- width="70%" -->
 
-Wenn wir noch einen Schritt weitergehen, können wir die Daten auch an einen Server übergeben. Dieser übernimmt die Aufbereitung und Visualisierung.
-
-Hier lassen sich dann die eigentlichen "Untersuchungen" realisieren und zum Beispiel die Frage beantworten, ob die Sonne am Wochenende häufiger scheint.
+Nach diesem Kurs wissen Sie nicht nur, wie man Sensordaten ausliest, sondern **warum** der ADC-Wandler 1023 als Maximum liefert und wie die Timer-Interrupts das Sampling steuern.
 
 ![Diagramme](./images/00_Einfuehrung/AlleWetter.png)<!-- width="70%" -->
 
-Die roten Punkte stellen die Verteilung der Wochenendmessungen der vergangenen Woche dar, während die blauen Kreuze die Wochentage illustrieren. Dunkelheit wird durch einen Wert nahe 1023 ausgedrückt, während helle Messsituationen durch kleine Werte dargestellt werden.
+Sie verstehen, warum die Messwerte (1023 = dunkel, niedrige Werte = hell) genau so aussehen und können die ADC-Referenzspannung für präzisere Messungen optimieren.
 
-                                 {{1-2}}
-**************************************************************************
+### 🤔 "Aber ich will doch Webentwickler/Data Scientist/KI-Entwickler werden..."
 
-**Aber ich will Webentwickler werden ... **
+**🎯 Perfekt! Denn Sie werden ein BESSERER Entwickler in JEDEM Bereich:**
 
-**Antwort A:**
-Was macht Sie da so sicher? Das Studium vermittelt ein breitgefächertes Weltbild und keine eng zugeschnittene Sicht.
++ **🌐 Webentwickler**: Sie verstehen Performance bis zur Hardware-Ebene
++ **📊 Data Scientist**: Sie wissen, wie Ihre Daten WIRKLICH entstehen  
++ **🤖 KI-Entwickler**: Edge-AI auf Mikrocontrollern? Sie können es!
++ **☁️ Cloud-Architekt**: Sie verstehen die Hardware unter Ihren VMs
++ **🎮 Game-Developer**: Low-Level-Optimierung wird Ihr Superpower
 
-**Antwort B:**
-Die Fähigkeit in Algorithmen zu denken ist eine Grundlage wissenschaftlichen
-Arbeitens.
-
-**Antwort C:**
-Am Ende steht Ihnen das Rüstzeug zur Verfügung kleine eingebettete C-Projekte
-selbst anzugehen.
-
-**************************************************************************
+**Das tiefe Hardware-Verständnis macht Sie in JEDER Tech-Rolle wertvoller!**
 
 ## Organisation
 
