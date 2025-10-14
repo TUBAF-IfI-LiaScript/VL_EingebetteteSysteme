@@ -2,7 +2,7 @@
 
 author:   Sebastian Zug, André Dietrich, Fabian Bär & GitHub Copilot Teaching-Agent
 email:    sebastian.zug@informatik.tu-freiberg.de & andre.dietrich@informatik.tu-freiberg.de & fabian.baer@student.tu-freiberg.de
-version:  0.6.1
+version:  0.6.2
 language: de
 narrator: Deutsch Female
 
@@ -224,17 +224,13 @@ Diesen Aspekt kann man auf technischer und theoretischer Ebene betrachten.
 
 Die Grundlagen moderner Rechner legten die Arbeiten von Georg Boole (1815 - 1864), der eine boolesche Algebra (oder einen booleschen Verband) definierte, die die Eigenschaften der logischen Operatoren UND, ODER, NICHT sowie die Eigenschaften der mengentheoretischen Verknüpfungen Durchschnitt, Vereinigung, Komplement verallgemeinert. Gleichwertig zu booleschen Algebren sind boolesche Ringe, die von UND und ENTWEDER-ODER (exklusiv-ODER) beziehungsweise Durchschnitt und symmetrischer Differenz ausgehen.
 
-![Boole](./images/01_Historie/George_Boole_color.jpg "Georg Boole [^Boole]")<!-- width="30%" -->
-
-[^Boole]: Autor unbekannt, George Boole, https://commons.wikimedia.org/wiki/File:George_Boole_color.jpg
+![Boole](./images/01_Historie/George_Boole_color.jpg "Georg Boole "Autor unbekannt, George Boole, https://commons.wikimedia.org/wiki/File:George_Boole_color.jpg")<!-- width="30%" -->
 
 ### Joseph-Marie Jacquard (1752 - 1834) - Automatischer Webstuhl
 
 Jacquards "Musterwebstuhl" realisierte die Ansteuerung der Webmechanik durch eine Lochkartensteuerung. Im Jahr 1805 wurde das Verfahren erstmals vorgestellt. Dadurch konnten endlose Muster von beliebiger Komplexität mechanisch hergestellt werden.
 
-![Jacquard](./images/01_Historie/Jacquard01.jpg "Die Lochkartensteuerung einer Jacquard-Maschine im Historischen Zentrum Wuppertal [^Jacquard]")<!-- width="60%" -->
-
-[^Jacquard]: Markus Schweiß, Die Lochkartensteuerung einer Jacquard-Maschine im Historischen Zentrum Wuppertal, https://de.wikipedia.org/wiki/Joseph-Marie_Jacquard#/media/Datei:Jacquard01.jpg
+![Jacquard](./images/01_Historie/Jacquard01.jpg "Die Lochkartensteuerung einer Jacquard-Maschine im Historischen Zentrum Wuppertal (Autor: Markus Schweiß, Die Lochkartensteuerung einer Jacquard-Maschine im Historischen Zentrum Wuppertal, https://de.wikipedia.org/wiki/Joseph-Marie_Jacquard#/media/Datei:Jacquard01.jpg)")<!-- width="60%" -->
 
 Auf den Karte waren Informationen über das in einem Schritt zu webende Muster enthalten. Ein Loch bedeutete Fadenhebung, kein Loch eine Fadensenkung. Dabei konnten die Lochkarten in einer Endlosschleife gekoppelt werden, um wiederkehrende Strukturen umzusetzen.
 
@@ -259,9 +255,7 @@ Eine weitere Parallele zu heute: Babbage dachte, 30 Dezimalstellen würden "für
 
 Die Maschine wurde zu Lebzeiten von Babbage nicht realisiert und nur in Teilen durch seinen Sohn implementiert. Aktuell exisitieren in verschiedenen Museen unterschiedliche Neubauten.
 
-![Analytical Engine](./images/01_Historie/Analytical_Engine.jpg "Rekonstruktionsversuch der Analytical Engine im Science Museum London  [^AnalyticalEngine]")<!-- width="60%" -->
-
-[^AnalyticalEngine]: Science Museum London / Science and Society Picture Library , https://commons.wikimedia.org/wiki/File:Babbages_Analytical_Engine,_1834-1871._(9660574685).jpg
+![Analytical Engine](./images/01_Historie/Analytical_Engine.jpg "Rekonstruktionsversuch der Analytical Engine im Science Museum London (Science Museum London / Science and Society Picture Library , https://commons.wikimedia.org/wiki/File:Babbages_Analytical_Engine,_1834-1871._(9660574685).jpg)")<!-- width="60%" -->
 
 !?[Analytical Engine](https://www.youtube.com/watch?v=_fyUtU6LVNY&feature=emb_logo)
 
@@ -286,7 +280,7 @@ Das System für die Erfassung von Daten auf Lochkarten bestand aus der Tabellier
 
 1924 wurde die von ihm gegründete Firma schließlich in International Business Machines Corporation (IBM) umbenannt.
 
-![Holerit](./images/01_Historie/HollerithMachine.CHM.jpg "Nachbau einer Hollerith Maschine [^Hollerith]")<!-- width="80%" -->
+![Holerit](./images/01_Historie/HollerithMachine.CHM.jpg "Nachbau einer Hollerith Maschine (Autor: Adam Schuster, Replica of early Hollerith punched card tabulator and sorting box (right) at Computer History Museum, https://commons.wikimedia.org/wiki/File:HollerithMachine.CHM.jpg)")<!-- width="80%" -->
 
 !?[Holerith](https://www.youtube.com/watch?v=17On5ItcrBA)
 
@@ -307,13 +301,9 @@ Nicht nur auf der Ebene der Datenerfassung, sondern auch für die Datenspeicheru
 *******************************************************************************
 Bis in die 80er Jahre bildeten Analogrechner einen alternativen Ansatz. Anders als bei den diskret arbeitenden Digitalrechnern wurde hier im Werte- und Zeitverlauf kontinuierlich gearbeitet. Dabei wurde das Systemverhalten von komplexen Systemen mit elektrischen Schaltungen nachgebildet.
 
-![AnalogRechner](./images/01_Historie/Analogrechner_HW-in-Loop_Ausschnitt.jpg "Analogrechneranwendung für die Simulation der Regelstrecke für einen Regelkreis [^AnalogRechner]")<!-- width="80%" -->
+![AnalogRechner](./images/01_Historie/Analogrechner_HW-in-Loop_Ausschnitt.jpg "Analogrechneranwendung für die Simulation der Regelstrecke für einen Regelkreis (Autor: SchmiAlf, Analogrechneranwendung für die Simulation der Regelstrecke für einen Regelkreis mit einem externen Steuergerät (Mikrocontroller) angeschlossen als Hardware-in-the-Loop, mit Analogrechner EAI-8800, ca. 1985, https://commons.wikimedia.org/wiki/File:Analogrechner_HW-in-Loop_Ausschnitt.jpg)")<!-- width="80%" -->
 
 *******************************************************************************
-
-[^Hollerith]: Adam Schuster, Replica of early Hollerith punched card tabulator and sorting box (right) at Computer History Museum, https://commons.wikimedia.org/wiki/File:HollerithMachine.CHM.jpg
-
-[^AnalogRechner]: SchmiAlf, Analogrechneranwendung für die Simulation der Regelstrecke für einen Regelkreis mit einem externen Steuergerät (Mikrocontroller) angeschlossen als Hardware-in-the-Loop, mit Analogrechner EAI-8800, ca. 1985, https://commons.wikimedia.org/wiki/File:Analogrechner_HW-in-Loop_Ausschnitt.jpg
 
 ### Zuse Z3
 
@@ -337,10 +327,7 @@ Bereits Vorwegname der Kernelemente moderner Architekturen:
 + Pipeline-Konzept
 + Carry-Look-Ahead Addierer
 
-![Z3Pipeline](./images/01_Historie/PipelineZ3.png "Sechzig Jahre Computergeschichte [^Rojas]")<!-- width="80%" -->
-
-[^Rojas]:  Raul Rojas, Sechzig Jahre Computergeschichte - Die Architektur der Rechenmaschinen Z1 und Z3 [Link](https://www2.informatik.uni-halle.de/wcms/dokumente/forschung/techreports/96-43report_3.pdf)
-
+![Z3Pipeline](./images/01_Historie/PipelineZ3.png "Sechzig Jahre Computergeschichte (Autor: Raul Rojas, Sechzig Jahre Computergeschichte - Die Architektur der Rechenmaschinen Z1 und Z3 [Link](https://www2.informatik.uni-halle.de/wcms/dokumente/forschung/techreports/96-43report_3.pdf)")<!-- width="80%" -->
 
 ### Eniac
 
@@ -355,11 +342,9 @@ Electronic Numerical Integrator and Computer (ENIAC)
 + E/A mittels Lochkarten
 + gebaut für ballistische Berechnungen
 
-![ENIAC](./images/01_Historie/Eniac.jpg "ENIAC Betriebsraum [^ENIAC]")<!-- width="60%" -->
+![ENIAC](./images/01_Historie/Eniac.jpg "ENIAC Betriebsraum (Autor unbekannt, ENIAC in Philadelphia, Pennsylvania. Glen Beck (background) and Betty Snyder (foreground) program the ENIAC in building 328 at the Ballistic Research Laboratory , https://commons.wikimedia.org/wiki/File:Eniac.jpg)")<!-- width="60%" -->
 
 Ein großes Problem bei der Entwicklung des ENIAC war die Fehleranfälligkeit der Elektronenröhren. Wenn nur eine der 17.468 Röhren ausfiel, rechnete die gesamte Maschine fehlerhaft.
-
-[^ENIAC]: Autor unbekannt, ENIAC in Philadelphia, Pennsylvania. Glen Beck (background) and Betty Snyder (foreground) program the ENIAC in building 328 at the Ballistic Research Laboratory , https://commons.wikimedia.org/wiki/File:Eniac.jpg
 
 ### Konzeptionelle Entwürfe
 
@@ -371,10 +356,7 @@ In seinem Papier _First Draft on the Report of EDVAC_ beschreibt John von Neuman
 + Memory – Speicherwerk sowohl für Programme als auch für Daten
 + Ein-/Ausgabe – Nutzerinterface
 
-![Neumann](./images/01_Historie/von_Neumann_Architektur.png "Von-Neumann Architektur [^Neumann]")<!-- width="60%" -->
-
-[^Neumann]: Medvedev, Schaltbild einer Von-Neumann-Architektur auf deutsch.: https://commons.wikimedia.org/wiki/File:%22von_Neumann%22_Architektur_de.svg
-
+![Neumann](./images/01_Historie/von_Neumann_Architektur.png "Von-Neumann Architektur (Medvedev, Schaltbild einer Von-Neumann-Architektur auf deutsch.: https://commons.wikimedia.org/wiki/File:%22von_Neumann%22_Architektur_de.svg)")<!-- width="60%" -->
 
 ## Die Transistor-Ära
 
@@ -384,23 +366,20 @@ In seinem Papier _First Draft on the Report of EDVAC_ beschreibt John von Neuman
 
 Und wie wird daraus nun ein Rechner? Die intelligente Verschaltung mehrerer Transistoren ermöglicht die Umsetzung von logischen Schaltungen wie AND, OR usw.
 
-![TransistorAND](./images/01_Historie/TransistorANDgate.png "Transistorverschaltung für AND-Logik [^ANDTransistor]")<!-- width="30%" -->
+![TransistorAND](./images/01_Historie/TransistorANDgate.png "Transistorverschaltung für AND-Logik (Autor: Datenblatt der Firma Fairchild, DM7408, August 1986)")<!-- width="30%" -->
 
 [^ANDTransistor]: EBatlleP, diagram of a transistor AND gate. Reference: http://hyperphysics.phy-astr.gsu.edu/hbase/electronic/and.html#c1, https://commons.wikimedia.org/wiki/File:TransistorANDgate.png
 
 Diese wiederum fassen wir nun in entsprechenden ICs zusammen. Wir haben die elektrische Ebene verlassen und sind endgültig auf der logischen Ebene angekommen.
 
-![AND-IC](./images/01_Historie/AND_IC.png "Datenblatt der Firma Fairchild [^Fairchild]")<!-- width="100%" -->
+![AND-IC](./images/01_Historie/AND_IC.png "AND-IC (Autor: Datenblatt der Firma Fairchild, DM7408, August 1986)")<!-- width="100%" -->
 
-[^Fairchild]: Datenblatt der Firma Fairchild, DM7408, August 1986
 
 ### Intel 4004
 
 Beispiel: Intel 4004-Architektur (1971)
 
-![intel](./images/01_Historie/4004_arch.png "Intel 4004 Architekturdarstellung [^Intel4004]")<!-- style="width: 80%; display: block; margin-left: auto; margin-right: auto;"-->
-
-[^Intel4004]: Autor Appaloosa, Intel 4004, https://upload.wikimedia.org/wikipedia/commons/thumb/8/87/4004_arch.svg/1190px-4004_arch.svg.png
+![intel](./images/01_Historie/4004_arch.png "Intel 4004 Architekturdarstellung (Autor: Appaloosa, Intel 4004, https://upload.wikimedia.org/wikipedia/commons/thumb/8/87/4004_arch.svg/1190px-4004_arch.svg.png)")<!-- style="width: 80%; display: block; margin-left: auto; margin-right: auto;"-->
 
 + Anzahl Transistoren: 2300
 + Taktfrequenz: 500 bis 740 kHz
@@ -430,9 +409,7 @@ Das Faszinierende: Beide verwenden die Harvard-Architektur! Der 4004 war seiner 
 Unterstützung für die Interpretation aus dem Nutzerhandbuch, dass das Instruction
 set beschreibt:
 
-![instruction-set](./images/01_Historie/4004_Instruction_set.png "Intel 4004 Instruction Set [^Instruction]")<!-- width="100%" -->
-
-[^Instruction]: Intel 4004 Assembler, http://e4004.szyc.org/asm.html
+![instruction-set](./images/01_Historie/4004_Instruction_set.png "Intel 4004 Instruction Set (Autor: Intel 4004 Assembler, http://e4004.szyc.org/asm.html)")<!-- width="100%" -->
 
 ### Weitere Entwicklung
 
@@ -455,10 +432,8 @@ set beschreibt:
 | 2022 | Nvidia Ada Lovelace-Architektur                           | Fortschrittliche Architektur für Raytracing und KI-Beschleunigung mit DLSS 3-Technologie.                        |
 
 
-![Moore](./images/01_Historie/Moore's_Law_Transistor_Count_1971-2018.png "Moore's Law [^MooresLaw]")<!--
+![Moore](./images/01_Historie/Moore's_Law_Transistor_Count_1971-2018.png "Moore's Law (Autor: https://commons.wikimedia.org/wiki/File:Moore%27s_Law_Transistor_Count_1971-2018.png, Max Roser)")<!--
 style="width: 80%; display: block; margin-left: auto; margin-right: auto;"-->
-
-[^MooresLaw]:Quelle: https://commons.wikimedia.org/wiki/File:Moore%27s_Law_Transistor_Count_1971-2018.png, Max Roser
 
 ## Warum ist das alles für Ihren Arduino wichtig?
 

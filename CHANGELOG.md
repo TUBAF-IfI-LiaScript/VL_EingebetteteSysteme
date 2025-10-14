@@ -2,6 +2,20 @@
 
 Alle wesentlichen Änderungen an diesem Kurs werden in dieser Datei dokumentiert.
 
+## [0.6.2] - 2025-10-14
+
+### Enhanced
+- **BILDQUELLENANGABEN**: Autorenschaft in Bildunterschriften integriert
+  * **Vollständige Quellenangaben**: Alle Bilder mit korrekten Autor-Attributionen
+  * **Copyright-Compliance**: Ordnungsgemäße Lizenzierung und Urheberrechte
+  * **Akademische Standards**: Professionelle Quellenangaben für Lehrmaterial
+  * **Rechtssicherheit**: Korrekte Bildnutzung für Bildungseinrichtungen
+
+### Impact
+- **Rechtssichere Lehre**: Alle Bildquellen ordnungsgemäß dokumentiert
+- **Professionelle Standards**: Wissenschaftliche Zitierweise eingehalten
+- **Transparenz**: Nachvollziehbare Herkunft aller visuellen Materialien
+
 ## [0.6.1] - 2025-10-14
 
 ### Enhanced
