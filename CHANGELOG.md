@@ -2,6 +2,41 @@
 
 Alle wesentlichen Änderungen an diesem Kurs werden in dieser Datei dokumentiert.
 
+## [0.6.1] - 2025-10-14
+
+### Enhanced
+- **INTERAKTIVE TIMELINE**: Mermaid-Timeline für Rechentechnik-Evolution implementiert
+  * **7 Epochen visualisiert**: Von mechanischen Grundlagen bis Intelligent Embedded Systems
+  * **200-Jahre-Überblick**: Arduino-fokussierte Meilensteine von 1800 bis heute
+  * **Technische Informatik-Fokus**: Moore's Law, ARM-Architektur, RISC-V prominent
+  * **Geometrische Symbole**: ■▲●◆★◉◈ für intuitive Epochen-Navigation
+  * **TTS-Integration**: Sprachkommentar zur Arduino-Ingenieurskunst-Evolution
+
+### Fixed
+- **Timeline-Korrekturen**: "Dampfmaschinen-Computer" durch historisch korrekte "US-Volkszählung 1890" ersetzt
+- **Mermaid-Kompatibilität**: Formatierungsprobleme mit Emojis und Markdown-Syntax behoben
+
+### Impact
+- **Visueller Einstieg**: Studis sehen sofort die komplette Entwicklung zum Arduino
+- **Motivation**: Jeder Arduino ist "200 Jahre Ingenieurskunst" in der Hand
+- **Historischer Kontext**: Von Babbage-Konzepten zu ATmega328P-Implementierung
+
+## [0.6.0] - 2025-10-14
+
+### Fixed
+- **STRUKTURBEREINIGUNG**: Entfernung obsoleter "Reflexion Ihrer Fragen" Sektion
+  * **Veraltete Partizipations-Tabelle** aus historischem Überblick entfernt
+  * **Redundante Inhalte** eliminiert für klarere Vorlesungsstruktur
+  * **Co-Author-Beitrag** ordnungsgemäß im Header dokumentiert
+
+### Enhanced
+- **Versionsverwaltung**: Systematische Versionsnummer-Aktualisierung
+- **Metadaten-Konsistenz**: Teaching-Agent als Co-Author ergänzt
+
+### Impact
+- **Streamlined Content**: Fokus auf relevante Inhalte ohne veraltete Partizipations-Elemente
+- **Professional Documentation**: Korrekte Versionierung und Autorschaft
+
 ## [0.5.0] - 2025-10-13
 
 ### Enhanced

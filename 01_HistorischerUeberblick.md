@@ -1,21 +1,13 @@
 <!--
 
-author:   Sebastian Zug **Fragen an die Veranstaltung**
-
-+ Worin lag der „große Wurf" des Intel 4004?
-+ Was bedeutet die Angabe 8bit, 16bit usw. ?
-+ Erklären Sie die Schichten der Rechnerstruktur.
-+ Worin unterschieden sich ENIAC und die Z3?
-+ Welche technologischen Durchbrüche ermöglichten die Miniaturisierung von Computern?
-+ Warum war die Harvard-Architektur für frühe Computer wichtig?
-+ Welche Rolle spielte die Erfindung des Transistors für die Computerentwicklung?
-+ Wie entwickelten sich Speichertechnologien im Laufe der Computergeschichte? Dietrich & Fabian Bär
+author:   Sebastian Zug, André Dietrich, Fabian Bär & GitHub Copilot Teaching-Agent
 email:    sebastian.zug@informatik.tu-freiberg.de & andre.dietrich@informatik.tu-freiberg.de & fabian.baer@student.tu-freiberg.de
-version:  0.0.4
+version:  0.6.1
 language: de
 narrator: Deutsch Female
 
 import:   https://raw.githubusercontent.com/LiaTemplates/NetSwarm-Simulator/master/README.md
+          https://raw.githubusercontent.com/liaScript/mermaid_template/master/README.md
           https://raw.githubusercontent.com/TUBAF-IfI-LiaScript/VL_EingebetteteSysteme/master/config.md
 
 -->
@@ -39,11 +31,14 @@ import:   https://raw.githubusercontent.com/LiaTemplates/NetSwarm-Simulator/mast
 
 **Fragen an die Veranstaltung**
 
-+ Worin lag der „große Wurf“ des Intel 4004?
++ Worin lag der „große Wurf" des Intel 4004?
 + Was bedeutet die Angabe 8bit, 16bit usw. ?
 + Erklären Sie die Schichten der Rechnerstruktur.
 + Worin unterschieden sich ENIAC und die Z3?
-+ ...
++ Welche technologischen Durchbrüche ermöglichten die Miniaturisierung von Computern?
++ Warum war die Harvard-Architektur für frühe Computer wichtig?
++ Welche Rolle spielte die Erfindung des Transistors für die Computerentwicklung?
++ Wie entwickelten sich Speichertechnologien im Laufe der Computergeschichte? 
 
 ---------------------------------------------------------------------
 
@@ -55,6 +50,18 @@ import:   https://raw.githubusercontent.com/LiaTemplates/NetSwarm-Simulator/mast
 
    + http://www.horst-zuse.homepage.t-online.de/z1.html
    + http://www.computerhistory.org/babbage/adalovelace
+
+---------------------------------------------------------------------
+
+## Von Rechenmaschinen zum Arduino: 200 Jahre Rechentechnik
+
+    --{{0}}--
+Erinnern Sie sich an den Arduino-Code aus der letzten Vorlesung? `pinMode()`, `digitalWrite()`, `delay()` - diese einfachen Befehle sind das Ergebnis einer 200-jährigen Evolution. Heute reisen wir durch die Zeit und entdecken, wie aus mechanischen Zahnrädern die Mikrocontroller in Ihrem Arduino wurden.
+
+    --{{1}}--
+Hier ist das Faszinierende: Die Grundprinzipien, die Charles Babbage 1837 in seiner Analytical Engine erdachte, stecken heute noch in Ihrem ATmega328P. Nur sind sie millionenfach kleiner und milliardenfach schneller geworden.
+
+> **Mission dieser Vorlesung:** Verstehen Sie, warum Ihr Arduino so funktioniert, wie er funktioniert - durch die Brille der Geschichte!
 
 ---------------------------------------------------------------------
 
@@ -96,20 +103,10 @@ style="width: 80%; min-width: 420px; max-width: 720px;"
 
 ---------------------------------------------------------------------
 
-## Reflexion Ihrer Fragen
-
-> Partizipative Materialentwicklung mit den Informatikern ...
-
-<!-- data-type="none" -->
-| Format                   | Informatik Studierende  | Nicht-Informatik Studierende |
-|--------------------------|-------------------------|------------------------------|
-| Verbesserungsvorschlag   | 1                       | 0                            |
-| Fragen                   | 0                       | 0                            |
-| generelle Hinweise       | 0                       | 0                            |
-
-Die Informatik wird gewinnen!!!
-
 ## Begrifflichkeiten
+
+    --{{0}}--
+Bevor wir in die Geschichte eintauchen, klären wir die Grundbegriffe. Ihr Arduino ist übrigens ein perfektes Beispiel für alle diese Definitionen: Er löst Probleme (LED-Steuerung), verarbeitet Daten (Sensormessungen) und besteht aus zusammenarbeitenden Baueinheiten (CPU, RAM, Flash-Speicher).
 
 _Ein Computer oder Digitalrechner ist eine Maschine, die Probleme für den Menschen lösen kann, indem sie die ihr gegebenen Befehle ausführt._ (Tannenbaum, Computerarchitektur)
 
@@ -117,7 +114,68 @@ _Ein Computer oder Rechner ist ein Gerät, das mittels programmierbarer Rechenvo
 
 _Rechenanlage (Computer) ...  Die Gesamtheit der Baueinheiten, aus denen ein Datenverarbeitungssystem aufgebaut ist._ (DIN 44300)
 
+    --{{1}}--
+Interessant: Diese Definitionen von 1945, 2020 und 1970 beschreiben alle das Gleiche - nur die Implementierung hat sich dramatisch verändert. Von raumfüllenden Röhrencomputern zu daumennagelgroßen Mikrocontrollern.
+
 > Welche Gemeinsamkeiten und Unterschiede sehen Sie in diesen Definitionen?
+
+## Zeitstrahl: Von Zahnrädern zu Mikrocontrollern
+
+Bevor wir in die Details eintauchen, verschaffen wir uns einen Überblick über die wichtigsten Meilensteine. Dieser Zeitstrahl zeigt Ihnen die Evolution von mechanischen Rechenmaschinen bis zu Ihrem Arduino - eine faszinierende 200-Jahres-Reise!
+
+```mermaid @mermaid
+timeline
+    title Entwicklung der Rechentechnik zu eingebetteten Systemen
+
+    1800-1850 : ■ MECHANISCHE GRUNDLAGEN
+              : 1801 Jacquard-Webstuhl (Lochkarten-Programmierung)
+              : 1820-1850 Rechenmaschinen (Leibniz, Pascal)
+              : 1837 Babbage Analytical Engine (erste "CPU"-Konzepte)
+
+    1850-1900 : ▲ ELEKTROMECHANISCHE ZEIT
+              : 1860-1929 Herman Hollerith (IBM-Vorläufer)
+              : 1886 Hollerith-Lochkartensystem
+              : 1890 US-Volkszählung mit Lochkarten automatisiert
+
+    1900-1950 : ● ELEKTRISCHE REVOLUTION
+              : 1941 Konrad Zuse Z3 (erster funktionsfähiger Computer)
+              : 1945 ENIAC (18.000 Elektronenröhren)
+              : 1945 von Neumann-Architektur (moderne CPU-Struktur)
+              : 1947 Transistor erfunden
+
+    1950-1980 : ◆ TRANSISTOR-ÄRA & MINIATURISIERUNG
+              : 1958 Integrierte Schaltkreise (Jack Kilby)
+              : 1965 Moore's Law formuliert
+              : 1971 Intel 4004 (erster Mikroprozessor)
+              : 1975 Intel 8080 (8-Bit-Ära)
+              : 1978 Intel 8086 (16-Bit-Architektur)
+
+    1980-2000 : ★ mC-REVOLUTION
+              : 1982 Intel 8051 (embedded Standard)
+              : 1985 ARM-Architektur entwickelt
+              : 1990er Atmel AVR-Familie
+              : 1995 erste RISC-Mikrocontroller
+              : Echtzeitbetriebssysteme etabliert
+              
+    2000-2020 : ◉ UBIQUITOUS COMPUTING
+               : 2005 Arduino-Projekt gestartet
+               : 2008 ARM Cortex-M Serie (32-Bit embedded)
+               : 2012 Raspberry Pi (Linux auf ARM)
+               : 2010s IoT-Explosion (ESP8266/ESP32)
+               : 2016 RISC-V Open Source ISA
+               : Edge Computing & Sensor Networks
+
+    2020-heute : ◈ INTELLIGENT EMBEDDED SYSTEMS
+                : Multi-Core Mikrocontroller
+                : 2020s TinyML auf MCU-Level
+                : RISC-V Mainstream
+                : Digital Twins & Cyber-Physical Systems
+                : Neuromorphic Computing Chips
+            
+```
+
+    --{{0}}--
+Faszinierend: Diese Timeline zeigt die kontinuierliche Evolution der technischen Informatik! Von Babbages mechanischen Konzepten 1837 über die Transistor-Revolution bis zu Ihrem Arduino heute - jede Epoche brachte entscheidende Durchbrüche. Besonders bemerkenswert: Moore's Law, ARM-Architektur und RISC-V haben direkt zu den Mikrocontrollern geführt, die Sie heute in embedded Systems verwenden. Ihr Arduino ist das Ergebnis von 200 Jahren Ingenieurskunst!
 
 ## Rechenmaschinen
 
@@ -191,7 +249,13 @@ Ausgangspunkt war die Konstruktion einer Rechenmaschine für die Lösung polynom
 + Zahlendarstellung: dezimale Festkommazahlen, pro Stelle ein Zahnrad
 + Arbeitsspeicher zwischen 1,6 und 20 kB (umstritten)
 
+    --{{0}}--
+Moment mal - 20 kB Arbeitsspeicher? Ihr Arduino Uno hat 2 kB SRAM! Babbage plante 1837 bereits zehnmal mehr RAM als Ihr moderner Mikrocontroller tatsächlich hat. Das zeigt: Speicher war schon damals der Flaschenhals.
+
 _The result of my reflections has been that numbers containing more than thirty places of figures will not be required for a long time to come. _
+
+    --{{1}}--
+Eine weitere Parallele zu heute: Babbage dachte, 30 Dezimalstellen würden "für lange Zeit" ausreichen. Heute rechnen wir mit 32-Bit-Zahlen - das sind etwa 10 Dezimalstellen. Manchmal liegen die Visionäre richtig, aber aus den falschen Gründen!
 
 Die Maschine wurde zu Lebzeiten von Babbage nicht realisiert und nur in Teilen durch seinen Sohn implementiert. Aktuell exisitieren in verschiedenen Museen unterschiedliche Neubauten.
 
@@ -345,6 +409,22 @@ Beispiel: Intel 4004-Architektur (1971)
 + Anzahl Befehle: 46
 + Bauform: 16 Pin (DIP)
 
+    --{{0}}--
+Jetzt wird's spannend: Vergleichen wir das mit Ihrem Arduino! Der ATmega328P hat etwa 100.000 Transistoren (40x mehr), läuft mit 16 MHz (20x schneller) und hat 131 Befehle. In 50 Jahren ist die Rechenleistung um etwa das 1000-fache gestiegen - und das Ganze passt auf einen Fingernagel!
+
+**Intel 4004 (1971) vs. ATmega328P (2008):**
+
+| Eigenschaft | Intel 4004 | ATmega328P | Faktor |
+|-------------|------------|------------|---------|
+| Transistoren | 2.300 | ~100.000 | 43x |
+| Taktfrequenz | 740 kHz | 16 MHz | 22x |
+| Befehle | 46 | 131 | 3x |
+| Wortbreite | 4 Bit | 8 Bit | 2x |
+| RAM | 80 Byte | 2048 Byte | 26x |
+
+    --{{1}}--
+Das Faszinierende: Beide verwenden die Harvard-Architektur! Der 4004 war seiner Zeit voraus und verwendete getrennte Speicher für Programm und Daten - genau wie Ihr Arduino heute.
+
 > Halten Sie nach der GoldCap-Variante Ausschau!
 
 Unterstützung für die Interpretation aus dem Nutzerhandbuch, dass das Instruction
@@ -380,18 +460,44 @@ style="width: 80%; display: block; margin-left: auto; margin-right: auto;"-->
 
 [^MooresLaw]:Quelle: https://commons.wikimedia.org/wiki/File:Moore%27s_Law_Transistor_Count_1971-2018.png, Max Roser
 
-## Und warum ist das nun alles für uns wichtig?
+## Warum ist das alles für Ihren Arduino wichtig?
 
-+ Die historische Entwicklung der Rechentechnik ist eine Übersicht über erfolgreiche und vergangene Trends oder korrekte und weniger korrekte Prognosen.
+    --{{0}}--
+Jetzt kommt die Auflösung: Diese ganze Geschichte erklärt, warum Ihr Arduino so funktioniert, wie er funktioniert. Jede Zeile Code, die Sie schreiben, steht auf den Schultern von 200 Jahren Innovation.
+
++ **Die historische Entwicklung zeigt Muster auf**, die sich wiederholen - auch bei den Fehlprognosen:
 
     _I think there is a world market for about five computers._ (Thomas J. Watson Jr., chairman of IBM, 1943)
 
     _Where a calculator as the ENIAC is equipped with 18000 vacuum tubes and weighs 30 tons, computers in the future may have only 1000 vaccum tubes and weigh 1 1/2 tons._ (Popular Mechanics, 1949)
 
-    _640 KBytes [of main memory] ought to be enough for anybody._ (Bill Gates, Microsoft, 1981)
+    _There is no reason anyone would want a computer in their home._ (Ken Olsen, founder of Digital Equipment Corporation, 1977)
 
-+ Eine Einordnung der vielzitierten Pioniere einer Wissenschaft ist für deren objektive Bewertung zwingend notwendig.
-+ Entwicklungen wiederholen sich ...
+    _Apple is already dead._ (Nathan Myhrvold, Microsoft CTO, 1997)
+
+    _The Internet will catastrophically collapse in 1996._ (Robert Metcalfe, Ethernet inventor, 1995)
+
+    _Two years from now, spam will be solved._ (Bill Gates, Microsoft, 2004)
+
+    _The iPhone has no chance of getting any significant market share._ (Steve Ballmer, Microsoft CEO, 2007)
+
+    _No one will ever need more than 637 kB of memory for a personal computer._ (Bill Gates, 1981 - angeblich)
+
+    _Smartphones will never replace cameras._ (Kodak executives, 2000s)
+
+    --{{1}}--
+**************************************************************
+
+Diese Fehleinschätzungen folgen einem Muster: Die Experten unterschätzten IMMER drei Dinge - Miniaturisierung, Vernetzung und Benutzerfreundlichkeit. Ken Olsen konnte sich 1977 nicht vorstellen, warum jemand einen Computer zu Hause haben wollte. Steve Ballmer lachte 2007 über das iPhone. Kodak dachte, Smartphones würden niemals Kameras ersetzen. Das Muster? Etablierte Experten denken in den Grenzen ihrer aktuellen Technologie, statt radikal neu zu denken.
+
++ **Ihre Arduino-Projekte sind Teil dieser Geschichte** - Sie programmieren die gleichen Grundkonzepte, die von Babbage erdacht und von den Intel-Ingenieuren perfektioniert wurden.
+
++ **Patterns wiederholen sich:** Von-Neumann-Architektur (1945) → Intel 4004 (1971) → ATmega328P (2008) → Ihre nächsten Projekte (2025+)
+
+**************************************************************
+
+    --{{2}}--
+Das Coolste: Sie sind Teil dieser Entwicklung! Jedes Arduino-Projekt, das Sie bauen, steht in direkter Linie zu den Visionären von gestern. Die Geschichte geht weiter - mit Ihnen als Autor der nächsten Kapitel.
 
 
 ## Hausaufgabe
