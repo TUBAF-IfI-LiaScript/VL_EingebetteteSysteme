@@ -2,7 +2,7 @@
 
 author:   Sebastian Zug, André Dietrich & `fjangfaragesh`, `FnHm`, `gjaeger`, `ShyFlyGuy`, `Lalelele`
 email:    sebastian.zug@informatik.tu-freiberg.de & andre.dietrich@informatik.tu-freiberg.de & fabian.baer@student.tu-freiberg.de
-version:  0.5.0
+version:  0.5.1
 language: de
 narrator: Deutsch Female
 
@@ -95,24 +95,17 @@ Der Code muss zunächst übersetzt und in eine für den Mikrocontroller verstän
 ******************************************************
 
 ```hex
-:100000000C9472000C947E000C947E000C947E0084
-:100010000C947E000C947E000C947E000C947E0068
-:100020000C947E000C947E000C947E000C947E0058
-:100030000C947E000C947E000C947E000C947E0048
-:100040000C947E000C947E000C947E000C947E0038
-:100050000C947E000C947E000C947E000C947E0028
-:100060000C947E000C947E000C947E000C947E0018
-:100070000C947E000C947E000C947E000C947E0008
-:100080000C947E000C947E000C947E000C947E00F8
-:100090000C947E000C947E000C947E000C947E00E8
-:1000A0000C947E000C947E000C947E000C947E00D8
-:1000B0000C947E000C947E000C947E000C947E00C8
-:1000C0000C947E000C947E000C947E000C947E00B8
-:1000D0000C947E000C947E000C947E000C947E00A8
-:1000E0000C947E0011241FBECFEFD1E2DEBFCDBF46
-:1000F00000E00CBF0E9480000C9483000C94000070
-:0A010000279A2F98FFCFF894FFCF45
-:00000001FF
+:100000000C945D000C9485000C9485000C94850084
+:100010000C9485000C9485000C9485000C9485004C
+:100020000C9485000C9485000C9485000C9485003C
+:100030000C9485000C9485000C9485000C9485002C
+:100040000C9412020C9485000C9482020C945C02B5
+:100050000C9485000C9485000C9485000C9485000C
+:100060000C9485000C9485000000000024002700FB
+:100070002A0000000000250028002B0004040404CE
+:100080000404040402020202020203030303030342
+:10009000010204081020408001020408102001021F
+...
 ```
 
 > **Am Ende des Semesters können Sie jeden Schritt dieser Transformation verstehen und erklären!**
@@ -122,28 +115,28 @@ Der Code muss zunächst übersetzt und in eine für den Mikrocontroller verstän
     --{{3}}--
 Das Faszinierende: Wenn Sie diese Hex-Datei verstehen können - und das werden Sie am Ende des Semesters - dann können Sie jeden Computer der Welt verstehen. Die Grundprinzipien sind universell, egal ob es sich um einen Arduino, einen Smartphone-Prozessor oder einen Supercomputer handelt. Schauen Sie genau hin: Die erste gepunktete Zeile beginnt mit "0C 94 72 00". Das sind vier Bytes, die einen einzigen Maschinenbefehl darstellen - einen Jump-Befehl zur Adresse 0x0072. Dort steht der Interrupt-Vektor für den Reset.
 
-### 🗺️ Die Reise: 16 Stationen zum Verständnis
+### Die Reise: 16 Stationen zum Verständnis
 
 <!-- data-type="none" -->
-| Station | Vorlesung                                           | Was lernen Sie hier?        |
-| ------- | --------------------------------------------------- | --------------------------- |
-| 🏁     | [00 Einführung](00_Einfuehrung.md)                  | Die große Vision            |
-| 📚     | [01 Historie](01_HistorischerUeberblick.md)         | Von Zuse zu Arduino         |
-| ⚡      | [02 Boolesche Algebra](02_BoolscheAlgebra.md)       | 0 und 1 verstehen           |
-| 🔧     | [03 Minimierung](03_Minimierung.md)                 | Effizienz in Logik          |
-| 🧩     | [04 Schaltnetze](04_Schaltnetze.md)                 | Logik wird Hardware         |
-| 🎛️   | [05 Standardschaltnetze](05_Standardschaltnetze.md) | Decoder & Multiplexer       |
-| 💾     | [06 FlipFlops](06_FlipFlops.md)                     | Speicher entsteht           |
-| 🔄     | [07 Schaltwerke](07_Schaltwerke.md)                 | Zustandsmaschinen           |
-| 📊     | [08 Standardschaltwerke](08_StandardSchaltwerke.md) | Counter & Register          |
-| 🧮     | [09 Rechnerarithmetik](09_Rechnerarithmetik.md)     | Addition in Hardware        |
-| 🏗️   | [10 CPU-Basis](10_CPU_Basis.md)                     | Der erste Prozessor         |
-| 🖥️   | [11 Modell-CPU](11_Modell_CPU.md)                   | CPU-Simulation              |
-| ⚡      | [12 Pipeline](12_Pipeline.md)                       | Geschwindigkeit             |
-| 🎯     | [13 AVR-CPU](13_AVR_CPU.md)                         | **IHR Arduino-Chip!**       |
-| 📡     | [14 ADC](14_ADC.md)                                 | Analog trifft Digital       |
-| ⏰       | [15 Timer & Interrupts](15_TimerUndInterrupts.md)   | Multitasking                |
-| 🤖     | [16 Aktoren](16_Aktoren.md)                         | Hardware ansteuern          |
+| Vorlesung                                           | Was lernen Sie hier?     |
+| --------------------------------------------------- | ------------------------ |
+| [00 Einführung](00_Einfuehrung.md)                  | Die große Vision         |
+| [01 Historie](01_HistorischerUeberblick.md)         | Von Leibnitz  zu Arduino |
+| [02 Boolesche Algebra](02_BoolscheAlgebra.md)       | 0 und 1 verstehen        |
+| [03 Minimierung](03_Minimierung.md)                 | Effizienz in Logik       |
+| [04 Schaltnetze](04_Schaltnetze.md)                 | Logik wird Hardware      |
+| [05 Standardschaltnetze](05_Standardschaltnetze.md) | Decoder & Multiplexer    |
+| [06 FlipFlops](06_FlipFlops.md)                     | Speicher entsteht        |
+| [07 Schaltwerke](07_Schaltwerke.md)                 | Zustandsmaschinen        |
+| [08 Standardschaltwerke](08_StandardSchaltwerke.md) | Counter & Register       |
+| [09 Rechnerarithmetik](09_Rechnerarithmetik.md)     | Addition in Hardware     |
+| [10 CPU-Basis](10_CPU_Basis.md)                     | Der erste Prozessor      |
+| [11 Modell-CPU](11_Modell_CPU.md)                   | CPU-Simulation           |
+| [12 Pipeline](12_Pipeline.md)                       | Geschwindigkeit          |
+| [13 AVR-CPU](13_AVR_CPU.md)                         | **IHR Arduino-Chip!**    |
+| [14 ADC](14_ADC.md)                                 | Analog trifft Digital    |
+| [15 Timer & Interrupts](15_TimerUndInterrupts.md)   | Multitasking             |
+| [16 Aktoren](16_Aktoren.md)                         | Hardware ansteuern       |
 
 > Wir haben nominell 21 Vorlesungen, an einigen Stellen werden wir aber länger verweilen und an anderen Stellen schneller vorankommen. Diese Aufzählung ist also eher ein Leitfaden, denn ein strikter Plan.
 
@@ -179,7 +172,7 @@ Ein kleiner Reality-Check: Diese acht Fragen würden viele Kommmilitonen der hö
    *Interrupts, Timer, UART, SPI - das komplette AVR-Ökosystem*
 
 
-## 🔬 Der Unterschied zu einem "Arduino-Kurs"
+## Der Unterschied zu einem "Arduino-Kurs"
 
     --{{0}}--
 Hier ist ein wichtiger Punkt: Nach einem typischen Arduino-Workshop können Sie LEDs blinken lassen. Nach diesem Kurs können Sie erklären, warum die `digitalWrite()`-Funktion exakt 12 Taktzyklen benötigt und welche vier Hardware-Register dabei beschrieben werden. Der Unterschied zwischen "es funktioniert" und "ich verstehe warum es funktioniert".
@@ -188,7 +181,7 @@ Hier ist ein wichtiger Punkt: Nach einem typischen Arduino-Workshop können Sie 
 
 **Unser Kurs:** "Warum passiert das und wie funktioniert es bis hinunter zum Transistor?"
 
-### 🧭 Unsere Bottom-Up-Reise
+### Unsere Bottom-Up-Reise
 
     --{{0}}--
 Schauen Sie sich diese Abstraktionsebenen an: Die meisten Programmierer arbeiten nur auf Ebene 6 und 5. Wir steigen bis auf Ebene 1 hinab und arbeiten uns systematisch nach oben.
@@ -277,7 +270,7 @@ Der ATmega328P hat "nur" etwa 100.000 Transistoren. Aber auch das ist schon gewa
 Fun Fact: Diese Struktur wurde 1945 von John von Neumann beschrieben und ist heute noch gültig. Ihr Mobiltelefons hat die gleiche Grundarchitektur wie dieser Arduino - nur mit ein paar Milliarden Transistoren mehr. Die Kunst liegt darin, diese Komplexität in verständliche Module zu unterteilen.
 
 
-### 🔬 Beispiel 2: Quer über alle Ebenene
+### Beispiel 2: Quer über alle Ebenene
 
     --{{0}}--
 Hier wird's richtig interessant: Wir verfolgen eine einzige Arduino-Zeile durch vier Abstraktionsebenen. Das ist wie ein CSI für Programmierer - wir verfolgen jeden Beweis, bis wir den echten Täter finden: den Transistor, der die Arbeit macht.
@@ -286,7 +279,7 @@ Hier wird's richtig interessant: Wir verfolgen eine einzige Arduino-Zeile durch 
 
 **Schauen wir uns konkret an, was in diesen 4 Abstraktionsebenen passiert:**
 
-**🎯 Ebene 6 - Ihr Arduino-Code:**
+**Ebene 6 - Ihr Arduino-Code:**
 
     --{{1}}--
 Ebene sechs sieht harmlos aus, aber diese eine Zeile triggert eine Kaskade von 50+ Funktionsaufrufen in der Arduino-Laufzeitumgebung. Pin 13 ist übrigens kein Zufall - das ist der eingebaute LED-Pin auf den meisten Arduino-Boards.
@@ -295,7 +288,7 @@ Ebene sechs sieht harmlos aus, aber diese eine Zeile triggert eine Kaskade von 5
 pinMode(13, OUTPUT);  // Pin 13 als Ausgang konfigurieren
 ```
 
-**⚙️ Ebene 5 - AVR-libc Implementation (echte Arduino-Version):**
+**Ebene 5 - AVR-libc Implementation (echte Arduino-Version):**
 
     --{{2}}--
 Hier wird's professionell: Die Arduino-Entwickler müssen Interrupts abschalten, weil ein anderer Interrupt-Handler zur falschen Zeit das gleiche Register manipulieren könnte. Das nennt man Race Condition - ein klassisches Problem in der Embedded-Programmierung.
@@ -316,7 +309,7 @@ void pinMode(uint8_t pin, uint8_t mode) {
 }
 ```
 
-**🔧 Ebene 3 - AVR-Assembler Code:**
+**Ebene 3 - AVR-Assembler Code:**
 
     --{{3}}--
 Jetzt sind wir bei der Maschinensprache angekommen. "CLI" schaltet global alle Interrupts ab - ein drastischer Schritt! "OUT 0x04, r24" schreibt direkt ins Hardware-Register DDRB. Diese 0x04 ist eine magische Zahl - die Speicheradresse des Data Direction Register B im AVR-Chip.
@@ -335,7 +328,7 @@ out  0x04, r24    ; Schreibe zurück zu DDRB
 out  0x3F, r25    ; Restore SREG → Interrupts wieder AN
 ```
 
-**⚡ Ebene 1 - Hardware-Konfiguration:**
+**Ebene 1 - Hardware-Konfiguration:**
 
     --{{4}}--
 Endlich am Ziel: echte Hardware! Das DDRB-Register besteht aus acht Flip-Flops, jedes steuert einen Pin. Wenn Sie Bit 5 setzen, öffnet sich ein Transistor-Paar am Pin 13. Der obere Transistor kann dann +5V durchschalten, der untere 0V. Das ist der Moment, wo Software zu Physik wird.
@@ -347,7 +340,7 @@ Das `DDRB`-Register steuert direkt die **Tri-State-Logik** des I/O-Pins:
 - **DDRB[5] = 1**: Ausgangstreiber wird aktiviert → Pin kann HIGH/LOW ausgeben
 - **DDRB[5] = 0**: Hochohmig → Pin kann Eingangssignale lesen
 
-## 🚀 Was können Sie damit bauen?
+## Was können Sie damit bauen?
 
     --{{0}}--
 Mit diesem tiefen Verständnis können Sie Systeme optimieren, die andere nur benutzen können. Sie wissen, warum der ADC-Wandler manchmal "rauscht", wie Sie Timer-Interrupts für präzises Timing einsetzen, und warum manche Sensoren 5V brauchen und andere mit 3.3V auskommen.
@@ -362,12 +355,12 @@ Nach diesem Kurs wissen Sie nicht nur, wie man Sensordaten ausliest, sondern **w
 
 Sie verstehen, warum die Messwerte (1023 = dunkel, niedrige Werte = hell) genau so aussehen und können die ADC-Referenzspannung für präzisere Messungen optimieren.
 
-### 🤔 "Aber ich will doch Webentwickler/Data Scientist/KI-Entwickler werden..."
+### "Aber ich will doch Webentwickler/Data Scientist/KI-Entwickler werden..."
 
     --{{0}}--
 Hier ist ein Geheimnis der Tech-Industrie: Die wertvollsten Entwickler sind die, die eine Schicht tiefer schauen können als ihre Kollegen. Wenn Ihre Webanwendung langsam ist und andere raten, wissen Sie genau, welche CPU-Zyklen verschwendet werden. Das macht den Unterschied zwischen Senior- und Junior-Entwickler aus.
 
-**🎯 Perfekt! Denn Sie werden ein BESSERER Entwickler in JEDEM Bereich:**
+**Perfekt! Denn Sie werden ein BESSERER Entwickler in JEDEM Bereich:**
 
 + **🌐 Webentwickler**: Sie verstehen Performance bis zur Hardware-Ebene
 + **📊 Data Scientist**: Sie wissen, wie Ihre Daten WIRKLICH entstehen  
@@ -501,10 +494,6 @@ für die Anwendbarkeit in der (Informatik-)Lehre sprechen:
 * Spezifische Tools für die Modellierung, Simulationen etc.
 
 ```cpp     ArduinoSimulator.ino
-void setup() {
-  Serial.println("Hello stuff.");
-}
-
 void thing(char i) {
   switch(i) {
   case 0: Serial.println("a pear"); break;
@@ -514,9 +503,16 @@ void thing(char i) {
   }
 }
 
+void setup() {
+  Serial.println("Hello stuff.");
+
+  for (int i=0; i<4; i++) {
+    Serial.print("here's ");
+    thing(random(4));
+  }
+}
+
 void loop() {
-  Serial.print("here's ");
-  thing(random(4));
 }
 ```
 @AVR8js.sketch
