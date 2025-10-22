@@ -2,7 +2,7 @@
 
 author:   Sebastian Zug, André Dietrich & `fjangfaragesh`, `FnHm`, `gjaeger`, `ShyFlyGuy`, `Lalelele`
 email:    sebastian.zug@informatik.tu-freiberg.de & andre.dietrich@informatik.tu-freiberg.de & fabian.baer@student.tu-freiberg.de
-version:  0.5.1
+version:  0.5.2
 language: de
 narrator: Deutsch Female
 
@@ -168,9 +168,6 @@ Ein kleiner Reality-Check: Diese acht Fragen würden viele Kommmilitonen der hö
 7. **"Wie kann ein 8-bit-Mikrocontroller 16-bit-Zahlen addieren?"**  
    *Multi-Precision-Arithmetik, Carry-Flag, ALU-Design*
 
-8. **"Welche Hardware-Komponenten arbeiten parallel zur `loop()`?"**  
-   *Interrupts, Timer, UART, SPI - das komplette AVR-Ökosystem*
-
 
 ## Der Unterschied zu einem "Arduino-Kurs"
 
@@ -265,19 +262,26 @@ style="width: 80%; min-width: 420px; max-width: 720px;"
 
     --{{0}}--
 Der ATmega328P hat "nur" etwa 100.000 Transistoren. Aber auch das ist schon gewaltig - stellen Sie sich vor, Sie müssten 100.000 Schalter von Hand verkabeln!
-
-    --{{1}}--
 Fun Fact: Diese Struktur wurde 1945 von John von Neumann beschrieben und ist heute noch gültig. Ihr Mobiltelefons hat die gleiche Grundarchitektur wie dieser Arduino - nur mit ein paar Milliarden Transistoren mehr. Die Kunst liegt darin, diese Komplexität in verständliche Module zu unterteilen.
 
 
 ### Beispiel 2: Quer über alle Ebenene
 
+                   {{0-1}}
+*****************************************************
+
     --{{0}}--
 Hier wird's richtig interessant: Wir verfolgen eine einzige Arduino-Zeile durch vier Abstraktionsebenen. Das ist wie ein CSI für Programmierer - wir verfolgen jeden Beweis, bis wir den echten Täter finden: den Transistor, der die Arbeit macht.
 
-**Wir bauen von den Grundlagen nach oben!** Jede Ebene erklärt die nächste, bis Sie verstehen, wie Ihr `digitalWrite()` am Ende einen Transistor schaltet.
+**Wir bauen von den Grundlagen nach oben!** Jede Ebene erklärt die nächste, bis Sie verstehen, wie Ihr `pinMode()` am Ende einen Transistor schaltet.
 
 **Schauen wir uns konkret an, was in diesen 4 Abstraktionsebenen passiert:**
+
+*****************************************************
+
+
+                   {{1-2}}
+*****************************************************
 
 **Ebene 6 - Ihr Arduino-Code:**
 
@@ -287,6 +291,11 @@ Ebene sechs sieht harmlos aus, aber diese eine Zeile triggert eine Kaskade von 5
 ```cpp
 pinMode(13, OUTPUT);  // Pin 13 als Ausgang konfigurieren
 ```
+
+*****************************************************
+
+                   {{2-3}}
+*****************************************************
 
 **Ebene 5 - AVR-libc Implementation (echte Arduino-Version):**
 
@@ -309,6 +318,11 @@ void pinMode(uint8_t pin, uint8_t mode) {
 }
 ```
 
+*****************************************************
+
+                   {{3-4}}
+*****************************************************
+
 **Ebene 3 - AVR-Assembler Code:**
 
     --{{3}}--
@@ -328,6 +342,11 @@ out  0x04, r24    ; Schreibe zurück zu DDRB
 out  0x3F, r25    ; Restore SREG → Interrupts wieder AN
 ```
 
+*****************************************************
+
+                   {{4-5}}
+*****************************************************
+
 **Ebene 1 - Hardware-Konfiguration:**
 
     --{{4}}--
@@ -339,6 +358,9 @@ Das `DDRB`-Register steuert direkt die **Tri-State-Logik** des I/O-Pins:
 
 - **DDRB[5] = 1**: Ausgangstreiber wird aktiviert → Pin kann HIGH/LOW ausgeben
 - **DDRB[5] = 0**: Hochohmig → Pin kann Eingangssignale lesen
+
+
+*****************************************************
 
 ## Was können Sie damit bauen?
 
@@ -362,11 +384,11 @@ Hier ist ein Geheimnis der Tech-Industrie: Die wertvollsten Entwickler sind die,
 
 **Perfekt! Denn Sie werden ein BESSERER Entwickler in JEDEM Bereich:**
 
-+ **🌐 Webentwickler**: Sie verstehen Performance bis zur Hardware-Ebene
-+ **📊 Data Scientist**: Sie wissen, wie Ihre Daten WIRKLICH entstehen  
-+ **🤖 KI-Entwickler**: Edge-AI auf Mikrocontrollern? Sie können es!
-+ **☁️ Cloud-Architekt**: Sie verstehen die Hardware unter Ihren VMs
-+ **🎮 Game-Developer**: Low-Level-Optimierung wird Ihr Superpower
++ **Webentwickler**: Sie verstehen Performance bis zur Hardware-Ebene
++ **Data Scientist**: Sie wissen, wie Ihre Daten WIRKLICH entstehen  
++ **KI-Entwickler**: Edge-AI auf Mikrocontrollern? Sie können es!
++ **Cloud-Architekt**: Sie verstehen die Hardware unter Ihren VMs
++ **Game-Developer**: Low-Level-Optimierung wird Ihr Superpower
 
 **Das tiefe Hardware-Verständnis macht Sie in JEDER Tech-Rolle wertvoller!**
 
@@ -391,18 +413,11 @@ Die Veranstaltung wird sowohl für die Vorlesung als auch die Übung in Präsenz
 
 > Die zugehörigen Übungen starten im Dezember und werden dann wöchentlich durchgeführt. Dort haben Sie dann insbesondere ab Januar Gelegenheit anhand spezifischer Mikrocontrollerschaltungen Ihre Kenntnisse praktisch zu vertiefen.
 
-> Daneben gibt es weiterführende Angebote, sich mit der Materie auseinanderzusetzen:
-
-+ Einsteiger-Tutorials zur Programmierung
-+ Bits & Bytes Vorträge im RoboLab 
-
 > Remote-Labore werden etwa Dezember bereitstehen, um einzelne Aspekte der Lehrveranstaltung zu vertiefen.
 
 ### Prüfungsmodalitäten
 
-> *Credit-Points:* 6
-
-> *Prüfungsform:* Die Veranstaltung wird mit einer schriftlichen Prüfung abgeschlossen. Diese wird als Open Book Klausur entworfen. Sie dürfen dazu alle schriftlichen, nicht-digitalen Materialien verwenden.
+> *Prüfungsform:* Die Veranstaltung wird mit einer schriftlichen Prüfung abgeschlossen. Diese wird als __Open Book Klausur__ entworfen. Sie dürfen dazu alle schriftlichen, nicht-digitalen Materialien verwenden.
 
 Im Laufe der Übungen werden wir "alte" Übungsaufgaben durchspielen, die Ihnen einen Eindruck von der Prüfung vermitteln sollen.
 
@@ -421,6 +436,8 @@ Im Laufe der Übungen werden wir "alte" Übungsaufgaben durchspielen, die Ihnen 
 Bei den jeweiligen Vorlesungsinhalten werden zusätzliche Materialien angegeben.
 
 ## Engagement und Motivation
+
+> *Credit-Points:* 6
 
 > *Arbeitsaufwand:* Der Zeitaufwand beträgt 180h und setzt sich zusammen aus **60h Präsenzzeit** und **120h Selbststudium**. Letzteres umfasst die Vor- und Nachbereitung der Lehrveranstaltung, die eigenständige Lösung von Übungsaufgaben sowie die Prüfungsvorbereitung.
 
