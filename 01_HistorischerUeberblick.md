@@ -389,17 +389,19 @@ Beispiel: Intel 4004-Architektur (1971)
 + Bauform: 16 Pin (DIP)
 
     --{{0}}--
-Jetzt wird's spannend: Vergleichen wir das mit Ihrem Arduino! Der ATmega328P hat etwa 100.000 Transistoren (40x mehr), läuft mit 16 MHz (20x schneller) und hat 131 Befehle. In 50 Jahren ist die Rechenleistung um etwa das 1000-fache gestiegen - und das Ganze passt auf einen Fingernagel!
+Jetzt wird's spannend: Vergleichen wir das mit Ihrem Arduino! Der ATmega328P hat etwa 100.000 Transistoren (40x mehr), läuft mit 16 MHz (20x schneller) und hat 131 Befehle. 
 
 **Intel 4004 (1971) vs. ATmega328P (2008):**
 
-| Eigenschaft | Intel 4004 | ATmega328P | Faktor |
-|-------------|------------|------------|---------|
-| Transistoren | 2.300 | ~100.000 | 43x |
-| Taktfrequenz | 740 kHz | 16 MHz | 22x |
-| Befehle | 46 | 131 | 3x |
-| Wortbreite | 4 Bit | 8 Bit | 2x |
-| RAM | 80 Byte | 2048 Byte | 26x |
+| Eigenschaft  | Intel 4004 | ATmega328P | Faktor |
+| ------------ | ---------- | ---------- | ------ |
+| Transistoren | 2.300      | ~100.000   | 43x    |
+| Taktfrequenz | 740 kHz    | 16 MHz     | 22x    |
+| Befehle      | 46         | 131        | 3x     |
+| Wortbreite   | 4 Bit      | 8 Bit      | 2x     |
+| RAM          | 80 Byte    | 2048 Byte  | 26x    |
+
+> Was sagt die Befehlsanzahl aus?
 
     --{{1}}--
 Das Faszinierende: Beide verwenden die Harvard-Architektur! Der 4004 war seiner Zeit voraus und verwendete getrennte Speicher für Programm und Daten - genau wie Ihr Arduino heute.
@@ -413,29 +415,29 @@ set beschreibt:
 
 ### Weitere Entwicklung
 
-| Jahr | Entwicklung                                               | Beschreibung                                                                                                      |
-|------|-----------------------------------------------------------|-------------------------------------------------------------------------------------------------------------------|
-| 1971 | Intel 4004                                                | Erste kommerzielle CPU auf einem einzigen Chip (4-Bit).                                                          |
-| 1978 | Intel 8086                                                | 16-Bit-Architektur und Grundlage für die x86-Architektur.                                                        |
-| 1979 | Motorola 68000 mit 32-Bit interner Architektur            |
-| 1985 | RISC-Architektur                                          | Einführung der RISC (Reduced Instruction Set Computer)-Architektur für effizientere CPU-Designs.                 |
-| 1989 | Intel i860 und erste GPUs                                 | Erste Grafikprozessoren (GPUs) für 3D-Beschleunigung und spezielle Berechnungen.                                 |
-| 1993 | Intel Pentium                                             | Einführung von Super-Skalaren und schnellerer Rechenleistung bei x86-Prozessoren.                                |
-| 1999 | Nvidia GeForce 256                                        | Erste „GPU“ zur Hardware-Beschleunigung von 3D-Grafikberechnungen.                                               |
-| 2000 | AMD Athlon 64                                             | Erste 64-Bit-Desktop-CPU.                                                |
-| 2006 | Mehrkernprozessoren (Intel Core, AMD Athlon X2)           | Einführung von Mehrkernprozessoren für verbesserte Leistung und parallele Verarbeitung.                          |
-| 2010 | Nvidia Fermi-Architektur                                  | CUDA-Architektur für Parallelverarbeitung und GPGPU (General Purpose GPU Computing).                             |
-| 2011 | Intel Sandy Bridge                                        | Einführung der integrierten Grafik mit CPU und GPU auf demselben Chip für höhere Effizienz.                      |
-| 2015 | AMD HBM (High Bandwidth Memory)                           | Einführung von HBM für schnelle und effiziente Speichernutzung bei GPUs.                                         |
-| 2016 | Nvidia Pascal-Architektur und Deep Learning               | GPUs mit optimierter Leistung für KI und Deep Learning (Tesla P100).                                             |
-| 2020 | Apple M1 SoC                                              | Erster ARM-basierter Desktop-Prozessor von Apple                         |
-| 2022 | Nvidia Ada Lovelace-Architektur                           | Fortschrittliche Architektur für Raytracing und KI-Beschleunigung mit DLSS 3-Technologie.                        |
+| Jahr | Entwicklung                                     | Beschreibung                                                                                     |
+| ---- | ----------------------------------------------- | ------------------------------------------------------------------------------------------------ |
+| 1971 | Intel 4004                                      | Erste kommerzielle CPU auf einem einzigen Chip (4-Bit).                                          |
+| 1978 | Intel 8086                                      | 16-Bit-Architektur und Grundlage für die x86-Architektur.                                        |
+| 1979 | Motorola 68000 mit 32-Bit interner Architektur  |                                                                                                  |
+| 1985 | RISC-Architektur                                | Einführung der RISC (Reduced Instruction Set Computer)-Architektur für effizientere CPU-Designs. |
+| 1989 | Intel i860 und erste GPUs                       | Erste Grafikprozessoren (GPUs) für 3D-Beschleunigung und spezielle Berechnungen.                 |
+| 1993 | Intel Pentium                                   | Einführung von Super-Skalaren und schnellerer Rechenleistung bei x86-Prozessoren.                |
+| 1999 | Nvidia GeForce 256                              | Erste „GPU“ zur Hardware-Beschleunigung von 3D-Grafikberechnungen.                               |
+| 2000 | AMD Athlon 64                                   | Erste 64-Bit-Desktop-CPU.                                                                        |
+| 2006 | Mehrkernprozessoren (Intel Core, AMD Athlon X2) | Einführung von Mehrkernprozessoren für verbesserte Leistung und parallele Verarbeitung.          |
+| 2010 | Nvidia Fermi-Architektur                        | CUDA-Architektur für Parallelverarbeitung und GPGPU (General Purpose GPU Computing).             |
+| 2011 | Intel Sandy Bridge                              | Einführung der integrierten Grafik mit CPU und GPU auf demselben Chip für höhere Effizienz.      |
+| 2015 | AMD HBM (High Bandwidth Memory)                 | Einführung von HBM für schnelle und effiziente Speichernutzung bei GPUs.                         |
+| 2016 | Nvidia Pascal-Architektur und Deep Learning     | GPUs mit optimierter Leistung für KI und Deep Learning (Tesla P100).                             |
+| 2020 | Apple M1 SoC                                    | Erster ARM-basierter Desktop-Prozessor von Apple                                                 |
+| 2022 | Nvidia Ada Lovelace-Architektur                 | Fortschrittliche Architektur für Raytracing und KI-Beschleunigung mit DLSS 3-Technologie.        |
 
 
 ![Moore](./images/01_Historie/Moore's_Law_Transistor_Count_1971-2018.png "Moore's Law (Autor: https://commons.wikimedia.org/wiki/File:Moore%27s_Law_Transistor_Count_1971-2018.png, Max Roser)")<!--
 style="width: 80%; display: block; margin-left: auto; margin-right: auto;"-->
 
-## Warum ist das alles für Ihren Arduino wichtig?
+## Warum ist das alles für Ihr Verständnis wichtig?
 
     --{{0}}--
 Jetzt kommt die Auflösung: Diese ganze Geschichte erklärt, warum Ihr Arduino so funktioniert, wie er funktioniert. Jede Zeile Code, die Sie schreiben, steht auf den Schultern von 200 Jahren Innovation.
@@ -447,8 +449,6 @@ Jetzt kommt die Auflösung: Diese ganze Geschichte erklärt, warum Ihr Arduino s
     _Where a calculator as the ENIAC is equipped with 18000 vacuum tubes and weighs 30 tons, computers in the future may have only 1000 vaccum tubes and weigh 1 1/2 tons._ (Popular Mechanics, 1949)
 
     _There is no reason anyone would want a computer in their home._ (Ken Olsen, founder of Digital Equipment Corporation, 1977)
-
-    _Apple is already dead._ (Nathan Myhrvold, Microsoft CTO, 1997)
 
     _The Internet will catastrophically collapse in 1996._ (Robert Metcalfe, Ethernet inventor, 1995)
 
