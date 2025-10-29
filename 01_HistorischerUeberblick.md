@@ -2,7 +2,7 @@
 
 author:   Sebastian Zug, André Dietrich, Fabian Bär & GitHub Copilot Teaching-Agent
 email:    sebastian.zug@informatik.tu-freiberg.de & andre.dietrich@informatik.tu-freiberg.de & fabian.baer@student.tu-freiberg.de
-version:  0.6.2
+version:  0.6.3
 language: de
 narrator: Deutsch Female
 
@@ -52,6 +52,55 @@ import:   https://raw.githubusercontent.com/LiaTemplates/NetSwarm-Simulator/mast
    + http://www.computerhistory.org/babbage/adalovelace
 
 ---------------------------------------------------------------------
+
+## Rückblick, Fragen und Diskussionen
+
+> C# ist furchtbar aufgebläht ... wer braucht so etwas wie Properties? 
+>
+> -- Kursteilnehmer
+
+Sprachunterschiede
+-------------------
+
+C++ und C# verfolgen unterschiedliche Ziele:  
+
+- **C++** gibt maximale Kontrolle, liegt nah an der Hardware, erfordert oft viel Boilerplate für Kapselung. Oberstes Ziel ist Perfomance und Transparenz.
+- **C#** ist eine *Managed Language*, die viele alltägliche Aufgaben übernimmt (z.B. Speicherverwaltung, Typsicherheit) und Features wie **Properties** bereitstellt, um **Datenkapselung** einfacher umzusetzen.
+
+
+Properties
+-------------------
+
+```csharp
+// C# Property
+class Person {
+    private int age;
+
+    public int Age {
+        get { return age; }
+        set {
+            if (value < 0) throw new ArgumentException("Alter darf nicht negativ sein");
+            age = value;
+        }
+    }
+}
+
+var p = new Person();
+p.Age = 25;   // Aufruf des setters
+Console.WriteLine(p.Age); // Aufruf des getters
+```
+
+> In C++ müsste man dafür Getter- und Setter-Methoden explizit definieren, in C# erledigt die Property beides in einer eleganten Syntax.
+
+> **Memo:** Es gibt keine "richtige" oder "falsche" Programmiersprache. Jede hat ihre Stärken und Schwächen. Wichtig ist, die Konzepte zu verstehen, die hinter den Sprachfeatures stehen.
+
+{{1-2}}
+<!-- data-type="none" -->
+| Format                   | Informatik Studierende  | Nicht-Informatik Studierende |
+|--------------------------|-------------------------|------------------------------|
+| Verbesserungsvorschlag   | 0                       | 0                            |
+| Fragen                   | 1                       | 0                            |
+| generelle Hinweise       | 0                       | 0                            |
 
 ## Von Rechenmaschinen zum Arduino: 200 Jahre Rechentechnik
 

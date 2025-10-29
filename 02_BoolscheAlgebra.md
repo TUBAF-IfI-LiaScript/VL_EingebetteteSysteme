@@ -77,48 +77,6 @@ style="width: 80%; min-width: 420px; max-width: 720px;"
 
 ---------------------------------------------------------------------
 
-## Rückblick, Fragen und Diskussionen
-
-> C# ist furchtbar aufgebläht ... wer braucht so etwas wie Properties? 
->
-> -- Kursteilnehmer
-
-Sprachunterschiede
--------------------
-
-C++ und C# verfolgen unterschiedliche Ziele:  
-
-- **C++** gibt maximale Kontrolle, liegt nah an der Hardware, erfordert oft viel Boilerplate für Kapselung. Oberstes Ziel ist Perfomance und Transparenz.
-- **C#** ist eine *Managed Language*, die viele alltägliche Aufgaben übernimmt (z.B. Speicherverwaltung, Typsicherheit) und Features wie **Properties** bereitstellt, um **Datenkapselung** einfacher umzusetzen.
-
-
-Properties
--------------------
-
-```csharp
-// C# Property
-class Person {
-    private int age;
-
-    public int Age {
-        get { return age; }
-        set {
-            if (value < 0) throw new ArgumentException("Alter darf nicht negativ sein");
-            age = value;
-        }
-    }
-}
-
-var p = new Person();
-p.Age = 25;   // Aufruf des setters
-Console.WriteLine(p.Age); // Aufruf des getters
-```
-
-> In C++ müsste man dafür Getter- und Setter-Methoden explizit definieren, in C# erledigt die Property beides in einer eleganten Syntax.
-
-> **Memo:** Es gibt keine "richtige" oder "falsche" Programmiersprache. Jede hat ihre Stärken und Schwächen. Wichtig ist, die Konzepte zu verstehen, die hinter den Sprachfeatures stehen.
-
-
 ## Digital vs. Analog
 
 > __Frage:__ Was bedeutet der Übergang von der Ebene der physikalischen Phänomene (0) auf die Ebene der digitalen Logik (2)?
