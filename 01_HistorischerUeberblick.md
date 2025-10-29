@@ -2,7 +2,7 @@
 
 author:   Sebastian Zug, André Dietrich, Fabian Bär & GitHub Copilot Teaching-Agent
 email:    sebastian.zug@informatik.tu-freiberg.de & andre.dietrich@informatik.tu-freiberg.de & fabian.baer@student.tu-freiberg.de
-version:  0.6.3
+version:  0.6.4
 language: de
 narrator: Deutsch Female
 
@@ -102,7 +102,7 @@ Console.WriteLine(p.Age); // Aufruf des getters
 | Fragen                   | 1                       | 0                            |
 | generelle Hinweise       | 0                       | 0                            |
 
-## Von Rechenmaschinen zum Arduino: 200 Jahre Rechentechnik
+## Von Rechenmaschinen zum uC: 200 Jahre Rechentechnik
 
     --{{0}}--
 Erinnern Sie sich an den Arduino-Code aus der letzten Vorlesung? `pinMode()`, `digitalWrite()`, `delay()` - diese einfachen Befehle sind das Ergebnis einer 200-jährigen Evolution. Heute reisen wir durch die Zeit und entdecken, wie aus mechanischen Zahnrädern die Mikrocontroller in Ihrem Arduino wurden.
@@ -176,37 +176,37 @@ Bevor wir in die Details eintauchen, verschaffen wir uns einen Überblick über 
 timeline
     title Entwicklung der Rechentechnik zu eingebetteten Systemen
 
-    1800-1850 : ■ MECHANISCHE GRUNDLAGEN
+    1800-1850 : MECHANISCHE GRUNDLAGEN
               : 1801 Jacquard-Webstuhl (Lochkarten-Programmierung)
               : 1820-1850 Rechenmaschinen (Leibniz, Pascal)
               : 1837 Babbage Analytical Engine (erste "CPU"-Konzepte)
 
-    1850-1900 : ▲ ELEKTROMECHANISCHE ZEIT
+    1850-1900 : ELEKTROMECHANISCHE ZEIT
               : 1860-1929 Herman Hollerith (IBM-Vorläufer)
               : 1886 Hollerith-Lochkartensystem
               : 1890 US-Volkszählung mit Lochkarten automatisiert
 
-    1900-1950 : ● ELEKTRISCHE REVOLUTION
+    1900-1950 : ELEKTRISCHE REVOLUTION
               : 1941 Konrad Zuse Z3 (erster funktionsfähiger Computer)
               : 1945 ENIAC (18.000 Elektronenröhren)
               : 1945 von Neumann-Architektur (moderne CPU-Struktur)
               : 1947 Transistor erfunden
 
-    1950-1980 : ◆ TRANSISTOR-ÄRA & MINIATURISIERUNG
+    1950-1980 : TRANSISTOR-ÄRA & MINIATURISIERUNG
               : 1958 Integrierte Schaltkreise (Jack Kilby)
               : 1965 Moore's Law formuliert
               : 1971 Intel 4004 (erster Mikroprozessor)
               : 1975 Intel 8080 (8-Bit-Ära)
               : 1978 Intel 8086 (16-Bit-Architektur)
 
-    1980-2000 : ★ mC-REVOLUTION
+    1980-2000 : uC-REVOLUTION
               : 1982 Intel 8051 (embedded Standard)
               : 1985 ARM-Architektur entwickelt
               : 1990er Atmel AVR-Familie
               : 1995 erste RISC-Mikrocontroller
               : Echtzeitbetriebssysteme etabliert
               
-    2000-2020 : ◉ UBIQUITOUS COMPUTING
+    2000-2020 : UBIQUITOUS COMPUTING
                : 2005 Arduino-Projekt gestartet
                : 2008 ARM Cortex-M Serie (32-Bit embedded)
                : 2012 Raspberry Pi (Linux auf ARM)
@@ -214,7 +214,7 @@ timeline
                : 2016 RISC-V Open Source ISA
                : Edge Computing & Sensor Networks
 
-    2020-heute : ◈ INTELLIGENT EMBEDDED SYSTEMS
+    2020-heute : INTELLIGENT EMBEDDED SYSTEMS
                 : Multi-Core Mikrocontroller
                 : 2020s TinyML auf MCU-Level
                 : RISC-V Mainstream
@@ -231,33 +231,49 @@ Faszinierend: Diese Timeline zeigt die kontinuierliche Evolution der technischen
 {{0-1}}
 Ausgangspunkt für die Vereinfachung des Rechnens ist das Konzept des Stellenwertsystems. In einer positionsunabhängigen Darstellung bedarf es immer neuer Symbole um größere Zahlen auszudrücken. Im römischen Zahlensystem sind dies die bekannten Formate `MDCCLXV`. Können Sie den Zahlenwert rekonstruieren - es ist das Gründungsjahr der Bergakademie.
 
-{{0-1}}
+    --{{0}}--
+**Antwort:** MDCCLXV = 1000 + 500 + 200 + 50 + 10 + 5 = 1765 - Gründung der Bergakademie Freiberg! Interessant: Additive Zahlensysteme wie das römische sind für maschinelle Verarbeitung ungeeignet, da jede Ziffer einzeln dekodiert werden muss.
+
+{{1-2}}
 > Die Idee, den Wert einer Ziffer von ihrer Position innerhalb der ganzen Zahl abhängig zu machen, geht auf den indischen Kulturkreis zurück. Die sogenannten "arabischen" Zahlen integrieren dafür einen zentrale Voraussetzung, die "0". Ohne die Null ist es nicht möglich, den Wert einer einzelnen Ziffer zu vervielfachen.
 
-{{1-2}}
+    --{{1}}--
+Die Null ist entscheidend für digitale Logik! In Ihrem Arduino repräsentiert 0V = "0" und 5V = "1". Ohne das Konzept der Null gäbe es keine Boolesche Algebra, keine Gatter, keine Mikrocontroller. Die indische Innovation der Null ermöglichte letztendlich die gesamte Digitaltechnik.
+
+    --{{1}}--
+**Binärsystem-Verbindung:** Das Stellenwertsystem ist fundamental für alle Computer! Ihr Arduino arbeitet intern nur mit Binärzahlen (Basis 2) - `pinMode(13, OUTPUT)` wird zu `DDRB |= (1<<5)`, was binär 00100000 bedeutet. Das Prinzip ist identisch zu unserem Dezimalsystem, nur mit zwei statt zehn Ziffern.
+
+
+{{2-3}}
 Der Abakus greift diesen Ansatz auf und strukturiert den Rechenprozess. Dabei unterscheidet man verschiedene Systeme. Es exisitieren Vorgehensmuster für die Umsetzung der Grundrechenarten und des Wurzelziehens.
 
-{{1-2}}
-![Abakus](./images/01_Historie/Abakus_Luebeck.jpg "Abakus im Stadtzentrum von Lübeck [^Abakus]")<!-- width="60%" -->
+    --{{2}}--
+Der Abakus (ca. 2400 v. Chr.) ist eines der ältesten bekannten Rechenhilfsmittel. Er nutzt das Stellenwertsystem, indem Perlen auf Stäben verschoben werden, um Zahlen darzustellen und Rechenoperationen durchzuführen.
 
-[^Abakus]: Dietmar Rabich, Abakus des Wissenschaftspfads, Lübeck, Schleswig-Holstein, Deutschland, https://commons.wikimedia.org/wiki/File:L%C3%BCbeck,_Wissenschaftspfad,_Abakus_--_2017_--_0373.jpg
+    --{{2}}--
+**CPU-Analogie:** Der Abakus ist erstaunlich ähnlich zu Ihrem Arduino! Die Perlen = Register (Speicher für Zwischenergebnisse), die Stäbe = Datenbusse (Transportwege), die Rechenregeln = Algorithmus (Ihr Arduino-Code), der Benutzer = Control Unit (Steuerwerk). Sogar Parallel-Processing gibt es: mehrere Stäbe gleichzeitig bearbeiten!
 
 {{2-3}}
+![Abakus](./images/01_Historie/Abakus_Luebeck.jpg "Abakus im Stadtzentrum von Lübeck Dietmar Rabich, Abakus des Wissenschaftspfads, Lübeck, Schleswig-Holstein, Deutschland, https://commons.wikimedia.org/wiki/File:L%C3%BCbeck,_Wissenschaftspfad,_Abakus_--_2017_--_0373.jpg")<!-- width="60%" -->
+
+{{3-4}}
 Eine weitreichendere Unterstützung beim eigentlichen Rechenprozess bieten die Napierschen Rechenstäbe (John Napier 1550 - 1617), die insbesondere die Multiplikation einer Ziffer mit einer beliebig großen Zahl unterstützen.
 
-{{2-3}}
+    --{{3}}--
+**Embedded-System-Prinzip:** Napiers Rechenstäbe sind das erste adaptive "Look-Up-Table"-System! Ihr uC nutzt dasselbe Prinzip: In der `sin()`-Funktion stehen vorberechnete Werte in Tabellen im Flash-Speicher. Statt zu rechnen, wird nachgeschlagen - genau wie bei Napier 1617! Modern: CORDIC-Algorithmen in Mikrocontrollern.
+
+{{3-4}}
 !?[Napirsche Rechenstäbe](https://www.youtube.com/watch?v=P_dKOtHjc3o)
 
-{{3-4}}
+{{4-5}}
 Die notwendige manuelle Addition bei größeren Faktoren löste die Rechenmaschine von Wilhelm Schickard. Die Automatisierung der Addition ist mechanisch gelöst und zum Beispiel unter [Link](https://www.rechenwerkzeug.de/schickar.htm) beschrieben.
 
-{{3-4}}
+{{4-5}}
 ![Schickard](./images/01_Historie/Schickardmaschine.jpg "Nachbau der Rechenmaschine von Wilhelm Schickard [^Schickard]") <!-- width="60%" -->
 
-{{3-4}}
-!?[Wilhelm Schickards Rechenmaschine](https://www.youtube.com/watch?v=N_uiwO8lT5c)
+{{4-5}}
+!?[Wilhelm Schickards Rechenmaschine "Herbert Klaeren, Nachbau der Rechenmaschine von Wilhelm Schickard, https://commons.wikimedia.org/wiki/File:Schickardmaschine.jpg"](https://www.youtube.com/watch?v=N_uiwO8lT5c)
 
-[^Schickard]:  	Herbert Klaeren, Nachbau der Rechenmaschine von Wilhelm Schickard, https://commons.wikimedia.org/wiki/File:Schickardmaschine.jpg
 
 {{4-5}}
 Blair Pascal, Gottfried Wilhelm Leibniz und andere Entwickler trieben die Entwicklung weiter, erweiterten die Stellensysteme, integrierten weitere Rechenarten hatten aber insgesamt mit den mechanischen Herausforderungen und fehlender Fertigungsgenauigkeit zu kämpfen.
@@ -273,7 +289,23 @@ Diesen Aspekt kann man auf technischer und theoretischer Ebene betrachten.
 
 Die Grundlagen moderner Rechner legten die Arbeiten von Georg Boole (1815 - 1864), der eine boolesche Algebra (oder einen booleschen Verband) definierte, die die Eigenschaften der logischen Operatoren UND, ODER, NICHT sowie die Eigenschaften der mengentheoretischen Verknüpfungen Durchschnitt, Vereinigung, Komplement verallgemeinert. Gleichwertig zu booleschen Algebren sind boolesche Ringe, die von UND und ENTWEDER-ODER (exklusiv-ODER) beziehungsweise Durchschnitt und symmetrischer Differenz ausgehen.
 
-![Boole](./images/01_Historie/George_Boole_color.jpg "Georg Boole "Autor unbekannt, George Boole, https://commons.wikimedia.org/wiki/File:George_Boole_color.jpg")<!-- width="30%" -->
+    --{{0}}--
+**Arduino-Hardware-Verbindung:** Booles Algebra von 1854 läuft EXAKT in Ihrem Arduino! Jeder `if(digitalRead(2) && digitalRead(3))` ist ein AND-Gatter. Die Hardware-Register wie PORTB werden mit OR (`|=`) und AND (`&=`) manipuliert. Booles abstrakte Mathematik wurde 1947 zu Transistor-Gattern und 2009 zu Ihrem Arduino!
+
+![Boole](./images/01_Historie/George_Boole_color.jpg "Georg Boole Autor unbekannt, George Boole, https://commons.wikimedia.org/wiki/File:George_Boole_color.jpg")<!-- width="30%" -->
+
+$$
+f(a,b,c) = (a \land b) \lor (\neg c) \\
+f(a,b,c) = (a \cdot b) + (\overline{c}) 
+$$
+
+      {{1-2}}
+**Praktisches Beispiel:** Diese Formel könnte in Arduino-Code so aussehen: `if((sensor_A && sensor_B) || !sensor_C)` - identisch zu Booles Notation von 1854! Ihr ATmega328P führt solche Operationen in seinen ALU-Gattern hardware-nativ aus.
+
+Im Rahmen dieser Vorlesung werden wir die boolesche Algebra als Grundlage für die digitale Logik verwenden.
+
+    --{{1}}--
+**Warum ist das revolutionär?** Boole schuf die mathematische Grundlage für ALLE digitale Elektronik. Ohne seine Algebra gäbe es keine Transistor-Gatter, keine CPUs, keine Mikrocontroller. Ihr Arduino ist Booles Theorie in Silizium gegossen!
 
 ### Joseph-Marie Jacquard (1752 - 1834) - Automatischer Webstuhl
 
@@ -294,17 +326,15 @@ Ausgangspunkt war die Konstruktion einer Rechenmaschine für die Lösung polynom
 + Zahlendarstellung: dezimale Festkommazahlen, pro Stelle ein Zahnrad
 + Arbeitsspeicher zwischen 1,6 und 20 kB (umstritten)
 
-    --{{0}}--
-Moment mal - 20 kB Arbeitsspeicher? Ihr Arduino Uno hat 2 kB SRAM! Babbage plante 1837 bereits zehnmal mehr RAM als Ihr moderner Mikrocontroller tatsächlich hat. Das zeigt: Speicher war schon damals der Flaschenhals.
-
 _The result of my reflections has been that numbers containing more than thirty places of figures will not be required for a long time to come. _
+
+    --{{0}}--
+Auch Genies irren. Babbage blieb den dezimalen Zahlen treu, obwohl die binäre Darstellung schon damals bekannt war. Die mechanische Realisierung von Zahnrädern für jede Ziffer machte die Maschine extrem komplex und fehleranfällig.
 
     --{{1}}--
 Eine weitere Parallele zu heute: Babbage dachte, 30 Dezimalstellen würden "für lange Zeit" ausreichen. Heute rechnen wir mit 32-Bit-Zahlen - das sind etwa 10 Dezimalstellen. Manchmal liegen die Visionäre richtig, aber aus den falschen Gründen!
 
 Die Maschine wurde zu Lebzeiten von Babbage nicht realisiert und nur in Teilen durch seinen Sohn implementiert. Aktuell exisitieren in verschiedenen Museen unterschiedliche Neubauten.
-
-![Analytical Engine](./images/01_Historie/Analytical_Engine.jpg "Rekonstruktionsversuch der Analytical Engine im Science Museum London (Science Museum London / Science and Society Picture Library , https://commons.wikimedia.org/wiki/File:Babbages_Analytical_Engine,_1834-1871._(9660574685).jpg)")<!-- width="60%" -->
 
 !?[Analytical Engine](https://www.youtube.com/watch?v=_fyUtU6LVNY&feature=emb_logo)
 
@@ -373,19 +403,7 @@ Bereits Vorwegname der Kernelemente moderner Architekturen:
 
 + Gleitkommaformat
 + Mikroprogrammierung
-+ Pipeline-Konzept
-+ Carry-Look-Ahead Addierer
-
-![Z3Pipeline](./images/01_Historie/PipelineZ3.png "Sechzig Jahre Computergeschichte (Autor: Raul Rojas, Sechzig Jahre Computergeschichte - Die Architektur der Rechenmaschinen Z1 und Z3 [Link](https://www2.informatik.uni-halle.de/wcms/dokumente/forschung/techreports/96-43report_3.pdf)")<!-- width="80%" -->
-
-### Eniac
-
-Electronic Numerical Integrator and Computer (ENIAC)
-
-+ 18000 Röhren, 1500 Relais
-+ 130 $m^2$, 30 Tonnen, 140 kW
-+ dezimale Kodierung
-+ ca. 5000 Additionen je Sek.
++ Pipeline
 + 20 Akkumulatoren, 1 Multiplizierer, 3 Funktionstabellen
 + programmiert durch Kabel-Verbindungen
 + E/A mittels Lochkarten
@@ -491,7 +509,7 @@ style="width: 80%; display: block; margin-left: auto; margin-right: auto;"-->
     --{{0}}--
 Jetzt kommt die Auflösung: Diese ganze Geschichte erklärt, warum Ihr Arduino so funktioniert, wie er funktioniert. Jede Zeile Code, die Sie schreiben, steht auf den Schultern von 200 Jahren Innovation.
 
-+ **Die historische Entwicklung zeigt Muster auf**, die sich wiederholen - auch bei den Fehlprognosen:
+> Die historische Entwicklung zeigt Muster auf, die sich wiederholen - auch bei den Fehlprognosen:
 
     _I think there is a world market for about five computers._ (Thomas J. Watson Jr., chairman of IBM, 1943)
 
@@ -509,19 +527,6 @@ Jetzt kommt die Auflösung: Diese ganze Geschichte erklärt, warum Ihr Arduino s
 
     _Smartphones will never replace cameras._ (Kodak executives, 2000s)
 
-    --{{1}}--
-**************************************************************
-
-Diese Fehleinschätzungen folgen einem Muster: Die Experten unterschätzten IMMER drei Dinge - Miniaturisierung, Vernetzung und Benutzerfreundlichkeit. Ken Olsen konnte sich 1977 nicht vorstellen, warum jemand einen Computer zu Hause haben wollte. Steve Ballmer lachte 2007 über das iPhone. Kodak dachte, Smartphones würden niemals Kameras ersetzen. Das Muster? Etablierte Experten denken in den Grenzen ihrer aktuellen Technologie, statt radikal neu zu denken.
-
-+ **Ihre Arduino-Projekte sind Teil dieser Geschichte** - Sie programmieren die gleichen Grundkonzepte, die von Babbage erdacht und von den Intel-Ingenieuren perfektioniert wurden.
-
-+ **Patterns wiederholen sich:** Von-Neumann-Architektur (1945) → Intel 4004 (1971) → ATmega328P (2008) → Ihre nächsten Projekte (2025+)
-
-**************************************************************
-
-    --{{2}}--
-Das Coolste: Sie sind Teil dieser Entwicklung! Jedes Arduino-Projekt, das Sie bauen, steht in direkter Linie zu den Visionären von gestern. Die Geschichte geht weiter - mit Ihnen als Autor der nächsten Kapitel.
 
 
 ## Hausaufgabe
