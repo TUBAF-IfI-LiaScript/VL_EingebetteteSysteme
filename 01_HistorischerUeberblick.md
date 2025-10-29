@@ -2,7 +2,7 @@
 
 author:   Sebastian Zug, André Dietrich, Fabian Bär & GitHub Copilot Teaching-Agent
 email:    sebastian.zug@informatik.tu-freiberg.de & andre.dietrich@informatik.tu-freiberg.de & fabian.baer@student.tu-freiberg.de
-version:  0.6.4
+version:  0.6.5
 language: de
 narrator: Deutsch Female
 
@@ -292,7 +292,7 @@ Die Grundlagen moderner Rechner legten die Arbeiten von Georg Boole (1815 - 1864
     --{{0}}--
 **Arduino-Hardware-Verbindung:** Booles Algebra von 1854 läuft EXAKT in Ihrem Arduino! Jeder `if(digitalRead(2) && digitalRead(3))` ist ein AND-Gatter. Die Hardware-Register wie PORTB werden mit OR (`|=`) und AND (`&=`) manipuliert. Booles abstrakte Mathematik wurde 1947 zu Transistor-Gattern und 2009 zu Ihrem Arduino!
 
-![Boole](./images/01_Historie/George_Boole_color.jpg "Georg Boole Autor unbekannt, George Boole, https://commons.wikimedia.org/wiki/File:George_Boole_color.jpg")<!-- width="30%" -->
+![Boole](./images/01_Historie/George_Boole_color.jpg "Georg Boole Autor unbekannt, https://commons.wikimedia.org/wiki/File:George_Boole_color.jpg")<!-- width="30%" -->
 
 $$
 f(a,b,c) = (a \land b) \lor (\neg c) \\
