@@ -1,13 +1,14 @@
 <!--
 
-author:   Sebastian Zug & André Dietrich & Fabian Bär
+author:   Sebastian Zug & André Dietrich & Fabian Bär & Copilot
 email:    sebastian.zug@informatik.tu-freiberg.de & andre.dietrich@informatik.tu-freiberg.de & fabian.baer@student.tu-freiberg.de
-version:  0.0.3
+version:  0.0.4
 language: de
 narrator: Deutsch Female
 
 import:   https://raw.githubusercontent.com/LiaTemplates/NetSwarm-Simulator/master/README.md
           https://raw.githubusercontent.com/TUBAF-IfI-LiaScript/VL_EingebetteteSysteme/master/config.md
+          
 -->
 
 [![LiaScript](https://raw.githubusercontent.com/LiaScript/LiaScript/master/badges/course.svg)](https://liascript.github.io/course/?https://raw.githubusercontent.com/TUBAF-IfI-LiaScript/VL_EingebetteteSysteme/master/02_BoolscheAlgebra.md#1)
@@ -39,6 +40,9 @@ import:   https://raw.githubusercontent.com/LiaTemplates/NetSwarm-Simulator/mast
 
 ---------------------------------------------------------------------
 
+
+## Digital vs. Analog
+
 <!--
 style="width: 80%; min-width: 420px; max-width: 720px;"
 -->
@@ -67,7 +71,7 @@ style="width: 80%; min-width: 420px; max-width: 720px;"
            +----------------------------+   |
                                             ⎬ Automaten, Speicher, Logik
            +----------------------------+   |       ╔═══════════════╗
-  Ebene 1  | Digitale Logik             |   |   ◀══║ HIER SIND WIR!║
+  Ebene 1  | Digitale Logik             |   |    ◀══║ HIER SIND WIR!║
            +----------------------------+  -.       ╚═══════════════╝
 
            +----------------------------+
@@ -75,11 +79,7 @@ style="width: 80%; min-width: 420px; max-width: 720px;"
            +----------------------------+                                      .
 ```
 
----------------------------------------------------------------------
-
-## Digital vs. Analog
-
-> __Frage:__ Was bedeutet der Übergang von der Ebene der physikalischen Phänomene (0) auf die Ebene der digitalen Logik (2)?
+> __Frage:__ Was bedeutet der Übergang von der Ebene der physikalischen Phänomene (0) auf die Ebene der digitalen Logik (1)?
 
                               {{1}}
 ********************************************************************************
@@ -141,9 +141,7 @@ Die Abtastung und Bildung des Digitalsignals erfolgt üblicherweise in konstante
 
 ### Exkurs: Kontrastprogramm - Analoge Rechner
 
-![Meda42](./images/02_BoolscheAlgebra/Analogrechner_MEDA_42TA.jpg "Analogrechner MEDA 42TA Aritma Prag [^AnalogRechner]")<!-- width="50%" -->
-
-[^AnalogRechner]: Wuselig, Deutsch: Analogrechner MEDA 42TA Aritma Prag, Tschechoslowakei, um 1970, https://commons.wikimedia.org/wiki/File:Analogrechner_MEDA_42TA-DSC4445.jpg [Link](http://www.analogmuseum.org/deutsch/collection/meda/43/)
+![Meda42](./images/02_BoolscheAlgebra/Analogrechner_MEDA_42TA.jpg "Analogrechner MEDA 42TA Aritma Prag Wuselig, Deutsch: Analogrechner MEDA 42TA Aritma Prag, Tschechoslowakei, um 1970, https://commons.wikimedia.org/wiki/File:Analogrechner_MEDA_42TA-DSC4445.jpg")<!-- width="50%" -->
 
 Die Eingabe erfolgte durch Verbinden der Komponenten mittels Programmierschnüren, Steckern und Rechenimpedanzen (Widerstände für die Summatoren und Integratoren) auf der Programmiertafel.
 
@@ -169,6 +167,9 @@ Zur Auswertung stand zur Verfügung:
 
 ### Pegel
 
+     {{0}}
+***************************************************************
+
 > Digitalisierung: Aufteilung des kontinuierlichen Spektrums in erlaubte und verbotene Bereiche
 
 Verschiedene Standards definieren unterschiedliche Spannungspotentiale für einen High- und einen Low-Pegel. Dazwischen befindet sich der verbotene Bereich.
@@ -177,24 +178,52 @@ Verschiedene Standards definieren unterschiedliche Spannungspotentiale für eine
 style="width: 80%; min-width: 420px; max-width: 720px;"
 -->
 ```ascii
-         ^
-Spannung |   |5.0|    |   |              TTL Logikgatter
-V        |   |   |    |   |
-         |   |   |    |   |
-         |   |   |    |2.4|
-         |   |2.0|    +---+
-         |   +---+
-         |
-         |   Verbotener Bereich
-         |
-         |   +---+
-         |   |0.8|    +---+
-         |   |   |    |0.4|
-         +------------------------>
-            Eingang  Ausgang                                        .
+         TTL Logikgatter              CMOS / aktuelle Mikrocontroller (5V)
+
+         ^                            ^                           
+Spannung |   |5.0|    |   |           |   |5.0|    |   |                      
+V        |   |   |    |   |           |   |   |    |4.2|                           
+         |   |   |    |   |           |   |3.0|    +---+                            
+         |   |   |    |2.4|           |   +---+                              
+         |   |2.0|    +---+           |                                       
+         |   +---+                    |                              
+         |                            |                           
+         |   Verbotener Bereich       |   Verbotener Bereich                           
+         |                            |                           
+         |   +---+                    |            +---+                  
+         |   |0.8|    +---+           |   +---+    |0.8|                          
+         |   |   |    |0.4|           |   |0.5|    |   |                           
+         +------------------------>   +------------------------>                           
+            Eingang  Ausgang             Eingang  Ausgang        .                           
 ```
 
-> **Frage:** Warum ist der undefinierte Bereich des Einganges schmaler als der des Ausganges?
+
+> **Frage:** Warum ist im TTL Kontext der undefinierte Bereich des Einganges schmaler als der des Ausganges?
+
+***************************************************************
+
+     {{1}}
+***************************************************************
+
+<!-- data-type="none" -->
+| Kriterium / Technologie | **Mechanisches Relais** | **TTL (Transistor-Transistor-Logik)** | **CMOS / Mikrocontroller-Eingang** |
+|--------------------------|-------------------------|---------------------------------------|------------------------------------|
+| **Funktionsprinzip** | Mechanischer Schalter mit elektromagnetischer Betätigung | Bipolare Transistorstufen (meist NPN) | MOSFET-Gatter mit hochohmigem Gateeingang |
+| **Schaltzeit** | 5–20 ms | 10–50 ns | < 10 ns (intern) |
+| **Stromverbrauch (aktiv)** | 100–500 mW | einige mW pro Gatter | < 1 µW (Eingang), wenige mW aktiv gesamt |
+| **Eingangswiderstand** | < 1 kΩ (Spule) | ca. 1 kΩ | > 1 MΩ (typ. 10–100 MΩ) |
+| **Schaltspannung (High)** | Abhängig von Spulenspannung (5–24 V üblich) | > 2,0 V (bei 5 V Versorgung) | > 0,7 × Vcc (z. B. > 2,1 V bei 3 V3) |
+| **Schaltspannung (Low)** | 0 V | < 0,8 V | < 0,3 × Vcc (z. B. < 1,0 V bei 3 V3) |
+| **Lebensdauer (Schaltzyklen)** | 10⁵ – 10⁷ | theoretisch unbegrenzt (keine Mechanik) | unbegrenzt (Halbleiter) |
+| **Größe** | cm-Bereich | mm-Bereich (IC) | µm-Bereich (integriert) |
+| **Isolation** | Galvanisch getrennt | Keine galvanische Trennung | Keine galvanische Trennung |
+| **Empfindlichkeit gegenüber Störungen** | Gering | Mittel | Hoch  |
+| **Kosten** | Hoch (0,5 – 2 €) | Mittel (Cent-Bereich pro Gatter) | Niedrig (Millionen Gatter pro Chip) |
+| **Typische Anwendung** | Schaltsignale in Industrie oder Leistungselektronik | Klassische Logikschaltungen | Eingänge von Mikrocontrollern, integrierte Logiksysteme |
+
+> Galvanische Trennung bedeutet, dass **kein direkter elektrischer Leiter** zwischen zwei Schaltungsteilen besteht. Die Information wird über andere physikalische Effekte übertragen, z. B.: Licht, Magnetfelder oder kapazitive Kopplung.
+
+***************************************************************
 
 ## Motivation
 
@@ -255,16 +284,12 @@ Historische Entwicklung:
 + George Boole (1815-1864) 1854 mathematische Formalisierung in _„An Investigation of the Laws of Thought on which are founded the Mathematical Theories of Logic and Probabilities"_.
 + Claude Shannon (1916-2001) hat im Rahmen seiner Masterarbeit _„On the Symbolic Analysis of Relay and Switching Circuits (1940)“_, gezeigt, dass man die Boolesche Algebra zur Beschreibung von Schaltkreisen anwenden kann.
 
-![Shannon](./images/02_BoolscheAlgebra/ClaudeShannon_MFO3807.jpg "Claude Shannon [^Shannon]")<!-- width="40%" -->
-
-[^Shannon]: Jacobs, Konrad, Shannon, Claude, https://commons.wikimedia.org/wiki/File:ClaudeShannon_MFO3807.jpg
+![Shannon](./images/02_BoolscheAlgebra/ClaudeShannon_MFO3807.jpg "Claude Shannon Jacobs, Konrad, Shannon, Claude, https://commons.wikimedia.org/wiki/File:ClaudeShannon_MFO3807.jpg")<!-- width="25%" -->
 
 > Problem: Gibt es ein Verfahren:
 >
 > + um die Äquivalenz zweier Schaltungen formal nachzuweisen ?
->
 > + um Schaltungen auf einfache Weise zu transformieren ?
->
 > + um minimale Schaltungen zu entwerfen ?
 
 __Lösung:__ Boolesche Algebra basierend auf den Vorarbeiten von G. Boole aus dem Jahre 1854
@@ -275,7 +300,7 @@ __Lösung:__ Boolesche Algebra basierend auf den Vorarbeiten von G. Boole aus de
 
 
 Die Boolesche Algebra basiert nach [Huntington](https://de.wikipedia.org/wiki/Edward_Vermilye_Huntington) auf einer Trägermenge
-$B \{0,1\}$ (Zuständen) mit zwei Verknüpfungen auf $B$ für deren Element $a\in B$, $b\in B$ und $c\in B$ gilt:
+$B = \{0,1\}$ (Zuständen) mit zwei Verknüpfungen auf $B$ für deren Elemente $a\in B$, $b\in B$ und $c\in B$ gilt:
 
 | Axiom                             | Definition |
 | --------------------------------- | ---------- |
@@ -303,7 +328,9 @@ Aus dieser Definition lassen sich die zugehörigen Gesetze der booleschen Algebr
                                      {{2}}
 ****************************************************************
 
-> Dualitätsprinzip der Booleschen Algebra ... Ersetzt man gleichzeitig in einem Axiom UND durch ODER und ODER durch UND sowie 1 durch 0 und 0 durch 1, so erhält man das zu diesem Axiom gehörige duale Axiom. Führt man diese Ersetzung in einem Theorem aus, so erhält man das zu diesem Theorem gehörige duale Theorem.
+> Das Dualitätsprinzip zeigt uns eine faszinierende Symmetrie: Jede wahre Aussage in der Booleschen Algebra hat ein "Spiegelbild" - und beide sind gleichermaßen gültig!
+
+_Ersetzt man gleichzeitig in einem Axiom UND durch ODER und ODER durch UND sowie 1 durch 0 und 0 durch 1, so erhält man das zu diesem Axiom gehörige duale Axiom. Führt man diese Ersetzung in einem Theorem aus, so erhält man das zu diesem Theorem gehörige duale Theorem._
 
 <!-- data-type="none" -->
 | Form 1                 | Form 2                     |
@@ -322,17 +349,30 @@ a+(b \cdot c) &= (a+b) \cdot (a+c)
 \end{aligned}
 $$
 
+
 ****************************************************************
 
 ## Anwendung
 
-Regeln zur Umformung Boolescher Gleichungen
+                    {{0-1}}
+****************************************************************
 
-+ Unabhängige Auswertung: Jeder Ausdruck auf der linken oder rechten Seite einer Gleichung kann durch einen anderen ersetzt werden, der mit ihm identisch ist, d.h. man kann die Ausdrücke links und rechts unabhängig voneinander vereinfachen.
+**Ziel der Umformung: Minimierung für die technische Realisierung**
 
-+ Komplementbildung: Die rechte und die linke Seite einer Gleichung können gleichzeitig durch ihre Komplemente ersetzt werden.
+> **Warum Minimierung?** In der technischen Informatik ist das Hauptziel die **Minimierung von Schaltfunktionen**. Weniger Terme bedeuten weniger Gatter, geringere Kosten, höhere Geschwindigkeit und niedrigeren Energieverbrauch!
 
-+ Erweiterung: Jede Seite einer Gleichung kann mit demselben Ausdruck oder mit einem äquivalenten Ausdruck durch den UND-Operator verknüpft werden. Dual dazu gilt, dass zu jeder Seite äquivalente Ausdrücke durch den ODER-Operator verknüpft werden können.
+**Grundlegende Strategien zur Minimierung:** Nutze die Booleschen Gesetze zur schrittweisen Reduktion der Terme.
+
+**Beispiel:** 
+
+$a \cdot b + a \cdot \overline{b} + a \cdot c = a \cdot (b + \overline{b}) + a \cdot c = a \cdot 1 + a \cdot c = a + a \cdot c = a$ (Absorption!)
+
+**Von 3 Produkttermen auf nur 1 Variable reduziert!**
+
+****************************************************************
+
+                    {{1-2}}
+****************************************************************
 
 **Anwendungsbeispiel 1**
 
@@ -348,17 +388,23 @@ f(x_1, x_2, x_3) &= x_1 \cdot x_2 \cdot \overline{x_3} + x_1 \cdot x_2 \cdot x_3
 \end{aligned}
 $$
 
-{{1}}
+> **🎯 Minimierungs-Erfolg:** Von **5 Produkttermen** auf **2 Terme** reduziert!  
+> **Hardware-Einsparung:** 60% weniger UND-Gatter benötigt!  
+> **Faktorisierung möglich:** $x_1(x_2 + x_3)$ → Nur noch 1 UND + 1 ODER Gatter!
+
+****************************************************************
+
+                    {{2-4}}
 **Anwendungsbeispiel 2**
 
-{{1}}
+                    {{2-3}}
 $$
 \begin{aligned}
 f(w,x,y,z) &=\overline{w}x\overline{y}\,\overline{z}+\overline{w}x\overline{y}z+w\overline{x}y\overline{z}+wx\overline{y}\,\overline{z}+wx\overline{y}z \\
 \end{aligned}
 $$
 
-{{2}}
+{{3-4}}
 $$
 \begin{aligned}
 f(w,x,y,z) &=\overline{w}x\overline{y}\,\overline{z}+\overline{w}x\overline{y}z+w\overline{x}y\overline{z}+wx\overline{y}\,\overline{z}+wx\overline{y}z \\
@@ -372,10 +418,16 @@ f(w,x,y,z) &=\overline{w}x\overline{y}\,\overline{z}+\overline{w}x\overline{y}z+
 \end{aligned}
 $$
 
-{{3}}
+
+{{3-4}}
+> **🎯 Beeindruckende Reduktion:** Von **5 komplexen 4-Variablen-Termen** auf nur **2 einfache Terme**!  
+> **Gatter-Einsparung:** Ursprünglich 20+ UND-Gatter → Jetzt nur noch 4 UND-Gatter (80% Reduktion!)  
+> **Praktischer Nutzen:** Weniger Chips, niedrigere Kosten, höhere Zuverlässigkeit!
+
+{{4}}
 **Anwendungsbeispiel 3**
 
-{{3}}
+{{4}}
 $$
 \begin{aligned}
 f(x_1, x_2) &=\overline{\overline{\overline{x}_1 x_2(x_1 +\overline{x}_1)}}  + x_1\overline{x_2x_1} \\
@@ -383,29 +435,44 @@ f(x_1, x_2) &=\overline{\overline{\overline{x}_1 x_2(x_1 +\overline{x}_1)}}  + x
 $$
 
 {{4}}
+> Jetzt sind Sie dran! 
+
+{{5}}
 $$
 \begin{aligned}
 f(x_1, x_2) &=\overline{\overline{\overline{x}_1 x_2(x_1 +\overline{x}_1)}}  + x_1\overline{x_2x_1} \\
-&=\overline{\overline{\overline{x}_1 x_2}}  + x_1\overline{x_2x_1} \\
-&=\overline{x}_1 x_2 + x_1\overline{x_2x_1} \\
-&=\overline{x}_1 x_2 + x_1(\overline{x}_2 + \overline{x}_1)\\
-&=\overline{x}_1 x_2 + x_1\overline{x}_2 + x_1\overline{x}_1\\
-&=\overline{x}_1 x_2 + x_1\overline{x}_2\\
+&=\overline{\overline{\overline{x}_1 x_2 \cdot 1}}  + x_1\overline{x_2x_1} & \text{(Komplement: } x_1 +\overline{x}_1 = 1\text{)} \\
+&=\overline{\overline{\overline{x}_1 x_2}}  + x_1\overline{x_2x_1} & \text{(Neutrales Element: } a \cdot 1 = a\text{)} \\
+&=\overline{x}_1 x_2 + x_1\overline{x_2x_1} & \text{(Doppelnegation: } \overline{\overline{a}} = a\text{)} \\
+&=\overline{x}_1 x_2 + x_1(\overline{x}_2 + \overline{x}_1) & \text{(De Morgan: } \overline{a \cdot b} = \overline{a} + \overline{b}\text{)} \\
+&=\overline{x}_1 x_2 + x_1\overline{x}_2 + x_1\overline{x}_1 & \text{(Distributiv)} \\
+&=\overline{x}_1 x_2 + x_1\overline{x}_2 + 0 & \text{(Komplement: } x_1\overline{x}_1 = 0\text{)} \\
+&=\overline{x}_1 x_2 + x_1\overline{x}_2 & \text{(Neutrales Element: } a + 0 = a\text{)} \\
+&=\overline{x}_1 \oplus x_2 & \text{(Definition XOR: } a \oplus b = \overline{a}b + a\overline{b}\text{)} \\
 \end{aligned}
 $$
+
+{{6}}
+> **🎉 Aha-Moment erreicht!** 
+> 
+> **Ergebnis:** Komplexe verschachtelte Negationen → Einfache XOR-Funktion!  
+> **Hardware-Gewinn:** Von 6+ Negationsgattern auf nur 2 Terme reduziert!  
+> **Erkenntnisse:** Systematisches Vorgehen macht selbst komplexeste Ausdrücke lösbar!
 
 ## Schaltfunktionen
 
 + Funktionen $f:\{0,1\}^n \rightarrow \{0,1\}^m$ mit $n, m \geq 1$ werden auch als Schaltfunktionen bezeichnet
 + Eine Schaltfunktion $f:\{0,1\}^n \rightarrow \{0,1\}^m$ heißt eine $n$-stellige Boolesche Funktion
 + Jede Schaltfunktion $f:\{0,1\}^n \rightarrow \{0,1\}^m$ kann durch $m$ Boolesche Funktionen ausgedrückt werden
-+ Jede Boolesche Funktion lässt sich eindeutig beschreiben
++ Jede Boolesche Funktion lässt sich beschreiben
 
-  + durch eine Wahrheitstabelle (auch Wahrheitstafel genannt)
+  + durch eine Wahrheitstabelle / Wahrheitstafel 
   + durch einen booleschen Ausdruck (gebildet durch Boolesche Variablen und Operationen aus der Booleschen Algebra)
   + ein Schaltwerk aus logischen Gattern
 
-+ Es gibt $2^{2^n}$ verschiedene $n$-stellige Boolesche Funktionen (also 16 zweistellige, 256 dreistellige, 65536 fünfstellige, ...)
++ Es gibt $2^{2^n}$ verschiedene $n$-stellige Boolesche Funktionen (also 16 zweistellige, 256 dreistellige, 65536 vierstellige, ...)
+
+> Achtung: Nur die Wahrheitstafel ist in jedem Fall eindeutig!
 
 {{1}}
 > Stellen Sie eine Wahrheitstafel für folgende Schaltfunktion auf:
@@ -439,7 +506,7 @@ $$
 | 1     | 1     | 1     | 0   |                                                           |
 
 {{3}}
-> Und die Schaltfunktionen?
+> Und die Schaltfunktionen? Kann man diese auch systematisch darstellen?
 
 ### Schaltfunktionen mit einem Eingang
 
@@ -454,7 +521,7 @@ Die möglichen 4 Kombinationen einer Schaltfunktion mit einem Eingang lassen sic
 
 ### Schaltfunktionen mit zwei Eingängen
 
-Die möglichen 4 Kombinationen einer Schaltfunktion mit einem Eingang lassen sich wie folgt gliedern:
+Die möglichen 16 Kombinationen einer Schaltfunktion mit zwei Eingängen lassen sich wie folgt gliedern:
 
 Konjunktion == UND == AND
 
@@ -510,6 +577,8 @@ zur Realisierung einer Funktion $Y = f (A,B,C,...)$
 ![instruction-set](./images/02_BoolscheAlgebra/RelaisAND.png)<!-- width="45%" -->
 ![instruction-set](./images/02_BoolscheAlgebra/TransistorAND.png)<!-- width="45%" -->
 
+Wir gehen bei der Frage der Schaltnetze in Vorlesung 04 nochmals auf die technische Realisierung ein.
+
 {{1}}
 > Und das exklusive ODER, hätten Sie eine Idee?
 
@@ -523,12 +592,7 @@ zur Realisierung einer Funktion $Y = f (A,B,C,...)$
 | 1     | 1     | 0   |
 
 {{2}}
-![instruction-set](./images/02_BoolscheAlgebra/SchaltwerkXORLoesung.png "Realisierung einer XOR Funktion mit Relais [^XOR]")<!-- width="45%" -->
-
-
-[^XOR]:  Autor "Rk sTEk",  XOR in Relais-Logik - berichtigte Version, https://de.m.wikipedia.org/wiki/Datei:Relay_xor.svg
-
-Wir gehen bei der Frage der Schaltnetze in Vorlesung 04 nochmals auf die technische Realisierung ein.
+![instruction-set](./images/02_BoolscheAlgebra/SchaltwerkXORLoesung.png "Realisierung einer XOR Funktion mit Relais Autor: 'Rk sTEk',  XOR in Relais-Logik - berichtigte Version, https://de.m.wikipedia.org/wiki/Datei:Relay_xor.svg")<!-- width="45%" -->
 
 ## Hausaufgaben
 
@@ -536,7 +600,7 @@ Wir gehen bei der Frage der Schaltnetze in Vorlesung 04 nochmals auf die technis
 
 ![instruction-set](./images/02_BoolscheAlgebra/Schaltwerk2.png)<!-- width="65%" -->
 
-2. Studieren Sie das Datenblatt eines AND Gates, welches Sie unter [Link](https://www.ti.com/lit/ds/symlink/sn74lvc2g08-ep.pdf?ts=1603723493940&ref_url=https%253A%252F%252Fwww.google.com%252F) finden und beantworten Sie folgende Fragen:
+2. Studieren Sie das Datenblatt eines AND Gates, welches Sie unter [Link](https://www.ti.com/lit/ds/symlink/sn74lvc2g08-ep.pdf?ts=1761744031191) finden und beantworten Sie folgende Fragen:
 
    + Wie groß ist die maximale Verzögerung, mit der der Ausgang dem Eingang nachfolgt?
    + Was bedeuten die Kreuze in der Wahrheitstafel (_Function table_)?

@@ -455,6 +455,8 @@ Beispiel: Intel 4004-Architektur (1971)
 + Anzahl Befehle: 46
 + Bauform: 16 Pin (DIP)
 
+> Halten Sie nach der GoldCap-Variante Ausschau!
+
     --{{0}}--
 Jetzt wird's spannend: Vergleichen wir das mit Ihrem Arduino! Der ATmega328P hat etwa 100.000 Transistoren (40x mehr), läuft mit 16 MHz (20x schneller) und hat 131 Befehle. 
 
@@ -468,12 +470,12 @@ Jetzt wird's spannend: Vergleichen wir das mit Ihrem Arduino! Der ATmega328P hat
 | Wortbreite   | 4 Bit      | 8 Bit      | 2x     |
 | RAM          | 80 Byte    | 2048 Byte  | 26x    |
 
+Achtung! Die Angaben zum ATmega328P sind Schätzungen, da die Architektur proprietär ist (vgl. zum Beispiel [Link](https://arduino.stackexchange.com/questions/28049/building-an-atmega328p-from-transistors?utm_source=chatgpt.com)).
+
 > Was sagt die Befehlsanzahl aus?
 
     --{{1}}--
-Das Faszinierende: Beide verwenden die Harvard-Architektur! Der 4004 war seiner Zeit voraus und verwendete getrennte Speicher für Programm und Daten - genau wie Ihr Arduino heute.
-
-> Halten Sie nach der GoldCap-Variante Ausschau!
+Offenbar ist das Steuerwerk des ATmega deutlich komplexer und kann kompliziertere Befehle verarbeiten. Es fehlen dem Intel 4004 viele der heute üblichen Operationen (z.B. Multiplikation, Sleep Modi, Watch-Dog Reset). Das bedeutet, dass Programme auf dem 4004 länger sind (mehr Programmspeicher) und zusätzlich zur geringen Taktrate mehr "Schritte" brauchen.
 
 Unterstützung für die Interpretation aus dem Nutzerhandbuch, dass das Instruction
 set beschreibt:
@@ -507,7 +509,7 @@ style="width: 80%; display: block; margin-left: auto; margin-right: auto;"-->
 ## Warum ist das alles für Ihr Verständnis wichtig?
 
     --{{0}}--
-Jetzt kommt die Auflösung: Diese ganze Geschichte erklärt, warum Ihr Arduino so funktioniert, wie er funktioniert. Jede Zeile Code, die Sie schreiben, steht auf den Schultern von 200 Jahren Innovation.
+Weil ein solides Hardwarewissen Ihnen hilft Software besser zu verstehen ... und falsche Statements zu erkennen!
 
 > Die historische Entwicklung zeigt Muster auf, die sich wiederholen - auch bei den Fehlprognosen:
 
@@ -523,10 +525,9 @@ Jetzt kommt die Auflösung: Diese ganze Geschichte erklärt, warum Ihr Arduino s
 
     _The iPhone has no chance of getting any significant market share._ (Steve Ballmer, Microsoft CEO, 2007)
 
-    _No one will ever need more than 637 kB of memory for a personal computer._ (Bill Gates, 1981 - angeblich)
+    _No one will ever need more than 640 kB of memory for a personal computer._ (Bill Gates, 1981 - angeblich)
 
     _Smartphones will never replace cameras._ (Kodak executives, 2000s)
-
 
 
 ## Hausaufgabe
