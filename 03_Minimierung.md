@@ -2,7 +2,7 @@
 
 author:   Sebastian Zug & André Dietrich & Fabian Bär
 email:    sebastian.zug@informatik.tu-freiberg.de & andre.dietrich@informatik.tu-freiberg.de & fabian.baer@student.tu-freiberg.de
-version:  0.0.3
+version:  0.0.4
 language: de
 narrator: Deutsch Female
 
@@ -38,6 +38,8 @@ import:   https://github.com/liascript/CodeRunner
 + Worin unterscheidet sich das Vorgehen mit dem Karnaugh-Veitch-Diagramm für Min- und Maxterme?
 
 ---------------------------------------------------------------------
+
+
 
 <!--
 style="width: 80%; min-width: 420px; max-width: 720px;"
@@ -77,7 +79,88 @@ style="width: 80%; min-width: 420px; max-width: 720px;"
 
 ---------------------------------------------------------------------
 
-## Wie weit waren wir gekommen?
+## Reflexion Ihrer Fragen / Rückmeldungen
+
+
+<!-- data-type="none" -->
+| Format                   | Informatik Studierende  | Nicht-Informatik Studierende |
+|--------------------------|-------------------------|------------------------------|
+| Verbesserungsvorschlag   | 0                       | 2                            |
+| Fragen                   | 1                       | 0                            |
+| generelle Hinweise       | 0                       | 1                            |
+
+> Was hatten wir in der vergangenen Woche gelernt?
+
+## Ausgangspunkt
+
+    --{{0}}--
+In der letzten Vorlesung haben Sie die Boolesche Algebra kennengelernt und gesehen, wie man Schaltfunktionen durch algebraische Umformungen vereinfachen kann. Erinnern Sie sich?
+
+                         {{0-2}}
+******************************************************
+
+**Rückblick: Algebraische Minimierung (Vorlesung 02)**
+
+Wir haben diese komplexe Funktion schrittweise vereinfacht:
+
+$$
+\begin{aligned}
+f(x_1, x_2, x_3) &= x_1 \cdot x_2 \cdot \overline{x_3} + x_1 \cdot x_2 \cdot x_3 + x_1 \cdot \overline{x_2} \cdot x_3 \\
+&\text{... 6 Umformungsschritte später ...} \\
+&= x_1 \cdot x_2  + x_1 \cdot x_3
+\end{aligned}
+$$
+
+******************************************************
+
+    --{{1}}--
+Das war erfolgreich, aber mühsam! Sie mussten die richtigen Gesetze in der richtigen Reihenfolge anwenden. Und bei komplexeren Funktionen wird es schnell unübersichtlich.
+
+                         {{1-2}}
+******************************************************
+
+
+**Die Herausforderungen der algebraischen Methode:**
+
+- ❌ Keine systematische Vorgehensweise
+- ❌ Fehleranfällig bei vielen Variablen  
+- ❌ Schwer zu erkennen, ob das Ergebnis minimal ist
+- ❌ Zeitaufwändig bei 4+ Variablen
+
+******************************************************
+
+    --{{2}}--
+Genau hier setzen die heutigen Verfahren an! Wir lernen systematische Methoden kennen, die immer zum minimalen Ergebnis führen.
+
+                         {{2-3}}
+******************************************************
+
+**Heute: Systematische Minimierungsverfahren**
+
+> **Das Ziel bleibt gleich:** Weniger Gatter = Geringere Kosten + Höhere Geschwindigkeit + Niedrigerer Energieverbrauch
+>
+> **Der Weg ändert sich:** Von trial-and-error zu garantiert minimalem Ergebnis!
+
+**Drei Ansätze, die wir kennenlernen:**
+
+1. **Graphisch:** Karnaugh-Veitch-Diagramme (2-4 Variablen)
+2. **Algorithmisch:** Quine-McCluskey-Verfahren (beliebig viele Variablen)
+3. **Software-gestützt:** Moderne Tools für komplexe Schaltungen
+
+******************************************************    
+
+
+## Herausforderung
+
+--{{0}}--
+Beginnen wir mit einem konkreten Beispiel, das die Grenzen der algebraischen Methode deutlich macht.
+
+                         {{0-3}}
+******************************************************
+
+> **Startpunkt für heute:** Können wir beweisen, dass zwei unterschiedlich aussehende Funktionen äquivalent sind?
+
+> **Die Aufgabe:** Beweisen Sie, dass diese beiden Funktionen äquivalent sind!
 
 $$
 \begin{aligned}
@@ -86,25 +169,39 @@ g(x_1, x_2, x_3, x_4) &= x_3\overline{x}_1 + x_4\overline{x}_2
 \end{aligned}
 $$
 
-Weisen Sie nach, dass die Terme äquivalent sind. Wie gehen Sie vor?
+******************************************************
 
-{{1}}
+    --{{1}}--
+Versuchen wir es zunächst mit algebraischen Umformungen, wie in der letzten Vorlesung. Mmmmh, scheinbar keine weitere Vereinfachung möglich. Sollten die beiden Gleichungen nicht äquivalent sein? Worin liegt unser Denkfehler?
+
+
+                         {{1-2}}
+******************************************************
+
+**Versuch 1: Algebraische Vereinfachung**
+
 $$
 \begin{aligned}
 f(x_1, x_2, x_3, x_4) &= x_3\overline{x}_1+ x_4\overline{x}_3\overline{x}_2 + \overline{x}_4x_3x_2\overline{x}_1 + x_4x_3\overline{x}_2x_1 \\
-&= x_3\overline{x}_1  + \overline{x}_4x_3x_2\overline{x}_1 + x_4x_3\overline{x}_2x_1   + x_4\overline{x}_3\overline{x}_2 & (Kommutativgesetz) \\
-&= x_3\overline{x}_1 + x_4x_3\overline{x}_2x_1   + x_4\overline{x}_3\overline{x}_2 & (Absorptionsgesetz) \\
+&= x_3\overline{x}_1  + \overline{x}_4x_3x_2\overline{x}_1 + x_4x_3\overline{x}_2x_1   + x_4\overline{x}_3\overline{x}_2 & \text{(Kommutativgesetz)} \\
+&= x_3\overline{x}_1 + x_4x_3\overline{x}_2x_1   + x_4\overline{x}_3\overline{x}_2 & \text{(Absorptionsgesetz)} \\
+&= \text{... und jetzt?} & \text{❌ Festgefahren!}
 \end{aligned}
 $$
 
-{{1}}
-Mmmmh, scheinbar keine weitere Vereinfachung möglich ... sollten die beiden Gleichungen nicht äquivalent sein? Worin liegt unser Denkfehler?
+> **❌ Problem erkannt:** Die bisherigen algebraischen Methoden führen uns hier in eine Sackgasse!  
+> **Aber:** Die Funktionen SIND tatsächlich äquivalent - wir müssen es nur beweisen können!
+
+******************************************************
 
 
-       {{2}}
+    --{{2}}--
+Alternativ können wir die Äquivalenz über Wahrheitstabellen überprüfen. Das funktioniert zwar nur bis zu einer gewissen Größe, ist aber systematisch! Die Wahrheitstabelle zeigt: Die rot markierten Zeilen werden von unserem minimierten Term $x_4\overline{x}_2$ abgedeckt! Aber das manuelle Erstellen von Wahrheitstabellen ist mühsam.
+
+       {{2-3}}
 ********************************************************************************
 
-Alternativ können wir den Nachweis der Äquivalenz auch über die Wertetabellen darstellen. Das funktioniert natürlich nur bis zu einer gewissen Größe. Aber die Wertetabelle macht auch deutlich, dass wir mit unseren schon minimierten Termen $x_3\overline{x}_1$ deutlich mehr Terme einschließen!
+**Versuch 2: Nachweis über Wahrheitstabelle**
 
 <!-- data-type="none" style="table-layout: fixed; max-width:800px;"-->
 | $x_4$                                 | $x_3$ | $x_2$                                 | $x_1$ | $f$ |                                                           |
@@ -126,49 +223,64 @@ Alternativ können wir den Nachweis der Äquivalenz auch über die Wertetabellen
 | 1                                     | 1     | 1                                     | 0     | 1   | $x_3\overline{x}_1$                                       |
 | 1                                     | 1     | 1                                     | 1     | 0   |                                                           |
 
+> **✅ Erkenntnis:** Die Wahrheitstabelle beweist die Äquivalenz!  
+> **Aber:** Bei 4 Variablen = 16 Zeilen, bei 5 Variablen = 32 Zeilen, bei 6 Variablen = 64 Zeilen...  
+> **Lösung:** Wir brauchen systematische graphische oder algorithmische Verfahren!
 
 ********************************************************************************
 
-{{3}}
-$$
-\begin{aligned}
-f(x_1, x_2, x_3, x_4) &= x_3\overline{x}_1+ x_4\overline{x}_3\overline{x}_2 + \overline{x}_4x_3x_2\overline{x}_1 + x_4x_3\overline{x}_2x_1 \\
-&= x_3\overline{x}_1  + \overline{x}_4x_3x_2\overline{x}_1 + x_4x_3\overline{x}_2x_1   + x_4\overline{x}_3\overline{x}_2 & (Kommutativgesetzt) \\
-&= x_3\overline{x}_1 + x_4x_3\overline{x}_2x_1   + x_4\overline{x}_3\overline{x}_2 & (Absorbtionsgesetz) \\
-&= x_3 (\overline{x}_1 + x_4\overline{x}_2x_1)   + x_4\overline{x}_3\overline{x}_2 & (Distributivgesetz) \\
-&= x_3 ((\overline{x}_1 + x_4) \cdot (\overline{x}_1 +\overline{x}_2) \cdot (\overline{x}_1 +x_1))   + x_4\overline{x}_3\overline{x}_2 & (Idempotenzgesetz) \\
-&= x_3 ((\overline{x}_1 + x_4) \cdot (\overline{x}_1 +\overline{x}_2) \cdot (1))   + x_4\overline{x}_3\overline{x}_2 & (Neutrales Element) \\
-&= x_3 ((\overline{x}_1 + x_4) \cdot (\overline{x}_1 +\overline{x}_2)) + x_4\overline{x}_3\overline{x}_2 & (Distributivgesetz) \\
-&= x_3 (\overline{x}_1 + (x_4 \cdot \overline{x}_2))+ x_4\overline{x}_3\overline{x}_2 & (Distributivgesetz) \\
-&= x_3\overline{x}_1 + x_3x_4\overline{x}_2+ x_4\overline{x}_3\overline{x}_2 & (Distributivgesetz) \\
-&= x_3\overline{x}_1 + x_4\overline{x}_2(x_3 + \overline{x}_3) & (Distributivgesetz) \\
-&= x_3\overline{x}_1 + x_4\overline{x}_2(x_3 + \overline{x}_3) & (Idempotenz/Neutrales Element) \\
-&= x_3\overline{x}_1 + x_4\overline{x}_2 & (Fertig) \\
-\end{aligned}
-$$
 
-
-      {{3}}
+      {{3-4}}
 ********************************************************************************
-Wir sind bei einer Gleichung mit
 
-+ 9 `AND` Verknüpfungen mit teilweise 4 Eingängen
-+ 3 `OR` Verknüpfungen mit 4 Eingängen
+**Die dramatische Reduktion:**
 
-gestartet und bei
+Wir sind von einer komplexen Funktion:
 
-+ 2 `AND` Verknüpfungen mit 2 Eingängen
-+ 1 `OR` Verknüpfungen mit 2 Eingängen
++ **9 UND-Verknüpfungen** (teilweise 4 Eingänge)
++ **3 ODER-Verknüpfungen** (4 Eingänge)
 
-geendet. Allerdings kann die manuelle Lösung der Gleichungen kein Lösungsansatz für realistische Logiken sein. Welche Methodik bietet sich also an?
+zu einer minimalen Form gekommen:
+
++ **2 UND-Verknüpfungen** (2 Eingänge)
++ **1 ODER-Verknüpfung** (2 Eingänge)
+
+> **Algebraische Minimierung funktioniert, aber:**
+>
+> - ❌ Erfordert viel Erfahrung und Intuition
+> - ❌ Fehleranfällig bei vielen Schritten
+> - ❌ Keine Garantie, das Minimum zu finden
+> - ❌ Nicht skalierbar für komplexe Schaltungen
+>
+> **Wir brauchen systematische Verfahren, die:**
+>
+> - ✅ Immer zum minimalen Ergebnis führen
+> - ✅ Mechanisch anwendbar sind
+> - ✅ Auch für Anfänger funktionieren
+> - ✅ Für beliebig viele Variablen skalieren
 
 ********************************************************************************
 
+    {{4-5}}
+********************************************************************************
+**Die Lösung: Drei komplementäre Ansätze**
+
+<!-- data-type="none" style="table-layout: fixed; max-width:900px;"-->
+| Methode | Eignung | Vorteile | Nachteile |
+|---------|---------|----------|-----------|
+| **Karnaugh-Veitch-Diagramm** | 2-4 Variablen | Visuell, intuitiv, schnell | Nicht für >4 Variablen |
+| **Quine-McCluskey** | Beliebig viele Variablen | Algorithmisch, garantiert minimal | Manuell aufwändig |
+| **Software-Tools** | Komplexe Schaltungen | Automatisch, skaliert beliebig | Blackbox-Charakter |
+
+
+> Beginnen wir mit dem visuell einprägsamsten Verfahren: dem Karnaugh-Veitch-Diagramm!
+
+********************************************************************************
 
 ## Aufstellen der Normalform
 
 
-   {{0-1}}
+       {{0-1}}
 ********************************************************************************
 
 | Format                                          | Bedeutung   |
@@ -187,14 +299,13 @@ Für die Darstellung der Normalform benötigen wir zunächst weitere Begriffsdef
 
 **Produktterm**
 
-+ einfache Variable (ggf. negiert)
-+ Konjunktion mehrerer Variablen (ggf. negiert)
-+ Beispiele: $x$, $y$, $x\cdot y \cdot \overline{x}$
++ Konjunktion (UND-Verknüpfung) von Variablen (ggf. negiert)
++ Beispiele: $x\cdot y$, $x\cdot \overline{y}$, $x\cdot y \cdot \overline{z}$
 
 **Summenterm**
 
-+ wie Produktterm, jedoch Disjunktion statt Konjunktion
-+ Beispiele: $x$, $y$, $x + y$, $x + y + z$
++ Disjunktion (ODER-Verknüpfung) von Variablen (ggf. negiert)
++ Beispiele: $x + y$, $x + \overline{y}$, $x + y + z$
 
 **Minterm**
 
@@ -326,15 +437,15 @@ Damit ergibt sich die Kanonisch Konjunktive Normalform obiger Wahrheitstafel zu
 
 $$
 \begin{aligned}
-f(x_1, x_2, x_3, x_4) =& x_4+x_3+x_2+x_1 \cdot \\
-                &x_4+x_3+x_2+\overline{x}_1 \cdot \\
-                & x_4+x_3+\overline{x}_2+x_1 \cdot \\
-                & x_4+x_3+\overline{x}_2+\overline{x}_1 \cdot \\
-                & x_4+\overline{x}_3+x_2+\overline{x}_1 \cdot \\
-                & x_4+\overline{x}_3+\overline{x}_2+\overline{x}_1 \cdot \\
-                & \overline{x}_4+x_3+\overline{x}_2+x_1 \cdot \\
-                & \overline{x}_4+x_3+\overline{x}_2+\overline{x}_1 \cdot\\
-                & \overline{x}_4+\overline{x}_3+\overline{x}_2+\overline{x}_1
+f(x_1, x_2, x_3, x_4) =& (x_4+x_3+x_2+x_1) \cdot \\
+                &(x_4+x_3+x_2+\overline{x}_1) \cdot \\
+                & (x_4+x_3+\overline{x}_2+x_1) \cdot \\
+                & (x_4+x_3+\overline{x}_2+\overline{x}_1) \cdot \\
+                & (x_4+\overline{x}_3+x_2+\overline{x}_1) \cdot \\
+                & (x_4+\overline{x}_3+\overline{x}_2+\overline{x}_1) \cdot \\
+                & (\overline{x}_4+x_3+\overline{x}_2+x_1) \cdot \\
+                & (\overline{x}_4+x_3+\overline{x}_2+\overline{x}_1) \cdot\\
+                & (\overline{x}_4+\overline{x}_3+\overline{x}_2+\overline{x}_1)
 \end{aligned}
 $$
 
@@ -407,7 +518,7 @@ $A= \overline{x} \cdot \overline{y} + \overline{x} \cdot y + x \cdot \overline{y
 
 Mit dieser verschobenen Wahrheitstafel lässt sich der Fingerabdruck einer booleschen Funktion darstellen.
 
-Bespiel 1: $f= x \cdot \overline{y} + x \cdot y$
+Beispiel 1: $f= x \cdot \overline{y} + x \cdot y$
 
 <!-- data-type="none" style="table-layout: fixed; max-width:300px;"-->
 |                | $\overline{x}$ | $x$ |
