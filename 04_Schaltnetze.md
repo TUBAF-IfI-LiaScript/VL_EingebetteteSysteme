@@ -1,8 +1,8 @@
 <!--
 
-author:   Sebastian Zug & André Dietrich & Fabian Bär
+author:   Sebastian Zug & André Dietrich & Fabian Bär & Copilot
 email:    sebastian.zug@informatik.tu-freiberg.de & andre.dietrich@informatik.tu-freiberg.de & fabian.baer@student.tu-freiberg.de
-version:  0.0.7
+version:  0.0.8
 language: de
 narrator: Deutsch Female
 
@@ -60,7 +60,23 @@ style="width: 80%; min-width: 420px; max-width: 720px;"
                 Abstraktionsebenen
 
            +----------------------------+ -.
-  Ebene 6  | Problemorientierte Sprache |  |S
+  Ebene 6  | Problemorientierte Sprache |  |
+           +----------------------------+  |
+                                           ⎬ Anwendungssoftware
+           +----------------------------+  |
+  Ebene 5  | Assemblersprache           |  |
+           +----------------------------+ -.
+
+           +----------------------------+
+  Ebene 4  | Betriebssystem             |     Systemsoftware
+           +----------------------------+
+
+           +----------------------------+
+  Ebene 3  | Instruktionsset            |     Maschinensprache
+           +----------------------------+
+
+           +----------------------------+  -.
+  Ebene 2  | Mikroarchitektur           |   |
            +----------------------------+   |
                                             ⎬ Automaten, Speicher, Logik
            +----------------------------+   |       ╔═══════════════╗
@@ -76,14 +92,34 @@ style="width: 80%; min-width: 420px; max-width: 720px;"
 
 ## Feedbacks/Ergänzungen
 
-+ Logikgattersimulator https://sebastian.itch.io/digital-logic-sim
-+ Codebeispiel für Karnaugh-Veit Diagramm im Projektordner
+{{0-1}}
+<!-- data-type="none" -->
+| Format                   | Informatik Studierende  | Nicht-Informatik Studierende |
+|--------------------------|-------------------------|------------------------------|
+| Verbesserungsvorschlag   | 0                       | 2                            |
+| Fragen                   | 2                       | 1                            |
+| generelle Hinweise       | 1                       | 1                            |
+
+
+                {{1-2}}
+********************************************
 
 https://github.com/TUBAF-IfI-LiaScript/VL_EingebetteteSysteme/tree/master/exampleCode/03_Minimierung
 
 !?[](./exampleCode/03_Minimierung/KarnaughVeitch4Var.mp4)
 
 > Was gefällt Ihnen daran, wo sehen Sie ggf. Verbesserungsbedarf?
+
+********************************************
+
+                {{2-3}}
+********************************************
+
+> Können wir eine Übersicht bekommen, die die Formeln in der hier verwendeten und traditionellen Schreibweise gegenüberstellt?
+
+ja, kommt auf Seite 12.
+
+********************************************
 
 ## Beispielanwendung
 
@@ -97,7 +133,7 @@ Beispiel mit einer LED verknüpft. Ab Zustand 6 bis 14 soll diese Leuchten.
 
 ![Bild](./images/04_Schaltnetze/Kaffeemaschine.jpg) <!--style="width: 50%; max-width:700px"-->
 
-<!-- data-type="none" -->
+<!-- data-type="none" style="table-layout: fixed; max-width:900px;"-->
 | $x_3$ | $x_2$ | $x_1$ | $x_0$ | $y$ | Zustand                  |
 | ----- | ----- | ----- | ----- | --- | ------------------------ |
 | 0     | 0     | 0     | 0     | 0   | 0  - Initialisierung     |
@@ -133,25 +169,25 @@ Wie muss also die Schaltung für diese Aufgabe umgesetzt werden?
 + Beispiel: $( x + y ) \cdot ( x + y ) \cdot ( x + y )$ ist KKNF von $f(x,y)$
 
 {{0-1}}
-<!-- data-type="none" -->
-| $x_3$ | $x_2$ | $x_1$ | $x_0$ | $y$ | Minterme | Maxterme |
-| ----- | ----- | ----- | ----- | --- | -------- | -------- |
-| 0     | 0     | 0     | 0     | 0   | ???      | ???      |
-| 0     | 0     | 0     | 1     | 0   |          |          |
-| 0     | 0     | 1     | 0     | 0   |          |          |
-| 0     | 0     | 1     | 1     | 0   |          |          |
-| 0     | 1     | 0     | 0     | 0   |          |          |
-| 0     | 1     | 0     | 1     | 0   |          |          |
-| 0     | 1     | 1     | 0     | 1   |          |          |
-| 0     | 1     | 1     | 1     | 1   |          |          |
-| 1     | 0     | 0     | 0     | 1   |          |          |
-| 1     | 0     | 0     | 1     | 1   |          |          |
-| 1     | 0     | 1     | 0     | 1   |          |          |
-| 1     | 0     | 1     | 1     | 1   |          |          |
-| 1     | 1     | 0     | 0     | 1   |          |          |
-| 1     | 1     | 0     | 1     | 1   |          |          |
-| 1     | 1     | 1     | 0     | 1   |          |          |
-| 1     | 1     | 1     | 1     | 0   |          |          |
+<!-- data-type="none" style="table-layout: fixed; max-width:850px;"-->
+| $x_3$ | $x_2$ | $x_1$ | $x_0$ | $y$ | Minterm | Maxterm |
+| ----- | ----- | ----- | ----- | --- | ------- | ------- |
+| 0     | 0     | 0     | 0     | 0   | ???     | ???     |
+| 0     | 0     | 0     | 1     | 0   |         |         |
+| 0     | 0     | 1     | 0     | 0   |         |         |
+| 0     | 0     | 1     | 1     | 0   |         |         |
+| 0     | 1     | 0     | 0     | 0   |         |         |
+| 0     | 1     | 0     | 1     | 0   |         |         |
+| 0     | 1     | 1     | 0     | 1   |         |         |
+| 0     | 1     | 1     | 1     | 1   |         |         |
+| 1     | 0     | 0     | 0     | 1   |         |         |
+| 1     | 0     | 0     | 1     | 1   |         |         |
+| 1     | 0     | 1     | 0     | 1   |         |         |
+| 1     | 0     | 1     | 1     | 1   |         |         |
+| 1     | 1     | 0     | 0     | 1   |         |         |
+| 1     | 1     | 0     | 1     | 1   |         |         |
+| 1     | 1     | 1     | 0     | 1   |         |         |
+| 1     | 1     | 1     | 1     | 0   |         |         |
 
 {{1}}
 <!-- data-type="none" -->
@@ -527,14 +563,7 @@ Die als zweite Quine'sche Tabelle bezeichnete Primimplikatentafel fasst die Prim
 | $P_5$ | x        |          |          |          |          |         |         |         | x       |
 
 
-### Lösung der minimalen Überdeckung
-
-> Ziel: Die Minterme sollen nur noch in einer Zeile erscheinen.
-
-                                              {{0-1}}
-*******************************************************************
-
-__1. Intuitiver Ansatz__
+### Lösung der minimalen Überdeckung - intuitiv 
 
 Die Minterme $m_{13}$, $m_{11}$ und $m_{7}$ kommen nun in jeweils einem Primimplikanten vor. Folglich sind diese sogenannte essentielle Primimplikanten ($P_1, P_2, P_4$).
 
@@ -597,30 +626,89 @@ $$
 > Ergebnis: Unsere relevanten Primimplikanten sind $y = P_1 + P_2 + P_3 + P_4 = \overline{x}_3 x_2 x_1 +  x_3\,\overline{x}_2 +  x_3 \overline{x}_1 + x_3 \overline{x}_0$.
 
 
-*******************************************************************
+### Lösung der minimalen Überdeckung - algorithmisch 
 
-                              {{1-2}}
+                              {{0-1}}
 *******************************************************************
-
-2. Formeller
 
 **Spaltendominanzprüfung**
 
 Die Spalten werden paarweise darauf verglichen, ob nicht eine Spalte existiert, in der die markierten Primterme eine Teilmenge der markierten Primterme der anderen Spalte sind. Ist dies der Fall, so kann die Spalte mit der Obermenge gestrichen werden, denn es müssen alle Konjunktionen erfasst werden und daher ist die Konjunktion mit der Obermenge durch Auswahl der Konjunktion mit der Teilmenge ebenfalls erfasst.
 
+**Beispiel Spaltendominanz:**
+
+Bei der **Spaltendominanzprüfung** werden die Spalten der Primimplikantentafel paarweise miteinander verglichen.
+Jede Spalte repräsentiert dabei einen **Minterm** und enthält Markierungen („x“), die angeben, **welche Primimplikanten** diesen Minterm abdecken.
+
+Eine Spalte ($m_i$) **dominiert** eine andere Spalte ($m_j$),
+wenn alle „x“ in ($m_i$) auch in ($m_j$) vorkommen, also:
+
+$$
+m_i \subseteq m_j
+$$
+
+In diesem Fall kann die **größere** (also die von ($m_i$) dominierte) Spalte ($m_j$) gestrichen werden,
+denn sobald ($m_i$) abgedeckt ist, ist ($m_j$) automatisch ebenfalls abgedeckt.
+Die dominierte Spalte liefert also keine zusätzliche Bedingung für die Auswahl der Primimplikanten.
+
+|                 | ($m_1$)   | ($m_2$) | ($m_3$) |
+| --------------- | --------- | ------- | ------- |
+| ($P_A$)         | x         | x       |         |
+| ($P_B$)         | x         |         | x       |
+| Dominanzprüfung | streichen |         |         |
+
+Wir lesen die Spalten als Mengen der abdeckenden Primimplikanten:
+
+* ($m_1 = \{ P_A, P_B \}$)
+* ($m_2 = \{ P_A \}$)
+* ($m_3 = \{ P_B \}$)
+
+Da ($m_2 \subset m_1$) gilt, wird **($m_1$)** gestrichen.
+Jede Abdeckung, die ($m_2$) erfüllt, deckt automatisch auch ($m_1$) ab.
+
+
+*******************************************************************
+
+                              {{1-2}}
+*******************************************************************
+
 **Zeilendominanzprüfung**
 
-Man vergleicht die Zeilen (Primterme) der Tabelle paarweise, ob nicht eine Zeile existiert, in denen die markierten Minterme eine Teilmenge der markierten Minterme der anderen Zeile sind. Ist dies der Fall, so kann der Primterm mit der Teilmenge gestrichen werden, denn man kann für jede Markierung des gestrichenen Primterms den anderen Primterm als Ersatz nehmen. Die Relation ist hier also genau umgekehrt wie bei der Spaltendominanz.
+Bei der **Zeilendominanzprüfung** werden die **Zeilen** der Primimplikantentafel paarweise miteinander verglichen.
+Jede Zeile repräsentiert dabei einen **Primimplikanten** und enthält Markierungen („x“), die angeben, **welche Minterme** dieser Primimplikant abdeckt.
 
-> Für das Verfahren von Quine-McCluskey exisitieren webbasierte Lösungen [Link Uni Marburg](https://www.mathematik.uni-marburg.de/~thormae/lectures/ti1/code/qmc/), die zum Ausprobieren einladen. Hier ist aber das Vorgehen etwas anders - die final identifizierten essentiellen Primimplikanten werden extrahiert.
+Eine Zeile ($P_i$) **dominiert** eine andere Zeile ($P_j$),
+wenn alle „x“ in ($P_j$) auch in ($P_i$) vorkommen, also:
 
-Evaluieren Sie den Ablauf mit https://www.goldi-labs.de/SANE/view6
+$$
+P_j \subseteq P_i
+$$
+
+In diesem Fall kann die **kleinere** (also die von ($P_i$) dominierte) Zeile ($P_j$) gestrichen werden,
+denn ($P_i$) deckt **alle** Minterme ab, die ($P_j$) abdeckt — und eventuell noch mehr.
+Damit ist ($P_j$) überflüssig.
+
+
+|         | ($m_1$) | ($m_2$) | ($m_3$) | Dominanzprüfung |
+| ------- | ------- | ------- | ------- | --------------- |
+| ($P_A$) | x       | x       |         | streichen       |
+| ($P_B$) | x       | x       | x       |                 |
+
+Wir lesen die Zeilen als Mengen der abgedeckten Minterme:
+
+* ($P_A = \{ m_1, m_2 \}$)
+* ($P_B = \{ m_1, m_2, m_3 \}$)
+
+Da ($P_A \subset P_B$) gilt, wird **($P_A$)** gestrichen.
+($P_B$) deckt alle Minterme ab, die auch ($P_A$) abdeckt, und zusätzlich noch ($m_3$).
+
+> Für das Verfahren von Quine-McCluskey exisitieren webbasierte Lösungen. Evaluieren Sie den Ablauf mit https://www.goldi-labs.de/SANE/view6
 
 *******************************************************************
 
 ## Schaltungssynthese
 
-> Schaltungssynthese beschreibt die Umsetzung einer booleschen Funktion in eine Hardware-Schaltung. Grundlage sind Logikgatter, die als spezifische Schaltnetze industriell gefertigt werden.
+> **Schaltungssynthese** beschreibt die Umsetzung einer booleschen Funktion in eine Hardware-Schaltung. Grundlage sind Logikgatter, die als spezifische Schaltnetze industriell gefertigt werden.
 
 Beispiel
 
