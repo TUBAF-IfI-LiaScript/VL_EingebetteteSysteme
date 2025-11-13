@@ -541,7 +541,7 @@ Bespiel 2: $f= x \cdot \overline{y} + \overline{x} \cdot y$
        {{1-2}}
 ********************************************************************************
 Dieses Konzept lässt sich auf Funktionen mit beliebig vielen Variablen übertragen. 
-Wichtig dabei ist, dass benachbarte Kombinationen von Variablen sich nur in **einer** Variable unterscheiden. (Siehe [Gray-Code](https://itwissen.info/Gray-Code-Gray-code.html))
+Wichtig dabei ist, dass benachbarte Kombinationen von Variablen sich nur in **einer** Variable unterscheiden. (Siehe [Gray-Code](https://www.youtube.com/watch?v=4GZBNTiQYik))
 
 > Der Gray-Code ist ein stetiger Code, bei dem sich benachbarte Codewörter nur in einer einzigen binären Ziffer unterscheiden.
 >
