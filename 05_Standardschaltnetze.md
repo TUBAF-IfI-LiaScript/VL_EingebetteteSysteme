@@ -202,7 +202,7 @@ prozessor|   +----->| B      | D_2     +--------------+       |
 </div>
 
 ``` cpp  sevenSegmentDisplay.ino
-const int PINS[] = {0, 1, 2, 3, 4, 5, 6};
+const int PINS[] = {0, 1, 2, 3, 4, 5, 6, 7};
 const int PAUSE = 1000;
 byte segDigits[10][8] = {
   { 1,1,1,1,1,1,1,0 },  // = 0
