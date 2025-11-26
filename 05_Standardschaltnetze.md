@@ -1,8 +1,8 @@
 <!--
 
-author:   Sebastian Zug & André Dietrich & Fabian Bär
+author:   Sebastian Zug & André Dietrich & Fabian Bär & Copilot
 email:    sebastian.zug@informatik.tu-freiberg.de & andre.dietrich@informatik.tu-freiberg.de & fabian.baer@student.tu-freiberg.de
-version:  0.0.9
+version:  0.0.10
 language: de
 narrator: Deutsch Female
 
@@ -89,6 +89,19 @@ style="width: 80%; min-width: 420px; max-width: 720px;"
 ```
 
 ---------------------------------------------------------------------
+
+## Feedbacks/Ergänzungen
+
+{{0-1}}
+<!-- data-type="none" -->
+| Format                   | Informatik Studierende  | Nicht-Informatik Studierende |
+|--------------------------|-------------------------|------------------------------|
+| Verbesserungsvorschlag   | 2                       | 2                            |
+| Fragen                   | 2                       | 5                            |
+| generelle Hinweise       | 0                       | 1                            |
+
+{{1-2}}
+> Klausuraufgabe ...
 
 ## Dekodierer / Kodierer
 
@@ -196,7 +209,7 @@ byte segDigits[10][8] = {
   { 0,1,1,0,0,0,0,0 },  // = 1
   { 1,1,0,1,1,1,0,1 },  // = 2
   { 1,1,1,1,1,0,0,1 },  // = 3
-  { 0,1,1,0,0,0,1,1 },  // = 4rtragen Sie die Funktion in ein Karnaugh-Veitch-Di
+  { 0,1,1,0,0,0,1,1 },  // = 4
 };
 void setup() {
   for(int i=0;i<8;i++){
@@ -334,7 +347,7 @@ Wir werden dem Encoder bei der Diskussion der Peripherie eines Mikrocontrollers 
 
 ## Multiplexer / Demultiplexer
 
-Eine Mulitplexerschaltung bildet analoge oder digitale Eingangssignale auf einen Kommunikationskanal ab, der Demultiplexer übernimmt die Abbildung auf n Ausgangsleitungen.
+Eine Multiplexerschaltung bildet analoge oder digitale Eingangssignale auf einen Kommunikationskanal ab, der Demultiplexer übernimmt die Abbildung auf n Ausgangsleitungen.
 
 <!--
 style="width: 80%; min-width: 420px; max-width: 720px;"
@@ -355,11 +368,11 @@ style="width: 80%; min-width: 420px; max-width: 720px;"
        "$a_0$ $a_1$"         "$a_0$ $a_1$"                                       .
 ```
 
-| Multiplexer                                       | Dekoder                                                      |
-|---------------------------------------------------|--------------------------------------------------------------|
-| mehrere Eingänge, ein Ausgang                     | mehrere Eingänge, mehrere Ausgänge                           |
-| Steuerleitungen konfiguriereren die Weiterleitung | das Mapping wird durch die interne Logik bestimmt |
-| bildet den Pegel einer Eingangsleitung auf die Ausgangsleitung ab  | wandelt den binären Code in einen unären Code um == aktiviert eine Ausgangsleitung             |
+| Multiplexer                                                       | Dekoder                                                                            |
+| ----------------------------------------------------------------- | ---------------------------------------------------------------------------------- |
+| mehrere Eingänge, ein Ausgang                                     | mehrere Eingänge, mehrere Ausgänge                                                 |
+| Steuerleitungen konfigurieren die Weiterleitung                   | das Mapping wird durch die interne Logik bestimmt                                  |
+| bildet den Pegel einer Eingangsleitung auf die Ausgangsleitung ab | wandelt den binären Code in einen unären Code um == aktiviert eine Ausgangsleitung |
 
 ### Multiplexer
 
@@ -448,7 +461,7 @@ $y_3 = x \cdot a_1 \cdot a_0$
 {"devices":{"x":{"label":"x","type":"Button","propagation":0,"position":{"x":-50,"y":0}},"a0":{"label":"a0","type":"Button","propagation":0,"position":{"x":-45,"y":185}},"a1":{"label":"a1","type":"Button","propagation":0,"position":{"x":-50,"y":100}},"y0":{"label":"y0","type":"Lamp","propagation":0,"position":{"x":495,"y":15}},"y1":{"label":"y1","type":"Lamp","propagation":0,"position":{"x":495,"y":75}},"y2":{"label":"y2","type":"Lamp","propagation":0,"position":{"x":495,"y":130}},"y3":{"label":"y3","type":"Lamp","propagation":0,"position":{"x":500,"y":185}},"not1":{"label":"~a0","type":"Not","propagation":0,"bits":1,"position":{"x":85,"y":225}},"not2":{"label":"~a1","type":"Not","propagation":0,"bits":1,"position":{"x":45,"y":110}},"and1":{"label":"x and ~a1","type":"And","propagation":0,"bits":1,"position":{"x":150,"y":55}},"and2":{"label":"x and a1","type":"And","propagation":0,"bits":1,"position":{"x":160,"y":155}},"and3":{"label":"x and ~a1 and ~a0","type":"And","propagation":0,"bits":1,"position":{"x":345,"y":10}},"and4":{"label":"x and ~a1 and a0","type":"And","propagation":0,"bits":1,"position":{"x":345,"y":70}},"and5":{"label":"x and a1 and ~a0","type":"And","propagation":0,"bits":1,"position":{"x":345,"y":125}},"and6":{"label":"x and a1 and a0","type":"And","propagation":0,"bits":1,"position":{"x":350,"y":180}}},"connectors":[{"from":{"id":"not2","port":"out"},"to":{"id":"and1","port":"in2"}},{"from":{"id":"x","port":"out"},"to":{"id":"and1","port":"in1"}},{"from":{"id":"x","port":"out"},"to":{"id":"and2","port":"in1"},"vertices":[{"x":85,"y":75},{"x":110,"y":115}]},{"from":{"id":"and1","port":"out"},"to":{"id":"and3","port":"in1"}},{"from":{"id":"and1","port":"out"},"to":{"id":"and4","port":"in1"}},{"from":{"id":"and2","port":"out"},"to":{"id":"and5","port":"in1"},"vertices":[{"x":285,"y":135}]},{"from":{"id":"and2","port":"out"},"to":{"id":"and6","port":"in1"}},{"from":{"id":"not1","port":"out"},"to":{"id":"and3","port":"in2"},"vertices":[{"x":290,"y":225},{"x":290,"y":155}]},{"from":{"id":"not1","port":"out"},"to":{"id":"and5","port":"in2"},"vertices":[{"x":285,"y":200}]},{"from":{"id":"and3","port":"out"},"to":{"id":"y0","port":"in"}},{"from":{"id":"and4","port":"out"},"to":{"id":"y1","port":"in"}},{"from":{"id":"and5","port":"out"},"to":{"id":"y2","port":"in"}},{"from":{"id":"and6","port":"out"},"to":{"id":"y3","port":"in"}},{"from":{"id":"a1","port":"out"},"to":{"id":"not2","port":"in"}},{"from":{"id":"a1","port":"out"},"to":{"id":"and2","port":"in2"},"vertices":[{"x":35,"y":145},{"x":65,"y":185}]},{"from":{"id":"a0","port":"out"},"to":{"id":"not1","port":"in"}},{"from":{"id":"a0","port":"out"},"to":{"id":"and4","port":"in2"},"vertices":[{"x":305,"y":200}]},{"from":{"id":"a0","port":"out"},"to":{"id":"and6","port":"in2"}}],"subcircuits":{}}
 ```
 
-## Komperatoren
+## Komparatoren
 
 ... siehe Hausaufgabe
 
@@ -458,8 +471,8 @@ Nunmehr können boolesche Funktionen als Schaltnetze abbilden? Was fehlt für de
 
 ## Hausaufgaben
 
-1. Entwerfen Sie einen Komperator, der zwei zweistellige Zahlen vergleicht. Definieren Sie dazu zunächst einen Ein-Bit Komperator und nutzen sie diesen als Grundlage für die Zwei-Bit-Variante
+1. Entwerfen Sie einen Komparator, der zwei zweistellige Zahlen vergleicht. Definieren Sie dazu zunächst einen Ein-Bit-Komparator und nutzen Sie diesen als Grundlage für die Zwei-Bit-Variante
 
-2. Entwickeln Sie ein Schaltnetz, dass die Teilbarkeit durch drei von einer 4-stelligen binären Zahl prüft. Stellen Sie dazu eine Wahrheitstafel auf, minimieren Sie den Ausdruck soweit wie möglich und skizzieren Sie die Verdrahtung der Gatter.
+2. Entwickeln Sie ein Schaltnetz, das die Teilbarkeit durch drei von einer 4-stelligen binären Zahl prüft. Stellen Sie dazu eine Wahrheitstafel auf, minimieren Sie den Ausdruck soweit wie möglich und skizzieren Sie die Verdrahtung der Gatter.
 
 > Wer möchte sich mit dem NE555 beschäftigen? 

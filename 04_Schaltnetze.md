@@ -2,7 +2,7 @@
 
 author:   Sebastian Zug & André Dietrich & Fabian Bär & Copilot
 email:    sebastian.zug@informatik.tu-freiberg.de & andre.dietrich@informatik.tu-freiberg.de & fabian.baer@student.tu-freiberg.de
-version:  0.0.8
+version:  0.0.9
 language: de
 narrator: Deutsch Female
 
@@ -150,7 +150,7 @@ Beispiel mit einer LED verknüpft. Ab Zustand 6 bis 14 soll diese Leuchten.
 | 1     | 0     | 1     | 1     | 1   | 11  -                    |
 | 1     | 1     | 0     | 0     | 1   | 12  -                    |
 | 1     | 1     | 0     | 1     | 1   | 13  -                    |
-| 1     | 1     | 1     | 0     | 1   | 14  -  Wartung fällig    |
+| 1     | 1     | 1     | 0  dlr   | 1   | 14  -  Wartung fällig    |
 | 1     | 1     | 1     | 1     | 0   | 15  -  Kaffee fertig     |
 
 
@@ -238,7 +238,7 @@ $$
        {{1-3}}
 ********************************************************************************
 **Erste Stufe der Vereinfachung**
-
+dlr
 Zunächst erweitern wir unseren KDNF um einen der Minterme, so dass die möglichen Minimierungen pro Zeile offensichtlich sind.
 
 $$
@@ -707,7 +707,18 @@ Da ($P_A \subset P_B$) gilt, wird **($P_A$)** gestrichen.
 *******************************************************************
 
 ## Schaltungssynthese
+{x}_2\, \overline{x}_1  + x_3 \overline{x}_2 x_1 + x_3 x_2\overline{x}_1 +  x_3 x_1\overline{x}_0
+\end{aligned}
+$$
 
+
+
+      {{3-5}}
+********************************************************************************
+
+**Zweite Stufe der Vereinfachung**
+
+$$
 > **Schaltungssynthese** beschreibt die Umsetzung einer booleschen Funktion in eine Hardware-Schaltung. Grundlage sind Logikgatter, die als spezifische Schaltnetze industriell gefertigt werden.
 
 Beispiel
