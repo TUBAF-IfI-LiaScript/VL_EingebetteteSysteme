@@ -973,6 +973,7 @@ print(result)
 @LIA.eval(`["main.py"]`, `none`, `python3 main.py`)
 
 Die Dokumentation zum Sympy Paket von Python finden Sie unter https://docs.sympy.org/latest/modules/logic.html 
+Sympy verwendet intern verschiedene Solver, darunter z.B. z3, dpll2 oder minisat22.
 
 ## Hausaufgaben
 
