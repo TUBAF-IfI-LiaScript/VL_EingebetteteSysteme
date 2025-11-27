@@ -406,7 +406,7 @@ Q   |       :  |            :  |          :  |:  |
 
 Gewünscht: Flip-Flop-Variante, die Änderungen nur zu einem definierten Zeitpunkt zulässt
 
-### Main-Subsidiary-Flops ("Master-Slave")
+### Main-Subsidiary Flip-Flops ("Master-Slave")
 
 Ein Main-Subsidiary RS-Flip-Flop besteht aus 2 hintereinander-geschalteten zustandsgesteuerten RS-Flip-Flops (als „Main“ und als „Subsidiary“ bezeichnet); zusätzlicher Inverter negiert Taktsignal für „Subsidiary“.
 
