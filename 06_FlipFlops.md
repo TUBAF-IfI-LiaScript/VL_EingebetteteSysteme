@@ -2,7 +2,7 @@
 
 author:   Sebastian Zug & André Dietrich & Fabian Bär
 email:    sebastian.zug@informatik.tu-freiberg.de & andre.dietrich@informatik.tu-freiberg.de & fabian.baer@student.tu-freiberg.de
-version:  0.0.8
+version:  0.0.9
 language: de
 narrator: Deutsch Female
 
@@ -90,6 +90,15 @@ style="width: 80%; min-width: 420px; max-width: 720px;"
 ```
 
 ---------------------------------------------------------------------
+
+## Feedbacks/Ergänzungen
+
+<!-- data-type="none" -->
+| Format                   | Informatik Studierende  | Nicht-Informatik Studierende |
+|--------------------------|-------------------------|------------------------------|
+| Verbesserungsvorschlag   | 3                       | 2                            |
+| Fragen                   | 2                       | 5                            |
+| generelle Hinweise       | 0                       | 1                            |
 
 
 ## Einführung sequenzieller Logik
@@ -313,13 +322,6 @@ Ein Taster schaltet bei der Aktivierung nicht zu einem definierten Zeitpunkt, so
 
 ![Bild](./images/05_FlipFlops/EntprellterTaster.png)<!-- style="width: 35%; max-width: 500px" -->
 
-__Anwendungsbeispiel 3__
-
-Wir wollen eine Schaltung entwerfen, die für einen Motor den abrupten Wechsel von einem Rechts- auf einen Links-Lauf vermeidet. Wie könnte dies umgesetzt werden?
-
-![Bild](./images/05_FlipFlops/RechtsLinksLauf_Muster.png)<!-- style="width: 55%; max-width: 500px" -->
-
-Der Motor soll nur aus einem Stop-Mode heraus in den Links-Lauf oder den Rechts-Lauf starten.
 
 ## Taktung von Schaltwerken
 
