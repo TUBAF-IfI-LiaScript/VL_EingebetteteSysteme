@@ -574,7 +574,7 @@ digraph finite_state_machine {
 @enduml
 ```
 
->**Die Ausgabe Y hängt jedoch die Ausgabelogik vom aktuellen Zustand und vom Eingabesignal E ab**
+>**Die Ausgabe Y der Ausgabelogik hängt sowohl vom aktuellen Zustand als auch vom Eingabesignal E ab**
 
 
 Der Mealy-Automat ist die generellere Form. Der Moore-Automat unterbindet den Einfluss des Einganges. Eine weitere Spezialisierung ist der sogenannte Medwedew-Automat, bei dem ganz auf die Ausgabelogik verzichtet wird.
@@ -671,7 +671,7 @@ A  &= F\overline{G}E
 $$
 
 
-Wir nutzen die `dont care` Zustände noch weiter aus und ermöglichen eine zusätzliche Vereinfachung.
+Wir nutzen die _Don't-care_-Zustände noch weiter aus und ermöglichen eine zusätzliche Vereinfachung.
 
 <!--
 style="width: 80%; min-width: 620px; max-width: 720px;"
@@ -745,7 +745,7 @@ Der JK-Flip-Flop wechselt beim setzen von $J$ in einen 1 Zustand und kann mit K 
 
 Der Wechsel von $Q(t)=0$ nach $Q(t+1)=1$ kann entweder über ein Setzen ($J=1$) oder ein Togglen ($J=K=1$) umgesetzt werden. Daher spielt der Zustand des Einganges $K$ keine Rolle.
 
-Zwar haben wir es nun mit jeweils zwei Eingängen für den Flip-Flop zu tuen (im Unterschied zum D-Flip-Flop). Dies äußert sich in einer zusätzlichen Spalte der Zustandsübergangstabelle. Die _don't care_ Konfigurationen ermöglichen aber eine höhere Flexibilität beim Entwurf.
+Zwar haben wir es nun mit jeweils zwei Eingängen für den Flip-Flop zu tun (im Unterschied zum D-Flip-Flop). Dies äußert sich in einer zusätzlichen Spalte der Zustandsübergangstabelle. Die _Don't-care_-Konfigurationen ermöglichen aber eine höhere Flexibilität beim Entwurf.
 
 Wie muss also die Beschaltung vorgenommen werden, um die bereits bekannte Zustandsübergangstabelle mit dem JK-Flip-Flop umzusetzen? Beginnen wir zunächst mit unserem ersten Flip-Flop F und seinen Eingängen JF und KF.
 
@@ -1083,6 +1083,92 @@ $$
 ![Bild](./images/07_Schaltwerke/PAL_example_Solution.png) <!--style="width: 80%;"-->
 
 > AND-Verbindungen, welche dasselbe OR-Gatter besitzen, sind kommutativ.
+
+## Race Conditions in Schaltwerken
+
+Eine **Race Condition** tritt auf, wenn das Verhalten einer Schaltung vom relativen Timing verschiedener Signale abhängt.
+
+**Typen von Race Conditions:**
+
+1. **Critical Race**: Das Endergebnis hängt vom Timing ab (problematisch)
+2. **Non-Critical Race**: Das Endergebnis ist unabhängig vom Timing (unkritisch)
+
+**Beispiel einer Critical Race:**
+
+Betrachten Sie ein Schaltwerk mit zwei Flip-Flops, deren Ausgänge sich gleichzeitig ändern sollen:
+
+<!--
+style="width: 80%; min-width: 420px; max-width: 720px;"
+-->
+```ascii
+Zustandsübergang: 11 → 00
+
+FF1: Q1(t) = 1 → Q1(t+1) = 0
+FF2: Q2(t) = 1 → Q2(t+1) = 0
+
+Mögliche Zwischenzustände bei Race:
+11 → 01 → 00  (FF1 schaltet zuerst)
+11 → 10 → 00  (FF2 schaltet zuerst)
+11 → 00       (beide schalten gleichzeitig)
+
+Falls nachfolgende Logik auf Zwischenzustände reagiert,
+kann unterschiedliches Verhalten entstehen!                                       .
+```
+
+### Vermeidungsstrategien
+
+**1. Synchrones Design:**
+- Alle Zustandsübergänge erfolgen mit dem Takt
+- Vermeidung asynchroner Rückkopplungen
+- Verwendung von Flip-Flops statt Latches
+
+**2. Timing-Analyse:**
+- Statische Timing-Analyse (STA)
+- Worst-case-Betrachtungen
+- Margin-Reserven einplanen
+
+**3. Clock Domain Crossing:**
+- Synchronizer für Signale zwischen verschiedenen Clock-Domains
+- Doppel-Flip-Flop-Synchronizer für einzelne Bits
+- FIFO-Buffer für Datenströme
+
+**4. Reset-Strategien:**
+- Synchrone Reset-Freigabe
+- Vermeidung von Reset-Race-Conditions
+
+```text @plantUML.png
+@startuml
+participant "Clock Domain A" as CDA
+participant "Synchronizer" as SYNC
+participant "Clock Domain B" as CDB
+
+CDA -> SYNC: Asynchrones Signal
+SYNC -> SYNC: 1. FF (kann metastabil werden)
+SYNC -> SYNC: 2. FF (stabilisiert Signal)
+SYNC -> CDB: Synchrones Signal
+@enduml
+```
+
+**Praktische Designregeln:**
+- Minimierung der kombinatorischen Logik zwischen Flip-Flops
+- Verwendung einheitlicher Clock-Flanken
+- Sorgfältige Placement & Routing bei Hardware-Implementierung
+- Pipeline-Register zur Pfadverkürzung
+
+### Debugging von Timing-Problemen
+
+**Symptome:**
+
+- Sporadische Fehlfunktionen
+- Temperatur- oder spannungsabhängige Probleme
+- Funktionsfehler bei hohen Taktraten
+
+**Debug-Methoden:**
+
+- Logic-Analyzer zur Timing-Betrachtung
+- Simulation mit realistischen Delays
+- Hardware-in-the-Loop-Tests
+- Stress-Tests bei verschiedenen Betriebsbedingungen
 
 ## Übungsaufgaben
 
