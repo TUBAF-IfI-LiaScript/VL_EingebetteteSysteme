@@ -406,16 +406,16 @@ Q   |       :  |            :  |          :  |:  |
 
 Gewünscht: Flip-Flop-Variante, die Änderungen nur zu einem definierten Zeitpunkt zulässt
 
-### Master-Slave Flip-Flops
+### Main-Subsidiary-Flip-Flops
 
-Ein Master-Slave RS-Flip-Flop besteht aus 2 hintereinander-geschalteten zustandsgesteuerten RS-Flip-Flops (als „Master“ und als „Slave“ bezeichnet); zusätzlicher Inverter negiert Taktsignal für „Slave“.
+Ein Main-Subsidiary RS-Flip-Flop besteht aus 2 hintereinander-geschalteten zustandsgesteuerten RS-Flip-Flops (als „Main“ und als „Subsidiary“ bezeichnet); zusätzlicher Inverter negiert Taktsignal für „Subsidiary“. In der Vergangenheit wurden diese Flip-Flops auch als Master-Slave-Flip-Flops bezeichnet.
 
 ![Bild](./images/05_FlipFlops/MasterSlave.png)
 
 Ablauf einer Periode:
 
-1. „Master“ übernimmt Eingangswerte bei Clk = 1 („Slave“ ändert sich nicht)
-2. „Slave“ übernimmt Werte vom „Master“ bei Clk = 0 („Master“ ändert sich nicht)
+1. „Main“ übernimmt Eingangswerte bei Clk = 1 („Subsidiary“ ändert sich nicht)
+2. „Subsidiary“ übernimmt Werte vom „Main“ bei Clk = 0 („Main“ ändert sich nicht)
 
 ![Bild](./images/05_FlipFlops/timeLineMasterSlave.png)<!-- style="width: 75%; max-width: 800px;" -->
 
@@ -538,7 +538,7 @@ Q   |       :  |                        :  |
 
 **JK-Flip-Flop**
 
-JK-Flipflops wurden wahrscheinlich nach Jack Kilby benannt. Sie basieren auf dem asynchronen RS-Flipflop, sind aber flankengesteuert oder als Master-Slave-Flipflop ausgeführt. Mit dem Taktsignal und der Eingangsbelegung J = 1 und K = 0 wird am Ausgang eine 1 erzeugt und gespeichert, alternativ bei K = 1 und J = 0 eine 0. Der Zustand J = K = 1 ist erlaubt; in diesem Fall wechselt der Ausgangspegel mit jeder wirksamen Flanke des Taktsignals. Dieses Verhalten lässt die Bezeichnung als Toggle-Flipflop zu.
+JK-Flipflops wurden wahrscheinlich nach Jack Kilby benannt. Sie basieren auf dem asynchronen RS-Flipflop, sind aber flankengesteuert oder als Main-Subsidiary-Flipflop ausgeführt. Mit dem Taktsignal und der Eingangsbelegung J = 1 und K = 0 wird am Ausgang eine 1 erzeugt und gespeichert, alternativ bei K = 1 und J = 0 eine 0. Der Zustand J = K = 1 ist erlaubt; in diesem Fall wechselt der Ausgangspegel mit jeder wirksamen Flanke des Taktsignals. Dieses Verhalten lässt die Bezeichnung als Toggle-Flipflop zu.
 
 <!-- data-type="none" -->
 | $J(t)$                                | $K(t)$                                | $Q'(t)$ bei Flankenwechsel       |
