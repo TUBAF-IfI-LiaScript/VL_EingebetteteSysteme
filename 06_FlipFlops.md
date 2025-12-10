@@ -415,7 +415,7 @@ Ein Main-Subsidiary RS-Flip-Flop besteht aus 2 hintereinander-geschalteten zusta
 Ablauf einer Periode:
 
 1. „Main“ übernimmt Eingangswerte bei Clk = 1 („Subsidiary“ ändert sich nicht)
-2. „Subsidiary“ übernimmt Werte vom „Main“ bei Clk = 0 („Main“ ändert sich nicht)
+2. „Subsidiary“ übernimmt Werte vom „Master“ bei Clk = 0 („Main“ ändert sich nicht)
 
 ![Bild](./images/05_FlipFlops/timeLineMasterSlave.png)<!-- style="width: 75%; max-width: 800px;" -->
 
