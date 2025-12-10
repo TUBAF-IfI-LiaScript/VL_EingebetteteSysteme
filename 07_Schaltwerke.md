@@ -117,7 +117,7 @@ Eingaben       +------------------+
 **In der sequentiellen Logik:**
 
 + sind Rückkopplungen gestattet
-+ werden Schaltungen werden Schaltwerke bezeichnet
++ werden Schaltungen als Schaltwerke bezeichnet
 + können Schaltungen als gerichteter zyklischer Graph dargestellt werden
 
 <!--
@@ -429,7 +429,7 @@ Realisierung der Schaltfunktion
 
 Um die entsprechende Schaltfunktionen für die Änderung der Zustände und die Ausgabe aufzustellen, brauchen wir die invertierte Wahrheitstafel des intendierten Flip-Flops.
 
-> __Merke:__  Unterschiedliche Flip-Flops für die Speicherung der Zustände führen zu  unterschiedlichen Beschaltungen!
+> __Merke:__  Unterschiedliche Flip-Flops für die Speicherung der Zustände führen zu unterschiedlichen Beschaltungen!
 
 Zustandstabelle
 
@@ -637,16 +637,16 @@ digraph finite_state_machine {
 Zustandstabelle
 
 <!-- data-type="none" style="table-layout: fixed; max-width:780px;"-->
-| Zustand | F | G | E | Zustand'  | F' | G' |
-|---------|---|---|---|-----------|----|----|
-| A       | 0 | 0 | 0 | A         | 0  | 0  |
-| B       | 0 | 1 | 0 | A         | 0  | 0  |
-| C       | 1 | 0 | 0 | A         | 0  | 0  |
-| D       | 1 | 1 | 0 | dont care | d  | d  |
-| A       | 0 | 0 | 1 | B         | 0  | 1  |
-| B       | 0 | 1 | 1 | C         | 1  | 0  |
-| C       | 1 | 0 | 1 | C         | 1  | 0  |
-| D       | 1 | 1 | 1 | dont care | d  | d  |
+| Zustand | F | G | E | Zustand'   | F' | G' |
+|---------|---|---|---|------------|----|----|
+| A       | 0 | 0 | 0 | A          | 0  | 0  |
+| B       | 0 | 1 | 0 | A          | 0  | 0  |
+| C       | 1 | 0 | 0 | A          | 0  | 0  |
+| D       | 1 | 1 | 0 | don't care | d  | d  |
+| A       | 0 | 0 | 1 | B          | 0  | 1  |
+| B       | 0 | 1 | 1 | C          | 1  | 0  |
+| C       | 1 | 0 | 1 | C          | 1  | 0  |
+| D       | 1 | 1 | 1 | don't care | d  | d  |
 
 Ausgaben
 
@@ -710,7 +710,7 @@ Bitte mit Eingabe 0 starten, um Flipflops zurück zu setzen!
 {"devices":{"e":{"label":"E","type":"Button","propagation":0,"position":{"x":-160,"y":10}},"clk":{"label":"Clk","type":"Button","propagation":0,"position":{"x":-160,"y":-50}},"not1":{"label":"~G","type":"Not","propagation":0,"bits":1,"position":{"x":-135,"y":110}},"not2":{"label":"~F","type":"Not","propagation":0,"bits":1,"position":{"x":110,"y":145}},"and1":{"label":"FE","type":"And","propagation":0,"bits":1,"position":{"x":30,"y":190}},"and2":{"label":"GE","type":"And","propagation":0,"bits":1,"position":{"x":10,"y":20}},"and3":{"label":"(~G)E","type":"And","propagation":0,"bits":1,"position":{"x":20,"y":100}},"or1":{"label":"GE + FE","type":"Or","propagation":0,"bits":1,"position":{"x":165,"y":15}},"and4":{"label":"(~F)(~G)E","type":"And","propagation":0,"bits":1,"position":{"x":175,"y":90}},"fff":{"label":"F FlipFlop","type":"Dff","propagation":0,"polarity":{"clock":true},"bits":1,"initial":"x","position":{"x":335,"y":30}},"ffg":{"label":"G FlipFlop","type":"Dff","propagation":0,"polarity":{"clock":true},"bits":1,"initial":"x","position":{"x":345,"y":90}},"a":{"label":"A","type":"Lamp","propagation":0,"position":{"x":340,"y":180}}},"connectors":[{"from":{"id":"or1","port":"out"},"to":{"id":"fff","port":"in"}},{"from":{"id":"not1","port":"out"},"to":{"id":"and3","port":"in2"}},{"from":{"id":"e","port":"out"},"to":{"id":"and2","port":"in1"}},{"from":{"id":"e","port":"out"},"to":{"id":"and3","port":"in1"}},{"from":{"id":"and2","port":"out"},"to":{"id":"or1","port":"in1"}},{"from":{"id":"and1","port":"out"},"to":{"id":"or1","port":"in2"}},{"from":{"id":"e","port":"out"},"to":{"id":"and1","port":"in1"}},{"from":{"id":"ffg","port":"out"},"to":{"id":"not1","port":"in"},"vertices":[{"x":430,"y":215},{"x":325,"y":240}]},{"from":{"id":"ffg","port":"out"},"to":{"id":"and2","port":"in2"},"vertices":[{"x":440,"y":210},{"x":405,"y":240},{"x":-90,"y":195},{"x":-145,"y":140},{"x":-120,"y":85}]},{"from":{"id":"and1","port":"out"},"to":{"id":"a","port":"in"}},{"from":{"id":"fff","port":"out"},"to":{"id":"and1","port":"in2"},"vertices":[{"x":460,"y":255}]},{"from":{"id":"clk","port":"out"},"to":{"id":"fff","port":"clk"},"vertices":[{"x":270,"y":-35}]},{"from":{"id":"not2","port":"out"},"to":{"id":"and4","port":"in2"}},{"from":{"id":"and3","port":"out"},"to":{"id":"and4","port":"in1"}},{"from":{"id":"fff","port":"out"},"to":{"id":"not2","port":"in"},"vertices":[{"x":460,"y":255},{"x":90,"y":225}]},{"from":{"id":"and4","port":"out"},"to":{"id":"ffg","port":"in"}},{"from":{"id":"clk","port":"out"},"to":{"id":"ffg","port":"clk"},"vertices":[{"x":275,"y":-35}]}],"subcircuits":{}}
 ```
 
-In der Simulation sehen Sie dass wir gegenüber dem Moore-Automaten ...
+In der Simulation sehen Sie, dass wir gegenüber dem Moore-Automaten ...
 
 $$
 \begin{aligned}
@@ -913,7 +913,7 @@ Diese erweitern wir nun um die Speicherglieder und deren Rückkopplung. Beachten
 
 ## Beispielanwendung
 
-Sequentieller Binärzahlenvergleicher - zwei Zahlenwerte werden sequenziell entsprechend ihren Stellen durch den Vergleicher bewegt und verglichen. Das Schaltwerk speichert das Resultat sobald ein Wert größer als der andere .
+Sequentieller Binärzahlenvergleicher - zwei Zahlenwerte werden sequenziell entsprechend ihren Stellen durch den Vergleicher bewegt und verglichen. Das Schaltwerk speichert das Resultat sobald ein Wert größer als der andere ist.
 
 <!--
 style="width: 80%; min-width: 420px; max-width: 720px;"
