@@ -2,7 +2,7 @@
 
 author:   Sebastian Zug & André Dietrich & Fabian Bär
 email:    sebastian.zug@informatik.tu-freiberg.de & andre.dietrich@informatik.tu-freiberg.de & fabian.baer@student.tu-freiberg.de
-version:  0.0.6
+version:  0.0.7
 language: de
 narrator: Deutsch Female
 
@@ -91,6 +91,61 @@ style="width: 80%; min-width: 420px; max-width: 720px;"
 
 ---------------------------------------------------------------------
 
+## Feedbacks/Ergänzungen
+
+                         {{0-1}}
+****************************************************
+
+<!-- data-type="none" -->
+| Format                   | Informatik Studierende  | Nicht-Informatik Studierende |
+|--------------------------|-------------------------|------------------------------|
+| Verbesserungsvorschlag   | 5                       | 2                            |
+| Fragen                   | 2                       | 8                            |
+| generelle Hinweise       | 0                       | 1                            |
+
+****************************************************
+
+                         {{1-2}}
+****************************************************
+
+In einer der Beispielaufgaben sollte ein Vergleicher entworfen werden, der zwei 2-Bit-Zahlen vergleicht und die Ausgänge für "gleich", "größer als" und "kleiner als" bereitstellt.
+
+Aus der Aufgabe ergäbe sich folgende Wahrheitstabelle:
+
+<!-- data-type="none" -->
+| $a_1$ | $a_0$ | $b_1$ | $b_0$ | $Y_{A=B}$ | $Y_{A>B}$ | $Y_{A<B}$ |
+| ----- | ----- | ----- | ----- | --------- | --------- | --------- |
+| 0     | 0     | 0     | 0     | 1         | 0         | 0         |
+| 0     | 0     | 0     | 1     | 0         | 0         | 1         |
+| 0     | 0     | 1     | 0     | 0         | 0         | 1         |
+| 0     | 0     | 1     | 1     | 0         | 0         | 1         |
+| 0     | 1     | 0     | 0     | 0         | 1         | 0         |
+| 0     | 1     | 0     | 1     | 1         | 0         | 0         |
+| 0     | 1     | 1     | 0     | 0         | 0         | 1         |
+| 0     | 1     | 1     | 1     | 0         | 0         | 1         |
+| 1     | 0     | 0     | 0     | 0         | 1         | 0         |
+| 1     | 0     | 0     | 1     | 0         | 1         | 0         |
+| 1     | 0     | 1     | 0     | 1         | 0         | 0         |
+| 1     | 0     | 1     | 1     | 0         | 0         | 1         |
+| 1     | 1     | 0     | 0     | 0         | 1         | 0         |
+| 1     | 1     | 0     | 1     | 0         | 1         | 0         |
+| 1     | 1     | 1     | 0     | 0         | 1         | 0         |
+| 1     | 1     | 1     | 1     | 1         | 0         | 0         |
+
+Die Ausgänge können mit folgenden Gleichungen realisiert werden:
+
+$$
+\begin{aligned}
+Y_{A=B} &= \overline{a_1} \cdot \overline{a_0} \cdot \overline{b_1} \cdot \overline{b_0} + \overline{a_1} \cdot a_0 \cdot \overline{b_1} \cdot b_0 + a_1 \cdot \overline{a_0} \cdot b_1 \cdot \overline{b_0} + a_1 \cdot a_0 \cdot b_1 \cdot b_0 \\
+Y_{A>B} &= \overline{a_1} \cdot a_0 \cdot \overline{b_1} \cdot \overline{b_0} + a_1 \cdot \overline{a_0} \cdot \overline{b_1} \cdot \overline{b_0} + a_1 \cdot \overline{a_0} \cdot \overline{b_1} \cdot b_0 + a_1 \cdot a_0 \cdot \overline{b_1} \cdot \overline{b_0} + a_1 \cdot a_0 \cdot \overline{b_1} \cdot b_0 + a_1 \cdot a_0 \cdot b_1 \cdot \overline{b_0} \\
+Y_{A<B} &= \overline{a_1} \cdot \overline{a_0} \cdot \overline{b_1} \cdot b_0 + \overline{a_1} \cdot \overline{a_0} \cdot b_1 \cdot \overline{b_0} + \overline{a_1} \cdot \overline{a_0} \cdot b_1 \cdot b_0 + \overline{a_1} \cdot a_0 \cdot b_1 \cdot \overline{b_0} + \overline{a_1} \cdot a_0 \cdot b_1 \cdot b_0 + a_1 \cdot \overline{a_0} \cdot b_1 \cdot b_0
+\end{aligned}
+$$
+
+> Welche Vereinfachungsmöglichkeiten sehen Sie?
+
+****************************************************
+
 ## Übungsbeispiel
 
                           {{0-1}}
@@ -115,7 +170,7 @@ E     |   |        |                |           |
 
 **1. Schritt: Aufstellen des Automatenmodels**
 
-```text @plantUML
+```text @plantUML.png
 @startuml
 digraph finite_state_machine {
     rankdir=LR;
@@ -139,7 +194,7 @@ digraph finite_state_machine {
 }
 @enduml
 ```
-@plantUML
+
 
 *******************************************************************************
 
