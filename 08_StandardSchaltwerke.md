@@ -743,6 +743,6 @@ Nachteil dieser Schaltung: höhere Laufzeiten
 
 + Entwerfen Sie einen Zähler, der eine Zählrichtungsvorgabe ermöglicht und evaluieren Sie Ihre Lösung mit einem Simulator.
 
-   [logisim-evolution](https://github.com/reds-heig/logisim-evolution)
+   [logisim-evolution](https://github.com/logisim-evolution/logisim-evolution)
 
 + Recherchieren Sie die Umsetzung eines Johnson Zählers und übernehmen Sie eine Implementierung in eine Simulator.
