@@ -1,8 +1,8 @@
 <!--
 
-author:   Sebastian Zug & André Dietrich & Fabian Bär
+author:   Sebastian Zug & André Dietrich & Fabian Bär & Copilot
 email:    sebastian.zug@informatik.tu-freiberg.de & andre.dietrich@informatik.tu-freiberg.de & fabian.baer@student.tu-freiberg.de
-version:  0.0.4
+version:  0.0.5
 language: de
 narrator: Deutsch Female
 
@@ -70,7 +70,7 @@ style="width: 80%; min-width: 420px; max-width: 720px;"
            +----------------------------+
 
            +----------------------------+
-  Ebene 3  | Istruktionsset             |     Maschinensprache
+  Ebene 3  | Instruktionsset            |     Maschinensprache
            +----------------------------+
 
            +----------------------------+  -.      ╔═══════════════╗
@@ -129,57 +129,7 @@ Arithmetische Funktionen: ADD, SUB, (MUL), (DIV)
 
 Sonstige: SHIFT LEFT (arithmetisch, logisch), SHIFT RIGHT (arithmetisch, logisch)
 
-```ascii
-             Daten                 Daten
-               |                     |
-               |                     |
-+--------------|---------------+     |
-| +------+     |               |     |     Funktionsauswahl
-| |      |     |               :     |        F0 F_1 F_2
-| |      V     V               V     V         |   |   | Zielregister
-| | +----+-----+-----+    +----+-----+-----+   |   |   |  auswahl
-| | |   Register A   |    |  Register B    |   |   |   |     Z
-| | +---+------------+    +---------+------+   |   |   |     |
-| |     |                           |          |   |   |     |
-| |     |        +------------------+          |   |   |     |
-| |     |        |                  |          |   |   |     |
-| |     +--------+-----------+      |          |   |   |     |
-| |     |        |           |      |          |   |   |     |
-| |     V        V           V      V          |   |   |     |
-| | +----------------+    +----------------+   |   |   |     |
-| | |                |<-  |                |<--+   |   |     |
-| | | Demultiplexer  |<-  | Demultiplexer  |<------+   |     |
-| | |                |<-  |                |<----------+     |
-| | ++-+-+-+-+-+-+-+-+    ++-+-+-+-+-+-+-+-+                 |
-| |  | | | | | | | |       | | | | | | | |                   |
-| |  | | | | | | | |       V V V V V V V V                   |
-| |  | | | | | | | +----------------------------------+      |
-| |  | | | | | | +-----------------------------+      |      |
-| |  | | | | | +------------------------+      |      |      |
-| |  | | | | +-------------------+      |      |      |      |
-| |  | | | +--------------+      |      |      |      |      |
-| |  | | +---------+      |      |      |      |      |      |
-| |  | +----+      |      |      |      |      |      |      |
-| |  |      |      |      |      |      |      |      |      |
-| |  |  |   |  |   |  |   |  |   |  |   |  |   |  |   |  |   |
-| |  V  V   V  V   V  V   V  V   V  V   V  V   V  V   V  V   |
-| | +----+ +----+ +----+ +----+ +----+ +----+ +----+ +----+  |
-| | | 000| | 001| | 010| | 011| | 100| | 101| | 110| | 111|  |
-| | | OR | |AND | |EXOR| |ADD | |SUB | |MUL | |DIV | | SL |  |
-| | +-+--+ +-+--+ +-+--+ +-+--+ +-+--+ +-+--+ +-+--+ +-+--+  |
-| |                                                          |
-| |   |      |      |      |      |      |      |      |     |
-| |   +------+------+------+---+--+------+------+------+     |
-| |                            |                             |
-| |                            V                             |
-| |                 +----------+----------+                  |
-| |                 |   DeMuxer/Selektor  |<-----------------+
-| |                 +---+-+---------------+
-| |                     | |                     |      |
-| +---------------------+ |                   --+---+--+
-|                         |                         | Status
-+-------------------------+                         v S                                                                 .
-```
+![](./images/10_CPU_Basis/ALU.png)<!-- style="width: 80%; max-width: 600px;" -->
 
 Der Status S umfasst eine Zusammenstellung der Resultate der Operationen codiert als 1-Bit Werte:
 
@@ -217,7 +167,7 @@ Zwischenstand
 | Stufe | Funktionalität                                                                                             | Wunschzettel                                                                                                                                                                                         |
 |-------|------------------------------------------------------------------------------------------------------------|------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
 | 0     | Addition/Subtraktion von einzelnen Werten $\color{green} \mathbf{✓}$                                       |                                                                                                                                                                                                      |
-| 1     | Arithmetische Einheit mit mehren Funktionen und wählbarem Ergebnisregister      $\color{green} \mathbf{✓}$ |                                                                                                                                                                                                      |
+| 1     | Arithmetische Einheit mit mehreren Funktionen und wählbarem Ergebnisregister      $\color{green} \mathbf{✓}$ |                                                                                                                                                                                                      |
 | 2     |                                                                                                            | Sequenz von Berechnungsfolgen  $\color{red} \mathbf{?}$ $$\begin{aligned} & Reg\_A \leftarrow 3 \\ & Reg\_B \leftarrow 2 \\ & ADD\_B \\ & Reg\_A \leftarrow -3 \\ & MUL\_B  \\ & ... \end{aligned}$$ |
 
 Für diesen Schritt fassen wir das obige Schaltbild unserer hypothetischen ALU mit 8 Funktionen in einem abstrakteren Schaubild zusammen.
@@ -303,7 +253,7 @@ Eine weitere Komponente, das Steuerwerk übernimmt diese Aufgabe. Anstatt nun ei
 @endditaa
 ```
 
-Allerdings bleibt bei dieser Konfiguration unser Status auf der Strecke! Im Grund müssen wir die Information dazu aber Operationsspezifisch auswerten. Es genügt also nicht allein eine Adressberechung zu realsieren, vielmehr bedarf es einer generellen Steuerungskomponente, die die Ausführung von Befehlen initiiert und überwacht.
+Allerdings bleibt bei dieser Konfiguration unser Status auf der Strecke! Im Grunde müssen wir die Information dazu aber operationsspezifisch auswerten. Es genügt also nicht allein eine Adressberechnung zu realisieren, vielmehr bedarf es einer generellen Steuerungskomponente, die die Ausführung von Befehlen initiiert und überwacht.
 
 ```text @plantUML.png
 @startditaa
@@ -346,7 +296,7 @@ Zwischenstand
 | Stufe | Funktionalität                                                                                             | Wunschzettel                                                                                                                                                                                                                                      |
 |-------|------------------------------------------------------------------------------------------------------------|---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
 | 0     | Addition/Subtraktion von einzelnen Werten $\color{green} \mathbf{✓}$                                       |                                                                                                                                                                                                                                                   |
-| 1     | Arithmetische Einheit mit mehren Funktionen und wählbarem Ergebnisregister      $\color{green} \mathbf{✓}$ |                                                                                                                                                                                                                                                   |
+| 1     | Arithmetische Einheit mit mehreren Funktionen und wählbarem Ergebnisregister      $\color{green} \mathbf{✓}$ |                                                                                                                                                                                                                                                   |
 | 2     | Sequenz von Berechnungsfolgen    $\color{green} \mathbf{✓}$                                                |                                                                                                                                                                                                                                                   |
 | 3     |                                                                                                            | Freie Definition von Operanden  $\color{red} \mathbf{?}$     $$\begin{aligned} & \color{red}{Reg\_A \leftarrow 3}  \\ & \color{red}{Reg\_B \leftarrow 2} \\ & ADD\_B \\ & \color{red}{Reg\_A \leftarrow -3} \\ & MUL\_B  \\ & ... \end{aligned}$$ |
 
@@ -397,6 +347,29 @@ Damit nimmt der Aufwand im Steuerwerk nochmals signifikant zu! Neben dem Adressb
 | 3       | Aktivieren eines schreibenden Zugriffs auf das Register A der ALU                     |
 | 4       | Umleiten der Inhalte aus dem Speicher an die ALU (anstatt an das Steuerwerk)          |
 
+
+Ein typischer Fetch–Decode–Execute-Zyklus (Sequenzdiagramm):
+
+```text @plantUML.png
+@startuml
+participant "PC" as PC
+participant "Speicher" as MEM
+participant "Steuerwerk" as CU
+participant "Register A oder B" as REG
+participant "ALU" as ALU
+
+CU -> MEM: Lese Instruktion (Adresse = PC)
+MEM --> CU: IR <- Instruktion
+CU -> REG: Dekodiere, setze Steuersignale
+CU -> MEM: Optional: Lese Operand(en)
+MEM --> REG: Operand -> Register
+CU -> ALU: Starte Operation
+ALU --> REG: Ergebnis, Flags
+CU -> MEM: Optional: Schreibe Ergebnis
+CU -> PC: PC <- PC + 1 oder Sprungziel
+@enduml
+```
+
 > **Achtung:** Offenbar haben wir jetzt 2 Kategorien von Befehlen! `ADD_A` oder `OR_B` werden in einem Zyklus ausgeführt. Die `LDA` oder `STB` Befehle brauchen ein Nachladen der zusätzlichen Parameter (hier Daten).
 
 ## Schritt 4 - Ein- und Ausgaben
@@ -406,7 +379,7 @@ Zwischenstand
 | Stufe | Funktionalität                                                                                             | Wunschzettel                                                   |
 |-------|------------------------------------------------------------------------------------------------------------|----------------------------------------------------------------|
 | 0     | Addition/Subtraktion von einzelnen Werten $\color{green} \mathbf{✓}$                                       |                                                                |
-| 1     | Arithmetische Einheit mit mehren Funktionen und wählbarem Ergebnisregister      $\color{green} \mathbf{✓}$ |                                                                |
+| 1     | Arithmetische Einheit mit mehreren Funktionen und wählbarem Ergebnisregister      $\color{green} \mathbf{✓}$ |                                                                |
 | 2     | Sequenz von Berechnungsfolgen    $\color{green} \mathbf{✓}$                                                |                                                                |
 |       | Darstellung von Programmen als Sequenzen abstrakter Befehle  $\color{green} \mathbf{✓}$                    |                                                                |
 | 3     | Flexibler Zugriff auf Daten und Programme im Speicher     $\color{green} \mathbf{✓}$                       |                                                                |
@@ -451,7 +424,10 @@ Das Steuerwerk koordiniert neben der ALU die Ein- und Ausgabeschnittstelle.
 @endditaa
 ```
 
-## 1945:  Von-Neumann Architektur
+> **Merke:** Die Ein- und Ausgabeeinheit (E/A-Werk) ist über separate Steuer- und Datenleitungen mit dem Steuerwerk verbunden. Für den Programmierer können wir aber den Eindruck erwecken, dass die E/A-Geräte wie Speicheradressen behandelt werden. In diesem Fall spricht man von Memory Mapped I/O.
+
+
+## 1945: Von-Neumann-Architektur
 
 John von Neumann beschrieb 1945 in seinem Aufsatz ”First Draft of a Report on the EDVAC“ ein strukturelles Konzept, wonach Computerprogramme und die zu verarbeitenden Daten zusammen im gleichen Speicher abgelegt werden sollten. [Link](http://abelgo.cn/cs101/papers/Neumann.pdf)
 
@@ -481,8 +457,3 @@ Einige der Ideen des Konzepts wurden bereits von Konrad Zuse erkannt und teilwei
 +------+    +----------+    +------------+
 @endditaa
 ```
-
-## Hausaufgaben
-
-1. Vergleichen Sie die von-Neumann-Architektur und die Harvard Architektur. Welche Vor- und Nachteile finden sich?
-2. Welche Schritte sind notwendig, um einen oder sehr viele neue(n) Befehl(e) zu integrieren? Woran müssen wir arbeiten?
