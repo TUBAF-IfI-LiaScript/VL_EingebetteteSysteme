@@ -118,7 +118,7 @@ Analog        0V                   <- Wert -> 8V
 
 Digital        | 0 | 1 | 2 | 3 | 4 | 5 | 6 | 7 |        3 Bit Auflösung   
 
-               |   0   |   2   |   3   |   4   |        2 Bit        
+               |   0   |   1   |   2   |   3   |        2 Bit        
 
                |       0       |       1       |        1 Bit           
 ```
