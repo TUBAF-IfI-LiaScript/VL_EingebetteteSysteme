@@ -2,7 +2,7 @@
 
 author:   Sebastian Zug & André Dietrich & Fabian Bär
 email:    sebastian.zug@informatik.tu-freiberg.de & andre.dietrich@informatik.tu-freiberg.de & fabian.baer@student.tu-freiberg.de
-version:  0.0.9
+version:  0.1.0
 language: de
 narrator: Deutsch Female
 
@@ -571,61 +571,27 @@ Entsprechend können Sie in den Übungen die Tools der Arduino IDE nutzen, die P
 
 ## Programmierung des Hello-World Beispiels
 
-```text @plantUML.png
-@startditaa
+![Bild](./images/13_AVR_CPU/Kompilierung.png "Toolchain der AVR Programmierung")<!-- style="width: 85%; max-width: 1000px" -->
 
-+-----------------------------------------------------------------------------------------+
-:  Entwicklungsrechner                                                                    |                  
-|  +---------------+                                                                      |                
-|  |c88FSimulink{o}|   Modellierungssprachen                                              |                                     
-|  +---------------+                                                                      |                
-|          |                                                                              |
-|          v                                   Assemblerprogrammierung                    |
-|  +---------------+     +---------------+     +---------------+                          |            
-|  |c88F C/C++{o}  |---> |c8F8 avr-gcc   |---> |c88F *.asm{o}  |                          |            
-|  +---------------+     +---------------+     +---------------+                          |           
-|                                                      |                                  |
-|   C/C++ Programmierung                               v                                  |
-|                                              +---------------+                          |         
-|                                              |c8F8 avr-as    |                          |         
-|                                              +---------------+                          |         
-|                                                      |                                  |
-|                                                      v                                  |
-|                                              +---------------+                          |         
-|                                              |      *.o{o}   |                          |         
-|                                              +---------------+                          |         
-|                                                      |                                  |
-|                                                      v                                  |
-|             +---------------+                +---------------+      +---------------+   |                                
-|             |c8F8 objcopy   |<-------+       |c8F8 avr-ld    | <----|    Library{o} |   |                                
-|             +---------------+        |       +---------------+      +---------------+   |                                
-|                      |               |               |                                  |
-|         +------------+-----------+   +---------------+                                  |
-|         |                        |                   |                                  |                
-|         v                        v                   v                                  |
-|  +---------------+       +---------------+   +---------------+                          |         
-|  |      *.hex{o} |  ...  |    *.bin{o}   |   |    *.elf{o}   |                          |         
-|  +---------------+       +---------------+   +---------------+                          |  
-|         |                        |                   |                                  |
-|         +------------------------+-------------------+                                  |
-|                                  |                                                      |
-|                                  v                                                      |
-|                          +---------------+                                              |
-|                          |c8F8 Programmer|                                              |
-|                          +---------------+                                              |     
-+-----------------------------------------------------------------------------------------+
-                                   |
-                                   +-------------------------+    
-                                   |                         |                                
-+----------------------------------|-=-----------------------|----------------------------+
-:                                  v                         v                            |
-: +---------------+        +---------------+         +---------------+                    |
-| |c2F8 SRAM      |<------ |c2F8 Flash     |         |c2F8 EEPROM    |                    |
-| +---------------+        +---------------+         +---------------+                    |    
-| Mikrocontroller                                                                         |
-+-----------------------------------------------------------------------------------------+
-@endditaa
-```
+Die Grafik zeigt den Weg vom Quellcode zum ausführbaren Programm auf dem Mikrocontroller:
+
+1. **Ausgangspunkt**: Der Entwickler kann auf verschiedenen Abstraktionsebenen starten:
+   - _Modellierungssprachen_ wie Simulink generieren C-Code automatisch
+   - _C/C++ Programmierung_ mit der avrlibc
+   - _Assemblerprogrammierung_ für maximale Kontrolle
+
+2. **Compilierung** (`avr-gcc`): Der C-Compiler übersetzt den Hochsprachencode in Assembler. Dabei werden bereits Optimierungen vorgenommen.
+
+3. **Assemblierung** (`avr-as`): Der Assembler wandelt die mnemonischen Befehle in Maschinencode um und erzeugt Objektdateien (`.o`).
+
+4. **Linken** (`avr-ld`): Der Linker verbindet die Objektdateien mit den benötigten Bibliotheken und löst Adressreferenzen auf. Das Ergebnis ist eine ELF-Datei.
+
+5. **Konvertierung** (`objcopy`): Aus der ELF-Datei werden verschiedene Ausgabeformate erzeugt:
+   - `.hex` - Intel HEX Format für viele Programmer
+   - `.bin` - Rohes Binärformat
+   - `.elf` - Enthält zusätzlich Debug-Informationen
+
+6. **Programmierung**: Ein Programmer (z.B. über USB) überträgt den Code in den **Flash**-Speicher des Mikrocontrollers. Beim Start wird das Programm in den **SRAM** geladen, während persistente Daten im **EEPROM** abgelegt werden können.
 
 ### Assembler
 
@@ -636,7 +602,7 @@ Die Assemblerbefehle des AVR sind in der [AVR Instruction Set Summary](https://w
 ```as
 main:  ; ------- INIT -------------------
        ; set DDRB as output
-       ; sbi 0x04, 7               ; set bit in I/O register
+       ; sbi 0x04, 5               ; set bit in I/O register
        sbi _SFR_IO_ADDR(DDRB),5    ; more general by using MACROS
        ; ------- Busy waiting 1 s -------
 loop:  ldi  r18, 41
