@@ -2,7 +2,7 @@
 
 author:   Sebastian Zug & André Dietrich & Fabian Bär
 email:    sebastian.zug@informatik.tu-freiberg.de & andre.dietrich@informatik.tu-freiberg.de & fabian.baer@student.tu-freiberg.de
-version:  0.0.7
+version:  0.0.8
 language: de
 narrator: Deutsch Female
 
@@ -798,30 +798,32 @@ Im folgenden wird der **Fast PWW Mode** genutzt, um auf diesem Wege die LED an
 PIN 9 zu periodisch zu dimmen. Dazu wird der Vergleichswert, der in OCR1A enthalten ist kontinuierlich verändert.
 
 ```cpp       avrlibc.cpp
-#ifndef F_CPU
-#define F_CPU 16000000UL // 16 MHz clock speed
-#endif
+#define F_CPU 16000000UL
+#include <avr/io.h>
+#include <util/delay.h>
 
 int main(void){
-  DDRB |=  (1<<PORTB1); //Define OCR1A as Output
-  TCCR1A |= (1<<COM1A1) | (1<<WGM10);  //Set Timer Register
-  TCCR1B |= (1<<WGM12) | (1<<CS11);
-  OCR1A = 0;
-  int timer;
-  while(1) {
-  		while(timer < 255){ //Fade from low to high
-  		   timer++;
-  		   OCR1A = timer;
-  		   _delay_ms(50);
-  		}
-  		while(timer > 1){ //Fade from high to low
-  		   timer--;
-  		   OCR1A = timer;
-  		   _delay_ms(50);
-  		}
-   }
+    DDRB |= (1<<PB1);          // PB1 = Pin 9
+
+    TCCR1A = (1<<COM1A1) | (1<<WGM10);
+    TCCR1B = (1<<WGM12) | (1<<CS11);
+
+    int timer = 0;
+
+    while (1) {
+        while (timer < 255) {
+            OCR1A = timer++;
+            _delay_ms(10);
+        }
+        while (timer > 0) {
+            OCR1A = timer--;
+            _delay_ms(10);
+        }
+    }
 }
 ```
+
+> Timer1, Fast PWM (8-bit), Mode 5, non-inverting, Prescaler /8
 
 [^megaAVR]: Firma Microchip, megaAVR® Data Sheet, [Link](http://ww1.microchip.com/downloads/en/DeviceDoc/ATmega48A-PA-88A-PA-168A-PA-328-P-DS-DS40002061A.pdf)
 
