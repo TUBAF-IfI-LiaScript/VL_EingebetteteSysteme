@@ -2,7 +2,7 @@
 
 author:   Sebastian Zug & André Dietrich & Fabian Bär
 email:    sebastian.zug@informatik.tu-freiberg.de & andre.dietrich@informatik.tu-freiberg.de & fabian.baer@student.tu-freiberg.de
-version:  0.0.7
+version:  0.0.8
 language: de
 narrator: Deutsch Female
 
@@ -711,8 +711,12 @@ Oscillator           |---|   |   |   |                                          
 
 ![Schaltung](./images/11_Modell_CPU/EinZyklusBefehle.png)<!-- width="80%" -->
 
-`Bus off` == Lesender Zugriff auf den Bus /
-`Bus on` == schreibender Zugriff
+`Bus off` == Datenfluss: Bus → Register (Register empfängt) /
+`Bus on` == Datenfluss: Register → Bus (Register sendet)
+
+> **Beispiel:** Für den Befehl `JMA` wird in CP7 der Inhalt des Instruktionsregisters in den Programmcounter kopiert. Das `on Bus` beim Instruktionsregister meint hier, dass dieses als Sender agiert und seine Daten auf den Bus legt. Das `Bus off` beim Programmcounter bedeutet, dass dieser als Empfänger die Daten vom Bus übernimmt.
+
+Darüber hinaus macht es dann Sinn die einzelnen Logikelemente der Befehle miteinander zu verzahnen, um die Anzahl der benötigten Logikgatter zu reduzieren. 
 
 ![kombinatorik1](./images/11_Modell_CPU/kombinatorik1.jpg)<!-- width="20%" -->
 ![kombinatorik2](./images/11_Modell_CPU/kombinatorik2.jpg)<!-- width="20%" -->
