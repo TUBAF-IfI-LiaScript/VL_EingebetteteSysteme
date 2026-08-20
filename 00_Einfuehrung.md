@@ -95,17 +95,18 @@ Der Code muss zunächst übersetzt und in eine für den Mikrocontroller verstän
 ******************************************************
 
 ```hex
-:100000000C945D000C9485000C9485000C94850084
-:100010000C9485000C9485000C9485000C9485004C
-:100020000C9485000C9485000C9485000C9485003C
-:100030000C9485000C9485000C9485000C9485002C
-:100040000C9412020C9485000C9482020C945C02B5
-:100050000C9485000C9485000C9485000C9485000C
-:100060000C9485000C9485000000000024002700FB
-:100070002A0000000000250028002B0004040404CE
-:100080000404040402020202020203030303030342
-:10009000010204081020408001020408102001021F
+:100000000C9472000C947E000C947E000C947E0084
+:100010000C947E000C947E000C947E000C947E0068
+:100020000C947E000C947E000C947E000C947E0058
 ...
+:1000A0000C947E000C947E000C947E000C947E00D8
+:1000B0000C947E000C947E000C947E000C947E00C8
+:1000C0000C947E000C947E000C947E000C947E00B8
+:1000D0000C947E000C947E000C947E000C947E00A8
+:1000E0000C947E0011241FBECFEFD1E2DEBFCDBF46
+:1000F00000E00CBF0E9480000C9483000C94000070
+:0A010000279A2F98FFCFF894FFCF45
+:00000001FF
 ```
 
 > **Am Ende des Semesters können Sie jeden Schritt dieser Transformation verstehen und erklären!**
@@ -113,7 +114,7 @@ Der Code muss zunächst übersetzt und in eine für den Mikrocontroller verstän
 ******************************************************
 
     --{{3}}--
-Das Faszinierende: Wenn Sie diese Hex-Datei verstehen können - und das werden Sie am Ende des Semesters - dann können Sie jeden Computer der Welt verstehen. Die Grundprinzipien sind universell, egal ob es sich um einen Arduino, einen Smartphone-Prozessor oder einen Supercomputer handelt. Schauen Sie genau hin: Die erste gepunktete Zeile beginnt mit "0C 94 72 00". Das sind vier Bytes, die einen einzigen Maschinenbefehl darstellen - einen Jump-Befehl zur Adresse 0x0072. Dort steht der Interrupt-Vektor für den Reset.
+Das Faszinierende: Wenn Sie diese Hex-Datei verstehen können - und das werden Sie am Ende des Semesters - dann können Sie jeden Computer der Welt verstehen. Die Grundprinzipien sind universell, egal ob es sich um einen Arduino, einen Smartphone-Prozessor oder einen Supercomputer handelt. Schauen Sie genau hin: Die erste gepunktete Zeile beginnt mit "0C 94 72 00". Das sind vier Bytes, die einen einzigen Maschinenbefehl darstellen - einen Jump-Befehl zur Wortadresse 0x0072, byteweise gezählt also 0xE4. Adresse 0 ist selbst der Reset-Vektor; das Sprungziel ist der Startup-Code, der schließlich `main()` aufruft.
 
 ### Die Reise: 16 Stationen zum Verständnis
 
