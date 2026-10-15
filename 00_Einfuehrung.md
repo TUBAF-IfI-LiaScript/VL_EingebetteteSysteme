@@ -132,11 +132,10 @@ Das Faszinierende: Wenn Sie diese Hex-Datei verstehen können - und das werden S
 | [09 Rechnerarithmetik](09_Rechnerarithmetik.md)     | Addition in Hardware     |
 | [10 CPU-Basis](10_CPU_Basis.md)                     | Der erste Prozessor      |
 | [11 Modell-CPU](11_Modell_CPU.md)                   | CPU-Simulation           |
-| [12 Pipeline](12_Pipeline.md)                       | Geschwindigkeit          |
-| [13 AVR-CPU](13_AVR_CPU.md)                         | **IHR Arduino-Chip!**    |
-| [14 ADC](14_ADC.md)                                 | Analog trifft Digital    |
-| [15 Timer & Interrupts](15_TimerUndInterrupts.md)   | Multitasking             |
-| [16 Aktoren](16_Aktoren.md)                         | Hardware ansteuern       |
+| [12 AVR-CPU](12_AVR_CPU.md)                         | **IHR Arduino-Chip!**    |
+| [13 ADC](13_ADC.md)                                 | Analog trifft Digital    |
+| [14 Timer & Interrupts](14_TimerUndInterrupts.md)   | Multitasking             |
+| [15 Aktoren](15_Aktoren.md)                         | Hardware ansteuern       |
 
 > Wir haben nominell 21 Vorlesungen, an einigen Stellen werden wir aber länger verweilen und an anderen Stellen schneller vorankommen. Diese Aufzählung ist also eher ein Leitfaden, denn ein strikter Plan.
 

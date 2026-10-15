@@ -28,7 +28,7 @@ blue: @mark(#898AE3,@0)
 gray: @mark(gray,@0)
 -->
 
-[![LiaScript](https://raw.githubusercontent.com/LiaScript/LiaScript/master/badges/course.svg)](https://liascript.github.io/course/?https://raw.githubusercontent.com/TUBAF-IfI-LiaScript/VL_EingebetteteSysteme/master/16_Aktoren.md#1)
+[![LiaScript](https://raw.githubusercontent.com/LiaScript/LiaScript/master/badges/course.svg)](https://liascript.github.io/course/?https://raw.githubusercontent.com/TUBAF-IfI-LiaScript/VL_EingebetteteSysteme/master/15_Aktoren.md#1)
 
 # Ansteuerung von peripheren Komponenten
 
@@ -38,7 +38,7 @@ gray: @mark(gray,@0)
 | **Semester:**            | @config.semester                                                                                         |
 | **Hochschule:**          | `Technische Universität Freiberg`                                                                        |
 | **Inhalte:**             | `Servo-, Schrittmotor- und PWM-Ansteuerung`                                                             |
-| **Link auf GitHub:**     | https://github.com/TUBAF-IfI-LiaScript/VL_EingebetteteSysteme/blob/master/16_Aktoren.md                |
+| **Link auf GitHub:**     | https://github.com/TUBAF-IfI-LiaScript/VL_EingebetteteSysteme/blob/master/15_Aktoren.md                |
 | **Autoren:**             | @author                                                                                                  |
 
 ![](https://media.giphy.com/media/10PNyg7YOcaBQA/giphy-downsized.gif)
@@ -113,7 +113,7 @@ Als zentrale Merkmale folgen daraus:
 1. Interaktion mit der Umgebung (Sensor/Aktor Systeme)
 2. ggf. hohe Anforderungen an die Verlässlichkeit (u.a. Zuverlässigkeit und Verfügbarkeit)
 
-![Bild](./images/16_Aktoren/1280px-Kernkraftwerk_Grafenrheinfeld_-_2013.jpeg "Kernkraftwerk Grafenrheinfeld - 2013 [^Wiki_Kraftwertk]")<!-- style="width: 75%; max-width: 1000px" -->
+![Bild](./images/15_Aktoren/1280px-Kernkraftwerk_Grafenrheinfeld_-_2013.jpeg "Kernkraftwerk Grafenrheinfeld - 2013 [^Wiki_Kraftwertk]")<!-- style="width: 75%; max-width: 1000px" -->
 
 3. Schwerpunktentwicklungsziel Effizienz (Energieverbrauch, Speicher, Ausführungsdauer)
 
@@ -165,7 +165,7 @@ Die Beschaltung eines externen Gerätes wird aus Sicht des Mikrocontrollers durc
 
 Elektronische, elektromechanische Bereitstellung einer entsprechenden Leistung.
 
-![Bild](./images/16_Aktoren/ControlPins.png "Ansteuerung einzelner Ausgänge [^OutputPin]")<!-- style="width: 75%; max-width: 1000px" -->
+![Bild](./images/15_Aktoren/ControlPins.png "Ansteuerung einzelner Ausgänge [^OutputPin]")<!-- style="width: 75%; max-width: 1000px" -->
 
 **Lösungsansätze zu 2:**
 
@@ -173,19 +173,19 @@ Elektronische, elektromechanische Bereitstellung einer entsprechenden Leistung.
 
 Der CD4543 Baustein dient der Ansteuerung von 7-Segment-Anzeigen. Mit dem Dekodieren einer 4-Bit Zahlendarstellung auf die zugehörigen Steuerleitungen werden 3 Pins eingespart. Vergleichen Sie die Schaltung mit der in Vorlesung 4 hergeleiteten Lösung.
 
-![Bild](./images/16_Aktoren/CD4543.png "CMOS BCD-to-Seven-Segement [^TI_BCD]")<!-- style="width: 75%; max-width: 1000px" -->
+![Bild](./images/15_Aktoren/CD4543.png "CMOS BCD-to-Seven-Segement [^TI_BCD]")<!-- style="width: 75%; max-width: 1000px" -->
 
 2. Multiplexiing
 
 Mittels Muliplexing lassen sich nun mehrere 7-Segment-Anzeigen durch ein Set von Ausgängen beschalten. Allerdings wird in dieser Lösung pro Anzeige eine weitere Steuerleitung verwendet. Zudem ist eine Berücksichtigung der Schaltzeiten der Displays zu berücksichtigen.
 
-![Bild](./images/16_Aktoren/Multiplexer.gif "7-Segment gemultiplext [^Mux_7-Segmente]")<!-- style="width: 75%; max-width: 1000px" -->
+![Bild](./images/15_Aktoren/Multiplexer.gif "7-Segment gemultiplext [^Mux_7-Segmente]")<!-- style="width: 75%; max-width: 1000px" -->
 
 3. Shift-Register (Sequenzialisierung)
 
-![Bild](./images/16_Aktoren/ShiftRegister.png "Struktur Bit-Shift Registers With 3-StateOutputRegisters [^TI_SNx4HC5958]")<!-- style="width: 45%; max-width: 800px" -->
+![Bild](./images/15_Aktoren/ShiftRegister.png "Struktur Bit-Shift Registers With 3-StateOutputRegisters [^TI_SNx4HC5958]")<!-- style="width: 45%; max-width: 800px" -->
 
-![Bild](./images/16_Aktoren/ShiftRegisterTiming.png "Zeitverlauf im SNx4HC5958")<!-- style="width: 65%; max-width: 1000px" -->
+![Bild](./images/15_Aktoren/ShiftRegisterTiming.png "Zeitverlauf im SNx4HC5958")<!-- style="width: 65%; max-width: 1000px" -->
 
 [^TI_SNx4HC5958]: Texas Instruments, SNx4HC5958-Bit Shift Registers With 3-StateOutputRegisters, [Link](https://www.ti.com/lit/ds/symlink/sn74hc595.pdf?ts=1612165666219&ref_url=https%253A%252F%252Fwww.ti.com%252Fproduct%252FSN74HC595)
 
@@ -202,22 +202,22 @@ Gleichstrommotor
 
 An dieser Stelle konzentrieren wir uns auf eine spezifische Variante des Gleichstrommotors und seine Ansteuerung mittels PWM.
 
-![Gleichstrom](./images/16_Aktoren/1280px-Gleichstrommaschine.svg.png "Prinzipskizze eines Gleichstrommotors [^WikiGleichstromMaschine]")<!-- style="width: 65%; max-width: 750px" -->
+![Gleichstrom](./images/15_Aktoren/1280px-Gleichstrommaschine.svg.png "Prinzipskizze eines Gleichstrommotors [^WikiGleichstromMaschine]")<!-- style="width: 65%; max-width: 750px" -->
 
 Welche Kernparameter bestimmen das Verhalten unseres Motors?
 
-![Gleichstrom](./images/16_Aktoren/Kennlinie.png "Beispielhafte Kennlinie eines Gleichstrommotors [^Dunker]")
+![Gleichstrom](./images/15_Aktoren/Kennlinie.png "Beispielhafte Kennlinie eines Gleichstrommotors [^Dunker]")
 
 Wie erfolgt der Betrieb aus Sicht des Mikrocontrollers? Wir haben zwei vorgaben, die wir umsetzen wollen, die Drehrichtung und die Geschwindigkeit.
 
 Für die Drehrichtung wird die Änderung der Polarität über eine H-Brücke umgesetzt. Mit 4 Schaltern kann der Stromfluss durch den Motor angepasst werden.
-![Gleichstrom](./images/16_Aktoren/HBruecke.png)<!-- style="width: 75%; max-width: 750px" -->
+![Gleichstrom](./images/15_Aktoren/HBruecke.png)<!-- style="width: 75%; max-width: 750px" -->
 
 Die Drehgeschwindigkeit ergibt sich aus der Vorgabe eines PWM Signals.
 
-![Gleichstrom](./images/16_Aktoren/PWM.png)<!-- style="width: 75%; max-width: 750px" -->
+![Gleichstrom](./images/15_Aktoren/PWM.png)<!-- style="width: 75%; max-width: 750px" -->
 
-![Gleichstrom](./images/16_Aktoren/L293D.png "Beschaltung eines Motortreibers L293D [^TI_L293]")
+![Gleichstrom](./images/15_Aktoren/L293D.png "Beschaltung eines Motortreibers L293D [^TI_L293]")
 
 [^WikiGleichstromMaschine]: Wikipedia, Autor Honina, Schematische Darstellung der Arbeitsweise einer permanenterregten Gleichstrommaschine, [Link](https://commons.wikimedia.org/wiki/File:Gleichstrommaschine.svg)
 
@@ -229,11 +229,11 @@ Die Drehgeschwindigkeit ergibt sich aus der Vorgabe eines PWM Signals.
 
 Ein Schrittmotor ist ein Synchronmotor, bei dem der Rotor (ein drehbares Motorteil mit Welle) durch ein gesteuertes, schrittweise rotierendes, elektromagnetisches Feld der Statorspulen um einen kleinen Winkel (Schritt) oder sein Vielfaches gedreht werden kann.
 
-![Schrittmotor](./images/16_Aktoren/Schrittmotor.PNG "Schrittmotor Wirkprinzip [^Schrittmotor]")<!-- style="width: 65%; max-width: 750px" -->
+![Schrittmotor](./images/15_Aktoren/Schrittmotor.PNG "Schrittmotor Wirkprinzip [^Schrittmotor]")<!-- style="width: 65%; max-width: 750px" -->
 
 Die technische Realsierung kann dabei zwei grundlegenden Mustern folgen. Man unterscheidet uni- und bipolare Schrittmotoren.
 
-![SchrittmotorVarianten](./images/16_Aktoren/Stepmotscheme.jpg "Schrittmotorvarianten [^StepperVariants]")<!-- style="width: 65%; max-width: 750px" -->
+![SchrittmotorVarianten](./images/15_Aktoren/Stepmotscheme.jpg "Schrittmotorvarianten [^StepperVariants]")<!-- style="width: 65%; max-width: 750px" -->
 
 ```c
 uint8_t pattern[4]={9,5,6,10};
@@ -268,7 +268,7 @@ Eine sehr schöne Erklärung zur Funktionsweise von Schrittmotoren liefert das f
 
 Als Servomotor werden Elektromotoren bezeichnet, die die Kontrolle der Winkelposition ihrer Motorwelle sowie der Drehgeschwindigkeit und Beschleunigung erlauben. Sie integrieren neben dem eigentlichen Elektromotor, eine Sensorik zur Positionsbestimmung und eine Regelelektronik. Damit kann die Bewegung des Motors entsprechend einem oder mehreren einstellbaren Sollwerten – wie etwa Soll-Winkelposition der Welle oder Solldrehzahl – bestimmt werden.
 
-![ServoMotor](./images/16_Aktoren/Rc-receiver-servo-battery_b.jpg "Setting eines Servomotors für den Modellbau [^Wiki_Servo]")<!-- style="width: 65%; max-width: 750px" -->
+![ServoMotor](./images/15_Aktoren/Rc-receiver-servo-battery_b.jpg "Setting eines Servomotors für den Modellbau [^Wiki_Servo]")<!-- style="width: 65%; max-width: 750px" -->
 
 <!--
 style="width: 80%; min-width: 420px; max-width: 720px;"
@@ -382,7 +382,7 @@ OC1A       |          | |       |
 
 ## Finales Anwendungsbeispiel
 
-![Gleichstrom](./images/16_Aktoren/Beispiel.png)<!-- style="width: 75%; max-width: 750px" -->
+![Gleichstrom](./images/15_Aktoren/Beispiel.png)<!-- style="width: 75%; max-width: 750px" -->
 
 https://www.tinkercad.com/things/lu1Gt48hNsL-gleichstrommotor-mit-encoder/editel
 

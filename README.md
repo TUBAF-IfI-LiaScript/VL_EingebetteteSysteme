@@ -30,11 +30,10 @@ Dieser Kurs vermittelt die Grundlagen digitaler Systeme vom theoretischen Fundam
 | [09](09_Rechnerarithmetik.md) | Rechnerarithmetik | Zahlensysteme, Addierer |
 | [10](10_CPU_Basis.md) | CPU-Grundlagen | ALU, Von-Neumann-Architektur |
 | [11](11_Modell_CPU.md) | Modell-CPU | Praktische CPU-Simulation |
-| **12** | **Pipeline** | **⚠️ Noch zu erstellen** |
-| [13](13_AVR_CPU.md) | AVR-CPU | Mikrocontroller-Programmierung |
-| [14](14_ADC.md) | Analog-Digital-Wandler | Sensorik |
-| [15](15_TimerUndInterrupts.md) | Timer & Interrupts | Echtzeit-Programmierung |
-| [16](16_Aktoren.md) | Aktoren | Servo- und Schrittmotoren |
+| [12](12_AVR_CPU.md) | AVR-CPU | Mikrocontroller-Programmierung |
+| [13](13_ADC.md) | Analog-Digital-Wandler | Sensorik |
+| [14](14_TimerUndInterrupts.md) | Timer & Interrupts | Echtzeit-Programmierung |
+| [15](15_Aktoren.md) | Aktoren | Servo- und Schrittmotoren |
 
 ## 🛠 Interaktive Features
 
@@ -67,7 +66,7 @@ git clone https://github.com/TUBAF-IfI-LiaScript/VL_EingebetteteSysteme.git
 ├── 00_Einfuehrung.md              # Kurseinführung
 ├── 01_HistorischerUeberblick.md   # Geschichte der Rechentechnik
 ├── ...                            # Weitere Vorlesungen
-├── 16_Aktoren.md                  # Aktor-Ansteuerung
+├── 15_Aktoren.md                  # Aktor-Ansteuerung
 ├── exampleCode/                   # Praktische Beispiele
 ├── files/                         # Schaltungsdateien
 ├── images/                        # Grafiken und Diagramme

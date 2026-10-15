@@ -27,7 +27,7 @@ blue: @mark(#898AE3,@0)
 gray: @mark(gray,@0)
 -->
 
-[![LiaScript](https://raw.githubusercontent.com/LiaScript/LiaScript/master/badges/course.svg)](https://liascript.github.io/course/?https://raw.githubusercontent.com/TUBAF-IfI-LiaScript/VL_EingebetteteSysteme/master/14_ADC.md#1)
+[![LiaScript](https://raw.githubusercontent.com/LiaScript/LiaScript/master/badges/course.svg)](https://liascript.github.io/course/?https://raw.githubusercontent.com/TUBAF-IfI-LiaScript/VL_EingebetteteSysteme/master/13_ADC.md#1)
 
 # Analog-Digital-Wandler
 
@@ -37,7 +37,7 @@ gray: @mark(gray,@0)
 | **Semester:**            | @config.semester                                                                                         |
 | **Hochschule:**          | `Technische Universität Freiberg`                                                                        |
 | **Inhalte:**             | `Grundlagen und Verwendung des Analog-Digital-Wandlers`                                                 |
-| **Link auf GitHub:**     | https://github.com/TUBAF-IfI-LiaScript/VL_EingebetteteSysteme/blob/master/14_ADC.md                    |
+| **Link auf GitHub:**     | https://github.com/TUBAF-IfI-LiaScript/VL_EingebetteteSysteme/blob/master/13_ADC.md                    |
 | **Autoren:**             | @author                                                                                                  |
 
 ![](https://media.giphy.com/media/10PNyg7YOcaBQA/giphy-downsized.gif)
@@ -98,7 +98,7 @@ style="width: 80%; min-width: 420px; max-width: 720px;"
 In der vorangegangenen Vorlesung sprachen wir insbesondere über die Erfassung
 von digitalen Signalen. Eine Erfassung von analogen Werten ist allerdings notwendig, um Phänomene der Umgebung mit dem notwendigen Detailgrad beobachten zu können.  
 
-![Bild](./images/14_ADC/Herausforderung.png)<!-- style="width: 85%; max-width: 1000px" -->
+![Bild](./images/13_ADC/Herausforderung.png)<!-- style="width: 85%; max-width: 1000px" -->
 
 Dabei wird das zeit- und wertkontinuierliche Eingangssignal in eine zeit- und wertdiskrete Darstellung überführt.
 
@@ -123,7 +123,7 @@ Digital        | 0 | 1 | 2 | 3 | 4 | 5 | 6 | 7 |        3 Bit Auflösung
                |       0       |       1       |        1 Bit           
 ```
 
-![Bild](./images/14_ADC/ADC_prinzip.png)<!-- style="width: 85%; max-width: 1000px" -->
+![Bild](./images/13_ADC/ADC_prinzip.png)<!-- style="width: 85%; max-width: 1000px" -->
 
 
 Daraus ergibt sich die zentrale Gleichung für die Interpretation des Ausgaben eines Analog-Digital-Wandlers
@@ -152,15 +152,15 @@ $$
 
 Dabei erfolgt die Wandlung in zwei generellen Schritten. Zunächst wird das Signal zeitlich diskretisiert und darauffolgend wertbezogenen gewandelt.
 
-![Bild](./images/14_ADC/Wandlungsprozess.png)<!-- style="width: 85%; max-width: 1000px" -->
+![Bild](./images/13_ADC/Wandlungsprozess.png)<!-- style="width: 85%; max-width: 1000px" -->
 
 ## Analog Komperator
 
 Ein Komparator ist eine elektronische Schaltung, die zwei Spannungen vergleicht. Der Ausgang zeigt in binärer/digitaler Form an, welche der beiden Eingangsspannungen höher ist. Damit handelt es sich praktisch um einen 1-Bit-Analog-Digital-Umsetzer.
 
-![Bild](./images/14_ADC/Op-amp_symbol.svg.png "Comparator Symbol [^OPAMP]")<!-- style="width: 35%; max-width: 300px" -->
+![Bild](./images/13_ADC/Op-amp_symbol.svg.png "Comparator Symbol [^OPAMP]")<!-- style="width: 35%; max-width: 300px" -->
 
-![Bild](./images/14_ADC/Comperator.png "Comparator Funktionsprinzip [^OPAMP]")<!-- style="width: 55%; max-width: 600px" -->
+![Bild](./images/13_ADC/Comperator.png "Comparator Funktionsprinzip [^OPAMP]")<!-- style="width: 55%; max-width: 600px" -->
 
 [^OPAMP]: Wikipedia, Autor Omegatron - Eigenes Werk, CC BY-SA 3.0, https://commons.wikimedia.org/w/index.php?curid=983276
 
@@ -196,7 +196,7 @@ style="width: 80%; min-width: 420px; max-width: 720px;"
 Im AVR findet sich ein Komperator, der unterschiedliche Eingänge miteinander vergleichen kann:
 Für "+" sind dies die `BANDGAP Reference` und der Eingang `AIN0` und für "-" der Pin `AIN1` sowie alle analogen Eingänge.  
 
-![Bild](./images/14_ADC/AnalogCompAVR.png "Analog Comperator, Seite 243 [^megaAVR]")<!-- style="width: 85%; max-width: 1000px" -->
+![Bild](./images/13_ADC/AnalogCompAVR.png "Analog Comperator, Seite 243 [^megaAVR]")<!-- style="width: 85%; max-width: 1000px" -->
 
 Die grundlegende Konfiguration erfolgt über die Konfiguration der Bits / Register :
 
@@ -215,7 +215,7 @@ Weitere Erläuterungen finden Sie im Handbuch auf Seite
 
 Ein Beispiel für den Vergleich eines Infrarot Distanzsensors mit einem fest vorgegebenen Spannungswert findet sich im _Example_ Ordner der Veranstaltung.
 
-![Bild](./images/14_ADC/ComperatorBeispiel.png)<!-- style="width: 85%; max-width: 1000px" -->
+![Bild](./images/13_ADC/ComperatorBeispiel.png)<!-- style="width: 85%; max-width: 1000px" -->
 
 ```cpp
 #define F_CPU 16000000UL
@@ -243,7 +243,7 @@ int main()
 
 Voraussetzung für den Wandlungsprozess ist die Sequenzierung des Signals. Mit einer spezifischen Taktrate wird das kontinuierliche Signal erfasst.  
 
-![Bild](./images/14_ADC/SampleAndHold.png)<!-- style="width: 85%; max-width: 1000px" -->
+![Bild](./images/13_ADC/SampleAndHold.png)<!-- style="width: 85%; max-width: 1000px" -->
 
 Wie sollte die Taktrate für die Messung denn gewählt werden?
 
@@ -292,7 +292,7 @@ Falls dieses Kriterium nicht eingehalten wird, entstehen nichtlineare Verzerrung
 
 Als Erklärung kann eine Darstellung des Signals im Frequenzbereich dienen:
 
-![Bild](./images/14_ADC/Nyquist.png)<!-- style="width: 85%; max-width: 1000px" -->
+![Bild](./images/13_ADC/Nyquist.png)<!-- style="width: 85%; max-width: 1000px" -->
 
 ### Flashwandler
 
@@ -302,7 +302,7 @@ Als Erklärung kann eine Darstellung des Signals im Frequenzbereich dienen:
 
 Verallgemeinerte Darstellung
 
-![Bild](./images/14_ADC/FlashWandler.png)<!-- style="width: 55%; max-width: 1000px" -->
+![Bild](./images/13_ADC/FlashWandler.png)<!-- style="width: 55%; max-width: 1000px" -->
 
 Vorteil
 
@@ -319,15 +319,15 @@ https://www.youtube.com/watch?v=x7oPVWLD59Y
 
 Sequenzielle Wandler umgehen die Notwendigkeit mehrerer Komperatoren, in dem das Referenzsignal variabel erzeugt wird.
 
-![Bild](./images/14_ADC/SequenziellerWandler.png)<!-- style="width: 85%; max-width: 1000px" -->
+![Bild](./images/13_ADC/SequenziellerWandler.png)<!-- style="width: 85%; max-width: 1000px" -->
 
 Dafür ist allerdings ein Digital-Analog-Wandler nötig, der die Vergleichsspannung ausgehend von einer digitalen Konfiguration vornimmt.
 
-![Bild](./images/14_ADC/DAWandler.png)<!-- style="width: 85%; max-width: 1000px" -->
+![Bild](./images/13_ADC/DAWandler.png)<!-- style="width: 85%; max-width: 1000px" -->
 
 **Zählverfahren**
 
-![Bild](./images/14_ADC/Zaehlverfahren.png)<!-- style="width: 85%; max-width: 1000px" -->
+![Bild](./images/13_ADC/Zaehlverfahren.png)<!-- style="width: 85%; max-width: 1000px" -->
 
 Vorteil
 
@@ -341,7 +341,7 @@ Nachteil
 
 **Sukzessive Approximation/Wägeverfahren**
 
-![Bild](./images/14_ADC/SukzessiveAppro.png)<!-- style="width: 85%; max-width: 1000px" -->
+![Bild](./images/13_ADC/SukzessiveAppro.png)<!-- style="width: 85%; max-width: 1000px" -->
 
 Vorteil
 
@@ -351,7 +351,7 @@ Vorteil
 
 **Fehlertypen**
 
-![Bild](./images/14_ADC/Fehler.png)<!-- style="width: 85%; max-width: 1000px" -->
+![Bild](./images/13_ADC/Fehler.png)<!-- style="width: 85%; max-width: 1000px" -->
 
 + Quantisierungsfehler sind bedingt durch die Auflösung des Wandlers
 + Offsetfehler ergeben sich aus einer Abweichung der Referenzspannung und führen zu einem konstanten Fehler.
@@ -360,7 +360,7 @@ Vorteil
 
 > **Merke:** Die Fehlerparameter hängen in starkem Maße von der Konfiguration des Wandlers (Sample Frequenz, Arbeitsbreite, Umgebungstemperatur) ab!
 
-![Bild](./images/14_ADC/Linearitaetsfehler.png "Datenblatt AD-Wandler 8 Bit DIL-8, TLC0831, TLC0831IP [^Texas_TLC]")<!-- style="width: 55%; max-width: 1000px" -->
+![Bild](./images/13_ADC/Linearitaetsfehler.png "Datenblatt AD-Wandler 8 Bit DIL-8, TLC0831, TLC0831IP [^Texas_TLC]")<!-- style="width: 55%; max-width: 1000px" -->
 
 [^Texas_TLC]: Firma Texas Instruments, Datenblatt AD-Wandler 8 Bit DIL-8, TLC0831, TLC0831IP
 
@@ -392,7 +392,7 @@ Eine Herausforderung liegt in der stabilen Bereitstellung der Referenzspannung f
 | Temperature Sensor Input Channel                    |                                                                                                 |
 | Sleep Mode Noise Canceler                                                    |    Reduzierung des Streuquellen durch einen "Sleepmode" für die CPU                                                                                             |
 
-![Bild](./images/14_ADC/AVR_ADC.png "megaAVR® Data Sheet, Seite 247 [^megaAVR]")<!-- style="width: 75%; max-width: 1000px" -->
+![Bild](./images/13_ADC/AVR_ADC.png "megaAVR® Data Sheet, Seite 247 [^megaAVR]")<!-- style="width: 75%; max-width: 1000px" -->
 
 **Trigger für den Wandlung**
 
@@ -402,9 +402,9 @@ Grundsätzlich sind 3 Modi für die Wandlung möglich:
 + Kontinuierliche Wandlung
 + ereignisgetriebener Start
 
-![Bild](./images/14_ADC/ADCTrigger.png "megaAVR® Data Sheet, Seite 247 [^megaAVR]")<!-- style="width: 75%; max-width: 1000px" -->
+![Bild](./images/13_ADC/ADCTrigger.png "megaAVR® Data Sheet, Seite 247 [^megaAVR]")<!-- style="width: 75%; max-width: 1000px" -->
 
-![Bild](./images/14_ADC/TimeLineADC.png "megaAVR® Data Sheet, Seite 250 [^megaAVR]")<!-- style="width: 75%; max-width: 1000px" -->
+![Bild](./images/13_ADC/TimeLineADC.png "megaAVR® Data Sheet, Seite 250 [^megaAVR]")<!-- style="width: 75%; max-width: 1000px" -->
 
 **Ergebnisregister**
 
@@ -496,7 +496,7 @@ void loop() {
           0     Temperatur in Grad Celsius       100
 
 
-![Bild](./images/14_ADC/Heissleiter.png)<!-- style="width: 75%; max-width: 500px" -->
+![Bild](./images/13_ADC/Heissleiter.png)<!-- style="width: 75%; max-width: 500px" -->
 
 
 $$
@@ -524,7 +524,7 @@ Mit diesem Spannungswert können wir nun den zugrundeliegenden Widerstand berech
 
 Für das Beispiel wird der AtMega2560 verwendet, der eine interne Referenzspannung von 2.56 V anstatt der des AtMega328 von 1.1 V bereit stellt.
 
-![Bild](./images/14_ADC/AtMega2560Refs.png "megaAVR® Data Sheet, Seite 281 [^megaAVR2560]")<!-- style="width: 75%; max-width: 1000px" -->
+![Bild](./images/13_ADC/AtMega2560Refs.png "megaAVR® Data Sheet, Seite 281 [^megaAVR2560]")<!-- style="width: 75%; max-width: 1000px" -->
 
 [^megaAVR2560]: Firma Atmel, Atmel ATmega640/V-1280/V-1281/V-2560/V-2561/V, Seite 281, [Link](https://ww1.microchip.com/downloads/en/devicedoc/atmel-2549-8-bit-avr-microcontroller-atmega640-1280-1281-2560-2561_datasheet.pdf)
 

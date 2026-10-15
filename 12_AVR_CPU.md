@@ -22,7 +22,7 @@ blue: @mark(#898AE3,@0)
 gray: @mark(gray,@0)
 -->
 
-[![LiaScript](https://raw.githubusercontent.com/LiaScript/LiaScript/master/badges/course.svg)](https://liascript.github.io/course/?https://raw.githubusercontent.com/TUBAF-IfI-LiaScript/VL_EingebetteteSysteme/master/13_AVR_CPU.md#1)
+[![LiaScript](https://raw.githubusercontent.com/LiaScript/LiaScript/master/badges/course.svg)](https://liascript.github.io/course/?https://raw.githubusercontent.com/TUBAF-IfI-LiaScript/VL_EingebetteteSysteme/master/12_AVR_CPU.md#1)
 
 # Programmierung CPU
 
@@ -32,7 +32,7 @@ gray: @mark(gray,@0)
 | **Semester:**            | @config.semester                                                                                         |
 | **Hochschule:**          | `Technische Universität Freiberg`                                                                        |
 | **Inhalte:**             | `Einführung AVR-Architektur, Assembler-Programmierung, Register und Speicher`                          |
-| **Link auf GitHub:**     | https://github.com/TUBAF-IfI-LiaScript/VL_EingebetteteSysteme/blob/master/13_AVR_CPU.md                |
+| **Link auf GitHub:**     | https://github.com/TUBAF-IfI-LiaScript/VL_EingebetteteSysteme/blob/master/12_AVR_CPU.md                |
 | **Autoren:**             | @author                                                                                                  |
 
 ![](https://media.giphy.com/media/10PNyg7YOcaBQA/giphy-downsized.gif)
@@ -141,7 +141,7 @@ Beispiel 1: Wallplotter
 
 Beispiel 2: Autonome Schwimmplattform
 
-![Bild](./images/13_AVR_CPU/Schwimmroboter.jpg)<!-- style="width: 95%; max-width: 900px" -->[^1]
+![Bild](./images/12_AVR_CPU/Schwimmroboter.jpg)<!-- style="width: 95%; max-width: 900px" -->[^1]
 
 <!--
 style="width: 70%; max-width: 720px; display: block; margin-left: auto; margin-right: auto;"
@@ -171,9 +171,9 @@ In den kommenden Vorlesungen wollen wir diese Anforderungen ausgehend von unsere
 
 Das Bild zeigt einen ATtiny Prozessor
 
-![Bild](./images/13_AVR_CPU/AtTiny.png "Architektur eines ATtiny [^ATtiny]")<!-- style="width: 75%; max-width: 500px" -->
+![Bild](./images/12_AVR_CPU/AtTiny.png "Architektur eines ATtiny [^ATtiny]")<!-- style="width: 75%; max-width: 500px" -->
 
-![Bild](./images/13_AVR_CPU/ATTINY13A.jpeg)<!-- style="width: 20%; max-width: 200px" -->
+![Bild](./images/12_AVR_CPU/ATTINY13A.jpeg)<!-- style="width: 20%; max-width: 200px" -->
 
 [^ATtiny]: Firma Microchip, Handbuch AtTiny Family, https://ww1.microchip.com/downloads/en/DeviceDoc/Atmel-2586-AVR-8-bit-Microcontroller-ATtiny25-ATtiny45-ATtiny85_Datasheet.pdf
 
@@ -220,13 +220,13 @@ Damit wird es möglich rund um den Mikroprozessor weitere periphere Komponenten 
 
 Das Werbematerial der vormaligen Firma AVR macht das anhand einer Grafik deutlich:
 
-![Bild](./images/13_AVR_CPU/AVR-8Bit-Vergleich.png)<!-- style="width: 55%; max-width: 500px" -->
+![Bild](./images/12_AVR_CPU/AVR-8Bit-Vergleich.png)<!-- style="width: 55%; max-width: 500px" -->
 
 [^2]: Firma Atmel Webseite
 
 Den Tiny Controller hatten wir in seiner Architektur bereits gesehen. Schon ein Atmega32U4 bringt einen deutlich größeren Umfang an Peripherie mit.
 
-![Bild](./images/13_AVR_CPU/AtMega32U4.png "Architekturdarstellung des AVR AtMega32U4 [^megaAVR]")
+![Bild](./images/12_AVR_CPU/AtMega32U4.png "Architekturdarstellung des AVR AtMega32U4 [^megaAVR]")
 
 [^megaAVR]: Firma Microchip, megaAVR® Data Sheet, [Link](http://ww1.microchip.com/downloads/en/DeviceDoc/ATmega48A-PA-88A-PA-168A-PA-328-P-DS-DS40002061A.pdf)
 
@@ -240,11 +240,11 @@ Das Konzept einer Mikrocontroller-Familie mit einem gemeinsamen "Kern" findet si
 Die ARM Cortex-M-Familie (32 Bit System) sind ARM-Mikroprozessor-Cores, die für den Einsatz in Mikrocontrollern, ASICs, ASSPs, FPGAs und SoCs konzipiert sind. Cortex-M-Cores werden üblicherweise als dedizierte Mikrocontroller-Chips verwendet, sind aber auch "versteckt" in SoC-Chips als Power-Management-Controller, I/O-Controller, System-Controller, Touchscreen-Controller, Smart-Battery-Controller und Sensor-Controller. Arm Holdings fertigt und verkauft keine CPU-Bausteine, die auf eigenen Designs basieren, sondern lizenziert die Prozessorarchitektur an Interessenten.  
 Entsprechend findet sich ein und der selbe Mikroprozessor in sehr vielen Controllern unterschiedlicher Hersteller wieder.
 
-![Bild](./images/13_AVR_CPU/UebersichtCortexM0.png "Cortex ARM Prozessoren [^4]")<!-- style="width: 45%; max-width: 500px" -->
+![Bild](./images/12_AVR_CPU/UebersichtCortexM0.png "Cortex ARM Prozessoren [^4]")<!-- style="width: 45%; max-width: 500px" -->
 
 [^4]: Firma STMicroelectronics, Arm® Cortex®-M0 in a nutshell, [Link](https://www.st.com/content/st_com/en/arm-32-bit-microcontrollers/arm-cortex-m0.html?icmp=tt18626_gl_lnkon_nov2020)
 
-![Bild](./images/13_AVR_CPU/STM32F0-Vergleich.png "Vergleich unterschiedlicher Implementierungen von Cortex Controllern")<!-- style="width: 75%; max-width: 500px" -->
+![Bild](./images/12_AVR_CPU/STM32F0-Vergleich.png "Vergleich unterschiedlicher Implementierungen von Cortex Controllern")<!-- style="width: 75%; max-width: 500px" -->
 
 [^5]: Firma STMicroelectronics, STM32F0 Series, [Link](https://www.st.com/en/microcontrollers-microprocessors/stm32f0-series.html?icmp=tt18625_gl_lnkon_nov2020)
 
@@ -266,7 +266,7 @@ Feature/Parameter des Controllers
 
 ### Handhabung
 
-![Bild](./images/13_AVR_CPU/ControllerBauformen.png)<!-- style="width: 100%; max-width: 700px" -->
+![Bild](./images/12_AVR_CPU/ControllerBauformen.png)<!-- style="width: 100%; max-width: 700px" -->
 
 Grundsätzlich unterscheidet man bei elektronischen Bauteilen zwischen:
 
@@ -332,7 +332,7 @@ Beschriebene Parameter:
   - One 16-bit Timer/Counter with Separate Prescaler, Compare Mode, and Capture Mode
   - ...
 
-![Bild](./images/13_AVR_CPU/PINBelegung.png "Pin Belegung AVR328, Seite 12 [^megaAVR]")<!-- style="width: 100%; max-width: 1000px" -->
+![Bild](./images/12_AVR_CPU/PINBelegung.png "Pin Belegung AVR328, Seite 12 [^megaAVR]")<!-- style="width: 100%; max-width: 1000px" -->
 
 > Wir nehmen nun an, dass wir uns für den Controller entschieden haben, um ein Problem zu lösen ... wie kommen wir von einen Chip zu einem funktionsfähigen System?
 
@@ -370,11 +370,11 @@ Beschriebene Parameter:
 
 ### Energieversorgung
 
-![Bild](./images/13_AVR_CPU/LowFrequency_Stromaufnahme.png "Stromaufnahme des Mikrocontrollers, Seite 597, [^megaAVR]")<!-- style="width: 75%; max-width: 1000px" -->
+![Bild](./images/12_AVR_CPU/LowFrequency_Stromaufnahme.png "Stromaufnahme des Mikrocontrollers, Seite 597, [^megaAVR]")<!-- style="width: 75%; max-width: 1000px" -->
 
-![Bild](./images/13_AVR_CPU/HighFrequency_Stromaufnahme.png "Stromaufnahme des Mikrocontrollers, Seite 597, [^megaAVR]")<!-- style="width: 65%; max-width: 1000px" -->
+![Bild](./images/12_AVR_CPU/HighFrequency_Stromaufnahme.png "Stromaufnahme des Mikrocontrollers, Seite 597, [^megaAVR]")<!-- style="width: 65%; max-width: 1000px" -->
 
-![Bild](./images/13_AVR_CPU/MaximaleStromaufnahme.png "Maximale Stromaufnahme des Mikrocontrollers, Seite 312, [^megaAVR]")<!-- style="width: 85%; max-width: 1000px" -->
+![Bild](./images/12_AVR_CPU/MaximaleStromaufnahme.png "Maximale Stromaufnahme des Mikrocontrollers, Seite 312, [^megaAVR]")<!-- style="width: 85%; max-width: 1000px" -->
 
 > **Aufgabe:** Zeichen Sie ein Diagramm das die maximale Taktfrequenz über der anliegenden Betriebsspannung zeigt.
 
@@ -391,7 +391,7 @@ In verschiedenen „Sleep“-Modi kann der Controllers im Hinblick auf:
 
 abgestimmt werden.
 
-![Bild](./images/13_AVR_CPU/SleepModes.png "Sleep Modes des Mikrocontrollers, Seite 47, [^megaAVR]")<!-- style="width: 85%; max-width: 1000px" -->
+![Bild](./images/12_AVR_CPU/SleepModes.png "Sleep Modes des Mikrocontrollers, Seite 47, [^megaAVR]")<!-- style="width: 85%; max-width: 1000px" -->
 
 **Idle Mode** Die CPU stoppt die Abarbeitung, aber die Timer, UART, ADC arbeiten aber weiter. Der Controller kann damit zum Beispiel auf ein Ereignis abwarten ohne selbst Energie zu verbrauchen, der Stromverbrauch sinkt auf ca. 0,04 mA. Aus diesem Modus kann jeder Interrupt die CPU wieder wecken.
 
@@ -407,7 +407,7 @@ abgestimmt werden.
 
 ### Taktgenerator
 
-![Bild](./images/13_AVR_CPU/Taktgenerierung.png "Taktsystem des Mikrocontrollers, Seite 36, [^megaAVR]")<!-- style="width: 75%; max-width: 1000px" -->
+![Bild](./images/12_AVR_CPU/Taktgenerierung.png "Taktsystem des Mikrocontrollers, Seite 36, [^megaAVR]")<!-- style="width: 75%; max-width: 1000px" -->
 
 !?[movie](https://www.youtube.com/watch?v=eYVOdlK15Og)<!--
 style = "width: 720px; height: 420px;"
@@ -420,7 +420,7 @@ style = "width: 720px; height: 420px;"
   - standardmäßig als Taktquelle vorkonfiguriert
   - Frequenzabweichung +/- (3-10) %
 
-![Bild](./images/13_AVR_CPU/RC_Oscillator.png "Genauigkeit des internen RC Taktes des Mikrocontrollers, Seite 312, [^megaAVR]")<!-- style="width: 75%; max-width: 1000px" -->
+![Bild](./images/12_AVR_CPU/RC_Oscillator.png "Genauigkeit des internen RC Taktes des Mikrocontrollers, Seite 312, [^megaAVR]")<!-- style="width: 75%; max-width: 1000px" -->
 
 + Schwingquarze (crystal oscillators)
 
@@ -435,7 +435,7 @@ style = "width: 720px; height: 420px;"
 
 ### Speicher
 
-![Bild](./images/13_AVR_CPU/AVR_core_Speicher.png "Architekturansicht des Controllers, Seite 18, [^megaAVR]")
+![Bild](./images/12_AVR_CPU/AVR_core_Speicher.png "Architekturansicht des Controllers, Seite 18, [^megaAVR]")
 
 Bei der Analyse der Struktur des AVRs haben wir bisher 3 Arten von Speicher kennengelernt:
 
@@ -451,7 +451,7 @@ Bei der Analyse der Struktur des AVRs haben wir bisher 3 Arten von Speicher kenn
 
 **Flash-ROM** des AVRs werden die Programme abgelegt. Über das Programmierinterface werden die kompilierten Programme vom PC an den Controller übertragen und hier gespeichert. Die Adressierung erfolgt über den Programmcounter. Bei der Programmausführung wird der Flash-Speicher Wort für Wort (16 Bit Breite) ausgelesen. Hier können neben den eigentlichen Programminformationen aber auch Daten abgelegt werden. Es kann beliebig oft ausgelesen werden, aber theoretisch nur ~10.000 mal beschrieben werden.
 
-![Bild](./images/13_AVR_CPU/ProgrammSpeicher.png)<!-- style="width: 75%; max-width: 1000px" -->
+![Bild](./images/12_AVR_CPU/ProgrammSpeicher.png)<!-- style="width: 75%; max-width: 1000px" -->
 
 $$3FFF = 16383 Speicherstellen$$
 $$ 16383 \cdot 2Byte = 32766 Byte = 32KB = 2^{15} Bit$$
@@ -466,7 +466,7 @@ Die **I/O Register** dienen der Konfiguration des Controllers bzw. der Interakti
 
 > **Merke** Die unterschiedlichen Speicherformen (RAM, GP Register, I/O Register) werden entsprechend der Idee des _Mapped Memory IO_ über einheitliche Befehle adressiert.
 
-![Bild](./images/13_AVR_CPU/Memory_Map.png "Speicherstruktur des Controllers, Seite 28, [^megaAVR]")<!-- style="width: 75%; max-width: 1000px" -->
+![Bild](./images/12_AVR_CPU/Memory_Map.png "Speicherstruktur des Controllers, Seite 28, [^megaAVR]")<!-- style="width: 75%; max-width: 1000px" -->
 
 | getrennter Adressraum                                      | gemeinsamer Adressraum                                                     |
 | ---------------------------------------------------------- | -------------------------------------------------------------------------- |
@@ -476,13 +476,13 @@ Die **I/O Register** dienen der Konfiguration des Controllers bzw. der Interakti
 
 Der EEPROM ist nicht Bestandteil des _Mapped Memory IO_ Konzepts! Vielmehr existiert für diesen ein eigener Zugriffsmechanismus, der über die zugehörigen IO-Register realsiert wird.
 
-![Bild](./images/13_AVR_CPU/EEPROM.png "Speicherstruktur des Controllers, Seite 29, [^megaAVR]")<!-- style="width: 75%; max-width: 1000px" -->
+![Bild](./images/12_AVR_CPU/EEPROM.png "Speicherstruktur des Controllers, Seite 29, [^megaAVR]")<!-- style="width: 75%; max-width: 1000px" -->
 
 [^megaAVR]: Firma Microchip, megaAVR® Data Sheet, [Link](http://ww1.microchip.com/downloads/en/DeviceDoc/ATmega48A-PA-88A-PA-168A-PA-328-P-DS-DS40002061A.pdf)
 
 ### Reset-System
 
-![Bild](./images/13_AVR_CPU/ResetSystem.png "Resetsystem des Controllers, Seite 57, [^megaAVR]")<!-- style="width: 75%; max-width: 1000px" -->
+![Bild](./images/12_AVR_CPU/ResetSystem.png "Resetsystem des Controllers, Seite 57, [^megaAVR]")<!-- style="width: 75%; max-width: 1000px" -->
 
 Quellen für Reset
 
@@ -509,12 +509,12 @@ Für die letztendliche Inbetriebnahme fehlt uns noch ein Baustein, die Ansteueru
 
 Schauen wir uns den grundsätzlichen Mechanismus noch mal an einem abstrahierten 8-Bit Eingang an:
 
-![Bild](./images/13_AVR_CPU/IO.png)<!-- style="width: 85%; max-width: 1000px" -->
+![Bild](./images/12_AVR_CPU/IO.png)<!-- style="width: 85%; max-width: 1000px" -->
 
 Wie ist das Ganze konkret am AVR umgesetzt?
 
 
-![Bild](./images/13_AVR_CPU/IO_ATmega.png "Speicherstruktur des Controllers, Seite 85, [^megaAVR]")<!-- style="width: 75%; max-width: 1000px" -->
+![Bild](./images/12_AVR_CPU/IO_ATmega.png "Speicherstruktur des Controllers, Seite 85, [^megaAVR]")<!-- style="width: 75%; max-width: 1000px" -->
 
 <!-- data-type="none" -->
 | DDRx       | PORTx | Zustand des Pin            |
@@ -528,7 +528,7 @@ Wie ist das Ganze konkret am AVR umgesetzt?
 
 Das Latch entkoppelt die Eingangsspannung und deren Erfassung, bewirkt aber eine Verzögerung. Im schlimmsten Fall beträgt diese 1.5 Clockzyklen im besten 1 Clockzyklus.
 
-![Bild](./images/13_AVR_CPU/ZeitverhaltenIO.png "Speicherstruktur des Controllers, Seite 86, [^megaAVR]")<!-- style="width: 75%; max-width: 1000px" -->
+![Bild](./images/12_AVR_CPU/ZeitverhaltenIO.png "Speicherstruktur des Controllers, Seite 86, [^megaAVR]")<!-- style="width: 75%; max-width: 1000px" -->
 
 [^megaAVR]: Firma Microchip, megaAVR® Data Sheet, [Link](http://ww1.microchip.com/downloads/en/DeviceDoc/ATmega48A-PA-88A-PA-168A-PA-328-P-DS-DS40002061A.pdf)
 
@@ -536,11 +536,11 @@ Das Latch entkoppelt die Eingangsspannung und deren Erfassung, bewirkt aber eine
 
 Und wie setzen wir das Ganze in einer konkreten Schaltung um?
 
-![Bild](./images/13_AVR_CPU/ArduinoDrawing.png "Schaltplan eines Arduino Uno Boards [^14]")<!-- style="width: 85%; max-width: 1000px" -->
+![Bild](./images/12_AVR_CPU/ArduinoDrawing.png "Schaltplan eines Arduino Uno Boards [^14]")<!-- style="width: 85%; max-width: 1000px" -->
 
 https://content.arduino.cc/assets/A000066-full-pinout.pdf
 
-![Bild](./images/13_AVR_CPU/ArduinoBoard.jpeg "Arduino Uno Board [^15]")<!-- style="width: 55%; max-width: 1000px" -->
+![Bild](./images/12_AVR_CPU/ArduinoBoard.jpeg "Arduino Uno Board [^15]")<!-- style="width: 55%; max-width: 1000px" -->
 
 [^14]: Arduino Webseite [Link](https://content.arduino.cc/assets/UNO-TH_Rev3e_sch.pdf)
 
@@ -571,7 +571,7 @@ Entsprechend können Sie in den Übungen die Tools der Arduino IDE nutzen, die P
 
 ## Programmierung des Hello-World Beispiels
 
-![Bild](./images/13_AVR_CPU/Kompilierung.png "Toolchain der AVR Programmierung")<!-- style="width: 85%; max-width: 1000px" -->
+![Bild](./images/12_AVR_CPU/Kompilierung.png "Toolchain der AVR Programmierung")<!-- style="width: 85%; max-width: 1000px" -->
 
 Die Grafik zeigt den Weg vom Quellcode zum ausführbaren Programm auf dem Mikrocontroller:
 
@@ -676,12 +676,12 @@ void loop() {
 ### Simulink
 
 
-![Bild](./images/13_AVR_CPU/Simulink_ueberblick.png)<!-- style="width: 85%; max-width: 1000px" -->[^16]
+![Bild](./images/12_AVR_CPU/Simulink_ueberblick.png)<!-- style="width: 85%; max-width: 1000px" -->[^16]
 
 [^16]: Mathworks Simulink, Simulink Support Package for Arduino Hardware, [Link](https://de.mathworks.com/help/supportpkg/arduino/examples/getting-started-with-arduino-hardware.html#d122e134)
 
 
-![Bild](./images/13_AVR_CPU/Simulink_beispiel.png)<!-- style="width: 85%; max-width: 1000px" -->
+![Bild](./images/12_AVR_CPU/Simulink_beispiel.png)<!-- style="width: 85%; max-width: 1000px" -->
 
 ### Vergleich
 
@@ -770,7 +770,7 @@ Die 16 Bit breiten Befehle sind im Little Endian Muster im Speicher abgelegt.
 Das erste Befehlswort entspricht somit  $94 0c$ = $1001.0100.0000.1100$. Wir übernehmen nun die Rolle des Instruktion-Dekoders und durchlaufen alle Befehle,
 die im Befehlssatz vorhanden sind.
 
-![Bild](./images/13_AVR_CPU/JumpInstruction.png)<!-- style="width: 85%; max-width: 1000px" -->[^17]
+![Bild](./images/12_AVR_CPU/JumpInstruction.png)<!-- style="width: 85%; max-width: 1000px" -->[^17]
 
 [^17]: Firma Microchip, Atmel AVR Instruction Set Manual, Seite 103
 

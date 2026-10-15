@@ -28,7 +28,7 @@ blue: @mark(#898AE3,@0)
 gray: @mark(gray,@0)
 -->
 
-[![LiaScript](https://raw.githubusercontent.com/LiaScript/LiaScript/master/badges/course.svg)](https://liascript.github.io/course/?https://raw.githubusercontent.com/TUBAF-IfI-LiaScript/VL_EingebetteteSysteme/master/15_TimerUndInterrupts.md#1)
+[![LiaScript](https://raw.githubusercontent.com/LiaScript/LiaScript/master/badges/course.svg)](https://liascript.github.io/course/?https://raw.githubusercontent.com/TUBAF-IfI-LiaScript/VL_EingebetteteSysteme/master/14_TimerUndInterrupts.md#1)
 
 # Timer und Interrupts
 
@@ -38,7 +38,7 @@ gray: @mark(gray,@0)
 | **Semester:**            | @config.semester                                                                                         |
 | **Hochschule:**          | `Technische Universität Freiberg`                                                                        |
 | **Inhalte:**             | `Konzepte und Nutzung von Timern und Interrupts`                                                        |
-| **Link auf GitHub:**     | https://github.com/TUBAF-IfI-LiaScript/VL_EingebetteteSysteme/blob/master/15_TimerUndInterrupts.md     |
+| **Link auf GitHub:**     | https://github.com/TUBAF-IfI-LiaScript/VL_EingebetteteSysteme/blob/master/14_TimerUndInterrupts.md     |
 | **Autoren:**             | @author                                                                                                  |
 
 ![](https://media.giphy.com/media/10PNyg7YOcaBQA/giphy-downsized.gif)
@@ -138,7 +138,7 @@ Beispiele
 {{1}}
 |     | Polling (zyklisches Abfragen)                                                                        | Interrupts                                                                                        |
 | --- | ---------------------------------------------------------------------------------------------------- | ------------------------------------------------------------------------------------------------- |
-|     | ![Bild](./images/15_Timer/Intel_PolledMethod.png)<!-- style="width: 75%; max-width: 1000px" --> [^1] | ![Bild](./images/15_Timer/Intel_Interrupt.png)<!-- style="width: 75%; max-width: 1000px" --> [^1] |
+|     | ![Bild](./images/14_Timer/Intel_PolledMethod.png)<!-- style="width: 75%; max-width: 1000px" --> [^1] | ![Bild](./images/14_Timer/Intel_Interrupt.png)<!-- style="width: 75%; max-width: 1000px" --> [^1] |
 | Vorteile    | <ul> <li>Kein zusätzlicher Hardwareaufwand</li>
 <li>Deterministisches Zeitverhalten</li>
 </ul>                                                                                                 |         <ul>
@@ -206,17 +206,17 @@ Eine ISR wird demnach nur dann ausgeführt, wenn
 + das individuelle Maskenbit gesetzt ist
 + der Interrupt (in dem konfigurierten Muster) eintritt
 
-![Bild](./images/14_ADC/AVR_ADC.png "Analog Digital Converter, Seite 243 [^megaAVR]")<!-- style="width: 75%; max-width: 1000px" -->
+![Bild](./images/13_ADC/AVR_ADC.png "Analog Digital Converter, Seite 243 [^megaAVR]")<!-- style="width: 75%; max-width: 1000px" -->
 
 
-![Bild](./images/15_Timer/ADCSRA.png "ADC Konfigurationsregister, Seite 258 [^megaAVR]")<!-- style="width: 75%; max-width: 1000px" -->
+![Bild](./images/14_Timer/ADCSRA.png "ADC Konfigurationsregister, Seite 258 [^megaAVR]")<!-- style="width: 75%; max-width: 1000px" -->
 
 ********************************************************************************
 
                          {{1}}
 ********************************************************************************
 
-![Bild](./images/15_Timer/InterruptVektor.png "Interrupt-Vector-Tabelle, Seite 74 [^megaAVR]")<!-- style="width: 75%; max-width: 1000px" -->
+![Bild](./images/14_Timer/InterruptVektor.png "Interrupt-Vector-Tabelle, Seite 74 [^megaAVR]")<!-- style="width: 75%; max-width: 1000px" -->
 
 [^1]: Firma Microchip, megaAVR® Data Sheet, Seite 74, [Link](http://ww1.microchip.com/downloads/en/DeviceDoc/ATmega48A-PA-88A-PA-168A-PA-328-P-DS-DS40002061A.pdf)
 
@@ -229,7 +229,7 @@ Im Anschluss wird die Integration der Interrupt-Vektortabelle im Speicher darges
 
 Der AVR deaktiviert die Ausführung von Interrupts, wenn er eine ISR aktiv ist. Dies kann aber manuell überschrieben werden.
 
-![Bild](./images/15_Timer/ADCSRA.png)<!-- style="width: 75%; max-width: 1000px" -->[^3]
+![Bild](./images/14_Timer/ADCSRA.png)<!-- style="width: 75%; max-width: 1000px" -->[^3]
 
 [^3]: Firma Microchip, megaAVR® Data Sheet, Seite 258, [Link](http://ww1.microchip.com/downloads/en/DeviceDoc/ATmega48A-PA-88A-PA-168A-PA-328-P-DS-DS40002061A.pdf)
 
@@ -606,9 +606,9 @@ Sie besitzt meist mehrere Betriebsmodi:
 
 Entsprechend ergibt sich für den Compare-Modus verschiedene Anwendungen und ein zeitliches Verhalten entsprechend den nachfolgenden Grafiken.
 
-![Bild](./images/15_Timer/TimerMode.png)<!-- style="width: 75%; max-width: 1000px" -->
+![Bild](./images/14_Timer/TimerMode.png)<!-- style="width: 75%; max-width: 1000px" -->
 
-![Bild](./images/15_Timer/PWMGeneration.png)<!-- style="width: 75%; max-width: 1000px" -->
+![Bild](./images/14_Timer/PWMGeneration.png)<!-- style="width: 75%; max-width: 1000px" -->
 
 ### Umsetzung im AVR
 
@@ -621,7 +621,7 @@ Der AtMega328 bringt 4 unabhängige Timersysteme mit:
 
 Dabei soll die Aufmerksamkeit zunächst auf dem 16-bit Timer/Zähler liegen.
 
-![Bild](./images/15_Timer/16BitTimerAVR.png "Timer Baustein im AVR Controller, Seite 250 [^megaAVR]")<!-- style="width: 75%; max-width: 1000px" -->
+![Bild](./images/14_Timer/16BitTimerAVR.png "Timer Baustein im AVR Controller, Seite 250 [^megaAVR]")<!-- style="width: 75%; max-width: 1000px" -->
 
 Folgende Fragen müssen wir die Nutzung des Timers beantwortet werden:
 
@@ -638,7 +638,7 @@ Timer-Modi bestimmen das Verhalten des Zählers und der angeschlossenen Ausgäng
 
 **Clear to Compare Mode (CTC)**
 
-![Bild](./images/15_Timer/CTC_mode.png "CTC mode, Seite 141 [^megaAVR]")<!-- style="width: 75%; max-width: 1000px" -->
+![Bild](./images/14_Timer/CTC_mode.png "CTC mode, Seite 141 [^megaAVR]")<!-- style="width: 75%; max-width: 1000px" -->
 
 Die Periode über eine `OCnA` Ausgang ergibt sich entsprechend zu
 
@@ -650,7 +650,7 @@ Der Counter läuft zwei mal durch die Werte bis zum Vergleichsregister `OCRnA`. 
 
 **Fast PWM**
 
-![Bild](./images/15_Timer/FastPWM.png "Fast PWM generation, Seite 141 [^megaAVR]")<!-- style="width: 75%; max-width: 1000px" -->
+![Bild](./images/14_Timer/FastPWM.png "Fast PWM generation, Seite 141 [^megaAVR]")<!-- style="width: 75%; max-width: 1000px" -->
 
 Die Periode des Signals an `OCRnA` wechselt während eines Hochzählens des Counters. Damit kann eine größere Frequenz bei gleicher Auflösung des Timers verglichen mit CTC erreicht werden.
 
@@ -660,7 +660,7 @@ $$
 
 **Phase Correct PWM**
 
-![Bild](./images/15_Timer/PhaseCorrectPWM.png "Phase correct PWM generation, Seite 141 [^megaAVR]")<!-- style="width: 75%; max-width: 1000px" -->
+![Bild](./images/14_Timer/PhaseCorrectPWM.png "Phase correct PWM generation, Seite 141 [^megaAVR]")<!-- style="width: 75%; max-width: 1000px" -->
 
 $$
 f_{OCnA} = \frac{f_{clk_i/o}}{2 \cdot N \cdot (TOP)}
@@ -674,7 +674,7 @@ Für die Umsetzung eines einfachen Timers, der wie im nachfolgenden Beispiel jed
 Sekunde aktiv wird, genügt es einen entsprechenden Vergleichswert zu bestimmen,
 den der Zähler erreicht haben muss.
 
-![Bild](./images/15_Timer/AVRSimpleCounter.png "Counter implementation, Seite 126 [^megaAVR]")<!-- style="width: 75%; max-width: 1000px" -->
+![Bild](./images/14_Timer/AVRSimpleCounter.png "Counter implementation, Seite 126 [^megaAVR]")<!-- style="width: 75%; max-width: 1000px" -->
 
 
 <lia-keep>
@@ -725,7 +725,7 @@ Wir lassen den Controller den Vergleichswert kontinuierlich auslesen. Damit habe
 
 Wir verknüpfen unseren Timer im Comparemodus mit einem entsprechenden Ausgang und stellen damit sicher, dass wir die Ausgabe ohne entsprechende Ansteuerung im Hauptprogramm aktivieren.
 
-![Bild](./images/15_Timer/AVR_CompareOutput.png "Outputmode des Timerbausteins, Seite 126, [^megaAVR]")<!-- style="width: 75%; max-width: 1000px" -->
+![Bild](./images/14_Timer/AVR_CompareOutput.png "Outputmode des Timerbausteins, Seite 126, [^megaAVR]")<!-- style="width: 75%; max-width: 1000px" -->
 
 > **Frage:** Welchen physischen Pin des Controllers können wir mit unserem Timer 1 ansteuern?
 
@@ -829,7 +829,7 @@ int main(void){
 
 #### Capture Mode
 
-![Bild](./images/15_Timer/AVR_Capture_Unit.png "Capture Mode, Seite, 126, [^megaAVR]")<!-- style="width: 75%; max-width: 1000px" -->
+![Bild](./images/14_Timer/AVR_Capture_Unit.png "Capture Mode, Seite, 126, [^megaAVR]")<!-- style="width: 75%; max-width: 1000px" -->
 
 
 ```cpp       avrlibc.cpp
@@ -894,7 +894,7 @@ Zähler |    +       +
 
 **Eingangszähler**
 
-![Bild](./images/15_Timer/16BitTimerAVR.png "Übersicht Timermodul Seite 250, [^megaAVR]")<!-- style="width: 75%; max-width: 1000px" -->
+![Bild](./images/14_Timer/16BitTimerAVR.png "Übersicht Timermodul Seite 250, [^megaAVR]")<!-- style="width: 75%; max-width: 1000px" -->
 
 Wir wollen einen Eingangszähler entwerfen, der die Ereignisse als Zählerimpulse betrachtet und zusätzlich mit einem Schwellwert vergleicht.
 
