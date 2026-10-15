@@ -1,0 +1,4381 @@
+<!doctype html>
+<html lang="de">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<meta name="description" content="Kurslandkarte der Vorlesung Digitale Systeme / Eingebettete Systeme (TU Bergakademie Freiberg): Begriffe, Zusammenhänge und didaktische Fäden über das Semester.">
+<title>Digitale Systeme Kurslandkarte</title>
+<style>
+*, *::before, *::after { box-sizing: border-box; }
+html { color-scheme: light; }
+body { margin: 0; }
+img { max-width: 100%; }
+[hidden] { display: none !important; }
+</style>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Barlow+Condensed:wght@500;600;700&family=Atkinson+Hyperlegible:ital,wght@0,400;0,700;1,400&family=JetBrains+Mono:wght@400;600&display=swap">
+<style>
+:root {
+  --bg: #f3f5f2;
+  --surface: #ffffff;
+  --ink: #1d2a2c;
+  --muted: #5d6c6f;
+  --faint: #c9d1cf;
+  --grid: #e3e8e5;
+  --phase-einstieg: #e7eee9;
+  --phase-digital: #edf1f5;
+  --phase-controller: #f6ece7;
+  --phase-rechner: #eeecf5;
+  --l-logik: #1f7a8c;
+  --l-zustand: #b7800f;
+  --l-rechner: #7a4e9c;
+  --l-controller: #c2462e;
+  --l-grundlagen: #2f5da8;
+  --t1: #d4502b;
+  --t2: #1b8a5a;
+  --t3: #b08400;
+  --t4: #2d63c8;
+  --t5: #8e44ad;
+  --t6: #1596a8;
+  --edge: #7d8b8e;
+  --focus: #1d2a2c;
+  --here: #c2462e;
+  --note-bg: #fff7e6;
+  --note-ink: #6b4a00;
+  color-scheme: light;
+}
+@media (prefers-color-scheme: dark) {
+  :root:not([data-theme="light"]) {
+    --bg: #141a1b;
+    --surface: #1c2426;
+    --ink: #e4ebe9;
+    --muted: #9aa9ab;
+    --faint: #3a4648;
+    --grid: #263032;
+    --phase-einstieg: #1b2a23;
+    --phase-digital: #1b2330;
+    --phase-controller: #2d201c;
+    --phase-rechner: #231f31;
+    --l-logik: #4fb3c6;
+    --l-zustand: #e0ab3d;
+    --l-rechner: #b58ad6;
+    --l-controller: #ee7a60;
+    --l-grundlagen: #6f98e0;
+    --t1: #f07a55;
+    --t2: #3fbf86;
+    --t3: #e0b53a;
+    --t4: #6e9bf0;
+    --t5: #c08ae0;
+    --t6: #45c3d4;
+    --edge: #8a999b;
+    --focus: #e4ebe9;
+    --here: #ee7a60;
+    --note-bg: #2e2716;
+    --note-ink: #f0d49a;
+    color-scheme: dark;
+  }
+}
+:root[data-theme="dark"] {
+  --bg: #141a1b;
+  --surface: #1c2426;
+  --ink: #e4ebe9;
+  --muted: #9aa9ab;
+  --faint: #3a4648;
+  --grid: #263032;
+  --phase-einstieg: #1b2a23;
+  --phase-digital: #1b2330;
+  --phase-controller: #2d201c;
+  --phase-rechner: #231f31;
+  --l-logik: #4fb3c6;
+  --l-zustand: #e0ab3d;
+  --l-rechner: #b58ad6;
+  --l-controller: #ee7a60;
+  --l-grundlagen: #6f98e0;
+  --t1: #f07a55;
+  --t2: #3fbf86;
+  --t3: #e0b53a;
+  --t4: #6e9bf0;
+  --t5: #c08ae0;
+  --t6: #45c3d4;
+  --edge: #8a999b;
+  --focus: #e4ebe9;
+  --here: #ee7a60;
+  --note-bg: #2e2716;
+  --note-ink: #f0d49a;
+  color-scheme: dark;
+}
+
+body {
+  background: var(--bg);
+  color: var(--ink);
+  font-family: "Atkinson Hyperlegible", "Segoe UI", system-ui, sans-serif;
+  font-size: 15px;
+  line-height: 1.5;
+}
+.wrap {
+  padding-inline: 16px;
+  padding-block: 20px 32px;
+  max-width: 1480px;
+  margin: 0 auto;
+  display: grid;
+  gap: 16px;
+}
+header {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: flex-end;
+  justify-content: space-between;
+  gap: 12px 24px;
+}
+.titleblock { display: grid; gap: 2px; }
+.eyebrow {
+  font-family: "Barlow Condensed", "Arial Narrow", sans-serif;
+  font-weight: 600;
+  letter-spacing: .08em;
+  text-transform: uppercase;
+  color: var(--muted);
+  font-size: 13px;
+}
+h1 {
+  font-family: "Barlow Condensed", "Arial Narrow", sans-serif;
+  font-weight: 700;
+  font-size: clamp(28px, 4vw, 40px);
+  line-height: 1.05;
+  margin: 0;
+  text-wrap: balance;
+}
+.sample {
+  display: inline-block;
+  font-size: 12px;
+  padding: 2px 8px;
+  border-radius: 3px;
+  background: var(--note-bg);
+  color: var(--note-ink);
+  margin-top: 4px;
+  width: fit-content;
+}
+.controls {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 12px 20px;
+}
+.control { display: grid; gap: 4px; }
+.control label, .control .lbl {
+  font-family: "Barlow Condensed", "Arial Narrow", sans-serif;
+  font-weight: 600;
+  font-size: 13px;
+  letter-spacing: .06em;
+  text-transform: uppercase;
+  color: var(--muted);
+}
+.here-row { display: flex; align-items: center; gap: 10px; }
+input[type=range] { width: 200px; accent-color: var(--here); }
+.here-val {
+  font-family: "JetBrains Mono", ui-monospace, monospace;
+  font-size: 13px;
+  min-width: 118px;
+  font-variant-numeric: tabular-nums;
+}
+.seg {
+  display: inline-flex;
+  border: 1px solid var(--faint);
+  border-radius: 4px;
+  overflow: hidden;
+}
+.seg button {
+  font: inherit;
+  font-size: 13px;
+  padding: 5px 12px;
+  background: var(--surface);
+  color: var(--ink);
+  border: 0;
+  cursor: pointer;
+}
+.seg button + button { border-left: 1px solid var(--faint); }
+.seg button[aria-pressed="true"] { background: var(--ink); color: var(--bg); }
+.seg button:focus-visible, .legend button:focus-visible { outline: 2px solid var(--here); outline-offset: 2px; }
+
+.legend {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px 18px;
+  align-items: center;
+}
+.legend button {
+  font: inherit;
+  font-size: 14px;
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  background: none;
+  border: 0;
+  padding: 2px 0;
+  color: var(--ink);
+  cursor: pointer;
+}
+.legend button[aria-pressed="false"] { color: var(--muted); text-decoration: line-through; }
+.legend .swatch { width: 22px; height: 6px; border-radius: 3px; display: inline-block; }
+.legend button[aria-pressed="false"] .swatch { opacity: .3; }
+
+.stage {
+  display: grid;
+  grid-template-columns: minmax(0, 1fr) 320px;
+  gap: 16px;
+  align-items: start;
+}
+@media (max-width: 980px) {
+  .stage { grid-template-columns: minmax(0, 1fr); }
+}
+.mapbox {
+  background: var(--surface);
+  border: 1px solid var(--faint);
+  border-radius: 6px;
+  display: flex;
+  overflow: hidden;
+  min-width: 0;
+}
+.mapbox #side { flex: none; }
+.scroller { overflow-x: auto; overflow-y: hidden; min-width: 0; flex: 1; }
+svg { display: block; }
+.lane-title {
+  font-family: "Barlow Condensed", "Arial Narrow", sans-serif;
+  font-weight: 700;
+  font-size: 14px;
+  letter-spacing: .05em;
+  text-transform: uppercase;
+}
+.col-head {
+  font-family: "Barlow Condensed", "Arial Narrow", sans-serif;
+  font-weight: 700;
+  font-size: 18px;
+  fill: var(--ink);
+}
+.col-short {
+  font-family: "Barlow Condensed", "Arial Narrow", sans-serif;
+  font-weight: 500;
+  font-size: 13px;
+  fill: var(--muted);
+}
+.col-date {
+  font-family: "JetBrains Mono", ui-monospace, monospace;
+  font-size: 10.5px;
+  fill: var(--muted);
+}
+.phase-label {
+  font-family: "Barlow Condensed", "Arial Narrow", sans-serif;
+  font-weight: 600;
+  font-size: 12px;
+  letter-spacing: .08em;
+  text-transform: uppercase;
+  fill: var(--muted);
+}
+.station { cursor: pointer; }
+.station text {
+  font-size: 12.5px;
+  fill: var(--ink);
+  paint-order: stroke;
+  stroke: var(--surface);
+  stroke-width: 4px;
+  stroke-linejoin: round;
+}
+.station.code text { font-family: "JetBrains Mono", ui-monospace, monospace; font-size: 11.5px; }
+.station .dot { stroke-width: 3; fill: var(--surface); }
+.station.future { opacity: .55; }
+.station.dim { opacity: .18; }
+.station.nb .dot { fill: currentColor; }
+.station.sel .dot { fill: currentColor; stroke: var(--focus); stroke-width: 3.5; }
+.station.sel text { font-weight: 700; }
+.station.detail text { font-size: 11.5px; }
+.station.code.detail text { font-size: 11px; }
+.col-status {
+  font-family: "Barlow Condensed", "Arial Narrow", sans-serif;
+  font-size: 11px;
+  font-style: italic;
+  fill: var(--muted);
+}
+.goto { display: grid; gap: 4px; }
+.station:focus { outline: none; }
+.station:focus-visible .ring { stroke: var(--here); stroke-width: 2; stroke-dasharray: 3 2; }
+.line { fill: none; stroke-width: 6; stroke-linecap: round; stroke-linejoin: round; }
+.line.dim { opacity: .15; }
+.stub { stroke-width: 3; stroke-linecap: round; }
+.rail { stroke-width: 2; opacity: .35; }
+.mline { fill: none; stroke-width: 7; stroke-linecap: round; stroke-linejoin: round; }
+.mline.dim { opacity: .14; }
+.station.metro text { font-size: 12.5px; font-weight: 400; }
+.station.metro text.xlabel { font-weight: 700; }
+.mstop { fill: var(--surface); stroke-width: 3; }
+.xchg { fill: var(--surface); stroke: var(--ink); stroke-width: 3; }
+.station.metro.sel .xchg, .station.metro.sel .mstop { stroke: var(--here); stroke-width: 4; }
+[hidden] { display: none !important; }
+.feedback { font-size: 13px; color: var(--muted); }
+.feedback:hover { color: var(--ink); }
+.legendrow { display: flex; flex-wrap: wrap; gap: 6px 14px; align-items: center; }
+.threads li { display: grid; gap: 2px; }
+.tname { display: inline-flex; align-items: center; gap: 6px; font-size: 13px; color: var(--muted); }
+.tname i { width: 16px; height: 5px; border-radius: 3px; display: inline-block; }
+.hop { display: flex; flex-wrap: wrap; justify-content: space-between; gap: 4px 12px; }
+.hop button { font: inherit; font-size: 14px; background: none; border: 0; padding: 0; color: var(--ink); cursor: pointer; }
+.hop button:hover, .hop button:focus-visible { text-decoration: underline; }
+ol.steps { list-style: decimal; padding-left: 22px; }
+.edge { fill: none; stroke: var(--edge); stroke-width: 1.4; }
+.edge.hi { stroke: var(--ink); stroke-width: 2; }
+.edge-label {
+  font-size: 11px;
+  font-style: italic;
+  fill: var(--ink);
+  paint-order: stroke;
+  stroke: var(--surface);
+  stroke-width: 5px;
+  stroke-linejoin: round;
+}
+.here-band { fill: var(--here); opacity: .07; }
+.here-tag {
+  font-family: "Barlow Condensed", "Arial Narrow", sans-serif;
+  font-weight: 700;
+  font-size: 12px;
+  letter-spacing: .06em;
+  text-transform: uppercase;
+  fill: var(--here);
+}
+@media (prefers-reduced-motion: no-preference) {
+  .station, .line, .edge { transition: opacity .2s ease; }
+}
+
+aside.panel {
+  background: var(--surface);
+  border: 1px solid var(--faint);
+  border-radius: 6px;
+  padding-inline: 18px;
+  padding-block: 16px 18px;
+  display: grid;
+  gap: 12px;
+  align-content: start;
+}
+.panel h2 {
+  font-family: "Barlow Condensed", "Arial Narrow", sans-serif;
+  font-size: 26px;
+  line-height: 1.1;
+  margin: 0;
+}
+.panel h2.code { font-family: "JetBrains Mono", ui-monospace, monospace; font-size: 21px; }
+.meta { display: flex; flex-wrap: wrap; gap: 6px 10px; align-items: center; font-size: 13px; color: var(--muted); }
+.chip {
+  display: inline-flex; align-items: center; gap: 6px;
+  font-size: 12.5px; padding: 1px 8px; border-radius: 10px;
+  border: 1px solid var(--faint); color: var(--ink);
+}
+.chip i { width: 10px; height: 10px; border-radius: 50%; display: inline-block; }
+.panel p { margin: 0; }
+.panel h3 {
+  font-family: "Barlow Condensed", "Arial Narrow", sans-serif;
+  font-weight: 600;
+  font-size: 13px;
+  letter-spacing: .07em;
+  text-transform: uppercase;
+  color: var(--muted);
+  margin: 0;
+}
+.rels { list-style: none; margin: 0; padding: 0; display: grid; gap: 4px; }
+.rels button {
+  font: inherit; font-size: 14px; text-align: left;
+  background: none; border: 0; padding: 2px 0; cursor: pointer; color: var(--ink);
+  display: flex; gap: 6px; align-items: baseline;
+}
+.rels button:hover span.t, .rels button:focus-visible span.t { text-decoration: underline; }
+.rels .v { color: var(--muted); font-style: italic; }
+.misc {
+  background: var(--note-bg);
+  color: var(--note-ink);
+  border-radius: 4px;
+  padding: 10px 12px;
+  font-size: 14px;
+}
+.misc strong { display: block; font-size: 12px; letter-spacing: .06em; text-transform: uppercase; margin-bottom: 2px; }
+.golink {
+  display: inline-block;
+  width: fit-content;
+  font-weight: 700;
+  color: var(--l-logik);
+  text-decoration: none;
+  border-bottom: 2px solid currentColor;
+}
+.hint { font-size: 13px; color: var(--muted); }
+.vorbereitet { font: inherit; font-size: 13px; color: var(--muted); background: none; border: 0; padding: 0; text-align: left; cursor: pointer; }
+.vorbereitet u { color: var(--ink); text-decoration-color: var(--faint); text-underline-offset: 3px; }
+.vorbereitet:hover u { text-decoration-color: currentColor; }
+.intro { background: var(--surface); border: 1px solid var(--faint); border-radius: 6px; padding: 10px 14px; font-size: 14px; }
+.intro summary { cursor: pointer; font-family: "Barlow Condensed", "Arial Narrow", sans-serif; font-weight: 700; font-size: 17px; }
+.intro .cols { display: grid; grid-template-columns: repeat(auto-fit, minmax(260px, 1fr)); gap: 4px 28px; margin-top: 8px; }
+.intro p { margin: 0 0 6px; }
+.intro table { border-collapse: collapse; margin: 0 0 6px; }
+.intro td { padding: 2px 12px 2px 0; vertical-align: top; }
+.intro td:first-child { color: var(--muted); white-space: nowrap; }
+.rels .s { color: var(--muted); }
+.rels button.satz { display: block; }
+footer { font-size: 13px; color: var(--muted); max-width: 70ch; }
+footer p { margin: 0 0 6px; }
+/* ---------- Liste ---------- */
+.today { font: inherit; font-size: 12px; padding: 2px 8px; border: 1px solid var(--faint); border-radius: 4px; background: var(--surface); color: var(--ink); cursor: pointer; }
+.liste { list-style: none; margin: 0; padding: 0; display: grid; gap: 10px; min-width: 0; }
+.liste > li.vl {
+  background: var(--surface);
+  border: 1px solid var(--faint);
+  border-radius: 6px;
+  padding: 10px 14px 12px;
+  display: grid;
+  gap: 8px;
+}
+.liste > li.vl.now { border-color: var(--here); box-shadow: inset 4px 0 0 var(--here); }
+.liste > li.vl.future .chips { opacity: .8; }
+.vlhead { display: flex; flex-wrap: wrap; align-items: baseline; gap: 2px 10px; }
+.vlhead b { font-family: "Barlow Condensed", "Arial Narrow", sans-serif; font-size: 20px; }
+.vlhead .d { font-family: "JetBrains Mono", ui-monospace, monospace; font-size: 12px; color: var(--muted); }
+.vlhead .s { font-size: 15px; }
+.vlhead .tag { font-family: "Barlow Condensed", "Arial Narrow", sans-serif; font-weight: 700; font-size: 12px; letter-spacing: .06em; text-transform: uppercase; color: var(--here); }
+.vlhead .tag.muted { color: var(--muted); }
+.vlhead a { margin-left: auto; font-size: 13px; color: var(--muted); }
+.chips { display: flex; flex-wrap: wrap; gap: 6px; }
+.chips button {
+  font: inherit; font-size: 14px;
+  display: inline-flex; align-items: center; gap: 6px;
+  padding: 3px 10px; border-radius: 14px;
+  border: 1px solid var(--faint); background: var(--surface); color: var(--ink); cursor: pointer;
+}
+.chips button i { width: 9px; height: 9px; border-radius: 50%; flex: none; }
+.chips button.detail { font-size: 13px; padding: 2px 8px; color: var(--muted); }
+.chips button.code .n { font-family: "JetBrains Mono", ui-monospace, monospace; font-size: 13px; }
+.chips button[aria-pressed="true"] { border-color: var(--ink); box-shadow: 0 0 0 1px var(--ink); font-weight: 700; }
+.chips button:focus-visible { outline: 2px solid var(--here); outline-offset: 2px; }
+.liste .panel { margin-top: 2px; }
+.vlhead + .frage, .frage { font-size: 14px; font-style: italic; color: var(--muted); margin-top: -4px; }
+.chips.vorschau { opacity: .7; }
+.chips.vorschau button { border-style: dashed; }
+.chips.apps { padding-top: 6px; border-top: 1px dashed var(--faint); align-items: center; }
+.apps-lbl { font-family: "Barlow Condensed", "Arial Narrow", sans-serif; font-weight: 600; font-size: 12px; letter-spacing: .06em; text-transform: uppercase; color: var(--muted); margin-right: 4px; }
+.chips.apps button { border-radius: 4px; border-style: dashed; }
+.chips.apps .fach { font-size: 11.5px; color: var(--muted); margin-left: 2px; }
+.chips.apps .fach::before { content: "· "; }
+@media (min-width: 981px) {
+  aside.panel { position: sticky; top: 12px; max-height: calc(100vh - 24px); overflow-y: auto; }
+}
+@media (max-width: 600px) {
+  .lane-title { font-size: 11px; letter-spacing: .02em; }
+  input[type=range] { width: 150px; }
+  .here-val { min-width: 0; }
+}
+
+</style>
+</head>
+<body>
+<div class="wrap">
+  <header>
+    <div class="titleblock">
+      <span class="eyebrow">Digitale Systeme / Eingebettete Systeme · WiSe 2026/27</span>
+      <h1>Kurslandkarte</h1>
+      <span class="sample"><span id="count"></span> · aktualisiert am 15.10.2026</span>
+      <span class="feedback">Begriff fehlt oder ist unklar? Sagen Sie es in der Vorlesung oder im OPAL-Forum. <a href="https://github.com/TUBAF-IfI-LiaScript/VL_EingebetteteSysteme/issues/new?title=Kurslandkarte%3A%20&amp;labels=kurslandkarte" target="_blank" rel="noopener">GitHub ↗</a></span>
+    </div>
+    <div class="controls">
+      <div class="control">
+        <span class="lbl" id="modeLbl">Variante</span>
+        <div class="seg" role="group" aria-labelledby="modeLbl">
+          <button id="mListe" aria-pressed="false" title="Alle Vorlesungen untereinander, mit Leitfrage, Begriffen und Anwendungen">Vorlesungen</button>
+          <button id="mMetro" aria-pressed="true" title="Jede farbige Linie ist ein roter Faden: ein Thema, das sich durch mehrere Vorlesungen zieht">Metrokarte</button>
+          <button id="mZeit" aria-pressed="false" title="Alle Begriffe nach Themengebiet über das Semester, mit Pfeilen für ihre Zusammenhänge">Zeitleiste</button>
+        </div>
+      </div>
+      <div class="control">
+        <label for="here" title="Folgt dem heutigen Datum; mit dem Regler blättern Sie vor und zurück">Sie sind hier</label>
+        <div class="here-row">
+          <input id="here" type="range" min="0" max="15" step="1" value="0">
+          <span class="here-val" id="hereVal"></span>
+          <button class="today" id="today" hidden>heute</button>
+        </div>
+      </div>
+      <div class="control" id="ctlAusblick">
+        <span class="lbl" id="ausLbl" title="Zeigt blass die vorbereiteten Begriffe kommender Vorlesungen">Ausblick</span>
+        <div class="seg" role="group" aria-labelledby="ausLbl">
+          <button id="ausAus" aria-pressed="true">Aus</button>
+          <button id="ausAn" aria-pressed="false">An</button>
+        </div>
+      </div>
+      <div class="control" id="ctlLevel">
+        <span class="lbl" id="lvlLbl">Begriffe</span>
+        <div class="seg" role="group" aria-labelledby="lvlLbl">
+          <button id="eKern" aria-pressed="true" title="Begriffe, die Sie in einem Satz erklären können sollten">Kernbegriffe</button>
+          <button id="eAlle" aria-pressed="false" title="Kernbegriffe und ergänzende Detailbegriffe">Alle</button>
+        </div>
+      </div>
+      <div class="control" id="ctlEdges">
+        <span class="lbl" id="viewLbl">Verbindungen</span>
+        <div class="seg" role="group" aria-labelledby="viewLbl">
+          <button id="vNb" aria-pressed="true" title="Nur die Pfeile zum ausgewählten Begriff">Nur Nachbarn</button>
+          <button id="vAll" aria-pressed="false" title="Alle Pfeile zwischen den Begriffen">Ganzes Netz</button>
+        </div>
+      </div>
+    </div>
+  </header>
+
+  <details class="intro" id="intro" open>
+    <summary>So nutzen Sie die Karte</summary>
+    <div class="cols">
+      <div>
+        <p>Die Karte zeigt, welche Begriffe in welcher Vorlesung dazukommen und wie sie zusammenhängen. Ein Klick auf einen Begriff erklärt ihn in einem Satz, nennt die typische Fehlvorstellung und führt zur passenden Folie.</p>
+        <table>
+          <tr><td>vor der Vorlesung</td><td>Was kommt heute dazu, und worauf baut es auf?</td></tr>
+          <tr><td>nach der Vorlesung</td><td>Kann ich jeden neuen Begriff in einem Satz erklären?</td></tr>
+          <tr><td>vor Übung und Klausur</td><td>Kenne ich die typische Fehlvorstellung – und warum sie falsch ist?</td></tr>
+        </table>
+      </div>
+      <div>
+        <p><strong>Vorlesungen:</strong> alle Termine untereinander, mit Leitfrage, Begriffen und Anwendungen. <strong>Metrokarte:</strong> Jede farbige Linie ist ein <em>roter Faden</em>, ein Thema, das sich durch mehrere Vorlesungen zieht; weiße Stationen liegen auf mehreren Fäden. <strong>Zeitleiste:</strong> alle Begriffe nach Themengebiet, mit Pfeilen für ihre Zusammenhänge.</p>
+        <p><strong>Die Karte wächst mit dem Semester.</strong> Nach jeder Vorlesung kommen ihre Begriffe dazu, ergänzt um Ihre Vorschläge. <strong>Kernbegriffe</strong> sollten Sie in einem Satz erklären können, Detailbegriffe ergänzen sie. Mit <strong>Ausblick: An</strong> sehen Sie blass, was für kommende Vorlesungen vorbereitet ist.</p>
+      </div>
+    </div>
+  </details>
+
+  <div class="legendrow"><span class="hint" id="legendHint"></span><div class="legend" id="legend"></div></div>
+
+  <div class="stage">
+    <div class="mapbox" id="mapwrap">
+      <svg id="side" aria-hidden="true"></svg>
+      <div class="scroller" id="mapbox">
+        <svg id="map" role="img" aria-labelledby="mapTitle"><title id="mapTitle">Kurslandkarte: Begriffe der Vorlesung über 16 Vorlesungen</title></svg>
+      </div>
+    </div>
+    <ol class="liste" id="liste" hidden></ol>
+    <aside class="panel" id="panel" aria-live="polite"></aside>
+  </div>
+
+</div>
+
+<script id="kartendaten" type="application/json">
+{
+ "stand": "15.10.2026",
+ "vorlesungen": [
+  {
+   "vl": 0,
+   "datei": "00_Einfuehrung.md",
+   "datum": "2026-10-21",
+   "kurz": "Einführung",
+   "leitfrage": "Wie wird aus einem Arduino-Programm ein Verhalten der Hardware?",
+   "freigegeben": false,
+   "status": "ausgearbeitet",
+   "abschnitte": [
+    "Einführung",
+    "Worum geht es in dieser Vorlesung?",
+    "Die Reise: 16 Stationen zum Verständnis",
+    "Was steht am Ende?",
+    "Der Unterschied zu einem \"Arduino-Kurs\"",
+    "Unsere Bottom-Up-Reise",
+    "Beispiel 1: Mikroarchitektur",
+    "Beispiel 2: Quer über alle Ebenene",
+    "Was können Sie damit bauen?",
+    "\"Aber ich will doch Webentwickler/Data Scientist/KI-Entwickler werden...\"",
+    "Organisation",
+    "Zeitplan",
+    "Prüfungsmodalitäten",
+    "Literaturempfehlungen",
+    "Engagement und Motivation",
+    "Open Educational Resources",
+    "Trotz Simulation und Virtuellem ...",
+    "Generelles Engagement",
+    "Und wenn Sie dann immer noch programmieren wollen ...",
+    "Schauen Sie im RoboLab vorbei!",
+    "Hausaufgabe"
+   ]
+  },
+  {
+   "vl": 1,
+   "datei": "01_HistorischerUeberblick.md",
+   "datum": "2026-10-28",
+   "kurz": "Historie",
+   "leitfrage": "Wie kam es vom Rechenbrett zum Mikrocontroller?",
+   "freigegeben": false,
+   "status": "ausgearbeitet",
+   "abschnitte": [
+    "Historischer Überblick",
+    "Rückblick, Fragen und Diskussionen",
+    "Von Rechenmaschinen zum uC: 200 Jahre Rechentechnik",
+    "Begrifflichkeiten",
+    "Zeitstrahl: Von Zahnrädern zu Mikrocontrollern",
+    "Rechenmaschinen",
+    "Abstraktere Konzepte",
+    "Joseph-Marie Jacquard (1752 - 1834) - Automatischer Webstuhl",
+    "Charles Babbage (1791 - 1871) - Analytical Engine",
+    "Es werde Licht ... elektrische Systeme",
+    "Zuse Z3",
+    "Konzeptionelle Entwürfe",
+    "Die Transistor-Ära",
+    "Intel 4004",
+    "Weitere Entwicklung",
+    "Warum ist das alles für Ihr Verständnis wichtig?",
+    "Hausaufgabe"
+   ]
+  },
+  {
+   "vl": 2,
+   "datei": "02_BoolscheAlgebra.md",
+   "datum": "2026-10-29",
+   "kurz": "Boolesche Algebra",
+   "leitfrage": "Wie rechnet man mit wahr und falsch?",
+   "freigegeben": false,
+   "status": "ausgearbeitet",
+   "abschnitte": [
+    "Boolesche Algebra",
+    "Digital vs. Analog",
+    "Exkurs: Kontrastprogramm - Analoge Rechner",
+    "Pegel",
+    "Motivation",
+    "Boolesche Algebra",
+    "Anwendung",
+    "Schaltfunktionen",
+    "Schaltfunktionen mit einem Eingang",
+    "Schaltfunktionen mit zwei Eingängen",
+    "Exkurs: Technische Realisierung",
+    "Hausaufgaben"
+   ]
+  },
+  {
+   "vl": 3,
+   "datei": "03_Minimierung.md",
+   "datum": "2026-11-04",
+   "kurz": "Minimierung",
+   "leitfrage": "Wie wird eine Schaltfunktion möglichst klein?",
+   "freigegeben": false,
+   "status": "ausgearbeitet",
+   "abschnitte": [
+    "Minimierung von Boolesche Funktionen",
+    "Reflexion Ihrer Fragen / Rückmeldungen",
+    "Ausgangspunkt",
+    "Herausforderung",
+    "Aufstellen der Normalform",
+    "Minimierung von Schaltfunktionen mit dem KV-Diagramm",
+    "Karnaugh-Veitch-Diagramme - Konzept",
+    "Beispiele",
+    "Optimierungskriterien",
+    "Karnaugh-Veitch für Maxterme",
+    "Dont-Care-Einträge in der Wahrheitstafel",
+    "Zusammenfassung",
+    "Hausaufgaben"
+   ]
+  },
+  {
+   "vl": 4,
+   "datei": "04_Schaltnetze.md",
+   "datum": "2026-11-11",
+   "kurz": "Schaltnetze",
+   "leitfrage": "Wie wird aus einer Funktion eine Schaltung – und was kann dabei schiefgehen?",
+   "freigegeben": false,
+   "status": "ausgearbeitet",
+   "abschnitte": [
+    "Minimierung von Boolesche Funktionen / Schaltnetze",
+    "Feedbacks/Ergänzungen",
+    "Beispielanwendung",
+    "Schritt 1: Aufstellen der Gleichungen",
+    "Schritt 2: Vereinfachen der Minterme - Analytische Lösung",
+    "Verfahren nach Quine-McCluskey",
+    "Ermittlung der Primterme",
+    "Darstellung der Minterme im Karnaugh-Diagramm",
+    "Lösung der minimalen Überdeckung - intuitiv",
+    "Lösung der minimalen Überdeckung - algorithmisch",
+    "Schaltungssynthese",
+    "Logikgatter als Grundlage der Schaltnetze",
+    "Zweistufige Schaltungssynthese",
+    "Zurück zum Beispiel - Schritt 3 Umsetzung",
+    "Umsetzung",
+    "Herausforderungen"
+   ]
+  },
+  {
+   "vl": 5,
+   "datei": "05_Standardschaltnetze.md",
+   "datum": "2026-11-12",
+   "kurz": "Standardschaltnetze",
+   "leitfrage": "Welche Bausteine braucht man immer wieder?",
+   "freigegeben": false,
+   "status": "ausgearbeitet",
+   "abschnitte": [
+    "Standardschaltnetze",
+    "Feedbacks/Ergänzungen",
+    "Dekodierer / Kodierer",
+    "n-zu-k Dekodierer",
+    "n-zu-k Kodierer",
+    "Multiplexer / Demultiplexer",
+    "Multiplexer",
+    "Demultiplexer",
+    "Komparatoren",
+    "Ausblick",
+    "Hausaufgaben"
+   ]
+  },
+  {
+   "vl": 6,
+   "datei": "06_FlipFlops.md",
+   "datum": "2026-11-25",
+   "kurz": "Flip-Flops",
+   "leitfrage": "Wie merkt sich eine Schaltung etwas?",
+   "freigegeben": false,
+   "status": "ausgearbeitet",
+   "abschnitte": [
+    "FlipFlops",
+    "Feedbacks/Ergänzungen",
+    "Einführung sequenzieller Logik",
+    "Erster Ansatz",
+    "Zweiter Ansatz",
+    "Dritter Ansatz (SR-Latch)",
+    "D-Latch",
+    "Anwendungsbeispiele",
+    "Taktung von Schaltwerken",
+    "Synchrones SR-Latch",
+    "Main-Subsidiary-Flip-Flops",
+    "Flankengesteuerte Flip-Flops",
+    "Weitere Flip-Flop-Konfigurationen",
+    "Anwendungen",
+    "Zusammenfassung",
+    "Einsatzbeispiel",
+    "Realisierungsbeispiel",
+    "Übungsaufgaben"
+   ]
+  },
+  {
+   "vl": 7,
+   "datei": "07_Schaltwerke.md",
+   "datum": "2026-11-26",
+   "kurz": "Schaltwerke",
+   "leitfrage": "Wie baut man eine Schaltung, die auf Abfolgen reagiert?",
+   "freigegeben": false,
+   "status": "ausgearbeitet",
+   "abschnitte": [
+    "Schaltwerke",
+    "Motivation",
+    "Wiederholung: Beschreibung von Flip-Flops",
+    "Grundkonzept",
+    "Beispiel",
+    "Vorgehensweise",
+    "Automaten Typen",
+    "Bedeutung des Flip-Flop Typs",
+    "Realisierung von Schaltwerken",
+    "Beispielanwendung",
+    "Race Conditions in Schaltwerken",
+    "Vermeidungsstrategien",
+    "Debugging von Timing-Problemen",
+    "Übungsaufgaben"
+   ]
+  },
+  {
+   "vl": 8,
+   "datei": "08_StandardSchaltwerke.md",
+   "datum": "2026-12-02",
+   "kurz": "Standardschaltwerke",
+   "leitfrage": "Wie zählt und schiebt man Bits im Takt?",
+   "freigegeben": false,
+   "status": "ausgearbeitet",
+   "abschnitte": [
+    "Standardschaltwerke",
+    "Feedbacks/Ergänzungen",
+    "Übungsbeispiel",
+    "Register",
+    "Zähler",
+    "Übungsaufgaben"
+   ]
+  },
+  {
+   "vl": 9,
+   "datei": "09_Rechnerarithmetik.md",
+   "datum": "2026-12-09",
+   "kurz": "Rechnerarithmetik",
+   "leitfrage": "Wie addiert und subtrahiert ein Rechner?",
+   "freigegeben": false,
+   "status": "ausgearbeitet",
+   "abschnitte": [
+    "Rechnerarithmetik",
+    "Zahlendarstellung",
+    "Gebrochene Zahlen",
+    "Wechsel zwischen Zahlensystemen mit Basis $2^n$",
+    "Addition Binärer Zahlen",
+    "Negative Zahlen",
+    "Überlauf bei arithmetischen Operationen",
+    "Schaltnetze für arithmetische Operationen",
+    "Umsetzung von Addierwerken",
+    "Umsetzung eines Addier-/Subtrahier-Werkes",
+    "Carry Look Ahead Addierer",
+    "Carry Save Addierer",
+    "Exkurs: Multiplikation",
+    "Übungsaufgaben"
+   ]
+  },
+  {
+   "vl": 10,
+   "datei": "10_CPU_Basis.md",
+   "datum": "2026-12-10",
+   "kurz": "CPU-Grundlagen",
+   "leitfrage": "Wie wird aus einem Addierer ein Prozessor?",
+   "freigegeben": false,
+   "status": "ausgearbeitet",
+   "abschnitte": [
+    "Von mathematischen Operationen zur CPU",
+    "Ausgangspunkt",
+    "Schritt 1 - Operationsauswahl",
+    "Schritt 2 - Sequenz von Berechnungen",
+    "Schritt 3 - Handhabung der Daten",
+    "Schritt 4 - Ein- und Ausgaben",
+    "1945: Von-Neumann-Architektur"
+   ]
+  },
+  {
+   "vl": 11,
+   "datei": "11_Modell_CPU.md",
+   "datum": "2026-12-16",
+   "kurz": "Modell-CPU",
+   "leitfrage": "Wie arbeitet ein Prozessor ein Programm Befehl für Befehl ab?",
+   "freigegeben": false,
+   "status": "ausgearbeitet",
+   "abschnitte": [
+    "Modell CPU",
+    "Ausgangspunkt",
+    "Wortformate",
+    "Wie sieht ein Programm dann aus?",
+    "Elemente des Modelle-Rechners",
+    "Speicherbezogene Komponente",
+    "Datenpfadbezogene Komponente",
+    "Steuerwerk",
+    "Und jetzt alles zusammen",
+    "Beschreibung der prozessorinternen Vorgänge",
+    "Register-Transfer-Sprache",
+    "Abläufe der Befehlsabarbeitung",
+    "Umsetzung als Schaltnetz / Schaltwerk",
+    "Taktvorgabe",
+    "Integrierung der Taktvorgabe in Steuerwerk",
+    "Realsierung der kombinatorischen Logik in der Kontrolleinheit",
+    "Beschränkungen der aktuellen Lösung",
+    "Mikroprogramme",
+    "Umsetzung",
+    "Layout eines Programmes im Mikroprogammspeicher",
+    "Horizontale vs. vertikale Mikroprogrammierung",
+    "Diskussion",
+    "Hausaufgaben"
+   ]
+  },
+  {
+   "vl": 12,
+   "datei": "12_AVR_CPU.md",
+   "datum": "2027-01-06",
+   "kurz": "AVR-CPU",
+   "leitfrage": "Was steckt im Chip auf dem Arduino – und wie kommt das Programm hinein?",
+   "freigegeben": false,
+   "status": "ausgearbeitet",
+   "abschnitte": [
+    "Programmierung CPU",
+    "Motivation",
+    "Mikroprozessor vs. Mikrocontroller",
+    "Kenngrößen eines Controllers",
+    "Handhabung",
+    "Atmega328 Controller",
+    "Inbetriebnahme",
+    "Energieversorgung",
+    "Taktgenerator",
+    "Speicher",
+    "Reset-System",
+    "Digitale Ein/Ausgaben",
+    "Integration in Schaltung",
+    "Programmierung des Hello-World Beispiels",
+    "Assembler",
+    "C++ / C",
+    "Simulink",
+    "Vergleich",
+    "Resultat",
+    "Vorbereitung der praktischen Aufgaben",
+    "Setzen eines Bits",
+    "Löschen eines Bits",
+    "Prüfen eines Bits"
+   ]
+  },
+  {
+   "vl": 13,
+   "datei": "13_ADC.md",
+   "datum": "2027-01-14",
+   "kurz": "ADC",
+   "leitfrage": "Wie kommt eine Spannung in den Rechner?",
+   "freigegeben": false,
+   "status": "ausgearbeitet",
+   "abschnitte": [
+    "Analog-Digital-Wandler",
+    "Motivation",
+    "Analog Komperator",
+    "Analog Digital Wandler",
+    "Flashwandler",
+    "Sequenzielle Wandler",
+    "Herausforderungen bei der Wandlung",
+    "Parameter eines Analog-Digital-Wandlers",
+    "Umsetzung im AVR",
+    "Beispiele",
+    "Beispiel 1 - Heißleiter",
+    "Beispiel 2 - Lesen eines Analogen Distanzsensors",
+    "Beispiel 3 - Temperaturüberwachung des Controllers"
+   ]
+  },
+  {
+   "vl": 14,
+   "datei": "14_TimerUndInterrupts.md",
+   "datum": "2027-01-20",
+   "kurz": "Interrupts & Timer",
+   "leitfrage": "Wie reagiert ein Controller rechtzeitig auf Ereignisse?",
+   "freigegeben": false,
+   "status": "ausgearbeitet",
+   "abschnitte": [
+    "Timer und Interrupts",
+    "Interrupts",
+    "Formen der Unterbrechungsbehandlung",
+    "Ablauf",
+    "Umsetzung auf dem AVR",
+    "Praktische Interruptprogrammierung",
+    "Einführungsbeispiele",
+    "Interrupt-Vektortabelle im AVR Programm",
+    "Timer",
+    "Basisfunktionalität",
+    "Umsetzung im AVR",
+    "Timer Modi",
+    "Timer-Funktionalität (Normal-Mode)",
+    "Compare Mode",
+    "Capture Mode",
+    "Anwendungen"
+   ]
+  },
+  {
+   "vl": 15,
+   "datei": "15_Aktoren.md",
+   "datum": "2027-02-03",
+   "kurz": "Aktoren & Ausblick",
+   "leitfrage": "Wie bewegt ein Controller die Welt – und was kommt danach?",
+   "freigegeben": false,
+   "status": "ausgearbeitet",
+   "abschnitte": [
+    "Ansteuerung von peripheren Komponenten",
+    "Motivation",
+    "Ansteuerung digitaler Ausgänge",
+    "Ansteuerung von Motoren",
+    "Schrittmotoren",
+    "Servomotoren",
+    "Finales Anwendungsbeispiel",
+    "Blick zurück"
+   ]
+  }
+ ],
+ "begriffe": [
+  {
+   "id": "abstraktionsebenen",
+   "name": "Abstraktionsebenen",
+   "linie": "grundlagen",
+   "vl": 0,
+   "abschnitt": 6,
+   "ebene": 1,
+   "code": false,
+   "erklaerung": "Ein Rechner wird in Schichten beschrieben – von Physik (Ebene 0) über digitale Logik, Mikroarchitektur und Befehlssatz bis zur Hochsprache (Ebene 6); der Kurs beginnt bei der digitalen Logik und arbeitet sich nach oben.",
+   "fehlvorstellung": "„Eine Zeile wie pinMode(13, OUTPUT) ist für die Hardware ein einzelner Schritt.“"
+  },
+  {
+   "id": "hexdatei",
+   "name": "Maschinencode (Hex-Datei)",
+   "linie": "rechner",
+   "vl": 0,
+   "abschnitt": 2,
+   "ebene": 2,
+   "code": false,
+   "erklaerung": "Das übersetzte Programm als lange Folge von Hexadezimalzahlen, die der Mikrocontroller ausführt; dahin kommt der C++-Code über Kompilieren und Übertragen.",
+   "fehlvorstellung": null
+  },
+  {
+   "id": "mikroarchitektur",
+   "name": "Mikroarchitektur",
+   "linie": "rechner",
+   "vl": 0,
+   "abschnitt": 7,
+   "ebene": 2,
+   "code": false,
+   "erklaerung": "Innerer Aufbau eines Rechners aus Steuerwerk, ALU, Speicher und Ein-/Ausgabe, die über Adressen, Daten, Kontroll- und Statussignale zusammenarbeiten.",
+   "fehlvorstellung": null
+  },
+  {
+   "id": "ddrb",
+   "name": "DDRB",
+   "linie": "controller",
+   "vl": 0,
+   "abschnitt": 8,
+   "ebene": 2,
+   "code": true,
+   "erklaerung": "Register, dessen Bits festlegen, ob ein Pin von Port B Ausgang (1) oder hochohmiger Eingang (0) ist; pinMode(13, OUTPUT) setzt am Ende Bit 5.",
+   "fehlvorstellung": null
+  },
+  {
+   "id": "lochkarte",
+   "name": "Lochkartensteuerung",
+   "linie": "grundlagen",
+   "vl": 1,
+   "abschnitt": 8,
+   "ebene": 2,
+   "code": false,
+   "erklaerung": "Jacquards Webstuhl las das Muster von Lochkarten: Loch = Faden heben, kein Loch = Faden senken; zu einer Schleife gekoppelt entstanden wiederkehrende Muster.",
+   "fehlvorstellung": null
+  },
+  {
+   "id": "analytical_engine",
+   "name": "Analytical Engine",
+   "linie": "grundlagen",
+   "vl": 1,
+   "abschnitt": 9,
+   "ebene": 2,
+   "code": false,
+   "erklaerung": "Babbages Entwurf einer universellen, programmierbaren mechanischen Rechenmaschine mit Lochkarten-Eingabe und dezimalen Zahlen; zu seinen Lebzeiten nicht gebaut. Ada Lovelace beschrieb dafür das erste veröffentlichte Programm.",
+   "fehlvorstellung": null
+  },
+  {
+   "id": "relais",
+   "name": "Relais",
+   "linie": "grundlagen",
+   "vl": 1,
+   "abschnitt": 10,
+   "ebene": 2,
+   "code": false,
+   "erklaerung": "Elektromagnetisch betätigter Schalter, der Zustände speichern und logische Operationen abbilden kann – damit setzte sich die binäre Darstellung An/Aus (1/0) durch.",
+   "fehlvorstellung": null
+  },
+  {
+   "id": "z3",
+   "name": "Zuse Z3",
+   "linie": "grundlagen",
+   "vl": 1,
+   "abschnitt": 11,
+   "ebene": 2,
+   "code": false,
+   "erklaerung": "Erster funktionsfähiger Digitalrechner (1941, Konrad Zuse): rund 2200 Relais, binäre Gleitkommazahlen, 10 Hertz Takt, aber keine Sprungbefehle.",
+   "fehlvorstellung": null
+  },
+  {
+   "id": "transistor",
+   "name": "Transistor",
+   "linie": "grundlagen",
+   "vl": 1,
+   "abschnitt": 13,
+   "ebene": 1,
+   "code": false,
+   "erklaerung": "Elektronischer Schalter und Verstärker, der ab 1948 die Röhre verdrängt; geschickt zusammengeschaltete Transistoren ergeben logische Gatter wie AND.",
+   "fehlvorstellung": null
+  },
+  {
+   "id": "mikroprozessor",
+   "name": "Mikroprozessor (Intel 4004)",
+   "linie": "rechner",
+   "vl": 1,
+   "abschnitt": 14,
+   "ebene": 2,
+   "code": false,
+   "erklaerung": "Der Intel 4004 (1971) gilt als erster Mikroprozessor: 2300 Transistoren, 4 Bit Wortbreite, 46 Befehle. Der ATmega328P im Arduino hat rund 100.000 Transistoren und 131 Befehle.",
+   "fehlvorstellung": null
+  },
+  {
+   "id": "digitalsignal",
+   "name": "Digitalsignal",
+   "linie": "grundlagen",
+   "vl": 2,
+   "abschnitt": 2,
+   "ebene": 1,
+   "code": false,
+   "erklaerung": "Signal aus diskreten Werten zu bestimmten Zeitpunkten; es entsteht aus einem kontinuierlichen Analogsignal (z. B. Temperatur im Tagesverlauf) durch Abtastung und Quantisierung.",
+   "fehlvorstellung": null
+  },
+  {
+   "id": "analogrechner",
+   "name": "Analogrechner",
+   "linie": "grundlagen",
+   "vl": 2,
+   "abschnitt": 3,
+   "ebene": 2,
+   "code": false,
+   "erklaerung": "Rechnet kontinuierlich mit Spannungen und wird über Steckschnüre programmiert; Addition und Multiplikation sind einfach, die Genauigkeit liegt aber nur bei etwa 6–8 Bit und hängt von der Temperatur ab.",
+   "fehlvorstellung": "„Wer mit Steckkabeln programmiert wird, ist ein Analogrechner.“ (Der ENIAC war digital.)"
+  },
+  {
+   "id": "pegel",
+   "name": "Pegel",
+   "linie": "grundlagen",
+   "vl": 2,
+   "abschnitt": 4,
+   "ebene": 1,
+   "code": false,
+   "erklaerung": "Spannungsbereiche, die als High (1) bzw. Low (0) gelten, dazwischen liegt ein verbotener Bereich. Bei TTL-Eingängen gilt z. B. über 2,0 V als High und unter 0,8 V als Low.",
+   "fehlvorstellung": "„Eine 1 ist genau 5 V, eine 0 genau 0 V.“"
+  },
+  {
+   "id": "boolesche_algebra",
+   "name": "Boolesche Algebra",
+   "linie": "logik",
+   "vl": 2,
+   "abschnitt": 5,
+   "ebene": 1,
+   "code": false,
+   "erklaerung": "Rechnen mit nur zwei Werten (0 und 1) und den Operationen UND, ODER, NICHT; zwei Schalter in Reihe wirken wie UND, parallel wie ODER.",
+   "fehlvorstellung": null
+  },
+  {
+   "id": "axiome",
+   "name": "Axiome und Gesetze",
+   "linie": "logik",
+   "vl": 2,
+   "abschnitt": 7,
+   "ebene": 2,
+   "code": false,
+   "erklaerung": "Kommutativität, Distributivität, neutrales Element und Komplement bilden die Grundlage; daraus folgen Assoziativität, Idempotenz, Absorption, Doppelnegation und De Morgan. Vertauscht man UND/ODER und 0/1, entsteht wieder ein gültiges Gesetz (Dualität).",
+   "fehlvorstellung": "„Wie in der Schulalgebra gilt nur a·(b+c) = a·b + a·c – nicht auch a + b·c = (a+b)·(a+c).“"
+  },
+  {
+   "id": "de_morgan",
+   "name": "De-Morgan-Regel",
+   "linie": "logik",
+   "vl": 2,
+   "abschnitt": 7,
+   "ebene": 2,
+   "code": false,
+   "erklaerung": "Eine negierte ODER-Verknüpfung ist das UND der negierten Variablen und umgekehrt: nicht(a + b) = nicht a · nicht b.",
+   "fehlvorstellung": "„Die Negation über a·b verteilt sich einfach: nicht(a·b) = nicht a · nicht b.“"
+  },
+  {
+   "id": "umformung",
+   "name": "Algebraische Vereinfachung",
+   "linie": "logik",
+   "vl": 2,
+   "abschnitt": 7,
+   "ebene": 2,
+   "code": false,
+   "erklaerung": "Ein Ausdruck wird Schritt für Schritt mit den Gesetzen vereinfacht, z. B. a·b + a·(nicht b) + a·c = a – weniger Terme bedeuten weniger Gatter.",
+   "fehlvorstellung": null
+  },
+  {
+   "id": "schaltfunktion",
+   "name": "Schaltfunktion",
+   "linie": "logik",
+   "vl": 2,
+   "abschnitt": 8,
+   "ebene": 1,
+   "code": false,
+   "erklaerung": "Funktion, die jeder Kombination von Eingängen aus 0 und 1 einen Ausgangswert 0 oder 1 zuordnet; darstellbar als Wahrheitstafel, als Ausdruck oder als Gatterschaltung.",
+   "fehlvorstellung": null
+  },
+  {
+   "id": "wahrheitstafel",
+   "name": "Wahrheitstafel",
+   "linie": "logik",
+   "vl": 2,
+   "abschnitt": 8,
+   "ebene": 1,
+   "code": false,
+   "erklaerung": "Tabelle mit einer Zeile für jede der 2^n Eingangskombinationen und dem zugehörigen Ausgangswert – die einzige Darstellung, die in jedem Fall eindeutig ist.",
+   "fehlvorstellung": "„Zwei verschieden aussehende Ausdrücke beschreiben verschiedene Funktionen.“"
+  },
+  {
+   "id": "zweistellig",
+   "name": "16 zweistellige Funktionen",
+   "linie": "logik",
+   "vl": 2,
+   "abschnitt": 10,
+   "ebene": 2,
+   "code": false,
+   "erklaerung": "Mit zwei Eingängen gibt es genau 16 Schaltfunktionen, darunter UND, ODER, XOR (Antivalenz), Äquivalenz, Implikation, NAND und NOR.",
+   "fehlvorstellung": null
+  },
+  {
+   "id": "xor",
+   "name": "XOR (Antivalenz)",
+   "linie": "logik",
+   "vl": 2,
+   "abschnitt": 10,
+   "ebene": 2,
+   "code": false,
+   "erklaerung": "Exklusives ODER: liefert 1, wenn genau einer der beiden Eingänge 1 ist.",
+   "fehlvorstellung": "„ODER heißt: entweder das eine oder das andere, aber nicht beides.“"
+  },
+  {
+   "id": "aequivalenz",
+   "name": "Äquivalenznachweis",
+   "linie": "logik",
+   "vl": 3,
+   "abschnitt": 4,
+   "ebene": 2,
+   "code": false,
+   "erklaerung": "Ob zwei verschieden aussehende Ausdrücke dieselbe Funktion beschreiben, zeigt sicher die Wahrheitstafel; algebraisches Umformen kann in einer Sackgasse enden.",
+   "fehlvorstellung": "„Wenn ich nicht weiter umformen kann, ist der Ausdruck minimal.“"
+  },
+  {
+   "id": "minterm",
+   "name": "Minterm / Maxterm",
+   "linie": "logik",
+   "vl": 3,
+   "abschnitt": 5,
+   "ebene": 2,
+   "code": false,
+   "erklaerung": "UND-Term (Minterm) bzw. ODER-Term (Maxterm), in dem jede Variable der Funktion genau einmal vorkommt, direkt oder negiert.",
+   "fehlvorstellung": null
+  },
+  {
+   "id": "dnf",
+   "name": "DNF / KNF",
+   "linie": "logik",
+   "vl": 3,
+   "abschnitt": 5,
+   "ebene": 1,
+   "code": false,
+   "erklaerung": "Disjunktive Normalform: ODER-Verknüpfung von UND-Termen; konjunktive Normalform: UND-Verknüpfung von ODER-Termen.",
+   "fehlvorstellung": null
+  },
+  {
+   "id": "kdnf",
+   "name": "KDNF / KKNF",
+   "linie": "logik",
+   "vl": 3,
+   "abschnitt": 5,
+   "ebene": 1,
+   "code": false,
+   "erklaerung": "Kanonische Normalformen direkt aus der Wahrheitstafel: KDNF = ODER aller Minterme der Zeilen mit 1, KKNF = UND aller Maxterme der Zeilen mit 0; bis auf die Reihenfolge eindeutig.",
+   "fehlvorstellung": "„DNF und KDNF sind dasselbe.“"
+  },
+  {
+   "id": "resolution",
+   "name": "Terme zusammenfassen",
+   "linie": "logik",
+   "vl": 3,
+   "abschnitt": 6,
+   "ebene": 2,
+   "code": false,
+   "erklaerung": "Unterscheiden sich zwei Terme nur in einer Variablen, die einmal direkt und einmal negiert vorkommt, fällt diese weg: x·y + x·(nicht y) = x.",
+   "fehlvorstellung": null
+  },
+  {
+   "id": "kv",
+   "name": "KV-Diagramm",
+   "linie": "logik",
+   "vl": 3,
+   "abschnitt": 7,
+   "ebene": 1,
+   "code": false,
+   "erklaerung": "Umgeordnete Wahrheitstafel, in der benachbarte Felder sich in genau einer Variablen unterscheiden – so werden zusammenfassbare Einsen sichtbar. Für 2 bis 4 Variablen geeignet.",
+   "fehlvorstellung": "„Felder am linken und rechten Rand sind nicht benachbart.“ (Das Diagramm ist ein Torus.)"
+  },
+  {
+   "id": "graycode",
+   "name": "Gray-Code",
+   "linie": "logik",
+   "vl": 3,
+   "abschnitt": 7,
+   "ebene": 2,
+   "code": false,
+   "erklaerung": "Zählweise, bei der sich benachbarte Codewörter in genau einer Stelle unterscheiden (000, 001, 011, 010 …); danach sind Zeilen und Spalten des KV-Diagramms angeordnet.",
+   "fehlvorstellung": null
+  },
+  {
+   "id": "schleife",
+   "name": "KV-Schleife",
+   "linie": "logik",
+   "vl": 3,
+   "abschnitt": 7,
+   "ebene": 1,
+   "code": false,
+   "erklaerung": "Zusammenhängender Block aus 1, 2, 4, 8 … Einsen; je größer die Schleife, desto weniger Variablen bleiben im Produktterm. Gesucht sind möglichst wenige, möglichst große Schleifen, die alle Einsen überdecken.",
+   "fehlvorstellung": "„Eine einzelne Eins darf allein stehen bleiben, auch wenn sie in eine größere Schleife passt.“"
+  },
+  {
+   "id": "ueberlappung",
+   "name": "Überlappende Schleifen",
+   "linie": "logik",
+   "vl": 3,
+   "abschnitt": 9,
+   "ebene": 2,
+   "code": false,
+   "erklaerung": "Eine Eins darf in mehreren Schleifen liegen; das lohnt sich nur, wenn dadurch größere Schleifen entstehen und eine isolierte Eins vermieden wird.",
+   "fehlvorstellung": "„Jede Eins darf nur zu einer Schleife gehören.“"
+  },
+  {
+   "id": "kv_maxterm",
+   "name": "KV-Diagramm für Maxterme",
+   "linie": "logik",
+   "vl": 3,
+   "abschnitt": 10,
+   "ebene": 2,
+   "code": false,
+   "erklaerung": "Statt der Einsen werden die Nullen zu Schleifen zusammengefasst; über die De-Morgan-Regel ergibt sich daraus eine minimale KNF.",
+   "fehlvorstellung": null
+  },
+  {
+   "id": "dontcare",
+   "name": "Don't Care",
+   "linie": "logik",
+   "vl": 3,
+   "abschnitt": 11,
+   "ebene": 1,
+   "code": false,
+   "erklaerung": "Eingangskombinationen, deren Ausgabe egal ist, weil sie nicht vorkommen (bei der Sieben-Segment-Anzeige die 6 Codes oberhalb von 9); im KV-Diagramm dürfen sie als 0 oder 1 gelten, je nachdem, was größere Schleifen ergibt.",
+   "fehlvorstellung": null
+  },
+  {
+   "id": "sopform",
+   "name": "SOPform",
+   "linie": "logik",
+   "vl": 3,
+   "abschnitt": 12,
+   "ebene": 2,
+   "code": true,
+   "erklaerung": "Funktion der Python-Bibliothek SymPy, die aus einer Liste von Mintermen automatisch eine minimale disjunktive Form berechnet.",
+   "fehlvorstellung": null
+  },
+  {
+   "id": "qmc",
+   "name": "Quine-McCluskey",
+   "linie": "logik",
+   "vl": 4,
+   "abschnitt": 6,
+   "ebene": 1,
+   "code": false,
+   "erklaerung": "Systematisches Tabellenverfahren: Minterme nach der Zahl ihrer Einsen sortieren und Paare, die sich in genau einer Variable unterscheiden, so lange zusammenfassen, bis nichts mehr geht.",
+   "fehlvorstellung": "„Wer von Hand zusammenfasst, landet automatisch bei der kürzesten Form.“"
+  },
+  {
+   "id": "primimplikant",
+   "name": "Primimplikant",
+   "linie": "logik",
+   "vl": 4,
+   "abschnitt": 7,
+   "ebene": 1,
+   "code": false,
+   "erklaerung": "Zusammengefasster Term, der sich nicht weiter vereinfachen lässt – im Kaffeemaschinen-Beispiel bleiben fünf solche Terme P1 bis P5 übrig.",
+   "fehlvorstellung": null
+  },
+  {
+   "id": "primtafel",
+   "name": "Primimplikantentafel",
+   "linie": "logik",
+   "vl": 4,
+   "abschnitt": 8,
+   "ebene": 2,
+   "code": false,
+   "erklaerung": "Tabelle („zweite Quine'sche Tabelle“), die zeigt, welcher Primimplikant welche Minterme abdeckt – Grundlage für die Auswahl der nötigen Terme.",
+   "fehlvorstellung": null
+  },
+  {
+   "id": "essentiell",
+   "name": "essentieller Primimplikant",
+   "linie": "logik",
+   "vl": 4,
+   "abschnitt": 9,
+   "ebene": 2,
+   "code": false,
+   "erklaerung": "Primimplikant, der als einziger einen bestimmten Minterm abdeckt und deshalb in jeder Lösung vorkommen muss.",
+   "fehlvorstellung": null
+  },
+  {
+   "id": "dominanz",
+   "name": "Dominanzregeln",
+   "linie": "logik",
+   "vl": 4,
+   "abschnitt": 10,
+   "ebene": 2,
+   "code": false,
+   "erklaerung": "Regeln zum Streichen überflüssiger Zeilen und Spalten der Primimplikantentafel: Wer von einem anderen Eintrag vollständig mit abgedeckt wird, fällt weg.",
+   "fehlvorstellung": null
+  },
+  {
+   "id": "schaltnetz",
+   "name": "Schaltnetz",
+   "linie": "logik",
+   "vl": 4,
+   "abschnitt": 11,
+   "ebene": 1,
+   "code": false,
+   "erklaerung": "Schaltungstechnische Umsetzung einer Schaltfunktion aus Gattern und Leitungen – ohne Rückkopplungen, die Ausgabe hängt nur von den aktuellen Eingaben ab.",
+   "fehlvorstellung": "„Schaltfunktion und Schaltnetz sind dasselbe.“"
+  },
+  {
+   "id": "gatter",
+   "name": "Logikgatter",
+   "linie": "logik",
+   "vl": 4,
+   "abschnitt": 12,
+   "ebene": 1,
+   "code": false,
+   "erklaerung": "Technische Realisierung einer einfachen booleschen Funktion wie UND, ODER, NICHT, NAND oder NOR – der Grundbaustein jedes Schaltnetzes.",
+   "fehlvorstellung": null
+  },
+  {
+   "id": "nand_universal",
+   "name": "NAND/NOR universell",
+   "linie": "logik",
+   "vl": 4,
+   "abschnitt": 11,
+   "ebene": 2,
+   "code": false,
+   "erklaerung": "Jedes Schaltnetz lässt sich allein aus NAND-Gattern (oder allein aus NOR-Gattern) aufbauen, weil sich NICHT, UND und ODER daraus zusammensetzen lassen.",
+   "fehlvorstellung": "„Für jede Funktion braucht man UND-, ODER- und NICHT-Gatter.“"
+  },
+  {
+   "id": "zweistufig",
+   "name": "zweistufige Schaltungssynthese",
+   "linie": "logik",
+   "vl": 4,
+   "abschnitt": 13,
+   "ebene": 2,
+   "code": false,
+   "erklaerung": "Eine Normalform direkt als Schaltung: je Minterm ein UND-Gatter, dahinter ein ODER-Gatter, das alle Minterme verknüpft.",
+   "fehlvorstellung": null
+  },
+  {
+   "id": "pal_prom",
+   "name": "PROM und PAL",
+   "linie": "logik",
+   "vl": 4,
+   "abschnitt": 15,
+   "ebene": 2,
+   "code": false,
+   "erklaerung": "Programmierbare Bausteine aus UND- und ODER-Matrix: Ein PROM speichert die ganze Wahrheitstabelle, ein PAL setzt eine (minimierte) DNF mit begrenzter Zahl an Produkttermen um.",
+   "fehlvorstellung": null
+  },
+  {
+   "id": "glitch",
+   "name": "Glitch / Hazard",
+   "linie": "logik",
+   "vl": 4,
+   "abschnitt": 16,
+   "ebene": 1,
+   "code": false,
+   "erklaerung": "Kurzzeitig falscher Ausgangswert, weil Signale unterschiedlich lange durch die Gatter laufen; im KV-Diagramm erkennbar an benachbarten Schleifen ohne Überlappung.",
+   "fehlvorstellung": "„Ein Gatter liefert sein Ergebnis sofort.“"
+  },
+  {
+   "id": "dekoder",
+   "name": "Dekodierer",
+   "linie": "logik",
+   "vl": 5,
+   "abschnitt": 4,
+   "ebene": 1,
+   "code": false,
+   "erklaerung": "Schaltnetz mit n Eingängen und bis zu 2^n Ausgängen: Für jede Eingangskombination wird genau ein Ausgang aktiviert.",
+   "fehlvorstellung": null
+  },
+  {
+   "id": "adressdekoder",
+   "name": "Adressdekoder",
+   "linie": "logik",
+   "vl": 5,
+   "abschnitt": 4,
+   "ebene": 2,
+   "code": false,
+   "erklaerung": "Dekodierer, der aus einem Teil der Adresse auswählt, welcher Speicherbaustein über seinen Chip-Select-Eingang angesprochen wird.",
+   "fehlvorstellung": null
+  },
+  {
+   "id": "bcd7seg",
+   "name": "BCD-7-Segment-Dekoder",
+   "linie": "logik",
+   "vl": 5,
+   "abschnitt": 4,
+   "ebene": 2,
+   "code": false,
+   "erklaerung": "Übersetzt eine binär kodierte Ziffer in die Segmente, die für ihre Darstellung leuchten müssen.",
+   "fehlvorstellung": null
+  },
+  {
+   "id": "kodierer",
+   "name": "Kodierer",
+   "linie": "logik",
+   "vl": 5,
+   "abschnitt": 5,
+   "ebene": 1,
+   "code": false,
+   "erklaerung": "Umkehrung des Dekodierers: Aus der einen aktiven von 2^n Eingangsleitungen wird deren Binärnummer an n Ausgängen.",
+   "fehlvorstellung": "„Ein Kodierer kommt mit jeder Eingangsbelegung zurecht.“"
+  },
+  {
+   "id": "prioenc",
+   "name": "Prioritätskodierer",
+   "linie": "logik",
+   "vl": 5,
+   "abschnitt": 5,
+   "ebene": 2,
+   "code": false,
+   "erklaerung": "Kodierer, der bei mehreren aktiven Eingängen festlegt, welcher Vorrang hat, und so die Lücken der Wahrheitstafel des einfachen Kodierers schließt.",
+   "fehlvorstellung": null
+  },
+  {
+   "id": "mux",
+   "name": "Multiplexer",
+   "linie": "logik",
+   "vl": 5,
+   "abschnitt": 7,
+   "ebene": 1,
+   "code": false,
+   "erklaerung": "Wählt über n Steuerleitungen einen von 2^n Eingängen aus und leitet dessen Pegel an den einzigen Ausgang weiter.",
+   "fehlvorstellung": "„Multiplexer und Dekodierer sind dasselbe.“"
+  },
+  {
+   "id": "mux_funktion",
+   "name": "Mux als Funktion",
+   "linie": "logik",
+   "vl": 5,
+   "abschnitt": 7,
+   "ebene": 2,
+   "code": false,
+   "erklaerung": "Legt man an die Dateneingänge eines Multiplexers die Spalte einer Wahrheitstafel an und an die Steuerleitungen die Variablen, bildet er jede beliebige boolesche Funktion ab.",
+   "fehlvorstellung": null
+  },
+  {
+   "id": "demux",
+   "name": "Demultiplexer",
+   "linie": "logik",
+   "vl": 5,
+   "abschnitt": 8,
+   "ebene": 1,
+   "code": false,
+   "erklaerung": "Gegenstück zum Multiplexer: Ein Eingang wird abhängig von den Steuerleitungen auf einen von mehreren Ausgängen geschaltet.",
+   "fehlvorstellung": null
+  },
+  {
+   "id": "komparator",
+   "name": "Komparator",
+   "linie": "logik",
+   "vl": 5,
+   "abschnitt": 9,
+   "ebene": 2,
+   "code": false,
+   "erklaerung": "Schaltnetz, das zwei Binärzahlen vergleicht; in der Vorlesung als Hausaufgabe aus Ein-Bit-Komparatoren aufzubauen.",
+   "fehlvorstellung": null
+  },
+  {
+   "id": "sequentiell",
+   "name": "sequenzielle Logik",
+   "linie": "zustand",
+   "vl": 6,
+   "abschnitt": 3,
+   "ebene": 1,
+   "code": false,
+   "erklaerung": "Schaltungen, deren Ausgabe nicht nur von der aktuellen Eingabe, sondern auch von einem gespeicherten Zustand abhängt – genau das fehlt Schaltnetzen: ein Speicher.",
+   "fehlvorstellung": null
+  },
+  {
+   "id": "rueckkopplung",
+   "name": "Rückkopplung",
+   "linie": "zustand",
+   "vl": 6,
+   "abschnitt": 4,
+   "ebene": 2,
+   "code": false,
+   "erklaerung": "Der Ausgang eines Gatters wird auf seinen Eingang zurückgeführt; ein rückgekoppeltes UND oder ODER hält so einen Wert fest – kann ihn aber nur löschen bzw. nur setzen.",
+   "fehlvorstellung": null
+  },
+  {
+   "id": "srlatch",
+   "name": "SR-Latch",
+   "linie": "zustand",
+   "vl": 6,
+   "abschnitt": 6,
+   "ebene": 1,
+   "code": false,
+   "erklaerung": "Einfachster Speicher für ein Bit: S (Set) setzt den Ausgang auf 1, R (Reset) auf 0, bei S = R = 0 bleibt der Wert erhalten; S = R = 1 ist zu vermeiden.",
+   "fehlvorstellung": "„Schon S = R = 1 macht den Speicher unbestimmt.“ – unbestimmt wird es erst, wenn beide danach gleichzeitig auf 0 gehen."
+  },
+  {
+   "id": "dlatch",
+   "name": "D-Latch",
+   "linie": "zustand",
+   "vl": 6,
+   "abschnitt": 7,
+   "ebene": 1,
+   "code": false,
+   "erklaerung": "Speichert den Wert am Dateneingang D, solange der Freigabeeingang E aktiv ist; die verbotene Kombination des SR-Latch kann nicht mehr auftreten.",
+   "fehlvorstellung": null
+  },
+  {
+   "id": "takt",
+   "name": "Takt",
+   "linie": "zustand",
+   "vl": 6,
+   "abschnitt": 9,
+   "ebene": 1,
+   "code": false,
+   "erklaerung": "Ein zentrales Taktsignal legt fest, wann Eingänge übernommen werden; das macht den Entwurf einfacher, die langsamste Komponente begrenzt aber die Taktfrequenz.",
+   "fehlvorstellung": null
+  },
+  {
+   "id": "sync_sr",
+   "name": "getaktetes SR-Latch",
+   "linie": "zustand",
+   "vl": 6,
+   "abschnitt": 10,
+   "ebene": 2,
+   "code": false,
+   "erklaerung": "SR-Latch, das R und S nur bei aktivem Takt übernimmt – innerhalb einer Taktphase sind aber weiterhin mehrere Zustandswechsel möglich.",
+   "fehlvorstellung": null
+  },
+  {
+   "id": "mainsub",
+   "name": "Main-Subsidiary-Flip-Flop",
+   "linie": "zustand",
+   "vl": 6,
+   "abschnitt": 11,
+   "ebene": 2,
+   "code": false,
+   "erklaerung": "Zwei hintereinandergeschaltete Latches (früher „Master-Slave“): Der erste übernimmt bei Clk = 1, der zweite gibt bei Clk = 0 weiter.",
+   "fehlvorstellung": null
+  },
+  {
+   "id": "flanke",
+   "name": "flankengesteuertes Flip-Flop",
+   "linie": "zustand",
+   "vl": 6,
+   "abschnitt": 12,
+   "ebene": 1,
+   "code": false,
+   "erklaerung": "Übernimmt Eingangswerte nur im Moment der steigenden oder fallenden Taktflanke; die Flanke wird mit Hilfe der Gatterlaufzeit erkannt.",
+   "fehlvorstellung": "„Latch und Flip-Flop sind dasselbe.“"
+  },
+  {
+   "id": "jkff",
+   "name": "JK-Flip-Flop",
+   "linie": "zustand",
+   "vl": 6,
+   "abschnitt": 13,
+   "ebene": 2,
+   "code": false,
+   "erklaerung": "Getaktetes Flip-Flop mit J (setzen) und K (rücksetzen); anders als beim SR-Flip-Flop ist J = K = 1 erlaubt und lässt den Ausgang mit jeder Flanke wechseln.",
+   "fehlvorstellung": null
+  },
+  {
+   "id": "tff",
+   "name": "T-Flip-Flop",
+   "linie": "zustand",
+   "vl": 6,
+   "abschnitt": 13,
+   "ebene": 2,
+   "code": false,
+   "erklaerung": "Wechselt (toggelt) seinen Ausgang mit jeder aktiven Taktflanke, solange T = 1 ist; entsteht aus einem JK-Flip-Flop mit verbundenen J- und K-Eingängen.",
+   "fehlvorstellung": null
+  },
+  {
+   "id": "frequenzteiler",
+   "name": "Frequenzteiler",
+   "linie": "zustand",
+   "vl": 6,
+   "abschnitt": 14,
+   "ebene": 2,
+   "code": false,
+   "erklaerung": "Hintereinandergeschaltete JK-Flip-Flops, die jeweils den Takt des nächsten liefern – jede Stufe halbiert die Frequenz und zählt so binär.",
+   "fehlvorstellung": null
+  },
+  {
+   "id": "schaltwerk",
+   "name": "Schaltwerk",
+   "linie": "zustand",
+   "vl": 7,
+   "abschnitt": 2,
+   "ebene": 1,
+   "code": false,
+   "erklaerung": "Schaltnetz plus Zustandsspeicher mit Rückkopplung: Die Ausgabe hängt von Eingaben und gespeichertem Zustand ab – damit ist jeder Rechner ein Schaltwerk.",
+   "fehlvorstellung": null
+  },
+  {
+   "id": "inv_wt",
+   "name": "invertierte Wahrheitstafel",
+   "linie": "zustand",
+   "vl": 7,
+   "abschnitt": 3,
+   "ebene": 2,
+   "code": false,
+   "erklaerung": "Beantwortet für ein Flip-Flop die umgekehrte Frage: Wie müssen die Eingänge belegt sein, damit aus Q(t) der gewünschte Folgezustand Q(t+1) wird?",
+   "fehlvorstellung": null
+  },
+  {
+   "id": "automat",
+   "name": "endlicher Automat",
+   "linie": "zustand",
+   "vl": 7,
+   "abschnitt": 4,
+   "ebene": 1,
+   "code": false,
+   "erklaerung": "Modell aus endlich vielen Zuständen, einem Startzustand und Übergängen, die je nach Eingabe in den nächsten Zustand führen.",
+   "fehlvorstellung": null
+  },
+  {
+   "id": "zustandsdiagramm",
+   "name": "Zustandsdiagramm",
+   "linie": "zustand",
+   "vl": 7,
+   "abschnitt": 4,
+   "ebene": 1,
+   "code": false,
+   "erklaerung": "Graph, in dem Kreise die Zustände und beschriftete Pfeile die Übergänge bei bestimmten Eingaben zeigen – etwa Tür offen/geschlossen oder ein Codeschloss.",
+   "fehlvorstellung": null
+  },
+  {
+   "id": "zustandstabelle",
+   "name": "Zustandstabelle",
+   "linie": "zustand",
+   "vl": 7,
+   "abschnitt": 5,
+   "ebene": 2,
+   "code": false,
+   "erklaerung": "Tabellarische Form des Zustandsdiagramms: Für jeden aktuellen Zustand und jede Eingabe steht dort der Folgezustand.",
+   "fehlvorstellung": null
+  },
+  {
+   "id": "zustandskodierung",
+   "name": "Zustandskodierung",
+   "linie": "zustand",
+   "vl": 7,
+   "abschnitt": 5,
+   "ebene": 2,
+   "code": false,
+   "erklaerung": "Jedem Zustand wird eine Bitfolge zugeordnet; für n Zustände braucht man aufgerundet log2(n) Flip-Flops, bei vier Zuständen also zwei.",
+   "fehlvorstellung": null
+  },
+  {
+   "id": "entwurf",
+   "name": "Entwurfsschritte eines Schaltwerks",
+   "linie": "zustand",
+   "vl": 7,
+   "abschnitt": 6,
+   "ebene": 2,
+   "code": false,
+   "erklaerung": "Zustandsdiagramm → Zustandstabelle → Kodierung → Wahrheitstafel für Zustände und Ausgaben → DNF oder KNF → Minimierung.",
+   "fehlvorstellung": null
+  },
+  {
+   "id": "moore",
+   "name": "Moore-Automat",
+   "linie": "zustand",
+   "vl": 7,
+   "abschnitt": 7,
+   "ebene": 1,
+   "code": false,
+   "erklaerung": "Automat, dessen Ausgabe nur vom aktuellen Zustand abhängt; die Ausgabe ändert sich deshalb nur taktsynchron.",
+   "fehlvorstellung": null
+  },
+  {
+   "id": "mealy",
+   "name": "Mealy-Automat",
+   "linie": "zustand",
+   "vl": 7,
+   "abschnitt": 7,
+   "ebene": 1,
+   "code": false,
+   "erklaerung": "Automat, dessen Ausgabe vom aktuellen Zustand und direkt von der Eingabe abhängt; reagiert schneller und kommt oft mit weniger Zuständen aus.",
+   "fehlvorstellung": "„Mealy- und Moore-Automat brauchen für dieselbe Aufgabe gleich viele Zustände.“"
+  },
+  {
+   "id": "medwedew",
+   "name": "Medwedew-Automat",
+   "linie": "zustand",
+   "vl": 7,
+   "abschnitt": 7,
+   "ebene": 2,
+   "code": false,
+   "erklaerung": "Sonderfall des Moore-Automaten ohne eigene Ausgabelogik: Die gespeicherten Zustände sind direkt die Ausgabe.",
+   "fehlvorstellung": null
+  },
+  {
+   "id": "fftyp",
+   "name": "Wahl des Flip-Flop-Typs",
+   "linie": "zustand",
+   "vl": 7,
+   "abschnitt": 8,
+   "ebene": 2,
+   "code": false,
+   "erklaerung": "Jeder getaktete Flip-Flop-Typ eignet sich für ein Schaltwerk; über die Don't-care-Einträge seiner invertierten Wahrheitstafel bestimmt er, wie aufwendig die Beschaltung wird.",
+   "fehlvorstellung": "„Ein Schaltwerk lässt sich nur mit D-Flip-Flops bauen.“"
+  },
+  {
+   "id": "race",
+   "name": "Race Condition",
+   "linie": "zustand",
+   "vl": 7,
+   "abschnitt": 11,
+   "ebene": 2,
+   "code": false,
+   "erklaerung": "Das Verhalten hängt davon ab, welches Signal zuerst ankommt – etwa wenn zwei Flip-Flops gleichzeitig umschalten sollen und kurz ein Zwischenzustand entsteht.",
+   "fehlvorstellung": null
+  },
+  {
+   "id": "fsm_entwurf",
+   "name": "Entwurf eines Schaltwerks",
+   "linie": "zustand",
+   "vl": 8,
+   "abschnitt": 3,
+   "ebene": 1,
+   "code": false,
+   "erklaerung": "Feste Schrittfolge vom Automatenmodell zur Schaltung: Zustandsdiagramm, Zustandstabelle, binäre Kodierung, Flip-Flop-Ansteuerung, Minimierung, Ausgabelogik.",
+   "fehlvorstellung": null
+  },
+  {
+   "id": "binaerkodierung",
+   "name": "binäre Zustandskodierung",
+   "linie": "zustand",
+   "vl": 8,
+   "abschnitt": 3,
+   "ebene": 2,
+   "code": false,
+   "erklaerung": "Jeder Zustand bekommt ein Bitmuster (z. B. Rot = 00, Rot-Gelb = 01) – jedes Bit wird von einem Flip-Flop gespeichert.",
+   "fehlvorstellung": null
+  },
+  {
+   "id": "ff_ansteuertabelle",
+   "name": "Ansteuertabelle (JK-Flip-Flop)",
+   "linie": "zustand",
+   "vl": 8,
+   "abschnitt": 3,
+   "ebene": 2,
+   "code": false,
+   "erklaerung": "Umgekehrte Wahrheitstafel: Für jeden gewünschten Wechsel von Q(t) nach Q(t+1) steht dort, welche Belegung von J und K nötig ist – oft mit „egal“ (d).",
+   "fehlvorstellung": null
+  },
+  {
+   "id": "realisierungsvarianten",
+   "name": "Schaltung oder Software",
+   "linie": "grundlagen",
+   "vl": 8,
+   "abschnitt": 3,
+   "ebene": 2,
+   "code": false,
+   "erklaerung": "Dieselbe Ampel lässt sich analog, als digitale Logik oder als Programm auf einem Mikrocontroller bauen – mit unterschiedlichen Bauteilkosten, Entwurfsaufwand und Änderbarkeit.",
+   "fehlvorstellung": null
+  },
+  {
+   "id": "register",
+   "name": "Register",
+   "linie": "zustand",
+   "vl": 8,
+   "abschnitt": 4,
+   "ebene": 1,
+   "code": false,
+   "erklaerung": "Mehrere D-Flip-Flops mit gemeinsamem Takt, die zusammen ein Datenwort (z. B. 4 Bit) speichern; Steuerleitungen legen fest, wann geschrieben und gelesen wird.",
+   "fehlvorstellung": null
+  },
+  {
+   "id": "schieberegister_modi",
+   "name": "SISO, SIPO, PISO, PIPO",
+   "linie": "zustand",
+   "vl": 8,
+   "abschnitt": 4,
+   "ebene": 2,
+   "code": false,
+   "erklaerung": "Register unterscheiden sich darin, ob Daten bitweise nacheinander (seriell) oder alle zugleich (parallel) hinein- und herausgehen – SIPO wandelt z. B. seriell in parallel.",
+   "fehlvorstellung": null
+  },
+  {
+   "id": "registerauswahl",
+   "name": "Registerauswahl über Adressen",
+   "linie": "zustand",
+   "vl": 8,
+   "abschnitt": 4,
+   "ebene": 2,
+   "code": false,
+   "erklaerung": "Statt jedes Register einzeln zu verdrahten, wählt eine Adresse über einen Dekoder aus, welches Register gelesen oder beschrieben wird; daraus ergeben sich Adressbus- und Datenbusbreite.",
+   "fehlvorstellung": null
+  },
+  {
+   "id": "zaehler",
+   "name": "Zähler",
+   "linie": "zustand",
+   "vl": 8,
+   "abschnitt": 5,
+   "ebene": 1,
+   "code": false,
+   "erklaerung": "Schaltwerk, das Eingangsimpulse auf aufeinanderfolgende Zustände abbildet – damit lassen sich Ereignisse zählen oder Folgen erzeugen.",
+   "fehlvorstellung": null
+  },
+  {
+   "id": "zaehler_sync",
+   "name": "synchroner Zähler",
+   "linie": "zustand",
+   "vl": 8,
+   "abschnitt": 5,
+   "ebene": 1,
+   "code": false,
+   "erklaerung": "Beim synchronen Zähler schalten alle Flip-Flops am selben Takt; beim asynchronen treibt ein Flip-Flop das nächste – einfacher, aber das Ergebnis hängt von den Laufzeiten ab.",
+   "fehlvorstellung": "„Ein asynchroner Zähler zeigt zu jedem Zeitpunkt einen gültigen Zählerstand.“"
+  },
+  {
+   "id": "zaehler_flip",
+   "name": "Zählerbit kippen mit XOR",
+   "linie": "zustand",
+   "vl": 8,
+   "abschnitt": 5,
+   "ebene": 2,
+   "code": false,
+   "erklaerung": "Ein Zählerbit wechselt, wenn alle niederwertigeren Bits 1 sind; das Kippen erledigt ein XOR, die Bedingung wird über eine UND-Kette weitergereicht (Carry).",
+   "fehlvorstellung": null
+  },
+  {
+   "id": "stellenwertsystem",
+   "name": "Stellenwertsystem",
+   "linie": "rechner",
+   "vl": 9,
+   "abschnitt": 2,
+   "ebene": 1,
+   "code": false,
+   "erklaerung": "Der Wert einer Ziffer hängt von ihrer Position ab: Jede Stelle zählt ein Vielfaches einer Potenz der Basis (10, 2, 8, 16) – anders als bei den additiven römischen Zahlen.",
+   "fehlvorstellung": null
+  },
+  {
+   "id": "basiswandlung",
+   "name": "Basisumrechnung",
+   "linie": "rechner",
+   "vl": 9,
+   "abschnitt": 2,
+   "ebene": 2,
+   "code": false,
+   "erklaerung": "Eine Dezimalzahl wird wiederholt ganzzahlig durch die Basis geteilt; die Reste rückwärts gelesen ergeben die Ziffern (29 → 11101).",
+   "fehlvorstellung": null
+  },
+  {
+   "id": "hex_oktal",
+   "name": "Hexadezimal und Oktal",
+   "linie": "rechner",
+   "vl": 9,
+   "abschnitt": 4,
+   "ebene": 2,
+   "code": false,
+   "erklaerung": "Zwischen Systemen mit Basis 2, 8 und 16 rechnet man blockweise um: je 3 Binärstellen ergeben eine Oktal-, je 4 eine Hexadezimalziffer.",
+   "fehlvorstellung": null
+  },
+  {
+   "id": "binaerbruch",
+   "name": "gebrochene Binärzahlen",
+   "linie": "rechner",
+   "vl": 9,
+   "abschnitt": 3,
+   "ebene": 2,
+   "code": false,
+   "erklaerung": "Nachkommastellen zählen halbe, viertel, achtel … Einheiten; manche Dezimalbrüche wie 0,1 haben dadurch keine endliche Binärdarstellung.",
+   "fehlvorstellung": "„0,1 wird im Rechner exakt gespeichert.“"
+  },
+  {
+   "id": "zweierkomplement",
+   "name": "Zweierkomplement",
+   "linie": "rechner",
+   "vl": 9,
+   "abschnitt": 6,
+   "ebene": 1,
+   "code": false,
+   "erklaerung": "Darstellung negativer Zahlen, bei der Addition und Subtraktion ohne Fallunterscheidung funktionieren und die Null nur einmal vorkommt – in heutigen Rechnern ausschließlich verwendet.",
+   "fehlvorstellung": "„Für eine negative Zahl genügt es, das vorderste Bit auf 1 zu setzen.“"
+  },
+  {
+   "id": "ueberlauf",
+   "name": "Überlauf",
+   "linie": "rechner",
+   "vl": 9,
+   "abschnitt": 7,
+   "ebene": 1,
+   "code": false,
+   "erklaerung": "Weil die Bitbreite fest ist, kann das Ergebnis den Zahlenbereich verlassen – dann ergeben zwei positive Zahlen plötzlich eine negative; erkennbar an den höchsten Bits von Operanden und Ergebnis.",
+   "fehlvorstellung": "„Zwei positive Zahlen ergeben addiert immer eine positive Zahl.“"
+  },
+  {
+   "id": "halbaddierer",
+   "name": "Halbaddierer",
+   "linie": "rechner",
+   "vl": 9,
+   "abschnitt": 8,
+   "ebene": 2,
+   "code": false,
+   "erklaerung": "Addiert zwei einzelne Bits: Summe per XOR, Übertrag (Carry) per UND.",
+   "fehlvorstellung": null
+  },
+  {
+   "id": "volladdierer",
+   "name": "Volladdierer",
+   "linie": "rechner",
+   "vl": 9,
+   "abschnitt": 8,
+   "ebene": 1,
+   "code": false,
+   "erklaerung": "Addiert zwei Bits und den Übertrag der vorherigen Stelle und liefert Summe und neuen Übertrag – lässt sich aus zwei Halbaddierern bauen.",
+   "fehlvorstellung": null
+  },
+  {
+   "id": "ripple_carry",
+   "name": "Ripple-Carry-Addierer",
+   "linie": "rechner",
+   "vl": 9,
+   "abschnitt": 9,
+   "ebene": 2,
+   "code": false,
+   "erklaerung": "n verkettete Volladdierer für n-Bit-Zahlen; der Übertrag läuft von Stelle zu Stelle, das Ergebnis steht erst nach dem kompletten Durchlauf fest.",
+   "fehlvorstellung": null
+  },
+  {
+   "id": "addsub",
+   "name": "Addier-/Subtrahierwerk",
+   "linie": "rechner",
+   "vl": 9,
+   "abschnitt": 10,
+   "ebene": 2,
+   "code": false,
+   "erklaerung": "Ein Addierwerk, das durch zusätzliche Beschaltung auch A − B berechnet – die Subtraktion wird als Addition des Komplements ausgeführt.",
+   "fehlvorstellung": null
+  },
+  {
+   "id": "cla",
+   "name": "Carry-Look-Ahead-Addierer",
+   "linie": "rechner",
+   "vl": 9,
+   "abschnitt": 11,
+   "ebene": 2,
+   "code": false,
+   "erklaerung": "Berechnet alle Überträge parallel aus „Generate“ und „Propagate“ jeder Stelle statt sie durchzureichen; schneller, braucht aber Gatter mit vielen Eingängen, daher in Blöcken eingesetzt.",
+   "fehlvorstellung": null
+  },
+  {
+   "id": "csa",
+   "name": "Carry-Save-Addierer",
+   "linie": "rechner",
+   "vl": 9,
+   "abschnitt": 12,
+   "ebene": 2,
+   "code": false,
+   "erklaerung": "Addiert drei Zahlen auf einmal und gibt Summe ohne Überträge und Überträge getrennt aus; lohnt sich, wenn viele Summanden zusammenkommen, etwa bei der Multiplikation.",
+   "fehlvorstellung": null
+  },
+  {
+   "id": "alu",
+   "name": "ALU (Rechenwerk)",
+   "linie": "rechner",
+   "vl": 10,
+   "abschnitt": 3,
+   "ebene": 1,
+   "code": false,
+   "erklaerung": "Arithmetisch-logische Einheit: führt je nach Steuerbits eine von mehreren Operationen (z. B. ADD, SUB, AND, Shift) auf den Registern A und B aus.",
+   "fehlvorstellung": null
+  },
+  {
+   "id": "statusflags",
+   "name": "Statusflags",
+   "linie": "rechner",
+   "vl": 10,
+   "abschnitt": 3,
+   "ebene": 2,
+   "code": false,
+   "erklaerung": "Einzelne Bits, die Besonderheiten des letzten Ergebnisses melden – etwa Carry, Overflow oder Fehler bei Division durch Null.",
+   "fehlvorstellung": null
+  },
+  {
+   "id": "befehlscodierung",
+   "name": "Befehl als Bitmuster",
+   "linie": "rechner",
+   "vl": 10,
+   "abschnitt": 3,
+   "ebene": 2,
+   "code": false,
+   "erklaerung": "Die Steuerbits der ALU (F0–F2, Z) bekommen Namen wie ADD_B – ein Befehl ist zunächst nichts anderes als ein Bitmuster an den Steuerleitungen.",
+   "fehlvorstellung": null
+  },
+  {
+   "id": "steuerwerk",
+   "name": "Steuerwerk",
+   "linie": "rechner",
+   "vl": 10,
+   "abschnitt": 4,
+   "ebene": 1,
+   "code": false,
+   "erklaerung": "Holt Befehle aus dem Speicher, interpretiert sie, konfiguriert die ALU und wertet ihre Statusinformationen aus – es trennt die Befehle von den einzelnen Steuerleitungen.",
+   "fehlvorstellung": null
+  },
+  {
+   "id": "lda_sta",
+   "name": "LDA / STA",
+   "linie": "rechner",
+   "vl": 10,
+   "abschnitt": 5,
+   "ebene": 2,
+   "code": true,
+   "erklaerung": "Lade- und Speicherbefehle, die Daten von einer Speicheradresse in ein Register holen bzw. dorthin zurückschreiben; sie brauchen einen zusätzlichen Speicherzugriff.",
+   "fehlvorstellung": null
+  },
+  {
+   "id": "befehlszyklus",
+   "name": "Fetch–Decode–Execute",
+   "linie": "rechner",
+   "vl": 10,
+   "abschnitt": 5,
+   "ebene": 1,
+   "code": false,
+   "erklaerung": "Grundtakt jeder CPU: Befehl an der Adresse des Programmzählers holen, dekodieren, ggf. Operanden laden, ausführen, Programmzähler weitersetzen.",
+   "fehlvorstellung": null
+  },
+  {
+   "id": "adress_datenbus",
+   "name": "Adressbus und Datenbus",
+   "linie": "rechner",
+   "vl": 10,
+   "abschnitt": 5,
+   "ebene": 2,
+   "code": false,
+   "erklaerung": "Zwei Verbindungswege zum Speicher: Über den Adressbus wird gesagt, welche Speicherstelle gemeint ist, über den Datenbus fließt ihr Inhalt.",
+   "fehlvorstellung": null
+  },
+  {
+   "id": "memory_mapped_io",
+   "name": "Memory Mapped I/O",
+   "linie": "rechner",
+   "vl": 10,
+   "abschnitt": 6,
+   "ebene": 2,
+   "code": false,
+   "erklaerung": "Ein- und Ausgabegeräte erscheinen für das Programm wie gewöhnliche Speicheradressen.",
+   "fehlvorstellung": null
+  },
+  {
+   "id": "von_neumann",
+   "name": "Von-Neumann-Architektur",
+   "linie": "rechner",
+   "vl": 10,
+   "abschnitt": 7,
+   "ebene": 1,
+   "code": false,
+   "erklaerung": "Bauplan von 1945: Programm und Daten liegen gemeinsam in einem Speicher; dazu kommen Rechenwerk, Steuerwerk und Ein-/Ausgabewerk.",
+   "fehlvorstellung": null
+  },
+  {
+   "id": "befehlssatz",
+   "name": "Befehlssatz",
+   "linie": "rechner",
+   "vl": 11,
+   "abschnitt": 3,
+   "ebene": 1,
+   "code": false,
+   "erklaerung": "Liste aller Befehle, die ein Prozessor direkt ausführt – beim Modellrechner 16 Befehle von HLT über Sprünge bis ADD, AND, XOR.",
+   "fehlvorstellung": null
+  },
+  {
+   "id": "befehlsformat",
+   "name": "Befehlsformat / Opcode",
+   "linie": "rechner",
+   "vl": 11,
+   "abschnitt": 3,
+   "ebene": 1,
+   "code": false,
+   "erklaerung": "Ein 16-Bit-Befehlswort teilt sich in 4 Bit Operationscode und 12 Bit Adresse – jedes Bit mehr für den Opcode halbiert den adressierbaren Speicher.",
+   "fehlvorstellung": null
+  },
+  {
+   "id": "assembler",
+   "name": "Assemblerprogramm",
+   "linie": "rechner",
+   "vl": 11,
+   "abschnitt": 4,
+   "ebene": 2,
+   "code": false,
+   "erklaerung": "Programm aus Befehlskürzeln (Mnemonics) wie LDA, ADD, JMP, die eins zu eins in Maschinenbefehle übersetzt werden; Hochsprachen erzeugt ein Compiler.",
+   "fehlvorstellung": null
+  },
+  {
+   "id": "mar_mbr",
+   "name": "MAR und MBR",
+   "linie": "rechner",
+   "vl": 11,
+   "abschnitt": 6,
+   "ebene": 2,
+   "code": true,
+   "erklaerung": "Speicher-Adress-Register (MAR) und Speicher-Puffer-Register (MBR) halten Adresse und Datenwort während eines Speicherzugriffs fest und entkoppeln so den langsamen Speicher vom Prozessor.",
+   "fehlvorstellung": null
+  },
+  {
+   "id": "akkumulator",
+   "name": "Akkumulator",
+   "linie": "rechner",
+   "vl": 11,
+   "abschnitt": 7,
+   "ebene": 2,
+   "code": false,
+   "erklaerung": "Register A – im Modellrechner das einzige allgemeine Register; alle Rechenbefehle verknüpfen A mit einem Speicherwort und schreiben das Ergebnis zurück nach A.",
+   "fehlvorstellung": null
+  },
+  {
+   "id": "pc_ir",
+   "name": "PC und Befehlsregister",
+   "linie": "rechner",
+   "vl": 11,
+   "abschnitt": 8,
+   "ebene": 1,
+   "code": false,
+   "erklaerung": "Der Programmzähler (PC) zeigt auf den nächsten Befehl, das Befehlsregister (IR) hält den gerade ausgeführten; Sprünge überschreiben den PC.",
+   "fehlvorstellung": null
+  },
+  {
+   "id": "befehlsphasen",
+   "name": "Fetch- und Execute-Phase",
+   "linie": "rechner",
+   "vl": 11,
+   "abschnitt": 10,
+   "ebene": 2,
+   "code": false,
+   "erklaerung": "Einfache Befehle (HLT, Sprünge) sind nach der Holphase fertig, Rechen- und Speicherbefehle brauchen eine zweite Phase; ein State-Flip-Flop merkt sich, welche gerade läuft.",
+   "fehlvorstellung": null
+  },
+  {
+   "id": "rtl",
+   "name": "Register-Transfer-Sprache",
+   "linie": "rechner",
+   "vl": 11,
+   "abschnitt": 11,
+   "ebene": 2,
+   "code": false,
+   "erklaerung": "Kurzschrift für Datenbewegungen zwischen Registern, z. B. PC ← PC + 1 oder bedingt A15 = 1: PC ← IR.",
+   "fehlvorstellung": null
+  },
+  {
+   "id": "taktphasen",
+   "name": "8-Phasen-Takt",
+   "linie": "rechner",
+   "vl": 11,
+   "abschnitt": 14,
+   "ebene": 2,
+   "code": false,
+   "erklaerung": "Ein 3-Bit-Zähler mit 3-zu-8-Dekoder teilt jede Phase in die Taktschritte CP1 bis CP8, in denen jeweils bestimmte Registertransfers stattfinden.",
+   "fehlvorstellung": null
+  },
+  {
+   "id": "festverdrahtet",
+   "name": "festverdrahtetes Steuerwerk",
+   "linie": "rechner",
+   "vl": 11,
+   "abschnitt": 13,
+   "ebene": 2,
+   "code": false,
+   "erklaerung": "Steuerwerk als Automat aus Gattern: Opcode-Dekoder, Takt und Status-Flip-Flops erzeugen über ein Schaltnetz alle Steuersignale.",
+   "fehlvorstellung": null
+  },
+  {
+   "id": "mikroprogramm",
+   "name": "Mikroprogramm",
+   "linie": "rechner",
+   "vl": 11,
+   "abschnitt": 18,
+   "ebene": 1,
+   "code": false,
+   "erklaerung": "Statt fester Logik liegt für jeden Maschinenbefehl eine Folge von Steuerwörtern in einem Speicher – leichter zu entwerfen und zu ändern.",
+   "fehlvorstellung": "„Ein Maschinenbefehl ist der kleinste Schritt, den die Hardware ausführt.“"
+  },
+  {
+   "id": "horiz_vert",
+   "name": "horizontal/vertikal",
+   "linie": "rechner",
+   "vl": 11,
+   "abschnitt": 21,
+   "ebene": 2,
+   "code": false,
+   "erklaerung": "Horizontal steuert jedes Bit direkt eine Leitung (schnell, aber lange Wörter); vertikal sind die Steuerinformationen in Feldern codiert (kurz, aber zusätzlicher Dekodieraufwand).",
+   "fehlvorstellung": null
+  },
+  {
+   "id": "mikrocontroller",
+   "name": "Mikrocontroller",
+   "linie": "controller",
+   "vl": 12,
+   "abschnitt": 3,
+   "ebene": 1,
+   "code": false,
+   "erklaerung": "Ein Mikroprozessor mit Peripherie auf einem Chip – Timer, analoge und digitale Eingänge, Interruptsystem, Taktgeber und Spannungsüberwachung. Der Übergang zum Mikroprozessor ist fließend.",
+   "fehlvorstellung": null
+  },
+  {
+   "id": "atmega328",
+   "name": "ATmega328",
+   "linie": "controller",
+   "vl": 12,
+   "abschnitt": 6,
+   "ebene": 2,
+   "code": false,
+   "erklaerung": "8-Bit-Controller der AVR-Familie auf dem Arduino Uno; die Zahl im Namen verweist auf die Speichergröße (32 KByte Flash, 1 KByte EEPROM, 2 KByte RAM).",
+   "fehlvorstellung": null
+  },
+  {
+   "id": "taktgenerator",
+   "name": "Taktgenerator",
+   "linie": "controller",
+   "vl": 12,
+   "abschnitt": 9,
+   "ebene": 2,
+   "code": false,
+   "erklaerung": "Liefert den Takt: der eingebaute RC-Oszillator (bis 8 MHz) ist bequem, weicht aber um 3–10 % ab; ein externer Quarz ist auf etwa 0,1 % genau, braucht aber zusätzliche Bauteile.",
+   "fehlvorstellung": null
+  },
+  {
+   "id": "speicherarten",
+   "name": "Flash, EEPROM und RAM",
+   "linie": "controller",
+   "vl": 12,
+   "abschnitt": 10,
+   "ebene": 1,
+   "code": false,
+   "erklaerung": "Drei Speicher mit verschiedenen Aufgaben: Im Flash steht das Programm, im EEPROM bleiben Einstellungen und Kalibrierdaten nach dem Ausschalten erhalten, das RAM ist der flüchtige Arbeitsspeicher.",
+   "fehlvorstellung": "„Was im RAM steht, ist nach dem Neustart noch da.“"
+  },
+  {
+   "id": "mmio",
+   "name": "Memory-Mapped-IO beim AVR",
+   "linie": "controller",
+   "vl": 12,
+   "abschnitt": 10,
+   "ebene": 2,
+   "code": false,
+   "erklaerung": "Arbeitsregister, I/O-Register und RAM liegen in einem gemeinsamen Adressraum und werden mit denselben Befehlen angesprochen – Peripherie bedienen heißt also: in bestimmte Adressen schreiben.",
+   "fehlvorstellung": null
+  },
+  {
+   "id": "reset",
+   "name": "Reset",
+   "linie": "controller",
+   "vl": 12,
+   "abschnitt": 11,
+   "ebene": 2,
+   "code": false,
+   "erklaerung": "Neustart des Controllers, ausgelöst z. B. beim Einschalten, über den Reset-Pin, durch den Watchdog oder bei zu niedriger Spannung (Brown-out); danach beginnt die Ausführung an Adresse 0.",
+   "fehlvorstellung": null
+  },
+  {
+   "id": "ddrx",
+   "name": "DDRx und PORTx",
+   "linie": "controller",
+   "vl": 12,
+   "abschnitt": 12,
+   "ebene": 1,
+   "code": true,
+   "erklaerung": "Register, über die ein Pin konfiguriert wird: DDRx legt die Richtung fest (1 = Ausgang), PORTx den ausgegebenen Pegel – oder bei einem Eingang den Pull-up-Widerstand. Gelesen wird über PINx.",
+   "fehlvorstellung": null
+  },
+  {
+   "id": "pullup",
+   "name": "Pull-up-Widerstand",
+   "linie": "controller",
+   "vl": 12,
+   "abschnitt": 12,
+   "ebene": 2,
+   "code": false,
+   "erklaerung": "Zieht einen Eingang auf High, solange nichts angeschlossen oder kein Taster gedrückt ist; beim AVR wird er eingeschaltet, indem man bei einem Eingang das PORTx-Bit setzt.",
+   "fehlvorstellung": "„Ein unbeschalteter Eingang liest zuverlässig 0.“"
+  },
+  {
+   "id": "arduino",
+   "name": "Arduino",
+   "linie": "controller",
+   "vl": 12,
+   "abschnitt": 13,
+   "ebene": 2,
+   "code": false,
+   "erklaerung": "Offene Hardware- und Softwareplattform mit fertigen Boards, Bibliotheken und den Funktionen setup und loop; im Kurs geht es um die Konzepte hinter dieser Fassade, programmiert wird mit der avrlibc.",
+   "fehlvorstellung": "„Mikrocontroller programmieren heißt Arduino-Funktionen aufrufen.“"
+  },
+  {
+   "id": "toolchain",
+   "name": "Toolchain",
+   "linie": "controller",
+   "vl": 12,
+   "abschnitt": 14,
+   "ebene": 1,
+   "code": false,
+   "erklaerung": "Kette von Werkzeugen vom Quelltext zum Controller: Compiler (avr-gcc), Assembler, Linker, Umwandlung in eine .hex-Datei, dann überträgt ein Programmer das Programm in den Flash.",
+   "fehlvorstellung": null
+  },
+  {
+   "id": "abstraktion_prog",
+   "name": "Programmierebenen",
+   "linie": "controller",
+   "vl": 12,
+   "abschnitt": 18,
+   "ebene": 2,
+   "code": false,
+   "erklaerung": "Dieselbe blinkende LED in Assembler, avrlibc, Arduino oder Simulink: Je höher die Abstraktion, desto weniger Expertenwissen ist nötig, aber desto größer wird der Code (24 Byte gegenüber 3232 Byte).",
+   "fehlvorstellung": null
+  },
+  {
+   "id": "bitmaske",
+   "name": "Bitmaske",
+   "linie": "controller",
+   "vl": 12,
+   "abschnitt": 20,
+   "ebene": 1,
+   "code": false,
+   "erklaerung": "Mit Schiebe- und Bitoperatoren gebaute Zahl, die gezielt einzelne Bits eines Registers trifft: setzen mit |=, löschen mit &= ~, prüfen mit &.",
+   "fehlvorstellung": "„PORTB = (1 << PB5) schaltet nur Bit 5 ein.“"
+  },
+  {
+   "id": "adc",
+   "name": "ADC",
+   "linie": "controller",
+   "vl": 13,
+   "abschnitt": 2,
+   "ebene": 1,
+   "code": false,
+   "erklaerung": "Ordnet einer Spannung eine ganze Zahl zu: Das kontinuierliche Signal wird zeitlich abgetastet und dann einer von 2^n Stufen zwischen 0 V und der Referenzspannung zugeordnet.",
+   "fehlvorstellung": null
+  },
+  {
+   "id": "aufloesung",
+   "name": "Auflösung",
+   "linie": "controller",
+   "vl": 13,
+   "abschnitt": 2,
+   "ebene": 1,
+   "code": false,
+   "erklaerung": "Die Zahl der Bits bestimmt, wie fein der Messbereich unterteilt wird; ein 3-Bit-Wandler teilt 8 V in Stufen von 1 V – genauer lässt sich der Wert nicht angeben.",
+   "fehlvorstellung": "„Mehr Bits bedeuten automatisch eine genauere Messung.“"
+  },
+  {
+   "id": "analogkomparator",
+   "name": "Analog-Komparator",
+   "linie": "controller",
+   "vl": 13,
+   "abschnitt": 3,
+   "ebene": 2,
+   "code": false,
+   "erklaerung": "Vergleicht zwei Spannungen und meldet nur, welche größer ist – praktisch ein 1-Bit-Analog-Digital-Wandler; reale Komparatoren haben eine Hysterese.",
+   "fehlvorstellung": null
+  },
+  {
+   "id": "abtasttheorem",
+   "name": "Abtasttheorem",
+   "linie": "controller",
+   "vl": 13,
+   "abschnitt": 4,
+   "ebene": 1,
+   "code": false,
+   "erklaerung": "Ein Signal lässt sich nur dann unverfälscht rekonstruieren, wenn öfter als doppelt so häufig abgetastet wird wie seine höchste Frequenz.",
+   "fehlvorstellung": "„Wer seltener misst, sieht das Signal nur gröber – aber nicht falsch.“"
+  },
+  {
+   "id": "aliasing",
+   "name": "Alias-Effekt",
+   "linie": "controller",
+   "vl": 13,
+   "abschnitt": 4,
+   "ebene": 2,
+   "code": false,
+   "erklaerung": "Verzerrung durch zu langsames Abtasten: Aus den Messpunkten scheint ein ganz anderes Signal hervorzugehen als das tatsächliche.",
+   "fehlvorstellung": null
+  },
+  {
+   "id": "flashwandler",
+   "name": "Flash-Wandler",
+   "linie": "controller",
+   "vl": 13,
+   "abschnitt": 5,
+   "ebene": 2,
+   "code": false,
+   "erklaerung": "Vergleicht die Eingangsspannung gleichzeitig mit vielen Stufen – je einem Komparator pro Stufe; sehr schnell, aber Energiebedarf und Hardwareaufwand wachsen mit der Auflösung.",
+   "fehlvorstellung": null
+  },
+  {
+   "id": "adc_seq",
+   "name": "Sequenzieller Wandler",
+   "linie": "controller",
+   "vl": 13,
+   "abschnitt": 6,
+   "ebene": 2,
+   "code": false,
+   "erklaerung": "Kommt mit einem Komparator aus, indem ein Digital-Analog-Wandler die Vergleichsspannung schrittweise erzeugt – beim Zählverfahren Stufe für Stufe, bei der sukzessiven Approximation (Wägeverfahren) mit gleichbleibender Wandlungsdauer.",
+   "fehlvorstellung": null
+  },
+  {
+   "id": "referenzspannung",
+   "name": "Referenzspannung",
+   "linie": "controller",
+   "vl": 13,
+   "abschnitt": 7,
+   "ebene": 1,
+   "code": false,
+   "erklaerung": "Die Spannung, mit der der Eingang verglichen wird – sie legt den größten messbaren Wert fest; schwankt sie, schwankt jedes Messergebnis mit.",
+   "fehlvorstellung": null
+  },
+  {
+   "id": "wandlerfehler",
+   "name": "Wandlerfehler",
+   "linie": "controller",
+   "vl": 13,
+   "abschnitt": 7,
+   "ebene": 2,
+   "code": false,
+   "erklaerung": "Neben dem Quantisierungsfehler gibt es Offset- (konstante Abweichung), Verstärkungs- (wertabhängige Abweichung) und Linearitätsfehler; sie hängen von Abtastrate und Temperatur ab.",
+   "fehlvorstellung": null
+  },
+  {
+   "id": "adclh",
+   "name": "ADCL und ADCH",
+   "linie": "controller",
+   "vl": 13,
+   "abschnitt": 9,
+   "ebene": 2,
+   "code": true,
+   "erklaerung": "Zwei 8-Bit-Register, auf die das 10-Bit-Ergebnis verteilt wird; zuerst ADCL lesen, dann ADCH, damit beide Teile aus derselben Wandlung stammen.",
+   "fehlvorstellung": "„Die Reihenfolge beim Auslesen von ADCL und ADCH ist egal.“"
+  },
+  {
+   "id": "admux",
+   "name": "ADMUX und ADCSRA",
+   "linie": "controller",
+   "vl": 13,
+   "abschnitt": 12,
+   "ebene": 2,
+   "code": true,
+   "erklaerung": "ADMUX wählt Eingangskanal und Referenzspannung, ADCSRA schaltet den Wandler ein, setzt den Taktteiler und startet mit dem Bit ADSC eine Wandlung; ist ADSC wieder 0, liegt das Ergebnis vor.",
+   "fehlvorstellung": null
+  },
+  {
+   "id": "ntc",
+   "name": "Heißleiter (NTC)",
+   "linie": "controller",
+   "vl": 13,
+   "abschnitt": 11,
+   "ebene": 2,
+   "code": false,
+   "erklaerung": "Widerstand, der mit steigender Temperatur kleiner wird; in einem Spannungsteiler wird daraus eine Spannung, die der ADC misst und aus der man auf die Temperatur zurückrechnet.",
+   "fehlvorstellung": null
+  },
+  {
+   "id": "interrupt",
+   "name": "Interrupt",
+   "linie": "controller",
+   "vl": 14,
+   "abschnitt": 2,
+   "ebene": 1,
+   "code": false,
+   "erklaerung": "Kurze Unterbrechung des laufenden Programms, um auf ein zeitkritisches Ereignis zu reagieren – etwa einen gedrückten Not-Aus-Taster, ein empfangenes Byte oder eine fertige AD-Wandlung.",
+   "fehlvorstellung": null
+  },
+  {
+   "id": "polling",
+   "name": "Polling",
+   "linie": "controller",
+   "vl": 14,
+   "abschnitt": 2,
+   "ebene": 1,
+   "code": false,
+   "erklaerung": "Zyklisches Abfragen eines Zustands im Hauptprogramm: braucht keine zusätzliche Hardware und ist zeitlich vorhersagbar, hält den Prozessor aber beschäftigt und reagiert verzögert.",
+   "fehlvorstellung": null
+  },
+  {
+   "id": "isr",
+   "name": "ISR",
+   "linie": "controller",
+   "vl": 14,
+   "abschnitt": 4,
+   "ebene": 1,
+   "code": true,
+   "erklaerung": "Funktion, die beim Interrupt angesprungen wird; der Prozessor sichert vorher den Zustand und setzt danach das Hauptprogramm fort. ISRs sollen kurz sein und nicht blockierend warten.",
+   "fehlvorstellung": "„In der ISR darf man ruhig warten – das Hauptprogramm läuft ja nebenher weiter.“"
+  },
+  {
+   "id": "sei",
+   "name": "sei, cli und Maskenbit",
+   "linie": "controller",
+   "vl": 14,
+   "abschnitt": 5,
+   "ebene": 2,
+   "code": true,
+   "erklaerung": "Zweistufige Freigabe: sei/cli schalten über das I-Bit im Statusregister alle Interrupts ein oder aus, ein Maskenbit pro Quelle jeden einzeln; eine ISR läuft nur, wenn beides gesetzt ist.",
+   "fehlvorstellung": "„Wenn ich das Maskenbit setze, kommt der Interrupt schon an.“"
+  },
+  {
+   "id": "vektortabelle",
+   "name": "Interrupt-Vektortabelle",
+   "linie": "controller",
+   "vl": 14,
+   "abschnitt": 8,
+   "ebene": 2,
+   "code": false,
+   "erklaerung": "Liste von Sprungbefehlen am Anfang des Programmspeichers – ein Eintrag pro Interruptquelle, der erste für den Reset; nicht belegte Einträge führen zum Neustart.",
+   "fehlvorstellung": null
+  },
+  {
+   "id": "atomar",
+   "name": "Atomarer Zugriff",
+   "linie": "controller",
+   "vl": 14,
+   "abschnitt": 6,
+   "ebene": 2,
+   "code": false,
+   "erklaerung": "Schutz einer Befehlsfolge vor Unterbrechung, z. B. mit cli/sei oder ATOMIC_BLOCK – nötig, wenn Hauptprogramm und ISR dieselben Variablen oder Register verwenden.",
+   "fehlvorstellung": "„Eine C-Zeile wird in einem Stück ausgeführt.“"
+  },
+  {
+   "id": "volatile",
+   "name": "volatile",
+   "linie": "controller",
+   "vl": 14,
+   "abschnitt": 6,
+   "ebene": 2,
+   "code": true,
+   "erklaerung": "Schlüsselwort, das dem Compiler verbietet, Annahmen über den Wert einer Variable zu treffen – nötig für Variablen, die eine ISR verändert.",
+   "fehlvorstellung": "„Der Compiler sieht doch, dass die ISR die Variable ändert.“"
+  },
+  {
+   "id": "timer",
+   "name": "Timer/Counter",
+   "linie": "controller",
+   "vl": 14,
+   "abschnitt": 10,
+   "ebene": 1,
+   "code": false,
+   "erklaerung": "Hardware-Zähler, der Takte oder äußere Ereignisse zählt und beim Überlauf oder bei einem Vergleichswert einen Interrupt auslösen kann – ohne Rechenzeit des Prozessors.",
+   "fehlvorstellung": null
+  },
+  {
+   "id": "prescaler",
+   "name": "Vorteiler (Prescaler)",
+   "linie": "controller",
+   "vl": 14,
+   "abschnitt": 13,
+   "ebene": 2,
+   "code": false,
+   "erklaerung": "Teilt den Prozessortakt, bevor er den Zähler erreicht: Bei 16 MHz und Vorteiler 1024 zählt der Timer 15 625 Schritte pro Sekunde.",
+   "fehlvorstellung": null
+  },
+  {
+   "id": "compare",
+   "name": "Compare-Modus",
+   "linie": "controller",
+   "vl": 14,
+   "abschnitt": 14,
+   "ebene": 2,
+   "code": false,
+   "erklaerung": "Der Timer vergleicht seinen Zählerstand mit einem Register (z. B. OCR1A) und schaltet bei Gleichheit selbstständig einen Ausgang um oder löst einen Interrupt aus – das Hauptprogramm bleibt frei.",
+   "fehlvorstellung": null
+  },
+  {
+   "id": "capture",
+   "name": "Capture-Modus",
+   "linie": "controller",
+   "vl": 14,
+   "abschnitt": 15,
+   "ebene": 2,
+   "code": false,
+   "erklaerung": "Bei einem Signal an einem Eingangspin speichert der Timer seinen aktuellen Zählerstand (ICR1) – so lassen sich Zeitpunkte und Zeitabstände messen.",
+   "fehlvorstellung": null
+  },
+  {
+   "id": "pwm",
+   "name": "PWM",
+   "linie": "controller",
+   "vl": 14,
+   "abschnitt": 14,
+   "ebene": 1,
+   "code": false,
+   "erklaerung": "Ein Ausgang wird schnell ein- und ausgeschaltet; das Verhältnis von An- zu Aus-Zeit (Tastverhältnis) bestimmt die im Mittel wirkende Spannung – eine Quasi-Analogausgabe ohne Digital-Analog-Wandler.",
+   "fehlvorstellung": "„Bei PWM liegt am Pin eine echte Zwischenspannung an.“"
+  },
+  {
+   "id": "eingebettet",
+   "name": "Eingebettetes System",
+   "linie": "controller",
+   "vl": 15,
+   "abschnitt": 2,
+   "ebene": 1,
+   "code": false,
+   "erklaerung": "Rechner, der in ein größeres Produkt eingebaut ist und dort eine spezielle Aufgabe erfüllt – oft unbemerkt, mit Zeitanforderungen, angepasster Hardware und Software.",
+   "fehlvorstellung": null
+  },
+  {
+   "id": "aktor",
+   "name": "Aktor",
+   "linie": "controller",
+   "vl": 15,
+   "abschnitt": 2,
+   "ebene": 1,
+   "code": false,
+   "erklaerung": "Setzt elektrische Signale in Bewegung oder andere physikalische Größen um und greift so in die Umgebung ein – etwa LED, Display, Ventil, Motor oder Lautsprecher.",
+   "fehlvorstellung": null
+  },
+  {
+   "id": "dekoder7seg",
+   "name": "7-Segment-Dekoder",
+   "linie": "controller",
+   "vl": 15,
+   "abschnitt": 3,
+   "ebene": 2,
+   "code": false,
+   "erklaerung": "Baustein (z. B. CD4543), der eine 4-Bit-Zahl in die sieben Steuerleitungen einer Ziffernanzeige übersetzt und so Pins des Controllers spart.",
+   "fehlvorstellung": null
+  },
+  {
+   "id": "anzeige_mux",
+   "name": "Multiplexing von Anzeigen",
+   "linie": "controller",
+   "vl": 15,
+   "abschnitt": 3,
+   "ebene": 2,
+   "code": false,
+   "erklaerung": "Mehrere Anzeigen teilen sich dieselben Datenleitungen und werden abwechselnd über je eine eigene Steuerleitung aktiviert; die Schaltzeiten der Anzeigen müssen berücksichtigt werden.",
+   "fehlvorstellung": null
+  },
+  {
+   "id": "schieberegister",
+   "name": "Schieberegister",
+   "linie": "controller",
+   "vl": 15,
+   "abschnitt": 3,
+   "ebene": 2,
+   "code": false,
+   "erklaerung": "Spart Pins, indem Bits nacheinander über wenige Leitungen übertragen statt parallel ausgegeben werden (Sequenzialisierung).",
+   "fehlvorstellung": null
+  },
+  {
+   "id": "hbruecke",
+   "name": "H-Brücke",
+   "linie": "controller",
+   "vl": 15,
+   "abschnitt": 4,
+   "ebene": 1,
+   "code": false,
+   "erklaerung": "Schaltung aus vier Schaltern, mit der sich die Stromrichtung durch einen Gleichstrommotor umpolen lässt – und damit seine Drehrichtung.",
+   "fehlvorstellung": null
+  },
+  {
+   "id": "dcmotor",
+   "name": "Gleichstrommotor",
+   "linie": "controller",
+   "vl": 15,
+   "abschnitt": 4,
+   "ebene": 2,
+   "code": false,
+   "erklaerung": "Motor, dessen Drehrichtung über die Polarität (H-Brücke) und dessen Geschwindigkeit über ein PWM-Signal vorgegeben wird.",
+   "fehlvorstellung": null
+  },
+  {
+   "id": "schrittmotor",
+   "name": "Schrittmotor",
+   "linie": "controller",
+   "vl": 15,
+   "abschnitt": 5,
+   "ebene": 1,
+   "code": false,
+   "erklaerung": "Motor, dessen Spulen nach einem festen Muster nacheinander bestromt werden, sodass sich der Rotor Schritt für Schritt um einen kleinen Winkel dreht.",
+   "fehlvorstellung": "„Ein Schrittmotor weiß immer, in welcher Position er steht.“"
+  },
+  {
+   "id": "servo",
+   "name": "Servomotor",
+   "linie": "controller",
+   "vl": 15,
+   "abschnitt": 6,
+   "ebene": 1,
+   "code": false,
+   "erklaerung": "Motor mit eingebauter Positionsmessung und Regelung; die Sollposition wird über die Pulsbreite (etwa 1 bis 2 ms) eines alle 20 ms wiederholten Signals vorgegeben.",
+   "fehlvorstellung": null
+  }
+ ],
+ "beziehungen": [
+  {
+   "von": "hexdatei",
+   "nach": "mikrocontroller",
+   "text": "wird ausgeführt vom"
+  },
+  {
+   "von": "ddrb",
+   "nach": "abstraktionsebenen",
+   "text": "zeigt den Weg durch die"
+  },
+  {
+   "von": "mikroarchitektur",
+   "nach": "abstraktionsebenen",
+   "text": "ist Ebene 2 der"
+  },
+  {
+   "von": "analytical_engine",
+   "nach": "lochkarte",
+   "text": "liest Daten und Befehle über"
+  },
+  {
+   "von": "relais",
+   "nach": "z3",
+   "text": "ist Baustein der"
+  },
+  {
+   "von": "von_neumann",
+   "nach": "mikroarchitektur",
+   "text": "ist Grundstruktur der"
+  },
+  {
+   "von": "transistor",
+   "nach": "mikroprozessor",
+   "text": "ist Baustein des"
+  },
+  {
+   "von": "pegel",
+   "nach": "digitalsignal",
+   "text": "legt die Werte 0 und 1 fest im"
+  },
+  {
+   "von": "boolesche_algebra",
+   "nach": "schaltfunktion",
+   "text": "beschreibt"
+  },
+  {
+   "von": "wahrheitstafel",
+   "nach": "schaltfunktion",
+   "text": "beschreibt eindeutig"
+  },
+  {
+   "von": "gatter",
+   "nach": "schaltfunktion",
+   "text": "realisiert"
+  },
+  {
+   "von": "umformung",
+   "nach": "axiome",
+   "text": "nutzt"
+  },
+  {
+   "von": "de_morgan",
+   "nach": "axiome",
+   "text": "folgt aus"
+  },
+  {
+   "von": "transistor",
+   "nach": "gatter",
+   "text": "bildet zusammengeschaltet"
+  },
+  {
+   "von": "kdnf",
+   "nach": "wahrheitstafel",
+   "text": "wird abgelesen aus"
+  },
+  {
+   "von": "kv",
+   "nach": "kdnf",
+   "text": "minimiert"
+  },
+  {
+   "von": "schleife",
+   "nach": "resolution",
+   "text": "beruht auf"
+  },
+  {
+   "von": "graycode",
+   "nach": "kv",
+   "text": "ordnet Zeilen und Spalten im"
+  },
+  {
+   "von": "kv",
+   "nach": "umformung",
+   "text": "ersetzt systematisch die"
+  },
+  {
+   "von": "dontcare",
+   "nach": "schleife",
+   "text": "vergrößert"
+  },
+  {
+   "von": "kv_maxterm",
+   "nach": "de_morgan",
+   "text": "nutzt"
+  },
+  {
+   "von": "aequivalenz",
+   "nach": "wahrheitstafel",
+   "text": "gelingt sicher mit der"
+  },
+  {
+   "von": "qmc",
+   "nach": "primimplikant",
+   "text": "ermittelt"
+  },
+  {
+   "von": "primtafel",
+   "nach": "essentiell",
+   "text": "zeigt"
+  },
+  {
+   "von": "schaltnetz",
+   "nach": "gatter",
+   "text": "besteht aus"
+  },
+  {
+   "von": "glitch",
+   "nach": "schaltnetz",
+   "text": "tritt auf in"
+  },
+  {
+   "von": "dekoder",
+   "nach": "schaltnetz",
+   "text": "ist ein vorgefertigtes"
+  },
+  {
+   "von": "dekoder",
+   "nach": "adressdekoder",
+   "text": "wird eingesetzt als"
+  },
+  {
+   "von": "kodierer",
+   "nach": "prioenc",
+   "text": "wird abgesichert durch"
+  },
+  {
+   "von": "demux",
+   "nach": "mux",
+   "text": "ist das Gegenstück zum"
+  },
+  {
+   "von": "sequentiell",
+   "nach": "schaltnetz",
+   "text": "erweitert um Speicher das"
+  },
+  {
+   "von": "rueckkopplung",
+   "nach": "srlatch",
+   "text": "ermöglicht"
+  },
+  {
+   "von": "srlatch",
+   "nach": "dlatch",
+   "text": "wird erweitert zum"
+  },
+  {
+   "von": "jkff",
+   "nach": "tff",
+   "text": "wird mit J = K zum"
+  },
+  {
+   "von": "schaltwerk",
+   "nach": "flanke",
+   "text": "speichert seinen Zustand in"
+  },
+  {
+   "von": "zustandsdiagramm",
+   "nach": "zustandstabelle",
+   "text": "wird übertragen in"
+  },
+  {
+   "von": "mealy",
+   "nach": "moore",
+   "text": "verallgemeinert den"
+  },
+  {
+   "von": "medwedew",
+   "nach": "moore",
+   "text": "ist Spezialfall vom"
+  },
+  {
+   "von": "inv_wt",
+   "nach": "fftyp",
+   "text": "bestimmt den Aufwand bei der"
+  },
+  {
+   "von": "fsm_entwurf",
+   "nach": "binaerkodierung",
+   "text": "erfordert"
+  },
+  {
+   "von": "binaerkodierung",
+   "nach": "ff_ansteuertabelle",
+   "text": "wird umgesetzt mit"
+  },
+  {
+   "von": "register",
+   "nach": "registerauswahl",
+   "text": "wird ausgewählt über"
+  },
+  {
+   "von": "zaehler",
+   "nach": "zaehler_sync",
+   "text": "unterscheidet"
+  },
+  {
+   "von": "zaehler_flip",
+   "nach": "zaehler",
+   "text": "realisiert alternativ"
+  },
+  {
+   "von": "stellenwertsystem",
+   "nach": "basiswandlung",
+   "text": "umgerechnet per"
+  },
+  {
+   "von": "halbaddierer",
+   "nach": "volladdierer",
+   "text": "ist Baustein von"
+  },
+  {
+   "von": "volladdierer",
+   "nach": "ripple_carry",
+   "text": "verkettet zum"
+  },
+  {
+   "von": "ripple_carry",
+   "nach": "cla",
+   "text": "wird beschleunigt durch"
+  },
+  {
+   "von": "zweierkomplement",
+   "nach": "addsub",
+   "text": "ermöglicht"
+  },
+  {
+   "von": "zweierkomplement",
+   "nach": "ueberlauf",
+   "text": "hat Grenze:"
+  },
+  {
+   "von": "alu",
+   "nach": "statusflags",
+   "text": "liefert"
+  },
+  {
+   "von": "steuerwerk",
+   "nach": "alu",
+   "text": "konfiguriert"
+  },
+  {
+   "von": "befehlszyklus",
+   "nach": "lda_sta",
+   "text": "braucht Zusatzzugriff bei"
+  },
+  {
+   "von": "von_neumann",
+   "nach": "steuerwerk",
+   "text": "umfasst"
+  },
+  {
+   "von": "befehlssatz",
+   "nach": "befehlsformat",
+   "text": "codiert im"
+  },
+  {
+   "von": "taktphasen",
+   "nach": "befehlsphasen",
+   "text": "unterteilt"
+  },
+  {
+   "von": "festverdrahtet",
+   "nach": "mikroprogramm",
+   "text": "wird ersetzt durch"
+  },
+  {
+   "von": "mikroprogramm",
+   "nach": "horiz_vert",
+   "text": "organisiert als"
+  },
+  {
+   "von": "volladdierer",
+   "nach": "alu",
+   "text": "ist Baustein der"
+  },
+  {
+   "von": "ueberlauf",
+   "nach": "statusflags",
+   "text": "wird gemeldet als"
+  },
+  {
+   "von": "registerauswahl",
+   "nach": "adress_datenbus",
+   "text": "führt zu"
+  },
+  {
+   "von": "register",
+   "nach": "akkumulator",
+   "text": "dient als"
+  },
+  {
+   "von": "pc_ir",
+   "nach": "zaehler",
+   "text": "zählt hoch wie ein"
+  },
+  {
+   "von": "befehlscodierung",
+   "nach": "befehlsformat",
+   "text": "wird zum"
+  },
+  {
+   "von": "befehlszyklus",
+   "nach": "befehlsphasen",
+   "text": "verfeinert in"
+  },
+  {
+   "von": "steuerwerk",
+   "nach": "festverdrahtet",
+   "text": "realisiert als"
+  },
+  {
+   "von": "von_neumann",
+   "nach": "befehlsformat",
+   "text": "erzwingt gleiche Wortbreite für Befehle und Daten im"
+  },
+  {
+   "von": "zweierkomplement",
+   "nach": "akkumulator",
+   "text": "Zahlenformat im"
+  },
+  {
+   "von": "mikrocontroller",
+   "nach": "speicherarten",
+   "text": "enthält"
+  },
+  {
+   "von": "ddrx",
+   "nach": "bitmaske",
+   "text": "wird verändert mit"
+  },
+  {
+   "von": "toolchain",
+   "nach": "speicherarten",
+   "text": "schreibt das Programm in den Flash von"
+  },
+  {
+   "von": "adc",
+   "nach": "referenzspannung",
+   "text": "misst relativ zur"
+  },
+  {
+   "von": "adc",
+   "nach": "abtasttheorem",
+   "text": "tastet ab nach dem"
+  },
+  {
+   "von": "analogkomparator",
+   "nach": "flashwandler",
+   "text": "vervielfacht ergibt den"
+  },
+  {
+   "von": "adclh",
+   "nach": "adc",
+   "text": "speichert das Ergebnis des"
+  },
+  {
+   "von": "interrupt",
+   "nach": "isr",
+   "text": "startet die"
+  },
+  {
+   "von": "polling",
+   "nach": "interrupt",
+   "text": "ist die Alternative zum"
+  },
+  {
+   "von": "timer",
+   "nach": "pwm",
+   "text": "erzeugt im Compare-Modus"
+  },
+  {
+   "von": "compare",
+   "nach": "pwm",
+   "text": "ist Grundlage für"
+  },
+  {
+   "von": "adc",
+   "nach": "interrupt",
+   "text": "meldet Wandlungsende per"
+  },
+  {
+   "von": "reset",
+   "nach": "vektortabelle",
+   "text": "springt über den ersten Eintrag der"
+  },
+  {
+   "von": "pwm",
+   "nach": "dcmotor",
+   "text": "steuert die Geschwindigkeit von"
+  },
+  {
+   "von": "hbruecke",
+   "nach": "dcmotor",
+   "text": "kehrt die Drehrichtung um von"
+  },
+  {
+   "von": "timer",
+   "nach": "servo",
+   "text": "erzeugt die Steuerpulse für"
+  },
+  {
+   "von": "aktor",
+   "nach": "eingebettet",
+   "text": "ist Teil eines"
+  },
+  {
+   "von": "kv",
+   "nach": "qmc",
+   "text": "wird bei vielen Variablen ersetzt durch"
+  },
+  {
+   "von": "dnf",
+   "nach": "zweistufig",
+   "text": "wird umgesetzt durch"
+  },
+  {
+   "von": "ddrb",
+   "nach": "register",
+   "text": "ist ein"
+  },
+  {
+   "von": "digitalsignal",
+   "nach": "adc",
+   "text": "entsteht durch"
+  },
+  {
+   "von": "xor",
+   "nach": "halbaddierer",
+   "text": "ist Baustein im"
+  },
+  {
+   "von": "qmc",
+   "nach": "kdnf",
+   "text": "minimiert die"
+  },
+  {
+   "von": "adressdekoder",
+   "nach": "speicherarten",
+   "text": "wählt den Baustein im"
+  },
+  {
+   "von": "prioenc",
+   "nach": "flashwandler",
+   "text": "wird eingesetzt im"
+  },
+  {
+   "von": "mux",
+   "nach": "adc",
+   "text": "wählt den Eingangskanal des"
+  },
+  {
+   "von": "frequenzteiler",
+   "nach": "zaehler",
+   "text": "ist eine einfache Form vom"
+  },
+  {
+   "von": "flanke",
+   "nach": "register",
+   "text": "ist Baustein von"
+  },
+  {
+   "von": "schaltwerk",
+   "nach": "steuerwerk",
+   "text": "ist Grundlage für das"
+  },
+  {
+   "von": "ff_ansteuertabelle",
+   "nach": "jkff",
+   "text": "kehrt die Wahrheitstafel um von"
+  },
+  {
+   "von": "fsm_entwurf",
+   "nach": "moore",
+   "text": "setzt in Hardware um"
+  },
+  {
+   "von": "fsm_entwurf",
+   "nach": "kv",
+   "text": "minimiert mit"
+  },
+  {
+   "von": "schieberegister_modi",
+   "nach": "schieberegister",
+   "text": "wird eingesetzt als"
+  },
+  {
+   "von": "registerauswahl",
+   "nach": "dekoder",
+   "text": "nutzt"
+  },
+  {
+   "von": "zaehler_sync",
+   "nach": "takt",
+   "text": "schaltet alle Flip-Flops am selben"
+  },
+  {
+   "von": "zaehler_flip",
+   "nach": "xor",
+   "text": "nutzt"
+  },
+  {
+   "von": "halbaddierer",
+   "nach": "schaltnetz",
+   "text": "ist ein"
+  },
+  {
+   "von": "festverdrahtet",
+   "nach": "automat",
+   "text": "ist ein"
+  },
+  {
+   "von": "festverdrahtet",
+   "nach": "dekoder",
+   "text": "dekodiert den Opcode mit"
+  },
+  {
+   "von": "memory_mapped_io",
+   "nach": "mmio",
+   "text": "wird umgesetzt als"
+  },
+  {
+   "von": "mikrocontroller",
+   "nach": "von_neumann",
+   "text": "erweitert die Bausteine der"
+  },
+  {
+   "von": "ddrx",
+   "nach": "register",
+   "text": "ist ein"
+  },
+  {
+   "von": "taktgenerator",
+   "nach": "takt",
+   "text": "liefert den"
+  },
+  {
+   "von": "abstraktion_prog",
+   "nach": "abstraktionsebenen",
+   "text": "ordnet sich ein in die"
+  },
+  {
+   "von": "bitmaske",
+   "nach": "boolesche_algebra",
+   "text": "wendet bitweise an"
+  },
+  {
+   "von": "toolchain",
+   "nach": "befehlszyklus",
+   "text": "erzeugt die Maschinenbefehle für den"
+  },
+  {
+   "von": "vektortabelle",
+   "nach": "pc_ir",
+   "text": "lädt den Programmzähler über"
+  },
+  {
+   "von": "atomar",
+   "nach": "race",
+   "text": "verhindert"
+  },
+  {
+   "von": "timer",
+   "nach": "zaehler",
+   "text": "ist ein Hardware-"
+  },
+  {
+   "von": "analogkomparator",
+   "nach": "komparator",
+   "text": "ist das analoge Gegenstück zum"
+  },
+  {
+   "von": "dekoder7seg",
+   "nach": "dekoder",
+   "text": "ist ein"
+  },
+  {
+   "von": "anzeige_mux",
+   "nach": "mux",
+   "text": "nutzt die Idee des"
+  },
+  {
+   "von": "schieberegister",
+   "nach": "register",
+   "text": "ist ein spezielles"
+  },
+  {
+   "von": "stellenwertsystem",
+   "nach": "zweierkomplement",
+   "text": "ist Grundlage für das"
+  }
+ ],
+ "faeden": [
+  {
+   "id": "prozessor",
+   "name": "Vom Gatter zum Prozessor",
+   "beschreibung": "Aus Logik wird Rechenwerk, aus Rechenwerk ein programmierbarer Rechner.",
+   "stationen": [
+    "boolesche_algebra",
+    "schaltnetz",
+    "volladdierer",
+    "alu",
+    "steuerwerk",
+    "mikroprogramm",
+    "mikrocontroller"
+   ]
+  },
+  {
+   "id": "speicher",
+   "name": "Wie eine Schaltung sich etwas merkt",
+   "beschreibung": "Rückkopplung wird zum Flip-Flop, Flip-Flops werden zu Registern – bis zu den Konfigurationsregistern des Controllers.",
+   "stationen": [
+    "rueckkopplung",
+    "srlatch",
+    "flanke",
+    "register",
+    "pc_ir",
+    "ddrx"
+   ]
+  },
+  {
+   "id": "minimieren",
+   "name": "Vom Problem zur kleinsten Schaltung",
+   "beschreibung": "Wahrheitstafel, Normalform und Minimierung kehren bei jedem Entwurf wieder.",
+   "stationen": [
+    "wahrheitstafel",
+    "dnf",
+    "kv",
+    "qmc",
+    "zweistufig",
+    "fsm_entwurf"
+   ]
+  },
+  {
+   "id": "automaten",
+   "name": "Zustände und Abläufe",
+   "beschreibung": "Wer Abfolgen erkennen oder erzeugen will, braucht Zustände – vom Automaten bis zum Timer.",
+   "stationen": [
+    "schaltwerk",
+    "automat",
+    "moore",
+    "zaehler",
+    "festverdrahtet",
+    "timer"
+   ]
+  },
+  {
+   "id": "analog",
+   "name": "Analog trifft digital",
+   "beschreibung": "Wo die Welt stetig ist und der Rechner diskret: Pegel, Wandler, Pulsweiten.",
+   "stationen": [
+    "digitalsignal",
+    "pegel",
+    "komparator",
+    "adc",
+    "pwm",
+    "servo"
+   ]
+  },
+  {
+   "id": "code",
+   "name": "Vom Code zur Hex-Datei",
+   "beschreibung": "Das Versprechen aus VL 00: jede Schicht zwischen C-Programm und Maschinenbefehl verstehen.",
+   "stationen": [
+    "abstraktionsebenen",
+    "hexdatei",
+    "befehlscodierung",
+    "befehlssatz",
+    "assembler",
+    "toolchain",
+    "bitmaske",
+    "isr"
+   ]
+  }
+ ],
+ "anwendungen": [
+  {
+   "id": "a_lauflicht",
+   "titel": "LED-Lauflicht auf dem Arduino",
+   "fach": "Lichtsteuerung",
+   "vl": 0,
+   "abschnitt": 2,
+   "datensatz": "Arduino-Sketch, der vier LEDs an Pin 10–13 nacheinander je 250 ms einschaltet (Wokwi-Simulation), und die daraus erzeugte Hex-Datei",
+   "schlagworte": [
+    "mikrocontroller",
+    "hexdatei"
+   ],
+   "herkunft": "lehrende"
+  },
+  {
+   "id": "a_wetterstation",
+   "titel": "Arduino-Wetterstation",
+   "fach": "Messtechnik",
+   "vl": 0,
+   "abschnitt": 9,
+   "datensatz": "Sensordaten einer Wetterstation, Helligkeitswerte des ADC (1023 = dunkel)",
+   "schlagworte": [
+    "mikrocontroller"
+   ],
+   "herkunft": "lehrende"
+  },
+  {
+   "id": "a_webstuhl",
+   "titel": "Jacquard-Webstuhl",
+   "fach": "Textil",
+   "vl": 1,
+   "abschnitt": 8,
+   "datensatz": "Lochkarten steuern das Webmuster; zur Endlosschleife gekoppelt für wiederkehrende Muster",
+   "schlagworte": [
+    "lochkarte"
+   ],
+   "herkunft": "lehrende"
+  },
+  {
+   "id": "a_volkszaehlung",
+   "titel": "Hollerith-Maschinen für die US-Volkszählung 1890",
+   "fach": "Verwaltung",
+   "vl": 1,
+   "abschnitt": 10,
+   "datensatz": "Tabelliermaschine, Sortierer, Locher und Leser für Lochkarten; Auswertung der Volkszählung in 2 Jahren",
+   "schlagworte": [
+    "lochkarte"
+   ],
+   "herkunft": "lehrende"
+  },
+  {
+   "id": "a_lampe",
+   "titel": "Lampe mit zwei Schaltern",
+   "fach": "Haushalt",
+   "vl": 2,
+   "abschnitt": 5,
+   "datensatz": "Reihenschaltung (Lampe leuchtet bei Schalter 1 und 2) und Parallelschaltung (Schalter 1 oder 2)",
+   "schlagworte": [
+    "boolesche_algebra",
+    "schaltfunktion"
+   ],
+   "herkunft": "lehrende"
+  },
+  {
+   "id": "a_relais_xor",
+   "titel": "XOR aus Relais",
+   "fach": "Elektrotechnik",
+   "vl": 2,
+   "abschnitt": 11,
+   "datensatz": "AND-Gatter aus Relais bzw. Transistoren, Relaisschaltung für das exklusive ODER",
+   "schlagworte": [
+    "xor",
+    "gatter"
+   ],
+   "herkunft": "lehrende"
+  },
+  {
+   "id": "a_7segment",
+   "titel": "Sieben-Segment-Anzeige",
+   "fach": "Anzeigetechnik",
+   "vl": 3,
+   "abschnitt": 11,
+   "datensatz": "Wahrheitstafel und KV-Diagramm für Segment d bei den Ziffern 0–9 (4 Eingangsleitungen, 6 Don't-Care-Codes), Prüfung im Simulator",
+   "schlagworte": [
+    "dontcare",
+    "kv",
+    "schleife"
+   ],
+   "herkunft": "lehrende"
+  },
+  {
+   "id": "a_sympy",
+   "titel": "Minimierung mit Python",
+   "fach": "Software",
+   "vl": 3,
+   "abschnitt": 12,
+   "datensatz": "SymPy-Skript Minimize.py: SOPform berechnet aus 9 Mintermen eine minimale DNF",
+   "schlagworte": [
+    "sopform",
+    "kdnf"
+   ],
+   "herkunft": "lehrende"
+  },
+  {
+   "id": "a_kaffeemaschine",
+   "titel": "Fehleranzeige einer Kaffeemaschine",
+   "fach": "Haushalt",
+   "vl": 4,
+   "abschnitt": 3,
+   "datensatz": "Vier digitale Sensorsignale, eine Fehler-LED für die Zustände 6 bis 14: Wahrheitstabelle, Minimierung mit Quine-McCluskey und Gatterschaltung in der Simulation",
+   "schlagworte": [
+    "qmc",
+    "primimplikant",
+    "schaltnetz"
+   ],
+   "herkunft": "lehrende"
+  },
+  {
+   "id": "a_paritaet",
+   "titel": "Paritätsprüfung",
+   "fach": "Datenübertragung",
+   "vl": 4,
+   "abschnitt": 11,
+   "datensatz": "Schaltnetz, das bei einer ungeraden Zahl von Einsen an drei Eingängen eine 1 ausgibt",
+   "schlagworte": [
+    "schaltnetz",
+    "gatter"
+   ],
+   "herkunft": "lehrende"
+  },
+  {
+   "id": "a_7segment_dekoder",
+   "titel": "Ziffernanzeige mit 7-Segment-Anzeige",
+   "fach": "Anzeigen",
+   "vl": 5,
+   "abschnitt": 4,
+   "datensatz": "Arduino-Sketch im Simulator, der die Ziffern 0 bis 9 auf einer 7-Segment-Anzeige ausgibt",
+   "schlagworte": [
+    "dekoder",
+    "bcd7seg"
+   ],
+   "herkunft": "lehrende"
+  },
+  {
+   "id": "a_flashadc",
+   "titel": "Flash-Analog-Digital-Wandler",
+   "fach": "Messtechnik",
+   "vl": 5,
+   "abschnitt": 5,
+   "datensatz": "Video: Ein Prioritätskodierer macht aus den Komparatorausgängen eines Flash-Wandlers eine Binärzahl",
+   "schlagworte": [
+    "prioenc",
+    "kodierer"
+   ],
+   "herkunft": "lehrende"
+  },
+  {
+   "id": "a_temperatur",
+   "titel": "Übertemperatur-Merker",
+   "fach": "Messtechnik",
+   "vl": 6,
+   "abschnitt": 8,
+   "datensatz": "Digitaler Temperatursensor setzt ein SR-Latch; die Meldung bleibt bestehen, bis sie über R quittiert wird",
+   "schlagworte": [
+    "srlatch"
+   ],
+   "herkunft": "lehrende"
+  },
+  {
+   "id": "a_avrpin",
+   "titel": "IO-Pin eines AVR-Mikrocontrollers",
+   "fach": "Mikrocontroller",
+   "vl": 6,
+   "abschnitt": 16,
+   "datensatz": "Schaltbild: Konfiguration eines einzelnen Pins mit Hilfe von vier Flip-Flops",
+   "schlagworte": [
+    "dlatch",
+    "flanke"
+   ],
+   "herkunft": "lehrende"
+  },
+  {
+   "id": "a_sequenzdetektor",
+   "titel": "Detektor für drei aufeinanderfolgende Einsen",
+   "fach": "Signalverarbeitung",
+   "vl": 7,
+   "abschnitt": 5,
+   "datensatz": "Binärsequenzdetektor als Moore- und als Mealy-Automat, realisiert mit D- und JK-Flip-Flops in der Simulation",
+   "schlagworte": [
+    "moore",
+    "mealy",
+    "zustandskodierung",
+    "zustandstabelle"
+   ],
+   "herkunft": "lehrende"
+  },
+  {
+   "id": "a_vergleicher",
+   "titel": "Sequentieller Binärzahlenvergleicher",
+   "fach": "Rechnerbau",
+   "vl": 7,
+   "abschnitt": 10,
+   "datensatz": "Zwei Zahlen werden stellenweise durch Schieberegister geschoben; ein Medwedew-Automat merkt sich größer/kleiner/gleich, Umsetzung mit D-Flip-Flops und PAL",
+   "schlagworte": [
+    "medwedew",
+    "entwurf",
+    "inv_wt"
+   ],
+   "herkunft": "lehrende"
+  },
+  {
+   "id": "a_ampel_moore",
+   "titel": "Ampelsteuerung als Schaltwerk",
+   "fach": "Verkehr",
+   "vl": 8,
+   "abschnitt": 3,
+   "datensatz": "Ampel mit Eingang E als Moore-Automat mit zwei JK-Flip-Flops entworfen; dieselbe Ampel als Arduino-Programm statemachine.cpp im AVR8js-Simulator",
+   "schlagworte": [
+    "fsm_entwurf",
+    "binaerkodierung",
+    "ff_ansteuertabelle",
+    "realisierungsvarianten"
+   ],
+   "herkunft": "lehrende"
+  },
+  {
+   "id": "a_4bit_zaehler",
+   "titel": "Synchroner 4-Bit-Zähler",
+   "fach": "Rechnerbau",
+   "vl": 8,
+   "abschnitt": 5,
+   "datensatz": "Herleitung aus der Zustandstabelle mit D-Flip-Flops, Realisierung mit XOR/UND, DigiSim-Simulation mit count und Reset",
+   "schlagworte": [
+    "zaehler",
+    "zaehler_flip"
+   ],
+   "herkunft": "lehrende"
+  },
+  {
+   "id": "a_null_komma_eins",
+   "titel": "Eine Million Mal 0,1 addieren",
+   "fach": "Programmierung",
+   "vl": 9,
+   "abschnitt": 3,
+   "datensatz": "Python-Programm, dessen Summe nicht genau 100000 ergibt, weil 0,1 binär nicht exakt darstellbar ist",
+   "schlagworte": [
+    "binaerbruch"
+   ],
+   "herkunft": "lehrende"
+  },
+  {
+   "id": "a_multiplizierer",
+   "titel": "Multiplizieren mit Partialprodukten",
+   "fach": "Rechnerbau",
+   "vl": 9,
+   "abschnitt": 13,
+   "datensatz": "211 × 206 = 43466: Partialprodukte per UND, Aufsummieren mit Carry-Save-Stufen und abschließender Addition",
+   "schlagworte": [
+    "csa",
+    "volladdierer"
+   ],
+   "herkunft": "lehrende"
+  },
+  {
+   "id": "a_inkrement_toggle",
+   "titel": "Inkrementieren und Togglen mit der ALU",
+   "fach": "Rechnerbau",
+   "vl": 10,
+   "abschnitt": 3,
+   "datensatz": "Erstes „Programm“ als Folge von ALU-Steuerworten: ADD_B wiederholt zählt hoch, EOR_A wiederholt schaltet ein Bit hin und her",
+   "schlagworte": [
+    "alu",
+    "befehlscodierung"
+   ],
+   "herkunft": "lehrende"
+  },
+  {
+   "id": "a_edvac",
+   "titel": "First Draft of a Report on the EDVAC",
+   "fach": "Geschichte",
+   "vl": 10,
+   "abschnitt": 7,
+   "datensatz": "Aufsatz von John von Neumann (1945); Teile der Ideen schon bei Konrad Zuse (Z1, Z3)",
+   "schlagworte": [
+    "von_neumann"
+   ],
+   "herkunft": "lehrende"
+  },
+  {
+   "id": "a_rechtsshift",
+   "titel": "Variabler Rechtsshift in Software",
+   "fach": "Programmierung",
+   "vl": 11,
+   "abschnitt": 4,
+   "datensatz": "Assemblerprogramm für den Modellrechner, das einen Rechtsshift um bis zu 15 Stellen aus wiederholten RAL-Linksrotationen zusammensetzt",
+   "schlagworte": [
+    "assembler",
+    "befehlssatz",
+    "akkumulator"
+   ],
+   "herkunft": "lehrende"
+  },
+  {
+   "id": "a_simulator",
+   "titel": "Simulator des Modellrechners",
+   "fach": "Rechnerbau",
+   "vl": 11,
+   "abschnitt": 5,
+   "datensatz": "Web-Simulation (Fabian Bär) für Speicher, Rechenwerk und den manuell getakteten Gesamtrechner",
+   "schlagworte": [
+    "mar_mbr",
+    "akkumulator",
+    "pc_ir"
+   ],
+   "herkunft": "lehrende"
+  },
+  {
+   "id": "a_blink",
+   "titel": "Hello World: blinkende LED auf vier Wegen",
+   "fach": "Einstieg",
+   "vl": 12,
+   "abschnitt": 14,
+   "datensatz": "LED an PB5 im Sekundentakt – in Assembler, avrlibc, Arduino und Simulink, mit Vergleich der Codegrößen",
+   "schlagworte": [
+    "ddrx",
+    "toolchain",
+    "abstraktion_prog"
+   ],
+   "herkunft": "lehrende"
+  },
+  {
+   "id": "a_schwimm",
+   "titel": "Wallplotter und autonome Schwimmplattform",
+   "fach": "Robotik",
+   "vl": 12,
+   "abschnitt": 2,
+   "datensatz": "Kette Sensorik – Filterung – Regelung – Aktorik als Ziel der hardwarenahen Programmierung",
+   "schlagworte": [
+    "mikrocontroller"
+   ],
+   "herkunft": "lehrende"
+  },
+  {
+   "id": "a_ntc",
+   "titel": "Temperaturmessung mit Heißleiter",
+   "fach": "Messtechnik",
+   "vl": 13,
+   "abschnitt": 11,
+   "datensatz": "NTC im Spannungsteiler, ADC-Wert 628 in Widerstand und Temperatur umrechnen",
+   "schlagworte": [
+    "ntc",
+    "adc",
+    "aufloesung"
+   ],
+   "herkunft": "lehrende"
+  },
+  {
+   "id": "a_distanz",
+   "titel": "Infrarot-Distanzsensor auslesen",
+   "fach": "Messtechnik",
+   "vl": 13,
+   "abschnitt": 12,
+   "datensatz": "Sensor GP2D am ATmega2560 mit interner Referenz 2,56 V, Wandlung per ADSC-Bit",
+   "schlagworte": [
+    "admux",
+    "referenzspannung"
+   ],
+   "herkunft": "lehrende"
+  },
+  {
+   "id": "a_personenzaehler",
+   "titel": "Eingangszähler: „5 Personen gezählt“",
+   "fach": "Messtechnik",
+   "vl": 14,
+   "abschnitt": 16,
+   "datensatz": "Timer 1 zählt externe Impulse, bei Vergleichswert 5 meldet eine ISR das Ergebnis",
+   "schlagworte": [
+    "timer",
+    "isr",
+    "compare"
+   ],
+   "herkunft": "lehrende"
+  },
+  {
+   "id": "a_dimmer",
+   "titel": "Glimmeffekt einer LED",
+   "fach": "Beleuchtung",
+   "vl": 14,
+   "abschnitt": 16,
+   "datensatz": "Fast-PWM an Pin 9, OCR1A wird stetig hoch- und heruntergezählt",
+   "schlagworte": [
+    "pwm",
+    "compare"
+   ],
+   "herkunft": "lehrende"
+  },
+  {
+   "id": "a_7seg",
+   "titel": "Ziffernanzeigen mit wenigen Pins",
+   "fach": "Anzeige",
+   "vl": 15,
+   "abschnitt": 3,
+   "datensatz": "7-Segment-Anzeige über Dekoder CD4543 und Multiplexing mehrerer Anzeigen",
+   "schlagworte": [
+    "dekoder7seg",
+    "anzeige_mux"
+   ],
+   "herkunft": "lehrende"
+  },
+  {
+   "id": "a_servo",
+   "titel": "Servo schwenken per Timer",
+   "fach": "Robotik",
+   "vl": 15,
+   "abschnitt": 6,
+   "datensatz": "Timer 1 im CTC-Modus mit Compare-Interrupt erzeugt den 20-ms-Puls, OCR1A verschiebt die Position",
+   "schlagworte": [
+    "servo",
+    "timer",
+    "isr"
+   ],
+   "herkunft": "lehrende"
+  }
+ ]
+}
+</script>
+<script>
+const DATA = JSON.parse(document.getElementById("kartendaten").textContent);
+const BASE = "https://liascript.github.io/course/?https://raw.githubusercontent.com/TUBAF-IfI-LiaScript/VL_EingebetteteSysteme/master/";
+const LECTURES = DATA.vorlesungen.map(v => {
+  const [y, m, d] = v.datum.split("-");
+  return { nr: String(v.vl).padStart(2, "0"), iso: v.datum, date: `${d}.${m}.`, short: v.kurz, frage: v.leitfrage, frei: v.freigegeben !== false, file: v.datei, status: v.status, sections: v.abschnitte };
+});
+// Aktuelle Vorlesung: die letzte, deren Termin erreicht ist (vor Semesterbeginn: VL 00)
+const TODAY = new Date().toISOString().slice(0, 10);
+const HERE_TODAY = Math.max(0, LECTURES.filter(l => l.iso <= TODAY).length - 1);
+const BEFORE_START = TODAY < LECTURES[0].iso;
+const PHASES = [
+  { from: 0, to: 1, name: "Einstieg", v: "--phase-einstieg" },
+  { from: 2, to: 8, name: "Digitaltechnik", v: "--phase-digital" },
+  { from: 9, to: 11, name: "Vom Rechenwerk zur CPU", v: "--phase-rechner" },
+  { from: 12, to: 15, name: "Mikrocontroller", v: "--phase-controller" }
+];
+const LINES = [
+  { id: "grundlagen", name: "Technik & Abstraktion", v: "--l-grundlagen" },
+  { id: "logik", name: "Logik & Schaltnetze", v: "--l-logik" },
+  { id: "zustand", name: "Zustand & Takt", v: "--l-zustand" },
+  { id: "rechner", name: "Rechner & Befehle", v: "--l-rechner" },
+  { id: "controller", name: "Mikrocontroller & Peripherie", v: "--l-controller" }
+];
+const THREADV = ["--t1", "--t2", "--t3", "--t4", "--t5", "--t6"];
+const THREADS = DATA.faeden.map((f, i) => ({ id: f.id, name: f.name, text: f.beschreibung, st: f.stationen, v: THREADV[i] }));
+const ALL = DATA.begriffe.map(b => ({ id: b.id, name: b.name, line: b.linie, vl: b.vl, sec: b.abschnitt, level: b.ebene, code: b.code, text: b.erklaerung, mis: b.fehlvorstellung }));
+const EDGES = DATA.beziehungen.map(r => [r.von, r.nach, r.text]);
+const byId = Object.fromEntries(ALL.map(n => [n.id, n]));
+// Anwendungen: konkrete Beispielschaltungen und -programme, die mehrere Begriffe nutzen
+const APPS = (DATA.anwendungen || []).map(a => ({ id: a.id, name: a.titel, fach: a.fach, vl: a.vl, sec: a.abschnitt, data: a.datensatz, uses: a.schlagworte, from: a.herkunft }));
+const byApp = Object.fromEntries(APPS.map(a => [a.id, a]));
+const appsOf = {};
+APPS.forEach(a => a.uses.forEach(k => (appsOf[k] = appsOf[k] || []).push(a)));
+const lineById = Object.fromEntries(LINES.map(l => [l.id, l]));
+const threadById = Object.fromEntries(THREADS.map(t => [t.id, t]));
+const threadsOf = {};
+THREADS.forEach(t => t.st.forEach(s => (threadsOf[s] = threadsOf[s] || []).push(t.id)));
+const nbs = {};
+ALL.forEach(n => nbs[n.id] = []);
+EDGES.forEach(([a, b, t]) => { nbs[a].push({ id: b, t, dir: "out" }); nbs[b].push({ id: a, t, dir: "in" }); });
+
+const $ = (s) => document.querySelector(s);
+const svgNS = "http://www.w3.org/2000/svg";
+const css = (v) => getComputedStyle(document.documentElement).getPropertyValue(v).trim();
+const reduce = () => matchMedia("(prefers-reduced-motion: reduce)").matches;
+
+const narrow = () => matchMedia("(max-width: 980px)").matches;
+// Begriffe erscheinen erst nach ihrer Vorlesung (Freigabe); „Ausblick“ zeigt die vorbereiteten blass
+const sichtbar = (n) => n && (state.ausblick || LECTURES[n.vl].frei);
+const state = { mode: narrow() ? "liste" : "metro", here: HERE_TODAY, view: "nb", detail: false, ausblick: false, sel: null, thread: null, hidden: new Set() };
+try {
+  const saved = JSON.parse(localStorage.getItem("eavd-map") || "{}");
+  if (typeof saved.detail === "boolean") state.detail = saved.detail;
+  if (typeof saved.ausblick === "boolean") state.ausblick = saved.ausblick;
+  if (["liste", "metro", "zeit"].includes(saved.mode)) state.mode = saved.mode;
+} catch (e) {}
+// „Sie sind hier“ wird bewusst nicht gespeichert: Es folgt immer dem Datum.
+function save() { try { localStorage.setItem("eavd-map", JSON.stringify({ detail: state.detail, mode: state.mode, ausblick: state.ausblick })); } catch (e) {} }
+
+const TOP = 108;
+let SIDE = 150, COL = 118, W = 0, H = 0, pos = {}, shown = [], laneY = {}, trackY = {};
+
+function el(name, attrs, parent) {
+  const e = document.createElementNS(svgNS, name);
+  for (const k in attrs) e.setAttribute(k, attrs[k]);
+  if (parent) parent.appendChild(e);
+  return e;
+}
+const svg = $("#map"), side = $("#side");
+const defs = el("defs", {}, svg);
+const mk = el("marker", { id: "arrow", viewBox: "0 0 10 10", refX: 17, refY: 5, markerWidth: 7, markerHeight: 7, orient: "auto-start-reverse" }, defs);
+el("path", { d: "M0,0 L10,5 L0,10 z", fill: "var(--edge)" }, mk);
+const gBack = el("g", {}, svg), gLines = el("g", {}, svg), gEdges = el("g", {}, svg), gSt = el("g", {}, svg), gLabels = el("g", {}, svg);
+
+function setSize() {
+  SIDE = matchMedia("(max-width: 600px)").matches ? 118 : 150;
+  W = COL * LECTURES.length + 60;
+  svg.setAttribute("viewBox", `0 0 ${W} ${H}`); svg.setAttribute("width", W); svg.setAttribute("height", H);
+  side.setAttribute("viewBox", `0 0 ${SIDE} ${H}`); side.setAttribute("width", SIDE); side.setAttribute("height", H);
+}
+
+/* ---------- Layout: Zeitleiste ---------- */
+function layoutZeit() {
+  COL = 118;
+  const ROW = 30, PAD = 18;
+  shown = ALL.filter(n => sichtbar(n) && !state.hidden.has(n.line) && (state.detail || n.level === 1 || n.id === state.sel));
+  const count = {};
+  shown.forEach(n => { const k = n.line + "|" + n.vl; count[k] = (count[k] || 0) + 1; });
+  let y = TOP;
+  laneY = {};
+  LINES.forEach(l => {
+    laneY[l.id] = y;
+    if (state.hidden.has(l.id)) return;
+    y += Math.max(1, ...LECTURES.map((_, i) => count[l.id + "|" + i] || 0)) * ROW + PAD * 2;
+  });
+  H = y + 8;
+  pos = {};
+  const used = {};
+  shown.slice().sort((a, b) => a.level - b.level || a.sec - b.sec).forEach(n => {
+    const k = n.line + "|" + n.vl;
+    const i = used[k] = (used[k] || 0); used[k]++;
+    pos[n.id] = { x: COL * n.vl + 22, y: laneY[n.line] + PAD + 10 + i * ROW };
+  });
+}
+
+/* ---------- Layout: Metrokarte ---------- */
+function layoutMetro() {
+  COL = 150;
+  const TRACK = 70;
+  trackY = {};
+  THREADS.forEach((t, i) => trackY[t.id] = TOP + 40 + i * TRACK);
+  H = TOP + 40 + THREADS.length * TRACK + 10;
+  const ids = [...new Set(THREADS.flatMap(t => t.st))].filter(id => sichtbar(byId[id]));
+  shown = ids.map(id => byId[id]);
+  pos = {};
+  for (let v = 0; v < LECTURES.length; v++) {
+    const col = ids.filter(id => byId[id].vl === v);
+    if (!col.length) continue;
+    // Reihenfolge in der Spalte: topologisch entlang der Fäden
+    const succ = {}, indeg = {};
+    col.forEach(id => { succ[id] = []; indeg[id] = 0; });
+    THREADS.forEach(t => t.st.forEach((s, k) => {
+      const nx = t.st[k + 1];
+      if (nx && succ[s] && succ[nx] !== undefined && !succ[s].includes(nx)) { succ[s].push(nx); indeg[nx]++; }
+    }));
+    const order = [], queue = col.filter(id => indeg[id] === 0);
+    while (queue.length) { const u = queue.shift(); order.push(u); succ[u].forEach(w => { if (--indeg[w] === 0) queue.push(w); }); }
+    const step = col.length > 1 ? Math.min(46, (COL - 40) / (col.length - 1)) : 0;
+    order.forEach((id, k) => {
+      const ys = threadsOf[id].map(t => trackY[t]);
+      const spread = Math.max(...ys) - Math.min(...ys);
+      const y = spread <= TRACK ? ys.reduce((a, b) => a + b, 0) / ys.length : ys[0];
+      pos[id] = { x: COL * v + 24 + k * step, y };
+    });
+  }
+}
+
+function octi(p, q) {
+  const dx = q.x - p.x, dy = q.y - p.y, ady = Math.abs(dy);
+  if (ady < 0.5) return ` L${q.x},${q.y}`;
+  if (dx <= ady + 2) return ` L${q.x},${q.y}`;
+  const flat = (dx - ady) / 2;
+  return ` L${p.x + flat},${p.y} L${p.x + flat + ady},${q.y} L${q.x},${q.y}`;
+}
+
+/* ---------- Hintergrund (beide Ansichten) ---------- */
+function drawBackground() {
+  gBack.innerHTML = "";
+  PHASES.forEach(p => {
+    const x = COL * p.from, w = COL * (p.to - p.from + 1);
+    el("rect", { x, y: 0, width: w, height: H, fill: css(p.v) }, gBack);
+    el("text", { x: x + 8, y: 16, class: "phase-label" }, gBack).textContent = p.name;
+  });
+  LECTURES.forEach((l, i) => {
+    const x = COL * i;
+    el("line", { x1: x, y1: 24, x2: x, y2: H, stroke: css("--grid"), "stroke-width": 1 }, gBack);
+    el("text", { x: x + 8, y: 46, class: "col-head" }, gBack).textContent = "VL " + l.nr;
+    el("text", { x: x + 8, y: 62, class: "col-date" }, gBack).textContent = l.date;
+    el("text", { x: x + 8, y: 78, class: "col-short" }, gBack).textContent = l.short;
+    if (l.status !== "ausgearbeitet") el("text", { x: x + 8, y: 94, class: "col-status" }, gBack).textContent = l.status === "Rumpf" ? "Rumpf" : "in Planung";
+  });
+  const hx = COL * state.here;
+  el("rect", { x: hx, y: 24, width: COL, height: H - 24, class: "here-band" }, gBack);
+  el("text", { x: hx + COL - 8, y: 32, "text-anchor": "end", class: "here-tag" }, gBack).textContent = "▼ Sie sind hier";
+  side.innerHTML = "";
+  el("rect", { x: 0, y: 0, width: SIDE, height: H, fill: css("--surface") }, side);
+  el("line", { x1: SIDE - 0.5, y1: 0, x2: SIDE - 0.5, y2: H, stroke: css("--faint") }, side);
+  const titles = state.mode === "metro"
+    ? THREADS.map(t => ({ name: t.name, v: t.v, y: trackY[t.id] - 8, dim: state.thread && state.thread !== t.id }))
+    : LINES.filter(l => !state.hidden.has(l.id)).map(l => ({ name: l.name, v: l.v, y: laneY[l.id] + 22 }));
+  titles.forEach(t => {
+    el("rect", { x: 12, y: t.y - 4, width: 18, height: 6, rx: 3, fill: css(t.v), opacity: t.dim ? .3 : 1 }, side);
+    const tx = el("text", { x: 12, y: t.y + 20, class: "lane-title", fill: css(t.v), opacity: t.dim ? .35 : 1 }, side);
+    const words = t.name.includes(" & ") ? t.name.split(" & ").map((w, i, a) => w + (i < a.length - 1 ? " &" : "")) : wrap(t.name, SIDE < 150 ? 11 : 18);
+    words.forEach((w, i) => { el("tspan", { x: 12, dy: i ? (SIDE < 150 ? 13 : 16) : 0 }, tx).textContent = w; });
+  });
+}
+function wrap(s, n) {
+  const out = []; let cur = "";
+  s.split(" ").forEach(w => { if ((cur + " " + w).trim().length > n) { out.push(cur); cur = w; } else cur = (cur + " " + w).trim(); });
+  if (cur) out.push(cur);
+  return out;
+}
+
+/* ---------- Zeitleiste: Schienen, Kanten, Stationen ---------- */
+function drawZeit() {
+  gLines.innerHTML = ""; gEdges.innerHTML = ""; gLabels.innerHTML = ""; gSt.innerHTML = "";
+  LINES.forEach(l => {
+    if (state.hidden.has(l.id)) return;
+    const y = laneY[l.id] + 28;
+    el("line", { x1: 0, y1: y, x2: W, y2: y, class: "rail", stroke: css(l.v) }, gLines);
+  });
+  const placed = [];
+  const free = (x, y, w) => !placed.some(r => Math.abs(r.x - x) < (r.w + w) / 2 + 4 && Math.abs(r.y - y) < 14);
+  const list = state.view === "all" ? EDGES : EDGES.filter(([a, b]) => a === state.sel || b === state.sel);
+  list.forEach(([a, b, t]) => {
+    if (!pos[a] || !pos[b]) return;
+    const hi = a === state.sel || b === state.sel;
+    const p = pos[a], q = pos[b], dx = (q.x - p.x) * 0.5, bend = p.x === q.x ? 60 : 0;
+    el("path", { d: `M${p.x},${p.y} C${p.x + dx + bend},${p.y} ${q.x - dx + bend},${q.y} ${q.x},${q.y}`, class: "edge" + (hi ? " hi" : ""), "marker-end": "url(#arrow)", opacity: hi || state.view === "nb" ? 1 : 0.3 }, gEdges);
+    if (hi) {
+      const lx = (p.x + q.x) / 2 + (p.x === q.x ? 46 : 0), w = t.length * 5.6, base = (p.y + q.y) / 2 - 4;
+      let ly = base;
+      for (const o of [0, 14, -14, 28, -28, 42, -42, 56, -56]) { if (free(lx, base + o, w)) { ly = base + o; break; } }
+      placed.push({ x: lx, y: ly, w });
+      el("text", { x: lx, y: ly, "text-anchor": "middle", class: "edge-label" }, gLabels).textContent = t;
+    }
+  });
+  const nbSet = new Set((nbs[state.sel] || []).map(n => n.id));
+  shown.forEach(n => {
+    const p = pos[n.id];
+    const cls = ["station"];
+    if (n.code) cls.push("code");
+    if (n.level === 2) cls.push("detail");
+    if (n.vl > state.here) cls.push("future");
+    if (n.id === state.sel) cls.push("sel");
+    else if (nbSet.has(n.id)) cls.push("nb");
+    else if (state.view === "nb" && state.sel) cls.push("dim");
+    const g = stationGroup(n, cls);
+    el("circle", { cx: p.x, cy: p.y, r: n.level === 1 ? 7 : 4.5, class: "dot", stroke: css(lineById[n.line].v) }, g);
+    el("text", { x: p.x + 12, y: p.y + 4 }, g).textContent = n.name;
+  });
+}
+
+function stationGroup(n, cls) {
+  const p = pos[n.id];
+  const g = el("g", { class: cls.join(" "), tabindex: 0, role: "button", "aria-label": `${n.name}, eingeführt in VL ${LECTURES[n.vl].nr}`, style: `color:${css(lineById[n.line].v)}` }, gSt);
+  el("circle", { cx: p.x, cy: p.y, r: 14, fill: "transparent", class: "ring", stroke: "none" }, g);
+  g.addEventListener("click", () => select(n.id));
+  g.addEventListener("keydown", (ev) => { if (ev.key === "Enter" || ev.key === " ") { ev.preventDefault(); select(n.id); } });
+  return g;
+}
+
+/* ---------- Metrokarte: Linien, Stationen ---------- */
+function drawMetro() {
+  gLines.innerHTML = ""; gEdges.innerHTML = ""; gLabels.innerHTML = ""; gSt.innerHTML = "";
+  const selThreads = state.sel ? (threadsOf[state.sel] || []) : [];
+  const active = state.thread ? [state.thread] : selThreads;
+  THREADS.forEach(t => {
+    const pts = t.st.filter(s => pos[s]).map(s => pos[s]);
+    if (!pts.length) return;
+    let d = `M${pts[0].x - 18},${pts[0].y} L${pts[0].x},${pts[0].y}`;
+    for (let i = 1; i < pts.length; i++) d += octi(pts[i - 1], pts[i]);
+    const last = pts[pts.length - 1];
+    d += ` L${last.x + 18},${last.y}`;
+    const dim = active.length && !active.includes(t.id);
+    el("path", { d, class: "mline" + (dim ? " dim" : ""), stroke: css(t.v) }, gLines);
+  });
+  shown.forEach(n => {
+    const p = pos[n.id];
+    const multi = (threadsOf[n.id] || []).length > 1;
+    const onActive = !active.length || (threadsOf[n.id] || []).some(t => active.includes(t));
+    const cls = ["station", "metro"];
+    if (n.code) cls.push("code");
+    if (n.vl > state.here) cls.push("future");
+    if (n.id === state.sel) cls.push("sel");
+    if (!onActive) cls.push("dim");
+    const g = stationGroup(n, cls);
+    if (multi) {
+      el("circle", { cx: p.x, cy: p.y, r: 9, class: "xchg" }, g);
+    } else {
+      el("circle", { cx: p.x, cy: p.y, r: 5.5, class: "mstop", stroke: css(threadById[threadsOf[n.id][0]].v) }, g);
+    }
+    el("text", { x: p.x + 6, y: p.y - 12, transform: `rotate(-32 ${p.x + 6} ${p.y - 12})`, class: multi ? "xlabel" : "" }, g).textContent = n.name;
+  });
+}
+
+
+/* ---------- Liste ---------- */
+function drawListe() {
+  const ol = $("#liste");
+  ol.innerHTML = "";
+  LECTURES.forEach((lec, v) => {
+    const items = ALL.filter(n => n.vl === v && sichtbar(n) && !state.hidden.has(n.line) && (state.detail || n.level === 1 || n.id === state.sel))
+      .sort((a, b) => a.level - b.level || a.sec - b.sec);
+    const li = document.createElement("li");
+    li.className = "vl" + (v === state.here ? " now" : v > state.here ? " future" : "");
+    li.dataset.vl = v;
+    const tag = v === state.here
+      ? (BEFORE_START && v === HERE_TODAY ? `<span class="tag">Start am ${lec.date}</span>` : `<span class="tag">Sie sind hier</span>`)
+      : lec.status !== "ausgearbeitet" ? `<span class="tag muted">in Vorbereitung</span>` : "";
+    li.innerHTML = `<div class="vlhead"><b>VL ${lec.nr}</b><span class="d">${lec.date}</span><span class="s">${lec.short}</span>${tag}
+      <a href="${BASE + lec.file}" target="_blank" rel="noopener">Folien ↗</a></div>
+      ${lec.frage ? `<div class="frage">${lec.frage}</div>` : ""}
+      ${!lec.frei && !state.ausblick ? vorbereitetHinweis(v) : `<div class="chips${lec.frei ? "" : " vorschau"}">${items.map(n => `<button data-id="${n.id}" class="${n.level === 2 ? "detail" : ""}${n.code ? " code" : ""}" aria-pressed="${n.id === state.sel}"><i style="background:${css(lineById[n.line].v)}"></i><span class="n">${n.name}</span></button>`).join("") || '<span class="hint">keine Begriffe in den gewählten Gebieten</span>'}</div>`}
+      ${APPS.some(a => a.vl === v && sichtbar(a)) ? `<div class="chips apps"><span class="apps-lbl">Anwendungen</span>${APPS.filter(a => a.vl === v && sichtbar(a)).map(a => `<button data-id="${a.id}" aria-pressed="${a.id === state.sel}"><span class="n">${a.name}</span><span class="fach">${a.fach}</span></button>`).join("")}</div>` : ""}`;
+    li.querySelectorAll("button[data-ausblick]").forEach(b => b.addEventListener("click", () => { state.ausblick = true; save(); render(); }));
+    li.querySelectorAll(".chips button").forEach(b => b.addEventListener("click", () => {
+      if (state.sel === b.dataset.id && narrow()) { state.sel = null; render(); return; }
+      select(b.dataset.id);
+      if (narrow()) $("#panel").scrollIntoView({ block: "nearest", behavior: reduce() ? "auto" : "smooth" });
+    }));
+    ol.appendChild(li);
+  });
+}
+function plural(n, eins, viele) { return `${n} ${n === 1 ? eins : viele}`; }
+function vorbereitetHinweis(v) {
+  const n = ALL.filter(b => b.vl === v).length;
+  return n ? `<button class="vorbereitet" data-ausblick="1">${plural(n, "Begriff", "Begriffe")} vorbereitet – erscheinen nach der Vorlesung, mit Ihren Vorschlägen. <u>Ausblick einschalten</u></button>`
+           : `<div class="hint">Begriffe folgen nach der Vorlesung – mit Ihren Vorschlägen.</div>`;
+}
+function placePanel() {
+  const panel = $("#panel"), stage = $(".stage");
+  const inline = state.mode === "liste" && narrow() && state.sel;
+  if (inline) {
+    const li = $(`#liste li.vl[data-vl="${byId[state.sel].vl}"]`);
+    if (panel.parentNode !== li) li.appendChild(panel);
+  } else if (panel.parentNode !== stage) stage.appendChild(panel);
+  panel.hidden = state.mode === "liste" && narrow() && !state.sel;
+}
+function defaultSel() {
+  const cand = ALL.filter(n => sichtbar(n) && n.level === 1 && n.vl <= state.here && (state.mode !== "metro" || threadsOf[n.id])).sort((a, b) => b.vl - a.vl);
+  return cand.length ? cand[0].id : null;
+}
+
+/* ---------- Seitenfeld ---------- */
+// Beziehung als Satz: „A <Text> B“, der andere Begriff ist anklickbar
+function relItem(r, n) {
+  const m = byId[r.id], vl = `<span class="v"> · VL ${LECTURES[m.vl].nr}</span>`;
+  return r.dir === "out"
+    ? `<li><button class="satz" data-id="${r.id}"><span class="s">${n.name} ${r.t}</span> <span class="t">${m.name}</span>${vl}</button></li>`
+    : `<li><button class="satz" data-id="${r.id}"><span class="t">${m.name}</span> <span class="s">${r.t} ${n.name}</span>${vl}</button></li>`;
+}
+function renderPanel() {
+  const p = $("#panel");
+  if (state.mode === "metro" && state.thread && !state.sel) {
+    const t = threadById[state.thread];
+    p.innerHTML = `
+      <h2>${t.name}</h2>
+      <div class="meta"><span class="chip"><i style="background:${css(t.v)}"></i>Faden · ${t.st.length} Stationen</span></div>
+      <p>${t.text}</p>
+      <h3>Stationen</h3>
+      <ol class="rels steps">${t.st.map(s => `<li><button data-id="${s}"><span class="t">${byId[s].name}</span> <span class="v">VL ${LECTURES[byId[s].vl].nr}${(threadsOf[s] || []).length > 1 ? " · Umstieg" : ""}</span></button></li>`).join("")}</ol>`;
+    p.querySelectorAll(".rels button").forEach(b => b.addEventListener("click", () => select(b.dataset.id, true)));
+    return;
+  }
+  const app = byApp[state.sel];
+  if (app) {
+    const lec = LECTURES[app.vl];
+    p.innerHTML = `
+      <h2>${app.name}</h2>
+      <div class="meta"><span class="chip">Anwendung · ${app.fach}</span><span>VL ${lec.nr} · ${lec.date}</span></div>
+      <p><strong>Beispiel:</strong> ${app.data}</p>
+      <h3>Nutzt die Schlagworte</h3>
+      <ul class="rels">${app.uses.map(k => `<li><button data-id="${k}"><span class="t">${byId[k].name}</span> <span class="v">VL ${LECTURES[byId[k].vl].nr}</span></button></li>`).join("")}</ul>
+      <div class="goto">
+        <span class="hint">Abschnitt ${app.sec}: ${lec.sections[app.sec - 1] || ""}</span>
+        <a class="golink" href="${BASE + lec.file}#${app.sec}" target="_blank" rel="noopener">Zur Vorlesung ${lec.nr}, Abschnitt ${app.sec} ↗</a>
+      </div>`;
+    p.querySelectorAll(".rels button").forEach(b => b.addEventListener("click", () => select(b.dataset.id, true)));
+    return;
+  }
+  const n = byId[state.sel];
+  if (!n) { p.innerHTML = '<p class="hint">Wählen Sie eine Station oder einen Faden.</p>'; return; }
+  const l = lineById[n.line], lec = LECTURES[n.vl];
+  const status = n.vl < state.here ? "bereits behandelt" : n.vl === state.here ? (BEFORE_START && state.here === HERE_TODAY ? "erste Vorlesung" : "diese Woche") : "kommt noch";
+  const rels = nbs[n.id].filter(r => sichtbar(byId[r.id])).sort((a, b) => byId[a.id].vl - byId[b.id].vl);
+  const back = rels.filter(r => byId[r.id].vl < n.vl), same = rels.filter(r => byId[r.id].vl === n.vl), fwd = rels.filter(r => byId[r.id].vl > n.vl);
+  const ths = threadsOf[n.id] || [];
+  const threadHtml = ths.length ? `<h3>${ths.length > 1 ? "Liegt auf mehreren roten Fäden" : "Liegt auf dem roten Faden"}</h3><ul class="rels threads">${ths.map(tid => {
+    const t = threadById[tid], st = t.st.filter(x => sichtbar(byId[x])), k = st.indexOf(n.id), pv = st[k - 1], nx = st[k + 1];
+    return `<li><span class="tname"><i style="background:${css(t.v)}"></i>${t.name}</span>
+      <span class="hop">${pv ? `<button data-id="${pv}">← ${byId[pv].name}</button>` : `<span class="v">Anfang</span>`}
+      ${nx ? `<button data-id="${nx}">${byId[nx].name} →</button>` : `<span class="v">${t.st.indexOf(n.id) < t.st.length - 1 ? "Fortsetzung folgt" : "Endstation"}</span>`}</span></li>`;
+  }).join("")}</ul>` : "";
+  p.innerHTML = `
+    <h2 class="${n.code ? "code" : ""}">${n.name}</h2>
+    <div class="meta">
+      <span class="chip"><i style="background:${css(l.v)}"></i>${l.name}</span>
+      <span class="chip" title="${n.level === 1 ? "Sollten Sie in einem Satz erklären können" : "Ergänzt einen Kernbegriff"}">${n.level === 1 ? "Kernbegriff" : "Detailbegriff"}</span>
+      <span>VL ${lec.nr} · ${lec.date} · ${status}</span>
+    </div>
+    <p>${n.text}</p>
+    ${n.mis ? `<div class="misc"><strong>Typische Fehlvorstellung</strong>${n.mis}</div>` : ""}
+    ${threadHtml}
+    ${back.length ? `<h3>Aus früheren Vorlesungen</h3><ul class="rels">${back.map(r => relItem(r, n)).join("")}</ul>` : ""}
+    ${same.length ? `<h3>In derselben Vorlesung</h3><ul class="rels">${same.map(r => relItem(r, n)).join("")}</ul>` : ""}
+    ${fwd.length ? `<h3>Später im Semester</h3><ul class="rels">${fwd.map(r => relItem(r, n)).join("")}</ul>` : ""}
+    ${(appsOf[n.id] || []).filter(sichtbar).length ? `<h3>Kommt vor in</h3><ul class="rels">${appsOf[n.id].filter(sichtbar).map(a => `<li><button data-id="${a.id}"><span class="t">${a.name}</span> <span class="v">${a.fach} · VL ${LECTURES[a.vl].nr}</span></button></li>`).join("")}</ul>` : ""}
+    <div class="goto">
+      <span class="hint">Eingeführt in Abschnitt ${n.sec}: ${lec.sections[n.sec - 1] || ""}${lec.status !== "ausgearbeitet" ? " — Vorlesung in Vorbereitung" : ""}</span>
+      <a class="golink" href="${BASE + lec.file}#${n.sec}" target="_blank" rel="noopener">Zur Vorlesung ${lec.nr}, Abschnitt ${n.sec} ↗</a>
+    </div>`;
+  p.querySelectorAll(".rels button, .hop button").forEach(b => b.addEventListener("click", () => select(b.dataset.id, true)));
+}
+
+function select(id, scroll) {
+  state.sel = id;
+  state.thread = null;
+  if (byApp[id]) {               // Anwendungen gibt es nur in der Ansicht „Vorlesungen“
+    if (state.mode !== "liste") { state.mode = "liste"; save(); }
+    render();
+    return;
+  }
+  state.hidden.delete(byId[id].line);
+  if (state.mode === "metro" && !threadsOf[id]) { state.mode = "zeit"; save(); }
+  render();
+  if (scroll && pos[id]) {
+    const box = $("#mapbox");
+    box.scrollTo({ left: Math.max(0, pos[id].x - box.clientWidth / 2), behavior: reduce() ? "auto" : "smooth" });
+  }
+}
+
+function renderLegend() {
+  const lg = $("#legend");
+  lg.innerHTML = "";
+  const items = state.mode === "metro" ? THREADS : LINES;
+  items.forEach(it => {
+    const b = document.createElement("button");
+    const on = state.mode === "metro" ? (!state.thread || state.thread === it.id) : !state.hidden.has(it.id);
+    b.setAttribute("aria-pressed", String(on));
+    b.innerHTML = `<span class="swatch" style="background:${css(it.v)}"></span>${it.name}`;
+    b.addEventListener("click", () => {
+      if (state.mode === "metro") { state.thread = state.thread === it.id ? null : it.id; state.sel = state.thread ? null : state.sel; }
+      else { state.hidden.has(it.id) ? state.hidden.delete(it.id) : state.hidden.add(it.id); }
+      render();
+    });
+    lg.appendChild(b);
+  });
+  $("#legendHint").textContent = state.mode === "metro" ? "Roten Faden anklicken, um ihn hervorzuheben (spätere Vorlesungen: seitlich scrollen):" : state.mode === "zeit" ? "Themengebiete ein- und ausblenden (spätere Vorlesungen: seitlich scrollen):" : "Themengebiete ein- und ausblenden:";
+}
+
+function render() {
+  const lec = LECTURES[state.here];
+  $("#hereVal").textContent = `VL ${lec.nr} · ${lec.date}`;
+  $("#here").value = state.here;
+  $("#today").hidden = state.here === HERE_TODAY;
+  const pressed = [["mListe", state.mode === "liste"], ["mMetro", state.mode === "metro"], ["mZeit", state.mode === "zeit"], ["vNb", state.view === "nb"], ["vAll", state.view === "all"], ["eKern", !state.detail], ["eAlle", state.detail], ["ausAus", !state.ausblick], ["ausAn", state.ausblick]];
+  for (const [id, on] of pressed) $("#" + id).setAttribute("aria-pressed", String(on));
+  $("#ctlLevel").hidden = state.mode === "metro";
+  $("#ctlEdges").hidden = state.mode !== "zeit";
+  $("#mapwrap").hidden = state.mode === "liste";
+  $("#liste").hidden = state.mode !== "liste";
+  const vis = ALL.filter(sichtbar);
+  const nVisSt = [...new Set(THREADS.flatMap(t => t.st))].filter(id => sichtbar(byId[id])).length;
+  const nFrei = LECTURES.filter(l => l.frei).length, nFreiB = ALL.filter(n => LECTURES[n.vl].frei).length;
+  $("#count").textContent = state.mode === "metro"
+    ? `${plural(THREADS.length, "roter Faden", "rote Fäden")} · ${plural(nVisSt, "Station", "Stationen")} ${state.ausblick ? "mit Ausblick" : "freigeschaltet"}`
+    : `${plural(nFreiB, "Begriff", "Begriffe")} aus ${plural(nFrei, "Vorlesung", "Vorlesungen")}` + (ALL.length > nFreiB ? ` · ${ALL.length - nFreiB} weitere vorbereitet` : "");
+  if (state.mode === "liste") drawListe();
+  else {
+    if (state.mode === "metro") layoutMetro(); else layoutZeit();
+    setSize();
+    drawBackground();
+    if (state.mode === "metro") drawMetro(); else drawZeit();
+  }
+  placePanel(); renderPanel(); renderLegend();
+}
+
+$("#here").addEventListener("input", (e) => {
+  state.here = +e.target.value; render();
+  if (state.mode === "liste") return;
+  const box = $("#mapbox"), hx = COL * state.here;
+  if (hx < box.scrollLeft || hx + COL > box.scrollLeft + box.clientWidth) box.scrollLeft = hx - box.clientWidth / 2;
+});
+function scrollToHere() {
+  if (state.mode === "liste") { const now = $(`#liste li.vl[data-vl="${state.here}"]`); if (now && state.here > 0) now.scrollIntoView({ block: "start" }); return; }
+  const box = $("#mapbox"), hx = COL * state.here;
+  box.scrollLeft = hx + COL > box.clientWidth ? hx - box.clientWidth / 2 : 0;
+}
+$("#mListe").addEventListener("click", () => { state.mode = "liste"; state.thread = null; save(); render(); });
+$("#mMetro").addEventListener("click", () => { state.mode = "metro"; if (!state.sel || !threadsOf[state.sel]) state.sel = defaultSel(); save(); render(); scrollToHere(); });
+$("#mZeit").addEventListener("click", () => { state.mode = "zeit"; state.thread = null; if (!state.sel) state.sel = defaultSel(); save(); render(); scrollToHere(); });
+$("#today").addEventListener("click", () => { state.here = HERE_TODAY; render(); scrollToHere(); });
+$("#vNb").addEventListener("click", () => { state.view = "nb"; render(); });
+$("#vAll").addEventListener("click", () => { state.view = "all"; render(); });
+$("#eKern").addEventListener("click", () => { state.detail = false; save(); render(); });
+$("#eAlle").addEventListener("click", () => { state.detail = true; save(); render(); });
+$("#ausAus").addEventListener("click", () => { state.ausblick = false; if (state.sel && !sichtbar(byId[state.sel] || byApp[state.sel])) state.sel = defaultSel(); save(); render(); });
+$("#ausAn").addEventListener("click", () => { state.ausblick = true; save(); render(); });
+matchMedia("(prefers-color-scheme: dark)").addEventListener("change", render);
+new MutationObserver(render).observe(document.documentElement, { attributes: true, attributeFilter: ["data-theme"] });
+
+try {
+  const z = localStorage.getItem("eavd-map-intro");
+  $("#intro").open = z ? z === "auf" : !narrow();
+} catch (e) { $("#intro").open = !narrow(); }
+$("#intro").addEventListener("toggle", () => { try { localStorage.setItem("eavd-map-intro", $("#intro").open ? "auf" : "zu"); } catch (e) {} });
+if (!(state.mode === "liste" && narrow())) state.sel = defaultSel();
+let lastW = innerWidth;  // nur auf Breitenänderung reagieren (mobile Adressleiste ändert die Höhe)
+addEventListener("resize", () => { if (innerWidth === lastW) return; lastW = innerWidth; clearTimeout(window._rs); window._rs = setTimeout(render, 150); });
+render();
+scrollToHere();
+</script>
+</body>
+</html>

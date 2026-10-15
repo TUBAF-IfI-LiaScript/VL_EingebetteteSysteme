@@ -1,0 +1,1044 @@
+<!doctype html>
+<html lang="de">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<meta name="description" content="Kurslandkarte der Vorlesung Digitale Systeme / Eingebettete Systeme (TU Bergakademie Freiberg): Begriffe, Zusammenhänge und didaktische Fäden über das Semester.">
+<title>Digitale Systeme Kurslandkarte</title>
+<style>
+*, *::before, *::after { box-sizing: border-box; }
+html { color-scheme: light; }
+body { margin: 0; }
+img { max-width: 100%; }
+[hidden] { display: none !important; }
+</style>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Barlow+Condensed:wght@500;600;700&family=Atkinson+Hyperlegible:ital,wght@0,400;0,700;1,400&family=JetBrains+Mono:wght@400;600&display=swap">
+<style>
+:root {
+  --bg: #f3f5f2;
+  --surface: #ffffff;
+  --ink: #1d2a2c;
+  --muted: #5d6c6f;
+  --faint: #c9d1cf;
+  --grid: #e3e8e5;
+  --phase-einstieg: #e7eee9;
+  --phase-digital: #edf1f5;
+  --phase-controller: #f6ece7;
+  --phase-rechner: #eeecf5;
+  --l-logik: #1f7a8c;
+  --l-zustand: #b7800f;
+  --l-rechner: #7a4e9c;
+  --l-controller: #c2462e;
+  --l-grundlagen: #2f5da8;
+  --t1: #d4502b;
+  --t2: #1b8a5a;
+  --t3: #b08400;
+  --t4: #2d63c8;
+  --t5: #8e44ad;
+  --t6: #1596a8;
+  --edge: #7d8b8e;
+  --focus: #1d2a2c;
+  --here: #c2462e;
+  --note-bg: #fff7e6;
+  --note-ink: #6b4a00;
+  color-scheme: light;
+}
+@media (prefers-color-scheme: dark) {
+  :root:not([data-theme="light"]) {
+    --bg: #141a1b;
+    --surface: #1c2426;
+    --ink: #e4ebe9;
+    --muted: #9aa9ab;
+    --faint: #3a4648;
+    --grid: #263032;
+    --phase-einstieg: #1b2a23;
+    --phase-digital: #1b2330;
+    --phase-controller: #2d201c;
+    --phase-rechner: #231f31;
+    --l-logik: #4fb3c6;
+    --l-zustand: #e0ab3d;
+    --l-rechner: #b58ad6;
+    --l-controller: #ee7a60;
+    --l-grundlagen: #6f98e0;
+    --t1: #f07a55;
+    --t2: #3fbf86;
+    --t3: #e0b53a;
+    --t4: #6e9bf0;
+    --t5: #c08ae0;
+    --t6: #45c3d4;
+    --edge: #8a999b;
+    --focus: #e4ebe9;
+    --here: #ee7a60;
+    --note-bg: #2e2716;
+    --note-ink: #f0d49a;
+    color-scheme: dark;
+  }
+}
+:root[data-theme="dark"] {
+  --bg: #141a1b;
+  --surface: #1c2426;
+  --ink: #e4ebe9;
+  --muted: #9aa9ab;
+  --faint: #3a4648;
+  --grid: #263032;
+  --phase-einstieg: #1b2a23;
+  --phase-digital: #1b2330;
+  --phase-controller: #2d201c;
+  --phase-rechner: #231f31;
+  --l-logik: #4fb3c6;
+  --l-zustand: #e0ab3d;
+  --l-rechner: #b58ad6;
+  --l-controller: #ee7a60;
+  --l-grundlagen: #6f98e0;
+  --t1: #f07a55;
+  --t2: #3fbf86;
+  --t3: #e0b53a;
+  --t4: #6e9bf0;
+  --t5: #c08ae0;
+  --t6: #45c3d4;
+  --edge: #8a999b;
+  --focus: #e4ebe9;
+  --here: #ee7a60;
+  --note-bg: #2e2716;
+  --note-ink: #f0d49a;
+  color-scheme: dark;
+}
+
+body {
+  background: var(--bg);
+  color: var(--ink);
+  font-family: "Atkinson Hyperlegible", "Segoe UI", system-ui, sans-serif;
+  font-size: 15px;
+  line-height: 1.5;
+}
+.wrap {
+  padding-inline: 16px;
+  padding-block: 20px 32px;
+  max-width: 1480px;
+  margin: 0 auto;
+  display: grid;
+  gap: 16px;
+}
+header {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: flex-end;
+  justify-content: space-between;
+  gap: 12px 24px;
+}
+.titleblock { display: grid; gap: 2px; }
+.eyebrow {
+  font-family: "Barlow Condensed", "Arial Narrow", sans-serif;
+  font-weight: 600;
+  letter-spacing: .08em;
+  text-transform: uppercase;
+  color: var(--muted);
+  font-size: 13px;
+}
+h1 {
+  font-family: "Barlow Condensed", "Arial Narrow", sans-serif;
+  font-weight: 700;
+  font-size: clamp(28px, 4vw, 40px);
+  line-height: 1.05;
+  margin: 0;
+  text-wrap: balance;
+}
+.sample {
+  display: inline-block;
+  font-size: 12px;
+  padding: 2px 8px;
+  border-radius: 3px;
+  background: var(--note-bg);
+  color: var(--note-ink);
+  margin-top: 4px;
+  width: fit-content;
+}
+.controls {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 12px 20px;
+}
+.control { display: grid; gap: 4px; }
+.control label, .control .lbl {
+  font-family: "Barlow Condensed", "Arial Narrow", sans-serif;
+  font-weight: 600;
+  font-size: 13px;
+  letter-spacing: .06em;
+  text-transform: uppercase;
+  color: var(--muted);
+}
+.here-row { display: flex; align-items: center; gap: 10px; }
+input[type=range] { width: 200px; accent-color: var(--here); }
+.here-val {
+  font-family: "JetBrains Mono", ui-monospace, monospace;
+  font-size: 13px;
+  min-width: 118px;
+  font-variant-numeric: tabular-nums;
+}
+.seg {
+  display: inline-flex;
+  border: 1px solid var(--faint);
+  border-radius: 4px;
+  overflow: hidden;
+}
+.seg button {
+  font: inherit;
+  font-size: 13px;
+  padding: 5px 12px;
+  background: var(--surface);
+  color: var(--ink);
+  border: 0;
+  cursor: pointer;
+}
+.seg button + button { border-left: 1px solid var(--faint); }
+.seg button[aria-pressed="true"] { background: var(--ink); color: var(--bg); }
+.seg button:focus-visible, .legend button:focus-visible { outline: 2px solid var(--here); outline-offset: 2px; }
+
+.legend {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px 18px;
+  align-items: center;
+}
+.legend button {
+  font: inherit;
+  font-size: 14px;
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  background: none;
+  border: 0;
+  padding: 2px 0;
+  color: var(--ink);
+  cursor: pointer;
+}
+.legend button[aria-pressed="false"] { color: var(--muted); text-decoration: line-through; }
+.legend .swatch { width: 22px; height: 6px; border-radius: 3px; display: inline-block; }
+.legend button[aria-pressed="false"] .swatch { opacity: .3; }
+
+.stage {
+  display: grid;
+  grid-template-columns: minmax(0, 1fr) 320px;
+  gap: 16px;
+  align-items: start;
+}
+@media (max-width: 980px) {
+  .stage { grid-template-columns: minmax(0, 1fr); }
+}
+.mapbox {
+  background: var(--surface);
+  border: 1px solid var(--faint);
+  border-radius: 6px;
+  display: flex;
+  overflow: hidden;
+  min-width: 0;
+}
+.mapbox #side { flex: none; }
+.scroller { overflow-x: auto; overflow-y: hidden; min-width: 0; flex: 1; }
+svg { display: block; }
+.lane-title {
+  font-family: "Barlow Condensed", "Arial Narrow", sans-serif;
+  font-weight: 700;
+  font-size: 14px;
+  letter-spacing: .05em;
+  text-transform: uppercase;
+}
+.col-head {
+  font-family: "Barlow Condensed", "Arial Narrow", sans-serif;
+  font-weight: 700;
+  font-size: 18px;
+  fill: var(--ink);
+}
+.col-short {
+  font-family: "Barlow Condensed", "Arial Narrow", sans-serif;
+  font-weight: 500;
+  font-size: 13px;
+  fill: var(--muted);
+}
+.col-date {
+  font-family: "JetBrains Mono", ui-monospace, monospace;
+  font-size: 10.5px;
+  fill: var(--muted);
+}
+.phase-label {
+  font-family: "Barlow Condensed", "Arial Narrow", sans-serif;
+  font-weight: 600;
+  font-size: 12px;
+  letter-spacing: .08em;
+  text-transform: uppercase;
+  fill: var(--muted);
+}
+.station { cursor: pointer; }
+.station text {
+  font-size: 12.5px;
+  fill: var(--ink);
+  paint-order: stroke;
+  stroke: var(--surface);
+  stroke-width: 4px;
+  stroke-linejoin: round;
+}
+.station.code text { font-family: "JetBrains Mono", ui-monospace, monospace; font-size: 11.5px; }
+.station .dot { stroke-width: 3; fill: var(--surface); }
+.station.future { opacity: .55; }
+.station.dim { opacity: .18; }
+.station.nb .dot { fill: currentColor; }
+.station.sel .dot { fill: currentColor; stroke: var(--focus); stroke-width: 3.5; }
+.station.sel text { font-weight: 700; }
+.station.detail text { font-size: 11.5px; }
+.station.code.detail text { font-size: 11px; }
+.col-status {
+  font-family: "Barlow Condensed", "Arial Narrow", sans-serif;
+  font-size: 11px;
+  font-style: italic;
+  fill: var(--muted);
+}
+.goto { display: grid; gap: 4px; }
+.station:focus { outline: none; }
+.station:focus-visible .ring { stroke: var(--here); stroke-width: 2; stroke-dasharray: 3 2; }
+.line { fill: none; stroke-width: 6; stroke-linecap: round; stroke-linejoin: round; }
+.line.dim { opacity: .15; }
+.stub { stroke-width: 3; stroke-linecap: round; }
+.rail { stroke-width: 2; opacity: .35; }
+.mline { fill: none; stroke-width: 7; stroke-linecap: round; stroke-linejoin: round; }
+.mline.dim { opacity: .14; }
+.station.metro text { font-size: 12.5px; font-weight: 400; }
+.station.metro text.xlabel { font-weight: 700; }
+.mstop { fill: var(--surface); stroke-width: 3; }
+.xchg { fill: var(--surface); stroke: var(--ink); stroke-width: 3; }
+.station.metro.sel .xchg, .station.metro.sel .mstop { stroke: var(--here); stroke-width: 4; }
+[hidden] { display: none !important; }
+.feedback { font-size: 13px; color: var(--muted); }
+.feedback:hover { color: var(--ink); }
+.legendrow { display: flex; flex-wrap: wrap; gap: 6px 14px; align-items: center; }
+.threads li { display: grid; gap: 2px; }
+.tname { display: inline-flex; align-items: center; gap: 6px; font-size: 13px; color: var(--muted); }
+.tname i { width: 16px; height: 5px; border-radius: 3px; display: inline-block; }
+.hop { display: flex; flex-wrap: wrap; justify-content: space-between; gap: 4px 12px; }
+.hop button { font: inherit; font-size: 14px; background: none; border: 0; padding: 0; color: var(--ink); cursor: pointer; }
+.hop button:hover, .hop button:focus-visible { text-decoration: underline; }
+ol.steps { list-style: decimal; padding-left: 22px; }
+.edge { fill: none; stroke: var(--edge); stroke-width: 1.4; }
+.edge.hi { stroke: var(--ink); stroke-width: 2; }
+.edge-label {
+  font-size: 11px;
+  font-style: italic;
+  fill: var(--ink);
+  paint-order: stroke;
+  stroke: var(--surface);
+  stroke-width: 5px;
+  stroke-linejoin: round;
+}
+.here-band { fill: var(--here); opacity: .07; }
+.here-tag {
+  font-family: "Barlow Condensed", "Arial Narrow", sans-serif;
+  font-weight: 700;
+  font-size: 12px;
+  letter-spacing: .06em;
+  text-transform: uppercase;
+  fill: var(--here);
+}
+@media (prefers-reduced-motion: no-preference) {
+  .station, .line, .edge { transition: opacity .2s ease; }
+}
+
+aside.panel {
+  background: var(--surface);
+  border: 1px solid var(--faint);
+  border-radius: 6px;
+  padding-inline: 18px;
+  padding-block: 16px 18px;
+  display: grid;
+  gap: 12px;
+  align-content: start;
+}
+.panel h2 {
+  font-family: "Barlow Condensed", "Arial Narrow", sans-serif;
+  font-size: 26px;
+  line-height: 1.1;
+  margin: 0;
+}
+.panel h2.code { font-family: "JetBrains Mono", ui-monospace, monospace; font-size: 21px; }
+.meta { display: flex; flex-wrap: wrap; gap: 6px 10px; align-items: center; font-size: 13px; color: var(--muted); }
+.chip {
+  display: inline-flex; align-items: center; gap: 6px;
+  font-size: 12.5px; padding: 1px 8px; border-radius: 10px;
+  border: 1px solid var(--faint); color: var(--ink);
+}
+.chip i { width: 10px; height: 10px; border-radius: 50%; display: inline-block; }
+.panel p { margin: 0; }
+.panel h3 {
+  font-family: "Barlow Condensed", "Arial Narrow", sans-serif;
+  font-weight: 600;
+  font-size: 13px;
+  letter-spacing: .07em;
+  text-transform: uppercase;
+  color: var(--muted);
+  margin: 0;
+}
+.rels { list-style: none; margin: 0; padding: 0; display: grid; gap: 4px; }
+.rels button {
+  font: inherit; font-size: 14px; text-align: left;
+  background: none; border: 0; padding: 2px 0; cursor: pointer; color: var(--ink);
+  display: flex; gap: 6px; align-items: baseline;
+}
+.rels button:hover span.t, .rels button:focus-visible span.t { text-decoration: underline; }
+.rels .v { color: var(--muted); font-style: italic; }
+.misc {
+  background: var(--note-bg);
+  color: var(--note-ink);
+  border-radius: 4px;
+  padding: 10px 12px;
+  font-size: 14px;
+}
+.misc strong { display: block; font-size: 12px; letter-spacing: .06em; text-transform: uppercase; margin-bottom: 2px; }
+.golink {
+  display: inline-block;
+  width: fit-content;
+  font-weight: 700;
+  color: var(--l-logik);
+  text-decoration: none;
+  border-bottom: 2px solid currentColor;
+}
+.hint { font-size: 13px; color: var(--muted); }
+.vorbereitet { font: inherit; font-size: 13px; color: var(--muted); background: none; border: 0; padding: 0; text-align: left; cursor: pointer; }
+.vorbereitet u { color: var(--ink); text-decoration-color: var(--faint); text-underline-offset: 3px; }
+.vorbereitet:hover u { text-decoration-color: currentColor; }
+.intro { background: var(--surface); border: 1px solid var(--faint); border-radius: 6px; padding: 10px 14px; font-size: 14px; }
+.intro summary { cursor: pointer; font-family: "Barlow Condensed", "Arial Narrow", sans-serif; font-weight: 700; font-size: 17px; }
+.intro .cols { display: grid; grid-template-columns: repeat(auto-fit, minmax(260px, 1fr)); gap: 4px 28px; margin-top: 8px; }
+.intro p { margin: 0 0 6px; }
+.intro table { border-collapse: collapse; margin: 0 0 6px; }
+.intro td { padding: 2px 12px 2px 0; vertical-align: top; }
+.intro td:first-child { color: var(--muted); white-space: nowrap; }
+.rels .s { color: var(--muted); }
+.rels button.satz { display: block; }
+footer { font-size: 13px; color: var(--muted); max-width: 70ch; }
+footer p { margin: 0 0 6px; }
+/* ---------- Liste ---------- */
+.today { font: inherit; font-size: 12px; padding: 2px 8px; border: 1px solid var(--faint); border-radius: 4px; background: var(--surface); color: var(--ink); cursor: pointer; }
+.liste { list-style: none; margin: 0; padding: 0; display: grid; gap: 10px; min-width: 0; }
+.liste > li.vl {
+  background: var(--surface);
+  border: 1px solid var(--faint);
+  border-radius: 6px;
+  padding: 10px 14px 12px;
+  display: grid;
+  gap: 8px;
+}
+.liste > li.vl.now { border-color: var(--here); box-shadow: inset 4px 0 0 var(--here); }
+.liste > li.vl.future .chips { opacity: .8; }
+.vlhead { display: flex; flex-wrap: wrap; align-items: baseline; gap: 2px 10px; }
+.vlhead b { font-family: "Barlow Condensed", "Arial Narrow", sans-serif; font-size: 20px; }
+.vlhead .d { font-family: "JetBrains Mono", ui-monospace, monospace; font-size: 12px; color: var(--muted); }
+.vlhead .s { font-size: 15px; }
+.vlhead .tag { font-family: "Barlow Condensed", "Arial Narrow", sans-serif; font-weight: 700; font-size: 12px; letter-spacing: .06em; text-transform: uppercase; color: var(--here); }
+.vlhead .tag.muted { color: var(--muted); }
+.vlhead a { margin-left: auto; font-size: 13px; color: var(--muted); }
+.chips { display: flex; flex-wrap: wrap; gap: 6px; }
+.chips button {
+  font: inherit; font-size: 14px;
+  display: inline-flex; align-items: center; gap: 6px;
+  padding: 3px 10px; border-radius: 14px;
+  border: 1px solid var(--faint); background: var(--surface); color: var(--ink); cursor: pointer;
+}
+.chips button i { width: 9px; height: 9px; border-radius: 50%; flex: none; }
+.chips button.detail { font-size: 13px; padding: 2px 8px; color: var(--muted); }
+.chips button.code .n { font-family: "JetBrains Mono", ui-monospace, monospace; font-size: 13px; }
+.chips button[aria-pressed="true"] { border-color: var(--ink); box-shadow: 0 0 0 1px var(--ink); font-weight: 700; }
+.chips button:focus-visible { outline: 2px solid var(--here); outline-offset: 2px; }
+.liste .panel { margin-top: 2px; }
+.vlhead + .frage, .frage { font-size: 14px; font-style: italic; color: var(--muted); margin-top: -4px; }
+.chips.vorschau { opacity: .7; }
+.chips.vorschau button { border-style: dashed; }
+.chips.apps { padding-top: 6px; border-top: 1px dashed var(--faint); align-items: center; }
+.apps-lbl { font-family: "Barlow Condensed", "Arial Narrow", sans-serif; font-weight: 600; font-size: 12px; letter-spacing: .06em; text-transform: uppercase; color: var(--muted); margin-right: 4px; }
+.chips.apps button { border-radius: 4px; border-style: dashed; }
+.chips.apps .fach { font-size: 11.5px; color: var(--muted); margin-left: 2px; }
+.chips.apps .fach::before { content: "· "; }
+@media (min-width: 981px) {
+  aside.panel { position: sticky; top: 12px; max-height: calc(100vh - 24px); overflow-y: auto; }
+}
+@media (max-width: 600px) {
+  .lane-title { font-size: 11px; letter-spacing: .02em; }
+  input[type=range] { width: 150px; }
+  .here-val { min-width: 0; }
+}
+
+</style>
+</head>
+<body>
+<div class="wrap">
+  <header>
+    <div class="titleblock">
+      <span class="eyebrow">Digitale Systeme / Eingebettete Systeme · WiSe 2026/27</span>
+      <h1>Kurslandkarte</h1>
+      <span class="sample"><span id="count"></span> · aktualisiert am %%STAND%%</span>
+      <span class="feedback">Begriff fehlt oder ist unklar? Sagen Sie es in der Vorlesung oder im OPAL-Forum. <a href="https://github.com/TUBAF-IfI-LiaScript/VL_EingebetteteSysteme/issues/new?title=Kurslandkarte%3A%20&amp;labels=kurslandkarte" target="_blank" rel="noopener">GitHub ↗</a></span>
+    </div>
+    <div class="controls">
+      <div class="control">
+        <span class="lbl" id="modeLbl">Variante</span>
+        <div class="seg" role="group" aria-labelledby="modeLbl">
+          <button id="mListe" aria-pressed="false" title="Alle Vorlesungen untereinander, mit Leitfrage, Begriffen und Anwendungen">Vorlesungen</button>
+          <button id="mMetro" aria-pressed="true" title="Jede farbige Linie ist ein roter Faden: ein Thema, das sich durch mehrere Vorlesungen zieht">Metrokarte</button>
+          <button id="mZeit" aria-pressed="false" title="Alle Begriffe nach Themengebiet über das Semester, mit Pfeilen für ihre Zusammenhänge">Zeitleiste</button>
+        </div>
+      </div>
+      <div class="control">
+        <label for="here" title="Folgt dem heutigen Datum; mit dem Regler blättern Sie vor und zurück">Sie sind hier</label>
+        <div class="here-row">
+          <input id="here" type="range" min="0" max="15" step="1" value="0">
+          <span class="here-val" id="hereVal"></span>
+          <button class="today" id="today" hidden>heute</button>
+        </div>
+      </div>
+      <div class="control" id="ctlAusblick">
+        <span class="lbl" id="ausLbl" title="Zeigt blass die vorbereiteten Begriffe kommender Vorlesungen">Ausblick</span>
+        <div class="seg" role="group" aria-labelledby="ausLbl">
+          <button id="ausAus" aria-pressed="true">Aus</button>
+          <button id="ausAn" aria-pressed="false">An</button>
+        </div>
+      </div>
+      <div class="control" id="ctlLevel">
+        <span class="lbl" id="lvlLbl">Begriffe</span>
+        <div class="seg" role="group" aria-labelledby="lvlLbl">
+          <button id="eKern" aria-pressed="true" title="Begriffe, die Sie in einem Satz erklären können sollten">Kernbegriffe</button>
+          <button id="eAlle" aria-pressed="false" title="Kernbegriffe und ergänzende Detailbegriffe">Alle</button>
+        </div>
+      </div>
+      <div class="control" id="ctlEdges">
+        <span class="lbl" id="viewLbl">Verbindungen</span>
+        <div class="seg" role="group" aria-labelledby="viewLbl">
+          <button id="vNb" aria-pressed="true" title="Nur die Pfeile zum ausgewählten Begriff">Nur Nachbarn</button>
+          <button id="vAll" aria-pressed="false" title="Alle Pfeile zwischen den Begriffen">Ganzes Netz</button>
+        </div>
+      </div>
+    </div>
+  </header>
+
+  <details class="intro" id="intro" open>
+    <summary>So nutzen Sie die Karte</summary>
+    <div class="cols">
+      <div>
+        <p>Die Karte zeigt, welche Begriffe in welcher Vorlesung dazukommen und wie sie zusammenhängen. Ein Klick auf einen Begriff erklärt ihn in einem Satz, nennt die typische Fehlvorstellung und führt zur passenden Folie.</p>
+        <table>
+          <tr><td>vor der Vorlesung</td><td>Was kommt heute dazu, und worauf baut es auf?</td></tr>
+          <tr><td>nach der Vorlesung</td><td>Kann ich jeden neuen Begriff in einem Satz erklären?</td></tr>
+          <tr><td>vor Übung und Klausur</td><td>Kenne ich die typische Fehlvorstellung – und warum sie falsch ist?</td></tr>
+        </table>
+      </div>
+      <div>
+        <p><strong>Vorlesungen:</strong> alle Termine untereinander, mit Leitfrage, Begriffen und Anwendungen. <strong>Metrokarte:</strong> Jede farbige Linie ist ein <em>roter Faden</em>, ein Thema, das sich durch mehrere Vorlesungen zieht; weiße Stationen liegen auf mehreren Fäden. <strong>Zeitleiste:</strong> alle Begriffe nach Themengebiet, mit Pfeilen für ihre Zusammenhänge.</p>
+        <p><strong>Die Karte wächst mit dem Semester.</strong> Nach jeder Vorlesung kommen ihre Begriffe dazu, ergänzt um Ihre Vorschläge. <strong>Kernbegriffe</strong> sollten Sie in einem Satz erklären können, Detailbegriffe ergänzen sie. Mit <strong>Ausblick: An</strong> sehen Sie blass, was für kommende Vorlesungen vorbereitet ist.</p>
+      </div>
+    </div>
+  </details>
+
+  <div class="legendrow"><span class="hint" id="legendHint"></span><div class="legend" id="legend"></div></div>
+
+  <div class="stage">
+    <div class="mapbox" id="mapwrap">
+      <svg id="side" aria-hidden="true"></svg>
+      <div class="scroller" id="mapbox">
+        <svg id="map" role="img" aria-labelledby="mapTitle"><title id="mapTitle">Kurslandkarte: Begriffe der Vorlesung über 16 Vorlesungen</title></svg>
+      </div>
+    </div>
+    <ol class="liste" id="liste" hidden></ol>
+    <aside class="panel" id="panel" aria-live="polite"></aside>
+  </div>
+
+</div>
+
+<script id="kartendaten" type="application/json">
+%%DATEN%%
+</script>
+<script>
+const DATA = JSON.parse(document.getElementById("kartendaten").textContent);
+const BASE = "https://liascript.github.io/course/?https://raw.githubusercontent.com/TUBAF-IfI-LiaScript/VL_EingebetteteSysteme/master/";
+const LECTURES = DATA.vorlesungen.map(v => {
+  const [y, m, d] = v.datum.split("-");
+  return { nr: String(v.vl).padStart(2, "0"), iso: v.datum, date: `${d}.${m}.`, short: v.kurz, frage: v.leitfrage, frei: v.freigegeben !== false, file: v.datei, status: v.status, sections: v.abschnitte };
+});
+// Aktuelle Vorlesung: die letzte, deren Termin erreicht ist (vor Semesterbeginn: VL 00)
+const TODAY = new Date().toISOString().slice(0, 10);
+const HERE_TODAY = Math.max(0, LECTURES.filter(l => l.iso <= TODAY).length - 1);
+const BEFORE_START = TODAY < LECTURES[0].iso;
+const PHASES = [
+  { from: 0, to: 1, name: "Einstieg", v: "--phase-einstieg" },
+  { from: 2, to: 8, name: "Digitaltechnik", v: "--phase-digital" },
+  { from: 9, to: 11, name: "Vom Rechenwerk zur CPU", v: "--phase-rechner" },
+  { from: 12, to: 15, name: "Mikrocontroller", v: "--phase-controller" }
+];
+const LINES = [
+  { id: "grundlagen", name: "Technik & Abstraktion", v: "--l-grundlagen" },
+  { id: "logik", name: "Logik & Schaltnetze", v: "--l-logik" },
+  { id: "zustand", name: "Zustand & Takt", v: "--l-zustand" },
+  { id: "rechner", name: "Rechner & Befehle", v: "--l-rechner" },
+  { id: "controller", name: "Mikrocontroller & Peripherie", v: "--l-controller" }
+];
+const THREADV = ["--t1", "--t2", "--t3", "--t4", "--t5", "--t6"];
+const THREADS = DATA.faeden.map((f, i) => ({ id: f.id, name: f.name, text: f.beschreibung, st: f.stationen, v: THREADV[i] }));
+const ALL = DATA.begriffe.map(b => ({ id: b.id, name: b.name, line: b.linie, vl: b.vl, sec: b.abschnitt, level: b.ebene, code: b.code, text: b.erklaerung, mis: b.fehlvorstellung }));
+const EDGES = DATA.beziehungen.map(r => [r.von, r.nach, r.text]);
+const byId = Object.fromEntries(ALL.map(n => [n.id, n]));
+// Anwendungen: konkrete Beispielschaltungen und -programme, die mehrere Begriffe nutzen
+const APPS = (DATA.anwendungen || []).map(a => ({ id: a.id, name: a.titel, fach: a.fach, vl: a.vl, sec: a.abschnitt, data: a.datensatz, uses: a.schlagworte, from: a.herkunft }));
+const byApp = Object.fromEntries(APPS.map(a => [a.id, a]));
+const appsOf = {};
+APPS.forEach(a => a.uses.forEach(k => (appsOf[k] = appsOf[k] || []).push(a)));
+const lineById = Object.fromEntries(LINES.map(l => [l.id, l]));
+const threadById = Object.fromEntries(THREADS.map(t => [t.id, t]));
+const threadsOf = {};
+THREADS.forEach(t => t.st.forEach(s => (threadsOf[s] = threadsOf[s] || []).push(t.id)));
+const nbs = {};
+ALL.forEach(n => nbs[n.id] = []);
+EDGES.forEach(([a, b, t]) => { nbs[a].push({ id: b, t, dir: "out" }); nbs[b].push({ id: a, t, dir: "in" }); });
+
+const $ = (s) => document.querySelector(s);
+const svgNS = "http://www.w3.org/2000/svg";
+const css = (v) => getComputedStyle(document.documentElement).getPropertyValue(v).trim();
+const reduce = () => matchMedia("(prefers-reduced-motion: reduce)").matches;
+
+const narrow = () => matchMedia("(max-width: 980px)").matches;
+// Begriffe erscheinen erst nach ihrer Vorlesung (Freigabe); „Ausblick“ zeigt die vorbereiteten blass
+const sichtbar = (n) => n && (state.ausblick || LECTURES[n.vl].frei);
+const state = { mode: narrow() ? "liste" : "metro", here: HERE_TODAY, view: "nb", detail: false, ausblick: false, sel: null, thread: null, hidden: new Set() };
+try {
+  const saved = JSON.parse(localStorage.getItem("eavd-map") || "{}");
+  if (typeof saved.detail === "boolean") state.detail = saved.detail;
+  if (typeof saved.ausblick === "boolean") state.ausblick = saved.ausblick;
+  if (["liste", "metro", "zeit"].includes(saved.mode)) state.mode = saved.mode;
+} catch (e) {}
+// „Sie sind hier“ wird bewusst nicht gespeichert: Es folgt immer dem Datum.
+function save() { try { localStorage.setItem("eavd-map", JSON.stringify({ detail: state.detail, mode: state.mode, ausblick: state.ausblick })); } catch (e) {} }
+
+const TOP = 108;
+let SIDE = 150, COL = 118, W = 0, H = 0, pos = {}, shown = [], laneY = {}, trackY = {};
+
+function el(name, attrs, parent) {
+  const e = document.createElementNS(svgNS, name);
+  for (const k in attrs) e.setAttribute(k, attrs[k]);
+  if (parent) parent.appendChild(e);
+  return e;
+}
+const svg = $("#map"), side = $("#side");
+const defs = el("defs", {}, svg);
+const mk = el("marker", { id: "arrow", viewBox: "0 0 10 10", refX: 17, refY: 5, markerWidth: 7, markerHeight: 7, orient: "auto-start-reverse" }, defs);
+el("path", { d: "M0,0 L10,5 L0,10 z", fill: "var(--edge)" }, mk);
+const gBack = el("g", {}, svg), gLines = el("g", {}, svg), gEdges = el("g", {}, svg), gSt = el("g", {}, svg), gLabels = el("g", {}, svg);
+
+function setSize() {
+  SIDE = matchMedia("(max-width: 600px)").matches ? 118 : 150;
+  W = COL * LECTURES.length + 60;
+  svg.setAttribute("viewBox", `0 0 ${W} ${H}`); svg.setAttribute("width", W); svg.setAttribute("height", H);
+  side.setAttribute("viewBox", `0 0 ${SIDE} ${H}`); side.setAttribute("width", SIDE); side.setAttribute("height", H);
+}
+
+/* ---------- Layout: Zeitleiste ---------- */
+function layoutZeit() {
+  COL = 118;
+  const ROW = 30, PAD = 18;
+  shown = ALL.filter(n => sichtbar(n) && !state.hidden.has(n.line) && (state.detail || n.level === 1 || n.id === state.sel));
+  const count = {};
+  shown.forEach(n => { const k = n.line + "|" + n.vl; count[k] = (count[k] || 0) + 1; });
+  let y = TOP;
+  laneY = {};
+  LINES.forEach(l => {
+    laneY[l.id] = y;
+    if (state.hidden.has(l.id)) return;
+    y += Math.max(1, ...LECTURES.map((_, i) => count[l.id + "|" + i] || 0)) * ROW + PAD * 2;
+  });
+  H = y + 8;
+  pos = {};
+  const used = {};
+  shown.slice().sort((a, b) => a.level - b.level || a.sec - b.sec).forEach(n => {
+    const k = n.line + "|" + n.vl;
+    const i = used[k] = (used[k] || 0); used[k]++;
+    pos[n.id] = { x: COL * n.vl + 22, y: laneY[n.line] + PAD + 10 + i * ROW };
+  });
+}
+
+/* ---------- Layout: Metrokarte ---------- */
+function layoutMetro() {
+  COL = 150;
+  const TRACK = 70;
+  trackY = {};
+  THREADS.forEach((t, i) => trackY[t.id] = TOP + 40 + i * TRACK);
+  H = TOP + 40 + THREADS.length * TRACK + 10;
+  const ids = [...new Set(THREADS.flatMap(t => t.st))].filter(id => sichtbar(byId[id]));
+  shown = ids.map(id => byId[id]);
+  pos = {};
+  for (let v = 0; v < LECTURES.length; v++) {
+    const col = ids.filter(id => byId[id].vl === v);
+    if (!col.length) continue;
+    // Reihenfolge in der Spalte: topologisch entlang der Fäden
+    const succ = {}, indeg = {};
+    col.forEach(id => { succ[id] = []; indeg[id] = 0; });
+    THREADS.forEach(t => t.st.forEach((s, k) => {
+      const nx = t.st[k + 1];
+      if (nx && succ[s] && succ[nx] !== undefined && !succ[s].includes(nx)) { succ[s].push(nx); indeg[nx]++; }
+    }));
+    const order = [], queue = col.filter(id => indeg[id] === 0);
+    while (queue.length) { const u = queue.shift(); order.push(u); succ[u].forEach(w => { if (--indeg[w] === 0) queue.push(w); }); }
+    const step = col.length > 1 ? Math.min(46, (COL - 40) / (col.length - 1)) : 0;
+    order.forEach((id, k) => {
+      const ys = threadsOf[id].map(t => trackY[t]);
+      const spread = Math.max(...ys) - Math.min(...ys);
+      const y = spread <= TRACK ? ys.reduce((a, b) => a + b, 0) / ys.length : ys[0];
+      pos[id] = { x: COL * v + 24 + k * step, y };
+    });
+  }
+}
+
+function octi(p, q) {
+  const dx = q.x - p.x, dy = q.y - p.y, ady = Math.abs(dy);
+  if (ady < 0.5) return ` L${q.x},${q.y}`;
+  if (dx <= ady + 2) return ` L${q.x},${q.y}`;
+  const flat = (dx - ady) / 2;
+  return ` L${p.x + flat},${p.y} L${p.x + flat + ady},${q.y} L${q.x},${q.y}`;
+}
+
+/* ---------- Hintergrund (beide Ansichten) ---------- */
+function drawBackground() {
+  gBack.innerHTML = "";
+  PHASES.forEach(p => {
+    const x = COL * p.from, w = COL * (p.to - p.from + 1);
+    el("rect", { x, y: 0, width: w, height: H, fill: css(p.v) }, gBack);
+    el("text", { x: x + 8, y: 16, class: "phase-label" }, gBack).textContent = p.name;
+  });
+  LECTURES.forEach((l, i) => {
+    const x = COL * i;
+    el("line", { x1: x, y1: 24, x2: x, y2: H, stroke: css("--grid"), "stroke-width": 1 }, gBack);
+    el("text", { x: x + 8, y: 46, class: "col-head" }, gBack).textContent = "VL " + l.nr;
+    el("text", { x: x + 8, y: 62, class: "col-date" }, gBack).textContent = l.date;
+    el("text", { x: x + 8, y: 78, class: "col-short" }, gBack).textContent = l.short;
+    if (l.status !== "ausgearbeitet") el("text", { x: x + 8, y: 94, class: "col-status" }, gBack).textContent = l.status === "Rumpf" ? "Rumpf" : "in Planung";
+  });
+  const hx = COL * state.here;
+  el("rect", { x: hx, y: 24, width: COL, height: H - 24, class: "here-band" }, gBack);
+  el("text", { x: hx + COL - 8, y: 32, "text-anchor": "end", class: "here-tag" }, gBack).textContent = "▼ Sie sind hier";
+  side.innerHTML = "";
+  el("rect", { x: 0, y: 0, width: SIDE, height: H, fill: css("--surface") }, side);
+  el("line", { x1: SIDE - 0.5, y1: 0, x2: SIDE - 0.5, y2: H, stroke: css("--faint") }, side);
+  const titles = state.mode === "metro"
+    ? THREADS.map(t => ({ name: t.name, v: t.v, y: trackY[t.id] - 8, dim: state.thread && state.thread !== t.id }))
+    : LINES.filter(l => !state.hidden.has(l.id)).map(l => ({ name: l.name, v: l.v, y: laneY[l.id] + 22 }));
+  titles.forEach(t => {
+    el("rect", { x: 12, y: t.y - 4, width: 18, height: 6, rx: 3, fill: css(t.v), opacity: t.dim ? .3 : 1 }, side);
+    const tx = el("text", { x: 12, y: t.y + 20, class: "lane-title", fill: css(t.v), opacity: t.dim ? .35 : 1 }, side);
+    const words = t.name.includes(" & ") ? t.name.split(" & ").map((w, i, a) => w + (i < a.length - 1 ? " &" : "")) : wrap(t.name, SIDE < 150 ? 11 : 18);
+    words.forEach((w, i) => { el("tspan", { x: 12, dy: i ? (SIDE < 150 ? 13 : 16) : 0 }, tx).textContent = w; });
+  });
+}
+function wrap(s, n) {
+  const out = []; let cur = "";
+  s.split(" ").forEach(w => { if ((cur + " " + w).trim().length > n) { out.push(cur); cur = w; } else cur = (cur + " " + w).trim(); });
+  if (cur) out.push(cur);
+  return out;
+}
+
+/* ---------- Zeitleiste: Schienen, Kanten, Stationen ---------- */
+function drawZeit() {
+  gLines.innerHTML = ""; gEdges.innerHTML = ""; gLabels.innerHTML = ""; gSt.innerHTML = "";
+  LINES.forEach(l => {
+    if (state.hidden.has(l.id)) return;
+    const y = laneY[l.id] + 28;
+    el("line", { x1: 0, y1: y, x2: W, y2: y, class: "rail", stroke: css(l.v) }, gLines);
+  });
+  const placed = [];
+  const free = (x, y, w) => !placed.some(r => Math.abs(r.x - x) < (r.w + w) / 2 + 4 && Math.abs(r.y - y) < 14);
+  const list = state.view === "all" ? EDGES : EDGES.filter(([a, b]) => a === state.sel || b === state.sel);
+  list.forEach(([a, b, t]) => {
+    if (!pos[a] || !pos[b]) return;
+    const hi = a === state.sel || b === state.sel;
+    const p = pos[a], q = pos[b], dx = (q.x - p.x) * 0.5, bend = p.x === q.x ? 60 : 0;
+    el("path", { d: `M${p.x},${p.y} C${p.x + dx + bend},${p.y} ${q.x - dx + bend},${q.y} ${q.x},${q.y}`, class: "edge" + (hi ? " hi" : ""), "marker-end": "url(#arrow)", opacity: hi || state.view === "nb" ? 1 : 0.3 }, gEdges);
+    if (hi) {
+      const lx = (p.x + q.x) / 2 + (p.x === q.x ? 46 : 0), w = t.length * 5.6, base = (p.y + q.y) / 2 - 4;
+      let ly = base;
+      for (const o of [0, 14, -14, 28, -28, 42, -42, 56, -56]) { if (free(lx, base + o, w)) { ly = base + o; break; } }
+      placed.push({ x: lx, y: ly, w });
+      el("text", { x: lx, y: ly, "text-anchor": "middle", class: "edge-label" }, gLabels).textContent = t;
+    }
+  });
+  const nbSet = new Set((nbs[state.sel] || []).map(n => n.id));
+  shown.forEach(n => {
+    const p = pos[n.id];
+    const cls = ["station"];
+    if (n.code) cls.push("code");
+    if (n.level === 2) cls.push("detail");
+    if (n.vl > state.here) cls.push("future");
+    if (n.id === state.sel) cls.push("sel");
+    else if (nbSet.has(n.id)) cls.push("nb");
+    else if (state.view === "nb" && state.sel) cls.push("dim");
+    const g = stationGroup(n, cls);
+    el("circle", { cx: p.x, cy: p.y, r: n.level === 1 ? 7 : 4.5, class: "dot", stroke: css(lineById[n.line].v) }, g);
+    el("text", { x: p.x + 12, y: p.y + 4 }, g).textContent = n.name;
+  });
+}
+
+function stationGroup(n, cls) {
+  const p = pos[n.id];
+  const g = el("g", { class: cls.join(" "), tabindex: 0, role: "button", "aria-label": `${n.name}, eingeführt in VL ${LECTURES[n.vl].nr}`, style: `color:${css(lineById[n.line].v)}` }, gSt);
+  el("circle", { cx: p.x, cy: p.y, r: 14, fill: "transparent", class: "ring", stroke: "none" }, g);
+  g.addEventListener("click", () => select(n.id));
+  g.addEventListener("keydown", (ev) => { if (ev.key === "Enter" || ev.key === " ") { ev.preventDefault(); select(n.id); } });
+  return g;
+}
+
+/* ---------- Metrokarte: Linien, Stationen ---------- */
+function drawMetro() {
+  gLines.innerHTML = ""; gEdges.innerHTML = ""; gLabels.innerHTML = ""; gSt.innerHTML = "";
+  const selThreads = state.sel ? (threadsOf[state.sel] || []) : [];
+  const active = state.thread ? [state.thread] : selThreads;
+  THREADS.forEach(t => {
+    const pts = t.st.filter(s => pos[s]).map(s => pos[s]);
+    if (!pts.length) return;
+    let d = `M${pts[0].x - 18},${pts[0].y} L${pts[0].x},${pts[0].y}`;
+    for (let i = 1; i < pts.length; i++) d += octi(pts[i - 1], pts[i]);
+    const last = pts[pts.length - 1];
+    d += ` L${last.x + 18},${last.y}`;
+    const dim = active.length && !active.includes(t.id);
+    el("path", { d, class: "mline" + (dim ? " dim" : ""), stroke: css(t.v) }, gLines);
+  });
+  shown.forEach(n => {
+    const p = pos[n.id];
+    const multi = (threadsOf[n.id] || []).length > 1;
+    const onActive = !active.length || (threadsOf[n.id] || []).some(t => active.includes(t));
+    const cls = ["station", "metro"];
+    if (n.code) cls.push("code");
+    if (n.vl > state.here) cls.push("future");
+    if (n.id === state.sel) cls.push("sel");
+    if (!onActive) cls.push("dim");
+    const g = stationGroup(n, cls);
+    if (multi) {
+      el("circle", { cx: p.x, cy: p.y, r: 9, class: "xchg" }, g);
+    } else {
+      el("circle", { cx: p.x, cy: p.y, r: 5.5, class: "mstop", stroke: css(threadById[threadsOf[n.id][0]].v) }, g);
+    }
+    el("text", { x: p.x + 6, y: p.y - 12, transform: `rotate(-32 ${p.x + 6} ${p.y - 12})`, class: multi ? "xlabel" : "" }, g).textContent = n.name;
+  });
+}
+
+
+/* ---------- Liste ---------- */
+function drawListe() {
+  const ol = $("#liste");
+  ol.innerHTML = "";
+  LECTURES.forEach((lec, v) => {
+    const items = ALL.filter(n => n.vl === v && sichtbar(n) && !state.hidden.has(n.line) && (state.detail || n.level === 1 || n.id === state.sel))
+      .sort((a, b) => a.level - b.level || a.sec - b.sec);
+    const li = document.createElement("li");
+    li.className = "vl" + (v === state.here ? " now" : v > state.here ? " future" : "");
+    li.dataset.vl = v;
+    const tag = v === state.here
+      ? (BEFORE_START && v === HERE_TODAY ? `<span class="tag">Start am ${lec.date}</span>` : `<span class="tag">Sie sind hier</span>`)
+      : lec.status !== "ausgearbeitet" ? `<span class="tag muted">in Vorbereitung</span>` : "";
+    li.innerHTML = `<div class="vlhead"><b>VL ${lec.nr}</b><span class="d">${lec.date}</span><span class="s">${lec.short}</span>${tag}
+      <a href="${BASE + lec.file}" target="_blank" rel="noopener">Folien ↗</a></div>
+      ${lec.frage ? `<div class="frage">${lec.frage}</div>` : ""}
+      ${!lec.frei && !state.ausblick ? vorbereitetHinweis(v) : `<div class="chips${lec.frei ? "" : " vorschau"}">${items.map(n => `<button data-id="${n.id}" class="${n.level === 2 ? "detail" : ""}${n.code ? " code" : ""}" aria-pressed="${n.id === state.sel}"><i style="background:${css(lineById[n.line].v)}"></i><span class="n">${n.name}</span></button>`).join("") || '<span class="hint">keine Begriffe in den gewählten Gebieten</span>'}</div>`}
+      ${APPS.some(a => a.vl === v && sichtbar(a)) ? `<div class="chips apps"><span class="apps-lbl">Anwendungen</span>${APPS.filter(a => a.vl === v && sichtbar(a)).map(a => `<button data-id="${a.id}" aria-pressed="${a.id === state.sel}"><span class="n">${a.name}</span><span class="fach">${a.fach}</span></button>`).join("")}</div>` : ""}`;
+    li.querySelectorAll("button[data-ausblick]").forEach(b => b.addEventListener("click", () => { state.ausblick = true; save(); render(); }));
+    li.querySelectorAll(".chips button").forEach(b => b.addEventListener("click", () => {
+      if (state.sel === b.dataset.id && narrow()) { state.sel = null; render(); return; }
+      select(b.dataset.id);
+      if (narrow()) $("#panel").scrollIntoView({ block: "nearest", behavior: reduce() ? "auto" : "smooth" });
+    }));
+    ol.appendChild(li);
+  });
+}
+function plural(n, eins, viele) { return `${n} ${n === 1 ? eins : viele}`; }
+function vorbereitetHinweis(v) {
+  const n = ALL.filter(b => b.vl === v).length;
+  return n ? `<button class="vorbereitet" data-ausblick="1">${plural(n, "Begriff", "Begriffe")} vorbereitet – erscheinen nach der Vorlesung, mit Ihren Vorschlägen. <u>Ausblick einschalten</u></button>`
+           : `<div class="hint">Begriffe folgen nach der Vorlesung – mit Ihren Vorschlägen.</div>`;
+}
+function placePanel() {
+  const panel = $("#panel"), stage = $(".stage");
+  const inline = state.mode === "liste" && narrow() && state.sel;
+  if (inline) {
+    const li = $(`#liste li.vl[data-vl="${byId[state.sel].vl}"]`);
+    if (panel.parentNode !== li) li.appendChild(panel);
+  } else if (panel.parentNode !== stage) stage.appendChild(panel);
+  panel.hidden = state.mode === "liste" && narrow() && !state.sel;
+}
+function defaultSel() {
+  const cand = ALL.filter(n => sichtbar(n) && n.level === 1 && n.vl <= state.here && (state.mode !== "metro" || threadsOf[n.id])).sort((a, b) => b.vl - a.vl);
+  return cand.length ? cand[0].id : null;
+}
+
+/* ---------- Seitenfeld ---------- */
+// Beziehung als Satz: „A <Text> B“, der andere Begriff ist anklickbar
+function relItem(r, n) {
+  const m = byId[r.id], vl = `<span class="v"> · VL ${LECTURES[m.vl].nr}</span>`;
+  return r.dir === "out"
+    ? `<li><button class="satz" data-id="${r.id}"><span class="s">${n.name} ${r.t}</span> <span class="t">${m.name}</span>${vl}</button></li>`
+    : `<li><button class="satz" data-id="${r.id}"><span class="t">${m.name}</span> <span class="s">${r.t} ${n.name}</span>${vl}</button></li>`;
+}
+function renderPanel() {
+  const p = $("#panel");
+  if (state.mode === "metro" && state.thread && !state.sel) {
+    const t = threadById[state.thread];
+    p.innerHTML = `
+      <h2>${t.name}</h2>
+      <div class="meta"><span class="chip"><i style="background:${css(t.v)}"></i>Faden · ${t.st.length} Stationen</span></div>
+      <p>${t.text}</p>
+      <h3>Stationen</h3>
+      <ol class="rels steps">${t.st.map(s => `<li><button data-id="${s}"><span class="t">${byId[s].name}</span> <span class="v">VL ${LECTURES[byId[s].vl].nr}${(threadsOf[s] || []).length > 1 ? " · Umstieg" : ""}</span></button></li>`).join("")}</ol>`;
+    p.querySelectorAll(".rels button").forEach(b => b.addEventListener("click", () => select(b.dataset.id, true)));
+    return;
+  }
+  const app = byApp[state.sel];
+  if (app) {
+    const lec = LECTURES[app.vl];
+    p.innerHTML = `
+      <h2>${app.name}</h2>
+      <div class="meta"><span class="chip">Anwendung · ${app.fach}</span><span>VL ${lec.nr} · ${lec.date}</span></div>
+      <p><strong>Beispiel:</strong> ${app.data}</p>
+      <h3>Nutzt die Schlagworte</h3>
+      <ul class="rels">${app.uses.map(k => `<li><button data-id="${k}"><span class="t">${byId[k].name}</span> <span class="v">VL ${LECTURES[byId[k].vl].nr}</span></button></li>`).join("")}</ul>
+      <div class="goto">
+        <span class="hint">Abschnitt ${app.sec}: ${lec.sections[app.sec - 1] || ""}</span>
+        <a class="golink" href="${BASE + lec.file}#${app.sec}" target="_blank" rel="noopener">Zur Vorlesung ${lec.nr}, Abschnitt ${app.sec} ↗</a>
+      </div>`;
+    p.querySelectorAll(".rels button").forEach(b => b.addEventListener("click", () => select(b.dataset.id, true)));
+    return;
+  }
+  const n = byId[state.sel];
+  if (!n) { p.innerHTML = '<p class="hint">Wählen Sie eine Station oder einen Faden.</p>'; return; }
+  const l = lineById[n.line], lec = LECTURES[n.vl];
+  const status = n.vl < state.here ? "bereits behandelt" : n.vl === state.here ? (BEFORE_START && state.here === HERE_TODAY ? "erste Vorlesung" : "diese Woche") : "kommt noch";
+  const rels = nbs[n.id].filter(r => sichtbar(byId[r.id])).sort((a, b) => byId[a.id].vl - byId[b.id].vl);
+  const back = rels.filter(r => byId[r.id].vl < n.vl), same = rels.filter(r => byId[r.id].vl === n.vl), fwd = rels.filter(r => byId[r.id].vl > n.vl);
+  const ths = threadsOf[n.id] || [];
+  const threadHtml = ths.length ? `<h3>${ths.length > 1 ? "Liegt auf mehreren roten Fäden" : "Liegt auf dem roten Faden"}</h3><ul class="rels threads">${ths.map(tid => {
+    const t = threadById[tid], st = t.st.filter(x => sichtbar(byId[x])), k = st.indexOf(n.id), pv = st[k - 1], nx = st[k + 1];
+    return `<li><span class="tname"><i style="background:${css(t.v)}"></i>${t.name}</span>
+      <span class="hop">${pv ? `<button data-id="${pv}">← ${byId[pv].name}</button>` : `<span class="v">Anfang</span>`}
+      ${nx ? `<button data-id="${nx}">${byId[nx].name} →</button>` : `<span class="v">${t.st.indexOf(n.id) < t.st.length - 1 ? "Fortsetzung folgt" : "Endstation"}</span>`}</span></li>`;
+  }).join("")}</ul>` : "";
+  p.innerHTML = `
+    <h2 class="${n.code ? "code" : ""}">${n.name}</h2>
+    <div class="meta">
+      <span class="chip"><i style="background:${css(l.v)}"></i>${l.name}</span>
+      <span class="chip" title="${n.level === 1 ? "Sollten Sie in einem Satz erklären können" : "Ergänzt einen Kernbegriff"}">${n.level === 1 ? "Kernbegriff" : "Detailbegriff"}</span>
+      <span>VL ${lec.nr} · ${lec.date} · ${status}</span>
+    </div>
+    <p>${n.text}</p>
+    ${n.mis ? `<div class="misc"><strong>Typische Fehlvorstellung</strong>${n.mis}</div>` : ""}
+    ${threadHtml}
+    ${back.length ? `<h3>Aus früheren Vorlesungen</h3><ul class="rels">${back.map(r => relItem(r, n)).join("")}</ul>` : ""}
+    ${same.length ? `<h3>In derselben Vorlesung</h3><ul class="rels">${same.map(r => relItem(r, n)).join("")}</ul>` : ""}
+    ${fwd.length ? `<h3>Später im Semester</h3><ul class="rels">${fwd.map(r => relItem(r, n)).join("")}</ul>` : ""}
+    ${(appsOf[n.id] || []).filter(sichtbar).length ? `<h3>Kommt vor in</h3><ul class="rels">${appsOf[n.id].filter(sichtbar).map(a => `<li><button data-id="${a.id}"><span class="t">${a.name}</span> <span class="v">${a.fach} · VL ${LECTURES[a.vl].nr}</span></button></li>`).join("")}</ul>` : ""}
+    <div class="goto">
+      <span class="hint">Eingeführt in Abschnitt ${n.sec}: ${lec.sections[n.sec - 1] || ""}${lec.status !== "ausgearbeitet" ? " — Vorlesung in Vorbereitung" : ""}</span>
+      <a class="golink" href="${BASE + lec.file}#${n.sec}" target="_blank" rel="noopener">Zur Vorlesung ${lec.nr}, Abschnitt ${n.sec} ↗</a>
+    </div>`;
+  p.querySelectorAll(".rels button, .hop button").forEach(b => b.addEventListener("click", () => select(b.dataset.id, true)));
+}
+
+function select(id, scroll) {
+  state.sel = id;
+  state.thread = null;
+  if (byApp[id]) {               // Anwendungen gibt es nur in der Ansicht „Vorlesungen“
+    if (state.mode !== "liste") { state.mode = "liste"; save(); }
+    render();
+    return;
+  }
+  state.hidden.delete(byId[id].line);
+  if (state.mode === "metro" && !threadsOf[id]) { state.mode = "zeit"; save(); }
+  render();
+  if (scroll && pos[id]) {
+    const box = $("#mapbox");
+    box.scrollTo({ left: Math.max(0, pos[id].x - box.clientWidth / 2), behavior: reduce() ? "auto" : "smooth" });
+  }
+}
+
+function renderLegend() {
+  const lg = $("#legend");
+  lg.innerHTML = "";
+  const items = state.mode === "metro" ? THREADS : LINES;
+  items.forEach(it => {
+    const b = document.createElement("button");
+    const on = state.mode === "metro" ? (!state.thread || state.thread === it.id) : !state.hidden.has(it.id);
+    b.setAttribute("aria-pressed", String(on));
+    b.innerHTML = `<span class="swatch" style="background:${css(it.v)}"></span>${it.name}`;
+    b.addEventListener("click", () => {
+      if (state.mode === "metro") { state.thread = state.thread === it.id ? null : it.id; state.sel = state.thread ? null : state.sel; }
+      else { state.hidden.has(it.id) ? state.hidden.delete(it.id) : state.hidden.add(it.id); }
+      render();
+    });
+    lg.appendChild(b);
+  });
+  $("#legendHint").textContent = state.mode === "metro" ? "Roten Faden anklicken, um ihn hervorzuheben (spätere Vorlesungen: seitlich scrollen):" : state.mode === "zeit" ? "Themengebiete ein- und ausblenden (spätere Vorlesungen: seitlich scrollen):" : "Themengebiete ein- und ausblenden:";
+}
+
+function render() {
+  const lec = LECTURES[state.here];
+  $("#hereVal").textContent = `VL ${lec.nr} · ${lec.date}`;
+  $("#here").value = state.here;
+  $("#today").hidden = state.here === HERE_TODAY;
+  const pressed = [["mListe", state.mode === "liste"], ["mMetro", state.mode === "metro"], ["mZeit", state.mode === "zeit"], ["vNb", state.view === "nb"], ["vAll", state.view === "all"], ["eKern", !state.detail], ["eAlle", state.detail], ["ausAus", !state.ausblick], ["ausAn", state.ausblick]];
+  for (const [id, on] of pressed) $("#" + id).setAttribute("aria-pressed", String(on));
+  $("#ctlLevel").hidden = state.mode === "metro";
+  $("#ctlEdges").hidden = state.mode !== "zeit";
+  $("#mapwrap").hidden = state.mode === "liste";
+  $("#liste").hidden = state.mode !== "liste";
+  const vis = ALL.filter(sichtbar);
+  const nVisSt = [...new Set(THREADS.flatMap(t => t.st))].filter(id => sichtbar(byId[id])).length;
+  const nFrei = LECTURES.filter(l => l.frei).length, nFreiB = ALL.filter(n => LECTURES[n.vl].frei).length;
+  $("#count").textContent = state.mode === "metro"
+    ? `${plural(THREADS.length, "roter Faden", "rote Fäden")} · ${plural(nVisSt, "Station", "Stationen")} ${state.ausblick ? "mit Ausblick" : "freigeschaltet"}`
+    : `${plural(nFreiB, "Begriff", "Begriffe")} aus ${plural(nFrei, "Vorlesung", "Vorlesungen")}` + (ALL.length > nFreiB ? ` · ${ALL.length - nFreiB} weitere vorbereitet` : "");
+  if (state.mode === "liste") drawListe();
+  else {
+    if (state.mode === "metro") layoutMetro(); else layoutZeit();
+    setSize();
+    drawBackground();
+    if (state.mode === "metro") drawMetro(); else drawZeit();
+  }
+  placePanel(); renderPanel(); renderLegend();
+}
+
+$("#here").addEventListener("input", (e) => {
+  state.here = +e.target.value; render();
+  if (state.mode === "liste") return;
+  const box = $("#mapbox"), hx = COL * state.here;
+  if (hx < box.scrollLeft || hx + COL > box.scrollLeft + box.clientWidth) box.scrollLeft = hx - box.clientWidth / 2;
+});
+function scrollToHere() {
+  if (state.mode === "liste") { const now = $(`#liste li.vl[data-vl="${state.here}"]`); if (now && state.here > 0) now.scrollIntoView({ block: "start" }); return; }
+  const box = $("#mapbox"), hx = COL * state.here;
+  box.scrollLeft = hx + COL > box.clientWidth ? hx - box.clientWidth / 2 : 0;
+}
+$("#mListe").addEventListener("click", () => { state.mode = "liste"; state.thread = null; save(); render(); });
+$("#mMetro").addEventListener("click", () => { state.mode = "metro"; if (!state.sel || !threadsOf[state.sel]) state.sel = defaultSel(); save(); render(); scrollToHere(); });
+$("#mZeit").addEventListener("click", () => { state.mode = "zeit"; state.thread = null; if (!state.sel) state.sel = defaultSel(); save(); render(); scrollToHere(); });
+$("#today").addEventListener("click", () => { state.here = HERE_TODAY; render(); scrollToHere(); });
+$("#vNb").addEventListener("click", () => { state.view = "nb"; render(); });
+$("#vAll").addEventListener("click", () => { state.view = "all"; render(); });
+$("#eKern").addEventListener("click", () => { state.detail = false; save(); render(); });
+$("#eAlle").addEventListener("click", () => { state.detail = true; save(); render(); });
+$("#ausAus").addEventListener("click", () => { state.ausblick = false; if (state.sel && !sichtbar(byId[state.sel] || byApp[state.sel])) state.sel = defaultSel(); save(); render(); });
+$("#ausAn").addEventListener("click", () => { state.ausblick = true; save(); render(); });
+matchMedia("(prefers-color-scheme: dark)").addEventListener("change", render);
+new MutationObserver(render).observe(document.documentElement, { attributes: true, attributeFilter: ["data-theme"] });
+
+try {
+  const z = localStorage.getItem("eavd-map-intro");
+  $("#intro").open = z ? z === "auf" : !narrow();
+} catch (e) { $("#intro").open = !narrow(); }
+$("#intro").addEventListener("toggle", () => { try { localStorage.setItem("eavd-map-intro", $("#intro").open ? "auf" : "zu"); } catch (e) {} });
+if (!(state.mode === "liste" && narrow())) state.sel = defaultSel();
+let lastW = innerWidth;  // nur auf Breitenänderung reagieren (mobile Adressleiste ändert die Höhe)
+addEventListener("resize", () => { if (innerWidth === lastW) return; lastW = innerWidth; clearTimeout(window._rs); window._rs = setTimeout(render, 150); });
+render();
+scrollToHere();
+</script>
+</body>
+</html>

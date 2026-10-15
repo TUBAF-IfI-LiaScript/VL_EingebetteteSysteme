@@ -1,0 +1,459 @@
+"""Kurslandkarte: Daten und Seite erzeugen.
+
+Abschnitte (Foliennummern) werden automatisch aus den Vorlesungen gelesen,
+Begriffe, Beziehungen, Anwendungen und didaktische Fäden sind unten kuratiert.
+
+Aufruf aus dem Repository-Wurzelverzeichnis:
+
+    python3 kurslandkarte/erzeuge.py
+
+Schreibt kurslandkarte/kurslandkarte.json und kurslandkarte/index.html
+(GitHub Pages veröffentlicht das Wurzelverzeichnis von master).
+"""
+import datetime, json, re, glob, os
+
+HIER = os.path.dirname(os.path.abspath(__file__))
+REPO = os.path.dirname(HIER)
+ZIEL = HIER
+STAND = datetime.date.today().strftime("%d.%m.%Y")
+ANZAHL = 16
+
+# ---- Abschnitte automatisch (LiaScript-Foliennummer = Position der Überschrift)
+sections = {}
+for f in sorted(glob.glob(os.path.join(REPO, "[01][0-9]_*.md"))):
+    vl = int(os.path.basename(f)[:2])
+    s = open(f, encoding="utf-8").read()
+    s = s[s.find("-->") + 3:]
+    s = re.sub(r"^(`{3,4}).*?\n.*?\n\1", "", s, flags=re.S | re.M)
+    heads = [m.group(2).strip().replace("`", "") for m in re.finditer(r"^(#{1,6}) +(.+)$", s, re.M)]
+    sections[vl] = {"datei": os.path.basename(f), "abschnitte": heads}
+assert sorted(sections) == list(range(ANZAHL)), sorted(sections)
+
+STATUS = {v: "ausgearbeitet" for v in range(ANZAHL)}
+
+# ---- Erster Termin jeder Vorlesung (Agenda in journal.md) und Kurztitel
+TERMINE = [
+    ("2026-10-21", "Einführung"), ("2026-10-28", "Historie"),
+    ("2026-10-29", "Boolesche Algebra"), ("2026-11-04", "Minimierung"),
+    ("2026-11-11", "Schaltnetze"), ("2026-11-12", "Standardschaltnetze"),
+    ("2026-11-25", "Flip-Flops"), ("2026-11-26", "Schaltwerke"),
+    ("2026-12-02", "Standardschaltwerke"), ("2026-12-09", "Rechnerarithmetik"),
+    ("2026-12-10", "CPU-Grundlagen"), ("2026-12-16", "Modell-CPU"),
+    ("2027-01-06", "AVR-CPU"), ("2027-01-14", "ADC"),
+    ("2027-01-20", "Interrupts & Timer"), ("2027-02-03", "Aktoren & Ausblick"),
+]
+assert len(TERMINE) == ANZAHL
+
+# ---- Freigabe: Begriffe einer Vorlesung erscheinen erst nach ihr in der Karte.
+FREIGEGEBEN = set()
+
+# ---- Leitfragen
+LEITFRAGE = {
+    0: "Wie wird aus einem Arduino-Programm ein Verhalten der Hardware?",
+    1: "Wie kam es vom Rechenbrett zum Mikrocontroller?",
+    2: "Wie rechnet man mit wahr und falsch?",
+    3: "Wie wird eine Schaltfunktion möglichst klein?",
+    4: "Wie wird aus einer Funktion eine Schaltung – und was kann dabei schiefgehen?",
+    5: "Welche Bausteine braucht man immer wieder?",
+    6: "Wie merkt sich eine Schaltung etwas?",
+    7: "Wie baut man eine Schaltung, die auf Abfolgen reagiert?",
+    8: "Wie zählt und schiebt man Bits im Takt?",
+    9: "Wie addiert und subtrahiert ein Rechner?",
+    10: "Wie wird aus einem Addierer ein Prozessor?",
+    11: "Wie arbeitet ein Prozessor ein Programm Befehl für Befehl ab?",
+    12: "Was steckt im Chip auf dem Arduino – und wie kommt das Programm hinein?",
+    13: "Wie kommt eine Spannung in den Rechner?",
+    14: "Wie reagiert ein Controller rechtzeitig auf Ereignisse?",
+    15: "Wie bewegt ein Controller die Welt – und was kommt danach?",
+}
+assert sorted(LEITFRAGE) == list(range(ANZAHL))
+
+# ---- Begriffe: id, Name, Linie, VL, Abschnittstitel, Ebene (1 Kern, 2 Detail), Code?, Erklärung, Fehlvorstellung
+# ---- Beziehungen: von, nach, Beschriftung („von … Beschriftung … nach“)
+# ---- Anwendungen: id (a_…), Titel, Anwendungsfeld, VL, Abschnittstitel, Beispiel, [Begriffs-ids], Herkunft
+# ---- Didaktische Fäden (Metrolinien): chronologische Ketten von Begriffs-ids
+B = [
+    ('abstraktionsebenen', 'Abstraktionsebenen', 'grundlagen', 0, 'Unsere Bottom-Up-Reise', 1, 0, 'Ein Rechner wird in Schichten beschrieben – von Physik (Ebene 0) über digitale Logik, Mikroarchitektur und Befehlssatz bis zur Hochsprache (Ebene 6); der Kurs beginnt bei der digitalen Logik und arbeitet sich nach oben.', '„Eine Zeile wie pinMode(13, OUTPUT) ist für die Hardware ein einzelner Schritt.“'),
+    ('hexdatei', 'Maschinencode (Hex-Datei)', 'rechner', 0, 'Worum geht es in dieser Vorlesung?', 2, 0, 'Das übersetzte Programm als lange Folge von Hexadezimalzahlen, die der Mikrocontroller ausführt; dahin kommt der C++-Code über Kompilieren und Übertragen.', None),
+    ('mikroarchitektur', 'Mikroarchitektur', 'rechner', 0, 'Beispiel 1: Mikroarchitektur', 2, 0, 'Innerer Aufbau eines Rechners aus Steuerwerk, ALU, Speicher und Ein-/Ausgabe, die über Adressen, Daten, Kontroll- und Statussignale zusammenarbeiten.', None),
+    ('ddrb', 'DDRB', 'controller', 0, 'Beispiel 2: Quer über alle Ebenene', 2, 1, 'Register, dessen Bits festlegen, ob ein Pin von Port B Ausgang (1) oder hochohmiger Eingang (0) ist; pinMode(13, OUTPUT) setzt am Ende Bit 5.', None),
+    ('lochkarte', 'Lochkartensteuerung', 'grundlagen', 1, 'Joseph-Marie Jacquard (1752 - 1834) - Automatischer Webstuhl', 2, 0, 'Jacquards Webstuhl las das Muster von Lochkarten: Loch = Faden heben, kein Loch = Faden senken; zu einer Schleife gekoppelt entstanden wiederkehrende Muster.', None),
+    ('analytical_engine', 'Analytical Engine', 'grundlagen', 1, 'Charles Babbage (1791 - 1871) - Analytical Engine', 2, 0, 'Babbages Entwurf einer universellen, programmierbaren mechanischen Rechenmaschine mit Lochkarten-Eingabe und dezimalen Zahlen; zu seinen Lebzeiten nicht gebaut. Ada Lovelace beschrieb dafür das erste veröffentlichte Programm.', None),
+    ('relais', 'Relais', 'grundlagen', 1, 'Es werde Licht ... elektrische Systeme', 2, 0, 'Elektromagnetisch betätigter Schalter, der Zustände speichern und logische Operationen abbilden kann – damit setzte sich die binäre Darstellung An/Aus (1/0) durch.', None),
+    ('z3', 'Zuse Z3', 'grundlagen', 1, 'Zuse Z3', 2, 0, 'Erster funktionsfähiger Digitalrechner (1941, Konrad Zuse): rund 2200 Relais, binäre Gleitkommazahlen, 10 Hertz Takt, aber keine Sprungbefehle.', None),
+    ('transistor', 'Transistor', 'grundlagen', 1, 'Die Transistor-Ära', 1, 0, 'Elektronischer Schalter und Verstärker, der ab 1948 die Röhre verdrängt; geschickt zusammengeschaltete Transistoren ergeben logische Gatter wie AND.', None),
+    ('mikroprozessor', 'Mikroprozessor (Intel 4004)', 'rechner', 1, 'Intel 4004', 2, 0, 'Der Intel 4004 (1971) gilt als erster Mikroprozessor: 2300 Transistoren, 4 Bit Wortbreite, 46 Befehle. Der ATmega328P im Arduino hat rund 100.000 Transistoren und 131 Befehle.', None),
+    ('digitalsignal', 'Digitalsignal', 'grundlagen', 2, 'Digital vs. Analog', 1, 0, 'Signal aus diskreten Werten zu bestimmten Zeitpunkten; es entsteht aus einem kontinuierlichen Analogsignal (z. B. Temperatur im Tagesverlauf) durch Abtastung und Quantisierung.', None),
+    ('analogrechner', 'Analogrechner', 'grundlagen', 2, 'Exkurs: Kontrastprogramm - Analoge Rechner', 2, 0, 'Rechnet kontinuierlich mit Spannungen und wird über Steckschnüre programmiert; Addition und Multiplikation sind einfach, die Genauigkeit liegt aber nur bei etwa 6–8 Bit und hängt von der Temperatur ab.', '„Wer mit Steckkabeln programmiert wird, ist ein Analogrechner.“ (Der ENIAC war digital.)'),
+    ('pegel', 'Pegel', 'grundlagen', 2, 'Pegel', 1, 0, 'Spannungsbereiche, die als High (1) bzw. Low (0) gelten, dazwischen liegt ein verbotener Bereich. Bei TTL-Eingängen gilt z. B. über 2,0 V als High und unter 0,8 V als Low.', '„Eine 1 ist genau 5 V, eine 0 genau 0 V.“'),
+    ('boolesche_algebra', 'Boolesche Algebra', 'logik', 2, 'Motivation', 1, 0, 'Rechnen mit nur zwei Werten (0 und 1) und den Operationen UND, ODER, NICHT; zwei Schalter in Reihe wirken wie UND, parallel wie ODER.', None),
+    ('axiome', 'Axiome und Gesetze', 'logik', 2, 'Anwendung', 2, 0, 'Kommutativität, Distributivität, neutrales Element und Komplement bilden die Grundlage; daraus folgen Assoziativität, Idempotenz, Absorption, Doppelnegation und De Morgan. Vertauscht man UND/ODER und 0/1, entsteht wieder ein gültiges Gesetz (Dualität).', '„Wie in der Schulalgebra gilt nur a·(b+c) = a·b + a·c – nicht auch a + b·c = (a+b)·(a+c).“'),
+    ('de_morgan', 'De-Morgan-Regel', 'logik', 2, 'Anwendung', 2, 0, 'Eine negierte ODER-Verknüpfung ist das UND der negierten Variablen und umgekehrt: nicht(a + b) = nicht a · nicht b.', '„Die Negation über a·b verteilt sich einfach: nicht(a·b) = nicht a · nicht b.“'),
+    ('umformung', 'Algebraische Vereinfachung', 'logik', 2, 'Anwendung', 2, 0, 'Ein Ausdruck wird Schritt für Schritt mit den Gesetzen vereinfacht, z. B. a·b + a·(nicht b) + a·c = a – weniger Terme bedeuten weniger Gatter.', None),
+    ('schaltfunktion', 'Schaltfunktion', 'logik', 2, 'Schaltfunktionen', 1, 0, 'Funktion, die jeder Kombination von Eingängen aus 0 und 1 einen Ausgangswert 0 oder 1 zuordnet; darstellbar als Wahrheitstafel, als Ausdruck oder als Gatterschaltung.', None),
+    ('wahrheitstafel', 'Wahrheitstafel', 'logik', 2, 'Schaltfunktionen', 1, 0, 'Tabelle mit einer Zeile für jede der 2^n Eingangskombinationen und dem zugehörigen Ausgangswert – die einzige Darstellung, die in jedem Fall eindeutig ist.', '„Zwei verschieden aussehende Ausdrücke beschreiben verschiedene Funktionen.“'),
+    ('zweistellig', '16 zweistellige Funktionen', 'logik', 2, 'Schaltfunktionen mit zwei Eingängen', 2, 0, 'Mit zwei Eingängen gibt es genau 16 Schaltfunktionen, darunter UND, ODER, XOR (Antivalenz), Äquivalenz, Implikation, NAND und NOR.', None),
+    ('xor', 'XOR (Antivalenz)', 'logik', 2, 'Schaltfunktionen mit zwei Eingängen', 2, 0, 'Exklusives ODER: liefert 1, wenn genau einer der beiden Eingänge 1 ist.', '„ODER heißt: entweder das eine oder das andere, aber nicht beides.“'),
+    ('aequivalenz', 'Äquivalenznachweis', 'logik', 3, 'Herausforderung', 2, 0, 'Ob zwei verschieden aussehende Ausdrücke dieselbe Funktion beschreiben, zeigt sicher die Wahrheitstafel; algebraisches Umformen kann in einer Sackgasse enden.', '„Wenn ich nicht weiter umformen kann, ist der Ausdruck minimal.“'),
+    ('minterm', 'Minterm / Maxterm', 'logik', 3, 'Aufstellen der Normalform', 2, 0, 'UND-Term (Minterm) bzw. ODER-Term (Maxterm), in dem jede Variable der Funktion genau einmal vorkommt, direkt oder negiert.', None),
+    ('dnf', 'DNF / KNF', 'logik', 3, 'Aufstellen der Normalform', 1, 0, 'Disjunktive Normalform: ODER-Verknüpfung von UND-Termen; konjunktive Normalform: UND-Verknüpfung von ODER-Termen.', None),
+    ('kdnf', 'KDNF / KKNF', 'logik', 3, 'Aufstellen der Normalform', 1, 0, 'Kanonische Normalformen direkt aus der Wahrheitstafel: KDNF = ODER aller Minterme der Zeilen mit 1, KKNF = UND aller Maxterme der Zeilen mit 0; bis auf die Reihenfolge eindeutig.', '„DNF und KDNF sind dasselbe.“'),
+    ('resolution', 'Terme zusammenfassen', 'logik', 3, 'Minimierung von Schaltfunktionen mit dem KV-Diagramm', 2, 0, 'Unterscheiden sich zwei Terme nur in einer Variablen, die einmal direkt und einmal negiert vorkommt, fällt diese weg: x·y + x·(nicht y) = x.', None),
+    ('kv', 'KV-Diagramm', 'logik', 3, 'Karnaugh-Veitch-Diagramme - Konzept', 1, 0, 'Umgeordnete Wahrheitstafel, in der benachbarte Felder sich in genau einer Variablen unterscheiden – so werden zusammenfassbare Einsen sichtbar. Für 2 bis 4 Variablen geeignet.', '„Felder am linken und rechten Rand sind nicht benachbart.“ (Das Diagramm ist ein Torus.)'),
+    ('graycode', 'Gray-Code', 'logik', 3, 'Karnaugh-Veitch-Diagramme - Konzept', 2, 0, 'Zählweise, bei der sich benachbarte Codewörter in genau einer Stelle unterscheiden (000, 001, 011, 010 …); danach sind Zeilen und Spalten des KV-Diagramms angeordnet.', None),
+    ('schleife', 'KV-Schleife', 'logik', 3, 'Karnaugh-Veitch-Diagramme - Konzept', 1, 0, 'Zusammenhängender Block aus 1, 2, 4, 8 … Einsen; je größer die Schleife, desto weniger Variablen bleiben im Produktterm. Gesucht sind möglichst wenige, möglichst große Schleifen, die alle Einsen überdecken.', '„Eine einzelne Eins darf allein stehen bleiben, auch wenn sie in eine größere Schleife passt.“'),
+    ('ueberlappung', 'Überlappende Schleifen', 'logik', 3, 'Optimierungskriterien', 2, 0, 'Eine Eins darf in mehreren Schleifen liegen; das lohnt sich nur, wenn dadurch größere Schleifen entstehen und eine isolierte Eins vermieden wird.', '„Jede Eins darf nur zu einer Schleife gehören.“'),
+    ('kv_maxterm', 'KV-Diagramm für Maxterme', 'logik', 3, 'Karnaugh-Veitch für Maxterme', 2, 0, 'Statt der Einsen werden die Nullen zu Schleifen zusammengefasst; über die De-Morgan-Regel ergibt sich daraus eine minimale KNF.', None),
+    ('dontcare', "Don't Care", 'logik', 3, 'Dont-Care-Einträge in der Wahrheitstafel', 1, 0, 'Eingangskombinationen, deren Ausgabe egal ist, weil sie nicht vorkommen (bei der Sieben-Segment-Anzeige die 6 Codes oberhalb von 9); im KV-Diagramm dürfen sie als 0 oder 1 gelten, je nachdem, was größere Schleifen ergibt.', None),
+    ('sopform', 'SOPform', 'logik', 3, 'Zusammenfassung', 2, 1, 'Funktion der Python-Bibliothek SymPy, die aus einer Liste von Mintermen automatisch eine minimale disjunktive Form berechnet.', None),
+    ('qmc', 'Quine-McCluskey', 'logik', 4, 'Verfahren nach Quine-McCluskey', 1, 0, 'Systematisches Tabellenverfahren: Minterme nach der Zahl ihrer Einsen sortieren und Paare, die sich in genau einer Variable unterscheiden, so lange zusammenfassen, bis nichts mehr geht.', '„Wer von Hand zusammenfasst, landet automatisch bei der kürzesten Form.“'),
+    ('primimplikant', 'Primimplikant', 'logik', 4, 'Ermittlung der Primterme', 1, 0, 'Zusammengefasster Term, der sich nicht weiter vereinfachen lässt – im Kaffeemaschinen-Beispiel bleiben fünf solche Terme P1 bis P5 übrig.', None),
+    ('primtafel', 'Primimplikantentafel', 'logik', 4, 'Darstellung der Minterme im Karnaugh-Diagramm', 2, 0, "Tabelle („zweite Quine'sche Tabelle“), die zeigt, welcher Primimplikant welche Minterme abdeckt – Grundlage für die Auswahl der nötigen Terme.", None),
+    ('essentiell', 'essentieller Primimplikant', 'logik', 4, 'Lösung der minimalen Überdeckung - intuitiv', 2, 0, 'Primimplikant, der als einziger einen bestimmten Minterm abdeckt und deshalb in jeder Lösung vorkommen muss.', None),
+    ('dominanz', 'Dominanzregeln', 'logik', 4, 'Lösung der minimalen Überdeckung - algorithmisch', 2, 0, 'Regeln zum Streichen überflüssiger Zeilen und Spalten der Primimplikantentafel: Wer von einem anderen Eintrag vollständig mit abgedeckt wird, fällt weg.', None),
+    ('schaltnetz', 'Schaltnetz', 'logik', 4, 'Schaltungssynthese', 1, 0, 'Schaltungstechnische Umsetzung einer Schaltfunktion aus Gattern und Leitungen – ohne Rückkopplungen, die Ausgabe hängt nur von den aktuellen Eingaben ab.', '„Schaltfunktion und Schaltnetz sind dasselbe.“'),
+    ('gatter', 'Logikgatter', 'logik', 4, 'Logikgatter als Grundlage der Schaltnetze', 1, 0, 'Technische Realisierung einer einfachen booleschen Funktion wie UND, ODER, NICHT, NAND oder NOR – der Grundbaustein jedes Schaltnetzes.', None),
+    ('nand_universal', 'NAND/NOR universell', 'logik', 4, 'Schaltungssynthese', 2, 0, 'Jedes Schaltnetz lässt sich allein aus NAND-Gattern (oder allein aus NOR-Gattern) aufbauen, weil sich NICHT, UND und ODER daraus zusammensetzen lassen.', '„Für jede Funktion braucht man UND-, ODER- und NICHT-Gatter.“'),
+    ('zweistufig', 'zweistufige Schaltungssynthese', 'logik', 4, 'Zweistufige Schaltungssynthese', 2, 0, 'Eine Normalform direkt als Schaltung: je Minterm ein UND-Gatter, dahinter ein ODER-Gatter, das alle Minterme verknüpft.', None),
+    ('pal_prom', 'PROM und PAL', 'logik', 4, 'Umsetzung', 2, 0, 'Programmierbare Bausteine aus UND- und ODER-Matrix: Ein PROM speichert die ganze Wahrheitstabelle, ein PAL setzt eine (minimierte) DNF mit begrenzter Zahl an Produkttermen um.', None),
+    ('glitch', 'Glitch / Hazard', 'logik', 4, 'Herausforderungen', 1, 0, 'Kurzzeitig falscher Ausgangswert, weil Signale unterschiedlich lange durch die Gatter laufen; im KV-Diagramm erkennbar an benachbarten Schleifen ohne Überlappung.', '„Ein Gatter liefert sein Ergebnis sofort.“'),
+    ('dekoder', 'Dekodierer', 'logik', 5, 'n-zu-k Dekodierer', 1, 0, 'Schaltnetz mit n Eingängen und bis zu 2^n Ausgängen: Für jede Eingangskombination wird genau ein Ausgang aktiviert.', None),
+    ('adressdekoder', 'Adressdekoder', 'logik', 5, 'n-zu-k Dekodierer', 2, 0, 'Dekodierer, der aus einem Teil der Adresse auswählt, welcher Speicherbaustein über seinen Chip-Select-Eingang angesprochen wird.', None),
+    ('bcd7seg', 'BCD-7-Segment-Dekoder', 'logik', 5, 'n-zu-k Dekodierer', 2, 0, 'Übersetzt eine binär kodierte Ziffer in die Segmente, die für ihre Darstellung leuchten müssen.', None),
+    ('kodierer', 'Kodierer', 'logik', 5, 'n-zu-k Kodierer', 1, 0, 'Umkehrung des Dekodierers: Aus der einen aktiven von 2^n Eingangsleitungen wird deren Binärnummer an n Ausgängen.', '„Ein Kodierer kommt mit jeder Eingangsbelegung zurecht.“'),
+    ('prioenc', 'Prioritätskodierer', 'logik', 5, 'n-zu-k Kodierer', 2, 0, 'Kodierer, der bei mehreren aktiven Eingängen festlegt, welcher Vorrang hat, und so die Lücken der Wahrheitstafel des einfachen Kodierers schließt.', None),
+    ('mux', 'Multiplexer', 'logik', 5, 'Multiplexer', 1, 0, 'Wählt über n Steuerleitungen einen von 2^n Eingängen aus und leitet dessen Pegel an den einzigen Ausgang weiter.', '„Multiplexer und Dekodierer sind dasselbe.“'),
+    ('mux_funktion', 'Mux als Funktion', 'logik', 5, 'Multiplexer', 2, 0, 'Legt man an die Dateneingänge eines Multiplexers die Spalte einer Wahrheitstafel an und an die Steuerleitungen die Variablen, bildet er jede beliebige boolesche Funktion ab.', None),
+    ('demux', 'Demultiplexer', 'logik', 5, 'Demultiplexer', 1, 0, 'Gegenstück zum Multiplexer: Ein Eingang wird abhängig von den Steuerleitungen auf einen von mehreren Ausgängen geschaltet.', None),
+    ('komparator', 'Komparator', 'logik', 5, 'Komparatoren', 2, 0, 'Schaltnetz, das zwei Binärzahlen vergleicht; in der Vorlesung als Hausaufgabe aus Ein-Bit-Komparatoren aufzubauen.', None),
+    ('sequentiell', 'sequenzielle Logik', 'zustand', 6, 'Einführung sequenzieller Logik', 1, 0, 'Schaltungen, deren Ausgabe nicht nur von der aktuellen Eingabe, sondern auch von einem gespeicherten Zustand abhängt – genau das fehlt Schaltnetzen: ein Speicher.', None),
+    ('rueckkopplung', 'Rückkopplung', 'zustand', 6, 'Erster Ansatz', 2, 0, 'Der Ausgang eines Gatters wird auf seinen Eingang zurückgeführt; ein rückgekoppeltes UND oder ODER hält so einen Wert fest – kann ihn aber nur löschen bzw. nur setzen.', None),
+    ('srlatch', 'SR-Latch', 'zustand', 6, 'Dritter Ansatz (SR-Latch)', 1, 0, 'Einfachster Speicher für ein Bit: S (Set) setzt den Ausgang auf 1, R (Reset) auf 0, bei S = R = 0 bleibt der Wert erhalten; S = R = 1 ist zu vermeiden.', '„Schon S = R = 1 macht den Speicher unbestimmt.“ – unbestimmt wird es erst, wenn beide danach gleichzeitig auf 0 gehen.'),
+    ('dlatch', 'D-Latch', 'zustand', 6, 'D-Latch', 1, 0, 'Speichert den Wert am Dateneingang D, solange der Freigabeeingang E aktiv ist; die verbotene Kombination des SR-Latch kann nicht mehr auftreten.', None),
+    ('takt', 'Takt', 'zustand', 6, 'Taktung von Schaltwerken', 1, 0, 'Ein zentrales Taktsignal legt fest, wann Eingänge übernommen werden; das macht den Entwurf einfacher, die langsamste Komponente begrenzt aber die Taktfrequenz.', None),
+    ('sync_sr', 'getaktetes SR-Latch', 'zustand', 6, 'Synchrones SR-Latch', 2, 0, 'SR-Latch, das R und S nur bei aktivem Takt übernimmt – innerhalb einer Taktphase sind aber weiterhin mehrere Zustandswechsel möglich.', None),
+    ('mainsub', 'Main-Subsidiary-Flip-Flop', 'zustand', 6, 'Main-Subsidiary-Flip-Flops', 2, 0, 'Zwei hintereinandergeschaltete Latches (früher „Master-Slave“): Der erste übernimmt bei Clk = 1, der zweite gibt bei Clk = 0 weiter.', None),
+    ('flanke', 'flankengesteuertes Flip-Flop', 'zustand', 6, 'Flankengesteuerte Flip-Flops', 1, 0, 'Übernimmt Eingangswerte nur im Moment der steigenden oder fallenden Taktflanke; die Flanke wird mit Hilfe der Gatterlaufzeit erkannt.', '„Latch und Flip-Flop sind dasselbe.“'),
+    ('jkff', 'JK-Flip-Flop', 'zustand', 6, 'Weitere Flip-Flop-Konfigurationen', 2, 0, 'Getaktetes Flip-Flop mit J (setzen) und K (rücksetzen); anders als beim SR-Flip-Flop ist J = K = 1 erlaubt und lässt den Ausgang mit jeder Flanke wechseln.', None),
+    ('tff', 'T-Flip-Flop', 'zustand', 6, 'Weitere Flip-Flop-Konfigurationen', 2, 0, 'Wechselt (toggelt) seinen Ausgang mit jeder aktiven Taktflanke, solange T = 1 ist; entsteht aus einem JK-Flip-Flop mit verbundenen J- und K-Eingängen.', None),
+    ('frequenzteiler', 'Frequenzteiler', 'zustand', 6, 'Anwendungen', 2, 0, 'Hintereinandergeschaltete JK-Flip-Flops, die jeweils den Takt des nächsten liefern – jede Stufe halbiert die Frequenz und zählt so binär.', None),
+    ('schaltwerk', 'Schaltwerk', 'zustand', 7, 'Motivation', 1, 0, 'Schaltnetz plus Zustandsspeicher mit Rückkopplung: Die Ausgabe hängt von Eingaben und gespeichertem Zustand ab – damit ist jeder Rechner ein Schaltwerk.', None),
+    ('inv_wt', 'invertierte Wahrheitstafel', 'zustand', 7, 'Wiederholung: Beschreibung von Flip-Flops', 2, 0, 'Beantwortet für ein Flip-Flop die umgekehrte Frage: Wie müssen die Eingänge belegt sein, damit aus Q(t) der gewünschte Folgezustand Q(t+1) wird?', None),
+    ('automat', 'endlicher Automat', 'zustand', 7, 'Grundkonzept', 1, 0, 'Modell aus endlich vielen Zuständen, einem Startzustand und Übergängen, die je nach Eingabe in den nächsten Zustand führen.', None),
+    ('zustandsdiagramm', 'Zustandsdiagramm', 'zustand', 7, 'Grundkonzept', 1, 0, 'Graph, in dem Kreise die Zustände und beschriftete Pfeile die Übergänge bei bestimmten Eingaben zeigen – etwa Tür offen/geschlossen oder ein Codeschloss.', None),
+    ('zustandstabelle', 'Zustandstabelle', 'zustand', 7, 'Beispiel', 2, 0, 'Tabellarische Form des Zustandsdiagramms: Für jeden aktuellen Zustand und jede Eingabe steht dort der Folgezustand.', None),
+    ('zustandskodierung', 'Zustandskodierung', 'zustand', 7, 'Beispiel', 2, 0, 'Jedem Zustand wird eine Bitfolge zugeordnet; für n Zustände braucht man aufgerundet log2(n) Flip-Flops, bei vier Zuständen also zwei.', None),
+    ('entwurf', 'Entwurfsschritte eines Schaltwerks', 'zustand', 7, 'Vorgehensweise', 2, 0, 'Zustandsdiagramm → Zustandstabelle → Kodierung → Wahrheitstafel für Zustände und Ausgaben → DNF oder KNF → Minimierung.', None),
+    ('moore', 'Moore-Automat', 'zustand', 7, 'Automaten Typen', 1, 0, 'Automat, dessen Ausgabe nur vom aktuellen Zustand abhängt; die Ausgabe ändert sich deshalb nur taktsynchron.', None),
+    ('mealy', 'Mealy-Automat', 'zustand', 7, 'Automaten Typen', 1, 0, 'Automat, dessen Ausgabe vom aktuellen Zustand und direkt von der Eingabe abhängt; reagiert schneller und kommt oft mit weniger Zuständen aus.', '„Mealy- und Moore-Automat brauchen für dieselbe Aufgabe gleich viele Zustände.“'),
+    ('medwedew', 'Medwedew-Automat', 'zustand', 7, 'Automaten Typen', 2, 0, 'Sonderfall des Moore-Automaten ohne eigene Ausgabelogik: Die gespeicherten Zustände sind direkt die Ausgabe.', None),
+    ('fftyp', 'Wahl des Flip-Flop-Typs', 'zustand', 7, 'Bedeutung des Flip-Flop Typs', 2, 0, "Jeder getaktete Flip-Flop-Typ eignet sich für ein Schaltwerk; über die Don't-care-Einträge seiner invertierten Wahrheitstafel bestimmt er, wie aufwendig die Beschaltung wird.", '„Ein Schaltwerk lässt sich nur mit D-Flip-Flops bauen.“'),
+    ('race', 'Race Condition', 'zustand', 7, 'Race Conditions in Schaltwerken', 2, 0, 'Das Verhalten hängt davon ab, welches Signal zuerst ankommt – etwa wenn zwei Flip-Flops gleichzeitig umschalten sollen und kurz ein Zwischenzustand entsteht.', None),
+    ('fsm_entwurf', 'Entwurf eines Schaltwerks', 'zustand', 8, 'Übungsbeispiel', 1, 0, 'Feste Schrittfolge vom Automatenmodell zur Schaltung: Zustandsdiagramm, Zustandstabelle, binäre Kodierung, Flip-Flop-Ansteuerung, Minimierung, Ausgabelogik.', None),
+    ('binaerkodierung', 'binäre Zustandskodierung', 'zustand', 8, 'Übungsbeispiel', 2, 0, 'Jeder Zustand bekommt ein Bitmuster (z. B. Rot = 00, Rot-Gelb = 01) – jedes Bit wird von einem Flip-Flop gespeichert.', None),
+    ('ff_ansteuertabelle', 'Ansteuertabelle (JK-Flip-Flop)', 'zustand', 8, 'Übungsbeispiel', 2, 0, 'Umgekehrte Wahrheitstafel: Für jeden gewünschten Wechsel von Q(t) nach Q(t+1) steht dort, welche Belegung von J und K nötig ist – oft mit „egal“ (d).', None),
+    ('realisierungsvarianten', 'Schaltung oder Software', 'grundlagen', 8, 'Übungsbeispiel', 2, 0, 'Dieselbe Ampel lässt sich analog, als digitale Logik oder als Programm auf einem Mikrocontroller bauen – mit unterschiedlichen Bauteilkosten, Entwurfsaufwand und Änderbarkeit.', None),
+    ('register', 'Register', 'zustand', 8, 'Register', 1, 0, 'Mehrere D-Flip-Flops mit gemeinsamem Takt, die zusammen ein Datenwort (z. B. 4 Bit) speichern; Steuerleitungen legen fest, wann geschrieben und gelesen wird.', None),
+    ('schieberegister_modi', 'SISO, SIPO, PISO, PIPO', 'zustand', 8, 'Register', 2, 0, 'Register unterscheiden sich darin, ob Daten bitweise nacheinander (seriell) oder alle zugleich (parallel) hinein- und herausgehen – SIPO wandelt z. B. seriell in parallel.', None),
+    ('registerauswahl', 'Registerauswahl über Adressen', 'zustand', 8, 'Register', 2, 0, 'Statt jedes Register einzeln zu verdrahten, wählt eine Adresse über einen Dekoder aus, welches Register gelesen oder beschrieben wird; daraus ergeben sich Adressbus- und Datenbusbreite.', None),
+    ('zaehler', 'Zähler', 'zustand', 8, 'Zähler', 1, 0, 'Schaltwerk, das Eingangsimpulse auf aufeinanderfolgende Zustände abbildet – damit lassen sich Ereignisse zählen oder Folgen erzeugen.', None),
+    ('zaehler_sync', 'synchroner Zähler', 'zustand', 8, 'Zähler', 1, 0, 'Beim synchronen Zähler schalten alle Flip-Flops am selben Takt; beim asynchronen treibt ein Flip-Flop das nächste – einfacher, aber das Ergebnis hängt von den Laufzeiten ab.', '„Ein asynchroner Zähler zeigt zu jedem Zeitpunkt einen gültigen Zählerstand.“'),
+    ('zaehler_flip', 'Zählerbit kippen mit XOR', 'zustand', 8, 'Zähler', 2, 0, 'Ein Zählerbit wechselt, wenn alle niederwertigeren Bits 1 sind; das Kippen erledigt ein XOR, die Bedingung wird über eine UND-Kette weitergereicht (Carry).', None),
+    ('stellenwertsystem', 'Stellenwertsystem', 'rechner', 9, 'Zahlendarstellung', 1, 0, 'Der Wert einer Ziffer hängt von ihrer Position ab: Jede Stelle zählt ein Vielfaches einer Potenz der Basis (10, 2, 8, 16) – anders als bei den additiven römischen Zahlen.', None),
+    ('basiswandlung', 'Basisumrechnung', 'rechner', 9, 'Zahlendarstellung', 2, 0, 'Eine Dezimalzahl wird wiederholt ganzzahlig durch die Basis geteilt; die Reste rückwärts gelesen ergeben die Ziffern (29 → 11101).', None),
+    ('hex_oktal', 'Hexadezimal und Oktal', 'rechner', 9, 'Wechsel zwischen Zahlensystemen mit Basis $2^n$', 2, 0, 'Zwischen Systemen mit Basis 2, 8 und 16 rechnet man blockweise um: je 3 Binärstellen ergeben eine Oktal-, je 4 eine Hexadezimalziffer.', None),
+    ('binaerbruch', 'gebrochene Binärzahlen', 'rechner', 9, 'Gebrochene Zahlen', 2, 0, 'Nachkommastellen zählen halbe, viertel, achtel … Einheiten; manche Dezimalbrüche wie 0,1 haben dadurch keine endliche Binärdarstellung.', '„0,1 wird im Rechner exakt gespeichert.“'),
+    ('zweierkomplement', 'Zweierkomplement', 'rechner', 9, 'Negative Zahlen', 1, 0, 'Darstellung negativer Zahlen, bei der Addition und Subtraktion ohne Fallunterscheidung funktionieren und die Null nur einmal vorkommt – in heutigen Rechnern ausschließlich verwendet.', '„Für eine negative Zahl genügt es, das vorderste Bit auf 1 zu setzen.“'),
+    ('ueberlauf', 'Überlauf', 'rechner', 9, 'Überlauf bei arithmetischen Operationen', 1, 0, 'Weil die Bitbreite fest ist, kann das Ergebnis den Zahlenbereich verlassen – dann ergeben zwei positive Zahlen plötzlich eine negative; erkennbar an den höchsten Bits von Operanden und Ergebnis.', '„Zwei positive Zahlen ergeben addiert immer eine positive Zahl.“'),
+    ('halbaddierer', 'Halbaddierer', 'rechner', 9, 'Schaltnetze für arithmetische Operationen', 2, 0, 'Addiert zwei einzelne Bits: Summe per XOR, Übertrag (Carry) per UND.', None),
+    ('volladdierer', 'Volladdierer', 'rechner', 9, 'Schaltnetze für arithmetische Operationen', 1, 0, 'Addiert zwei Bits und den Übertrag der vorherigen Stelle und liefert Summe und neuen Übertrag – lässt sich aus zwei Halbaddierern bauen.', None),
+    ('ripple_carry', 'Ripple-Carry-Addierer', 'rechner', 9, 'Umsetzung von Addierwerken', 2, 0, 'n verkettete Volladdierer für n-Bit-Zahlen; der Übertrag läuft von Stelle zu Stelle, das Ergebnis steht erst nach dem kompletten Durchlauf fest.', None),
+    ('addsub', 'Addier-/Subtrahierwerk', 'rechner', 9, 'Umsetzung eines Addier-/Subtrahier-Werkes', 2, 0, 'Ein Addierwerk, das durch zusätzliche Beschaltung auch A − B berechnet – die Subtraktion wird als Addition des Komplements ausgeführt.', None),
+    ('cla', 'Carry-Look-Ahead-Addierer', 'rechner', 9, 'Carry Look Ahead Addierer', 2, 0, 'Berechnet alle Überträge parallel aus „Generate“ und „Propagate“ jeder Stelle statt sie durchzureichen; schneller, braucht aber Gatter mit vielen Eingängen, daher in Blöcken eingesetzt.', None),
+    ('csa', 'Carry-Save-Addierer', 'rechner', 9, 'Carry Save Addierer', 2, 0, 'Addiert drei Zahlen auf einmal und gibt Summe ohne Überträge und Überträge getrennt aus; lohnt sich, wenn viele Summanden zusammenkommen, etwa bei der Multiplikation.', None),
+    ('alu', 'ALU (Rechenwerk)', 'rechner', 10, 'Schritt 1 - Operationsauswahl', 1, 0, 'Arithmetisch-logische Einheit: führt je nach Steuerbits eine von mehreren Operationen (z. B. ADD, SUB, AND, Shift) auf den Registern A und B aus.', None),
+    ('statusflags', 'Statusflags', 'rechner', 10, 'Schritt 1 - Operationsauswahl', 2, 0, 'Einzelne Bits, die Besonderheiten des letzten Ergebnisses melden – etwa Carry, Overflow oder Fehler bei Division durch Null.', None),
+    ('befehlscodierung', 'Befehl als Bitmuster', 'rechner', 10, 'Schritt 1 - Operationsauswahl', 2, 0, 'Die Steuerbits der ALU (F0–F2, Z) bekommen Namen wie ADD_B – ein Befehl ist zunächst nichts anderes als ein Bitmuster an den Steuerleitungen.', None),
+    ('steuerwerk', 'Steuerwerk', 'rechner', 10, 'Schritt 2 - Sequenz von Berechnungen', 1, 0, 'Holt Befehle aus dem Speicher, interpretiert sie, konfiguriert die ALU und wertet ihre Statusinformationen aus – es trennt die Befehle von den einzelnen Steuerleitungen.', None),
+    ('lda_sta', 'LDA / STA', 'rechner', 10, 'Schritt 3 - Handhabung der Daten', 2, 1, 'Lade- und Speicherbefehle, die Daten von einer Speicheradresse in ein Register holen bzw. dorthin zurückschreiben; sie brauchen einen zusätzlichen Speicherzugriff.', None),
+    ('befehlszyklus', 'Fetch–Decode–Execute', 'rechner', 10, 'Schritt 3 - Handhabung der Daten', 1, 0, 'Grundtakt jeder CPU: Befehl an der Adresse des Programmzählers holen, dekodieren, ggf. Operanden laden, ausführen, Programmzähler weitersetzen.', None),
+    ('adress_datenbus', 'Adressbus und Datenbus', 'rechner', 10, 'Schritt 3 - Handhabung der Daten', 2, 0, 'Zwei Verbindungswege zum Speicher: Über den Adressbus wird gesagt, welche Speicherstelle gemeint ist, über den Datenbus fließt ihr Inhalt.', None),
+    ('memory_mapped_io', 'Memory Mapped I/O', 'rechner', 10, 'Schritt 4 - Ein- und Ausgaben', 2, 0, 'Ein- und Ausgabegeräte erscheinen für das Programm wie gewöhnliche Speicheradressen.', None),
+    ('von_neumann', 'Von-Neumann-Architektur', 'rechner', 10, '1945: Von-Neumann-Architektur', 1, 0, 'Bauplan von 1945: Programm und Daten liegen gemeinsam in einem Speicher; dazu kommen Rechenwerk, Steuerwerk und Ein-/Ausgabewerk.', None),
+    ('befehlssatz', 'Befehlssatz', 'rechner', 11, 'Wortformate', 1, 0, 'Liste aller Befehle, die ein Prozessor direkt ausführt – beim Modellrechner 16 Befehle von HLT über Sprünge bis ADD, AND, XOR.', None),
+    ('befehlsformat', 'Befehlsformat / Opcode', 'rechner', 11, 'Wortformate', 1, 0, 'Ein 16-Bit-Befehlswort teilt sich in 4 Bit Operationscode und 12 Bit Adresse – jedes Bit mehr für den Opcode halbiert den adressierbaren Speicher.', None),
+    ('assembler', 'Assemblerprogramm', 'rechner', 11, 'Wie sieht ein Programm dann aus?', 2, 0, 'Programm aus Befehlskürzeln (Mnemonics) wie LDA, ADD, JMP, die eins zu eins in Maschinenbefehle übersetzt werden; Hochsprachen erzeugt ein Compiler.', None),
+    ('mar_mbr', 'MAR und MBR', 'rechner', 11, 'Speicherbezogene Komponente', 2, 1, 'Speicher-Adress-Register (MAR) und Speicher-Puffer-Register (MBR) halten Adresse und Datenwort während eines Speicherzugriffs fest und entkoppeln so den langsamen Speicher vom Prozessor.', None),
+    ('akkumulator', 'Akkumulator', 'rechner', 11, 'Datenpfadbezogene Komponente', 2, 0, 'Register A – im Modellrechner das einzige allgemeine Register; alle Rechenbefehle verknüpfen A mit einem Speicherwort und schreiben das Ergebnis zurück nach A.', None),
+    ('pc_ir', 'PC und Befehlsregister', 'rechner', 11, 'Steuerwerk', 1, 0, 'Der Programmzähler (PC) zeigt auf den nächsten Befehl, das Befehlsregister (IR) hält den gerade ausgeführten; Sprünge überschreiben den PC.', None),
+    ('befehlsphasen', 'Fetch- und Execute-Phase', 'rechner', 11, 'Beschreibung der prozessorinternen Vorgänge', 2, 0, 'Einfache Befehle (HLT, Sprünge) sind nach der Holphase fertig, Rechen- und Speicherbefehle brauchen eine zweite Phase; ein State-Flip-Flop merkt sich, welche gerade läuft.', None),
+    ('rtl', 'Register-Transfer-Sprache', 'rechner', 11, 'Register-Transfer-Sprache', 2, 0, 'Kurzschrift für Datenbewegungen zwischen Registern, z. B. PC ← PC + 1 oder bedingt A15 = 1: PC ← IR.', None),
+    ('taktphasen', '8-Phasen-Takt', 'rechner', 11, 'Taktvorgabe', 2, 0, 'Ein 3-Bit-Zähler mit 3-zu-8-Dekoder teilt jede Phase in die Taktschritte CP1 bis CP8, in denen jeweils bestimmte Registertransfers stattfinden.', None),
+    ('festverdrahtet', 'festverdrahtetes Steuerwerk', 'rechner', 11, 'Umsetzung als Schaltnetz / Schaltwerk', 2, 0, 'Steuerwerk als Automat aus Gattern: Opcode-Dekoder, Takt und Status-Flip-Flops erzeugen über ein Schaltnetz alle Steuersignale.', None),
+    ('mikroprogramm', 'Mikroprogramm', 'rechner', 11, 'Mikroprogramme', 1, 0, 'Statt fester Logik liegt für jeden Maschinenbefehl eine Folge von Steuerwörtern in einem Speicher – leichter zu entwerfen und zu ändern.', '„Ein Maschinenbefehl ist der kleinste Schritt, den die Hardware ausführt.“'),
+    ('horiz_vert', 'horizontal/vertikal', 'rechner', 11, 'Horizontale vs. vertikale Mikroprogrammierung', 2, 0, 'Horizontal steuert jedes Bit direkt eine Leitung (schnell, aber lange Wörter); vertikal sind die Steuerinformationen in Feldern codiert (kurz, aber zusätzlicher Dekodieraufwand).', None),
+    ('mikrocontroller', 'Mikrocontroller', 'controller', 12, 'Mikroprozessor vs. Mikrocontroller', 1, 0, 'Ein Mikroprozessor mit Peripherie auf einem Chip – Timer, analoge und digitale Eingänge, Interruptsystem, Taktgeber und Spannungsüberwachung. Der Übergang zum Mikroprozessor ist fließend.', None),
+    ('atmega328', 'ATmega328', 'controller', 12, 'Atmega328 Controller', 2, 0, '8-Bit-Controller der AVR-Familie auf dem Arduino Uno; die Zahl im Namen verweist auf die Speichergröße (32 KByte Flash, 1 KByte EEPROM, 2 KByte RAM).', None),
+    ('taktgenerator', 'Taktgenerator', 'controller', 12, 'Taktgenerator', 2, 0, 'Liefert den Takt: der eingebaute RC-Oszillator (bis 8 MHz) ist bequem, weicht aber um 3–10 % ab; ein externer Quarz ist auf etwa 0,1 % genau, braucht aber zusätzliche Bauteile.', None),
+    ('speicherarten', 'Flash, EEPROM und RAM', 'controller', 12, 'Speicher', 1, 0, 'Drei Speicher mit verschiedenen Aufgaben: Im Flash steht das Programm, im EEPROM bleiben Einstellungen und Kalibrierdaten nach dem Ausschalten erhalten, das RAM ist der flüchtige Arbeitsspeicher.', '„Was im RAM steht, ist nach dem Neustart noch da.“'),
+    ('mmio', 'Memory-Mapped-IO beim AVR', 'controller', 12, 'Speicher', 2, 0, 'Arbeitsregister, I/O-Register und RAM liegen in einem gemeinsamen Adressraum und werden mit denselben Befehlen angesprochen – Peripherie bedienen heißt also: in bestimmte Adressen schreiben.', None),
+    ('reset', 'Reset', 'controller', 12, 'Reset-System', 2, 0, 'Neustart des Controllers, ausgelöst z. B. beim Einschalten, über den Reset-Pin, durch den Watchdog oder bei zu niedriger Spannung (Brown-out); danach beginnt die Ausführung an Adresse 0.', None),
+    ('ddrx', 'DDRx und PORTx', 'controller', 12, 'Digitale Ein/Ausgaben', 1, 1, 'Register, über die ein Pin konfiguriert wird: DDRx legt die Richtung fest (1 = Ausgang), PORTx den ausgegebenen Pegel – oder bei einem Eingang den Pull-up-Widerstand. Gelesen wird über PINx.', None),
+    ('pullup', 'Pull-up-Widerstand', 'controller', 12, 'Digitale Ein/Ausgaben', 2, 0, 'Zieht einen Eingang auf High, solange nichts angeschlossen oder kein Taster gedrückt ist; beim AVR wird er eingeschaltet, indem man bei einem Eingang das PORTx-Bit setzt.', '„Ein unbeschalteter Eingang liest zuverlässig 0.“'),
+    ('arduino', 'Arduino', 'controller', 12, 'Integration in Schaltung', 2, 0, 'Offene Hardware- und Softwareplattform mit fertigen Boards, Bibliotheken und den Funktionen setup und loop; im Kurs geht es um die Konzepte hinter dieser Fassade, programmiert wird mit der avrlibc.', '„Mikrocontroller programmieren heißt Arduino-Funktionen aufrufen.“'),
+    ('toolchain', 'Toolchain', 'controller', 12, 'Programmierung des Hello-World Beispiels', 1, 0, 'Kette von Werkzeugen vom Quelltext zum Controller: Compiler (avr-gcc), Assembler, Linker, Umwandlung in eine .hex-Datei, dann überträgt ein Programmer das Programm in den Flash.', None),
+    ('abstraktion_prog', 'Programmierebenen', 'controller', 12, 'Vergleich', 2, 0, 'Dieselbe blinkende LED in Assembler, avrlibc, Arduino oder Simulink: Je höher die Abstraktion, desto weniger Expertenwissen ist nötig, aber desto größer wird der Code (24 Byte gegenüber 3232 Byte).', None),
+    ('bitmaske', 'Bitmaske', 'controller', 12, 'Vorbereitung der praktischen Aufgaben', 1, 0, 'Mit Schiebe- und Bitoperatoren gebaute Zahl, die gezielt einzelne Bits eines Registers trifft: setzen mit |=, löschen mit &= ~, prüfen mit &.', '„PORTB = (1 << PB5) schaltet nur Bit 5 ein.“'),
+    ('adc', 'ADC', 'controller', 13, 'Motivation', 1, 0, 'Ordnet einer Spannung eine ganze Zahl zu: Das kontinuierliche Signal wird zeitlich abgetastet und dann einer von 2^n Stufen zwischen 0 V und der Referenzspannung zugeordnet.', None),
+    ('aufloesung', 'Auflösung', 'controller', 13, 'Motivation', 1, 0, 'Die Zahl der Bits bestimmt, wie fein der Messbereich unterteilt wird; ein 3-Bit-Wandler teilt 8 V in Stufen von 1 V – genauer lässt sich der Wert nicht angeben.', '„Mehr Bits bedeuten automatisch eine genauere Messung.“'),
+    ('analogkomparator', 'Analog-Komparator', 'controller', 13, 'Analog Komperator', 2, 0, 'Vergleicht zwei Spannungen und meldet nur, welche größer ist – praktisch ein 1-Bit-Analog-Digital-Wandler; reale Komparatoren haben eine Hysterese.', None),
+    ('abtasttheorem', 'Abtasttheorem', 'controller', 13, 'Analog Digital Wandler', 1, 0, 'Ein Signal lässt sich nur dann unverfälscht rekonstruieren, wenn öfter als doppelt so häufig abgetastet wird wie seine höchste Frequenz.', '„Wer seltener misst, sieht das Signal nur gröber – aber nicht falsch.“'),
+    ('aliasing', 'Alias-Effekt', 'controller', 13, 'Analog Digital Wandler', 2, 0, 'Verzerrung durch zu langsames Abtasten: Aus den Messpunkten scheint ein ganz anderes Signal hervorzugehen als das tatsächliche.', None),
+    ('flashwandler', 'Flash-Wandler', 'controller', 13, 'Flashwandler', 2, 0, 'Vergleicht die Eingangsspannung gleichzeitig mit vielen Stufen – je einem Komparator pro Stufe; sehr schnell, aber Energiebedarf und Hardwareaufwand wachsen mit der Auflösung.', None),
+    ('adc_seq', 'Sequenzieller Wandler', 'controller', 13, 'Sequenzielle Wandler', 2, 0, 'Kommt mit einem Komparator aus, indem ein Digital-Analog-Wandler die Vergleichsspannung schrittweise erzeugt – beim Zählverfahren Stufe für Stufe, bei der sukzessiven Approximation (Wägeverfahren) mit gleichbleibender Wandlungsdauer.', None),
+    ('referenzspannung', 'Referenzspannung', 'controller', 13, 'Herausforderungen bei der Wandlung', 1, 0, 'Die Spannung, mit der der Eingang verglichen wird – sie legt den größten messbaren Wert fest; schwankt sie, schwankt jedes Messergebnis mit.', None),
+    ('wandlerfehler', 'Wandlerfehler', 'controller', 13, 'Herausforderungen bei der Wandlung', 2, 0, 'Neben dem Quantisierungsfehler gibt es Offset- (konstante Abweichung), Verstärkungs- (wertabhängige Abweichung) und Linearitätsfehler; sie hängen von Abtastrate und Temperatur ab.', None),
+    ('adclh', 'ADCL und ADCH', 'controller', 13, 'Umsetzung im AVR', 2, 1, 'Zwei 8-Bit-Register, auf die das 10-Bit-Ergebnis verteilt wird; zuerst ADCL lesen, dann ADCH, damit beide Teile aus derselben Wandlung stammen.', '„Die Reihenfolge beim Auslesen von ADCL und ADCH ist egal.“'),
+    ('admux', 'ADMUX und ADCSRA', 'controller', 13, 'Beispiel 2 - Lesen eines Analogen Distanzsensors', 2, 1, 'ADMUX wählt Eingangskanal und Referenzspannung, ADCSRA schaltet den Wandler ein, setzt den Taktteiler und startet mit dem Bit ADSC eine Wandlung; ist ADSC wieder 0, liegt das Ergebnis vor.', None),
+    ('ntc', 'Heißleiter (NTC)', 'controller', 13, 'Beispiel 1 - Heißleiter', 2, 0, 'Widerstand, der mit steigender Temperatur kleiner wird; in einem Spannungsteiler wird daraus eine Spannung, die der ADC misst und aus der man auf die Temperatur zurückrechnet.', None),
+    ('interrupt', 'Interrupt', 'controller', 14, 'Interrupts', 1, 0, 'Kurze Unterbrechung des laufenden Programms, um auf ein zeitkritisches Ereignis zu reagieren – etwa einen gedrückten Not-Aus-Taster, ein empfangenes Byte oder eine fertige AD-Wandlung.', None),
+    ('polling', 'Polling', 'controller', 14, 'Interrupts', 1, 0, 'Zyklisches Abfragen eines Zustands im Hauptprogramm: braucht keine zusätzliche Hardware und ist zeitlich vorhersagbar, hält den Prozessor aber beschäftigt und reagiert verzögert.', None),
+    ('isr', 'ISR', 'controller', 14, 'Ablauf', 1, 1, 'Funktion, die beim Interrupt angesprungen wird; der Prozessor sichert vorher den Zustand und setzt danach das Hauptprogramm fort. ISRs sollen kurz sein und nicht blockierend warten.', '„In der ISR darf man ruhig warten – das Hauptprogramm läuft ja nebenher weiter.“'),
+    ('sei', 'sei, cli und Maskenbit', 'controller', 14, 'Umsetzung auf dem AVR', 2, 1, 'Zweistufige Freigabe: sei/cli schalten über das I-Bit im Statusregister alle Interrupts ein oder aus, ein Maskenbit pro Quelle jeden einzeln; eine ISR läuft nur, wenn beides gesetzt ist.', '„Wenn ich das Maskenbit setze, kommt der Interrupt schon an.“'),
+    ('vektortabelle', 'Interrupt-Vektortabelle', 'controller', 14, 'Interrupt-Vektortabelle im AVR Programm', 2, 0, 'Liste von Sprungbefehlen am Anfang des Programmspeichers – ein Eintrag pro Interruptquelle, der erste für den Reset; nicht belegte Einträge führen zum Neustart.', None),
+    ('atomar', 'Atomarer Zugriff', 'controller', 14, 'Praktische Interruptprogrammierung', 2, 0, 'Schutz einer Befehlsfolge vor Unterbrechung, z. B. mit cli/sei oder ATOMIC_BLOCK – nötig, wenn Hauptprogramm und ISR dieselben Variablen oder Register verwenden.', '„Eine C-Zeile wird in einem Stück ausgeführt.“'),
+    ('volatile', 'volatile', 'controller', 14, 'Praktische Interruptprogrammierung', 2, 1, 'Schlüsselwort, das dem Compiler verbietet, Annahmen über den Wert einer Variable zu treffen – nötig für Variablen, die eine ISR verändert.', '„Der Compiler sieht doch, dass die ISR die Variable ändert.“'),
+    ('timer', 'Timer/Counter', 'controller', 14, 'Basisfunktionalität', 1, 0, 'Hardware-Zähler, der Takte oder äußere Ereignisse zählt und beim Überlauf oder bei einem Vergleichswert einen Interrupt auslösen kann – ohne Rechenzeit des Prozessors.', None),
+    ('prescaler', 'Vorteiler (Prescaler)', 'controller', 14, 'Timer-Funktionalität (Normal-Mode)', 2, 0, 'Teilt den Prozessortakt, bevor er den Zähler erreicht: Bei 16 MHz und Vorteiler 1024 zählt der Timer 15 625 Schritte pro Sekunde.', None),
+    ('compare', 'Compare-Modus', 'controller', 14, 'Compare Mode', 2, 0, 'Der Timer vergleicht seinen Zählerstand mit einem Register (z. B. OCR1A) und schaltet bei Gleichheit selbstständig einen Ausgang um oder löst einen Interrupt aus – das Hauptprogramm bleibt frei.', None),
+    ('capture', 'Capture-Modus', 'controller', 14, 'Capture Mode', 2, 0, 'Bei einem Signal an einem Eingangspin speichert der Timer seinen aktuellen Zählerstand (ICR1) – so lassen sich Zeitpunkte und Zeitabstände messen.', None),
+    ('pwm', 'PWM', 'controller', 14, 'Compare Mode', 1, 0, 'Ein Ausgang wird schnell ein- und ausgeschaltet; das Verhältnis von An- zu Aus-Zeit (Tastverhältnis) bestimmt die im Mittel wirkende Spannung – eine Quasi-Analogausgabe ohne Digital-Analog-Wandler.', '„Bei PWM liegt am Pin eine echte Zwischenspannung an.“'),
+    ('eingebettet', 'Eingebettetes System', 'controller', 15, 'Motivation', 1, 0, 'Rechner, der in ein größeres Produkt eingebaut ist und dort eine spezielle Aufgabe erfüllt – oft unbemerkt, mit Zeitanforderungen, angepasster Hardware und Software.', None),
+    ('aktor', 'Aktor', 'controller', 15, 'Motivation', 1, 0, 'Setzt elektrische Signale in Bewegung oder andere physikalische Größen um und greift so in die Umgebung ein – etwa LED, Display, Ventil, Motor oder Lautsprecher.', None),
+    ('dekoder7seg', '7-Segment-Dekoder', 'controller', 15, 'Ansteuerung digitaler Ausgänge', 2, 0, 'Baustein (z. B. CD4543), der eine 4-Bit-Zahl in die sieben Steuerleitungen einer Ziffernanzeige übersetzt und so Pins des Controllers spart.', None),
+    ('anzeige_mux', 'Multiplexing von Anzeigen', 'controller', 15, 'Ansteuerung digitaler Ausgänge', 2, 0, 'Mehrere Anzeigen teilen sich dieselben Datenleitungen und werden abwechselnd über je eine eigene Steuerleitung aktiviert; die Schaltzeiten der Anzeigen müssen berücksichtigt werden.', None),
+    ('schieberegister', 'Schieberegister', 'controller', 15, 'Ansteuerung digitaler Ausgänge', 2, 0, 'Spart Pins, indem Bits nacheinander über wenige Leitungen übertragen statt parallel ausgegeben werden (Sequenzialisierung).', None),
+    ('hbruecke', 'H-Brücke', 'controller', 15, 'Ansteuerung von Motoren', 1, 0, 'Schaltung aus vier Schaltern, mit der sich die Stromrichtung durch einen Gleichstrommotor umpolen lässt – und damit seine Drehrichtung.', None),
+    ('dcmotor', 'Gleichstrommotor', 'controller', 15, 'Ansteuerung von Motoren', 2, 0, 'Motor, dessen Drehrichtung über die Polarität (H-Brücke) und dessen Geschwindigkeit über ein PWM-Signal vorgegeben wird.', None),
+    ('schrittmotor', 'Schrittmotor', 'controller', 15, 'Schrittmotoren', 1, 0, 'Motor, dessen Spulen nach einem festen Muster nacheinander bestromt werden, sodass sich der Rotor Schritt für Schritt um einen kleinen Winkel dreht.', '„Ein Schrittmotor weiß immer, in welcher Position er steht.“'),
+    ('servo', 'Servomotor', 'controller', 15, 'Servomotoren', 1, 0, 'Motor mit eingebauter Positionsmessung und Regelung; die Sollposition wird über die Pulsbreite (etwa 1 bis 2 ms) eines alle 20 ms wiederholten Signals vorgegeben.', None),
+]
+
+R = [
+    ('hexdatei', 'mikrocontroller', 'wird ausgeführt vom'),
+    ('ddrb', 'abstraktionsebenen', 'zeigt den Weg durch die'),
+    ('mikroarchitektur', 'abstraktionsebenen', 'ist Ebene 2 der'),
+    ('analytical_engine', 'lochkarte', 'liest Daten und Befehle über'),
+    ('relais', 'z3', 'ist Baustein der'),
+    ('von_neumann', 'mikroarchitektur', 'ist Grundstruktur der'),
+    ('transistor', 'mikroprozessor', 'ist Baustein des'),
+    ('pegel', 'digitalsignal', 'legt die Werte 0 und 1 fest im'),
+    ('boolesche_algebra', 'schaltfunktion', 'beschreibt'),
+    ('wahrheitstafel', 'schaltfunktion', 'beschreibt eindeutig'),
+    ('gatter', 'schaltfunktion', 'realisiert'),
+    ('umformung', 'axiome', 'nutzt'),
+    ('de_morgan', 'axiome', 'folgt aus'),
+    ('transistor', 'gatter', 'bildet zusammengeschaltet'),
+    ('kdnf', 'wahrheitstafel', 'wird abgelesen aus'),
+    ('kv', 'kdnf', 'minimiert'),
+    ('schleife', 'resolution', 'beruht auf'),
+    ('graycode', 'kv', 'ordnet Zeilen und Spalten im'),
+    ('kv', 'umformung', 'ersetzt systematisch die'),
+    ('dontcare', 'schleife', 'vergrößert'),
+    ('kv_maxterm', 'de_morgan', 'nutzt'),
+    ('aequivalenz', 'wahrheitstafel', 'gelingt sicher mit der'),
+    ('qmc', 'primimplikant', 'ermittelt'),
+    ('primtafel', 'essentiell', 'zeigt'),
+    ('schaltnetz', 'gatter', 'besteht aus'),
+    ('glitch', 'schaltnetz', 'tritt auf in'),
+    ('dekoder', 'schaltnetz', 'ist ein vorgefertigtes'),
+    ('dekoder', 'adressdekoder', 'wird eingesetzt als'),
+    ('kodierer', 'prioenc', 'wird abgesichert durch'),
+    ('demux', 'mux', 'ist das Gegenstück zum'),
+    ('sequentiell', 'schaltnetz', 'erweitert um Speicher das'),
+    ('rueckkopplung', 'srlatch', 'ermöglicht'),
+    ('srlatch', 'dlatch', 'wird erweitert zum'),
+    ('jkff', 'tff', 'wird mit J = K zum'),
+    ('schaltwerk', 'flanke', 'speichert seinen Zustand in'),
+    ('zustandsdiagramm', 'zustandstabelle', 'wird übertragen in'),
+    ('mealy', 'moore', 'verallgemeinert den'),
+    ('medwedew', 'moore', 'ist Spezialfall vom'),
+    ('inv_wt', 'fftyp', 'bestimmt den Aufwand bei der'),
+    ('fsm_entwurf', 'binaerkodierung', 'erfordert'),
+    ('binaerkodierung', 'ff_ansteuertabelle', 'wird umgesetzt mit'),
+    ('register', 'registerauswahl', 'wird ausgewählt über'),
+    ('zaehler', 'zaehler_sync', 'unterscheidet'),
+    ('zaehler_flip', 'zaehler', 'realisiert alternativ'),
+    ('stellenwertsystem', 'basiswandlung', 'umgerechnet per'),
+    ('halbaddierer', 'volladdierer', 'ist Baustein von'),
+    ('volladdierer', 'ripple_carry', 'verkettet zum'),
+    ('ripple_carry', 'cla', 'wird beschleunigt durch'),
+    ('zweierkomplement', 'addsub', 'ermöglicht'),
+    ('zweierkomplement', 'ueberlauf', 'hat Grenze:'),
+    ('alu', 'statusflags', 'liefert'),
+    ('steuerwerk', 'alu', 'konfiguriert'),
+    ('befehlszyklus', 'lda_sta', 'braucht Zusatzzugriff bei'),
+    ('von_neumann', 'steuerwerk', 'umfasst'),
+    ('befehlssatz', 'befehlsformat', 'codiert im'),
+    ('taktphasen', 'befehlsphasen', 'unterteilt'),
+    ('festverdrahtet', 'mikroprogramm', 'wird ersetzt durch'),
+    ('mikroprogramm', 'horiz_vert', 'organisiert als'),
+    ('volladdierer', 'alu', 'ist Baustein der'),
+    ('ueberlauf', 'statusflags', 'wird gemeldet als'),
+    ('registerauswahl', 'adress_datenbus', 'führt zu'),
+    ('register', 'akkumulator', 'dient als'),
+    ('pc_ir', 'zaehler', 'zählt hoch wie ein'),
+    ('befehlscodierung', 'befehlsformat', 'wird zum'),
+    ('befehlszyklus', 'befehlsphasen', 'verfeinert in'),
+    ('steuerwerk', 'festverdrahtet', 'realisiert als'),
+    ('von_neumann', 'befehlsformat', 'erzwingt gleiche Wortbreite für Befehle und Daten im'),
+    ('zweierkomplement', 'akkumulator', 'Zahlenformat im'),
+    ('mikrocontroller', 'speicherarten', 'enthält'),
+    ('ddrx', 'bitmaske', 'wird verändert mit'),
+    ('toolchain', 'speicherarten', 'schreibt das Programm in den Flash von'),
+    ('adc', 'referenzspannung', 'misst relativ zur'),
+    ('adc', 'abtasttheorem', 'tastet ab nach dem'),
+    ('analogkomparator', 'flashwandler', 'vervielfacht ergibt den'),
+    ('adclh', 'adc', 'speichert das Ergebnis des'),
+    ('interrupt', 'isr', 'startet die'),
+    ('polling', 'interrupt', 'ist die Alternative zum'),
+    ('timer', 'pwm', 'erzeugt im Compare-Modus'),
+    ('compare', 'pwm', 'ist Grundlage für'),
+    ('adc', 'interrupt', 'meldet Wandlungsende per'),
+    ('reset', 'vektortabelle', 'springt über den ersten Eintrag der'),
+    ('pwm', 'dcmotor', 'steuert die Geschwindigkeit von'),
+    ('hbruecke', 'dcmotor', 'kehrt die Drehrichtung um von'),
+    ('timer', 'servo', 'erzeugt die Steuerpulse für'),
+    ('aktor', 'eingebettet', 'ist Teil eines'),
+    ('kv', 'qmc', 'wird bei vielen Variablen ersetzt durch'),
+    ('dnf', 'zweistufig', 'wird umgesetzt durch'),
+    ('ddrb', 'register', 'ist ein'),
+    ('digitalsignal', 'adc', 'entsteht durch'),
+    ('xor', 'halbaddierer', 'ist Baustein im'),
+    ('qmc', 'kdnf', 'minimiert die'),
+    ('adressdekoder', 'speicherarten', 'wählt den Baustein im'),
+    ('prioenc', 'flashwandler', 'wird eingesetzt im'),
+    ('mux', 'adc', 'wählt den Eingangskanal des'),
+    ('frequenzteiler', 'zaehler', 'ist eine einfache Form vom'),
+    ('flanke', 'register', 'ist Baustein von'),
+    ('schaltwerk', 'steuerwerk', 'ist Grundlage für das'),
+    ('ff_ansteuertabelle', 'jkff', 'kehrt die Wahrheitstafel um von'),
+    ('fsm_entwurf', 'moore', 'setzt in Hardware um'),
+    ('fsm_entwurf', 'kv', 'minimiert mit'),
+    ('schieberegister_modi', 'schieberegister', 'wird eingesetzt als'),
+    ('registerauswahl', 'dekoder', 'nutzt'),
+    ('zaehler_sync', 'takt', 'schaltet alle Flip-Flops am selben'),
+    ('zaehler_flip', 'xor', 'nutzt'),
+    ('halbaddierer', 'schaltnetz', 'ist ein'),
+    ('festverdrahtet', 'automat', 'ist ein'),
+    ('festverdrahtet', 'dekoder', 'dekodiert den Opcode mit'),
+    ('memory_mapped_io', 'mmio', 'wird umgesetzt als'),
+    ('mikrocontroller', 'von_neumann', 'erweitert die Bausteine der'),
+    ('ddrx', 'register', 'ist ein'),
+    ('taktgenerator', 'takt', 'liefert den'),
+    ('abstraktion_prog', 'abstraktionsebenen', 'ordnet sich ein in die'),
+    ('bitmaske', 'boolesche_algebra', 'wendet bitweise an'),
+    ('toolchain', 'befehlszyklus', 'erzeugt die Maschinenbefehle für den'),
+    ('vektortabelle', 'pc_ir', 'lädt den Programmzähler über'),
+    ('atomar', 'race', 'verhindert'),
+    ('timer', 'zaehler', 'ist ein Hardware-'),
+    ('analogkomparator', 'komparator', 'ist das analoge Gegenstück zum'),
+    ('dekoder7seg', 'dekoder', 'ist ein'),
+    ('anzeige_mux', 'mux', 'nutzt die Idee des'),
+    ('schieberegister', 'register', 'ist ein spezielles'),
+    ('stellenwertsystem', 'zweierkomplement', 'ist Grundlage für das'),
+]
+
+A = [
+    ('a_lauflicht', 'LED-Lauflicht auf dem Arduino', 'Lichtsteuerung', 0, 'Worum geht es in dieser Vorlesung?', 'Arduino-Sketch, der vier LEDs an Pin 10–13 nacheinander je 250 ms einschaltet (Wokwi-Simulation), und die daraus erzeugte Hex-Datei', ['mikrocontroller', 'hexdatei'], 'lehrende'),
+    ('a_wetterstation', 'Arduino-Wetterstation', 'Messtechnik', 0, 'Was können Sie damit bauen?', 'Sensordaten einer Wetterstation, Helligkeitswerte des ADC (1023 = dunkel)', ['mikrocontroller'], 'lehrende'),
+    ('a_webstuhl', 'Jacquard-Webstuhl', 'Textil', 1, 'Joseph-Marie Jacquard (1752 - 1834) - Automatischer Webstuhl', 'Lochkarten steuern das Webmuster; zur Endlosschleife gekoppelt für wiederkehrende Muster', ['lochkarte'], 'lehrende'),
+    ('a_volkszaehlung', 'Hollerith-Maschinen für die US-Volkszählung 1890', 'Verwaltung', 1, 'Es werde Licht ... elektrische Systeme', 'Tabelliermaschine, Sortierer, Locher und Leser für Lochkarten; Auswertung der Volkszählung in 2 Jahren', ['lochkarte'], 'lehrende'),
+    ('a_lampe', 'Lampe mit zwei Schaltern', 'Haushalt', 2, 'Motivation', 'Reihenschaltung (Lampe leuchtet bei Schalter 1 und 2) und Parallelschaltung (Schalter 1 oder 2)', ['boolesche_algebra', 'schaltfunktion'], 'lehrende'),
+    ('a_relais_xor', 'XOR aus Relais', 'Elektrotechnik', 2, 'Exkurs: Technische Realisierung', 'AND-Gatter aus Relais bzw. Transistoren, Relaisschaltung für das exklusive ODER', ['xor', 'gatter'], 'lehrende'),
+    ('a_7segment', 'Sieben-Segment-Anzeige', 'Anzeigetechnik', 3, 'Dont-Care-Einträge in der Wahrheitstafel', "Wahrheitstafel und KV-Diagramm für Segment d bei den Ziffern 0–9 (4 Eingangsleitungen, 6 Don't-Care-Codes), Prüfung im Simulator", ['dontcare', 'kv', 'schleife'], 'lehrende'),
+    ('a_sympy', 'Minimierung mit Python', 'Software', 3, 'Zusammenfassung', 'SymPy-Skript Minimize.py: SOPform berechnet aus 9 Mintermen eine minimale DNF', ['sopform', 'kdnf'], 'lehrende'),
+    ('a_kaffeemaschine', 'Fehleranzeige einer Kaffeemaschine', 'Haushalt', 4, 'Beispielanwendung', 'Vier digitale Sensorsignale, eine Fehler-LED für die Zustände 6 bis 14: Wahrheitstabelle, Minimierung mit Quine-McCluskey und Gatterschaltung in der Simulation', ['qmc', 'primimplikant', 'schaltnetz'], 'lehrende'),
+    ('a_paritaet', 'Paritätsprüfung', 'Datenübertragung', 4, 'Schaltungssynthese', 'Schaltnetz, das bei einer ungeraden Zahl von Einsen an drei Eingängen eine 1 ausgibt', ['schaltnetz', 'gatter'], 'lehrende'),
+    ('a_7segment_dekoder', 'Ziffernanzeige mit 7-Segment-Anzeige', 'Anzeigen', 5, 'n-zu-k Dekodierer', 'Arduino-Sketch im Simulator, der die Ziffern 0 bis 9 auf einer 7-Segment-Anzeige ausgibt', ['dekoder', 'bcd7seg'], 'lehrende'),
+    ('a_flashadc', 'Flash-Analog-Digital-Wandler', 'Messtechnik', 5, 'n-zu-k Kodierer', 'Video: Ein Prioritätskodierer macht aus den Komparatorausgängen eines Flash-Wandlers eine Binärzahl', ['prioenc', 'kodierer'], 'lehrende'),
+    ('a_temperatur', 'Übertemperatur-Merker', 'Messtechnik', 6, 'Anwendungsbeispiele', 'Digitaler Temperatursensor setzt ein SR-Latch; die Meldung bleibt bestehen, bis sie über R quittiert wird', ['srlatch'], 'lehrende'),
+    ('a_avrpin', 'IO-Pin eines AVR-Mikrocontrollers', 'Mikrocontroller', 6, 'Einsatzbeispiel', 'Schaltbild: Konfiguration eines einzelnen Pins mit Hilfe von vier Flip-Flops', ['dlatch', 'flanke'], 'lehrende'),
+    ('a_sequenzdetektor', 'Detektor für drei aufeinanderfolgende Einsen', 'Signalverarbeitung', 7, 'Beispiel', 'Binärsequenzdetektor als Moore- und als Mealy-Automat, realisiert mit D- und JK-Flip-Flops in der Simulation', ['moore', 'mealy', 'zustandskodierung', 'zustandstabelle'], 'lehrende'),
+    ('a_vergleicher', 'Sequentieller Binärzahlenvergleicher', 'Rechnerbau', 7, 'Beispielanwendung', 'Zwei Zahlen werden stellenweise durch Schieberegister geschoben; ein Medwedew-Automat merkt sich größer/kleiner/gleich, Umsetzung mit D-Flip-Flops und PAL', ['medwedew', 'entwurf', 'inv_wt'], 'lehrende'),
+    ('a_ampel_moore', 'Ampelsteuerung als Schaltwerk', 'Verkehr', 8, 'Übungsbeispiel', 'Ampel mit Eingang E als Moore-Automat mit zwei JK-Flip-Flops entworfen; dieselbe Ampel als Arduino-Programm statemachine.cpp im AVR8js-Simulator', ['fsm_entwurf', 'binaerkodierung', 'ff_ansteuertabelle', 'realisierungsvarianten'], 'lehrende'),
+    ('a_4bit_zaehler', 'Synchroner 4-Bit-Zähler', 'Rechnerbau', 8, 'Zähler', 'Herleitung aus der Zustandstabelle mit D-Flip-Flops, Realisierung mit XOR/UND, DigiSim-Simulation mit count und Reset', ['zaehler', 'zaehler_flip'], 'lehrende'),
+    ('a_null_komma_eins', 'Eine Million Mal 0,1 addieren', 'Programmierung', 9, 'Gebrochene Zahlen', 'Python-Programm, dessen Summe nicht genau 100000 ergibt, weil 0,1 binär nicht exakt darstellbar ist', ['binaerbruch'], 'lehrende'),
+    ('a_multiplizierer', 'Multiplizieren mit Partialprodukten', 'Rechnerbau', 9, 'Exkurs: Multiplikation', '211 × 206 = 43466: Partialprodukte per UND, Aufsummieren mit Carry-Save-Stufen und abschließender Addition', ['csa', 'volladdierer'], 'lehrende'),
+    ('a_inkrement_toggle', 'Inkrementieren und Togglen mit der ALU', 'Rechnerbau', 10, 'Schritt 1 - Operationsauswahl', 'Erstes „Programm“ als Folge von ALU-Steuerworten: ADD_B wiederholt zählt hoch, EOR_A wiederholt schaltet ein Bit hin und her', ['alu', 'befehlscodierung'], 'lehrende'),
+    ('a_edvac', 'First Draft of a Report on the EDVAC', 'Geschichte', 10, '1945: Von-Neumann-Architektur', 'Aufsatz von John von Neumann (1945); Teile der Ideen schon bei Konrad Zuse (Z1, Z3)', ['von_neumann'], 'lehrende'),
+    ('a_rechtsshift', 'Variabler Rechtsshift in Software', 'Programmierung', 11, 'Wie sieht ein Programm dann aus?', 'Assemblerprogramm für den Modellrechner, das einen Rechtsshift um bis zu 15 Stellen aus wiederholten RAL-Linksrotationen zusammensetzt', ['assembler', 'befehlssatz', 'akkumulator'], 'lehrende'),
+    ('a_simulator', 'Simulator des Modellrechners', 'Rechnerbau', 11, 'Elemente des Modelle-Rechners', 'Web-Simulation (Fabian Bär) für Speicher, Rechenwerk und den manuell getakteten Gesamtrechner', ['mar_mbr', 'akkumulator', 'pc_ir'], 'lehrende'),
+    ('a_blink', 'Hello World: blinkende LED auf vier Wegen', 'Einstieg', 12, 'Programmierung des Hello-World Beispiels', 'LED an PB5 im Sekundentakt – in Assembler, avrlibc, Arduino und Simulink, mit Vergleich der Codegrößen', ['ddrx', 'toolchain', 'abstraktion_prog'], 'lehrende'),
+    ('a_schwimm', 'Wallplotter und autonome Schwimmplattform', 'Robotik', 12, 'Motivation', 'Kette Sensorik – Filterung – Regelung – Aktorik als Ziel der hardwarenahen Programmierung', ['mikrocontroller'], 'lehrende'),
+    ('a_ntc', 'Temperaturmessung mit Heißleiter', 'Messtechnik', 13, 'Beispiel 1 - Heißleiter', 'NTC im Spannungsteiler, ADC-Wert 628 in Widerstand und Temperatur umrechnen', ['ntc', 'adc', 'aufloesung'], 'lehrende'),
+    ('a_distanz', 'Infrarot-Distanzsensor auslesen', 'Messtechnik', 13, 'Beispiel 2 - Lesen eines Analogen Distanzsensors', 'Sensor GP2D am ATmega2560 mit interner Referenz 2,56 V, Wandlung per ADSC-Bit', ['admux', 'referenzspannung'], 'lehrende'),
+    ('a_personenzaehler', 'Eingangszähler: „5 Personen gezählt“', 'Messtechnik', 14, 'Anwendungen', 'Timer 1 zählt externe Impulse, bei Vergleichswert 5 meldet eine ISR das Ergebnis', ['timer', 'isr', 'compare'], 'lehrende'),
+    ('a_dimmer', 'Glimmeffekt einer LED', 'Beleuchtung', 14, 'Anwendungen', 'Fast-PWM an Pin 9, OCR1A wird stetig hoch- und heruntergezählt', ['pwm', 'compare'], 'lehrende'),
+    ('a_7seg', 'Ziffernanzeigen mit wenigen Pins', 'Anzeige', 15, 'Ansteuerung digitaler Ausgänge', '7-Segment-Anzeige über Dekoder CD4543 und Multiplexing mehrerer Anzeigen', ['dekoder7seg', 'anzeige_mux'], 'lehrende'),
+    ('a_servo', 'Servo schwenken per Timer', 'Robotik', 15, 'Servomotoren', 'Timer 1 im CTC-Modus mit Compare-Interrupt erzeugt den 20-ms-Puls, OCR1A verschiebt die Position', ['servo', 'timer', 'isr'], 'lehrende'),
+]
+
+F = [
+    ('prozessor', 'Vom Gatter zum Prozessor', 'Aus Logik wird Rechenwerk, aus Rechenwerk ein programmierbarer Rechner.', ['boolesche_algebra', 'schaltnetz', 'volladdierer', 'alu', 'steuerwerk', 'mikroprogramm', 'mikrocontroller']),
+    ('speicher', 'Wie eine Schaltung sich etwas merkt', 'Rückkopplung wird zum Flip-Flop, Flip-Flops werden zu Registern – bis zu den Konfigurationsregistern des Controllers.', ['rueckkopplung', 'srlatch', 'flanke', 'register', 'pc_ir', 'ddrx']),
+    ('minimieren', 'Vom Problem zur kleinsten Schaltung', 'Wahrheitstafel, Normalform und Minimierung kehren bei jedem Entwurf wieder.', ['wahrheitstafel', 'dnf', 'kv', 'qmc', 'zweistufig', 'fsm_entwurf']),
+    ('automaten', 'Zustände und Abläufe', 'Wer Abfolgen erkennen oder erzeugen will, braucht Zustände – vom Automaten bis zum Timer.', ['schaltwerk', 'automat', 'moore', 'zaehler', 'festverdrahtet', 'timer']),
+    ('analog', 'Analog trifft digital', 'Wo die Welt stetig ist und der Rechner diskret: Pegel, Wandler, Pulsweiten.', ['digitalsignal', 'pegel', 'komparator', 'adc', 'pwm', 'servo']),
+    ('code', 'Vom Code zur Hex-Datei', 'Das Versprechen aus VL 00: jede Schicht zwischen C-Programm und Maschinenbefehl verstehen.', ['abstraktionsebenen', 'hexdatei', 'befehlscodierung', 'befehlssatz', 'assembler', 'toolchain', 'bitmaske', 'isr']),
+]
+
+ids = {b[0] for b in B}
+assert len(ids) == len(B), "doppelte id"
+vl_of = {x[0]: x[3] for x in B}
+for fid, _, _, st in F:
+    for x in st:
+        assert x in ids, (fid, x)
+    for u, v in zip(st, st[1:]):
+        assert vl_of[u] <= vl_of[v], ("Faden nicht chronologisch", fid, u, v)
+for a, b, _ in R:
+    assert a in ids and b in ids, (a, b)
+assert len({x[0] for x in A}) == len(A), "doppelte Anwendungs-id"
+for x in A:
+    assert x[0] not in ids, ("Anwendung und Begriff mit gleicher id", x[0])
+    for k in x[6]:
+        assert k in ids, ("Anwendung nutzt unbekannten Begriff", x[0], k)
+
+def abschnitt_nr(vl, titel):
+    heads = sections[vl]["abschnitte"]
+    if titel not in heads:
+        raise SystemExit(f"Abschnitt nicht gefunden: VL {vl:02d} »{titel}« — vorhanden: {heads}")
+    return heads.index(titel) + 1
+
+B = [(b[0], b[1], b[2], b[3], abschnitt_nr(b[3], b[4])) + tuple(b[5:]) for b in B]
+
+out = {
+    "stand": STAND,
+    "vorlesungen": [
+        {"vl": v, "datei": sections[v]["datei"], "datum": TERMINE[v][0], "kurz": TERMINE[v][1],
+         "leitfrage": LEITFRAGE[v], "freigegeben": v in FREIGEGEBEN,
+         "status": STATUS[v], "abschnitte": sections[v]["abschnitte"]}
+        for v in range(ANZAHL)
+    ],
+    "begriffe": [
+        {"id": b[0], "name": b[1], "linie": b[2], "vl": b[3], "abschnitt": b[4], "ebene": b[5],
+         "code": bool(b[6]), "erklaerung": b[7], "fehlvorstellung": b[8]}
+        for b in B
+    ],
+    "beziehungen": [{"von": a, "nach": b, "text": t} for a, b, t in R],
+    "faeden": [{"id": f, "name": n, "beschreibung": d, "stationen": st} for f, n, d, st in F],
+    "anwendungen": [{"id": i, "titel": t, "fach": fa, "vl": v, "abschnitt": abschnitt_nr(v, ab), "datensatz": ds,
+                     "schlagworte": sw, "herkunft": h} for i, t, fa, v, ab, ds, sw, h in A],
+}
+text = json.dumps(out, ensure_ascii=False, indent=1)
+open(os.path.join(ZIEL, "kurslandkarte.json"), "w", encoding="utf-8").write(text + "\n")
+seite = open(os.path.join(HIER, "vorlage.html"), encoding="utf-8").read()
+seite = seite.replace("%%DATEN%%", text.replace("</", "<\\/")).replace("%%STAND%%", STAND)
+open(os.path.join(ZIEL, "index.html"), "w", encoding="utf-8").write(seite)
+e1 = sum(1 for b in B if b[5] == 1)
+print(f"{len(B)} Begriffe ({e1} Kern, {len(B)-e1} Detail), {len(R)} Beziehungen, {len(A)} Anwendungen, {len(F)} Fäden")

@@ -35,6 +35,8 @@ Dieser Kurs vermittelt die Grundlagen digitaler Systeme vom theoretischen Fundam
 | [14](14_TimerUndInterrupts.md) | Timer & Interrupts | Echtzeit-Programmierung |
 | [15](15_Aktoren.md) | Aktoren | Servo- und Schrittmotoren |
 
+**Kurslandkarte:** Begriffe, Zusammenhänge und rote Fäden aller Vorlesungen auf einen Blick – https://tubaf-ifi-liascript.github.io/VL_EingebetteteSysteme/kurslandkarte/
+
 ## 🛠 Interaktive Features
 
 ### Simulatoren
