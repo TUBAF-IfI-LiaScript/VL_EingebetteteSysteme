@@ -12,6 +12,7 @@
    "abschnitte": [
     "Einführung",
     "Worum geht es in dieser Vorlesung?",
+    "Was ist ein eingebettetes System?",
     "Die Reise: 16 Vorlesungen zum Verständnis",
     "Was steht am Ende?",
     "Der Unterschied zu einem \"Arduino-Kurs\"",
@@ -31,7 +32,10 @@
     "Generelles Engagement",
     "Und wenn Sie dann immer noch programmieren wollen ...",
     "Schauen Sie im RoboLab vorbei!",
-    "Hausaufgabe"
+    "Was Sie heute mitnehmen",
+    "Ihre Begriffe für die Kurslandkarte",
+    "Hausaufgabe",
+    "Nächste Woche"
    ]
   },
   {
@@ -45,7 +49,7 @@
    "abschnitte": [
     "Historischer Überblick",
     "Rückblick, Fragen und Diskussionen",
-    "Von Rechenmaschinen zum uC: 200 Jahre Rechentechnik",
+    "Von Rechenmaschinen zum µC: 400 Jahre Rechentechnik",
     "Begrifflichkeiten",
     "Zeitstrahl: Von Zahnrädern zu Mikrocontrollern",
     "Rechenmaschinen",
@@ -54,11 +58,13 @@
     "Charles Babbage (1791 - 1871) - Analytical Engine",
     "Es werde Licht ... elektrische Systeme",
     "Zuse Z3",
+    "ENIAC",
     "Konzeptionelle Entwürfe",
     "Die Transistor-Ära",
     "Intel 4004",
     "Weitere Entwicklung",
     "Warum ist das alles für Ihr Verständnis wichtig?",
+    "Ihre Begriffe für die Kurslandkarte",
     "Hausaufgabe"
    ]
   },
@@ -417,7 +423,7 @@
    "name": "Abstraktionsebenen",
    "linie": "grundlagen",
    "vl": 0,
-   "abschnitt": 6,
+   "abschnitt": 7,
    "ebene": 1,
    "code": false,
    "erklaerung": "Ein Rechner wird in Schichten beschrieben – von Physik (Ebene 0) über digitale Logik, Mikroarchitektur und Befehlssatz bis zur Hochsprache (Ebene 6); der Kurs beginnt bei der digitalen Logik und arbeitet sich nach oben.",
@@ -439,7 +445,7 @@
    "name": "Mikroarchitektur",
    "linie": "rechner",
    "vl": 0,
-   "abschnitt": 7,
+   "abschnitt": 8,
    "ebene": 2,
    "code": false,
    "erklaerung": "Innerer Aufbau eines Rechners aus Steuerwerk, ALU, Speicher und Ein-/Ausgabe, die über Adressen, Daten, Kontroll- und Statussignale zusammenarbeiten.",
@@ -450,7 +456,7 @@
    "name": "DDRB",
    "linie": "controller",
    "vl": 0,
-   "abschnitt": 8,
+   "abschnitt": 9,
    "ebene": 2,
    "code": true,
    "erklaerung": "Register, dessen Bits festlegen, ob ein Pin von Port B Ausgang (1) oder hochohmiger Eingang (0) ist; pinMode(13, OUTPUT) setzt am Ende Bit 5.",
@@ -505,7 +511,7 @@
    "name": "Transistor",
    "linie": "grundlagen",
    "vl": 1,
-   "abschnitt": 13,
+   "abschnitt": 14,
    "ebene": 1,
    "code": false,
    "erklaerung": "Elektronischer Schalter und Verstärker, der ab 1948 die Röhre verdrängt; geschickt zusammengeschaltete Transistoren ergeben logische Gatter wie AND.",
@@ -516,7 +522,7 @@
    "name": "Mikroprozessor (Intel 4004)",
    "linie": "rechner",
    "vl": 1,
-   "abschnitt": 14,
+   "abschnitt": 15,
    "ebene": 2,
    "code": false,
    "erklaerung": "Der Intel 4004 (1971) gilt als erster Mikroprozessor: 2300 Transistoren, 4 Bit Wortbreite, 46 Befehle. Der ATmega328P im Arduino hat rund 100.000 Transistoren und 131 Befehle.",
@@ -2931,7 +2937,7 @@
    "titel": "Arduino-Wetterstation",
    "fach": "Messtechnik",
    "vl": 0,
-   "abschnitt": 9,
+   "abschnitt": 10,
    "datensatz": "Sensordaten einer Wetterstation, Helligkeitswerte des ADC (1023 = dunkel)",
    "schlagworte": [
     "mikrocontroller"

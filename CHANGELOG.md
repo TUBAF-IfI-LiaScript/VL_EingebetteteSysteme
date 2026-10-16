@@ -2,6 +2,14 @@
 
 Alle wesentlichen Änderungen an diesem Kurs werden in dieser Datei dokumentiert.
 
+## [0.7.1] - 2026-10-16
+
+### Changed
+- **Begriffsabfrage:** VL 00 und 01 enden mit „Ihre Begriffe für die Kurslandkarte“ (LiaScript-Klassenzimmer)
+- **00_Einfuehrung (0.6.2):** Didaktik-Review und Persona-Urteile: Schlussfolie, Ausblick, Ebene 2, Pegel/Pull-up, Präsenzzeit 45 h, Hinweis auf PDF-Fassung, Hausaufgabe offen formuliert
+- **00_Einfuehrung (0.6.1):** nach Persona-Reviews (Runde 2): Definition „eingebettetes System“ mit Quiz, richtiges Port-Diagramm des ATmega, Hinweise auf spätere Vorlesungen, Bitoperationen erklärt, Nachlese C, Tri-State erklärt, kleinere Korrekturen
+- **01_HistorischerUeberblick (0.7.0):** überarbeitet: Fremdinhalt (C#/C++) ersetzt durch Rückblick-Quiz; Zeitstrahl und Jahreszahlen korrigiert; ENIAC eigener Abschnitt mit Vergleich und Quiz; Ebenen erklärt mit Zuordnungsquiz; Wortbreite, Befehle pro Sekunde, Harvard-Architektur, Relais-Selbsthaltung; Zitate belegt bzw. als zugeschrieben gekennzeichnet
+
 ## [0.7.0] - 2026-10-16
 
 ### Changed

@@ -2,7 +2,7 @@
 
 author:   Sebastian Zug, André Dietrich & `fjangfaragesh`, `FnHm`, `gjaeger`, `ShyFlyGuy`, `Lalelele`
 email:    sebastian.zug@informatik.tu-freiberg.de & andre.dietrich@informatik.tu-freiberg.de & fabian.baer@student.tu-freiberg.de
-version:  0.6.0
+version:  0.6.2
 language: de
 narrator: Deutsch Female
 
@@ -81,16 +81,18 @@ void loop() {
 > **Frage:** Welche Funktion hat der Code? Lesen Sie die Antwort im Diagramm ab, bevor Sie weiterklicken.
 
     --{{1}}--
-Der Code schaltet nacheinander vier LEDs an den Pins 10 bis 13 ein und aus, jede für 250 Millisekunden. Das Diagramm darunter zeigt dasselbe wie ein Logikanalysator: Zu jedem Zeitpunkt ist genau ein Pin auf HIGH. Hinter diesen zwanzig Zeilen steckt viel mehr, als man sieht – Bibliothekscode der Arduino-Umgebung, ein Compiler und am Ende Transistoren, die schalten. Die Befehle können Sie unter https://www.arduino.cc/reference/en/ nachschlagen.
+Der Code schaltet nacheinander vier LEDs an den Pins 13 bis 10 ein und aus, jede für 250 Millisekunden. Das Diagramm darunter zeigt dasselbe wie ein Logikanalysator: Zu jedem Zeitpunkt ist höchstens ein Pin auf HIGH. Hinter diesen knapp zwanzig Zeilen steckt viel mehr, als man sieht – Bibliothekscode der Arduino-Umgebung, ein Compiler und am Ende Transistoren, die schalten. Die Befehle können Sie unter https://www.arduino.cc/reference/en/ nachschlagen.
 
       {{2}}
 > **Frage:** Was ist notwendig, damit dieses Programm auf einem Mikrocontroller ausgeführt werden kann?
 
     --{{2}}--
-Der Code muss übersetzt werden. Der Compiler macht aus dem C++-Code Assemblerbefehle für die AVR-Architektur, der Assembler daraus Maschinencode – Zahlen, die der Mikrocontroller direkt ausführen kann. Diese Zahlen werden als Hex-Datei auf den Controller übertragen.
+Der Code muss übersetzt werden. Der Compiler macht aus dem C++-Code Assemblerbefehle für die AVR-Architektur, der Assembler daraus Maschinencode – Zahlen, die der Mikrocontroller direkt ausführen kann. Der Linker fügt die benötigten Teile der Arduino-Bibliothek hinzu und legt fest, wo im Speicher alles steht. Das Ergebnis wird als Hex-Datei auf den Controller übertragen.
 
       {{3}}
 ******************************************************
+
+> Keine Sorge: Diese Zahlen müssen Sie heute nicht lesen können – es geht nur darum, wohin die Reise geht.
 
 ```hex
 :100000000C945D000C9485000C9485000C94850084
@@ -113,7 +115,31 @@ Jede Zeile hat dasselbe Format: `:` · Anzahl der Datenbytes (`10` = 16) · Adre
 ******************************************************
 
     --{{3}}--
-Schauen Sie auf die ersten vier Datenbytes: 0C 94 5D 00. Das ist ein einziger Maschinenbefehl, ein Sprungbefehl – jmp 0xBA. Er steht an Adresse 0, dort beginnt der Controller nach einem Reset. Von dort springt er zum Startcode, der das Programm vorbereitet und schließlich setup und loop aufruft. Die Grundprinzipien, die wir an diesem kleinen Controller lernen, gelten für jeden Rechner.
+Schauen Sie auf die ersten vier Datenbytes: 0C 94 5D 00. Das ist ein einziger Maschinenbefehl, ein Sprungbefehl – jmp 0xBA. Im Befehl steht die Wortadresse 5D; weil jedes Befehlswort zwei Bytes lang ist, entspricht das der Byteadresse 0xBA. Der Befehl steht an Adresse 0, dort beginnt der Controller nach einem Reset. Von dort springt er zum Startcode, der das Programm vorbereitet und schließlich setup und loop aufruft. Die Grundprinzipien, die wir an diesem kleinen Controller lernen, gelten für jeden Rechner.
+
+### Was ist ein eingebettetes System?
+
+    --{{0}}--
+Die Vorlesung heißt „Eingebettete Systeme“ – also klären wir den Begriff, bevor wir losgehen. Ihr Arduino mit den vier LEDs ist bereits eines.
+
+Ein **eingebettetes System** ist ein Rechner, der fest in ein technisches Gerät eingebaut ist und dort eine bestimmte Aufgabe erfüllt – meist ohne dass man ihn als Rechner wahrnimmt. Typisch sind:
+
++ eine **feste Aufgabe** statt beliebiger Programme (Waschmaschine, Motorsteuerung, Wetterstation),
++ **Sensoren und Aktoren** statt Tastatur und Bildschirm,
++ **knappe Ressourcen**: wenig Speicher, wenig Rechenleistung, wenig Energie, geringe Kosten,
++ oft **Echtzeitanforderungen**: Die Reaktion muss nicht nur richtig, sondern auch rechtzeitig kommen – ein Airbag, der eine Sekunde zu spät auslöst, ist nutzlos.
+
+Welche dieser Geräte sind eingebettete Systeme?
+
+[[X]] die Steuerung einer Waschmaschine
+[[X]] ein Herzschrittmacher
+[[ ]] ein Laptop, auf dem Sie Ihre Hausaufgaben schreiben
+[[X]] das Steuergerät für die Bremsen im Auto
+***************************************************************
+
+Der Laptop ist ein Universalrechner: Er führt beliebige Programme aus, die Sie installieren – auch wenn in ihm selbst kleine eingebettete Controller stecken, etwa für Tastatur oder Akku. Die anderen drei Geräte haben einen eingebauten Rechner mit einer festen Aufgabe, Sensoren und Aktoren – und Herzschrittmacher und Bremse müssen rechtzeitig reagieren.
+
+***************************************************************
 
 ### Die Reise: 16 Vorlesungen zum Verständnis
 
@@ -134,8 +160,8 @@ Schauen Sie auf die ersten vier Datenbytes: 0C 94 5D 00. Das ist ein einziger Ma
 | [11 Modell-CPU](11_Modell_CPU.md)                   | Befehl für Befehl             | was mit `0C 94 5D 00` passiert                     |
 | [12 AVR-CPU](12_AVR_CPU.md)                         | **Ihr Arduino-Chip!**         | ATmega328P, Toolchain, Register                    |
 | [13 ADC](13_ADC.md)                                 | Analog trifft Digital         | `analogRead`                                       |
-| [14 Timer & Interrupts](14_TimerUndInterrupts.md)   | Unterprogramme, Stack, Timing | `attachInterrupt`, `delay`, `analogWrite`          |
-| [15 Aktoren](15_Aktoren.md)                         | Hardware bewegen, Ausblick    | Servo, Schrittmotor, Energiesparen                 |
+| [14 Timer & Interrupts](14_TimerUndInterrupts.md)   | Unterprogramme, Stack, Timing | `attachInterrupt`, `delay`, `analogWrite`, Echtzeit |
+| [15 Aktoren](15_Aktoren.md)                         | Hardware bewegen, Ausblick    | Servo, Schrittmotor, Echtzeit und Energiesparen    |
 
 > Für 16 Vorlesungen haben wir 21 Termine: Einige Themen bekommen zwei Termine, am Ende bleiben Zeit für Wiederholung und ein Puffer.
 
@@ -149,7 +175,7 @@ Diese Fragen klingen heute noch nach Zauberei. Am Ende des Semesters sollten Sie
 1. **„Wie wird `pinMode(13, OUTPUT)` zu einer Hardware-Konfiguration?“**  
    *Von der Arduino-Funktion über Assembler zum Bit im Register `DDRB` und zur Tri-State-Logik am Pin*
 
-2. **„Was bedeutet `Serial.begin(9600)`?“**  
+2. **„Was bedeutet `Serial.begin(115200)`?“**  
    *Die serielle Schnittstelle (UART) überträgt Bit für Bit ohne gemeinsamen Takt – deshalb vereinbaren beide Seiten zu Beginn die „Sprechgeschwindigkeit“.*
 
 3. **„Ist ein `delay(1000)` tatsächlich genau 16.000.000 Taktzyklen lang?“**  
@@ -183,7 +209,7 @@ Nach einem typischen Arduino-Workshop können Sie LEDs blinken lassen. Nach dies
 ### Unsere Bottom-Up-Reise
 
     --{{0}}--
-Schauen Sie sich diese Abstraktionsebenen an: Die meisten Programmierer arbeiten nur auf Ebene 6 und 5. Wir steigen bis auf Ebene 1 hinab und arbeiten uns systematisch nach oben.
+Schauen Sie sich diese Abstraktionsebenen an: Die meisten Programmierer arbeiten auf Ebene 6, nur wenige schauen auf Ebene 5 hinunter. Wir steigen bis auf Ebene 1 hinab und arbeiten uns systematisch nach oben.
 
 <!--
 style="width: 80%; min-width: 420px; max-width: 720px;"
@@ -278,6 +304,8 @@ Wir verfolgen jetzt eine einzige Arduino-Zeile durch die Abstraktionsebenen – 
 
 **Schauen wir uns konkret an, was auf den einzelnen Ebenen passiert:**
 
+> **Sie müssen heute noch nicht alles verstehen.** Begriffe wie Interrupt, Register oder Flip-Flop sind heute nur Wegmarken – jeder davon bekommt im Semester seine eigene Vorlesung (Hinweise in Klammern).
+
 *****************************************************
 
 
@@ -318,7 +346,11 @@ void pinMode(uint8_t pin, uint8_t mode) {
 }
 ```
 
-Kern des Ganzen ist eine einzige Zeile: `DDRB |= (1 << 5);` – setze Bit 5 im Register `DDRB`.
+Den Code müssen Sie nur überfliegen. Interrupts und Race Conditions behandeln wir in Vorlesung 14.
+
+Kern des Ganzen ist eine einzige Zeile: `DDRB |= (1 << 5);` – setze Bit 5 im Register `DDRB`. Dabei schiebt `1 << 5` eine Eins um fünf Stellen nach links (`0000 0001` → `0010 0000`), und `|=` verknüpft das Register bitweise mit ODER: Bit 5 wird 1, alle anderen Bits bleiben, wie sie waren.
+
+> Sie hören „Algorithmen und Datenstrukturen“ nicht parallel? Die Bitoperatoren von C erklärt zum Beispiel das [Wikibook C-Programmierung](https://de.wikibooks.org/wiki/C-Programmierung:_Ausdr%C3%BCcke_und_Operatoren).
 
 *****************************************************
 
@@ -326,6 +358,8 @@ Kern des Ganzen ist eine einzige Zeile: `DDRB |= (1 << 5);` – setze Bit 5 im R
 *****************************************************
 
 **Ebene 5 – Assembler:**
+
+Nur die Kernzeile `DDRB |= (1 << 5);` wird zu einem einzigen Befehl. Die ganze Funktion `pinMode` – mit Tabellen, Sichern des Statusregisters und Interrupt-Sperre – übersetzt der Compiler in deutlich mehr Befehle.
 
     --{{3}}--
 Schreiben wir die Kernzeile DDRB oder-gleich eins geschoben um fünf direkt, macht der Compiler daraus einen einzigen Assemblerbefehl: sbi, set bit in I/O register. 0x04 ist die Adresse von DDRB im Ein-/Ausgabebereich des Controllers. Dieses Programm können Sie direkt ausführen – es lässt die LED an Pin 13 blinken.
@@ -352,7 +386,7 @@ loop:
 wait:
   ldi   r20, 41
 wait_outer:
-  ldi   r19, 0
+  ldi   r19, 0                  ; 0 heißt hier: 256 Durchläufe (dec 0 → 255)
 wait_middle:
   ldi   r18, 0
 wait_inner:
@@ -374,13 +408,15 @@ wait_inner:
 **Ebene 3 – Maschinencode:**
 
     --{{4}}--
-Der Assembler übersetzt sbi 0x04, 5 in genau zwei Bytes: 25 und 9A. Genau solche Bytes stehen in der Hex-Datei vom Anfang. Wie das Steuerwerk aus diesen Bits erkennt, was zu tun ist, sehen wir in Vorlesung 11.
+Der Assembler übersetzt sbi 0x04, 5 in genau zwei Bytes: 25 und 9A. Bytes dieser Art – wenn auch nicht genau diese – stehen in der Hex-Datei vom Anfang. Wie das Steuerwerk aus diesen Bits erkennt, was zu tun ist, sehen wir in Vorlesung 11.
 
 | Assembler     | Maschinencode im Speicher | Bedeutung der Bits                                 |
 | ------------- | ------------------------- | -------------------------------------------------- |
 | `sbi 0x04, 5` | `25 9A`                   | `1001 1010` = sbi · `00100` = Adresse 4 · `101` = Bit 5 |
 
 Der Befehl ist das 16-Bit-Wort `0x9A25`; im Speicher steht das niederwertige Byte zuerst.
+
+**Ebene 2 – Mikroarchitektur:** Das Steuerwerk erkennt am Bitmuster `1001 1010` den Befehl `sbi`, leitet die Adresse 4 an den Ein-/Ausgabebereich weiter und setzt dort Bit 5. Wie ein Steuerwerk das macht, bauen wir in Vorlesung 10 und 11 selbst nach.
 
 *****************************************************
 
@@ -390,14 +426,20 @@ Der Befehl ist das 16-Bit-Wort `0x9A25`; im Speicher steht das niederwertige Byt
 **Ebene 1 – Hardware-Konfiguration:**
 
     --{{5}}--
-Am Ziel: echte Hardware. Das Register DDRB besteht aus acht Flip-Flops, jedes gehört zu einem Pin. Ist Bit 5 gesetzt, wird der Ausgangstreiber von Pin 13 freigeschaltet: Ein Transistor kann den Pin mit der Versorgungsspannung verbinden, ein anderer mit Masse. Das ist der Moment, in dem Software zu Physik wird.
+Am Ziel: echte Hardware. Das Register DDRB besteht aus acht Flip-Flops, jedes gehört zu einem Pin. Ist Bit 5 gesetzt, wird der Ausgangstreiber von Pin 13 freigeschaltet: Ein Transistor kann den Pin mit der Versorgungsspannung verbinden, ein anderer mit Masse – das ist genau genommen schon Ebene 0. Das ist der Moment, in dem Software zu Physik wird.
 
-![Diagramme](./images/00_Einfuehrung/IOpin.png "Darstellung der Input/Output Beschaltung eines Microcontrollers")<!-- width="60%" -->
+![Diagramme](./images/12_AVR_CPU/IO_ATmega.png "Aufbau eines Ein-/Ausgabe-Pins beim ATmega: oben das Flip-Flop DDxn (Richtung), in der Mitte PORTxn (Ausgabewert), unten der Eingang PINxn; Microchip, ATmega328P Datenblatt, General Digital I/O")<!-- width="70%" -->
+
+Für Pin 13 ist im Bild x = B und n = 5: Das Flip-Flop DDxn ist also DDB5, Bit 5 im Register `DDRB`. Der Ausgangstreiber ist der dreieckige Verstärker in der Mitte, der den Pin Pxn treibt; der Transistor oben links gehört zum Pull-up-Widerstand.
+
+**HIGH und LOW sind Spannungen:** Beim Arduino Uno liegt HIGH nahe der Versorgungsspannung von 5 V, LOW nahe 0 V, der Masse.
 
 Das `DDRB`-Register steuert direkt die **Tri-State-Logik** des I/O-Pins:
 
 - **DDRB[5] = 1**: Ausgangstreiber wird aktiviert → Pin kann HIGH/LOW ausgeben
-- **DDRB[5] = 0**: Hochohmig → Pin kann Eingangssignale lesen
+- **DDRB[5] = 0**: Hochohmig → Pin kann Eingangssignale lesen; ist zusätzlich `PORTB[5] = 1` (das macht `INPUT_PULLUP`), zieht der Pull-up-Widerstand den Pin auf HIGH, solange ihn nichts auf LOW zieht
+
+„Tri-State“ heißt: Ein Ausgang kennt drei Zustände – HIGH, LOW und „abgeschaltet“. Abgeschaltet (hochohmig) beeinflusst der Pin die angeschlossene Leitung praktisch nicht und kann so als Eingang dienen. Mehr dazu in Vorlesung 05 und 12.
 
 *****************************************************
 
@@ -438,7 +480,7 @@ Die Vorlesung hören Studierende aus sehr unterschiedlichen Richtungen. Jede Gru
 + **Robotik**: Jeder Roboter ist ein eingebettetes System – Sensoren lesen, Motoren ansteuern, rechtzeitig reagieren.
 + **Angewandte Informatik**: Sie verstehen, was Ihr Programm auf der Hardware tatsächlich tut, und warum manches langsam oder speicherhungrig ist.
 + **Mathematik**: Boolesche Algebra und Automaten werden hier zu Schaltungen – mit Laufzeiten, Takten und Grenzen der Physik.
-+ **Ingenieurwissenschaften**: Messen, Steuern und Regeln laufen heute fast immer auf einem Mikrocontroller.
++ **Ingenieurwissenschaften**: Messen, Steuern und Regeln laufen heute fast immer auf einem Mikrocontroller. Abtastung, Quantisierung und Pulsweitenmodulation kennen Sie vielleicht aus der Messtechnik – hier sehen Sie, wie der Controller sie umsetzt (Vorlesung 13–15), bis hin zu Servo und Schrittmotor; in Vorlesung 12 wird auch ein Simulink-Modell zu Code für den Controller.
 
 ## Organisation
 
@@ -447,7 +489,7 @@ Die Vorlesung hören Studierende aus sehr unterschiedlichen Richtungen. Jede Gru
 | Prof. Dr. Sebastian Zug | sebastian.zug@informatik.tu-freiberg.de | Vorlesung, theoretische Übungsblätter    |
 | N.N.                    |                                         | praktische Übungen ab Januar             |
 
-> Bitte melden Sie sich im OPAL unter [Digitale Systeme](https://bildungsportal.sachsen.de/opal/auth/RepositoryEntry/37204033543) für die Veranstaltung an. Dort finden Sie auch die aktuellen Informationen zur Veranstaltung.
+> Bitte melden Sie sich im OPAL unter [Digitale Systeme](https://bildungsportal.sachsen.de/opal/auth/RepositoryEntry/37204033543) für die Veranstaltung an – dort heißt sie kurz „Digitale Systeme“. Dort finden Sie auch die aktuellen Informationen zur Veranstaltung.
 
 ### Zeitplan
 
@@ -469,6 +511,8 @@ Die Veranstaltung wird sowohl für die Vorlesung als auch die Übung in Präsenz
 
 > *Prüfungsform:* Die Veranstaltung wird mit einer schriftlichen Prüfung abgeschlossen. Diese wird als __Open Book Klausur__ entworfen. Sie dürfen dazu alle schriftlichen, nicht-digitalen Materialien verwenden.
 
+Eine druckbare PDF-Fassung jeder Vorlesung finden Sie in der [Kursübersicht](https://tubaf-ifi-liascript.github.io/digitalesysteme.html) – ideal, um eigene Notizen für die Klausur direkt daneben zu schreiben.
+
 Im Laufe der Übungen werden wir "alte" Übungsaufgaben durchspielen, die Ihnen einen Eindruck von der Prüfung vermitteln sollen.
 
 ### Literaturempfehlungen
@@ -488,7 +532,7 @@ Bei den jeweiligen Vorlesungsinhalten werden zusätzliche Materialien angegeben.
 ### Ihre Vorkenntnisse
 
     --{{0}}--
-Die Vorlesung hören Studierende mit sehr unterschiedlichen Vorkenntnissen. Ihre Antworten helfen uns, Beispiele und Übungen passend zu wählen. Die Abfrage ist anonym.
+Die Vorlesung hören Studierende mit sehr unterschiedlichen Vorkenntnissen. Ihre Antworten helfen uns, Beispiele und Übungen passend zu wählen. Die Abfrage ist anonym; wir sammeln die Antworten im Hörsaal über das LiaScript-Klassenzimmer.
 
 **Aus welchem Studiengang kommen Sie?**
 
@@ -520,7 +564,7 @@ Die Vorlesung hören Studierende mit sehr unterschiedlichen Vorkenntnissen. Ihre
 
 > *Credit-Points:* 6
 
-> *Arbeitsaufwand:* Der Zeitaufwand beträgt 180h und setzt sich zusammen aus **60h Präsenzzeit** und **120h Selbststudium**. Letzteres umfasst die Vor- und Nachbereitung der Lehrveranstaltung, die eigenständige Lösung von Übungsaufgaben sowie die Prüfungsvorbereitung.
+> *Arbeitsaufwand:* Der Zeitaufwand beträgt 180 h. Davon sind rund **45 h Präsenzzeit** – pro Woche im Mittel 1,5 × 90 Minuten Vorlesung und 0,5 × 90 Minuten Übung – und rund **135 h Selbststudium**. Das Selbststudium umfasst die Vor- und Nachbereitung der Lehrveranstaltung, die eigenständige Lösung von Übungsaufgaben sowie die Prüfungsvorbereitung.
 
 ### Open Educational Resources
 
@@ -532,7 +576,7 @@ Sie sind in LiaScript geschrieben, einer Erweiterung von Markdown. Markdown besc
 
 Zum Weiterlesen: [Markdown Guide](https://www.markdownguide.org/getting-started/) · [LiaScript-Dokumentation](https://liascript.github.io/course/?https://raw.githubusercontent.com/liaScript/docs/master/README.md#1) · [Einführungsvideos](https://www.youtube.com/channel/UCyiTe2GkW_u05HSdvUblGYg)
 
-Eine Übersicht über alle Begriffe und roten Fäden der Vorlesung bietet die [Kurslandkarte](https://tubaf-ifi-liascript.github.io/VL_EingebetteteSysteme/kurslandkarte/).
+Eine Übersicht über alle Begriffe und roten Fäden der Vorlesung bietet die [Kurslandkarte](https://tubaf-ifi-liascript.github.io/VL_EingebetteteSysteme/kurslandkarte/). Sie wächst mit dem Semester: Am Ende jeder Vorlesung fragen wir Sie nach den Begriffen des Tages.
 
 ### Trotz Simulation und Virtuellem ...
 
@@ -559,8 +603,32 @@ Lion und Caio warten auf Sie ...
 
 ![](https://www.saxeed.net/wp-content/uploads/2024/04/IMG_5898-scaled.jpg)
 
+## Was Sie heute mitnehmen
+
++ Ein **eingebettetes System** ist ein Rechner mit fester Aufgabe in einem Gerät – mit Sensoren, Aktoren, knappen Ressourcen und oft Echtzeitanforderungen.
++ Zwischen `pinMode(13, OUTPUT)` und dem Pegel an Pin 13 liegen **Abstraktionsebenen**: Hochsprache, Assembler, Maschinencode, Mikroarchitektur, digitale Logik, Physik.
++ Am Ende steht eine einfache Bitoperation – `sbi 0x04, 5` setzt ein Flip-Flop in `DDRB` –, und die Hex-Datei ist nichts anderes als solche Befehle hintereinander.
++ Wir gehen **von unten nach oben**: Nächste Woche beginnen wir mit der Geschichte und der Logik, im Januar sind wir beim Controller angekommen.
+
+## Ihre Begriffe für die Kurslandkarte
+
+Die [Kurslandkarte](https://tubaf-ifi-liascript.github.io/VL_EingebetteteSysteme/kurslandkarte/) wächst mit dem Semester, und Sie bestimmen mit, was hineinkommt. Ihre Antworten sammeln wir im Hörsaal gemeinsam über das LiaScript-Klassenzimmer; nach der Vorlesung werden die Begriffe dieser Woche in der Karte freigeschaltet.
+
+**Welche Begriffe aus der heutigen Vorlesung gehören für Sie in die Kurslandkarte?**
+
+[[___ ___ ___]]
+
+**Wo begegnet Ihnen das, was heute dran war – in Ihrem Studiengang oder in Geräten Ihres Alltags?**
+
+[[___ ___ ___]]
+
 ## Hausaufgabe
 
 + Legen Sie sich einen GitHub-Account an ... und finden Sie als Erste oder Erster einen Tippfehler in den Unterlagen, den Sie als Contributor korrigieren :-)
 + Organisieren Sie sich in einer gemeinsamen Chatgruppe! Bevor Sie heute den Raum verlassen, sollten Sie dort Mitglied sein.
-+ Ändern Sie im Assembler-Beispiel die Wartezeit so, dass die LED doppelt so schnell blinkt. Welche Zahl müssen Sie ändern – und warum genau diese?
++ Lassen Sie die LED im Assembler-Beispiel doppelt so schnell blinken. Es gibt mehr als einen Weg – finden Sie zwei und begründen Sie, welcher der Verdopplung näher kommt und warum keiner sie exakt trifft. Die Auflösung gibt es zu Beginn der nächsten Vorlesung.
+
+## Nächste Woche
+
+Am **Mittwoch, 28.10.**, reisen wir durch 400 Jahre Rechentechnik – von Zahnrädern über Relais und Röhren bis zum Mikroprozessor –, am **Donnerstag, 29.10.**, beginnt mit der Booleschen Algebra die Digitaltechnik.
+
