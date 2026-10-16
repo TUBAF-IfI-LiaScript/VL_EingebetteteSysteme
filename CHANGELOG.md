@@ -2,6 +2,21 @@
 
 Alle wesentlichen Änderungen an diesem Kurs werden in dieser Datei dokumentiert.
 
+## [0.7.0] - 2026-10-16
+
+### Changed
+- **Neue Nummerierung:** Pipeline-Vorlesung entfällt; AVR-Vorlesungen 13–16 heißen jetzt 12–15 (Dateien, Bilder, Beispiele, Material)
+- **00_Einfuehrung (0.6.0):** überarbeitet nach Persona-Reviews
+  * Hex-Beispiel und Text stimmen überein (`0C 94 5D 00` = `jmp 0xBA`), Intel-HEX-Format erklärt
+  * Ebenenreise konsistent zum Schichtenmodell; neuer Schritt Assembler (ausführbar mit `@AVR8js.asm`) und Maschinencode (`sbi 0x04, 5` = `25 9A`)
+  * Logikanalysator (`<avr-chart>`) am Blink-Beispiel, Zuordnungsquiz „Code → Ebene“, Vorkenntnis-Umfrage
+  * unbelegte Zahlen entfernt, Harvard-Architektur des ATmega328P korrigiert, Fragen an den Kursumfang angepasst
+  * Zeitplan WiSe 2026/27, Studiengangsbezug statt Berufsliste, OER-Teil gekürzt
+- **config.md:** Wintersemester 2026/27
+
+### Added
+- **Kurslandkarte** unter `kurslandkarte/` (GitHub Pages)
+
 ## [0.6.2] - 2025-10-14
 
 ### Enhanced

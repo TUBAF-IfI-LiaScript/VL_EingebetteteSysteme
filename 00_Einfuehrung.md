@@ -2,19 +2,17 @@
 
 author:   Sebastian Zug, André Dietrich & `fjangfaragesh`, `FnHm`, `gjaeger`, `ShyFlyGuy`, `Lalelele`
 email:    sebastian.zug@informatik.tu-freiberg.de & andre.dietrich@informatik.tu-freiberg.de & fabian.baer@student.tu-freiberg.de
-version:  0.5.2
+version:  0.6.0
 language: de
 narrator: Deutsch Female
 
 import:   https://raw.githubusercontent.com/liascript-templates/plantUML/master/README.md
-          https://raw.githubusercontent.com/LiaTemplates/NetSwarm-Simulator/master/README.md
-          https://raw.githubusercontent.com/liaTemplates/DigiSim/master/README.md
           https://raw.githubusercontent.com/liaTemplates/AVR8js/main/README.md
           https://raw.githubusercontent.com/TUBAF-IfI-LiaScript/VL_EingebetteteSysteme/master/config.md
 
 -->
 
-# Einführung 
+# Einführung
 
     --{{0}}--
 Bevor wir starten: Haben Sie schon einmal darüber nachgedacht, wie aus einem Hochsprachen-Programm ein tatsächliches Verhalten eines Computers wird? Die Idee liegt darin, die Komplexität dieser Frage in handhabbare Schichten zu unterteilen. Wie diese Schichten genau aussehen, werden wir in dieser Vorlesung systematisch erarbeiten.
@@ -35,19 +33,18 @@ Bevor wir starten: Haben Sie schon einmal darüber nachgedacht, wie aus einem Ho
 **Fragen an die Veranstaltung**
 
 + Welche Abstraktionsebenen durchlaufen wir vom Arduino-Code bis zur Hardware-Ebene?
-+ Warum ist das Verständnis eingebetteter Systeme für Informatiker wichtig?
++ Warum lohnt sich das Verständnis eingebetteter Systeme für Informatik, Robotik und Ingenieurwesen?
 + Welche Rolle spielen Mikrocontroller in modernen digitalen Systemen?
 + Wie unterscheiden sich eingebettete Systeme von herkömmlichen Computersystemen?
 + Welche praktischen Anwendungsgebiete finden Sie für eingebettete Systeme in Ihrem Alltag?
-+ Was bedeutet „Real-Time" im Kontext eingebetteter Systeme?
-+ Welche Herausforderungen ergeben sich beim Debugging auf Hardware-Ebene?
-+ Wie wirken sich Ressourcenbeschränkungen auf die Programmierung aus?
++ Was bedeutet „Echtzeit“ im Kontext eingebetteter Systeme?
++ Wie wirken sich Ressourcenbeschränkungen (Speicher, Rechenzeit, Energie) auf die Programmierung aus?
 
 ---------------------------------------------------------------------
 
 ## Worum geht es in dieser Vorlesung?
 
-> Starten wir mit etwas Code ... 
+> Starten wir mit etwas Code ...
 
 <div id="example1">
 <wokwi-led color="red"   pin="13" label="13"></wokwi-led>
@@ -55,6 +52,7 @@ Bevor wir starten: Haben Sie schon einmal darüber nachgedacht, wie aus einem Ho
 <wokwi-led color="blue"  pin="11" label="11"></wokwi-led>
 <wokwi-led color="blue"  pin="10" label="10"></wokwi-led>
 <span id="simulation-time"></span>
+<avr-chart signals="D13, D12, D11, D10" window="2s" title="Pegel an den Pins 13 bis 10"></avr-chart>
 </div>
 
 ```cpp BlinkLEDs.ino
@@ -77,19 +75,19 @@ void loop() {
   i = (i + 1) % sizeof(leds);
 }
 ```
-@AVR8js.sketch
+@AVR8js.sketch(example1)
 
       {{1}}
-> **Frage:** Welche Funktion hat der Code?
+> **Frage:** Welche Funktion hat der Code? Lesen Sie die Antwort im Diagramm ab, bevor Sie weiterklicken.
 
     --{{1}}--
-Die Funktion des Codes besteht darin, nacheinander vier LEDs an den Pins 10 bis 13 des Arduino-Boards ein- und auszuschalten. Dabei wird jede LED für 250 Millisekunden aktiviert, bevor die nächste LED eingeschaltet wird. Schlagen Sie ggf. die Dokumentation der Befehle unter https://www.arduino.cc/reference/en/ nach. Interessant an diesem Code: Er ist nur 20 Zeilen lang, aber dahinter verbergen sich tausende von Zeilen Arduino-Bibliothekscode, Compiler-Optimierungen, und am Ende Millionen von Transistor-Schaltoperationen. Die `digitalWrite()`-Funktion allein ruft über sieben weitere Funktionen auf, bevor sie einen einzigen Pin schaltet.
+Der Code schaltet nacheinander vier LEDs an den Pins 10 bis 13 ein und aus, jede für 250 Millisekunden. Das Diagramm darunter zeigt dasselbe wie ein Logikanalysator: Zu jedem Zeitpunkt ist genau ein Pin auf HIGH. Hinter diesen zwanzig Zeilen steckt viel mehr, als man sieht – Bibliothekscode der Arduino-Umgebung, ein Compiler und am Ende Transistoren, die schalten. Die Befehle können Sie unter https://www.arduino.cc/reference/en/ nachschlagen.
 
       {{2}}
 > **Frage:** Was ist notwendig, damit dieses Programm auf einem Mikrocontroller ausgeführt werden kann?
 
     --{{2}}--
-Der Code muss zunächst übersetzt und in eine für den Mikrocontroller verständliche Form gebracht werden. Dies geschieht in mehreren Schritten: 1. **Kompilierung:** Der C++-Code wird in Assembler-Code übersetzt, der spezifisch für die AVR-Architektur des Mikrocontrollers ist. 2. **Assemblierung:** Der Assembler-Code wird in Maschinencode umgewandelt, der aus binären Instruktionen besteht, die der Mikrocontroller direkt ausführen kann.
+Der Code muss übersetzt werden. Der Compiler macht aus dem C++-Code Assemblerbefehle für die AVR-Architektur, der Assembler daraus Maschinencode – Zahlen, die der Mikrocontroller direkt ausführen kann. Diese Zahlen werden als Hex-Datei auf den Controller übertragen.
 
       {{3}}
 ******************************************************
@@ -108,70 +106,75 @@ Der Code muss zunächst übersetzt und in eine für den Mikrocontroller verstän
 ...
 ```
 
-> **Am Ende des Semesters können Sie jeden Schritt dieser Transformation verstehen und erklären!**
+Jede Zeile hat dasselbe Format: `:` · Anzahl der Datenbytes (`10` = 16) · Adresse im Programmspeicher (`0000`) · Typ (`00` = Daten) · die Datenbytes · eine Prüfsumme.
+
+> **Am Ende des Semesters können Sie jeden Schritt dieser Transformation erklären.**
 
 ******************************************************
 
     --{{3}}--
-Das Faszinierende: Wenn Sie diese Hex-Datei verstehen können - und das werden Sie am Ende des Semesters - dann können Sie jeden Computer der Welt verstehen. Die Grundprinzipien sind universell, egal ob es sich um einen Arduino, einen Smartphone-Prozessor oder einen Supercomputer handelt. Schauen Sie genau hin: Die erste gepunktete Zeile beginnt mit "0C 94 72 00". Das sind vier Bytes, die einen einzigen Maschinenbefehl darstellen - einen Jump-Befehl zur Adresse 0x0072. Dort steht der Interrupt-Vektor für den Reset.
+Schauen Sie auf die ersten vier Datenbytes: 0C 94 5D 00. Das ist ein einziger Maschinenbefehl, ein Sprungbefehl – jmp 0xBA. Er steht an Adresse 0, dort beginnt der Controller nach einem Reset. Von dort springt er zum Startcode, der das Programm vorbereitet und schließlich setup und loop aufruft. Die Grundprinzipien, die wir an diesem kleinen Controller lernen, gelten für jeden Rechner.
 
-### Die Reise: 16 Stationen zum Verständnis
+### Die Reise: 16 Vorlesungen zum Verständnis
 
 <!-- data-type="none" -->
-| Vorlesung                                           | Was lernen Sie hier?     |
-| --------------------------------------------------- | ------------------------ |
-| [00 Einführung](00_Einfuehrung.md)                  | Die große Vision         |
-| [01 Historie](01_HistorischerUeberblick.md)         | Von Leibnitz  zu Arduino |
-| [02 Boolesche Algebra](02_BoolscheAlgebra.md)       | 0 und 1 verstehen        |
-| [03 Minimierung](03_Minimierung.md)                 | Effizienz in Logik       |
-| [04 Schaltnetze](04_Schaltnetze.md)                 | Logik wird Hardware      |
-| [05 Standardschaltnetze](05_Standardschaltnetze.md) | Decoder & Multiplexer    |
-| [06 FlipFlops](06_FlipFlops.md)                     | Speicher entsteht        |
-| [07 Schaltwerke](07_Schaltwerke.md)                 | Zustandsmaschinen        |
-| [08 Standardschaltwerke](08_StandardSchaltwerke.md) | Counter & Register       |
-| [09 Rechnerarithmetik](09_Rechnerarithmetik.md)     | Addition in Hardware     |
-| [10 CPU-Basis](10_CPU_Basis.md)                     | Der erste Prozessor      |
-| [11 Modell-CPU](11_Modell_CPU.md)                   | CPU-Simulation           |
-| [12 AVR-CPU](12_AVR_CPU.md)                         | **IHR Arduino-Chip!**    |
-| [13 ADC](13_ADC.md)                                 | Analog trifft Digital    |
-| [14 Timer & Interrupts](14_TimerUndInterrupts.md)   | Multitasking             |
-| [15 Aktoren](15_Aktoren.md)                         | Hardware ansteuern       |
+| Vorlesung                                           | Was lernen Sie hier?          | Wo steckt das im Arduino?                          |
+| --------------------------------------------------- | ----------------------------- | -------------------------------------------------- |
+| [00 Einführung](00_Einfuehrung.md)                  | Die große Vision              | vom Sketch zur Hex-Datei                           |
+| [01 Historie](01_HistorischerUeberblick.md)         | Von Leibniz zu Arduino        | warum der Chip so aussieht, wie er aussieht        |
+| [02 Boolesche Algebra](02_BoolscheAlgebra.md)       | 0 und 1 verstehen             | `if (a && b)`, Bitmasken                           |
+| [03 Minimierung](03_Minimierung.md)                 | Effizienz in Logik            | weniger Gatter für dieselbe Funktion               |
+| [04 Schaltnetze](04_Schaltnetze.md)                 | Logik wird Hardware           | die Logik im Chip, inklusive ihrer Laufzeiten      |
+| [05 Standardschaltnetze](05_Standardschaltnetze.md) | Decoder & Multiplexer         | Registerauswahl, Kanalwahl beim `analogRead`       |
+| [06 FlipFlops](06_FlipFlops.md)                     | Speicher entsteht             | das Bit in `DDRB`, das sich „Ausgang“ merkt        |
+| [07 Schaltwerke](07_Schaltwerke.md)                 | Zustandsmaschinen             | Steuerungen mit Zuständen, z. B. eine Ampel        |
+| [08 Standardschaltwerke](08_StandardSchaltwerke.md) | Counter & Register            | der Zähler hinter `millis()`                       |
+| [09 Rechnerarithmetik](09_Rechnerarithmetik.md)     | Addition in Hardware          | `int`, Überlauf, `float`                           |
+| [10 CPU-Basis](10_CPU_Basis.md)                     | Der erste Prozessor           | Rechenwerk, Steuerwerk, Speicher                   |
+| [11 Modell-CPU](11_Modell_CPU.md)                   | Befehl für Befehl             | was mit `0C 94 5D 00` passiert                     |
+| [12 AVR-CPU](12_AVR_CPU.md)                         | **Ihr Arduino-Chip!**         | ATmega328P, Toolchain, Register                    |
+| [13 ADC](13_ADC.md)                                 | Analog trifft Digital         | `analogRead`                                       |
+| [14 Timer & Interrupts](14_TimerUndInterrupts.md)   | Unterprogramme, Stack, Timing | `attachInterrupt`, `delay`, `analogWrite`          |
+| [15 Aktoren](15_Aktoren.md)                         | Hardware bewegen, Ausblick    | Servo, Schrittmotor, Energiesparen                 |
 
-> Wir haben nominell 21 Vorlesungen, an einigen Stellen werden wir aber länger verweilen und an anderen Stellen schneller vorankommen. Diese Aufzählung ist also eher ein Leitfaden, denn ein strikter Plan.
+> Für 16 Vorlesungen haben wir 21 Termine: Einige Themen bekommen zwei Termine, am Ende bleiben Zeit für Wiederholung und ein Puffer.
 
 ### Was steht am Ende?
 
     --{{0}}--
-Ein kleiner Reality-Check: Diese acht Fragen würden viele Kommmilitonen der höheren Semester zum Schwitzen bringen. Nach diesem Kurs gehören Sie zu den wenigen, die wirklich verstehen, was unter der Haube passiert. Das macht Sie unglaublich wertvoll auf dem Arbeitsmarkt.
+Diese Fragen klingen heute noch nach Zauberei. Am Ende des Semesters sollten Sie jede davon in wenigen Sätzen beantworten können – und genau solche Fragen finden Sie in der Klausur wieder.
 
-**Sie können diese 8 Fragen fundiert beantworten:**
+**Sie können diese Fragen fundiert beantworten:**
 
-1. **"Wie wird `pinMode(13, OUTPUT)` zu Hardware-Konfiguration?"**  
-   *Von Arduino-Funktion über AVR-libc zu Assembler zu DDRB-Register zu Tri-State-Logik*
+1. **„Wie wird `pinMode(13, OUTPUT)` zu einer Hardware-Konfiguration?“**  
+   *Von der Arduino-Funktion über Assembler zum Bit im Register `DDRB` und zur Tri-State-Logik am Pin*
 
-2. **"Was bedeutet, das `Serial.begin(9600)`?"**  
-   *UART ist eine asynchrone Kommunikationsschnittstelle, wir vereinbaren zu Beginn die "Sprechgeschwindigkeit".*
+2. **„Was bedeutet `Serial.begin(9600)`?“**  
+   *Die serielle Schnittstelle (UART) überträgt Bit für Bit ohne gemeinsamen Takt – deshalb vereinbaren beide Seiten zu Beginn die „Sprechgeschwindigkeit“.*
 
-3. **"Ist eine `delay(1000)` tatsächlich genau 16.000.000 Taktzyklen lang?"**  
+3. **„Ist ein `delay(1000)` tatsächlich genau 16.000.000 Taktzyklen lang?“**  
    *Taktfrequenz, Befehlszyklen und Timer-Hardware verstehen*
 
-4. **"Was passiert im ATmega328P während `analogRead(A0)`?"**  
-   *ADC-Wandlung, Sampling, Quantisierung und Speicherung*
+4. **„Was passiert im ATmega328P während `analogRead(A0)`?“**  
+   *ADC-Wandlung, Abtastung, Quantisierung und Speicherung*
 
-5. **"Wie führt die CPU den Maschinenbefehl `0C 94 72 00` aus?"**  
-   *Instruction Decode, Fetch-Execute-Cycle, Register-Operationen*
+5. **„Wie führt die CPU den Maschinenbefehl `0C 94 5D 00` aus?“**  
+   *Befehl holen, dekodieren, ausführen; Register und Programmzähler*
 
-6. **"Warum ist `if (digitalRead(2) && digitalRead(3))` als Schaltung effizienter?"**  
-   *Boolesche Algebra, Gatter-Optimierung, Hardware-Software-Grenze*
+6. **„Wie sähe `if (digitalRead(2) && digitalRead(3))` als Schaltung aus – und was wäre daran anders als im Programm?“**  
+   *Boolesche Algebra, Gatter, Grenze zwischen Hardware und Software*
 
-7. **"Wie kann ein 8-bit-Mikrocontroller 16-bit-Zahlen addieren?"**  
-   *Multi-Precision-Arithmetik, Carry-Flag, ALU-Design*
+7. **„Wie kann ein 8-bit-Mikrocontroller 16-bit-Zahlen addieren?“**  
+   *Rechnen in mehreren Schritten, Carry-Flag, Aufbau der ALU*
+
+8. **„Woher weiß der Controller nach einem Interrupt, wo er weitermachen muss?“**  
+   *Unterprogramme, Rücksprungadresse und Stack*
 
 
 ## Der Unterschied zu einem "Arduino-Kurs"
 
     --{{0}}--
-Hier ist ein wichtiger Punkt: Nach einem typischen Arduino-Workshop können Sie LEDs blinken lassen. Nach diesem Kurs können Sie erklären, warum die `digitalWrite()`-Funktion exakt 12 Taktzyklen benötigt und welche vier Hardware-Register dabei beschrieben werden. Der Unterschied zwischen "es funktioniert" und "ich verstehe warum es funktioniert".
+Nach einem typischen Arduino-Workshop können Sie LEDs blinken lassen. Nach diesem Kurs können Sie erklären, welche Register dabei beschrieben werden, warum digitalWrite deutlich mehr Befehle braucht als ein direkter Registerzugriff und wie aus dem Bit im Register ein Pegel am Pin wird. Das ist der Unterschied zwischen „es funktioniert“ und „ich verstehe, warum es funktioniert“.
 
 **Arduino-Kurs:** "Drücke diesen Button, LEDs blinken" ✨ *Magie!*
 
@@ -260,21 +263,20 @@ style="width: 80%; min-width: 420px; max-width: 720px;"
 ```
 
     --{{0}}--
-Der ATmega328P hat "nur" etwa 100.000 Transistoren. Aber auch das ist schon gewaltig - stellen Sie sich vor, Sie müssten 100.000 Schalter von Hand verkabeln!
-Fun Fact: Diese Struktur wurde 1945 von John von Neumann beschrieben und ist heute noch gültig. Ihr Mobiltelefons hat die gleiche Grundarchitektur wie dieser Arduino - nur mit ein paar Milliarden Transistoren mehr. Die Kunst liegt darin, diese Komplexität in verständliche Module zu unterteilen.
+Die Aufteilung in Steuerwerk, Rechenwerk, Speicher und Ein-/Ausgabe hat John von Neumann 1945 beschrieben, sie gilt bis heute – vom Mobiltelefon bis zum Arduino. Der ATmega328P auf dem Arduino weicht in einem Punkt ab: Programm und Daten liegen in getrennten Speichern. Man nennt das Harvard-Architektur; mehr dazu in Vorlesung 10 und 12.
 
 
-### Beispiel 2: Quer über alle Ebenene
+### Beispiel 2: Quer über alle Ebenen
 
                    {{0-1}}
 *****************************************************
 
     --{{0}}--
-Hier wird's richtig interessant: Wir verfolgen eine einzige Arduino-Zeile durch vier Abstraktionsebenen. Das ist wie ein CSI für Programmierer - wir verfolgen jeden Beweis, bis wir den echten Täter finden: den Transistor, der die Arbeit macht.
+Wir verfolgen jetzt eine einzige Arduino-Zeile durch die Abstraktionsebenen – so lange, bis wir beim Transistor ankommen, der die eigentliche Arbeit macht.
 
 **Wir bauen von den Grundlagen nach oben!** Jede Ebene erklärt die nächste, bis Sie verstehen, wie Ihr `pinMode()` am Ende einen Transistor schaltet.
 
-**Schauen wir uns konkret an, was in diesen 4 Abstraktionsebenen passiert:**
+**Schauen wir uns konkret an, was auf den einzelnen Ebenen passiert:**
 
 *****************************************************
 
@@ -282,10 +284,10 @@ Hier wird's richtig interessant: Wir verfolgen eine einzige Arduino-Zeile durch 
                    {{1-2}}
 *****************************************************
 
-**Ebene 6 - Ihr Arduino-Code:**
+**Ebene 6 – Ihr Arduino-Code:**
 
     --{{1}}--
-Ebene sechs sieht harmlos aus, aber diese eine Zeile triggert eine Kaskade von 50+ Funktionsaufrufen in der Arduino-Laufzeitumgebung. Pin 13 ist übrigens kein Zufall - das ist der eingebaute LED-Pin auf den meisten Arduino-Boards.
+Ebene sechs sieht harmlos aus. Pin 13 ist übrigens kein Zufall – an ihm hängt die eingebaute LED der meisten Arduino-Boards.
 
 ```cpp
 pinMode(13, OUTPUT);  // Pin 13 als Ausgang konfigurieren
@@ -296,60 +298,99 @@ pinMode(13, OUTPUT);  // Pin 13 als Ausgang konfigurieren
                    {{2-3}}
 *****************************************************
 
-**Ebene 5 - AVR-libc Implementation (echte Arduino-Version):**
+**Ebene 6 – darunter: die Arduino-Bibliothek (C, gekürzt aus `wiring_digital.c`):**
 
     --{{2}}--
-Hier wird's professionell: Die Arduino-Entwickler müssen Interrupts abschalten, weil ein anderer Interrupt-Handler zur falschen Zeit das gleiche Register manipulieren könnte. Das nennt man Race Condition - ein klassisches Problem in der Embedded-Programmierung.
+Auch die Arduino-Bibliothek ist in C geschrieben, also noch Ebene sechs. Sie übersetzt die Pin-Nummer in ein Register und ein Bit. Bevor sie das Register ändert, schaltet sie Interrupts kurz ab: Eine Interrupt-Routine könnte sonst zwischen Lesen und Zurückschreiben dasselbe Register verändern. Das nennt man eine Race Condition.
 
 ```c
 void pinMode(uint8_t pin, uint8_t mode) {
-  uint8_t bit = digitalPinToBitMask(pin);    // Pin 13 → Bit 5
-  uint8_t port = digitalPinToPort(pin);      // Pin 13 → PORTB
-  volatile uint8_t *reg = portModeRegister(port); // → &DDRB
-  
+  uint8_t bit  = digitalPinToBitMask(pin);           // Pin 13 → Bit 5
+  uint8_t port = digitalPinToPort(pin);              // Pin 13 → Port B
+  volatile uint8_t *reg = portModeRegister(port);    // → &DDRB
+  ...
   if (mode == OUTPUT) {
-    uint8_t oldSREG = SREG;  // ⚠️ INTERRUPT-SCHUTZ!
-    cli();                   // Interrupts AUS
-    *reg |= bit;            // DDRB |= (1 << 5)
-    SREG = oldSREG;         // Interrupts wieder AN
+    uint8_t oldSREG = SREG;   // Statusregister sichern
+    cli();                    // Interrupts aus
+    *reg |= bit;              // DDRB |= (1 << 5)
+    SREG = oldSREG;           // alten Zustand wiederherstellen
   }
-  // INPUT und INPUT_PULLUP analog...
 }
 ```
+
+Kern des Ganzen ist eine einzige Zeile: `DDRB |= (1 << 5);` – setze Bit 5 im Register `DDRB`.
 
 *****************************************************
 
                    {{3-4}}
 *****************************************************
 
-**Ebene 3 - AVR-Assembler Code:**
+**Ebene 5 – Assembler:**
 
     --{{3}}--
-Jetzt sind wir bei der Maschinensprache angekommen. "CLI" schaltet global alle Interrupts ab - ein drastischer Schritt! "OUT 0x04, r24" schreibt direkt ins Hardware-Register DDRB. Diese 0x04 ist eine magische Zahl - die Speicheradresse des Data Direction Register B im AVR-Chip.
+Schreiben wir die Kernzeile DDRB oder-gleich eins geschoben um fünf direkt, macht der Compiler daraus einen einzigen Assemblerbefehl: sbi, set bit in I/O register. 0x04 ist die Adresse von DDRB im Ein-/Ausgabebereich des Controllers. Dieses Programm können Sie direkt ausführen – es lässt die LED an Pin 13 blinken.
+
+<div id="asm-example">
+<wokwi-led color="red" pin="13" label="13"></wokwi-led>
+<span id="simulation-time"></span>
+</div>
 
 ```asm
-; uint8_t oldSREG = SREG; cli();
-in   r25, 0x3F    ; Lade SREG (Status Register)
-cli               ; Clear Interrupt Flag → Interrupts AUS
+; Pin 13 (Port B, Bit 5) als Ausgang, dann blinken
+#include <avr/io.h>
 
-; *reg |= bit;  (DDRB |= (1 << 5))
-in   r24, 0x04    ; Lade DDRB Register (I/O-Adresse 0x04)
-ori  r24, 0x20    ; OR mit 0x20 (Bit 5 setzen)
-out  0x04, r24    ; Schreibe zurück zu DDRB
+.global main
+main:
+  sbi   _SFR_IO_ADDR(DDRB), 5   ; DDRB |= (1 << 5)  →  sbi 0x04, 5
 
-; SREG = oldSREG;
-out  0x3F, r25    ; Restore SREG → Interrupts wieder AN
+loop:
+  sbi   _SFR_IO_ADDR(PINB), 5   ; eine 1 in PINB schaltet PORTB5 um
+  rcall wait
+  rjmp  loop
+
+; 41 * 256 * 256 * 3 Takte ≈ 8.000.000 Takte = 0,5 s bei 16 MHz
+wait:
+  ldi   r20, 41
+wait_outer:
+  ldi   r19, 0
+wait_middle:
+  ldi   r18, 0
+wait_inner:
+  dec   r18
+  brne  wait_inner
+  dec   r19
+  brne  wait_middle
+  dec   r20
+  brne  wait_outer
+  ret
 ```
+@AVR8js.asm(asm-example)
 
 *****************************************************
 
                    {{4-5}}
 *****************************************************
 
-**Ebene 1 - Hardware-Konfiguration:**
+**Ebene 3 – Maschinencode:**
 
     --{{4}}--
-Endlich am Ziel: echte Hardware! Das DDRB-Register besteht aus acht Flip-Flops, jedes steuert einen Pin. Wenn Sie Bit 5 setzen, öffnet sich ein Transistor-Paar am Pin 13. Der obere Transistor kann dann +5V durchschalten, der untere 0V. Das ist der Moment, wo Software zu Physik wird.
+Der Assembler übersetzt sbi 0x04, 5 in genau zwei Bytes: 25 und 9A. Genau solche Bytes stehen in der Hex-Datei vom Anfang. Wie das Steuerwerk aus diesen Bits erkennt, was zu tun ist, sehen wir in Vorlesung 11.
+
+| Assembler     | Maschinencode im Speicher | Bedeutung der Bits                                 |
+| ------------- | ------------------------- | -------------------------------------------------- |
+| `sbi 0x04, 5` | `25 9A`                   | `1001 1010` = sbi · `00100` = Adresse 4 · `101` = Bit 5 |
+
+Der Befehl ist das 16-Bit-Wort `0x9A25`; im Speicher steht das niederwertige Byte zuerst.
+
+*****************************************************
+
+                   {{5-6}}
+*****************************************************
+
+**Ebene 1 – Hardware-Konfiguration:**
+
+    --{{5}}--
+Am Ziel: echte Hardware. Das Register DDRB besteht aus acht Flip-Flops, jedes gehört zu einem Pin. Ist Bit 5 gesetzt, wird der Ausgangstreiber von Pin 13 freigeschaltet: Ein Transistor kann den Pin mit der Versorgungsspannung verbinden, ein anderer mit Masse. Das ist der Moment, in dem Software zu Physik wird.
 
 ![Diagramme](./images/00_Einfuehrung/IOpin.png "Darstellung der Input/Output Beschaltung eines Microcontrollers")<!-- width="60%" -->
 
@@ -358,45 +399,53 @@ Das `DDRB`-Register steuert direkt die **Tri-State-Logik** des I/O-Pins:
 - **DDRB[5] = 1**: Ausgangstreiber wird aktiviert → Pin kann HIGH/LOW ausgeben
 - **DDRB[5] = 0**: Hochohmig → Pin kann Eingangssignale lesen
 
+*****************************************************
+
+                   {{6}}
+*****************************************************
+
+**Ordnen Sie zu:** Auf welcher Ebene liegt die jeweilige Darstellung?
+
+[[Ebene 6] [Ebene 5] [Ebene 3] [Ebene 1]]
+[    (X)       ( )       ( )       ( )    ]  `pinMode(13, OUTPUT);`
+[    (X)       ( )       ( )       ( )    ]  `DDRB |= (1 << 5);`
+[    ( )       (X)       ( )       ( )    ]  `sbi 0x04, 5`
+[    ( )       ( )       (X)       ( )    ]  `25 9A`
+[    ( )       ( )       ( )       (X)    ]  das Flip-Flop für Bit 5 in `DDRB`
 
 *****************************************************
 
 ## Was können Sie damit bauen?
 
     --{{0}}--
-Mit diesem tiefen Verständnis können Sie Systeme optimieren, die andere nur benutzen können. Sie wissen, warum der ADC-Wandler manchmal "rauscht", wie Sie Timer-Interrupts für präzises Timing einsetzen, und warum manche Sensoren 5V brauchen und andere mit 3.3V auskommen.
+Mit diesem Verständnis können Sie Systeme gezielt verbessern, statt nur Bibliotheken zu benutzen. Sie wissen, warum der Analog-Digital-Wandler manchmal „rauscht“, wie Sie Timer-Interrupts für präzises Timing einsetzen und warum manche Sensoren 5 V brauchen und andere mit 3,3 V auskommen.
 
 **Von einfachen LEDs zu echten Projekten:**
 
 ![Diagramme](./images/00_Einfuehrung/Wetterstation.png)<!-- width="70%" -->
 
-Nach diesem Kurs wissen Sie nicht nur, wie man Sensordaten ausliest, sondern **warum** der ADC-Wandler 1023 als Maximum liefert und wie die Timer-Interrupts das Sampling steuern.
+Nach diesem Kurs wissen Sie nicht nur, wie man Sensordaten ausliest, sondern **warum** der 10-Bit-Analog-Digital-Wandler höchstens 1023 liefert und wie Timer-Interrupts die Abtastung steuern.
 
 ![Diagramme](./images/00_Einfuehrung/AlleWetter.png)<!-- width="70%" -->
 
-Sie verstehen, warum die Messwerte (1023 = dunkel, niedrige Werte = hell) genau so aussehen und können die ADC-Referenzspannung für präzisere Messungen optimieren.
+In diesem Aufbau bedeuten hohe Werte Dunkelheit und niedrige Werte Helligkeit – das liegt an der Beschaltung des Lichtsensors, nicht am Wandler. Sie verstehen, warum die Messwerte so aussehen, und können die Referenzspannung des Wandlers für präzisere Messungen wählen.
 
-### "Aber ich will doch Webentwickler/Data Scientist/KI-Entwickler werden..."
+### Wozu brauche ich das in meinem Studiengang?
 
     --{{0}}--
-Hier ist ein Geheimnis der Tech-Industrie: Die wertvollsten Entwickler sind die, die eine Schicht tiefer schauen können als ihre Kollegen. Wenn Ihre Webanwendung langsam ist und andere raten, wissen Sie genau, welche CPU-Zyklen verschwendet werden. Das macht den Unterschied zwischen Senior- und Junior-Entwickler aus.
+Die Vorlesung hören Studierende aus sehr unterschiedlichen Richtungen. Jede Gruppe nimmt etwas anderes mit – aber alle profitieren davon, eine Schicht tiefer schauen zu können als bisher.
 
-**Perfekt! Denn Sie werden ein BESSERER Entwickler in JEDEM Bereich:**
-
-+ **Webentwickler**: Sie verstehen Performance bis zur Hardware-Ebene
-+ **Data Scientist**: Sie wissen, wie Ihre Daten WIRKLICH entstehen  
-+ **KI-Entwickler**: Edge-AI auf Mikrocontrollern? Sie können es!
-+ **Cloud-Architekt**: Sie verstehen die Hardware unter Ihren VMs
-+ **Game-Developer**: Low-Level-Optimierung wird Ihr Superpower
-
-**Das tiefe Hardware-Verständnis macht Sie in JEDER Tech-Rolle wertvoller!**
++ **Robotik**: Jeder Roboter ist ein eingebettetes System – Sensoren lesen, Motoren ansteuern, rechtzeitig reagieren.
++ **Angewandte Informatik**: Sie verstehen, was Ihr Programm auf der Hardware tatsächlich tut, und warum manches langsam oder speicherhungrig ist.
++ **Mathematik**: Boolesche Algebra und Automaten werden hier zu Schaltungen – mit Laufzeiten, Takten und Grenzen der Physik.
++ **Ingenieurwissenschaften**: Messen, Steuern und Regeln laufen heute fast immer auf einem Mikrocontroller.
 
 ## Organisation
 
-| Name                    | Email                                   |
-| :---------------------- | :-------------------------------------- |
-| Prof. Dr. Sebastian Zug | sebastian.zug@informatik.tu-freiberg.de |
-| Adrian Köppen           | adrian.koeppen@student.tu-freiberg.de   |
+| Name                    | Email                                   | Aufgabe                                  |
+| :---------------------- | :-------------------------------------- | :--------------------------------------- |
+| Prof. Dr. Sebastian Zug | sebastian.zug@informatik.tu-freiberg.de | Vorlesung, theoretische Übungsblätter    |
+| N.N.                    |                                         | praktische Übungen ab Januar             |
 
 > Bitte melden Sie sich im OPAL unter [Digitale Systeme](https://bildungsportal.sachsen.de/opal/auth/RepositoryEntry/37204033543/CourseNode/1665541981269900003) für die Veranstaltung an. Dort finden Sie auch die aktuellen Informationen zur Veranstaltung.
 
@@ -405,14 +454,16 @@ Hier ist ein Geheimnis der Tech-Industrie: Die wertvollsten Entwickler sind die,
 Die Veranstaltung wird sowohl für die Vorlesung als auch die Übung in Präsenz durchgeführt.
 
 <!-- data-type="none" -->
-| Veranstaltungen | Tag        | Zeitslot      | Ort      | Bemerkung     |
-| --------------- | ---------- | ------------- | -------- | ------------- |
-| Vorlesung I     | Mittwoch   | 16:15 - 17:45 | FOR-0270 | wöchentlich   |
-| Vorlesung II    | Donnerstag | 09:45 - 11:15 | FOR-0270 | gerade Wochen |
+| Veranstaltungen | Tag        | Zeitslot      | Ort      | Bemerkung                    |
+| --------------- | ---------- | ------------- | -------- | ---------------------------- |
+| Vorlesung I     | Mittwoch   | 16:15 - 17:45 | FOR-0270 | wöchentlich                  |
+| Vorlesung II    | Donnerstag | 11:30 - 13:00 | FOR-0270 | gerade Kalenderwochen        |
+| Übung, Gruppe 1 | Montag     | 18:00 - 19:30 | KKB-2097 | wöchentlich ab Ende November |
+| Übung, Gruppe 2 | Donnerstag | 18:00 - 19:30 | KKB-2097 | wöchentlich ab Ende November |
 
-> Die zugehörigen Übungen starten im Dezember und werden dann wöchentlich durchgeführt. Dort haben Sie dann insbesondere ab Januar Gelegenheit anhand spezifischer Mikrocontrollerschaltungen Ihre Kenntnisse praktisch zu vertiefen.
+> Die Übungen starten Ende November mit theoretischen Übungsblättern und werden wöchentlich durchgeführt. Ab Januar vertiefen Sie Ihre Kenntnisse in praktischen Übungen an Mikrocontrollerschaltungen.
 
-> Remote-Labore werden etwa Dezember bereitstehen, um einzelne Aspekte der Lehrveranstaltung zu vertiefen.
+> Ergänzend stehen Remote-Labore bereit, um einzelne Aspekte der Lehrveranstaltung zu vertiefen.
 
 ### Prüfungsmodalitäten
 
@@ -434,6 +485,37 @@ Im Laufe der Übungen werden wir "alte" Übungsaufgaben durchspielen, die Ihnen 
 
 Bei den jeweiligen Vorlesungsinhalten werden zusätzliche Materialien angegeben.
 
+### Ihre Vorkenntnisse
+
+    --{{0}}--
+Die Vorlesung hören Studierende mit sehr unterschiedlichen Vorkenntnissen. Ihre Antworten helfen uns, Beispiele und Übungen passend zu wählen. Die Abfrage ist anonym.
+
+**Aus welchem Studiengang kommen Sie?**
+
+[(informatik)] Angewandte Informatik
+[(robotik)] Robotik
+[(mathe)] Mathematik
+[(ingenieur)] ein Ingenieurstudiengang
+[(anderer)] ein anderer Studiengang
+
+**Welche Erfahrung haben Sie mit Arduino oder anderen Mikrocontrollern?**
+
+[(keine)] keine Vorerfahrung
+[(kurz)] kurz ausprobiert, Praktikum oder Ähnliches
+[(basteln)] umfangreiche „Basteleien“
+[(beruf)] Berufserfahrung mit Mikrocontrollern
+
+**Können Sie in C programmieren?**
+
+[(parallel)] ich lerne C in diesem Semester (Algorithmen und Datenstrukturen)
+[(ja)] ja, schon vorher
+[(nein)] nein, und ich höre auch keine C-Vorlesung
+
+**Haben Sie Zugriff auf einen Arduino Uno, Nano oder einen anderen ATmega-Mikrocontroller?**
+
+[(ja)] ja, ein Controller ist vorhanden
+[(nein)] nein
+
 ## Engagement und Motivation
 
 > *Credit-Points:* 6
@@ -442,108 +524,19 @@ Bei den jeweiligen Vorlesungsinhalten werden zusätzliche Materialien angegeben.
 
 ### Open Educational Resources
 
-                              {{0-1}}
-****************************************************************************
-
-Die Lehrmaterialien finden Sie unter GitHub, einer Webseite für das Versionsmanagement und die Projektverwaltung.
+Die Lehrmaterialien sind offen verfügbar und liegen auf GitHub:
 
 [https://github.com/TUBAF-IfI-LiaScript/VL_EingebetteteSysteme](https://github.com/TUBAF-IfI-LiaScript/VL_EingebetteteSysteme)
 
-Die Unterlagen selbst sind in der Auszeichnungsprache LiaScript verfasst und öffentlich verfügbar.
+Sie sind in LiaScript geschrieben, einer Erweiterung von Markdown. Markdown beschreibt Texte mit wenigen, gut lesbaren Zeichen – `# Überschrift`, `*kursiv*`, `**fett**`, `+ Aufzählung`. LiaScript ergänzt, was in der Lehre fehlt: ausführbaren Code, Simulationen, Quizze und Animationen. Den Simulator haben Sie oben schon benutzt.
 
-****************************************************************************
+Zum Weiterlesen: [Markdown Guide](https://www.markdownguide.org/getting-started/) · [LiaScript-Dokumentation](https://liascript.github.io/course/?https://raw.githubusercontent.com/liaScript/docs/master/README.md#1) · [Einführungsvideos](https://www.youtube.com/channel/UCyiTe2GkW_u05HSdvUblGYg)
 
-                         {{1-2}}
-****************************************************************************
-
-Markdown ist eine Auszeichnungssprache für die Gliederung und Formatierung von Texten und anderen Daten. Analog zu HTML oder LaTex werden die Eigenschaften und Organisation von Textelementen (Zeichen, Wörtern, Absätzen) beschrieben. Dazu werden entsprechende "Schlüsselworte", die sogenannten Tags, verwendet.
-
-Markdown wurde von John Gruber und Aaron Swartz mit dem Ziel entworfen, die Komplexität der Darstellung so weit zu reduzieren, dass schon der Code sehr einfach lesbar ist. Als Auszeichnungselemente werden entsprechend möglichst kompakte Darstellungen genutzt.
-
-```markdown HelloWorld.md
-# Überschrift
-
-__eine__ Betonung __in kursiver Umgebung__
-
-+ Punkt 1
-+ Punkt 2
-
-Und noch eine Zeile mit einer mathematischen Notation $a=cos(b)$!
-
-```
-
-----------------------------------------------------------------------------<h1>Überschrift</h1>
-<i>eine <em>Betonung</em> in kursiver Umgebung</i>
-<ul>
-<li>Punkt 1</li>
-<li>Punkt 2</li>
-</ul>
-Und noch eine Zeile mit einer mathematischen Notation $a=cos(b)$!
-
-----------------------------------------------------------------------------
-
-
-Eine gute Einführung zu Markdown finden Sie zum Beispiel unter:
-
-* [MarkdownGuide](https://www.markdownguide.org/getting-started/)
-* [GitHubMarkdownIntro](https://guides.github.com/features/mastering-markdown/)
-
-Mit einem entsprechenden Editor und einigen Paketen macht das Ganze dann auch Spaß.
-
-* Wichtigstes Element ist ein Previewer, der es Ihnen erlaubt "online" die Korrektheit der Eingaben zu prüfen
-* Tools zur Unterstützung komplexerer Eingaben wie zum Beispiel der Tabellen (zum Beispiel für Atom mit [markdown-table-editor](https://atom.io/packages/markdown-table-editor))
-* Visualisierungsmethoden, die schon bei der Eingabe unterstützen
-* Rechtschreibprüfung (!)
-
-****************************************************************************
-
-
-                                 {{2-3}}
-****************************************************************************
-
-Allerdings vermisst Markdown trotz seiner Einfachheit einige Features, die
-für die Anwendbarkeit in der (Informatik-)Lehre sprechen:
-
-* Ausführbarer Code
-* Möglichkeiten zur Visualisierung
-* Quizze, Tests und Aufgaben
-* Spezifische Tools für die Modellierung, Simulationen etc.
-
-```cpp     ArduinoSimulator.ino
-void thing(char i) {
-  switch(i) {
-  case 0: Serial.println("a pear"); break;
-  case 1: Serial.println("an apple"); break;
-  case 2: Serial.println("an elephant"); break;
-  case 3: Serial.println("an arduino"); break;
-  }
-}
-
-void setup() {
-  Serial.println("Hello stuff.");
-
-  for (int i=0; i<4; i++) {
-    Serial.print("here's ");
-    thing(random(4));
-  }
-}
-
-void loop() {
-}
-```
-@AVR8js.sketch
-
-??[Simulation: Noninverting Amplifier](https://www.falstad.com/circuit/circuitjs.html?ctz=CQAgzCAMB0l3BWEA2aB2ATAFi2TXIBODMARjUJAQA4Q0rIqBTAWlNICgBDEUyLFAPLJBvRkkZ94cFNCyEFipUqixk0uBlKF1yMGGpCN3MUNIZeaEewt8qUMRqpzlrhfRiR1GrTq-7DR3gTPiF1S2twuwkg+BAsFzdlWk9vaV9dAKNpEP4QDEhaYXzCsXtJDUYwRKTFag81Soz-A2zgnlD8hGsrLutxBylpfJrahVUvJu1M1tjIXIEwPOKlo3K5yVGxkVSpvz1ZobgF8ARbXrAzspijmRh5MZVdn2mWwNuOACc6C1pMKh2DHm33+3R+pkGwRBtjy-1IVwqx2hvCu-wKjERwPB6OxWBSQS+uL+FgwOkhSOxZP+YBw5Kx1Np1OIDgQxwASuDaGBfg5GAQ6LzVAgOAB3cFgzpg+ZiuHLOUCaXg+EwoQI0XYmSdHGKtF4iHYFLqtFkrVknUWGlGRa0xWdWVCApQdWdcwVMKGsUu5BFPJaHbO32kfoCDDIBUBkNhiFkCy2vIx6PhOMCe35cMcrVCQLYBwCVngdBIapoGIwYUAc3BYGZ-wIGKd8JD1C53tOFtbpAF4mdFyuK2ZtouzIwzfAA57IlWvECU9tM+WM8Cc8W2dHs0HIgwEuHUudO+szLw-s9h96I65vQ3JVoOIKHpKjDvD-ArcVOLArfPL-vxSDj9Kf5OmKT6AU+H4YuqYHhF+4FAREvDmPkQYIbGkHITYSGTmqwHIZcJJrth8FRhgOZRm+pEhjmlpwSR1pNlyNocI2+TUI+ZJ4fkJrgCyzrzk2VR5G+rGcZueqkseLGPqOW6bqOb5iWSBrXjRYmlLepRvmCX4yShNESohfq6fJN6lBxT6KhxH5clc3L3mZplXKG4ZYNo4BnlGWBaWR4DqmZUZHvkZG+Y57FnmawUWiObmTlF8wAPbgFUsbxEQPoTPAhBWN0W4OBaVQcAlyBFslBCELQCCwHANKKGgDxlSklWQJ2nYWEVPmFTFuapeUjVEFlyA5S1KCTgVKD0NyXVlT10iZUVA1IENyDjRwQA)
-
-Eine Reihe von Einführungsvideos findet sich unter [Youtube](https://www.youtube.com/channel/UCyiTe2GkW_u05HSdvUblGYg). Die Dokumentation von LiaScript ist hier [verlinkt](https://liascript.github.io/course/?https://raw.githubusercontent.com/liaScript/docs/master/README.md#1)
-
-***************************************************************************
+Eine Übersicht über alle Begriffe und roten Fäden der Vorlesung bietet die [Kurslandkarte](https://tubaf-ifi-liascript.github.io/VL_EingebetteteSysteme/kurslandkarte/).
 
 ### Trotz Simulation und Virtuellem ...
 
-... braucht es aber auch immer etwas zum anfassen.
-
-> Blick hinter eine Arduino-Anwendung
+... braucht es aber auch immer etwas zum Anfassen. Der Simulator zeigt viel – aber er verzeiht auch Dinge, die echte Hardware nicht verzeiht: falsche Verdrahtung, zu hohe Ströme, prellende Taster. Ab Januar arbeiten Sie deshalb in der Übung mit echten Mikrocontrollerschaltungen.
 
 ### Generelles Engagement
 
@@ -568,5 +561,6 @@ Lion und Caio warten auf Sie ...
 
 ## Hausaufgabe
 
-+ Legen Sie sich einen GitHub Account an ... und seien Sie der Erste, der einen Typo in den Unterlagen findet und diesen als Contributor korrigiert :-)
-+ Organisieren Sie sich alle in einer Chatgruppe! Niemand verlässt den Raum, bevor er dort nicht Mitglied ist.
++ Legen Sie sich einen GitHub-Account an ... und finden Sie als Erste oder Erster einen Tippfehler in den Unterlagen, den Sie als Contributor korrigieren :-)
++ Organisieren Sie sich in einer gemeinsamen Chatgruppe! Bevor Sie heute den Raum verlassen, sollten Sie dort Mitglied sein.
++ Ändern Sie im Assembler-Beispiel die Wartezeit so, dass die LED doppelt so schnell blinkt. Welche Zahl müssen Sie ändern – und warum genau diese?
