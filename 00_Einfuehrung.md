@@ -447,7 +447,7 @@ Die Vorlesung hören Studierende aus sehr unterschiedlichen Richtungen. Jede Gru
 | Prof. Dr. Sebastian Zug | sebastian.zug@informatik.tu-freiberg.de | Vorlesung, theoretische Übungsblätter    |
 | N.N.                    |                                         | praktische Übungen ab Januar             |
 
-> Bitte melden Sie sich im OPAL unter [Digitale Systeme](https://bildungsportal.sachsen.de/opal/auth/RepositoryEntry/37204033543/CourseNode/1665541981269900003) für die Veranstaltung an. Dort finden Sie auch die aktuellen Informationen zur Veranstaltung.
+> Bitte melden Sie sich im OPAL unter [Digitale Systeme](https://bildungsportal.sachsen.de/opal/auth/RepositoryEntry/37204033543) für die Veranstaltung an. Dort finden Sie auch die aktuellen Informationen zur Veranstaltung.
 
 ### Zeitplan
 
