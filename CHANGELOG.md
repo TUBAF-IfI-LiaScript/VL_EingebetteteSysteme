@@ -2,6 +2,11 @@
 
 Alle wesentlichen Änderungen an diesem Kurs werden in dieser Datei dokumentiert.
 
+## [0.7.2] - 2026-10-18
+
+### Changed
+- **06_FlipFlops (0.0.10), 09_Rechnerarithmetik (0.0.8):** DigiSim-Schaltungen mit rechtwinkligen Leitungen (`"router": "manhattan"`, DigiSim-Template 0.1.0)
+
 ## [0.7.1] - 2026-10-16
 
 ### Changed
