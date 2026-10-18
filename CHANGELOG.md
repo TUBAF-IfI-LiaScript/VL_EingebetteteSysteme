@@ -5,6 +5,8 @@ Alle wesentlichen Änderungen an diesem Kurs werden in dieser Datei dokumentiert
 ## [0.7.2] - 2026-10-18
 
 ### Changed
+- **Begriffsabfrage in allen Vorlesungen:** VL 02–15 enden (vor Haus- bzw. Übungsaufgaben) mit „Ihre Begriffe für die Kurslandkarte“; Versionen jeweils um eins erhöht
+- **00_Einfuehrung (0.6.3):** Startcheck vor dem 21.10.: Vorkenntnis-Umfrage direkt hinter das Team, Hinweis auf den Klassenzimmer-Link im Hörsaal, Übungsbeginn „ab Ende November, Details bis Mitte November im OPAL“, Ausfall 18.11., Probeklausur Ende Januar, Remote-Labore gestrichen, Chatgruppe angepasst, Tipp zur Assembler-Hausaufgabe, RoboLab-Folie ohne Namen, Alt-Texte; neue Folie „Zwei Simulatoren begleiten Sie durchs Semester“ (DigiSim-UND, AVR8js mit Taster, Potentiometer, Servo und Logikanalysator); Bezeichnungen ATmega328P (Microchip), Arduino UNO R3 und Arduino-Framework statt „Arduino“, Pin 13 = PB5, Eingangspegel laut Datenblatt
 - **06_FlipFlops (0.0.10), 09_Rechnerarithmetik (0.0.8):** DigiSim-Schaltungen mit rechtwinkligen Leitungen (`"router": "manhattan"`, DigiSim-Template 0.1.0)
 
 ## [0.7.1] - 2026-10-16

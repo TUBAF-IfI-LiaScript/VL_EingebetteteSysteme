@@ -2,12 +2,13 @@
 
 author:   Sebastian Zug, André Dietrich & `fjangfaragesh`, `FnHm`, `gjaeger`, `ShyFlyGuy`, `Lalelele`
 email:    sebastian.zug@informatik.tu-freiberg.de & andre.dietrich@informatik.tu-freiberg.de & fabian.baer@student.tu-freiberg.de
-version:  0.6.2
+version:  0.6.3
 language: de
 narrator: Deutsch Female
 
 import:   https://raw.githubusercontent.com/liascript-templates/plantUML/master/README.md
           https://raw.githubusercontent.com/liaTemplates/AVR8js/main/README.md
+          https://raw.githubusercontent.com/LiaTemplates/DigiSim/master/README.md
           https://raw.githubusercontent.com/TUBAF-IfI-LiaScript/VL_EingebetteteSysteme/master/config.md
 
 -->
@@ -32,7 +33,7 @@ Bevor wir starten: Haben Sie schon einmal darüber nachgedacht, wie aus einem Ho
 
 **Fragen an die Veranstaltung**
 
-+ Welche Abstraktionsebenen durchlaufen wir vom Arduino-Code bis zur Hardware-Ebene?
++ Welche Abstraktionsebenen durchlaufen wir vom Programm im Arduino-Framework bis zur Hardware-Ebene?
 + Warum lohnt sich das Verständnis eingebetteter Systeme für Informatik, Robotik und Ingenieurwesen?
 + Welche Rolle spielen Mikrocontroller in modernen digitalen Systemen?
 + Wie unterscheiden sich eingebettete Systeme von herkömmlichen Computersystemen?
@@ -120,7 +121,7 @@ Schauen Sie auf die ersten vier Datenbytes: 0C 94 5D 00. Das ist ein einziger Ma
 ### Was ist ein eingebettetes System?
 
     --{{0}}--
-Die Vorlesung heißt „Eingebettete Systeme“ – also klären wir den Begriff, bevor wir losgehen. Ihr Arduino mit den vier LEDs ist bereits eines.
+Die Vorlesung heißt „Eingebettete Systeme“ – also klären wir den Begriff, bevor wir losgehen. Der Mikrocontroller ATmega328P (Microchip, 8-Bit-AVR) auf dem Board Arduino UNO R3 mit den vier LEDs ist bereits eines.
 
 Ein **eingebettetes System** ist ein Rechner, der fest in ein technisches Gerät eingebaut ist und dort eine bestimmte Aufgabe erfüllt – meist ohne dass man ihn als Rechner wahrnimmt. Typisch sind:
 
@@ -144,10 +145,10 @@ Der Laptop ist ein Universalrechner: Er führt beliebige Programme aus, die Sie 
 ### Die Reise: 16 Vorlesungen zum Verständnis
 
 <!-- data-type="none" -->
-| Vorlesung                                           | Was lernen Sie hier?          | Wo steckt das im Arduino?                          |
+| Vorlesung                                           | Was lernen Sie hier?          | Wo steckt das im ATmega328P?                       |
 | --------------------------------------------------- | ----------------------------- | -------------------------------------------------- |
 | [00 Einführung](00_Einfuehrung.md)                  | Die große Vision              | vom Sketch zur Hex-Datei                           |
-| [01 Historie](01_HistorischerUeberblick.md)         | Von Leibniz zu Arduino        | warum der Chip so aussieht, wie er aussieht        |
+| [01 Historie](01_HistorischerUeberblick.md)         | Von Leibniz zum Mikrocontroller | warum der Chip so aussieht, wie er aussieht        |
 | [02 Boolesche Algebra](02_BoolscheAlgebra.md)       | 0 und 1 verstehen             | `if (a && b)`, Bitmasken                           |
 | [03 Minimierung](03_Minimierung.md)                 | Effizienz in Logik            | weniger Gatter für dieselbe Funktion               |
 | [04 Schaltnetze](04_Schaltnetze.md)                 | Logik wird Hardware           | die Logik im Chip, inklusive ihrer Laufzeiten      |
@@ -158,10 +159,10 @@ Der Laptop ist ein Universalrechner: Er führt beliebige Programme aus, die Sie 
 | [09 Rechnerarithmetik](09_Rechnerarithmetik.md)     | Addition in Hardware          | `int`, Überlauf, `float`                           |
 | [10 CPU-Basis](10_CPU_Basis.md)                     | Der erste Prozessor           | Rechenwerk, Steuerwerk, Speicher                   |
 | [11 Modell-CPU](11_Modell_CPU.md)                   | Befehl für Befehl             | was mit `0C 94 5D 00` passiert                     |
-| [12 AVR-CPU](12_AVR_CPU.md)                         | **Ihr Arduino-Chip!**         | ATmega328P, Toolchain, Register                    |
+| [12 AVR-CPU](12_AVR_CPU.md)                         | **Ihr Controller: ATmega328P** | ATmega328P, Toolchain, Register                    |
 | [13 ADC](13_ADC.md)                                 | Analog trifft Digital         | `analogRead`                                       |
 | [14 Timer & Interrupts](14_TimerUndInterrupts.md)   | Unterprogramme, Stack, Timing | `attachInterrupt`, `delay`, `analogWrite`, Echtzeit |
-| [15 Aktoren](15_Aktoren.md)                         | Hardware bewegen, Ausblick    | Servo, Schrittmotor, Echtzeit und Energiesparen    |
+| [15 Aktoren](15_Aktoren.md)                         | Hardware bewegen, Ausblick    | Servo, Schrittmotor, Echtzeit, Energiesparen – und die Hex-Datei vom Anfang komplett lesen |
 
 > Für 16 Vorlesungen haben wir 21 Termine: Einige Themen bekommen zwei Termine, am Ende bleiben Zeit für Wiederholung und ein Puffer.
 
@@ -173,7 +174,7 @@ Diese Fragen klingen heute noch nach Zauberei. Am Ende des Semesters sollten Sie
 **Sie können diese Fragen fundiert beantworten:**
 
 1. **„Wie wird `pinMode(13, OUTPUT)` zu einer Hardware-Konfiguration?“**  
-   *Von der Arduino-Funktion über Assembler zum Bit im Register `DDRB` und zur Tri-State-Logik am Pin*
+   *Von der Funktion des Arduino-Frameworks über Assembler zum Bit im Register `DDRB` und zur Tri-State-Logik am Pin*
 
 2. **„Was bedeutet `Serial.begin(115200)`?“**  
    *Die serielle Schnittstelle (UART) überträgt Bit für Bit ohne gemeinsamen Takt – deshalb vereinbaren beide Seiten zu Beginn die „Sprechgeschwindigkeit“.*
@@ -289,7 +290,7 @@ style="width: 80%; min-width: 420px; max-width: 720px;"
 ```
 
     --{{0}}--
-Die Aufteilung in Steuerwerk, Rechenwerk, Speicher und Ein-/Ausgabe hat John von Neumann 1945 beschrieben, sie gilt bis heute – vom Mobiltelefon bis zum Arduino. Der ATmega328P auf dem Arduino weicht in einem Punkt ab: Programm und Daten liegen in getrennten Speichern. Man nennt das Harvard-Architektur; mehr dazu in Vorlesung 10 und 12.
+Die Aufteilung in Steuerwerk, Rechenwerk, Speicher und Ein-/Ausgabe hat John von Neumann 1945 beschrieben, sie gilt bis heute – vom Mobiltelefon bis zum Mikrocontroller. Der ATmega328P weicht in einem Punkt ab: Programm und Daten liegen in getrennten Speichern. Man nennt das Harvard-Architektur; mehr dazu in Vorlesung 10 und 12.
 
 
 ### Beispiel 2: Quer über alle Ebenen
@@ -298,7 +299,7 @@ Die Aufteilung in Steuerwerk, Rechenwerk, Speicher und Ein-/Ausgabe hat John von
 *****************************************************
 
     --{{0}}--
-Wir verfolgen jetzt eine einzige Arduino-Zeile durch die Abstraktionsebenen – so lange, bis wir beim Transistor ankommen, der die eigentliche Arbeit macht.
+Wir verfolgen jetzt eine einzige Programmzeile durch die Abstraktionsebenen – so lange, bis wir beim Transistor ankommen, der die eigentliche Arbeit macht.
 
 **Wir bauen von den Grundlagen nach oben!** Jede Ebene erklärt die nächste, bis Sie verstehen, wie Ihr `pinMode()` am Ende einen Transistor schaltet.
 
@@ -312,10 +313,10 @@ Wir verfolgen jetzt eine einzige Arduino-Zeile durch die Abstraktionsebenen – 
                    {{1-2}}
 *****************************************************
 
-**Ebene 6 – Ihr Arduino-Code:**
+**Ebene 6 – Ihr Programm (Arduino-Framework):**
 
     --{{1}}--
-Ebene sechs sieht harmlos aus. Pin 13 ist übrigens kein Zufall – an ihm hängt die eingebaute LED der meisten Arduino-Boards.
+Ebene sechs sieht harmlos aus. Pin 13 ist übrigens kein Zufall – an ihm hängt die eingebaute LED des Boards Arduino UNO R3. Die 13 ist allerdings nur die Beschriftung auf dem Board; am ATmega328P heißt dieser Anschluss PB5, Port B, Bit 5.
 
 ```cpp
 pinMode(13, OUTPUT);  // Pin 13 als Ausgang konfigurieren
@@ -432,7 +433,7 @@ Am Ziel: echte Hardware. Das Register DDRB besteht aus acht Flip-Flops, jedes ge
 
 Für Pin 13 ist im Bild x = B und n = 5: Das Flip-Flop DDxn ist also DDB5, Bit 5 im Register `DDRB`. Der Ausgangstreiber ist der dreieckige Verstärker in der Mitte, der den Pin Pxn treibt; der Transistor oben links gehört zum Pull-up-Widerstand.
 
-**HIGH und LOW sind Spannungen:** Beim Arduino Uno liegt HIGH nahe der Versorgungsspannung von 5 V, LOW nahe 0 V, der Masse.
+**HIGH und LOW sind Spannungen:** Beim ATmega328P mit 5 V Versorgung liegt HIGH nahe der Versorgungsspannung, LOW nahe 0 V, der Masse. Laut Datenblatt erkennt ein Eingang sicher LOW unter 1,5 V und sicher HIGH über 3,0 V.
 
 Das `DDRB`-Register steuert direkt die **Tri-State-Logik** des I/O-Pins:
 
@@ -491,48 +492,12 @@ Die Vorlesung hören Studierende aus sehr unterschiedlichen Richtungen. Jede Gru
 
 > Bitte melden Sie sich im OPAL unter [Digitale Systeme](https://bildungsportal.sachsen.de/opal/auth/RepositoryEntry/37204033543) für die Veranstaltung an – dort heißt sie kurz „Digitale Systeme“. Dort finden Sie auch die aktuellen Informationen zur Veranstaltung.
 
-### Zeitplan
-
-Die Veranstaltung wird sowohl für die Vorlesung als auch die Übung in Präsenz durchgeführt.
-
-<!-- data-type="none" -->
-| Veranstaltungen | Tag        | Zeitslot      | Ort      | Bemerkung                    |
-| --------------- | ---------- | ------------- | -------- | ---------------------------- |
-| Vorlesung I     | Mittwoch   | 16:15 - 17:45 | FOR-0270 | wöchentlich                  |
-| Vorlesung II    | Donnerstag | 11:30 - 13:00 | FOR-0270 | gerade Kalenderwochen        |
-| Übung, Gruppe 1 | Montag     | 18:00 - 19:30 | KKB-2097 | wöchentlich ab Ende November |
-| Übung, Gruppe 2 | Donnerstag | 18:00 - 19:30 | KKB-2097 | wöchentlich ab Ende November |
-
-> Die Übungen starten Ende November mit theoretischen Übungsblättern und werden wöchentlich durchgeführt. Ab Januar vertiefen Sie Ihre Kenntnisse in praktischen Übungen an Mikrocontrollerschaltungen.
-
-> Ergänzend stehen Remote-Labore bereit, um einzelne Aspekte der Lehrveranstaltung zu vertiefen.
-
-### Prüfungsmodalitäten
-
-> *Prüfungsform:* Die Veranstaltung wird mit einer schriftlichen Prüfung abgeschlossen. Diese wird als __Open Book Klausur__ entworfen. Sie dürfen dazu alle schriftlichen, nicht-digitalen Materialien verwenden.
-
-Eine druckbare PDF-Fassung jeder Vorlesung finden Sie in der [Kursübersicht](https://tubaf-ifi-liascript.github.io/digitalesysteme.html) – ideal, um eigene Notizen für die Klausur direkt daneben zu schreiben.
-
-Im Laufe der Übungen werden wir "alte" Übungsaufgaben durchspielen, die Ihnen einen Eindruck von der Prüfung vermitteln sollen.
-
-### Literaturempfehlungen
-
-1. Umfassende Lehrbücher
-
-   + David A. Patterson, John L. Hennessy: Computer Organization & Design
-   + B. Becker, R. Drechsler, P. Molitor: Technische Informatik - Eine Einführung, Pearson Studium, 2005
-   + Hoffmann, D. W.: Grundlagen der technischen Informatik, Hanser Verlag
-
-2. Videos
-
-   + Youtube – „How a CPU Works“ [Link](https://www.youtube.com/watch?v=cNN_tTXABUA)
-
-Bei den jeweiligen Vorlesungsinhalten werden zusätzliche Materialien angegeben.
-
 ### Ihre Vorkenntnisse
 
     --{{0}}--
 Die Vorlesung hören Studierende mit sehr unterschiedlichen Vorkenntnissen. Ihre Antworten helfen uns, Beispiele und Übungen passend zu wählen. Die Abfrage ist anonym; wir sammeln die Antworten im Hörsaal über das LiaScript-Klassenzimmer.
+
+> Den Link zum LiaScript-Klassenzimmer zeigen wir Ihnen im Hörsaal. Treten Sie bei, bevor Sie antworten – sonst bleiben Ihre Antworten nur in Ihrem eigenen Browser.
 
 **Aus welchem Studiengang kommen Sie?**
 
@@ -555,10 +520,48 @@ Die Vorlesung hören Studierende mit sehr unterschiedlichen Vorkenntnissen. Ihre
 [(ja)] ja, schon vorher
 [(nein)] nein, und ich höre auch keine C-Vorlesung
 
-**Haben Sie Zugriff auf einen Arduino Uno, Nano oder einen anderen ATmega-Mikrocontroller?**
+**Haben Sie Zugriff auf einen Arduino UNO, Nano oder einen anderen ATmega-Mikrocontroller?**
 
 [(ja)] ja, ein Controller ist vorhanden
 [(nein)] nein
+
+### Zeitplan
+
+Die Veranstaltung wird sowohl für die Vorlesung als auch die Übung in Präsenz durchgeführt.
+
+<!-- data-type="none" -->
+| Veranstaltungen | Tag        | Zeitslot      | Ort      | Bemerkung                    |
+| --------------- | ---------- | ------------- | -------- | ---------------------------- |
+| Vorlesung I     | Mittwoch   | 16:15 - 17:45 | FOR-0270 | wöchentlich                  |
+| Vorlesung II    | Donnerstag | 11:30 - 13:00 | FOR-0270 | gerade Kalenderwochen        |
+| Übung, Gruppe 1 | Montag     | 18:00 - 19:30 | KKB-2097 | ab Ende November             |
+| Übung, Gruppe 2 | Donnerstag | 18:00 - 19:30 | KKB-2097 | ab Ende November             |
+
+Am **Mittwoch, 18.11.** (Buß- und Bettag), entfällt die Vorlesung.
+
+> Die Übungen starten Ende November mit theoretischen Übungsblättern. Ab Januar vertiefen Sie Ihre Kenntnisse in praktischen Übungen an Mikrocontrollerschaltungen. Datum, Rhythmus und Gruppeneinteilung geben wir bis Mitte November im OPAL bekannt.
+
+### Prüfungsmodalitäten
+
+> *Prüfungsform:* Die Veranstaltung wird mit einer schriftlichen Prüfung abgeschlossen. Diese wird als __Open Book Klausur__ entworfen. Sie dürfen dazu alle schriftlichen, nicht-digitalen Materialien verwenden.
+
+Eine druckbare PDF-Fassung jeder Vorlesung finden Sie in der [Kursübersicht](https://tubaf-ifi-liascript.github.io/digitalesysteme.html) – ideal, um eigene Notizen für die Klausur direkt daneben zu schreiben.
+
+Im Laufe der Übungen werden wir "alte" Übungsaufgaben durchspielen, die Ihnen einen Eindruck von der Prüfung vermitteln sollen. Ende Januar stellen wir eine Probeklausur bereit, die wir in der letzten Vorlesung am 10.02. besprechen.
+
+### Literaturempfehlungen
+
+1. Umfassende Lehrbücher
+
+   + David A. Patterson, John L. Hennessy: Computer Organization & Design
+   + B. Becker, R. Drechsler, P. Molitor: Technische Informatik - Eine Einführung, Pearson Studium, 2005
+   + Hoffmann, D. W.: Grundlagen der technischen Informatik, Hanser Verlag
+
+2. Videos
+
+   + Youtube – „How a CPU Works“ [Link](https://www.youtube.com/watch?v=cNN_tTXABUA)
+
+Bei den jeweiligen Vorlesungsinhalten werden zusätzliche Materialien angegeben.
 
 ## Engagement und Motivation
 
@@ -578,6 +581,48 @@ Zum Weiterlesen: [Markdown Guide](https://www.markdownguide.org/getting-started/
 
 Eine Übersicht über alle Begriffe und roten Fäden der Vorlesung bietet die [Kurslandkarte](https://tubaf-ifi-liascript.github.io/VL_EingebetteteSysteme/kurslandkarte/). Sie wächst mit dem Semester: Am Ende jeder Vorlesung fragen wir Sie nach den Begriffen des Tages.
 
+### Zwei Simulatoren begleiten Sie durchs Semester
+
+    --{{0}}--
+Zwei Werkzeuge werden Sie das ganze Semester über begleiten. Mit dem Schaltungssimulator bauen Sie Gatter, Flip-Flops und Zähler. Mit dem Mikrocontroller-Simulator lassen Sie Programme auf einem simulierten ATmega328P mit der Pinbelegung des Arduino UNO R3 laufen – inzwischen mit Tastern, Potentiometern, Servos und einem Blick in das Innere des Controllers.
+
+**Schaltungen mit DigiSim** (ab Vorlesung 04): Klicken Sie auf die beiden Taster `a` und `b`. Wann leuchtet die Lampe?
+
+``` json @DigiSim.evalJson
+{"devices":{"a":{"label":"a","type":"Button","propagation":0,"position":{"x":0,"y":0}},"b":{"label":"b","type":"Button","propagation":0,"position":{"x":0,"y":60}},"and1":{"label":"UND","type":"And","propagation":0,"bits":1,"position":{"x":150,"y":25}},"y":{"label":"Lampe","type":"Lamp","propagation":0,"position":{"x":300,"y":30}}},"connectors":[{"from":{"id":"a","port":"out"},"to":{"id":"and1","port":"in1"}},{"from":{"id":"b","port":"out"},"to":{"id":"and1","port":"in2"}},{"from":{"id":"and1","port":"out"},"to":{"id":"y","port":"in"}}],"subcircuits":{}}
+```
+
+**Mikrocontroller mit AVR8js** (ab Vorlesung 12): Starten Sie das Programm, drücken Sie den Taster und drehen Sie am Potentiometer. Der Logikanalysator darunter zeigt die Pegel an Pin 2 und 13 und die Spannung am Analogeingang A0.
+
+<div id="sim-tour">
+<wokwi-pushbutton color="green" pin="2"></wokwi-pushbutton>
+<wokwi-led color="red" pin="13" label="13"></wokwi-led>
+<wokwi-potentiometer pin="A0" value="512"></wokwi-potentiometer>
+<wokwi-servo pin="9"></wokwi-servo>
+<avr-chart signals="D2, D13, ADC0" window="2s" title="Taster, LED und Analogeingang"></avr-chart>
+</div>
+
+```cpp Rundgang.ino
+#include <Servo.h>
+
+Servo servo;
+
+void setup() {
+  pinMode(2, INPUT_PULLUP);   // Taster gedrückt = LOW
+  pinMode(13, OUTPUT);
+  servo.attach(9);
+}
+
+void loop() {
+  digitalWrite(13, digitalRead(2) == LOW);  // gedrückt: LED an
+  servo.write(map(analogRead(A0), 0, 1023, 0, 180));  // Poti stellt den Servo
+  delay(20);
+}
+```
+@AVR8js.sketch(sim-tour)
+
+Was hier passiert, verstehen Sie im Laufe des Semesters Schicht für Schicht: den Pull-up am Taster und die Pegel (Vorlesung 02 und 12), den Analog-Digital-Wandler hinter `analogRead` (Vorlesung 13) und die Pulsweitenmodulation, mit der der Servo gestellt wird (Vorlesung 14 und 15).
+
 ### Trotz Simulation und Virtuellem ...
 
 ... braucht es aber auch immer etwas zum Anfassen. Der Simulator zeigt viel – aber er verzeiht auch Dinge, die echte Hardware nicht verzeiht: falsche Verdrahtung, zu hohe Ströme, prellende Taster. Ab Januar arbeiten Sie deshalb in der Übung mit echten Mikrocontrollerschaltungen.
@@ -594,14 +639,14 @@ Eine Übersicht über alle Begriffe und roten Fäden der Vorlesung bietet die [K
 
 Dann wartet das __racetech__ Team auf Sie ... autonomes Fahren im Formula Student Kontext.
 
-![WALL-E](./images/00_Einfuehrung/RaceTech.jpg)<!--
+![Rennwagen des racetech-Teams](./images/00_Einfuehrung/RaceTech.jpg)<!--
 style="width: 80%; display: block; margin-left: auto; margin-right: auto;" -->
 
 ### Schauen Sie im RoboLab vorbei!
 
-Lion und Caio warten auf Sie ...
+Im RoboLab arbeiten Studierende an eigenen Robotik-Projekten – kommen Sie vorbei und machen Sie mit!
 
-![](https://www.saxeed.net/wp-content/uploads/2024/04/IMG_5898-scaled.jpg)
+![Foto aus dem RoboLab](https://www.saxeed.net/wp-content/uploads/2024/04/IMG_5898-scaled.jpg)
 
 ## Was Sie heute mitnehmen
 
@@ -612,7 +657,7 @@ Lion und Caio warten auf Sie ...
 
 ## Ihre Begriffe für die Kurslandkarte
 
-Die [Kurslandkarte](https://tubaf-ifi-liascript.github.io/VL_EingebetteteSysteme/kurslandkarte/) wächst mit dem Semester, und Sie bestimmen mit, was hineinkommt. Ihre Antworten sammeln wir im Hörsaal gemeinsam über das LiaScript-Klassenzimmer; nach der Vorlesung werden die Begriffe dieser Woche in der Karte freigeschaltet.
+Die [Kurslandkarte](https://tubaf-ifi-liascript.github.io/VL_EingebetteteSysteme/kurslandkarte/) wächst mit dem Semester, und Sie bestimmen mit, was hineinkommt. Ihre Antworten sammeln wir im Hörsaal gemeinsam über das LiaScript-Klassenzimmer; nach der Vorlesung werden die Begriffe dieser Woche in der Karte freigeschaltet. Den Link zum Klassenzimmer zeigen wir Ihnen im Hörsaal.
 
 **Welche Begriffe aus der heutigen Vorlesung gehören für Sie in die Kurslandkarte?**
 
@@ -625,8 +670,8 @@ Die [Kurslandkarte](https://tubaf-ifi-liascript.github.io/VL_EingebetteteSysteme
 ## Hausaufgabe
 
 + Legen Sie sich einen GitHub-Account an ... und finden Sie als Erste oder Erster einen Tippfehler in den Unterlagen, den Sie als Contributor korrigieren :-)
-+ Organisieren Sie sich in einer gemeinsamen Chatgruppe! Bevor Sie heute den Raum verlassen, sollten Sie dort Mitglied sein.
-+ Lassen Sie die LED im Assembler-Beispiel doppelt so schnell blinken. Es gibt mehr als einen Weg – finden Sie zwei und begründen Sie, welcher der Verdopplung näher kommt und warum keiner sie exakt trifft. Die Auflösung gibt es zu Beginn der nächsten Vorlesung.
++ Nutzen Sie Ihre Chatgruppe auch für diese Vorlesung: Finden Sie dort Partnerinnen und Partner zum gemeinsamen Nacharbeiten.
++ Lassen Sie die LED im Assembler-Beispiel doppelt so schnell blinken. Es gibt mehr als einen Weg – finden Sie zwei und begründen Sie, welcher der Verdopplung näher kommt und warum keiner sie exakt trifft. Tipp: Probieren Sie beide Wege im Simulator aus und vergleichen Sie die Simulationszeit unter der LED. Achten Sie darauf, dass 41 ungerade ist und dass auch `ldi`, `rcall` und `ret` Takte kosten. Die Auflösung gibt es zu Beginn der nächsten Vorlesung.
 
 ## Nächste Woche
 

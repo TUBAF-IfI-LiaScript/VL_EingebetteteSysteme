@@ -1,12 +1,12 @@
 {
- "stand": "16.10.2026",
+ "stand": "18.10.2026",
  "vorlesungen": [
   {
    "vl": 0,
    "datei": "00_Einfuehrung.md",
    "datum": "2026-10-21",
    "kurz": "Einführung",
-   "leitfrage": "Wie wird aus einem Arduino-Programm ein Verhalten der Hardware?",
+   "leitfrage": "Wie wird aus einem Programm ein Verhalten der Hardware?",
    "freigegeben": false,
    "status": "ausgearbeitet",
    "abschnitte": [
@@ -22,12 +22,13 @@
     "Was können Sie damit bauen?",
     "Wozu brauche ich das in meinem Studiengang?",
     "Organisation",
+    "Ihre Vorkenntnisse",
     "Zeitplan",
     "Prüfungsmodalitäten",
     "Literaturempfehlungen",
-    "Ihre Vorkenntnisse",
     "Engagement und Motivation",
     "Open Educational Resources",
+    "Zwei Simulatoren begleiten Sie durchs Semester",
     "Trotz Simulation und Virtuellem ...",
     "Generelles Engagement",
     "Und wenn Sie dann immer noch programmieren wollen ...",
@@ -88,6 +89,7 @@
     "Schaltfunktionen mit einem Eingang",
     "Schaltfunktionen mit zwei Eingängen",
     "Exkurs: Technische Realisierung",
+    "Ihre Begriffe für die Kurslandkarte",
     "Hausaufgaben"
    ]
   },
@@ -112,6 +114,7 @@
     "Karnaugh-Veitch für Maxterme",
     "Dont-Care-Einträge in der Wahrheitstafel",
     "Zusammenfassung",
+    "Ihre Begriffe für die Kurslandkarte",
     "Hausaufgaben"
    ]
   },
@@ -139,7 +142,8 @@
     "Zweistufige Schaltungssynthese",
     "Zurück zum Beispiel - Schritt 3 Umsetzung",
     "Umsetzung",
-    "Herausforderungen"
+    "Herausforderungen",
+    "Ihre Begriffe für die Kurslandkarte"
    ]
   },
   {
@@ -161,6 +165,7 @@
     "Demultiplexer",
     "Komparatoren",
     "Ausblick",
+    "Ihre Begriffe für die Kurslandkarte",
     "Hausaufgaben"
    ]
   },
@@ -190,6 +195,7 @@
     "Zusammenfassung",
     "Einsatzbeispiel",
     "Realisierungsbeispiel",
+    "Ihre Begriffe für die Kurslandkarte",
     "Übungsaufgaben"
    ]
   },
@@ -215,6 +221,7 @@
     "Race Conditions in Schaltwerken",
     "Vermeidungsstrategien",
     "Debugging von Timing-Problemen",
+    "Ihre Begriffe für die Kurslandkarte",
     "Übungsaufgaben"
    ]
   },
@@ -232,6 +239,7 @@
     "Übungsbeispiel",
     "Register",
     "Zähler",
+    "Ihre Begriffe für die Kurslandkarte",
     "Übungsaufgaben"
    ]
   },
@@ -257,6 +265,7 @@
     "Carry Look Ahead Addierer",
     "Carry Save Addierer",
     "Exkurs: Multiplikation",
+    "Ihre Begriffe für die Kurslandkarte",
     "Übungsaufgaben"
    ]
   },
@@ -275,7 +284,8 @@
     "Schritt 2 - Sequenz von Berechnungen",
     "Schritt 3 - Handhabung der Daten",
     "Schritt 4 - Ein- und Ausgaben",
-    "1945: Von-Neumann-Architektur"
+    "1945: Von-Neumann-Architektur",
+    "Ihre Begriffe für die Kurslandkarte"
    ]
   },
   {
@@ -309,6 +319,7 @@
     "Layout eines Programmes im Mikroprogammspeicher",
     "Horizontale vs. vertikale Mikroprogrammierung",
     "Diskussion",
+    "Ihre Begriffe für die Kurslandkarte",
     "Hausaufgaben"
    ]
   },
@@ -317,7 +328,7 @@
    "datei": "12_AVR_CPU.md",
    "datum": "2027-01-06",
    "kurz": "AVR-CPU",
-   "leitfrage": "Was steckt im Chip auf dem Arduino – und wie kommt das Programm hinein?",
+   "leitfrage": "Was steckt im ATmega328P – und wie kommt das Programm hinein?",
    "freigegeben": false,
    "status": "ausgearbeitet",
    "abschnitte": [
@@ -340,6 +351,7 @@
     "Simulink",
     "Vergleich",
     "Resultat",
+    "Ihre Begriffe für die Kurslandkarte",
     "Vorbereitung der praktischen Aufgaben",
     "Setzen eines Bits",
     "Löschen eines Bits",
@@ -367,7 +379,8 @@
     "Beispiele",
     "Beispiel 1 - Heißleiter",
     "Beispiel 2 - Lesen eines Analogen Distanzsensors",
-    "Beispiel 3 - Temperaturüberwachung des Controllers"
+    "Beispiel 3 - Temperaturüberwachung des Controllers",
+    "Ihre Begriffe für die Kurslandkarte"
    ]
   },
   {
@@ -394,7 +407,8 @@
     "Timer-Funktionalität (Normal-Mode)",
     "Compare Mode",
     "Capture Mode",
-    "Anwendungen"
+    "Anwendungen",
+    "Ihre Begriffe für die Kurslandkarte"
    ]
   },
   {
@@ -413,7 +427,8 @@
     "Schrittmotoren",
     "Servomotoren",
     "Finales Anwendungsbeispiel",
-    "Blick zurück"
+    "Blick zurück",
+    "Ihre Begriffe für die Kurslandkarte"
    ]
   }
  ],
@@ -525,7 +540,7 @@
    "abschnitt": 15,
    "ebene": 2,
    "code": false,
-   "erklaerung": "Der Intel 4004 (1971) gilt als erster Mikroprozessor: 2300 Transistoren, 4 Bit Wortbreite, 46 Befehle. Der ATmega328P im Arduino hat rund 100.000 Transistoren und 131 Befehle.",
+   "erklaerung": "Der Intel 4004 (1971) gilt als erster Mikroprozessor: 2300 Transistoren, 4 Bit Wortbreite, 46 Befehle. Der ATmega328P hat rund 100.000 Transistoren und 131 Befehle.",
    "fehlvorstellung": null
   },
   {
@@ -1740,13 +1755,13 @@
   },
   {
    "id": "atmega328",
-   "name": "ATmega328",
+   "name": "ATmega328P",
    "linie": "controller",
    "vl": 12,
    "abschnitt": 6,
    "ebene": 2,
    "code": false,
-   "erklaerung": "8-Bit-Controller der AVR-Familie auf dem Arduino Uno; die Zahl im Namen verweist auf die Speichergröße (32 KByte Flash, 1 KByte EEPROM, 2 KByte RAM).",
+   "erklaerung": "8-Bit-Mikrocontroller von Microchip (AVR-Architektur, Familie megaAVR), z. B. auf dem Board Arduino UNO R3; die Zahl im Namen verweist auf die Speichergröße (32 KByte Flash, 1 KByte EEPROM, 2 KByte RAM).",
    "fehlvorstellung": null
   },
   {
@@ -1853,7 +1868,7 @@
    "name": "Bitmaske",
    "linie": "controller",
    "vl": 12,
-   "abschnitt": 20,
+   "abschnitt": 21,
    "ebene": 1,
    "code": false,
    "erklaerung": "Mit Schiebe- und Bitoperatoren gebaute Zahl, die gezielt einzelne Bits eines Registers trifft: setzen mit |=, löschen mit &= ~, prüfen mit &.",
@@ -2921,7 +2936,7 @@
  "anwendungen": [
   {
    "id": "a_lauflicht",
-   "titel": "LED-Lauflicht auf dem Arduino",
+   "titel": "LED-Lauflicht am ATmega328P",
    "fach": "Lichtsteuerung",
    "vl": 0,
    "abschnitt": 2,
@@ -2934,7 +2949,7 @@
   },
   {
    "id": "a_wetterstation",
-   "titel": "Arduino-Wetterstation",
+   "titel": "Wetterstation mit ATmega328P",
    "fach": "Messtechnik",
    "vl": 0,
    "abschnitt": 10,

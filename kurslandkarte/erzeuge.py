@@ -49,7 +49,7 @@ FREIGEGEBEN = set()
 
 # ---- Leitfragen
 LEITFRAGE = {
-    0: "Wie wird aus einem Arduino-Programm ein Verhalten der Hardware?",
+    0: "Wie wird aus einem Programm ein Verhalten der Hardware?",
     1: "Wie kam es vom Rechenbrett zum Mikrocontroller?",
     2: "Wie rechnet man mit wahr und falsch?",
     3: "Wie wird eine Schaltfunktion möglichst klein?",
@@ -61,7 +61,7 @@ LEITFRAGE = {
     9: "Wie addiert und subtrahiert ein Rechner?",
     10: "Wie wird aus einem Addierer ein Prozessor?",
     11: "Wie arbeitet ein Prozessor ein Programm Befehl für Befehl ab?",
-    12: "Was steckt im Chip auf dem Arduino – und wie kommt das Programm hinein?",
+    12: "Was steckt im ATmega328P – und wie kommt das Programm hinein?",
     13: "Wie kommt eine Spannung in den Rechner?",
     14: "Wie reagiert ein Controller rechtzeitig auf Ereignisse?",
     15: "Wie bewegt ein Controller die Welt – und was kommt danach?",
@@ -82,7 +82,7 @@ B = [
     ('relais', 'Relais', 'grundlagen', 1, 'Es werde Licht ... elektrische Systeme', 2, 0, 'Elektromagnetisch betätigter Schalter, der Zustände speichern und logische Operationen abbilden kann – damit setzte sich die binäre Darstellung An/Aus (1/0) durch.', None),
     ('z3', 'Zuse Z3', 'grundlagen', 1, 'Zuse Z3', 2, 0, 'Erster funktionsfähiger Digitalrechner (1941, Konrad Zuse): rund 2200 Relais, binäre Gleitkommazahlen, 10 Hertz Takt, aber keine Sprungbefehle.', None),
     ('transistor', 'Transistor', 'grundlagen', 1, 'Die Transistor-Ära', 1, 0, 'Elektronischer Schalter und Verstärker, der ab 1948 die Röhre verdrängt; geschickt zusammengeschaltete Transistoren ergeben logische Gatter wie AND.', None),
-    ('mikroprozessor', 'Mikroprozessor (Intel 4004)', 'rechner', 1, 'Intel 4004', 2, 0, 'Der Intel 4004 (1971) gilt als erster Mikroprozessor: 2300 Transistoren, 4 Bit Wortbreite, 46 Befehle. Der ATmega328P im Arduino hat rund 100.000 Transistoren und 131 Befehle.', None),
+    ('mikroprozessor', 'Mikroprozessor (Intel 4004)', 'rechner', 1, 'Intel 4004', 2, 0, 'Der Intel 4004 (1971) gilt als erster Mikroprozessor: 2300 Transistoren, 4 Bit Wortbreite, 46 Befehle. Der ATmega328P hat rund 100.000 Transistoren und 131 Befehle.', None),
     ('digitalsignal', 'Digitalsignal', 'grundlagen', 2, 'Digital vs. Analog', 1, 0, 'Signal aus diskreten Werten zu bestimmten Zeitpunkten; es entsteht aus einem kontinuierlichen Analogsignal (z. B. Temperatur im Tagesverlauf) durch Abtastung und Quantisierung.', None),
     ('analogrechner', 'Analogrechner', 'grundlagen', 2, 'Exkurs: Kontrastprogramm - Analoge Rechner', 2, 0, 'Rechnet kontinuierlich mit Spannungen und wird über Steckschnüre programmiert; Addition und Multiplikation sind einfach, die Genauigkeit liegt aber nur bei etwa 6–8 Bit und hängt von der Temperatur ab.', '„Wer mit Steckkabeln programmiert wird, ist ein Analogrechner.“ (Der ENIAC war digital.)'),
     ('pegel', 'Pegel', 'grundlagen', 2, 'Pegel', 1, 0, 'Spannungsbereiche, die als High (1) bzw. Low (0) gelten, dazwischen liegt ein verbotener Bereich. Bei TTL-Eingängen gilt z. B. über 2,0 V als High und unter 0,8 V als Low.', '„Eine 1 ist genau 5 V, eine 0 genau 0 V.“'),
@@ -193,7 +193,7 @@ B = [
     ('mikroprogramm', 'Mikroprogramm', 'rechner', 11, 'Mikroprogramme', 1, 0, 'Statt fester Logik liegt für jeden Maschinenbefehl eine Folge von Steuerwörtern in einem Speicher – leichter zu entwerfen und zu ändern.', '„Ein Maschinenbefehl ist der kleinste Schritt, den die Hardware ausführt.“'),
     ('horiz_vert', 'horizontal/vertikal', 'rechner', 11, 'Horizontale vs. vertikale Mikroprogrammierung', 2, 0, 'Horizontal steuert jedes Bit direkt eine Leitung (schnell, aber lange Wörter); vertikal sind die Steuerinformationen in Feldern codiert (kurz, aber zusätzlicher Dekodieraufwand).', None),
     ('mikrocontroller', 'Mikrocontroller', 'controller', 12, 'Mikroprozessor vs. Mikrocontroller', 1, 0, 'Ein Mikroprozessor mit Peripherie auf einem Chip – Timer, analoge und digitale Eingänge, Interruptsystem, Taktgeber und Spannungsüberwachung. Der Übergang zum Mikroprozessor ist fließend.', None),
-    ('atmega328', 'ATmega328', 'controller', 12, 'Atmega328 Controller', 2, 0, '8-Bit-Controller der AVR-Familie auf dem Arduino Uno; die Zahl im Namen verweist auf die Speichergröße (32 KByte Flash, 1 KByte EEPROM, 2 KByte RAM).', None),
+    ('atmega328', 'ATmega328P', 'controller', 12, 'Atmega328 Controller', 2, 0, '8-Bit-Mikrocontroller von Microchip (AVR-Architektur, Familie megaAVR), z. B. auf dem Board Arduino UNO R3; die Zahl im Namen verweist auf die Speichergröße (32 KByte Flash, 1 KByte EEPROM, 2 KByte RAM).', None),
     ('taktgenerator', 'Taktgenerator', 'controller', 12, 'Taktgenerator', 2, 0, 'Liefert den Takt: der eingebaute RC-Oszillator (bis 8 MHz) ist bequem, weicht aber um 3–10 % ab; ein externer Quarz ist auf etwa 0,1 % genau, braucht aber zusätzliche Bauteile.', None),
     ('speicherarten', 'Flash, EEPROM und RAM', 'controller', 12, 'Speicher', 1, 0, 'Drei Speicher mit verschiedenen Aufgaben: Im Flash steht das Programm, im EEPROM bleiben Einstellungen und Kalibrierdaten nach dem Ausschalten erhalten, das RAM ist der flüchtige Arbeitsspeicher.', '„Was im RAM steht, ist nach dem Neustart noch da.“'),
     ('mmio', 'Memory-Mapped-IO beim AVR', 'controller', 12, 'Speicher', 2, 0, 'Arbeitsregister, I/O-Register und RAM liegen in einem gemeinsamen Adressraum und werden mit denselben Befehlen angesprochen – Peripherie bedienen heißt also: in bestimmte Adressen schreiben.', None),
@@ -365,8 +365,8 @@ R = [
 ]
 
 A = [
-    ('a_lauflicht', 'LED-Lauflicht auf dem Arduino', 'Lichtsteuerung', 0, 'Worum geht es in dieser Vorlesung?', 'Arduino-Sketch, der vier LEDs an Pin 10–13 nacheinander je 250 ms einschaltet (Wokwi-Simulation), und die daraus erzeugte Hex-Datei', ['mikrocontroller', 'hexdatei'], 'lehrende'),
-    ('a_wetterstation', 'Arduino-Wetterstation', 'Messtechnik', 0, 'Was können Sie damit bauen?', 'Sensordaten einer Wetterstation, Helligkeitswerte des ADC (1023 = dunkel)', ['mikrocontroller'], 'lehrende'),
+    ('a_lauflicht', 'LED-Lauflicht am ATmega328P', 'Lichtsteuerung', 0, 'Worum geht es in dieser Vorlesung?', 'Arduino-Sketch, der vier LEDs an Pin 10–13 nacheinander je 250 ms einschaltet (Wokwi-Simulation), und die daraus erzeugte Hex-Datei', ['mikrocontroller', 'hexdatei'], 'lehrende'),
+    ('a_wetterstation', 'Wetterstation mit ATmega328P', 'Messtechnik', 0, 'Was können Sie damit bauen?', 'Sensordaten einer Wetterstation, Helligkeitswerte des ADC (1023 = dunkel)', ['mikrocontroller'], 'lehrende'),
     ('a_webstuhl', 'Jacquard-Webstuhl', 'Textil', 1, 'Joseph-Marie Jacquard (1752 - 1834) - Automatischer Webstuhl', 'Lochkarten steuern das Webmuster; zur Endlosschleife gekoppelt für wiederkehrende Muster', ['lochkarte'], 'lehrende'),
     ('a_volkszaehlung', 'Hollerith-Maschinen für die US-Volkszählung 1890', 'Verwaltung', 1, 'Es werde Licht ... elektrische Systeme', 'Tabelliermaschine, Sortierer, Locher und Leser für Lochkarten; Auswertung der Volkszählung in 2 Jahren', ['lochkarte'], 'lehrende'),
     ('a_lampe', 'Lampe mit zwei Schaltern', 'Haushalt', 2, 'Motivation', 'Reihenschaltung (Lampe leuchtet bei Schalter 1 und 2) und Parallelschaltung (Schalter 1 oder 2)', ['boolesche_algebra', 'schaltfunktion'], 'lehrende'),
