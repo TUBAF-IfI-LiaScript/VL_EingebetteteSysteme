@@ -1,0 +1,46 @@
+<!doctype html>
+<html lang="de">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Digitale Systeme / Eingebettete Systeme</title>
+<style>
+:root { --bg: #f3f5f2; --ink: #1d2a2c; --muted: #5d6c6f; --accent: #1f7a8c; color-scheme: light; }
+@media (prefers-color-scheme: dark) { :root { --bg: #141a1b; --ink: #e4ebe9; --muted: #9aa9ab; --accent: #4fb3c6; color-scheme: dark; } }
+body { margin: 0; background: var(--bg); color: var(--ink); font-family: system-ui, "Segoe UI", sans-serif; line-height: 1.55; }
+main { max-width: 62ch; margin: 0 auto; padding: 48px 16px; display: grid; gap: 14px; }
+h1 { margin: 0; font-size: 1.7rem; line-height: 1.2; }
+h2 { margin: 18px 0 0; font-size: 1.15rem; }
+p { margin: 0; }
+.muted { color: var(--muted); }
+a { color: var(--accent); }
+ul, ol { margin: 0; padding-left: 1.2em; display: grid; gap: 6px; }
+</style>
+</head>
+<body>
+<main>
+  <p class="muted">TU Bergakademie Freiberg · Wintersemester 2026/27</p>
+  <h1>Digitale Systeme / Eingebettete Systeme</h1>
+  <p>Von der Booleschen Algebra bis zur Programmierung eines Mikrocontrollers.</p>
+  <ul>
+    <li><a href="kurslandkarte/">Kurslandkarte</a> — Begriffe, Zusammenhänge und rote Fäden aller Vorlesungen, mit Sprung in die jeweilige Vorlesung</li>
+    <li><a href="https://liascript.github.io/course/?https://raw.githubusercontent.com/TUBAF-IfI-LiaScript/VL_EingebetteteSysteme/master/00_Einfuehrung.md">Vorlesungsmaterialien</a> (LiaScript, Einstieg mit Vorlesung 00)</li>
+  </ul>
+
+  <h2>Lernziele</h2>
+  <p>Nach dem Semester können Sie</p>
+  <ol>
+    <li>Schaltfunktionen aus einer Problembeschreibung aufstellen, in Normalform bringen und mit KV-Diagramm bzw. Quine-McCluskey minimieren,</li>
+    <li>Schaltnetze und Schaltwerke (Mealy/Moore) für eine gegebene Aufgabe, etwa einen Sequenzdetektor oder Zähler, entwerfen und im Simulator prüfen,</li>
+    <li>Zahlendarstellungen (Zweierkomplement) und Addierwerke erklären und deren Grenzen (Überlauf, Laufzeit) begründen,</li>
+    <li>den Befehlszyklus einer Modell-CPU (Fetch/Decode/Execute, Register, Steuerwerk) an einem kleinen Programm nachvollziehen,</li>
+    <li>ein AVR-Programm vom C-Code bis zum disassemblierten Maschinencode lesen und Peripherie (ADC, Timer, Interrupts, PWM) über Register konfigurieren.</li>
+  </ol>
+
+  <h2>Kontakt</h2>
+  <p>Prof. Dr.-Ing. Sebastian Zug<br>
+     Lehrstuhl für Softwaretechnologie und Robotik, TU Bergakademie Freiberg<br>
+     <a href="mailto:sebastian.zug@informatik.tu-freiberg.de">sebastian.zug@informatik.tu-freiberg.de</a></p>
+</main>
+</body>
+</html>
