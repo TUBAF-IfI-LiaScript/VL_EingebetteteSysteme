@@ -488,7 +488,7 @@ footer p { margin: 0 0 6px; }
         <span class="lbl" id="modeLbl">Variante</span>
         <div class="seg" role="group" aria-labelledby="modeLbl">
           <button id="mListe" aria-pressed="false" title="Alle Vorlesungen untereinander, mit Leitfrage, Begriffen und Anwendungen">Vorlesungen</button>
-          <button id="mMetro" aria-pressed="true" title="Jede farbige Linie ist ein roter Faden: ein Thema, das sich durch mehrere Vorlesungen zieht">Metrokarte</button>
+          <button id="mMetro" aria-pressed="true" title="Jede farbige Linie ist ein Faden: ein Thema, das sich durch mehrere Vorlesungen zieht">Metrokarte</button>
           <button id="mZeit" aria-pressed="false" title="Alle Begriffe nach Themengebiet über das Semester, mit Pfeilen für ihre Zusammenhänge">Zeitleiste</button>
         </div>
       </div>
@@ -536,8 +536,9 @@ footer p { margin: 0 0 6px; }
         </table>
       </div>
       <div>
-        <p><strong>Vorlesungen:</strong> alle Termine untereinander, mit Leitfrage, Begriffen und Anwendungen. <strong>Metrokarte:</strong> Jede farbige Linie ist ein <em>roter Faden</em>, ein Thema, das sich durch mehrere Vorlesungen zieht; weiße Stationen liegen auf mehreren Fäden. <strong>Zeitleiste:</strong> alle Begriffe nach Themengebiet, mit Pfeilen für ihre Zusammenhänge.</p>
+        <p><strong>Vorlesungen:</strong> alle Termine untereinander, mit Leitfrage, Begriffen und Anwendungen. <strong>Metrokarte:</strong> Jede farbige Linie ist ein <em>Faden</em>, ein Thema, das sich durch mehrere Vorlesungen zieht; weiße Stationen liegen auf mehreren Fäden. <strong>Zeitleiste:</strong> alle Begriffe nach Themengebiet, mit Pfeilen für ihre Zusammenhänge.</p>
         <p><strong>Die Karte wächst mit dem Semester.</strong> Nach jeder Vorlesung kommen ihre Begriffe dazu, ergänzt um Ihre Vorschläge. <strong>Kernbegriffe</strong> sollten Sie in einem Satz erklären können, Detailbegriffe ergänzen sie. Mit <strong>Ausblick: An</strong> sehen Sie blass, was für kommende Vorlesungen vorbereitet ist.</p>
+        <p><strong>Bedienung:</strong> <em>Sie sind hier</em> folgt dem heutigen Datum; mit dem Regler blättern Sie zu einer anderen Woche – er verschiebt nur die Markierung, freigeschaltet wird dadurch nichts, und „heute“ springt zurück. <em>Begriffe</em> wählt zwischen Kernbegriffen und allen Begriffen (Vorlesungen und Zeitleiste), <em>Verbindungen</em> zwischen den Pfeilen zum gewählten Begriff und dem ganzen Netz (nur Zeitleiste). Was in einer Ansicht nicht wirkt, ist ausgegraut. Die Farben stehen in der Metrokarte für Fäden, in Vorlesungen und Zeitleiste für Themengebiete.</p>
       </div>
     </div>
   </details>
@@ -999,6 +1000,17 @@ footer p { margin: 0 0 6px; }
   }
  ],
  "begriffe": [
+  {
+   "id": "eingebettet",
+   "name": "Eingebettetes System",
+   "linie": "grundlagen",
+   "vl": 0,
+   "abschnitt": 6,
+   "ebene": 1,
+   "code": false,
+   "erklaerung": "Rechner, der fest in ein technisches Gerät eingebaut ist und dort eine bestimmte Aufgabe erfüllt – typisch sind eine feste Aufgabe, Sensoren und Aktoren, knappe Ressourcen und oft Echtzeitanforderungen.",
+   "fehlvorstellung": "„Eingebettete Systeme sind eine Nische – die meisten Rechner sind PCs und Smartphones.“"
+  },
   {
    "id": "abstraktionsebenen",
    "name": "Abstraktionsebenen",
@@ -2716,17 +2728,6 @@ footer p { margin: 0 0 6px; }
    "fehlvorstellung": "„Bei PWM liegt am Pin eine echte Zwischenspannung an.“"
   },
   {
-   "id": "eingebettet",
-   "name": "Eingebettetes System",
-   "linie": "controller",
-   "vl": 15,
-   "abschnitt": 2,
-   "ebene": 1,
-   "code": false,
-   "erklaerung": "Rechner, der in ein größeres Produkt eingebaut ist und dort eine spezielle Aufgabe erfüllt – oft unbemerkt, mit Zeitanforderungen, angepasster Hardware und Software.",
-   "fehlvorstellung": null
-  },
-  {
    "id": "aktor",
    "name": "Aktor",
    "linie": "controller",
@@ -4298,7 +4299,7 @@ function renderPanel() {
   const rels = nbs[n.id].filter(r => sichtbar(byId[r.id])).sort((a, b) => byId[a.id].vl - byId[b.id].vl);
   const back = rels.filter(r => byId[r.id].vl < n.vl), same = rels.filter(r => byId[r.id].vl === n.vl), fwd = rels.filter(r => byId[r.id].vl > n.vl);
   const ths = threadsOf[n.id] || [];
-  const threadHtml = ths.length ? `<h3>${ths.length > 1 ? "Liegt auf mehreren roten Fäden" : "Liegt auf dem roten Faden"}</h3><ul class="rels threads">${ths.map(tid => {
+  const threadHtml = ths.length ? `<h3>${ths.length > 1 ? "Liegt auf mehreren Fäden" : "Liegt auf dem Faden"}</h3><ul class="rels threads">${ths.map(tid => {
     const t = threadById[tid], st = t.st.filter(x => sichtbar(byId[x])), k = st.indexOf(n.id), pv = st[k - 1], nx = st[k + 1];
     return `<li><span class="tname"><i style="background:${css(t.v)}"></i>${t.name}</span>
       <span class="hop">${pv ? `<button data-id="${pv}">← ${byId[pv].name}</button>` : `<span class="v">Anfang</span>`}
@@ -4343,7 +4344,7 @@ function select(id, scroll) {
 }
 
 const LEGEND_HINT = {
-  metro: "Roten Faden anklicken, um ihn hervorzuheben (spätere Vorlesungen: seitlich scrollen):",
+  metro: "Faden anklicken, um ihn hervorzuheben (spätere Vorlesungen: seitlich scrollen):",
   zeit: "Themengebiete ein- und ausblenden (spätere Vorlesungen: seitlich scrollen):",
   liste: "Themengebiete ein- und ausblenden:",
 };
@@ -4396,7 +4397,7 @@ function render() {
   const nVisSt = [...new Set(THREADS.flatMap(t => t.st))].filter(id => sichtbar(byId[id])).length;
   const nFrei = LECTURES.filter(l => l.frei).length, nFreiB = ALL.filter(n => LECTURES[n.vl].frei).length;
   $("#count").textContent = state.mode === "metro"
-    ? `${plural(THREADS.length, "roter Faden", "rote Fäden")} · ${plural(nVisSt, "Station", "Stationen")} ${state.ausblick ? "mit Ausblick" : "freigeschaltet"}`
+    ? `${plural(nVisSt, "Begriff", "Begriffe")} auf ${plural(THREADS.length, "Faden", "Fäden")} ${state.ausblick ? "(mit Ausblick)" : "freigeschaltet"}`
     : `${plural(nFreiB, "Begriff", "Begriffe")} aus ${plural(nFrei, "Vorlesung", "Vorlesungen")}` + (ALL.length > nFreiB ? ` · ${ALL.length - nFreiB} weitere vorbereitet` : "");
   if (state.mode === "liste") drawListe();
   else {

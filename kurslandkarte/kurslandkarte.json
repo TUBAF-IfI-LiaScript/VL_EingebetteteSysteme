@@ -440,6 +440,17 @@
  ],
  "begriffe": [
   {
+   "id": "eingebettet",
+   "name": "Eingebettetes System",
+   "linie": "grundlagen",
+   "vl": 0,
+   "abschnitt": 6,
+   "ebene": 1,
+   "code": false,
+   "erklaerung": "Rechner, der fest in ein technisches Gerät eingebaut ist und dort eine bestimmte Aufgabe erfüllt – typisch sind eine feste Aufgabe, Sensoren und Aktoren, knappe Ressourcen und oft Echtzeitanforderungen.",
+   "fehlvorstellung": "„Eingebettete Systeme sind eine Nische – die meisten Rechner sind PCs und Smartphones.“"
+  },
+  {
    "id": "abstraktionsebenen",
    "name": "Abstraktionsebenen",
    "linie": "grundlagen",
@@ -2154,17 +2165,6 @@
    "code": false,
    "erklaerung": "Ein Ausgang wird schnell ein- und ausgeschaltet; das Verhältnis von An- zu Aus-Zeit (Tastverhältnis) bestimmt die im Mittel wirkende Spannung – eine Quasi-Analogausgabe ohne Digital-Analog-Wandler.",
    "fehlvorstellung": "„Bei PWM liegt am Pin eine echte Zwischenspannung an.“"
-  },
-  {
-   "id": "eingebettet",
-   "name": "Eingebettetes System",
-   "linie": "controller",
-   "vl": 15,
-   "abschnitt": 2,
-   "ebene": 1,
-   "code": false,
-   "erklaerung": "Rechner, der in ein größeres Produkt eingebaut ist und dort eine spezielle Aufgabe erfüllt – oft unbemerkt, mit Zeitanforderungen, angepasster Hardware und Software.",
-   "fehlvorstellung": null
   },
   {
    "id": "aktor",
