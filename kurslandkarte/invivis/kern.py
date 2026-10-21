@@ -23,7 +23,7 @@ Datenformate (Tupel, damit die Kursdateien kompakt bleiben):
 
 Autoren: Sebastian Zug & Claude Code (Opus 5.5)
 """
-import datetime, html, json, os, re
+import datetime, html, json, os, re, subprocess, sys
 
 VERSION = open(os.path.join(os.path.dirname(os.path.abspath(__file__)), "VERSION"), encoding="utf-8").read().strip()
 HIER = os.path.dirname(os.path.abspath(__file__))
@@ -63,12 +63,25 @@ def typ(label):
 
 def erzeuge(repo, kurs, termine, bloecke, linien, begriffe, beziehungen, faeden,
             anwendungen=(), leitfragen=None, freigegeben=(), anwendet=None, brauchen=None,
-            karte="docs/kurslandkarte", startseite="docs/index.html", folien=False, vorschau="ausblick", pdf=None):
+            karte="docs/kurslandkarte", startseite="docs/index.html", folien=False, vorschau="ausblick", pdf=None,
+            pdf_ordner=None, pdf_termine=None):
     """vorschau: "ausblick" – kommende Begriffe stehen in den Daten und erscheinen mit „Ausblick“ blass;
                  "keine"    – nur Freigegebenes steht in der Seite (auch nicht im Quelltext).
-       pdf:      {termin: url} – Link auf eine Druckfassung je Termin."""
+       pdf:      {termin: url} – Link auf eine Druckfassung je Termin (überschreibt pdf_ordner).
+       pdf_ordner: Ordner (relativ zum Repository) mit den Druckfassungen, z. B. "docs/pdf". Mit `--pdf` auf der
+                 Kommandozeile werden fehlende oder veraltete PDFs vorher mit liaex erzeugt.
+       pdf_termine: Termine, deren PDF gebaut und verlinkt wird (Standard: die freigegebenen)."""
     assert vorschau in ("ausblick", "keine"), vorschau
-    pdf = pdf or {}
+    pdf = dict(pdf or {})
+    if pdf_ordner:
+        pdf_termine = set(freigegeben if pdf_termine is None else pdf_termine)
+        darf = [t for t in termine if t[4] and t[0] in pdf_termine]
+        if "--pdf" in sys.argv:
+            baue_pdfs(repo, [t[4] for t in darf], pdf_ordner)
+        for t in darf:
+            pfad = os.path.join(pdf_ordner, pdf_name(t[4]))
+            if t[0] not in pdf and os.path.exists(os.path.join(repo, pfad)):
+                pdf[t[0]] = os.path.relpath(pfad, karte)
     K = {**STANDARD, **kurs}
     leitfragen, anwendet, brauchen = leitfragen or {}, anwendet or {}, brauchen or {}
     stand = datetime.date.today().strftime("%d.%m.%Y")
@@ -194,11 +207,34 @@ def erzeuge(repo, kurs, termine, bloecke, linien, begriffe, beziehungen, faeden,
     return out
 
 
+# ---------------------------------------------------------------- Druckfassungen
+def pdf_name(datei):
+    """Name der Druckfassung: Dateiname des Materials, bei README.md der Ordnername."""
+    stamm = os.path.splitext(os.path.basename(datei))[0]
+    return (os.path.basename(os.path.dirname(datei)) if stamm.lower() == "readme" else stamm) + ".pdf"
+
+
+def baue_pdfs(repo, dateien, ordner):
+    """Erzeugt mit dem LiaScript-Exporter (liaex) jedes PDF, das fehlt oder älter als sein Material ist."""
+    os.makedirs(os.path.join(repo, ordner), exist_ok=True)
+    for datei in dateien:
+        quelle, ziel = os.path.abspath(os.path.join(repo, datei)), os.path.abspath(os.path.join(repo, ordner, pdf_name(datei)))
+        if os.path.exists(ziel) and os.path.getmtime(ziel) >= os.path.getmtime(quelle):
+            continue
+        print("PDF:", datei, "->", os.path.relpath(ziel, repo), flush=True)
+        r = subprocess.run(["liaex", "-i", quelle, "-f", "pdf", "-o", ziel[:-4], "--pdf-timeout", "30000"],
+                           cwd=os.path.dirname(quelle), capture_output=True, text=True)
+        if r.returncode or not os.path.exists(ziel):
+            print("  FEHLER beim Export:", (r.stderr or r.stdout).strip()[-300:], flush=True)
+
+
 # ---------------------------------------------------------------- Startseite
 def _startseite(K, T, out, karte, startseite, stand):
     karte_rel = os.path.relpath(karte, os.path.dirname(startseite) or ".") + "/"
     termine = [{"key": v["key"], "label": v["label"], "kurz": v["kurz"], "datum": v["datum"],
-                "url": (K["basis"] + v["datei"]) if v["datei"] else None, "frage": v["leitfrage"]} for v in out["vorlesungen"]]
+                "url": (K["basis"] + v["datei"]) if v["datei"] else None, "frage": v["leitfrage"],
+                "pdf": os.path.relpath(os.path.join(karte, v["pdf"]), os.path.dirname(startseite) or ".") if v["pdf"] else None}
+               for v in out["vorlesungen"]]
     e = html.escape
     lernziele = "".join(f"<li>{z}</li>" for z in K["lernziele"])
     orga = "".join(f"<dt>{e(a)}</dt><dd>{b}</dd>" for a, b in K["organisation"])

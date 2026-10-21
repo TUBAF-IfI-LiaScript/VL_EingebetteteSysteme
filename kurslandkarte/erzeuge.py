@@ -7,7 +7,8 @@ der Kern automatisch aus den Vorlesungen.
 
 Aufruf aus dem Repository-Wurzelverzeichnis:
 
-    python3 kurslandkarte/erzeuge.py
+    python3 kurslandkarte/erzeuge.py          # Karte und Startseite
+    python3 kurslandkarte/erzeuge.py --pdf    # vorher fehlende/veraltete PDFs nach pdf/ (liaex)
 
 Schreibt kurslandkarte/kurslandkarte.json, kurslandkarte/index.html und die
 Startseite index.html (GitHub Pages veröffentlicht das Wurzelverzeichnis von master).
@@ -441,5 +442,5 @@ for v in range(ANZAHL):
 kern.erzeuge(
     repo=REPO, kurs=KURS, termine=T, bloecke=BLOECKE, linien=LINIEN,
     begriffe=B, beziehungen=R, faeden=F, anwendungen=A, leitfragen=LEITFRAGE, freigegeben=FREIGEGEBEN,
-    karte="kurslandkarte", startseite="index.html",
+    karte="kurslandkarte", startseite="index.html", pdf_ordner="pdf", pdf_termine={0},
 )

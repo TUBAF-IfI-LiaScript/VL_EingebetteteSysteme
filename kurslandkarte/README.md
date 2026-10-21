@@ -15,8 +15,11 @@ Interaktive Übersicht über Begriffe, Zusammenhänge und didaktische Fäden der
 Nach Änderungen an Vorlesungen oder Begriffen im Wurzelverzeichnis des Repositorys:
 
 ```bash
-python3 kurslandkarte/erzeuge.py
+python3 kurslandkarte/erzeuge.py          # Karte und Startseite
+python3 kurslandkarte/erzeuge.py --pdf    # vorher fehlende/veraltete PDFs nach `pdf/` (liaex)
 ```
+
+Kacheln und Startseite verlinken die PDFs aus `pdf/`; sie werden mit eingecheckt.
 
 Begriffe verweisen in `erzeuge.py` auf den **Titel** ihres Abschnitts (ohne Backticks); das Skript liest die Abschnitte automatisch aus den Vorlesungsdateien und ermittelt daraus die LiaScript-Foliennummer. Es bricht ab, wenn ein Abschnittstitel nicht mehr existiert, eine Beziehung auf einen unbekannten Begriff verweist oder ein Faden nicht chronologisch verläuft. Die erzeugten Dateien werden mit eingecheckt.
 

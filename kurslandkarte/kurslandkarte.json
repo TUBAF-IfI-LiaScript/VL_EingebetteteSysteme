@@ -1,6 +1,6 @@
 {
  "stand": "21.10.2026",
- "version": "0.1.0",
+ "version": "0.2.0",
  "kurs": {
   "basis": "https://liascript.github.io/course/?https://raw.githubusercontent.com/TUBAF-IfI-LiaScript/VL_EingebetteteSysteme/master/",
   "speicher": "eavd-map",
@@ -96,7 +96,7 @@
    "freigegeben": false,
    "status": "ausgearbeitet",
    "block": 1,
-   "pdf": null,
+   "pdf": "../pdf/00_Einfuehrung.pdf",
    "anwendet": [],
    "abschnitte": [
     "Einführung",

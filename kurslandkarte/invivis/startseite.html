@@ -27,7 +27,7 @@ ol, ul { margin: 0; padding-left: 1.3em; display: grid; gap: 6px; }
 .woche h2 { margin: 0; font-size: 1rem; color: var(--here); }
 .woche ul { list-style: none; padding: 0; }
 .woche .frage { color: var(--muted); font-size: .92rem; }
-.woche .naechst { color: var(--muted); font-size: .92rem; }
+.woche h2 + ul + h2 { margin-top: 8px; padding-top: 10px; border-top: 1px solid var(--faint); color: var(--ink); }
 dl { margin: 0; display: grid; grid-template-columns: max-content 1fr; gap: 6px 16px; }
 dt { color: var(--muted); }
 dd { margin: 0; }
@@ -61,24 +61,28 @@ footer { margin-top: 24px; font-size: .85rem; color: var(--muted); display: grid
 <script>
 // „Diese Woche“: alle Termine der laufenden Woche, sonst der nächste Termin
 const T = JSON.parse(document.getElementById("termine").textContent);
-const heute = new Date();
+const heute = new Date(); heute.setHours(12, 0, 0, 0);   // Mittag: Datumsvergleich in UTC verrutscht nicht
 const iso = (d) => d.toISOString().slice(0, 10);
 const montag = new Date(heute); montag.setDate(heute.getDate() - ((heute.getDay() + 6) % 7));
 const sonntag = new Date(montag); sonntag.setDate(montag.getDate() + 6);
 const datum = (s) => { const [y, m, d] = s.split("-"); return `${+d}.${+m}.`; };
 const eintrag = (t) => `<li>${t.url ? `<a href="${t.url}">${t.label} · ${t.kurz}</a>` : `${t.label} · ${t.kurz} <span class="muted">(Material folgt)</span>`}
-  <span class="muted">${datum(t.datum)}</span>${t.frage ? `<div class="frage">%%FRAGE%%: ${t.frage}</div>` : ""}</li>`;
+  <span class="muted">${datum(t.datum)}</span>${t.pdf ? ` · <a href="${t.pdf}" title="Druckfassung; Quizze und Code laufen nur in den Folien">PDF</a>` : ""}${t.frage ? `<div class="frage">%%FRAGE%%: ${t.frage}</div>` : ""}</li>`;
 const diese = T.filter(t => t.datum >= iso(montag) && t.datum <= iso(sonntag));
-const naechster = T.find(t => t.datum > iso(sonntag));
-const box = document.getElementById("woche");
-if (diese.length) {
-  box.innerHTML = `<h2>Diese Woche</h2><ul>${diese.map(eintrag).join("")}</ul>` +
-    (naechster ? `<p class="naechst">Danach: ${naechster.label} · ${naechster.kurz} (${datum(naechster.datum)})</p>` : "");
-  box.hidden = false;
-} else if (naechster) {
-  box.innerHTML = `<h2>${T[0].datum > iso(heute) ? "Los geht es mit" : "Als Nächstes"}</h2><ul>${eintrag(naechster)}</ul>`;
-  box.hidden = false;
+// „Als Nächstes“: alle Termine der nächsten Woche, in der überhaupt etwas stattfindet
+const erster = T.find(t => t.datum > iso(sonntag));
+let naechste = [];
+if (erster) {
+  const [y, m, d] = erster.datum.split("-").map(Number);
+  const mo = new Date(Date.UTC(y, m - 1, d)); mo.setUTCDate(mo.getUTCDate() - ((mo.getUTCDay() + 6) % 7));
+  const so = new Date(mo); so.setUTCDate(mo.getUTCDate() + 6);
+  naechste = T.filter(t => t.datum >= iso(mo) && t.datum <= iso(so));
 }
+const box = document.getElementById("woche");
+const teile = [];
+if (diese.length) teile.push(`<h2>Diese Woche</h2><ul>${diese.map(eintrag).join("")}</ul>`);
+if (naechste.length) teile.push(`<h2>${T[0].datum > iso(heute) ? "Los geht es mit" : "Als Nächstes"}</h2><ul>${naechste.map(eintrag).join("")}</ul>`);
+if (teile.length) { box.innerHTML = teile.join(""); box.hidden = false; }
 </script>
 </body>
 </html>
