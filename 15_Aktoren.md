@@ -2,7 +2,7 @@
 
 author:   Sebastian Zug & André Dietrich & Fabian Bär
 email:    sebastian.zug@informatik.tu-freiberg.de & andre.dietrich@informatik.tu-freiberg.de & fabian.baer@student.tu-freiberg.de
-version:  0.0.6
+version:  0.0.7
 language: de
 narrator: Deutsch Female
 
@@ -63,21 +63,21 @@ style="width: 80%; min-width: 420px; max-width: 720px;"
 
                 Abstraktionsebenen
 
-           +----------------------------+ -.
-  Ebene 6  | Problemorientierte Sprache |  |
-           +----------------------------+  |
+           +----------------------------+ -.        ╔═══════════════╗
+  Ebene 6  | Problemorientierte Sprache |  |     ◀══║ HIER SIND WIR!║
+           +----------------------------+  |        ╚═══════════════╝
                                            ⎬ Anwendungssoftware
-           +----------------------------+  |        ╔═══════════════╗
-  Ebene 5  | Assemblersprache           |  |     ◀══║ HIER SIND WIR!║
-           +----------------------------+ -.        ╚═══════════════╝
+           +----------------------------+  |
+  Ebene 5  | Assemblersprache           |  |
+           +----------------------------+ -.
 
            +----------------------------+
-  Ebene 4  | Betriebssystem             |     Systemsoftware
-           +----------------------------+   
+  Ebene 4  | Betriebssystem             |     Systemsoftware (fehlt beim ATmega328P)
+           +----------------------------+
 
-           +----------------------------+   
-  Ebene 3  | Istruktionsset             |     Maschinensprache
-           +----------------------------+     
+           +----------------------------+
+  Ebene 3  | Instruktionsset            |     Maschinensprache
+           +----------------------------+
 
            +----------------------------+  -.
   Ebene 2  | Mikroarchitektur           |   |
@@ -88,7 +88,7 @@ style="width: 80%; min-width: 420px; max-width: 720px;"
            +----------------------------+  -.
 
            +----------------------------+
-  Ebene 0  | E-Technik, Physik          |     Analoge Phänomene
+  Ebene 0  | E-Technik, Physik          |     Analoge Phänomene  ◀══ Treiber, Motoren
            +----------------------------+                                      .
 ```
 

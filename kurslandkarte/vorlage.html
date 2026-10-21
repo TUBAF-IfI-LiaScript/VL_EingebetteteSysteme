@@ -162,6 +162,9 @@ h1 {
   gap: 12px 20px;
 }
 .control { display: grid; gap: 4px; }
+.control.off .seg { opacity: .4; }
+.control.off .lbl { opacity: .6; }
+.control.off button { cursor: not-allowed; }
 .control label, .control .lbl {
   font-family: "Barlow Condensed", "Arial Narrow", sans-serif;
   font-weight: 600;
@@ -310,6 +313,8 @@ svg { display: block; }
 .xchg { fill: var(--surface); stroke: var(--ink); stroke-width: 3; }
 .station.metro.sel .xchg, .station.metro.sel .mstop { stroke: var(--here); stroke-width: 4; }
 [hidden] { display: none !important; }
+a.eyebrow { color: inherit; text-decoration: none; }
+a.eyebrow:hover { color: var(--ink); text-decoration: underline; }
 .feedback { font-size: 13px; color: var(--muted); }
 .feedback:hover { color: var(--ink); }
 .legendrow { display: flex; flex-wrap: wrap; gap: 6px 14px; align-items: center; }
@@ -473,7 +478,7 @@ footer p { margin: 0 0 6px; }
 <div class="wrap">
   <header>
     <div class="titleblock">
-      <span class="eyebrow">Digitale Systeme / Eingebettete Systeme · WiSe 2026/27</span>
+      <a class="eyebrow" href="../" title="Zur Startseite des Kurses">← Digitale Systeme / Eingebettete Systeme · WiSe 2026/27</a>
       <h1>Kurslandkarte</h1>
       <span class="sample"><span id="count"></span> · aktualisiert am %%STAND%%</span>
       <span class="feedback">Begriff fehlt oder ist unklar? Sagen Sie es in der Vorlesung oder im OPAL-Forum. <a href="https://github.com/TUBAF-IfI-LiaScript/VL_EingebetteteSysteme/issues/new?title=Kurslandkarte%3A%20&amp;labels=kurslandkarte" target="_blank" rel="noopener">GitHub ↗</a></span>
@@ -605,7 +610,7 @@ const reduce = () => matchMedia("(prefers-reduced-motion: reduce)").matches;
 const narrow = () => matchMedia("(max-width: 980px)").matches;
 // Begriffe erscheinen erst nach ihrer Vorlesung (Freigabe); „Ausblick“ zeigt die vorbereiteten blass
 const sichtbar = (n) => n && (state.ausblick || LECTURES[n.vl].frei);
-const state = { mode: narrow() ? "liste" : "metro", here: HERE_TODAY, view: "nb", detail: false, ausblick: false, sel: null, thread: null, hidden: new Set() };
+const state = { mode: narrow() ? "liste" : "metro", here: HERE_TODAY, view: "nb", detail: false, ausblick: !LECTURES.some(l => l.frei), sel: null, thread: null, hidden: new Set() };
 try {
   const saved = JSON.parse(localStorage.getItem("eavd-map") || "{}");
   if (typeof saved.detail === "boolean") state.detail = saved.detail;
@@ -959,13 +964,18 @@ function select(id, scroll) {
   }
 }
 
-function renderLegend() {
+const LEGEND_HINT = {
+  metro: "Roten Faden anklicken, um ihn hervorzuheben (spätere Vorlesungen: seitlich scrollen):",
+  zeit: "Themengebiete ein- und ausblenden (spätere Vorlesungen: seitlich scrollen):",
+  liste: "Themengebiete ein- und ausblenden:",
+};
+function fillLegend(mode) {
   const lg = $("#legend");
   lg.innerHTML = "";
-  const items = state.mode === "metro" ? THREADS : LINES;
+  const items = mode === "metro" ? THREADS : LINES;
   items.forEach(it => {
     const b = document.createElement("button");
-    const on = state.mode === "metro" ? (!state.thread || state.thread === it.id) : !state.hidden.has(it.id);
+    const on = mode === "metro" ? (!state.thread || state.thread === it.id) : !state.hidden.has(it.id);
     b.setAttribute("aria-pressed", String(on));
     b.innerHTML = `<span class="swatch" style="background:${css(it.v)}"></span>${it.name}`;
     b.addEventListener("click", () => {
@@ -975,7 +985,16 @@ function renderLegend() {
     });
     lg.appendChild(b);
   });
-  $("#legendHint").textContent = state.mode === "metro" ? "Roten Faden anklicken, um ihn hervorzuheben (spätere Vorlesungen: seitlich scrollen):" : state.mode === "zeit" ? "Themengebiete ein- und ausblenden (spätere Vorlesungen: seitlich scrollen):" : "Themengebiete ein- und ausblenden:";
+  $("#legendHint").textContent = LEGEND_HINT[mode];
+}
+function renderLegend() {
+  // Platz für die höchste Variante freihalten, damit der Inhalt beim Wechsel der Ansicht nicht springt
+  const row = $(".legendrow");
+  row.style.minHeight = "";
+  let h = 0;
+  for (const m of Object.keys(LEGEND_HINT)) { fillLegend(m); h = Math.max(h, row.offsetHeight); }
+  fillLegend(state.mode);
+  row.style.minHeight = h + "px";
 }
 
 function render() {
@@ -985,8 +1004,14 @@ function render() {
   $("#today").hidden = state.here === HERE_TODAY;
   const pressed = [["mListe", state.mode === "liste"], ["mMetro", state.mode === "metro"], ["mZeit", state.mode === "zeit"], ["vNb", state.view === "nb"], ["vAll", state.view === "all"], ["eKern", !state.detail], ["eAlle", state.detail], ["ausAus", !state.ausblick], ["ausAn", state.ausblick]];
   for (const [id, on] of pressed) $("#" + id).setAttribute("aria-pressed", String(on));
-  $("#ctlLevel").hidden = state.mode === "metro";
-  $("#ctlEdges").hidden = state.mode !== "zeit";
+  // Bedienelemente bleiben in allen Ansichten stehen (sonst springt der Kopf); was nicht gilt, wird ausgegraut
+  const aus = (sel, off, hint) => {
+    const c = $(sel); c.classList.toggle("off", off);
+    c.querySelectorAll("button").forEach(b => { b.disabled = off; });
+    if (off) c.title = hint; else c.removeAttribute("title");
+  };
+  aus("#ctlLevel", state.mode === "metro", "Wirkt in den Ansichten Vorlesungen und Zeitleiste");
+  aus("#ctlEdges", state.mode !== "zeit", "Wirkt nur in der Zeitleiste");
   $("#mapwrap").hidden = state.mode === "liste";
   $("#liste").hidden = state.mode !== "liste";
   const vis = ALL.filter(sichtbar);

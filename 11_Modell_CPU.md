@@ -2,7 +2,7 @@
 
 author:   Sebastian Zug & André Dietrich & Fabian Bär
 email:    sebastian.zug@informatik.tu-freiberg.de & andre.dietrich@informatik.tu-freiberg.de & fabian.baer@student.tu-freiberg.de
-version:  0.0.9
+version:  0.0.10
 language: de
 narrator: Deutsch Female
 
@@ -66,16 +66,16 @@ style="width: 80%; min-width: 420px; max-width: 720px;"
            +----------------------------+ -.
 
            +----------------------------+
-  Ebene 4  | Betriebssystem             |     Systemsoftware
+  Ebene 4  | Betriebssystem             |     Systemsoftware (fehlt beim ATmega328P)
            +----------------------------+
 
            +----------------------------+
-  Ebene 3  | Istruktionsset             |     Maschinensprache
+  Ebene 3  | Instruktionsset            |     Maschinensprache  ◀══ Befehlsformate
            +----------------------------+
 
-           +----------------------------+  -.      ╔═══════════════╗
-  Ebene 2  | Mikroarchitektur           |   |   ◀══║ HIER SIND WIR!║
-           +----------------------------+   |      ╚═══════════════╝
+           +----------------------------+  -.       ╔═══════════════╗
+  Ebene 2  | Mikroarchitektur           |   |    ◀══║ HIER SIND WIR!║
+           +----------------------------+   |       ╚═══════════════╝
                                             ⎬ Automaten, Speicher, Logik
            +----------------------------+   |
   Ebene 1  | Digitale Logik             |   |

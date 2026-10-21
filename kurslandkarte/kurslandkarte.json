@@ -1,5 +1,5 @@
 {
- "stand": "18.10.2026",
+ "stand": "21.10.2026",
  "vorlesungen": [
   {
    "vl": 0,
@@ -12,15 +12,16 @@
    "abschnitte": [
     "Einführung",
     "Worum geht es in dieser Vorlesung?",
-    "Was ist ein eingebettetes System?",
     "Die Reise: 16 Vorlesungen zum Verständnis",
     "Was steht am Ende?",
     "Der Unterschied zu einem \"Arduino-Kurs\"",
+    "Was ist ein eingebettetes System?",
     "Unsere Bottom-Up-Reise",
-    "Beispiel 1: Mikroarchitektur",
-    "Beispiel 2: Quer über alle Ebenen",
+    "Quer über alle Ebenen",
     "Was können Sie damit bauen?",
+    "Heute an der Tür",
     "Wozu brauche ich das in meinem Studiengang?",
+    "Und was ist mit KI?",
     "Organisation",
     "Ihre Vorkenntnisse",
     "Zeitplan",
@@ -28,9 +29,9 @@
     "Literaturempfehlungen",
     "Engagement und Motivation",
     "Open Educational Resources",
+    "Die Kurslandkarte",
     "Zwei Simulatoren begleiten Sie durchs Semester",
     "Trotz Simulation und Virtuellem ...",
-    "Generelles Engagement",
     "Und wenn Sie dann immer noch programmieren wollen ...",
     "Schauen Sie im RoboLab vorbei!",
     "Was Sie heute mitnehmen",
@@ -65,8 +66,10 @@
     "Intel 4004",
     "Weitere Entwicklung",
     "Warum ist das alles für Ihr Verständnis wichtig?",
+    "Was Sie heute mitnehmen",
     "Ihre Begriffe für die Kurslandkarte",
-    "Hausaufgabe"
+    "Hausaufgabe",
+    "Nächste Vorlesung"
    ]
   },
   {
@@ -79,18 +82,21 @@
    "status": "ausgearbeitet",
    "abschnitte": [
     "Boolesche Algebra",
+    "Rückblick: Hausaufgabe aus Vorlesung 01",
     "Digital vs. Analog",
     "Exkurs: Kontrastprogramm - Analoge Rechner",
     "Pegel",
     "Motivation",
-    "Boolesche Algebra",
+    "Axiome und Gesetze",
     "Anwendung",
     "Schaltfunktionen",
     "Schaltfunktionen mit einem Eingang",
     "Schaltfunktionen mit zwei Eingängen",
     "Exkurs: Technische Realisierung",
+    "Und im ATmega328P?",
     "Ihre Begriffe für die Kurslandkarte",
-    "Hausaufgaben"
+    "Hausaufgaben",
+    "Nächste Vorlesung"
    ]
   },
   {
@@ -463,7 +469,7 @@
    "abschnitt": 8,
    "ebene": 2,
    "code": false,
-   "erklaerung": "Innerer Aufbau eines Rechners aus Steuerwerk, ALU, Speicher und Ein-/Ausgabe, die über Adressen, Daten, Kontroll- und Statussignale zusammenarbeiten.",
+   "erklaerung": "Ebene 2 des Schichtenmodells: wie Steuerwerk, Rechenwerk, Register und Speicher zusammenarbeiten; das Steuerwerk erkennt am Bitmuster eines Befehls wie sbi, was zu tun ist.",
    "fehlvorstellung": null
   },
   {
@@ -471,7 +477,7 @@
    "name": "DDRB",
    "linie": "controller",
    "vl": 0,
-   "abschnitt": 9,
+   "abschnitt": 8,
    "ebene": 2,
    "code": true,
    "erklaerung": "Register, dessen Bits festlegen, ob ein Pin von Port B Ausgang (1) oder hochohmiger Eingang (0) ist; pinMode(13, OUTPUT) setzt am Ende Bit 5.",
@@ -544,11 +550,22 @@
    "fehlvorstellung": null
   },
   {
+   "id": "harvard",
+   "name": "Harvard-Architektur",
+   "linie": "rechner",
+   "vl": 1,
+   "abschnitt": 13,
+   "ebene": 1,
+   "code": false,
+   "erklaerung": "Programm und Daten liegen in getrennten Speichern mit eigenen Bussen – benannt nach dem Harvard Mark I (1944). Der ATmega328P ist so aufgebaut: Programm im Flash, Daten im SRAM.",
+   "fehlvorstellung": "„Jeder Rechner ist ein Von-Neumann-Rechner – Programm und Daten liegen immer im selben Speicher.“"
+  },
+  {
    "id": "digitalsignal",
    "name": "Digitalsignal",
    "linie": "grundlagen",
    "vl": 2,
-   "abschnitt": 2,
+   "abschnitt": 3,
    "ebene": 1,
    "code": false,
    "erklaerung": "Signal aus diskreten Werten zu bestimmten Zeitpunkten; es entsteht aus einem kontinuierlichen Analogsignal (z. B. Temperatur im Tagesverlauf) durch Abtastung und Quantisierung.",
@@ -559,7 +576,7 @@
    "name": "Analogrechner",
    "linie": "grundlagen",
    "vl": 2,
-   "abschnitt": 3,
+   "abschnitt": 4,
    "ebene": 2,
    "code": false,
    "erklaerung": "Rechnet kontinuierlich mit Spannungen und wird über Steckschnüre programmiert; Addition und Multiplikation sind einfach, die Genauigkeit liegt aber nur bei etwa 6–8 Bit und hängt von der Temperatur ab.",
@@ -570,7 +587,7 @@
    "name": "Pegel",
    "linie": "grundlagen",
    "vl": 2,
-   "abschnitt": 4,
+   "abschnitt": 5,
    "ebene": 1,
    "code": false,
    "erklaerung": "Spannungsbereiche, die als High (1) bzw. Low (0) gelten, dazwischen liegt ein verbotener Bereich. Bei TTL-Eingängen gilt z. B. über 2,0 V als High und unter 0,8 V als Low.",
@@ -581,7 +598,7 @@
    "name": "Boolesche Algebra",
    "linie": "logik",
    "vl": 2,
-   "abschnitt": 5,
+   "abschnitt": 6,
    "ebene": 1,
    "code": false,
    "erklaerung": "Rechnen mit nur zwei Werten (0 und 1) und den Operationen UND, ODER, NICHT; zwei Schalter in Reihe wirken wie UND, parallel wie ODER.",
@@ -592,7 +609,7 @@
    "name": "Axiome und Gesetze",
    "linie": "logik",
    "vl": 2,
-   "abschnitt": 7,
+   "abschnitt": 8,
    "ebene": 2,
    "code": false,
    "erklaerung": "Kommutativität, Distributivität, neutrales Element und Komplement bilden die Grundlage; daraus folgen Assoziativität, Idempotenz, Absorption, Doppelnegation und De Morgan. Vertauscht man UND/ODER und 0/1, entsteht wieder ein gültiges Gesetz (Dualität).",
@@ -603,7 +620,7 @@
    "name": "De-Morgan-Regel",
    "linie": "logik",
    "vl": 2,
-   "abschnitt": 7,
+   "abschnitt": 8,
    "ebene": 2,
    "code": false,
    "erklaerung": "Eine negierte ODER-Verknüpfung ist das UND der negierten Variablen und umgekehrt: nicht(a + b) = nicht a · nicht b.",
@@ -614,7 +631,7 @@
    "name": "Algebraische Vereinfachung",
    "linie": "logik",
    "vl": 2,
-   "abschnitt": 7,
+   "abschnitt": 8,
    "ebene": 2,
    "code": false,
    "erklaerung": "Ein Ausdruck wird Schritt für Schritt mit den Gesetzen vereinfacht, z. B. a·b + a·(nicht b) + a·c = a – weniger Terme bedeuten weniger Gatter.",
@@ -625,7 +642,7 @@
    "name": "Schaltfunktion",
    "linie": "logik",
    "vl": 2,
-   "abschnitt": 8,
+   "abschnitt": 9,
    "ebene": 1,
    "code": false,
    "erklaerung": "Funktion, die jeder Kombination von Eingängen aus 0 und 1 einen Ausgangswert 0 oder 1 zuordnet; darstellbar als Wahrheitstafel, als Ausdruck oder als Gatterschaltung.",
@@ -636,10 +653,10 @@
    "name": "Wahrheitstafel",
    "linie": "logik",
    "vl": 2,
-   "abschnitt": 8,
+   "abschnitt": 9,
    "ebene": 1,
    "code": false,
-   "erklaerung": "Tabelle mit einer Zeile für jede der 2^n Eingangskombinationen und dem zugehörigen Ausgangswert – die einzige Darstellung, die in jedem Fall eindeutig ist.",
+   "erklaerung": "Tabelle mit einer Zeile für jede der 2^n Eingangskombinationen und dem zugehörigen Ausgangswert – eine kanonische Darstellung: Zwei Funktionen sind genau dann gleich, wenn ihre Wahrheitstafeln gleich sind.",
    "fehlvorstellung": "„Zwei verschieden aussehende Ausdrücke beschreiben verschiedene Funktionen.“"
   },
   {
@@ -647,7 +664,7 @@
    "name": "16 zweistellige Funktionen",
    "linie": "logik",
    "vl": 2,
-   "abschnitt": 10,
+   "abschnitt": 11,
    "ebene": 2,
    "code": false,
    "erklaerung": "Mit zwei Eingängen gibt es genau 16 Schaltfunktionen, darunter UND, ODER, XOR (Antivalenz), Äquivalenz, Implikation, NAND und NOR.",
@@ -658,7 +675,7 @@
    "name": "XOR (Antivalenz)",
    "linie": "logik",
    "vl": 2,
-   "abschnitt": 10,
+   "abschnitt": 11,
    "ebene": 2,
    "code": false,
    "erklaerung": "Exklusives ODER: liefert 1, wenn genau einer der beiden Eingänge 1 ist.",
@@ -1431,7 +1448,7 @@
    "abschnitt": 6,
    "ebene": 1,
    "code": false,
-   "erklaerung": "Darstellung negativer Zahlen, bei der Addition und Subtraktion ohne Fallunterscheidung funktionieren und die Null nur einmal vorkommt – in heutigen Rechnern ausschließlich verwendet.",
+   "erklaerung": "Darstellung negativer Zahlen, bei der Addition und Subtraktion ohne Fallunterscheidung funktionieren und die Null nur einmal vorkommt – für ganze Zahlen in heutigen Rechnern ausschließlich verwendet.",
    "fehlvorstellung": "„Für eine negative Zahl genügt es, das vorderste Bit auf 1 zu setzen.“"
   },
   {
@@ -1772,7 +1789,7 @@
    "abschnitt": 9,
    "ebene": 2,
    "code": false,
-   "erklaerung": "Liefert den Takt: der eingebaute RC-Oszillator (bis 8 MHz) ist bequem, weicht aber um 3–10 % ab; ein externer Quarz ist auf etwa 0,1 % genau, braucht aber zusätzliche Bauteile.",
+   "erklaerung": "Liefert den Takt: der eingebaute RC-Oszillator (8 MHz) ist bequem, weicht ab Werk aber um bis zu 10 % ab; ein externer Quarz ist auf etwa 0,005 % genau, der Keramikresonator auf dem Arduino UNO R3 auf etwa 0,5 %.",
    "fehlvorstellung": null
   },
   {
@@ -2036,7 +2053,7 @@
    "abschnitt": 4,
    "ebene": 1,
    "code": true,
-   "erklaerung": "Funktion, die beim Interrupt angesprungen wird; der Prozessor sichert vorher den Zustand und setzt danach das Hauptprogramm fort. ISRs sollen kurz sein und nicht blockierend warten.",
+   "erklaerung": "Funktion, die beim Interrupt angesprungen wird: Die Hardware legt die Rücksprungadresse auf den Stack und sperrt weitere Interrupts, Statusregister und Arbeitsregister sichert der vom Compiler erzeugte Code der ISR; reti setzt das Hauptprogramm fort. ISRs sollen kurz sein und nicht blockierend warten.",
    "fehlvorstellung": "„In der ISR darf man ruhig warten – das Hauptprogramm läuft ja nebenher weiter.“"
   },
   {
@@ -2069,7 +2086,7 @@
    "abschnitt": 6,
    "ebene": 2,
    "code": false,
-   "erklaerung": "Schutz einer Befehlsfolge vor Unterbrechung, z. B. mit cli/sei oder ATOMIC_BLOCK – nötig, wenn Hauptprogramm und ISR dieselben Variablen oder Register verwenden.",
+   "erklaerung": "Schutz einer Befehlsfolge vor Unterbrechung, z. B. mit cli/sei oder ATOMIC_BLOCK – nötig, wenn Hauptprogramm und ISR dieselben Variablen oder Register verwenden; sonst entsteht eine Race Condition in der Software.",
    "fehlvorstellung": "„Eine C-Zeile wird in einem Stück ausgeführt.“"
   },
   {
@@ -2780,9 +2797,14 @@
    "text": "wird umgesetzt als"
   },
   {
-   "von": "mikrocontroller",
+   "von": "atmega328",
+   "nach": "harvard",
+   "text": "ist aufgebaut nach der"
+  },
+  {
+   "von": "harvard",
    "nach": "von_neumann",
-   "text": "erweitert die Bausteine der"
+   "text": "trennt Programm und Daten, anders als die"
   },
   {
    "von": "ddrx",
@@ -2813,11 +2835,6 @@
    "von": "vektortabelle",
    "nach": "pc_ir",
    "text": "lädt den Programmzähler über"
-  },
-  {
-   "von": "atomar",
-   "nach": "race",
-   "text": "verhindert"
   },
   {
    "von": "timer",
@@ -2935,15 +2952,17 @@
  ],
  "anwendungen": [
   {
-   "id": "a_lauflicht",
-   "titel": "LED-Lauflicht am ATmega328P",
-   "fach": "Lichtsteuerung",
+   "id": "a_tuerzaehler",
+   "titel": "Personenzähler an der Hörsaaltür",
+   "fach": "Gebäudetechnik",
    "vl": 0,
-   "abschnitt": 2,
-   "datensatz": "Arduino-Sketch, der vier LEDs an Pin 10–13 nacheinander je 250 ms einschaltet (Wokwi-Simulation), und die daraus erzeugte Hex-Datei",
+   "abschnitt": 10,
+   "datensatz": "Abstandssensor misst quer durch die Tür in drei Zonen; Schwelle macht daraus „belegt“, ein Automat erkennt die Richtung, ein Zähler zählt rein/raus",
    "schlagworte": [
-    "mikrocontroller",
-    "hexdatei"
+    "komparator",
+    "automat",
+    "zaehler",
+    "abtasttheorem"
    ],
    "herkunft": "lehrende"
   },
@@ -2952,7 +2971,7 @@
    "titel": "Wetterstation mit ATmega328P",
    "fach": "Messtechnik",
    "vl": 0,
-   "abschnitt": 10,
+   "abschnitt": 9,
    "datensatz": "Sensordaten einer Wetterstation, Helligkeitswerte des ADC (1023 = dunkel)",
    "schlagworte": [
     "mikrocontroller"
@@ -2988,7 +3007,7 @@
    "titel": "Lampe mit zwei Schaltern",
    "fach": "Haushalt",
    "vl": 2,
-   "abschnitt": 5,
+   "abschnitt": 6,
    "datensatz": "Reihenschaltung (Lampe leuchtet bei Schalter 1 und 2) und Parallelschaltung (Schalter 1 oder 2)",
    "schlagworte": [
     "boolesche_algebra",
@@ -3001,7 +3020,7 @@
    "titel": "XOR aus Relais",
    "fach": "Elektrotechnik",
    "vl": 2,
-   "abschnitt": 11,
+   "abschnitt": 12,
    "datensatz": "AND-Gatter aus Relais bzw. Transistoren, Relaisschaltung für das exklusive ODER",
    "schlagworte": [
     "xor",

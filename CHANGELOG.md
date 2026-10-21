@@ -2,6 +2,37 @@
 
 Alle wesentlichen Änderungen an diesem Kurs werden in dieser Datei dokumentiert.
 
+## [0.7.5] - 2026-10-21
+
+### Changed
+- **00_Einfuehrung (0.6.7):** Folie „Wozu brauche ich das in meinem Studiengang?“ um Smart Systems Engineering ergänzt
+
+## [0.7.4] - 2026-10-20
+
+### Changed
+- **00_Einfuehrung (0.6.6):** neue Folie „Heute an der Tür“: Personenzähler an der Hörsaaltür (derselbe Aufbau wie in EAVD), Auszug aus dem Probelauf vom 19.10. in FOR-0270, Idee in vier Schritten als Zustandsdiagramm nach der Zähllogik in EAVD `zaehler.py` (Mermaid, Template neu importiert; fünf Zustände mit Eingängen L/R, 400 ms Nachlauf, Ausgabe rein/raus/unklar; Mitte, gleichzeitige Belegung und 6-s-Grenze nur im Text): Takt, Schwelle/Komparator, Automat, Zähler mit Verweis auf VL 05, 07, 08, 13, 14 – bewusst ohne Hardwaredetails; Rückgriff „Zurück zur Tür“ in „Was Sie heute mitnehmen“; neue Folie „Und was ist mit KI?“ (nach EAVD: Begriffe für Frage und Prüfung, Controller meldet keine Fehler, KI braucht Hardware, Klausur nur auf Papier); „Die Kurslandkarte“ als eigene Folie mit Vorschaubild (`images/00_Einfuehrung/kurslandkarte.png`, Stand nach VL 08) statt Nebensatz in OER; OER-Folie bettet den LiaScript-LiveEditor ein (Template LiveEdit-Embeddings 0.0.1) mit Beispielfolie zu Bits und Quiz
+- **Kurslandkarte:** Anwendung „Personenzähler an der Hörsaaltür“ (VL 00); veraltete Abschnittsverweise der Begriffe Mikroarchitektur und DDRB auf „Quer über alle Ebenen“ korrigiert
+
+## [0.7.3] - 2026-10-18
+
+### Changed
+- **Sprechertexte VL 00–02:** geprüft (Sprachregel, vorlesetauglich ohne Formeln und Codezeichen, Werbeton entfernt) und für alle inhaltlichen Folien ergänzt – VL 00 (0.6.5): 19 → 33 Texte, VL 01: 17 → 33, VL 02: 2 → 40
+- **01_HistorischerUeberblick (0.7.1):** Bezeichnungen ATmega328P / Arduino UNO R3 / Arduino-Framework; Z3-Takt (5,3 Hz) und Additionszeit (0,6 s) nach Rojas; Abschluss „Was Sie heute mitnehmen“ und „Nächste Vorlesung“; Auflösung der VL-00-Hausaufgabe ergänzt; Bild `Moores_Law_…` ohne Apostroph (JS-Fehler behoben); Wikimedia-Link repariert
+- **02_BoolscheAlgebra (0.1.0):** nach Persona-Reviews und Fachprüfung überarbeitet: Ergebnis von Beispiel 3 (XOR), CMOS-Pegel nach Datenblatt des ATmega328P mit Störabstand, Gatterbilanzen nachgerechnet, Definition Boolesche Funktion (m = 1), Schaltnetz statt Schaltwerk, Shannon-Titel; neu: Rückblick auf VL 01, Schreibweisen (+, ·, Überstrich, C-Operatoren), Beweis der Idempotenz und Aufgabe für Vorerfahrene, Minterm/KDNF an der Wahrheitstafel, Namen f0–f15 der zweistelligen Funktionen, XOR in DigiSim, Abschnitt „Und im ATmega328P?“ mit ausführbarem Sketch (Wahrheitstafel und De-Morgan-Probe auf dem simulierten ATmega328P, Zweihandbedienung mit Schaltern und Logikanalysator), Warnkasten `&&` vs. `&`, acht Quizze, Hausaufgabe mit Selbstkontrolle (Teil A) und Besprechung (Teil B), „Nächste Vorlesung“; DNF/KNF-Fragen nach VL 03; NetSwarm-Import durch DigiSim ersetzt
+- **Ebenen-Diagramm in allen Vorlesungen vereinheitlicht:** Ebene 4 „Systemsoftware (fehlt beim ATmega328P)“, Tippfehler „Istruktionsset“ (VL 11–15) und Pfeilversatz (VL 03) behoben; VL 02 markiert zusätzlich den Übergang analog → digital (Abtastung, Quantisierung, Pegel) passend zum Sprechertext; Markierung „HIER SIND WIR“ an den Inhalt angepasst: VL 11 Ebene 2 (+ 3), VL 12 Ebene 5 (+ 6, 3), VL 13–15 Ebene 6 (+ 0 bzw. 2); Versionen VL 03–15 jeweils um eins erhöht
+- **00_Einfuehrung, Startfolie:** „Herzlich willkommen“; „Fragen an die Veranstaltung“ auf vier gekürzt und als Einordnung und Motivation gekennzeichnet (Echtzeit und Ressourcen folgen in VL 14/15); Begrüßung im Sprechertext
+- **00_Einfuehrung, nach Didaktik-Gutachten:** „Merke“ an der Kernaussage zu den Ebenen (vor dem Zuordnungsquiz) statt am KI-Satz; LiaScript-Exkurs mit Live-Editor entfernt (Import LiveEdit-Embeddings entfällt)
+- **Kurslandkarte, nach Fachgutachten:** neuer Kernbegriff Harvard-Architektur (VL 01), ATmega328P „ist aufgebaut nach der“ Harvard-Architektur statt „erweitert die Bausteine der“ Von-Neumann-Architektur; Wahrheitstafel als kanonische Darstellung (kein Widerspruch mehr zur KDNF); ISR nach AVR-Ablauf (Hardware sichert nur die Rücksprungadresse); Taktgenerator mit realistischen Genauigkeiten und Keramikresonator des UNO R3; Zweierkomplement „für ganze Zahlen“; Atomarer Zugriff ohne Verweis auf die Hardware-Race-Condition; Ausblick voreingestellt, solange keine Vorlesung freigeschaltet ist
+- **00_Einfuehrung, nach Persona-Reviews vom 21.10.:** Personenzähler-Tabelle mit Roboterzeit und Zählung 416 ms nach „alle frei“ (wie `zaehler.py`), Messrate „etwa 15-mal pro Sekunde“; Hausaufgabe ohne „Teil A/B“; „Median 3,3“; Quiz 3 erklärt `eax`/`rax`; „Vorsicht, Hardware“ mit „kann … beschädigt werden“ und Vorwiderstand; Kasten „Keine Sorge“; Ebenenüberschriften wie in der Leiste; Hex-Datei enthält auch Tabellen (Bitmasken ab 0x90)
+- **00_Einfuehrung:** Foto des Personenzählers im Hörsaal (aus VL_EAVD, 00_Motivation) unter „Heute an der Tür“
+- **00_Einfuehrung:** Prüfungsmodalitäten mit Histogramm der Klausurnoten des letzten Wintersemesters (25 Teilnehmende, ein Fünftel nicht bestanden, Median 3,3) und Hinweis auf Hausaufgaben und Probeklausur
+- **Hervorhebungen (Decision vom 21.10.):** VL 00 und 02 nutzen LiaScript-Kästen mit festen deutschen Titeln – VL 00: zweimal „Mehr dazu“, „Typische Fehlvorstellung“ (`pinMode` ist kein einzelner Befehl), „Vorsicht, Hardware“ (Kurzschluss, 20/40 mA pro Pin), „Merke“ (ohne Begriffe keine Hilfe von der KI); VL 02: „Typische Fehlvorstellung“ (ENIAC, `&&`/`&`), zweimal „Merke“ (Dualitätsprinzip, Wahrheitstafel eindeutig); VL 01 ohne passende Stelle
+- **Startseite `index.html`** für GitHub Pages (https://tubaf-ifi-liascript.github.io/VL_EingebetteteSysteme/): Link zur Kurslandkarte und zu VL 00, Lernziele (aus der Outline), Kontakt; ersetzt die aus der README erzeugte Seite; die Kurslandkarte verlinkt über die Kursbezeichnung im Kopf zurück zur Startseite
+- **Kurslandkarte, VL 00:** Personenzähler an der Hörsaaltür statt LED-Lauflicht als erste Anwendung; Erklärung „Mikroarchitektur“ an die gekürzte Folie angepasst
+- **Kurslandkarte:** Kopf und Legende springen beim Wechsel zwischen Vorlesungen, Metrokarte und Zeitleiste nicht mehr – Bedienelemente bleiben stehen und werden ausgegraut, wo sie nicht wirken; die Legende hält die Höhe der größten Variante frei
+- **00_Einfuehrung (0.6.5):** Frage „Welche Funktion hat der Code?“ erscheint zusammen mit dem Code (nicht erst im nächsten Schritt); Foto einer kurzgeschlossenen 9-V-Batterie unter „Trotz Simulation und Virtuellem …“ (Wikimedia Commons, CC BY-SA 4.0); Hausaufgabe: Compiler Explorer (`addiere8`/`addiere32` für AVR und x86-64, drei Quizfragen zur Wortbreite) statt der Assembler-Blinkaufgabe; „Quer über alle Ebenen“ zeigt neben jedem Schritt eine Ebenen-Leiste mit der aktuellen Ebene (Makro `@ebenen`); verwaiste Zeile „Beispiel 2:“ entfernt
+- **13_ADC (0.0.8):** JS-Fehler beim Laden behoben: `link:`-Zeilen waren unter `script:` eingerückt und wurden als Skripte geladen (Chartist und animate.css werden nicht benutzt, entfernt); CodeRunner-Import auf die README-Adresse umgestellt; überzähliges `s` hinter `@LIA.eval` entfernt; Python-Beispiel zur Abtastung zeigt jetzt den Alias-Effekt (fs = 50 Hz → 10-Hz-Alias statt 401 Hz ohne Alias), Rekonstruktion mit voller Amplitude, ohne ComplexWarning
+
 ## [0.7.2] - 2026-10-18
 
 ### Changed

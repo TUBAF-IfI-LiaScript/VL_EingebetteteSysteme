@@ -2,18 +2,15 @@
 
 author:   Sebastian Zug & André Dietrich & Fabian Bär
 email:    sebastian.zug@informatik.tu-freiberg.de & andre.dietrich@informatik.tu-freiberg.de & fabian.baer@student.tu-freiberg.de
-version:  0.0.7
+version:  0.0.8
 language: de
 narrator: Deutsch Female
 
 import:  https://raw.githubusercontent.com/liascript-templates/plantUML/master/README.md
-         https://github.com/liascript/CodeRunner
+         https://raw.githubusercontent.com/LiaScript/CodeRunner/master/README.md
          https://fjangfaragesh.github.io/AVR8js-mem/INCLUDE.md
-        https://raw.githubusercontent.com/TUBAF-IfI-LiaScript/VL_EingebetteteSysteme/master/config.md
+         https://raw.githubusercontent.com/TUBAF-IfI-LiaScript/VL_EingebetteteSysteme/master/config.md
 
-script:   https://cdn.jsdelivr.net/chartist.js/latest/chartist.min.js
-         link: https://cdn.jsdelivr.net/chartist.js/latest/chartist.min.css
-         link: https://cdnjs.cloudflare.com/ajax/libs/animate.css/3.7.0/animate.min.css
 
 
 mark: <span style="background-color: @0;
@@ -62,21 +59,21 @@ style="width: 80%; min-width: 420px; max-width: 720px;"
 
                 Abstraktionsebenen
 
-           +----------------------------+ -.
-  Ebene 6  | Problemorientierte Sprache |  |
-           +----------------------------+  |
+           +----------------------------+ -.        ╔═══════════════╗
+  Ebene 6  | Problemorientierte Sprache |  |     ◀══║ HIER SIND WIR!║
+           +----------------------------+  |        ╚═══════════════╝
                                            ⎬ Anwendungssoftware
-           +----------------------------+  |        ╔═══════════════╗
-  Ebene 5  | Assemblersprache           |  |     ◀══║ HIER SIND WIR!║
-           +----------------------------+ -.        ╚═══════════════╝
+           +----------------------------+  |
+  Ebene 5  | Assemblersprache           |  |
+           +----------------------------+ -.
 
            +----------------------------+
-  Ebene 4  | Betriebssystem             |     Systemsoftware
-           +----------------------------+   
+  Ebene 4  | Betriebssystem             |     Systemsoftware (fehlt beim ATmega328P)
+           +----------------------------+
 
-           +----------------------------+   
-  Ebene 3  | Istruktionsset             |     Maschinensprache
-           +----------------------------+     
+           +----------------------------+
+  Ebene 3  | Instruktionsset            |     Maschinensprache
+           +----------------------------+
 
            +----------------------------+  -.
   Ebene 2  | Mikroarchitektur           |   |
@@ -87,7 +84,7 @@ style="width: 80%; min-width: 420px; max-width: 720px;"
            +----------------------------+  -.
 
            +----------------------------+
-  Ebene 0  | E-Technik, Physik          |     Analoge Phänomene
+  Ebene 0  | E-Technik, Physik          |     Analoge Phänomene  ◀══ Spannung am Pin
            +----------------------------+                                      .
 ```
 
@@ -251,41 +248,42 @@ Wie sollte die Taktrate für die Messung denn gewählt werden?
 import numpy as np
 import matplotlib.pyplot as plt
 
-# Generierung der "Realen Messungen"
-f = 40  # Hz
-tmin = -0.3
-tmax = 0.3
-t = np.linspace(tmin, tmax, 400)
+# "Reales" Signal: Kosinus mit 40 Hz
+f = 40                      # Hz
+tmin, tmax = -0.3, 0.3
+t = np.linspace(tmin, tmax, 2000)
 s = np.cos(2*np.pi*f*t)
 
-# Abtastung mit einer Frequenz kleiner der Grenzfrequenz
-T = 1/401.0
-nmin = np.ceil((tmin) / T)
-nmax = np.floor(tmax / T)
-n = np.arange(nmin, nmax) * T
+# Abtastung mit fs = 50 Hz, also weniger als 2*f = 80 Hz
+fs = 50                     # Hz, probieren Sie auch 100 oder 400
+T = 1/fs
+n = np.arange(np.ceil(tmin/T), np.floor(tmax/T)) * T
 y = np.cos(2*np.pi*f*n)
 
-# Fitting eines Cosinussignals anhand der Messungen
-mfft=np.fft.fft(y)
-imax=np.argmax(np.absolute(mfft))
-mask=np.zeros_like(mfft)
-mask[[imax]]=1
-mfft*=mask
-fdata=np.fft.ifft(mfft)
+# Rekonstruktion: stärkste Frequenz in den Abtastwerten suchen
+N = len(y)
+spektrum = np.fft.rfft(y)
+k = np.argmax(np.abs(spektrum[1:])) + 1     # Gleichanteil (k = 0) überspringen
+f_rek = k * fs / N
+amplitude = 2 * np.abs(spektrum[k]) / N
+phase = np.angle(spektrum[k])
+rek = amplitude * np.cos(2*np.pi*f_rek*(t - n[0]) + phase)
+print(f"abgetastet mit {fs} Hz, rekonstruiert: {f_rek:.1f} Hz")
 
 # Ausgabe
 fig, ax = plt.subplots()
-ax.plot(t, s)
-ax.plot(n, y, '.', markersize=8)
-ax.plot(n, fdata, '--', color='red', label=f"Estimated Signal")
+ax.plot(t, s, label=f"Signal: {f} Hz")
+ax.plot(n, y, '.', markersize=8, label=f"Abtastwerte ({fs} Hz)")
+ax.plot(t, rek, '--', color='red', label=f"rekonstruiert: {f_rek:.0f} Hz")
 ax.grid(True, linestyle='-.')
-ax.tick_params(labelcolor='r', labelsize='medium', width=3)
 ax.set_xlim([-0.15, 0.15])
+ax.set_xlabel("Zeit in s")
+ax.legend(loc="lower right")
 
-#plt.show()
 plt.savefig('foo.png')
 ```
-@LIA.eval(`["main.py"]`, `none`, `python3 main.py`)s
+@LIA.eval(`["main.py"]`, `none`, `python3 main.py`)
+
 Wenn ein kontinuierliches Signal, das keine Frequenzkomponenten hat, die über einer Frequenz  $f_c$ liegen mit einer Häufigkeit von größer $2f_c$ abgetatstet wird, kann das Originalsignal aus den gewonnenen Punkten unverzerrt rekonstruiert werden.
 
 Falls dieses Kriterium nicht eingehalten wird, entstehen nichtlineare Verzerrungen, die auch als Alias-Effekt bezeichnet werden (vgl. Python Beispiel).  Die untere Grenze für eine Alias-freie Abtastung wird auch als _Nyquist-Rate_ bezeichnet.  
