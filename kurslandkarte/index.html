@@ -3,8 +3,10 @@
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
-<meta name="description" content="Kurslandkarte der Vorlesung Digitale Systeme / Eingebettete Systeme (TU Bergakademie Freiberg): Begriffe, Zusammenhänge und didaktische Fäden über das Semester.">
-<title>Digitale Systeme Kurslandkarte</title>
+<meta name="description" content="Kurslandkarte Digitale Systeme / Eingebettete Systeme (TU Bergakademie Freiberg): Begriffe, Zusammenhänge und didaktische Fäden.">
+<meta name="author" content="Sebastian Zug &amp; Claude Code (Opus 5.5)">
+<meta name="generator" content="invivis-kurslandkarte 0.1.0">
+<title>Digitale Systeme / Eingebettete Systeme Kurslandkarte</title>
 <style>
 *, *::before, *::after { box-sizing: border-box; }
 html { color-scheme: light; }
@@ -23,15 +25,17 @@ img { max-width: 100%; }
   --muted: #5d6c6f;
   --faint: #c9d1cf;
   --grid: #e3e8e5;
-  --phase-einstieg: #e7eee9;
-  --phase-digital: #edf1f5;
-  --phase-controller: #f6ece7;
-  --phase-rechner: #eeecf5;
-  --l-logik: #1f7a8c;
-  --l-zustand: #b7800f;
-  --l-rechner: #7a4e9c;
-  --l-controller: #c2462e;
-  --l-grundlagen: #2f5da8;
+  --ph1: #e7eee9;
+  --ph2: #edf1f5;
+  --ph3: #f6ece7;
+  --ph4: #eeecf5;
+  --c1: #1f7a8c;
+  --c2: #b7800f;
+  --c3: #7a4e9c;
+  --c4: #c2462e;
+  --c5: #2f5da8;
+  --c6: #1b8a5a;
+  --c7: #5d6c6f;
   --t1: #d4502b;
   --t2: #1b8a5a;
   --t3: #b08400;
@@ -53,15 +57,17 @@ img { max-width: 100%; }
     --muted: #9aa9ab;
     --faint: #3a4648;
     --grid: #263032;
-    --phase-einstieg: #1b2a23;
-    --phase-digital: #1b2330;
-    --phase-controller: #2d201c;
-    --phase-rechner: #231f31;
-    --l-logik: #4fb3c6;
-    --l-zustand: #e0ab3d;
-    --l-rechner: #b58ad6;
-    --l-controller: #ee7a60;
-    --l-grundlagen: #6f98e0;
+    --ph1: #1b2a23;
+    --ph2: #1b2330;
+    --ph3: #2d201c;
+    --ph4: #231f31;
+    --c1: #4fb3c6;
+    --c2: #e0ab3d;
+    --c3: #b58ad6;
+    --c4: #ee7a60;
+    --c5: #6f98e0;
+  --c6: #3fbf86;
+  --c7: #9aa9ab;
     --t1: #f07a55;
     --t2: #3fbf86;
     --t3: #e0b53a;
@@ -83,15 +89,17 @@ img { max-width: 100%; }
   --muted: #9aa9ab;
   --faint: #3a4648;
   --grid: #263032;
-  --phase-einstieg: #1b2a23;
-  --phase-digital: #1b2330;
-  --phase-controller: #2d201c;
-  --phase-rechner: #231f31;
-  --l-logik: #4fb3c6;
-  --l-zustand: #e0ab3d;
-  --l-rechner: #b58ad6;
-  --l-controller: #ee7a60;
-  --l-grundlagen: #6f98e0;
+  --ph1: #1b2a23;
+  --ph2: #1b2330;
+  --ph3: #2d201c;
+  --ph4: #231f31;
+  --c1: #4fb3c6;
+  --c2: #e0ab3d;
+  --c3: #b58ad6;
+  --c4: #ee7a60;
+  --c5: #6f98e0;
+  --c6: #3fbf86;
+  --c7: #9aa9ab;
   --t1: #f07a55;
   --t2: #3fbf86;
   --t3: #e0b53a;
@@ -240,6 +248,8 @@ input[type=range] { width: 200px; accent-color: var(--here); }
   min-width: 0;
 }
 .mapbox #side { flex: none; }
+.mapbox { position: relative; }
+.mapbox::after { content: ""; position: absolute; top: 0; right: 0; bottom: 0; width: 28px; pointer-events: none; background: linear-gradient(to right, transparent, var(--surface)); }
 .scroller { overflow-x: auto; overflow-y: hidden; min-width: 0; flex: 1; }
 svg { display: block; }
 .lane-title {
@@ -403,7 +413,7 @@ aside.panel {
   display: inline-block;
   width: fit-content;
   font-weight: 700;
-  color: var(--l-logik);
+  color: var(--c1);
   text-decoration: none;
   border-bottom: 2px solid currentColor;
 }
@@ -421,20 +431,42 @@ aside.panel {
 .rels .s { color: var(--muted); }
 .rels button.satz { display: block; }
 footer { font-size: 13px; color: var(--muted); max-width: 70ch; }
+footer a { color: inherit; }
 footer p { margin: 0 0 6px; }
 /* ---------- Liste ---------- */
 .today { font: inherit; font-size: 12px; padding: 2px 8px; border: 1px solid var(--faint); border-radius: 4px; background: var(--surface); color: var(--ink); cursor: pointer; }
-.liste { list-style: none; margin: 0; padding: 0; display: grid; gap: 10px; min-width: 0; }
-.liste > li.vl {
+.liste { display: grid; gap: 20px; min-width: 0; }
+.block h2 {
+  font-family: "Barlow Condensed", "Arial Narrow", sans-serif; font-weight: 700; font-size: 19px; letter-spacing: .02em;
+  margin: 0 0 8px; padding: 3px 10px; border-radius: 4px; background: var(--blk); width: fit-content;
+}
+.raster { display: grid; grid-template-columns: minmax(0, 1fr); gap: 10px; }
+.liste.spalten .raster { grid-template-columns: max-content repeat(var(--n), minmax(0, 1fr)); gap: 8px 10px; align-items: start; }
+.rh {
+  font-family: "Barlow Condensed", "Arial Narrow", sans-serif; font-weight: 600; font-size: 13px; letter-spacing: .06em;
+  text-transform: uppercase; color: var(--muted); border-bottom: 1px solid var(--faint); padding-bottom: 2px;
+}
+.wk { font-family: "JetBrains Mono", ui-monospace, monospace; font-size: 12px; color: var(--muted); padding-top: 12px; white-space: nowrap; }
+.wk.now { color: var(--here); font-weight: 600; }
+.zelle { display: grid; gap: 8px; min-width: 0; }
+.kachel {
   background: var(--surface);
   border: 1px solid var(--faint);
   border-radius: 6px;
   padding: 10px 14px 12px;
   display: grid;
   gap: 8px;
+  min-width: 0;
 }
-.liste > li.vl.now { border-color: var(--here); box-shadow: inset 4px 0 0 var(--here); }
-.liste > li.vl.future .chips { opacity: .8; }
+.kachel.now { border-color: var(--here); box-shadow: inset 4px 0 0 var(--here); }
+.kachel.future .chips { opacity: .8; }
+.kachel.ohne { background: transparent; border-style: dashed; }
+.liste.spalten .vlhead .d { display: none; }
+@media (max-width: 980px) {
+  .liste.spalten .raster { grid-template-columns: minmax(0, 1fr); }
+  .liste.spalten .rh, .liste.spalten .wk, .liste.spalten .zelle:empty { display: none; }
+  .liste.spalten .vlhead .d { display: inline; }
+}
 .vlhead { display: flex; flex-wrap: wrap; align-items: baseline; gap: 2px 10px; }
 .vlhead b { font-family: "Barlow Condensed", "Arial Narrow", sans-serif; font-size: 20px; }
 .vlhead .d { font-family: "JetBrains Mono", ui-monospace, monospace; font-size: 12px; color: var(--muted); }
@@ -442,6 +474,7 @@ footer p { margin: 0 0 6px; }
 .vlhead .tag { font-family: "Barlow Condensed", "Arial Narrow", sans-serif; font-weight: 700; font-size: 12px; letter-spacing: .06em; text-transform: uppercase; color: var(--here); }
 .vlhead .tag.muted { color: var(--muted); }
 .vlhead a { margin-left: auto; font-size: 13px; color: var(--muted); }
+.vlhead a + a { margin-left: 0; }
 .chips { display: flex; flex-wrap: wrap; gap: 6px; }
 .chips button {
   font: inherit; font-size: 14px;
@@ -478,7 +511,7 @@ footer p { margin: 0 0 6px; }
 <div class="wrap">
   <header>
     <div class="titleblock">
-      <a class="eyebrow" href="../" title="Zur Startseite des Kurses">← Digitale Systeme / Eingebettete Systeme · WiSe 2026/27</a>
+      <a class="eyebrow" href="../" title="Zur Startseite des Kurses">← TU Bergakademie Freiberg · Wintersemester 2026/27</a>
       <h1>Kurslandkarte</h1>
       <span class="sample"><span id="count"></span> · aktualisiert am 21.10.2026</span>
       <span class="feedback">Begriff fehlt oder ist unklar? Sagen Sie es in der Vorlesung oder im OPAL-Forum. <a href="https://github.com/TUBAF-IfI-LiaScript/VL_EingebetteteSysteme/issues/new?title=Kurslandkarte%3A%20&amp;labels=kurslandkarte" target="_blank" rel="noopener">GitHub ↗</a></span>
@@ -487,9 +520,9 @@ footer p { margin: 0 0 6px; }
       <div class="control">
         <span class="lbl" id="modeLbl">Variante</span>
         <div class="seg" role="group" aria-labelledby="modeLbl">
-          <button id="mListe" aria-pressed="false" title="Alle Vorlesungen untereinander, mit Leitfrage, Begriffen und Anwendungen">Vorlesungen</button>
+          <button id="mListe" aria-pressed="false" title="Alle Vorlesungen im Wochenraster, mit Leitfrage, Begriffen und Anwendungen">Vorlesungen</button>
           <button id="mMetro" aria-pressed="true" title="Jede farbige Linie ist ein Faden: ein Thema, das sich durch mehrere Vorlesungen zieht">Metrokarte</button>
-          <button id="mZeit" aria-pressed="false" title="Alle Begriffe nach Themengebiet über das Semester, mit Pfeilen für ihre Zusammenhänge">Zeitleiste</button>
+          <button id="mZeit" aria-pressed="false" title="Alle Begriffe nach Themengebiet über die Zeit, mit Pfeilen für ihre Zusammenhänge">Zeitleiste</button>
         </div>
       </div>
       <div class="control">
@@ -536,7 +569,7 @@ footer p { margin: 0 0 6px; }
         </table>
       </div>
       <div>
-        <p><strong>Vorlesungen:</strong> alle Termine untereinander, mit Leitfrage, Begriffen und Anwendungen. <strong>Metrokarte:</strong> Jede farbige Linie ist ein <em>Faden</em>, ein Thema, das sich durch mehrere Vorlesungen zieht; weiße Stationen liegen auf mehreren Fäden. <strong>Zeitleiste:</strong> alle Begriffe nach Themengebiet, mit Pfeilen für ihre Zusammenhänge.</p>
+        <p><strong>Vorlesungen:</strong> alle Vorlesungen im Wochenraster, mit Leitfrage, Begriffen und Anwendungen. <strong>Metrokarte:</strong> Jede farbige Linie ist ein <em>Faden</em>, ein Thema, das sich durch mehrere Vorlesungen zieht; weiße Stationen liegen auf mehreren Fäden. <strong>Zeitleiste:</strong> alle Begriffe nach Themengebiet, mit Pfeilen für ihre Zusammenhänge.</p>
         <p><strong>Die Karte wächst mit dem Semester.</strong> Nach jeder Vorlesung kommen ihre Begriffe dazu, ergänzt um Ihre Vorschläge. <strong>Kernbegriffe</strong> sollten Sie in einem Satz erklären können, Detailbegriffe ergänzen sie. Mit <strong>Ausblick: An</strong> sehen Sie blass, was für kommende Vorlesungen vorbereitet ist.</p>
         <p><strong>Bedienung:</strong> <em>Sie sind hier</em> folgt dem heutigen Datum; mit dem Regler blättern Sie zu einer anderen Woche – er verschiebt nur die Markierung, freigeschaltet wird dadurch nichts, und „heute“ springt zurück. <em>Begriffe</em> wählt zwischen Kernbegriffen und allen Begriffen (Vorlesungen und Zeitleiste), <em>Verbindungen</em> zwischen den Pfeilen zum gewählten Begriff und dem ganzen Netz (nur Zeitleiste). Was in einer Ansicht nicht wirkt, ist ausgegraut. Die Farben stehen in der Metrokarte für Fäden, in Vorlesungen und Zeitleiste für Themengebiete.</p>
       </div>
@@ -549,27 +582,117 @@ footer p { margin: 0 0 6px; }
     <div class="mapbox" id="mapwrap">
       <svg id="side" aria-hidden="true"></svg>
       <div class="scroller" id="mapbox">
-        <svg id="map" role="img" aria-labelledby="mapTitle"><title id="mapTitle">Kurslandkarte: Begriffe der Vorlesung über 16 Vorlesungen</title></svg>
+        <svg id="map" role="img" aria-labelledby="mapTitle"><title id="mapTitle">Kurslandkarte: Begriffe über alle Vorlesungen</title></svg>
       </div>
     </div>
-    <ol class="liste" id="liste" hidden></ol>
+    <div class="liste" id="liste" hidden></div>
     <aside class="panel" id="panel" aria-live="polite"></aside>
   </div>
 
+  <footer><p>Erzeugt mit <a href="https://github.com/TUBAF-IfI-LiaScript/invivis-kurslandkarte">invivis Kurslandkarte</a> 0.1.0 · Autoren: Sebastian Zug &amp; Claude Code (Opus 5.5)</p></footer>
 </div>
 
 <script id="kartendaten" type="application/json">
 {
  "stand": "21.10.2026",
+ "version": "0.1.0",
+ "kurs": {
+  "basis": "https://liascript.github.io/course/?https://raw.githubusercontent.com/TUBAF-IfI-LiaScript/VL_EingebetteteSysteme/master/",
+  "speicher": "eavd-map",
+  "einheit": "Vorlesung",
+  "einheiten": "Vorlesungen",
+  "einheiten_dat": "Vorlesungen",
+  "gleich": "In derselben Vorlesung",
+  "freigabe": "erscheinen nach der Vorlesung, mit Ihren Vorschlägen",
+  "folgen": "Die Begriffe dieser Vorlesung entstehen nach der Vorlesung – mit Ihren Vorschlägen.",
+  "spalten": [
+   [
+    "VL",
+    "Vorlesung"
+   ],
+   [
+    "Ü",
+    "Übung"
+   ],
+   [
+    "P",
+    "Praktikum"
+   ]
+  ],
+  "woche": "Woche ab",
+  "status": {},
+  "anwendung_daten": "Beispiel",
+  "start_ansicht": "metro",
+  "vorschau": "ausblick"
+ },
+ "linien": [
+  {
+   "id": "grundlagen",
+   "name": "Technik & Abstraktion",
+   "farbe": "c5"
+  },
+  {
+   "id": "logik",
+   "name": "Logik & Schaltnetze",
+   "farbe": "c1"
+  },
+  {
+   "id": "zustand",
+   "name": "Zustand & Takt",
+   "farbe": "c2"
+  },
+  {
+   "id": "rechner",
+   "name": "Rechner & Befehle",
+   "farbe": "c3"
+  },
+  {
+   "id": "controller",
+   "name": "Mikrocontroller & Peripherie",
+   "farbe": "c4"
+  }
+ ],
+ "phasen": [
+  {
+   "von": 0,
+   "bis": 1,
+   "name": "Einstieg",
+   "farbe": "ph1"
+  },
+  {
+   "von": 2,
+   "bis": 8,
+   "name": "Digitaltechnik",
+   "farbe": "ph2"
+  },
+  {
+   "von": 9,
+   "bis": 11,
+   "name": "Vom Rechenwerk zur CPU",
+   "farbe": "ph4"
+  },
+  {
+   "von": 12,
+   "bis": 15,
+   "name": "Mikrocontroller",
+   "farbe": "ph3"
+  }
+ ],
  "vorlesungen": [
   {
    "vl": 0,
+   "key": "0",
+   "label": "VL 00",
+   "typ": "VL",
    "datei": "00_Einfuehrung.md",
    "datum": "2026-10-21",
    "kurz": "Einführung",
    "leitfrage": "Wie wird aus einem Programm ein Verhalten der Hardware?",
    "freigegeben": false,
    "status": "ausgearbeitet",
+   "block": 1,
+   "pdf": null,
+   "anwendet": [],
    "abschnitte": [
     "Einführung",
     "Worum geht es in dieser Vorlesung?",
@@ -603,12 +726,18 @@ footer p { margin: 0 0 6px; }
   },
   {
    "vl": 1,
+   "key": "1",
+   "label": "VL 01",
+   "typ": "VL",
    "datei": "01_HistorischerUeberblick.md",
    "datum": "2026-10-28",
    "kurz": "Historie",
    "leitfrage": "Wie kam es vom Rechenbrett zum Mikrocontroller?",
    "freigegeben": false,
    "status": "ausgearbeitet",
+   "block": 1,
+   "pdf": null,
+   "anwendet": [],
    "abschnitte": [
     "Historischer Überblick",
     "Rückblick, Fragen und Diskussionen",
@@ -635,12 +764,18 @@ footer p { margin: 0 0 6px; }
   },
   {
    "vl": 2,
+   "key": "2",
+   "label": "VL 02",
+   "typ": "VL",
    "datei": "02_BoolscheAlgebra.md",
    "datum": "2026-10-29",
    "kurz": "Boolesche Algebra",
    "leitfrage": "Wie rechnet man mit wahr und falsch?",
    "freigegeben": false,
    "status": "ausgearbeitet",
+   "block": 2,
+   "pdf": null,
+   "anwendet": [],
    "abschnitte": [
     "Boolesche Algebra",
     "Rückblick: Hausaufgabe aus Vorlesung 01",
@@ -662,12 +797,18 @@ footer p { margin: 0 0 6px; }
   },
   {
    "vl": 3,
+   "key": "3",
+   "label": "VL 03",
+   "typ": "VL",
    "datei": "03_Minimierung.md",
    "datum": "2026-11-04",
    "kurz": "Minimierung",
    "leitfrage": "Wie wird eine Schaltfunktion möglichst klein?",
    "freigegeben": false,
    "status": "ausgearbeitet",
+   "block": 2,
+   "pdf": null,
+   "anwendet": [],
    "abschnitte": [
     "Minimierung von Boolesche Funktionen",
     "Reflexion Ihrer Fragen / Rückmeldungen",
@@ -687,12 +828,18 @@ footer p { margin: 0 0 6px; }
   },
   {
    "vl": 4,
+   "key": "4",
+   "label": "VL 04",
+   "typ": "VL",
    "datei": "04_Schaltnetze.md",
    "datum": "2026-11-11",
    "kurz": "Schaltnetze",
    "leitfrage": "Wie wird aus einer Funktion eine Schaltung – und was kann dabei schiefgehen?",
    "freigegeben": false,
    "status": "ausgearbeitet",
+   "block": 2,
+   "pdf": null,
+   "anwendet": [],
    "abschnitte": [
     "Minimierung von Boolesche Funktionen / Schaltnetze",
     "Feedbacks/Ergänzungen",
@@ -715,12 +862,18 @@ footer p { margin: 0 0 6px; }
   },
   {
    "vl": 5,
+   "key": "5",
+   "label": "VL 05",
+   "typ": "VL",
    "datei": "05_Standardschaltnetze.md",
    "datum": "2026-11-12",
    "kurz": "Standardschaltnetze",
    "leitfrage": "Welche Bausteine braucht man immer wieder?",
    "freigegeben": false,
    "status": "ausgearbeitet",
+   "block": 2,
+   "pdf": null,
+   "anwendet": [],
    "abschnitte": [
     "Standardschaltnetze",
     "Feedbacks/Ergänzungen",
@@ -738,12 +891,18 @@ footer p { margin: 0 0 6px; }
   },
   {
    "vl": 6,
+   "key": "6",
+   "label": "VL 06",
+   "typ": "VL",
    "datei": "06_FlipFlops.md",
    "datum": "2026-11-25",
    "kurz": "Flip-Flops",
    "leitfrage": "Wie merkt sich eine Schaltung etwas?",
    "freigegeben": false,
    "status": "ausgearbeitet",
+   "block": 2,
+   "pdf": null,
+   "anwendet": [],
    "abschnitte": [
     "FlipFlops",
     "Feedbacks/Ergänzungen",
@@ -768,12 +927,18 @@ footer p { margin: 0 0 6px; }
   },
   {
    "vl": 7,
+   "key": "7",
+   "label": "VL 07",
+   "typ": "VL",
    "datei": "07_Schaltwerke.md",
    "datum": "2026-11-26",
    "kurz": "Schaltwerke",
    "leitfrage": "Wie baut man eine Schaltung, die auf Abfolgen reagiert?",
    "freigegeben": false,
    "status": "ausgearbeitet",
+   "block": 2,
+   "pdf": null,
+   "anwendet": [],
    "abschnitte": [
     "Schaltwerke",
     "Motivation",
@@ -794,12 +959,18 @@ footer p { margin: 0 0 6px; }
   },
   {
    "vl": 8,
+   "key": "8",
+   "label": "VL 08",
+   "typ": "VL",
    "datei": "08_StandardSchaltwerke.md",
    "datum": "2026-12-02",
    "kurz": "Standardschaltwerke",
    "leitfrage": "Wie zählt und schiebt man Bits im Takt?",
    "freigegeben": false,
    "status": "ausgearbeitet",
+   "block": 2,
+   "pdf": null,
+   "anwendet": [],
    "abschnitte": [
     "Standardschaltwerke",
     "Feedbacks/Ergänzungen",
@@ -812,12 +983,18 @@ footer p { margin: 0 0 6px; }
   },
   {
    "vl": 9,
+   "key": "9",
+   "label": "VL 09",
+   "typ": "VL",
    "datei": "09_Rechnerarithmetik.md",
    "datum": "2026-12-09",
    "kurz": "Rechnerarithmetik",
    "leitfrage": "Wie addiert und subtrahiert ein Rechner?",
    "freigegeben": false,
    "status": "ausgearbeitet",
+   "block": 3,
+   "pdf": null,
+   "anwendet": [],
    "abschnitte": [
     "Rechnerarithmetik",
     "Zahlendarstellung",
@@ -838,12 +1015,18 @@ footer p { margin: 0 0 6px; }
   },
   {
    "vl": 10,
+   "key": "10",
+   "label": "VL 10",
+   "typ": "VL",
    "datei": "10_CPU_Basis.md",
    "datum": "2026-12-10",
    "kurz": "CPU-Grundlagen",
    "leitfrage": "Wie wird aus einem Addierer ein Prozessor?",
    "freigegeben": false,
    "status": "ausgearbeitet",
+   "block": 3,
+   "pdf": null,
+   "anwendet": [],
    "abschnitte": [
     "Von mathematischen Operationen zur CPU",
     "Ausgangspunkt",
@@ -857,12 +1040,18 @@ footer p { margin: 0 0 6px; }
   },
   {
    "vl": 11,
+   "key": "11",
+   "label": "VL 11",
+   "typ": "VL",
    "datei": "11_Modell_CPU.md",
    "datum": "2026-12-16",
    "kurz": "Modell-CPU",
    "leitfrage": "Wie arbeitet ein Prozessor ein Programm Befehl für Befehl ab?",
    "freigegeben": false,
    "status": "ausgearbeitet",
+   "block": 3,
+   "pdf": null,
+   "anwendet": [],
    "abschnitte": [
     "Modell CPU",
     "Ausgangspunkt",
@@ -892,12 +1081,18 @@ footer p { margin: 0 0 6px; }
   },
   {
    "vl": 12,
+   "key": "12",
+   "label": "VL 12",
+   "typ": "VL",
    "datei": "12_AVR_CPU.md",
    "datum": "2027-01-06",
    "kurz": "AVR-CPU",
    "leitfrage": "Was steckt im ATmega328P – und wie kommt das Programm hinein?",
    "freigegeben": false,
    "status": "ausgearbeitet",
+   "block": 4,
+   "pdf": null,
+   "anwendet": [],
    "abschnitte": [
     "Programmierung CPU",
     "Motivation",
@@ -927,12 +1122,18 @@ footer p { margin: 0 0 6px; }
   },
   {
    "vl": 13,
+   "key": "13",
+   "label": "VL 13",
+   "typ": "VL",
    "datei": "13_ADC.md",
    "datum": "2027-01-14",
    "kurz": "ADC",
    "leitfrage": "Wie kommt eine Spannung in den Rechner?",
    "freigegeben": false,
    "status": "ausgearbeitet",
+   "block": 4,
+   "pdf": null,
+   "anwendet": [],
    "abschnitte": [
     "Analog-Digital-Wandler",
     "Motivation",
@@ -952,12 +1153,18 @@ footer p { margin: 0 0 6px; }
   },
   {
    "vl": 14,
+   "key": "14",
+   "label": "VL 14",
+   "typ": "VL",
    "datei": "14_TimerUndInterrupts.md",
    "datum": "2027-01-20",
    "kurz": "Interrupts & Timer",
    "leitfrage": "Wie reagiert ein Controller rechtzeitig auf Ereignisse?",
    "freigegeben": false,
    "status": "ausgearbeitet",
+   "block": 4,
+   "pdf": null,
+   "anwendet": [],
    "abschnitte": [
     "Timer und Interrupts",
     "Interrupts",
@@ -980,12 +1187,18 @@ footer p { margin: 0 0 6px; }
   },
   {
    "vl": 15,
+   "key": "15",
+   "label": "VL 15",
+   "typ": "VL",
    "datei": "15_Aktoren.md",
    "datum": "2027-02-03",
    "kurz": "Aktoren & Ausblick",
    "leitfrage": "Wie bewegt ein Controller die Welt – und was kommt danach?",
    "freigegeben": false,
    "status": "ausgearbeitet",
+   "block": 4,
+   "pdf": null,
+   "anwendet": [],
    "abschnitte": [
     "Ansteuerung von peripheren Komponenten",
     "Motivation",
@@ -3441,7 +3654,8 @@ footer p { margin: 0 0 6px; }
     "steuerwerk",
     "mikroprogramm",
     "mikrocontroller"
-   ]
+   ],
+   "weiter": false
   },
   {
    "id": "speicher",
@@ -3454,7 +3668,8 @@ footer p { margin: 0 0 6px; }
     "register",
     "pc_ir",
     "ddrx"
-   ]
+   ],
+   "weiter": false
   },
   {
    "id": "minimieren",
@@ -3467,7 +3682,8 @@ footer p { margin: 0 0 6px; }
     "qmc",
     "zweistufig",
     "fsm_entwurf"
-   ]
+   ],
+   "weiter": false
   },
   {
    "id": "automaten",
@@ -3480,7 +3696,8 @@ footer p { margin: 0 0 6px; }
     "zaehler",
     "festverdrahtet",
     "timer"
-   ]
+   ],
+   "weiter": false
   },
   {
    "id": "analog",
@@ -3493,7 +3710,8 @@ footer p { margin: 0 0 6px; }
     "adc",
     "pwm",
     "servo"
-   ]
+   ],
+   "weiter": false
   },
   {
    "id": "code",
@@ -3508,7 +3726,8 @@ footer p { margin: 0 0 6px; }
     "toolchain",
     "bitmaske",
     "isr"
-   ]
+   ],
+   "weiter": false
   }
  ],
  "anwendungen": [
@@ -3941,30 +4160,25 @@ footer p { margin: 0 0 6px; }
 </script>
 <script>
 const DATA = JSON.parse(document.getElementById("kartendaten").textContent);
-const BASE = "https://liascript.github.io/course/?https://raw.githubusercontent.com/TUBAF-IfI-LiaScript/VL_EingebetteteSysteme/master/";
+const KURS = DATA.kurs;
+const BASE = KURS.basis;
 const LECTURES = DATA.vorlesungen.map(v => {
   const [y, m, d] = v.datum.split("-");
-  return { nr: String(v.vl).padStart(2, "0"), iso: v.datum, date: `${d}.${m}.`, short: v.kurz, frage: v.leitfrage, frei: v.freigegeben !== false, file: v.datei, status: v.status, sections: v.abschnitte };
+  return { key: v.key, label: v.label, typ: v.typ, iso: v.datum, date: `${d}.${m}.`, short: v.kurz, frage: v.leitfrage, frei: v.freigegeben !== false,
+           file: v.datei, pdf: v.pdf, status: v.status, sections: v.abschnitte, block: v.block, uses: v.anwendet || [] };
 });
-// Aktuelle Vorlesung: die letzte, deren Termin erreicht ist (vor Semesterbeginn: VL 00)
+const statusText = (l) => (KURS.status || {})[l.status] ?? (l.status === "ausgearbeitet" ? "" : "in Vorbereitung");
+// Aktueller Termin: der letzte, dessen Datum erreicht ist (vor Semesterbeginn: der erste)
 const TODAY = new Date().toISOString().slice(0, 10);
+document.getElementById("here").max = LECTURES.length - 1;
 const HERE_TODAY = Math.max(0, LECTURES.filter(l => l.iso <= TODAY).length - 1);
 const BEFORE_START = TODAY < LECTURES[0].iso;
-const PHASES = [
-  { from: 0, to: 1, name: "Einstieg", v: "--phase-einstieg" },
-  { from: 2, to: 8, name: "Digitaltechnik", v: "--phase-digital" },
-  { from: 9, to: 11, name: "Vom Rechenwerk zur CPU", v: "--phase-rechner" },
-  { from: 12, to: 15, name: "Mikrocontroller", v: "--phase-controller" }
-];
-const LINES = [
-  { id: "grundlagen", name: "Technik & Abstraktion", v: "--l-grundlagen" },
-  { id: "logik", name: "Logik & Schaltnetze", v: "--l-logik" },
-  { id: "zustand", name: "Zustand & Takt", v: "--l-zustand" },
-  { id: "rechner", name: "Rechner & Befehle", v: "--l-rechner" },
-  { id: "controller", name: "Mikrocontroller & Peripherie", v: "--l-controller" }
-];
+const PHASES = DATA.phasen.map(p => ({ from: p.von, to: p.bis, name: p.name, v: "--" + p.farbe }));
+const LINES = DATA.linien.map(l => ({ id: l.id, name: l.name, v: "--" + l.farbe }));
+// Spalten des Rasters: nur Termintypen, die im Kurs vorkommen
+const SPALTEN = (KURS.spalten || [["VL", "Vorlesung"]]).filter(([t]) => LECTURES.some(l => l.typ === t));
 const THREADV = ["--t1", "--t2", "--t3", "--t4", "--t5", "--t6"];
-const THREADS = DATA.faeden.map((f, i) => ({ id: f.id, name: f.name, text: f.beschreibung, st: f.stationen, v: THREADV[i] }));
+const THREADS = DATA.faeden.map((f, i) => ({ id: f.id, name: f.name, text: f.beschreibung, st: f.stationen, weiter: f.weiter, v: THREADV[i] }));
 const ALL = DATA.begriffe.map(b => ({ id: b.id, name: b.name, line: b.linie, vl: b.vl, sec: b.abschnitt, level: b.ebene, code: b.code, text: b.erklaerung, mis: b.fehlvorstellung }));
 const EDGES = DATA.beziehungen.map(r => [r.von, r.nach, r.text]);
 const byId = Object.fromEntries(ALL.map(n => [n.id, n]));
@@ -3989,15 +4203,17 @@ const reduce = () => matchMedia("(prefers-reduced-motion: reduce)").matches;
 const narrow = () => matchMedia("(max-width: 980px)").matches;
 // Begriffe erscheinen erst nach ihrer Vorlesung (Freigabe); „Ausblick“ zeigt die vorbereiteten blass
 const sichtbar = (n) => n && (state.ausblick || LECTURES[n.vl].frei);
-const state = { mode: narrow() ? "liste" : "metro", here: HERE_TODAY, view: "nb", detail: false, ausblick: !LECTURES.some(l => l.frei), sel: null, thread: null, hidden: new Set() };
+// Vorschau „keine“: nicht Freigegebenes steht gar nicht in den Daten, der Schalter Ausblick entfällt
+const VORSCHAU = KURS.vorschau !== "keine";
+const state = { mode: narrow() ? "liste" : (KURS.start_ansicht || "metro"), here: HERE_TODAY, view: "nb", detail: false, ausblick: VORSCHAU && !LECTURES.some(l => l.frei), sel: null, thread: null, hidden: new Set() };
 try {
-  const saved = JSON.parse(localStorage.getItem("eavd-map") || "{}");
+  const saved = JSON.parse(localStorage.getItem(KURS.speicher) || "{}");
   if (typeof saved.detail === "boolean") state.detail = saved.detail;
-  if (typeof saved.ausblick === "boolean") state.ausblick = saved.ausblick;
+  if (VORSCHAU && typeof saved.ausblick === "boolean") state.ausblick = saved.ausblick;
   if (["liste", "metro", "zeit"].includes(saved.mode)) state.mode = saved.mode;
 } catch (e) {}
 // „Sie sind hier“ wird bewusst nicht gespeichert: Es folgt immer dem Datum.
-function save() { try { localStorage.setItem("eavd-map", JSON.stringify({ detail: state.detail, mode: state.mode, ausblick: state.ausblick })); } catch (e) {} }
+function save() { try { localStorage.setItem(KURS.speicher, JSON.stringify({ detail: state.detail, mode: state.mode, ausblick: state.ausblick })); } catch (e) {} }
 
 const TOP = 108;
 let SIDE = 150, COL = 118, W = 0, H = 0, pos = {}, shown = [], laneY = {}, trackY = {};
@@ -4096,10 +4312,10 @@ function drawBackground() {
   LECTURES.forEach((l, i) => {
     const x = COL * i;
     el("line", { x1: x, y1: 24, x2: x, y2: H, stroke: css("--grid"), "stroke-width": 1 }, gBack);
-    el("text", { x: x + 8, y: 46, class: "col-head" }, gBack).textContent = "VL " + l.nr;
+    el("text", { x: x + 8, y: 46, class: "col-head" }, gBack).textContent = l.label;
     el("text", { x: x + 8, y: 62, class: "col-date" }, gBack).textContent = l.date;
     el("text", { x: x + 8, y: 78, class: "col-short" }, gBack).textContent = l.short;
-    if (l.status !== "ausgearbeitet") el("text", { x: x + 8, y: 94, class: "col-status" }, gBack).textContent = l.status === "Rumpf" ? "Rumpf" : "in Planung";
+    if (statusText(l)) el("text", { x: x + 8, y: 94, class: "col-status" }, gBack).textContent = statusText(l);
   });
   const hx = COL * state.here;
   el("rect", { x: hx, y: 24, width: COL, height: H - 24, class: "here-band" }, gBack);
@@ -4166,7 +4382,7 @@ function drawZeit() {
 
 function stationGroup(n, cls) {
   const p = pos[n.id];
-  const g = el("g", { class: cls.join(" "), tabindex: 0, role: "button", "aria-label": `${n.name}, eingeführt in VL ${LECTURES[n.vl].nr}`, style: `color:${css(lineById[n.line].v)}` }, gSt);
+  const g = el("g", { class: cls.join(" "), tabindex: 0, role: "button", "aria-label": `${n.name}, eingeführt in ${LECTURES[n.vl].label}`, style: `color:${css(lineById[n.line].v)}` }, gSt);
   el("circle", { cx: p.x, cy: p.y, r: 14, fill: "transparent", class: "ring", stroke: "none" }, g);
   g.addEventListener("click", () => select(n.id));
   g.addEventListener("keydown", (ev) => { if (ev.key === "Enter" || ev.key === " ") { ev.preventDefault(); select(n.id); } });
@@ -4208,45 +4424,65 @@ function drawMetro() {
 }
 
 
-/* ---------- Liste ---------- */
+/* ---------- Raster: Blöcke × Wochen × Termintypen ---------- */
+function chip(n) {
+  return `<button data-id="${n.id}" class="${n.level === 2 ? "detail" : ""}${n.code ? " code" : ""}" aria-pressed="${n.id === state.sel}"><i style="background:${css(lineById[n.line].v)}"></i><span class="n">${n.name}</span></button>`;
+}
+function kachel(lec, v) {
+  const items = ALL.filter(n => n.vl === v && sichtbar(n) && !state.hidden.has(n.line) && (state.detail || n.level === 1 || n.id === state.sel))
+    .sort((a, b) => a.level - b.level || a.sec - b.sec);
+  const uses = lec.uses.map(k => byId[k]).filter(n => n && sichtbar(n) && !state.hidden.has(n.line));
+  const apps = APPS.filter(a => a.vl === v && sichtbar(a));
+  const tag = v === state.here
+    ? (BEFORE_START && v === HERE_TODAY ? `<span class="tag">Start am ${lec.date}</span>` : `<span class="tag">Sie sind hier</span>`)
+    : statusText(lec) ? `<span class="tag muted">${statusText(lec)}</span>` : "";
+  const begriffe = !lec.frei && !state.ausblick ? vorbereitetHinweis(v)
+    : !ALL.some(n => n.vl === v) ? ""
+    : `<div class="chips${lec.frei ? "" : " vorschau"}">${items.map(chip).join("") || '<span class="hint">keine Begriffe in den gewählten Gebieten</span>'}</div>`;
+  return `<div class="kachel${v === state.here ? " now" : v > state.here ? " future" : ""}${lec.file ? "" : " ohne"}" data-vl="${v}">
+    <div class="vlhead"><b>${lec.label}</b><span class="s">${lec.short}</span><span class="d">${lec.date}</span>${tag}
+      ${lec.file ? `<a href="${BASE + lec.file}" target="_blank" rel="noopener">Folien ↗</a>` : ""}${lec.pdf ? `<a class="pdf" href="${lec.pdf}" target="_blank" rel="noopener" title="Lehrbuchfassung zum Ausdrucken; Quizze und Code laufen nur in den Folien">PDF ↗</a>` : ""}</div>
+    ${lec.frage ? `<div class="frage">${lec.frage}</div>` : ""}
+    ${begriffe}
+    ${uses.length ? `<div class="chips apps"><span class="apps-lbl">wendet an</span>${uses.map(chip).join("")}</div>` : ""}
+    ${apps.length ? `<div class="chips apps"><span class="apps-lbl">Anwendungen</span>${apps.map(a => `<button data-id="${a.id}" aria-pressed="${a.id === state.sel}"><span class="n">${a.name}</span><span class="fach">${a.fach}</span></button>`).join("")}</div>` : ""}
+  </div>`;
+}
 function drawListe() {
-  const ol = $("#liste");
-  ol.innerHTML = "";
-  LECTURES.forEach((lec, v) => {
-    const items = ALL.filter(n => n.vl === v && sichtbar(n) && !state.hidden.has(n.line) && (state.detail || n.level === 1 || n.id === state.sel))
-      .sort((a, b) => a.level - b.level || a.sec - b.sec);
-    const li = document.createElement("li");
-    li.className = "vl" + (v === state.here ? " now" : v > state.here ? " future" : "");
-    li.dataset.vl = v;
-    const tag = v === state.here
-      ? (BEFORE_START && v === HERE_TODAY ? `<span class="tag">Start am ${lec.date}</span>` : `<span class="tag">Sie sind hier</span>`)
-      : lec.status !== "ausgearbeitet" ? `<span class="tag muted">in Vorbereitung</span>` : "";
-    li.innerHTML = `<div class="vlhead"><b>VL ${lec.nr}</b><span class="d">${lec.date}</span><span class="s">${lec.short}</span>${tag}
-      <a href="${BASE + lec.file}" target="_blank" rel="noopener">Folien ↗</a></div>
-      ${lec.frage ? `<div class="frage">${lec.frage}</div>` : ""}
-      ${!lec.frei && !state.ausblick ? vorbereitetHinweis(v) : `<div class="chips${lec.frei ? "" : " vorschau"}">${items.map(n => `<button data-id="${n.id}" class="${n.level === 2 ? "detail" : ""}${n.code ? " code" : ""}" aria-pressed="${n.id === state.sel}"><i style="background:${css(lineById[n.line].v)}"></i><span class="n">${n.name}</span></button>`).join("") || '<span class="hint">keine Begriffe in den gewählten Gebieten</span>'}</div>`}
-      ${APPS.some(a => a.vl === v && sichtbar(a)) ? `<div class="chips apps"><span class="apps-lbl">Anwendungen</span>${APPS.filter(a => a.vl === v && sichtbar(a)).map(a => `<button data-id="${a.id}" aria-pressed="${a.id === state.sel}"><span class="n">${a.name}</span><span class="fach">${a.fach}</span></button>`).join("")}</div>` : ""}`;
-    li.querySelectorAll("button[data-ausblick]").forEach(b => b.addEventListener("click", () => { state.ausblick = true; save(); render(); }));
-    li.querySelectorAll(".chips button").forEach(b => b.addEventListener("click", () => {
-      if (state.sel === b.dataset.id && narrow()) { state.sel = null; render(); return; }
-      select(b.dataset.id);
-      if (narrow()) $("#panel").scrollIntoView({ block: "nearest", behavior: reduce() ? "auto" : "smooth" });
-    }));
-    ol.appendChild(li);
-  });
+  const box = $("#liste");
+  const mehr = SPALTEN.length > 1;
+  box.classList.toggle("spalten", mehr);
+  box.style.setProperty("--n", SPALTEN.length);
+  box.innerHTML = PHASES.map(p => {
+    const idx = LECTURES.map((_, i) => i).filter(i => i >= p.from && i <= p.to);
+    const wochen = [...new Set(idx.map(i => LECTURES[i].iso))];
+    const kopf = mehr ? `<span class="rh">${KURS.woche || "Woche ab"}</span>${SPALTEN.map(([, name]) => `<span class="rh">${name}</span>`).join("")}` : "";
+    const zeilen = wochen.map(w => {
+      const now = LECTURES[state.here].iso === w;
+      const zellen = SPALTEN.map(([t]) => `<div class="zelle">${idx.filter(i => LECTURES[i].iso === w && LECTURES[i].typ === t).map(i => kachel(LECTURES[i], i)).join("")}</div>`).join("");
+      return mehr ? `<span class="wk${now ? " now" : ""}">${LECTURES.find(l => l.iso === w).date}</span>${zellen}` : zellen;
+    }).join("");
+    return `<section class="block"><h2 style="--blk:var(${p.v})">${p.name}</h2><div class="raster">${kopf}${zeilen}</div></section>`;
+  }).join("");
+  box.querySelectorAll("button[data-ausblick]").forEach(b => b.addEventListener("click", () => { state.ausblick = true; save(); render(); }));
+  box.querySelectorAll(".chips button").forEach(b => b.addEventListener("click", () => {
+    if (state.sel === b.dataset.id && narrow()) { state.sel = null; render(); return; }
+    select(b.dataset.id);
+    if (narrow()) $("#panel").scrollIntoView({ block: "nearest", behavior: reduce() ? "auto" : "smooth" });
+  }));
 }
 function plural(n, eins, viele) { return `${n} ${n === 1 ? eins : viele}`; }
 function vorbereitetHinweis(v) {
   const n = ALL.filter(b => b.vl === v).length;
-  return n ? `<button class="vorbereitet" data-ausblick="1">${plural(n, "Begriff", "Begriffe")} vorbereitet – erscheinen nach der Vorlesung, mit Ihren Vorschlägen. <u>Ausblick einschalten</u></button>`
-           : `<div class="hint">Begriffe folgen nach der Vorlesung – mit Ihren Vorschlägen.</div>`;
+  return n ? `<button class="vorbereitet" data-ausblick="1">${plural(n, "Begriff", "Begriffe")} vorbereitet – ${KURS.freigabe}. <u>Ausblick einschalten</u></button>`
+           : `<div class="hint">${KURS.folgen}</div>`;
 }
 function placePanel() {
   const panel = $("#panel"), stage = $(".stage");
   const inline = state.mode === "liste" && narrow() && state.sel;
   if (inline) {
-    const li = $(`#liste li.vl[data-vl="${byId[state.sel].vl}"]`);
-    if (panel.parentNode !== li) li.appendChild(panel);
+    const k = $(`#liste .kachel[data-vl="${(byId[state.sel] || byApp[state.sel]).vl}"]`);
+    if (k && panel.parentNode !== k) k.appendChild(panel);
   } else if (panel.parentNode !== stage) stage.appendChild(panel);
   panel.hidden = state.mode === "liste" && narrow() && !state.sel;
 }
@@ -4258,7 +4494,7 @@ function defaultSel() {
 /* ---------- Seitenfeld ---------- */
 // Beziehung als Satz: „A <Text> B“, der andere Begriff ist anklickbar
 function relItem(r, n) {
-  const m = byId[r.id], vl = `<span class="v"> · VL ${LECTURES[m.vl].nr}</span>`;
+  const m = byId[r.id], vl = `<span class="v"> · ${LECTURES[m.vl].label}</span>`;
   return r.dir === "out"
     ? `<li><button class="satz" data-id="${r.id}"><span class="s">${n.name} ${r.t}</span> <span class="t">${m.name}</span>${vl}</button></li>`
     : `<li><button class="satz" data-id="${r.id}"><span class="t">${m.name}</span> <span class="s">${r.t} ${n.name}</span>${vl}</button></li>`;
@@ -4272,7 +4508,7 @@ function renderPanel() {
       <div class="meta"><span class="chip"><i style="background:${css(t.v)}"></i>Faden · ${t.st.length} Stationen</span></div>
       <p>${t.text}</p>
       <h3>Stationen</h3>
-      <ol class="rels steps">${t.st.map(s => `<li><button data-id="${s}"><span class="t">${byId[s].name}</span> <span class="v">VL ${LECTURES[byId[s].vl].nr}${(threadsOf[s] || []).length > 1 ? " · Umstieg" : ""}</span></button></li>`).join("")}</ol>`;
+      <ol class="rels steps">${t.st.map(s => `<li><button data-id="${s}"><span class="t">${byId[s].name}</span> <span class="v">${LECTURES[byId[s].vl].label}${(threadsOf[s] || []).length > 1 ? " · Umstieg" : ""}</span></button></li>`).join("")}</ol>`;
     p.querySelectorAll(".rels button").forEach(b => b.addEventListener("click", () => select(b.dataset.id, true)));
     return;
   }
@@ -4281,13 +4517,13 @@ function renderPanel() {
     const lec = LECTURES[app.vl];
     p.innerHTML = `
       <h2>${app.name}</h2>
-      <div class="meta"><span class="chip">Anwendung · ${app.fach}</span><span>VL ${lec.nr} · ${lec.date}</span></div>
-      <p><strong>Beispiel:</strong> ${app.data}</p>
-      <h3>Nutzt die Schlagworte</h3>
-      <ul class="rels">${app.uses.map(k => `<li><button data-id="${k}"><span class="t">${byId[k].name}</span> <span class="v">VL ${LECTURES[byId[k].vl].nr}</span></button></li>`).join("")}</ul>
+      <div class="meta"><span class="chip">Anwendung · ${app.fach}</span><span>${lec.label} · ${lec.date}</span></div>
+      <p><strong>${KURS.anwendung_daten}:</strong> ${app.data}</p>
+      <h3>Nutzt die Begriffe</h3>
+      <ul class="rels">${app.uses.map(k => `<li><button data-id="${k}"><span class="t">${byId[k].name}</span> <span class="v">${LECTURES[byId[k].vl].label}</span></button></li>`).join("")}</ul>
       <div class="goto">
         <span class="hint">Abschnitt ${app.sec}: ${lec.sections[app.sec - 1] || ""}</span>
-        <a class="golink" href="${BASE + lec.file}#${app.sec}" target="_blank" rel="noopener">Zur Vorlesung ${lec.nr}, Abschnitt ${app.sec} ↗</a>
+        <a class="golink" href="${BASE + lec.file}#${app.sec}" target="_blank" rel="noopener">Zu ${lec.label}, Abschnitt ${app.sec} ↗</a>
       </div>`;
     p.querySelectorAll(".rels button").forEach(b => b.addEventListener("click", () => select(b.dataset.id, true)));
     return;
@@ -4295,7 +4531,7 @@ function renderPanel() {
   const n = byId[state.sel];
   if (!n) { p.innerHTML = '<p class="hint">Wählen Sie eine Station oder einen Faden.</p>'; return; }
   const l = lineById[n.line], lec = LECTURES[n.vl];
-  const status = n.vl < state.here ? "bereits behandelt" : n.vl === state.here ? (BEFORE_START && state.here === HERE_TODAY ? "erste Vorlesung" : "diese Woche") : "kommt noch";
+  const status = n.vl < state.here ? "bereits behandelt" : n.vl === state.here ? (BEFORE_START && state.here === HERE_TODAY ? "erster Termin" : "diese Woche") : "kommt noch";
   const rels = nbs[n.id].filter(r => sichtbar(byId[r.id])).sort((a, b) => byId[a.id].vl - byId[b.id].vl);
   const back = rels.filter(r => byId[r.id].vl < n.vl), same = rels.filter(r => byId[r.id].vl === n.vl), fwd = rels.filter(r => byId[r.id].vl > n.vl);
   const ths = threadsOf[n.id] || [];
@@ -4303,25 +4539,25 @@ function renderPanel() {
     const t = threadById[tid], st = t.st.filter(x => sichtbar(byId[x])), k = st.indexOf(n.id), pv = st[k - 1], nx = st[k + 1];
     return `<li><span class="tname"><i style="background:${css(t.v)}"></i>${t.name}</span>
       <span class="hop">${pv ? `<button data-id="${pv}">← ${byId[pv].name}</button>` : `<span class="v">Anfang</span>`}
-      ${nx ? `<button data-id="${nx}">${byId[nx].name} →</button>` : `<span class="v">${t.st.indexOf(n.id) < t.st.length - 1 ? "Fortsetzung folgt" : "Endstation"}</span>`}</span></li>`;
+      ${nx ? `<button data-id="${nx}">${byId[nx].name} →</button>` : `<span class="v">${t.weiter || t.st.indexOf(n.id) < t.st.length - 1 ? "Fortsetzung folgt" : "Endstation"}</span>`}</span></li>`;
   }).join("")}</ul>` : "";
   p.innerHTML = `
     <h2 class="${n.code ? "code" : ""}">${n.name}</h2>
     <div class="meta">
       <span class="chip"><i style="background:${css(l.v)}"></i>${l.name}</span>
       <span class="chip" title="${n.level === 1 ? "Sollten Sie in einem Satz erklären können" : "Ergänzt einen Kernbegriff"}">${n.level === 1 ? "Kernbegriff" : "Detailbegriff"}</span>
-      <span>VL ${lec.nr} · ${lec.date} · ${status}</span>
+      <span>${lec.label} · ${lec.date} · ${status}</span>
     </div>
     <p>${n.text}</p>
     ${n.mis ? `<div class="misc"><strong>Typische Fehlvorstellung</strong>${n.mis}</div>` : ""}
     ${threadHtml}
-    ${back.length ? `<h3>Aus früheren Vorlesungen</h3><ul class="rels">${back.map(r => relItem(r, n)).join("")}</ul>` : ""}
-    ${same.length ? `<h3>In derselben Vorlesung</h3><ul class="rels">${same.map(r => relItem(r, n)).join("")}</ul>` : ""}
-    ${fwd.length ? `<h3>Später im Semester</h3><ul class="rels">${fwd.map(r => relItem(r, n)).join("")}</ul>` : ""}
-    ${(appsOf[n.id] || []).filter(sichtbar).length ? `<h3>Kommt vor in</h3><ul class="rels">${appsOf[n.id].filter(sichtbar).map(a => `<li><button data-id="${a.id}"><span class="t">${a.name}</span> <span class="v">${a.fach} · VL ${LECTURES[a.vl].nr}</span></button></li>`).join("")}</ul>` : ""}
+    ${back.length ? `<h3>Aus früheren ${KURS.einheiten_dat}</h3><ul class="rels">${back.map(r => relItem(r, n)).join("")}</ul>` : ""}
+    ${same.length ? `<h3>${KURS.gleich}</h3><ul class="rels">${same.map(r => relItem(r, n)).join("")}</ul>` : ""}
+    ${fwd.length ? `<h3>Später im Kurs</h3><ul class="rels">${fwd.map(r => relItem(r, n)).join("")}</ul>` : ""}
+    ${(appsOf[n.id] || []).filter(sichtbar).length ? `<h3>Kommt vor in</h3><ul class="rels">${appsOf[n.id].filter(sichtbar).map(a => `<li><button data-id="${a.id}"><span class="t">${a.name}</span> <span class="v">${a.fach} · ${LECTURES[a.vl].label}</span></button></li>`).join("")}</ul>` : ""}
     <div class="goto">
-      <span class="hint">Eingeführt in Abschnitt ${n.sec}: ${lec.sections[n.sec - 1] || ""}${lec.status !== "ausgearbeitet" ? " — Vorlesung in Vorbereitung" : ""}</span>
-      <a class="golink" href="${BASE + lec.file}#${n.sec}" target="_blank" rel="noopener">Zur Vorlesung ${lec.nr}, Abschnitt ${n.sec} ↗</a>
+      ${lec.file && n.sec ? `<span class="hint">Eingeführt in Abschnitt ${n.sec}: ${lec.sections[n.sec - 1] || ""}${statusText(lec) ? " — " + statusText(lec) : ""}</span>
+      <a class="golink" href="${BASE + lec.file}#${n.sec}" target="_blank" rel="noopener">Zu ${lec.label}, Abschnitt ${n.sec} ↗</a>` : `<span class="hint">Material zu ${lec.label} folgt.</span>`}
     </div>`;
   p.querySelectorAll(".rels button, .hop button").forEach(b => b.addEventListener("click", () => select(b.dataset.id, true)));
 }
@@ -4344,8 +4580,8 @@ function select(id, scroll) {
 }
 
 const LEGEND_HINT = {
-  metro: "Faden anklicken, um ihn hervorzuheben (spätere Vorlesungen: seitlich scrollen):",
-  zeit: "Themengebiete ein- und ausblenden (spätere Vorlesungen: seitlich scrollen):",
+  metro: `Faden anklicken, um ihn hervorzuheben (spätere ${KURS.einheiten}: seitlich scrollen):`,
+  zeit: `Themengebiete ein- und ausblenden (spätere ${KURS.einheiten}: seitlich scrollen):`,
   liste: "Themengebiete ein- und ausblenden:",
 };
 function fillLegend(mode) {
@@ -4378,9 +4614,10 @@ function renderLegend() {
 
 function render() {
   const lec = LECTURES[state.here];
-  $("#hereVal").textContent = `VL ${lec.nr} · ${lec.date}`;
+  $("#hereVal").textContent = `${lec.label} · ${lec.date}`;
   $("#here").value = state.here;
   $("#today").hidden = state.here === HERE_TODAY;
+  $("#ctlAusblick").hidden = !VORSCHAU;
   const pressed = [["mListe", state.mode === "liste"], ["mMetro", state.mode === "metro"], ["mZeit", state.mode === "zeit"], ["vNb", state.view === "nb"], ["vAll", state.view === "all"], ["eKern", !state.detail], ["eAlle", state.detail], ["ausAus", !state.ausblick], ["ausAn", state.ausblick]];
   for (const [id, on] of pressed) $("#" + id).setAttribute("aria-pressed", String(on));
   // Bedienelemente bleiben in allen Ansichten stehen (sonst springt der Kopf); was nicht gilt, wird ausgegraut
@@ -4389,7 +4626,7 @@ function render() {
     c.querySelectorAll("button").forEach(b => { b.disabled = off; });
     if (off) c.title = hint; else c.removeAttribute("title");
   };
-  aus("#ctlLevel", state.mode === "metro", "Wirkt in den Ansichten Vorlesungen und Zeitleiste");
+  aus("#ctlLevel", state.mode === "metro", `Wirkt in den Ansichten ${$("#mListe").textContent} und Zeitleiste`);
   aus("#ctlEdges", state.mode !== "zeit", "Wirkt nur in der Zeitleiste");
   $("#mapwrap").hidden = state.mode === "liste";
   $("#liste").hidden = state.mode !== "liste";
@@ -4398,7 +4635,7 @@ function render() {
   const nFrei = LECTURES.filter(l => l.frei).length, nFreiB = ALL.filter(n => LECTURES[n.vl].frei).length;
   $("#count").textContent = state.mode === "metro"
     ? `${plural(nVisSt, "Begriff", "Begriffe")} auf ${plural(THREADS.length, "Faden", "Fäden")} ${state.ausblick ? "(mit Ausblick)" : "freigeschaltet"}`
-    : `${plural(nFreiB, "Begriff", "Begriffe")} aus ${plural(nFrei, "Vorlesung", "Vorlesungen")}` + (ALL.length > nFreiB ? ` · ${ALL.length - nFreiB} weitere vorbereitet` : "");
+    : `${plural(nFreiB, "Begriff", "Begriffe")} aus ${plural(nFrei, KURS.einheit, KURS.einheiten_dat)}` + (ALL.length > nFreiB ? ` · ${ALL.length - nFreiB} weitere vorbereitet` : "");
   if (state.mode === "liste") drawListe();
   else {
     if (state.mode === "metro") layoutMetro(); else layoutZeit();
@@ -4416,7 +4653,7 @@ $("#here").addEventListener("input", (e) => {
   if (hx < box.scrollLeft || hx + COL > box.scrollLeft + box.clientWidth) box.scrollLeft = hx - box.clientWidth / 2;
 });
 function scrollToHere() {
-  if (state.mode === "liste") { const now = $(`#liste li.vl[data-vl="${state.here}"]`); if (now && state.here > 0) now.scrollIntoView({ block: "start" }); return; }
+  if (state.mode === "liste") { const now = $(`#liste .kachel[data-vl="${state.here}"]`); if (now && state.here > 0) now.scrollIntoView({ block: "center" }); return; }
   const box = $("#mapbox"), hx = COL * state.here;
   box.scrollLeft = hx + COL > box.clientWidth ? hx - box.clientWidth / 2 : 0;
 }
@@ -4434,15 +4671,31 @@ matchMedia("(prefers-color-scheme: dark)").addEventListener("change", render);
 new MutationObserver(render).observe(document.documentElement, { attributes: true, attributeFilter: ["data-theme"] });
 
 try {
-  const z = localStorage.getItem("eavd-map-intro");
+  const z = localStorage.getItem(KURS.speicher + "-intro");
   $("#intro").open = z ? z === "auf" : !narrow();
 } catch (e) { $("#intro").open = !narrow(); }
-$("#intro").addEventListener("toggle", () => { try { localStorage.setItem("eavd-map-intro", $("#intro").open ? "auf" : "zu"); } catch (e) {} });
+$("#intro").addEventListener("toggle", () => { try { localStorage.setItem(KURS.speicher + "-intro", $("#intro").open ? "auf" : "zu"); } catch (e) {} });
 if (!(state.mode === "liste" && narrow())) state.sel = defaultSel();
+// Direktlink aus den Materialien: #termin=<key> setzt „Sie sind hier“, #begriff=<id> wählt einen Begriff
+const LINK = new URLSearchParams(location.hash.slice(1));
+const KEYS = LECTURES.map(l => String(l.key));
+if (KEYS.includes(LINK.get("termin"))) state.here = KEYS.indexOf(LINK.get("termin"));
+const ANSICHT = { termine: "liste", vorlesungen: "liste", liste: "liste", metro: "metro", metrokarte: "metro", zeit: "zeit", zeitleiste: "zeit" }[LINK.get("ansicht")];
+if (ANSICHT) state.mode = ANSICHT;
+const ziel = byId[LINK.get("begriff")] || byApp[LINK.get("begriff")];
+if (ziel) {
+  state.sel = ziel.id;
+  if (!sichtbar(ziel)) state.ausblick = true;        // noch nicht freigegeben: blass zeigen statt ins Leere führen
+  if (ziel.level > 1) state.detail = true;
+  if (byApp[ziel.id]) state.mode = "liste";
+  else if (state.mode === "metro" && !threadsOf[ziel.id]) state.mode = "zeit";
+}
 let lastW = innerWidth;  // nur auf Breitenänderung reagieren (mobile Adressleiste ändert die Höhe)
 addEventListener("resize", () => { if (innerWidth === lastW) return; lastW = innerWidth; clearTimeout(window._rs); window._rs = setTimeout(render, 150); });
 render();
 scrollToHere();
+if (ziel && state.mode !== "liste" && pos[ziel.id]) { const box = $("#mapbox"); box.scrollLeft = Math.max(0, pos[ziel.id].x - box.clientWidth / 2); }
+else if (ziel && state.mode === "liste") { const k = $(`#liste .kachel[data-vl="${ziel.vl}"]`); if (k) k.scrollIntoView({ block: "center" }); }
 </script>
 </body>
 </html>

@@ -1,35 +1,50 @@
-"""Kurslandkarte: Daten und Seite erzeugen.
+"""Kurslandkarte Digitale Systeme / Eingebettete Systeme: Kursdaten.
 
-Abschnitte (Foliennummern) werden automatisch aus den Vorlesungen gelesen,
-Begriffe, Beziehungen, Anwendungen und didaktische Fäden sind unten kuratiert.
+Begriffe, Beziehungen, Anwendungen und didaktische Fäden sind hier kuratiert;
+Prüfung, Karte und Startseite erzeugt der gemeinsame Kern invivis Kurslandkarte
+(kurslandkarte/invivis/, nicht hier ändern). Abschnitte (Foliennummern) liest
+der Kern automatisch aus den Vorlesungen.
 
 Aufruf aus dem Repository-Wurzelverzeichnis:
 
     python3 kurslandkarte/erzeuge.py
 
-Schreibt kurslandkarte/kurslandkarte.json und kurslandkarte/index.html
-(GitHub Pages veröffentlicht das Wurzelverzeichnis von master).
+Schreibt kurslandkarte/kurslandkarte.json, kurslandkarte/index.html und die
+Startseite index.html (GitHub Pages veröffentlicht das Wurzelverzeichnis von master).
 """
-import datetime, json, re, glob, os
+import glob, os, sys
 
 HIER = os.path.dirname(os.path.abspath(__file__))
 REPO = os.path.dirname(HIER)
-ZIEL = HIER
-STAND = datetime.date.today().strftime("%d.%m.%Y")
+sys.path.insert(0, os.path.join(HIER, "invivis"))
+import kern
+
 ANZAHL = 16
-
-# ---- Abschnitte automatisch (LiaScript-Foliennummer = Position der Überschrift)
-sections = {}
-for f in sorted(glob.glob(os.path.join(REPO, "[01][0-9]_*.md"))):
-    vl = int(os.path.basename(f)[:2])
-    s = open(f, encoding="utf-8").read()
-    s = s[s.find("-->") + 3:]
-    s = re.sub(r"^(`{3,4}).*?\n.*?\n\1", "", s, flags=re.S | re.M)
-    heads = [m.group(2).strip().replace("`", "") for m in re.finditer(r"^(#{1,6}) +(.+)$", s, re.M)]
-    sections[vl] = {"datei": os.path.basename(f), "abschnitte": heads}
-assert sorted(sections) == list(range(ANZAHL)), sorted(sections)
-
+DATEIEN = {int(os.path.basename(f)[:2]): os.path.basename(f) for f in glob.glob(os.path.join(REPO, "[01][0-9]_*.md"))}
+assert sorted(DATEIEN) == list(range(ANZAHL)), sorted(DATEIEN)
 STATUS = {v: "ausgearbeitet" for v in range(ANZAHL)}
+
+KURS = {
+    "titel": "Digitale Systeme / Eingebettete Systeme",
+    "name": "TU Bergakademie Freiberg · Wintersemester 2026/27",
+    "hochschule": "TU Bergakademie Freiberg",
+    "beschreibung": "Von der Booleschen Algebra bis zur Programmierung eines Mikrocontrollers.",
+    "basis": "https://liascript.github.io/course/?https://raw.githubusercontent.com/TUBAF-IfI-LiaScript/VL_EingebetteteSysteme/master/",
+    "pages": "https://tubaf-ifi-liascript.github.io/VL_EingebetteteSysteme/",
+    "repo": "https://github.com/TUBAF-IfI-LiaScript/VL_EingebetteteSysteme",
+    "speicher": "eavd-map",
+    "autoren": "Sebastian Zug & Claude Code (Opus 5.5)",
+    "feedback": 'Begriff fehlt oder ist unklar? Sagen Sie es in der Vorlesung oder im OPAL-Forum. <a href="https://github.com/TUBAF-IfI-LiaScript/VL_EingebetteteSysteme/issues/new?title=Kurslandkarte%3A%20&amp;labels=kurslandkarte" target="_blank" rel="noopener">GitHub ↗</a>',
+    "lernziele": [
+        "Schaltfunktionen aus einer Problembeschreibung aufstellen, in Normalform bringen und mit KV-Diagramm bzw. Quine-McCluskey minimieren,",
+        "Schaltnetze und Schaltwerke (Mealy/Moore) für eine gegebene Aufgabe, etwa einen Sequenzdetektor oder Zähler, entwerfen und im Simulator prüfen,",
+        "Zahlendarstellungen (Zweierkomplement) und Addierwerke erklären und deren Grenzen (Überlauf, Laufzeit) begründen,",
+        "den Befehlszyklus einer Modell-CPU (Fetch/Decode/Execute, Register, Steuerwerk) an einem kleinen Programm nachvollziehen,",
+        "ein AVR-Programm vom C-Code bis zum disassemblierten Maschinencode lesen und Peripherie (ADC, Timer, Interrupts, PWM) über Register konfigurieren.",
+    ],
+    "kontakt": 'Prof. Dr.-Ing. Sebastian Zug<br>Lehrstuhl für Softwaretechnologie und Robotik, TU Bergakademie Freiberg<br><a href="mailto:sebastian.zug@informatik.tu-freiberg.de">sebastian.zug@informatik.tu-freiberg.de</a>',
+    "lizenz": "",
+}
 
 # ---- Erster Termin jeder Vorlesung (Agenda in journal.md) und Kurztitel
 TERMINE = [
@@ -409,52 +424,22 @@ F = [
     ('code', 'Vom Code zur Hex-Datei', 'Das Versprechen aus VL 00: jede Schicht zwischen C-Programm und Maschinenbefehl verstehen.', ['abstraktionsebenen', 'hexdatei', 'befehlscodierung', 'befehlssatz', 'assembler', 'toolchain', 'bitmaske', 'isr']),
 ]
 
-ids = {b[0] for b in B}
-assert len(ids) == len(B), "doppelte id"
-vl_of = {x[0]: x[3] for x in B}
-for fid, _, _, st in F:
-    for x in st:
-        assert x in ids, (fid, x)
-    for u, v in zip(st, st[1:]):
-        assert vl_of[u] <= vl_of[v], ("Faden nicht chronologisch", fid, u, v)
-for a, b, _ in R:
-    assert a in ids and b in ids, (a, b)
-assert len({x[0] for x in A}) == len(A), "doppelte Anwendungs-id"
-for x in A:
-    assert x[0] not in ids, ("Anwendung und Begriff mit gleicher id", x[0])
-    for k in x[6]:
-        assert k in ids, ("Anwendung nutzt unbekannten Begriff", x[0], k)
+# ---- Blöcke (Hintergrund der Karte, Überschriften im Raster) und Themengebiete
+BLOECKE = {1: ("Einstieg", "ph1"), 2: ("Digitaltechnik", "ph2"), 3: ("Vom Rechenwerk zur CPU", "ph4"), 4: ("Mikrocontroller", "ph3")}
+BLOCK_VON = {0: 1, 2: 2, 9: 3, 12: 4}   # erste Vorlesung eines Blocks
+LINIEN = [
+    ("grundlagen", "Technik & Abstraktion", "c5"), ("logik", "Logik & Schaltnetze", "c1"),
+    ("zustand", "Zustand & Takt", "c2"), ("rechner", "Rechner & Befehle", "c3"),
+    ("controller", "Mikrocontroller & Peripherie", "c4"),
+]
 
-def abschnitt_nr(vl, titel):
-    heads = sections[vl]["abschnitte"]
-    if titel not in heads:
-        raise SystemExit(f"Abschnitt nicht gefunden: VL {vl:02d} »{titel}« — vorhanden: {heads}")
-    return heads.index(titel) + 1
+T, blk = [], 1
+for v in range(ANZAHL):
+    blk = BLOCK_VON.get(v, blk)
+    T.append((v, f"VL {v:02d}", TERMINE[v][0], TERMINE[v][1], DATEIEN[v], STATUS[v], blk))
 
-B = [(b[0], b[1], b[2], b[3], abschnitt_nr(b[3], b[4])) + tuple(b[5:]) for b in B]
-
-out = {
-    "stand": STAND,
-    "vorlesungen": [
-        {"vl": v, "datei": sections[v]["datei"], "datum": TERMINE[v][0], "kurz": TERMINE[v][1],
-         "leitfrage": LEITFRAGE[v], "freigegeben": v in FREIGEGEBEN,
-         "status": STATUS[v], "abschnitte": sections[v]["abschnitte"]}
-        for v in range(ANZAHL)
-    ],
-    "begriffe": [
-        {"id": b[0], "name": b[1], "linie": b[2], "vl": b[3], "abschnitt": b[4], "ebene": b[5],
-         "code": bool(b[6]), "erklaerung": b[7], "fehlvorstellung": b[8]}
-        for b in B
-    ],
-    "beziehungen": [{"von": a, "nach": b, "text": t} for a, b, t in R],
-    "faeden": [{"id": f, "name": n, "beschreibung": d, "stationen": st} for f, n, d, st in F],
-    "anwendungen": [{"id": i, "titel": t, "fach": fa, "vl": v, "abschnitt": abschnitt_nr(v, ab), "datensatz": ds,
-                     "schlagworte": sw, "herkunft": h} for i, t, fa, v, ab, ds, sw, h in A],
-}
-text = json.dumps(out, ensure_ascii=False, indent=1)
-open(os.path.join(ZIEL, "kurslandkarte.json"), "w", encoding="utf-8").write(text + "\n")
-seite = open(os.path.join(HIER, "vorlage.html"), encoding="utf-8").read()
-seite = seite.replace("%%DATEN%%", text.replace("</", "<\\/")).replace("%%STAND%%", STAND)
-open(os.path.join(ZIEL, "index.html"), "w", encoding="utf-8").write(seite)
-e1 = sum(1 for b in B if b[5] == 1)
-print(f"{len(B)} Begriffe ({e1} Kern, {len(B)-e1} Detail), {len(R)} Beziehungen, {len(A)} Anwendungen, {len(F)} Fäden")
+kern.erzeuge(
+    repo=REPO, kurs=KURS, termine=T, bloecke=BLOECKE, linien=LINIEN,
+    begriffe=B, beziehungen=R, faeden=F, anwendungen=A, leitfragen=LEITFRAGE, freigegeben=FREIGEGEBEN,
+    karte="kurslandkarte", startseite="index.html",
+)

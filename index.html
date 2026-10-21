@@ -3,18 +3,36 @@
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="description" content="Von der Booleschen Algebra bis zur Programmierung eines Mikrocontrollers.">
+<meta name="author" content="Sebastian Zug &amp; Claude Code (Opus 5.5)">
+<meta name="generator" content="invivis-kurslandkarte 0.1.0">
 <title>Digitale Systeme / Eingebettete Systeme</title>
 <style>
-:root { --bg: #f3f5f2; --ink: #1d2a2c; --muted: #5d6c6f; --accent: #1f7a8c; color-scheme: light; }
-@media (prefers-color-scheme: dark) { :root { --bg: #141a1b; --ink: #e4ebe9; --muted: #9aa9ab; --accent: #4fb3c6; color-scheme: dark; } }
+:root { --bg: #f3f5f2; --surface: #ffffff; --ink: #1d2a2c; --muted: #5d6c6f; --faint: #c9d1cf; --accent: #1f7a8c; --here: #c2462e; color-scheme: light; }
+@media (prefers-color-scheme: dark) {
+  :root { --bg: #141a1b; --surface: #1c2426; --ink: #e4ebe9; --muted: #9aa9ab; --faint: #3a4648; --accent: #4fb3c6; --here: #ee7a60; color-scheme: dark; }
+}
+* { box-sizing: border-box; }
 body { margin: 0; background: var(--bg); color: var(--ink); font-family: system-ui, "Segoe UI", sans-serif; line-height: 1.55; }
-main { max-width: 62ch; margin: 0 auto; padding: 48px 16px; display: grid; gap: 14px; }
-h1 { margin: 0; font-size: 1.7rem; line-height: 1.2; }
-h2 { margin: 18px 0 0; font-size: 1.15rem; }
+main { max-width: 68ch; margin: 0 auto; padding: 40px 16px 48px; display: grid; gap: 14px; }
+h1 { margin: 0; font-size: 1.8rem; line-height: 1.2; }
+h2 { margin: 20px 0 0; font-size: 1.15rem; }
 p { margin: 0; }
-.muted { color: var(--muted); }
 a { color: var(--accent); }
-ul, ol { margin: 0; padding-left: 1.2em; display: grid; gap: 6px; }
+.muted { color: var(--muted); }
+ol, ul { margin: 0; padding-left: 1.3em; display: grid; gap: 6px; }
+.karte { display: inline-block; width: fit-content; padding: 10px 16px; border: 1px solid var(--accent); border-radius: 8px; text-decoration: none; font-weight: 600; }
+.karte:hover, .karte:focus-visible { background: var(--surface); }
+.woche { background: var(--surface); border: 1px solid var(--faint); border-left: 4px solid var(--here); border-radius: 6px; padding: 12px 16px; display: grid; gap: 6px; }
+.woche h2 { margin: 0; font-size: 1rem; color: var(--here); }
+.woche ul { list-style: none; padding: 0; }
+.woche .frage { color: var(--muted); font-size: .92rem; }
+.woche .naechst { color: var(--muted); font-size: .92rem; }
+dl { margin: 0; display: grid; grid-template-columns: max-content 1fr; gap: 6px 16px; }
+dt { color: var(--muted); }
+dd { margin: 0; }
+@media (max-width: 560px) { dl { grid-template-columns: 1fr; } dd { margin-bottom: 6px; } }
+footer { margin-top: 24px; font-size: .85rem; color: var(--muted); display: grid; gap: 4px; }
 </style>
 </head>
 <body>
@@ -22,25 +40,48 @@ ul, ol { margin: 0; padding-left: 1.2em; display: grid; gap: 6px; }
   <p class="muted">TU Bergakademie Freiberg · Wintersemester 2026/27</p>
   <h1>Digitale Systeme / Eingebettete Systeme</h1>
   <p>Von der Booleschen Algebra bis zur Programmierung eines Mikrocontrollers.</p>
-  <ul>
-    <li><a href="kurslandkarte/">Kurslandkarte</a> — Begriffe, Zusammenhänge und rote Fäden aller Vorlesungen, mit Sprung in die jeweilige Vorlesung</li>
-    <li><a href="https://liascript.github.io/course/?https://raw.githubusercontent.com/TUBAF-IfI-LiaScript/VL_EingebetteteSysteme/master/00_Einfuehrung.md">Vorlesungsmaterialien</a> (LiaScript, Einstieg mit Vorlesung 00)</li>
-  </ul>
+
+  <section class="woche" id="woche" hidden aria-live="polite"></section>
+
+  <a class="karte" href="kurslandkarte/">🗺️ Kurslandkarte: alle Termine, Begriffe und Zusammenhänge</a>
 
   <h2>Lernziele</h2>
-  <p>Nach dem Semester können Sie</p>
-  <ol>
-    <li>Schaltfunktionen aus einer Problembeschreibung aufstellen, in Normalform bringen und mit KV-Diagramm bzw. Quine-McCluskey minimieren,</li>
-    <li>Schaltnetze und Schaltwerke (Mealy/Moore) für eine gegebene Aufgabe, etwa einen Sequenzdetektor oder Zähler, entwerfen und im Simulator prüfen,</li>
-    <li>Zahlendarstellungen (Zweierkomplement) und Addierwerke erklären und deren Grenzen (Überlauf, Laufzeit) begründen,</li>
-    <li>den Befehlszyklus einer Modell-CPU (Fetch/Decode/Execute, Register, Steuerwerk) an einem kleinen Programm nachvollziehen,</li>
-    <li>ein AVR-Programm vom C-Code bis zum disassemblierten Maschinencode lesen und Peripherie (ADC, Timer, Interrupts, PWM) über Register konfigurieren.</li>
-  </ol>
+<p>Nach dem Kurs können Sie</p>
+<ol><li>Schaltfunktionen aus einer Problembeschreibung aufstellen, in Normalform bringen und mit KV-Diagramm bzw. Quine-McCluskey minimieren,</li><li>Schaltnetze und Schaltwerke (Mealy/Moore) für eine gegebene Aufgabe, etwa einen Sequenzdetektor oder Zähler, entwerfen und im Simulator prüfen,</li><li>Zahlendarstellungen (Zweierkomplement) und Addierwerke erklären und deren Grenzen (Überlauf, Laufzeit) begründen,</li><li>den Befehlszyklus einer Modell-CPU (Fetch/Decode/Execute, Register, Steuerwerk) an einem kleinen Programm nachvollziehen,</li><li>ein AVR-Programm vom C-Code bis zum disassemblierten Maschinencode lesen und Peripherie (ADC, Timer, Interrupts, PWM) über Register konfigurieren.</li></ol>
+
+  
 
   <h2>Kontakt</h2>
-  <p>Prof. Dr.-Ing. Sebastian Zug<br>
-     Lehrstuhl für Softwaretechnologie und Robotik, TU Bergakademie Freiberg<br>
-     <a href="mailto:sebastian.zug@informatik.tu-freiberg.de">sebastian.zug@informatik.tu-freiberg.de</a></p>
+<p>Prof. Dr.-Ing. Sebastian Zug<br>Lehrstuhl für Softwaretechnologie und Robotik, TU Bergakademie Freiberg<br><a href="mailto:sebastian.zug@informatik.tu-freiberg.de">sebastian.zug@informatik.tu-freiberg.de</a></p>
+
+  <footer>
+    <span></span>
+    <span>Quelle: <a href="https://github.com/TUBAF-IfI-LiaScript/VL_EingebetteteSysteme">https://github.com/TUBAF-IfI-LiaScript/VL_EingebetteteSysteme</a> · Stand 21.10.2026</span>
+    <span>Autoren: Sebastian Zug &amp; Claude Code (Opus 5.5) · erzeugt mit invivis Kurslandkarte 0.1.0</span>
+  </footer>
 </main>
+<script id="termine" type="application/json">[{"key": "0", "label": "VL 00", "kurz": "Einführung", "datum": "2026-10-21", "url": "https://liascript.github.io/course/?https://raw.githubusercontent.com/TUBAF-IfI-LiaScript/VL_EingebetteteSysteme/master/00_Einfuehrung.md", "frage": "Wie wird aus einem Programm ein Verhalten der Hardware?"}, {"key": "1", "label": "VL 01", "kurz": "Historie", "datum": "2026-10-28", "url": "https://liascript.github.io/course/?https://raw.githubusercontent.com/TUBAF-IfI-LiaScript/VL_EingebetteteSysteme/master/01_HistorischerUeberblick.md", "frage": "Wie kam es vom Rechenbrett zum Mikrocontroller?"}, {"key": "2", "label": "VL 02", "kurz": "Boolesche Algebra", "datum": "2026-10-29", "url": "https://liascript.github.io/course/?https://raw.githubusercontent.com/TUBAF-IfI-LiaScript/VL_EingebetteteSysteme/master/02_BoolscheAlgebra.md", "frage": "Wie rechnet man mit wahr und falsch?"}, {"key": "3", "label": "VL 03", "kurz": "Minimierung", "datum": "2026-11-04", "url": "https://liascript.github.io/course/?https://raw.githubusercontent.com/TUBAF-IfI-LiaScript/VL_EingebetteteSysteme/master/03_Minimierung.md", "frage": "Wie wird eine Schaltfunktion möglichst klein?"}, {"key": "4", "label": "VL 04", "kurz": "Schaltnetze", "datum": "2026-11-11", "url": "https://liascript.github.io/course/?https://raw.githubusercontent.com/TUBAF-IfI-LiaScript/VL_EingebetteteSysteme/master/04_Schaltnetze.md", "frage": "Wie wird aus einer Funktion eine Schaltung – und was kann dabei schiefgehen?"}, {"key": "5", "label": "VL 05", "kurz": "Standardschaltnetze", "datum": "2026-11-12", "url": "https://liascript.github.io/course/?https://raw.githubusercontent.com/TUBAF-IfI-LiaScript/VL_EingebetteteSysteme/master/05_Standardschaltnetze.md", "frage": "Welche Bausteine braucht man immer wieder?"}, {"key": "6", "label": "VL 06", "kurz": "Flip-Flops", "datum": "2026-11-25", "url": "https://liascript.github.io/course/?https://raw.githubusercontent.com/TUBAF-IfI-LiaScript/VL_EingebetteteSysteme/master/06_FlipFlops.md", "frage": "Wie merkt sich eine Schaltung etwas?"}, {"key": "7", "label": "VL 07", "kurz": "Schaltwerke", "datum": "2026-11-26", "url": "https://liascript.github.io/course/?https://raw.githubusercontent.com/TUBAF-IfI-LiaScript/VL_EingebetteteSysteme/master/07_Schaltwerke.md", "frage": "Wie baut man eine Schaltung, die auf Abfolgen reagiert?"}, {"key": "8", "label": "VL 08", "kurz": "Standardschaltwerke", "datum": "2026-12-02", "url": "https://liascript.github.io/course/?https://raw.githubusercontent.com/TUBAF-IfI-LiaScript/VL_EingebetteteSysteme/master/08_StandardSchaltwerke.md", "frage": "Wie zählt und schiebt man Bits im Takt?"}, {"key": "9", "label": "VL 09", "kurz": "Rechnerarithmetik", "datum": "2026-12-09", "url": "https://liascript.github.io/course/?https://raw.githubusercontent.com/TUBAF-IfI-LiaScript/VL_EingebetteteSysteme/master/09_Rechnerarithmetik.md", "frage": "Wie addiert und subtrahiert ein Rechner?"}, {"key": "10", "label": "VL 10", "kurz": "CPU-Grundlagen", "datum": "2026-12-10", "url": "https://liascript.github.io/course/?https://raw.githubusercontent.com/TUBAF-IfI-LiaScript/VL_EingebetteteSysteme/master/10_CPU_Basis.md", "frage": "Wie wird aus einem Addierer ein Prozessor?"}, {"key": "11", "label": "VL 11", "kurz": "Modell-CPU", "datum": "2026-12-16", "url": "https://liascript.github.io/course/?https://raw.githubusercontent.com/TUBAF-IfI-LiaScript/VL_EingebetteteSysteme/master/11_Modell_CPU.md", "frage": "Wie arbeitet ein Prozessor ein Programm Befehl für Befehl ab?"}, {"key": "12", "label": "VL 12", "kurz": "AVR-CPU", "datum": "2027-01-06", "url": "https://liascript.github.io/course/?https://raw.githubusercontent.com/TUBAF-IfI-LiaScript/VL_EingebetteteSysteme/master/12_AVR_CPU.md", "frage": "Was steckt im ATmega328P – und wie kommt das Programm hinein?"}, {"key": "13", "label": "VL 13", "kurz": "ADC", "datum": "2027-01-14", "url": "https://liascript.github.io/course/?https://raw.githubusercontent.com/TUBAF-IfI-LiaScript/VL_EingebetteteSysteme/master/13_ADC.md", "frage": "Wie kommt eine Spannung in den Rechner?"}, {"key": "14", "label": "VL 14", "kurz": "Interrupts & Timer", "datum": "2027-01-20", "url": "https://liascript.github.io/course/?https://raw.githubusercontent.com/TUBAF-IfI-LiaScript/VL_EingebetteteSysteme/master/14_TimerUndInterrupts.md", "frage": "Wie reagiert ein Controller rechtzeitig auf Ereignisse?"}, {"key": "15", "label": "VL 15", "kurz": "Aktoren & Ausblick", "datum": "2027-02-03", "url": "https://liascript.github.io/course/?https://raw.githubusercontent.com/TUBAF-IfI-LiaScript/VL_EingebetteteSysteme/master/15_Aktoren.md", "frage": "Wie bewegt ein Controller die Welt – und was kommt danach?"}]</script>
+<script>
+// „Diese Woche“: alle Termine der laufenden Woche, sonst der nächste Termin
+const T = JSON.parse(document.getElementById("termine").textContent);
+const heute = new Date();
+const iso = (d) => d.toISOString().slice(0, 10);
+const montag = new Date(heute); montag.setDate(heute.getDate() - ((heute.getDay() + 6) % 7));
+const sonntag = new Date(montag); sonntag.setDate(montag.getDate() + 6);
+const datum = (s) => { const [y, m, d] = s.split("-"); return `${+d}.${+m}.`; };
+const eintrag = (t) => `<li>${t.url ? `<a href="${t.url}">${t.label} · ${t.kurz}</a>` : `${t.label} · ${t.kurz} <span class="muted">(Material folgt)</span>`}
+  <span class="muted">${datum(t.datum)}</span>${t.frage ? `<div class="frage">Leitfrage: ${t.frage}</div>` : ""}</li>`;
+const diese = T.filter(t => t.datum >= iso(montag) && t.datum <= iso(sonntag));
+const naechster = T.find(t => t.datum > iso(sonntag));
+const box = document.getElementById("woche");
+if (diese.length) {
+  box.innerHTML = `<h2>Diese Woche</h2><ul>${diese.map(eintrag).join("")}</ul>` +
+    (naechster ? `<p class="naechst">Danach: ${naechster.label} · ${naechster.kurz} (${datum(naechster.datum)})</p>` : "");
+  box.hidden = false;
+} else if (naechster) {
+  box.innerHTML = `<h2>${T[0].datum > iso(heute) ? "Los geht es mit" : "Als Nächstes"}</h2><ul>${eintrag(naechster)}</ul>`;
+  box.hidden = false;
+}
+</script>
 </body>
 </html>

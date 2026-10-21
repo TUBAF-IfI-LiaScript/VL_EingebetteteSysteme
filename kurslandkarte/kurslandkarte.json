@@ -1,14 +1,103 @@
 {
  "stand": "21.10.2026",
+ "version": "0.1.0",
+ "kurs": {
+  "basis": "https://liascript.github.io/course/?https://raw.githubusercontent.com/TUBAF-IfI-LiaScript/VL_EingebetteteSysteme/master/",
+  "speicher": "eavd-map",
+  "einheit": "Vorlesung",
+  "einheiten": "Vorlesungen",
+  "einheiten_dat": "Vorlesungen",
+  "gleich": "In derselben Vorlesung",
+  "freigabe": "erscheinen nach der Vorlesung, mit Ihren Vorschlägen",
+  "folgen": "Die Begriffe dieser Vorlesung entstehen nach der Vorlesung – mit Ihren Vorschlägen.",
+  "spalten": [
+   [
+    "VL",
+    "Vorlesung"
+   ],
+   [
+    "Ü",
+    "Übung"
+   ],
+   [
+    "P",
+    "Praktikum"
+   ]
+  ],
+  "woche": "Woche ab",
+  "status": {},
+  "anwendung_daten": "Beispiel",
+  "start_ansicht": "metro",
+  "vorschau": "ausblick"
+ },
+ "linien": [
+  {
+   "id": "grundlagen",
+   "name": "Technik & Abstraktion",
+   "farbe": "c5"
+  },
+  {
+   "id": "logik",
+   "name": "Logik & Schaltnetze",
+   "farbe": "c1"
+  },
+  {
+   "id": "zustand",
+   "name": "Zustand & Takt",
+   "farbe": "c2"
+  },
+  {
+   "id": "rechner",
+   "name": "Rechner & Befehle",
+   "farbe": "c3"
+  },
+  {
+   "id": "controller",
+   "name": "Mikrocontroller & Peripherie",
+   "farbe": "c4"
+  }
+ ],
+ "phasen": [
+  {
+   "von": 0,
+   "bis": 1,
+   "name": "Einstieg",
+   "farbe": "ph1"
+  },
+  {
+   "von": 2,
+   "bis": 8,
+   "name": "Digitaltechnik",
+   "farbe": "ph2"
+  },
+  {
+   "von": 9,
+   "bis": 11,
+   "name": "Vom Rechenwerk zur CPU",
+   "farbe": "ph4"
+  },
+  {
+   "von": 12,
+   "bis": 15,
+   "name": "Mikrocontroller",
+   "farbe": "ph3"
+  }
+ ],
  "vorlesungen": [
   {
    "vl": 0,
+   "key": "0",
+   "label": "VL 00",
+   "typ": "VL",
    "datei": "00_Einfuehrung.md",
    "datum": "2026-10-21",
    "kurz": "Einführung",
    "leitfrage": "Wie wird aus einem Programm ein Verhalten der Hardware?",
    "freigegeben": false,
    "status": "ausgearbeitet",
+   "block": 1,
+   "pdf": null,
+   "anwendet": [],
    "abschnitte": [
     "Einführung",
     "Worum geht es in dieser Vorlesung?",
@@ -42,12 +131,18 @@
   },
   {
    "vl": 1,
+   "key": "1",
+   "label": "VL 01",
+   "typ": "VL",
    "datei": "01_HistorischerUeberblick.md",
    "datum": "2026-10-28",
    "kurz": "Historie",
    "leitfrage": "Wie kam es vom Rechenbrett zum Mikrocontroller?",
    "freigegeben": false,
    "status": "ausgearbeitet",
+   "block": 1,
+   "pdf": null,
+   "anwendet": [],
    "abschnitte": [
     "Historischer Überblick",
     "Rückblick, Fragen und Diskussionen",
@@ -74,12 +169,18 @@
   },
   {
    "vl": 2,
+   "key": "2",
+   "label": "VL 02",
+   "typ": "VL",
    "datei": "02_BoolscheAlgebra.md",
    "datum": "2026-10-29",
    "kurz": "Boolesche Algebra",
    "leitfrage": "Wie rechnet man mit wahr und falsch?",
    "freigegeben": false,
    "status": "ausgearbeitet",
+   "block": 2,
+   "pdf": null,
+   "anwendet": [],
    "abschnitte": [
     "Boolesche Algebra",
     "Rückblick: Hausaufgabe aus Vorlesung 01",
@@ -101,12 +202,18 @@
   },
   {
    "vl": 3,
+   "key": "3",
+   "label": "VL 03",
+   "typ": "VL",
    "datei": "03_Minimierung.md",
    "datum": "2026-11-04",
    "kurz": "Minimierung",
    "leitfrage": "Wie wird eine Schaltfunktion möglichst klein?",
    "freigegeben": false,
    "status": "ausgearbeitet",
+   "block": 2,
+   "pdf": null,
+   "anwendet": [],
    "abschnitte": [
     "Minimierung von Boolesche Funktionen",
     "Reflexion Ihrer Fragen / Rückmeldungen",
@@ -126,12 +233,18 @@
   },
   {
    "vl": 4,
+   "key": "4",
+   "label": "VL 04",
+   "typ": "VL",
    "datei": "04_Schaltnetze.md",
    "datum": "2026-11-11",
    "kurz": "Schaltnetze",
    "leitfrage": "Wie wird aus einer Funktion eine Schaltung – und was kann dabei schiefgehen?",
    "freigegeben": false,
    "status": "ausgearbeitet",
+   "block": 2,
+   "pdf": null,
+   "anwendet": [],
    "abschnitte": [
     "Minimierung von Boolesche Funktionen / Schaltnetze",
     "Feedbacks/Ergänzungen",
@@ -154,12 +267,18 @@
   },
   {
    "vl": 5,
+   "key": "5",
+   "label": "VL 05",
+   "typ": "VL",
    "datei": "05_Standardschaltnetze.md",
    "datum": "2026-11-12",
    "kurz": "Standardschaltnetze",
    "leitfrage": "Welche Bausteine braucht man immer wieder?",
    "freigegeben": false,
    "status": "ausgearbeitet",
+   "block": 2,
+   "pdf": null,
+   "anwendet": [],
    "abschnitte": [
     "Standardschaltnetze",
     "Feedbacks/Ergänzungen",
@@ -177,12 +296,18 @@
   },
   {
    "vl": 6,
+   "key": "6",
+   "label": "VL 06",
+   "typ": "VL",
    "datei": "06_FlipFlops.md",
    "datum": "2026-11-25",
    "kurz": "Flip-Flops",
    "leitfrage": "Wie merkt sich eine Schaltung etwas?",
    "freigegeben": false,
    "status": "ausgearbeitet",
+   "block": 2,
+   "pdf": null,
+   "anwendet": [],
    "abschnitte": [
     "FlipFlops",
     "Feedbacks/Ergänzungen",
@@ -207,12 +332,18 @@
   },
   {
    "vl": 7,
+   "key": "7",
+   "label": "VL 07",
+   "typ": "VL",
    "datei": "07_Schaltwerke.md",
    "datum": "2026-11-26",
    "kurz": "Schaltwerke",
    "leitfrage": "Wie baut man eine Schaltung, die auf Abfolgen reagiert?",
    "freigegeben": false,
    "status": "ausgearbeitet",
+   "block": 2,
+   "pdf": null,
+   "anwendet": [],
    "abschnitte": [
     "Schaltwerke",
     "Motivation",
@@ -233,12 +364,18 @@
   },
   {
    "vl": 8,
+   "key": "8",
+   "label": "VL 08",
+   "typ": "VL",
    "datei": "08_StandardSchaltwerke.md",
    "datum": "2026-12-02",
    "kurz": "Standardschaltwerke",
    "leitfrage": "Wie zählt und schiebt man Bits im Takt?",
    "freigegeben": false,
    "status": "ausgearbeitet",
+   "block": 2,
+   "pdf": null,
+   "anwendet": [],
    "abschnitte": [
     "Standardschaltwerke",
     "Feedbacks/Ergänzungen",
@@ -251,12 +388,18 @@
   },
   {
    "vl": 9,
+   "key": "9",
+   "label": "VL 09",
+   "typ": "VL",
    "datei": "09_Rechnerarithmetik.md",
    "datum": "2026-12-09",
    "kurz": "Rechnerarithmetik",
    "leitfrage": "Wie addiert und subtrahiert ein Rechner?",
    "freigegeben": false,
    "status": "ausgearbeitet",
+   "block": 3,
+   "pdf": null,
+   "anwendet": [],
    "abschnitte": [
     "Rechnerarithmetik",
     "Zahlendarstellung",
@@ -277,12 +420,18 @@
   },
   {
    "vl": 10,
+   "key": "10",
+   "label": "VL 10",
+   "typ": "VL",
    "datei": "10_CPU_Basis.md",
    "datum": "2026-12-10",
    "kurz": "CPU-Grundlagen",
    "leitfrage": "Wie wird aus einem Addierer ein Prozessor?",
    "freigegeben": false,
    "status": "ausgearbeitet",
+   "block": 3,
+   "pdf": null,
+   "anwendet": [],
    "abschnitte": [
     "Von mathematischen Operationen zur CPU",
     "Ausgangspunkt",
@@ -296,12 +445,18 @@
   },
   {
    "vl": 11,
+   "key": "11",
+   "label": "VL 11",
+   "typ": "VL",
    "datei": "11_Modell_CPU.md",
    "datum": "2026-12-16",
    "kurz": "Modell-CPU",
    "leitfrage": "Wie arbeitet ein Prozessor ein Programm Befehl für Befehl ab?",
    "freigegeben": false,
    "status": "ausgearbeitet",
+   "block": 3,
+   "pdf": null,
+   "anwendet": [],
    "abschnitte": [
     "Modell CPU",
     "Ausgangspunkt",
@@ -331,12 +486,18 @@
   },
   {
    "vl": 12,
+   "key": "12",
+   "label": "VL 12",
+   "typ": "VL",
    "datei": "12_AVR_CPU.md",
    "datum": "2027-01-06",
    "kurz": "AVR-CPU",
    "leitfrage": "Was steckt im ATmega328P – und wie kommt das Programm hinein?",
    "freigegeben": false,
    "status": "ausgearbeitet",
+   "block": 4,
+   "pdf": null,
+   "anwendet": [],
    "abschnitte": [
     "Programmierung CPU",
     "Motivation",
@@ -366,12 +527,18 @@
   },
   {
    "vl": 13,
+   "key": "13",
+   "label": "VL 13",
+   "typ": "VL",
    "datei": "13_ADC.md",
    "datum": "2027-01-14",
    "kurz": "ADC",
    "leitfrage": "Wie kommt eine Spannung in den Rechner?",
    "freigegeben": false,
    "status": "ausgearbeitet",
+   "block": 4,
+   "pdf": null,
+   "anwendet": [],
    "abschnitte": [
     "Analog-Digital-Wandler",
     "Motivation",
@@ -391,12 +558,18 @@
   },
   {
    "vl": 14,
+   "key": "14",
+   "label": "VL 14",
+   "typ": "VL",
    "datei": "14_TimerUndInterrupts.md",
    "datum": "2027-01-20",
    "kurz": "Interrupts & Timer",
    "leitfrage": "Wie reagiert ein Controller rechtzeitig auf Ereignisse?",
    "freigegeben": false,
    "status": "ausgearbeitet",
+   "block": 4,
+   "pdf": null,
+   "anwendet": [],
    "abschnitte": [
     "Timer und Interrupts",
     "Interrupts",
@@ -419,12 +592,18 @@
   },
   {
    "vl": 15,
+   "key": "15",
+   "label": "VL 15",
+   "typ": "VL",
    "datei": "15_Aktoren.md",
    "datum": "2027-02-03",
    "kurz": "Aktoren & Ausblick",
    "leitfrage": "Wie bewegt ein Controller die Welt – und was kommt danach?",
    "freigegeben": false,
    "status": "ausgearbeitet",
+   "block": 4,
+   "pdf": null,
+   "anwendet": [],
    "abschnitte": [
     "Ansteuerung von peripheren Komponenten",
     "Motivation",
@@ -2880,7 +3059,8 @@
     "steuerwerk",
     "mikroprogramm",
     "mikrocontroller"
-   ]
+   ],
+   "weiter": false
   },
   {
    "id": "speicher",
@@ -2893,7 +3073,8 @@
     "register",
     "pc_ir",
     "ddrx"
-   ]
+   ],
+   "weiter": false
   },
   {
    "id": "minimieren",
@@ -2906,7 +3087,8 @@
     "qmc",
     "zweistufig",
     "fsm_entwurf"
-   ]
+   ],
+   "weiter": false
   },
   {
    "id": "automaten",
@@ -2919,7 +3101,8 @@
     "zaehler",
     "festverdrahtet",
     "timer"
-   ]
+   ],
+   "weiter": false
   },
   {
    "id": "analog",
@@ -2932,7 +3115,8 @@
     "adc",
     "pwm",
     "servo"
-   ]
+   ],
+   "weiter": false
   },
   {
    "id": "code",
@@ -2947,7 +3131,8 @@
     "toolchain",
     "bitmaske",
     "isr"
-   ]
+   ],
+   "weiter": false
   }
  ],
  "anwendungen": [

@@ -1,11 +1,12 @@
 # Kurslandkarte
 
-Interaktive Übersicht über Begriffe, Zusammenhänge und didaktische Fäden der Vorlesung für Studierende – in drei Ansichten: Vorlesungen (Liste, Standard auf dem Handy), Metrokarte und Zeitleiste. „Sie sind hier“ ergibt sich aus dem Datum. Veröffentlicht über GitHub Pages (Wurzelverzeichnis von `master`): https://tubaf-ifi-liascript.github.io/VL_EingebetteteSysteme/kurslandkarte/
+Interaktive Übersicht über Begriffe, Zusammenhänge und didaktische Fäden der Vorlesung für Studierende – in drei Ansichten: Vorlesungen (Wochenraster nach Blöcken, Standard auf dem Handy), Metrokarte und Zeitleiste. „Sie sind hier“ ergibt sich aus dem Datum. Veröffentlicht über GitHub Pages (Wurzelverzeichnis von `master`): https://tubaf-ifi-liascript.github.io/VL_EingebetteteSysteme/kurslandkarte/
 
 | Datei | Inhalt |
 | :---- | :----- |
-| `erzeuge.py` | Kuratierte Daten (Begriffe, Beziehungen, Anwendungen, Fäden, Termine, Leitfragen) und Erzeugung von Daten und Seite |
-| `vorlage.html` | Ansicht; `%%DATEN%%` und `%%STAND%%` werden beim Erzeugen ersetzt (abgeleitet von der Kurslandkarte in VL_EAVD) |
+| `erzeuge.py` | Kuratierte Kursdaten (Begriffe, Beziehungen, Anwendungen, Fäden, Termine, Leitfragen) und Aufruf des Kerns |
+| `invivis/` | Kopie des gemeinsamen Kerns [invivis Kurslandkarte](https://github.com/TUBAF-IfI-LiaScript/invivis-kurslandkarte) (`kern.py`, `vorlage.html`, `startseite.html`) – **nicht hier ändern**, Verbesserungen im Kern-Repository machen und mit `uebernehmen.py` verteilen |
+| `../index.html` | erzeugt: Startseite des Kurses („Diese Woche“, Kurslandkarte, Lernziele, Organisation, Kontakt) |
 | `kurslandkarte.json` | erzeugt: alle Daten |
 | `index.html` | erzeugt: die veröffentlichte Seite |
 
@@ -21,7 +22,7 @@ Begriffe verweisen in `erzeuge.py` auf den **Titel** ihres Abschnitts (ohne Back
 
 ## Nach jeder Vorlesung: Begriffe freischalten
 
-Die Karte zeigt nur die Begriffe freigegebener Vorlesungen; für alle anderen Termin, Titel und Leitfrage. Mit „Ausblick: An“ sehen Neugierige die vorbereiteten Begriffe blass.
+Die Karte zeigt nur die Begriffe freigegebener Vorlesungen; für alle anderen Termin, Titel und Leitfrage. Mit „Ausblick: An“ sehen Neugierige die vorbereiteten Begriffe blass. Direktlinks: `#termin=<key>`, `#begriff=<id>`, `#ansicht=liste|metro|zeit`.
 
 1. Begriffe der Vorlesung mit dem tatsächlich Behandelten abgleichen, Vorschläge der Studierenden aufnehmen.
 2. Die Vorlesung in `FREIGEGEBEN` eintragen, `python3 kurslandkarte/erzeuge.py`, committen.
