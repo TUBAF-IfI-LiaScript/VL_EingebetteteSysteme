@@ -11,7 +11,8 @@ Datenformate (Tupel, damit die Kursdateien kompakt bleiben):
                label: "VL 00", "VL 1", "Ü 1", "P 1" … – der Typ ist das erste Wort
                datum: ISO-Datum (bei Wochenplänen der Montag der Woche)
   bloecke      {block: (name, farbe)}          farbe: "ph1".."ph4"
-  linien       [(id, name, farbe)]             farbe: "c1".."c7"
+  linien       [(id, name, farbe)]             Themengebiete; farbe ("c1".."c7") wird seit 0.3.0 nicht mehr
+                                               dargestellt – Farbe steht in der Karte nur für Fäden
   begriffe     (id, name, linie, termin, abschnittstitel|None, ebene, code, erklaerung, fehlvorstellung|None)
   beziehungen  (von, nach, text)               „von <text> nach“
   faeden       (id, name, beschreibung, [begriffs-ids chronologisch])
@@ -21,7 +22,7 @@ Datenformate (Tupel, damit die Kursdateien kompakt bleiben):
   anwendet     {termin: [begriffs-ids]}        z. B. Praktika, die nur anwenden
   brauchen     {termin: [begriffs-ids]}        Vorwissen für „Wo stehen wir?“ (sonst abgeleitet)
 
-Autoren: Sebastian Zug & Claude Code (Opus 5.5)
+Autoren: Sebastian Zug, Ines Aubeln & Claude Code (Opus 5.5)
 """
 import datetime, html, json, os, re, subprocess, sys
 

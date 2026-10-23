@@ -1,0 +1,6 @@
+Die Vorlage vorlage.html enthält das Icon „chevron--down“ aus IBM Carbon Design System
+(https://github.com/carbon-design-system/carbon), eingebettet als SVG-Pfad.
+
+Copyright IBM Corp. 2016, 2023
+Lizenziert unter der Apache License, Version 2.0 (https://www.apache.org/licenses/LICENSE-2.0).
+Das Icon wurde nicht verändert.

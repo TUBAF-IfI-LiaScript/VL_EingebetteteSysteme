@@ -34,7 +34,7 @@ KURS = {
     "pages": "https://tubaf-ifi-liascript.github.io/VL_EingebetteteSysteme/",
     "repo": "https://github.com/TUBAF-IfI-LiaScript/VL_EingebetteteSysteme",
     "speicher": "eavd-map",
-    "autoren": "Sebastian Zug & Claude Code (Opus 5.5)",
+    "autoren": "Sebastian Zug, Ines Aubeln & Claude Code (Opus 5.5)",
     "feedback": 'Begriff fehlt oder ist unklar? Sagen Sie es in der Vorlesung oder im OPAL-Forum. <a href="https://github.com/TUBAF-IfI-LiaScript/VL_EingebetteteSysteme/issues/new?title=Kurslandkarte%3A%20&amp;labels=kurslandkarte" target="_blank" rel="noopener">GitHub ↗</a>',
     "lernziele": [
         "Schaltfunktionen aus einer Problembeschreibung aufstellen, in Normalform bringen und mit KV-Diagramm bzw. Quine-McCluskey minimieren,",
