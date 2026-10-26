@@ -321,16 +321,17 @@ footer p { margin: 0 0 6px; }
 /* Kacheln liegen wie Fliesen auf der Fuge, damit jeder Termin für sich steht */
 .liste .raster { background: var(--gap); padding: 6px; }
 .liste .rh, .liste .wk { padding-inline-start: 6px; }
-.kachel .typ, .wk-pre { display: none; }
+.kachel .typ { display: none; }
+.wk-kw, .wk-tage { display: block; }
 .kachel .typ { font-size: 13px; font-weight: 700; color: var(--muted); margin-bottom: -6px; }
-.liste.spalten .vlhead .d { display: none; }
 @media (max-width: 980px) {
   .liste.spalten .raster { grid-template-columns: minmax(0, 1fr); }
   .liste.spalten .rh, .liste.spalten .zelle:empty { display: none; }
   /* schmal: Wochen als Zwischenköpfe, Übung/Praktikum ausgeschrieben */
   .liste.spalten .wk { padding: 10px 0 0 6px; }
   .liste.spalten .wk:first-of-type { padding-top: 4px; }
-  .liste.spalten .wk-pre, .liste.spalten .kachel .typ { display: inline; }
+  .liste.spalten .kachel .typ, .liste.spalten .wk-kw, .liste.spalten .wk-tage { display: inline; }
+  .liste.spalten .wk-tage::before { content: " · "; }
 }
 .vlhead { display: flex; flex-wrap: wrap; align-items: baseline; gap: 2px 12px; }
 .vlhead b { font-size: 20px; font-weight: 700; letter-spacing: -0.02em; }
@@ -670,15 +671,17 @@ footer > .fuss-marke { grid-column: 2; grid-row: 1 / span 4; justify-self: end; 
 const DATA = JSON.parse(document.getElementById("kartendaten").textContent);
 const KURS = DATA.kurs;
 const BASE = KURS.basis;
+// iso: Montag der Woche (Raster, „Sie sind hier“); date: kurz („Mi 28.10.“ bzw. „KW 44“), when: mit Uhrzeit
 const LECTURES = DATA.vorlesungen.map(v => {
-  const [y, m, d] = v.datum.split("-");
-  return { key: v.key, label: v.label, typ: v.typ, iso: v.datum, date: `${d}.${m}.`, short: v.kurz, frage: v.leitfrage, frei: v.freigegeben !== false,
+  return { key: v.key, label: v.label, typ: v.typ, iso: v.datum, ende: v.ende, date: v.wann_kurz, when: v.wann, kw: `KW ${v.kw}`, wkTage: v.woche_tage, short: v.kurz, frage: v.leitfrage, frei: v.freigegeben !== false,
            file: v.datei, pdf: v.pdf, status: v.status, sections: v.abschnitte, block: v.block, uses: v.anwendet || [] };
 });
 const statusText = (l) => (KURS.status || {})[l.status] ?? (l.status === "ausgearbeitet" ? "" : "in Vorbereitung");
-// Aktueller Termin: der letzte, dessen Datum erreicht ist (vor Semesterbeginn: der erste)
+// Aktueller Termin: der nächste noch nicht vorbeigegangene dieser Woche, sonst der letzte erreichte
+// (vor Semesterbeginn: der erste); ende ist der letzte Tag des Termins bzw. der Sonntag seiner Woche
 const TODAY = new Date().toISOString().slice(0, 10);
-const HERE_TODAY = Math.max(0, LECTURES.filter(l => l.iso <= TODAY).length - 1);
+const LAUFEND = LECTURES.findIndex(l => l.iso <= TODAY && l.ende >= TODAY);
+const HERE_TODAY = LAUFEND >= 0 ? LAUFEND : Math.max(0, LECTURES.filter(l => l.iso <= TODAY).length - 1);
 const BEFORE_START = TODAY < LECTURES[0].iso;
 document.getElementById("here").max = LECTURES.length - 1;
 const PHASES = DATA.phasen.map(p => ({ from: p.von, to: p.bis, name: p.name, v: "--" + p.farbe }));
@@ -999,7 +1002,7 @@ function kachel(lec, v) {
     : `<div class="chips${lec.frei ? "" : " vorschau"}">${items.map(chip).join("") || '<span class="hint">keine Begriffe in den gewählten Gebieten</span>'}</div>`;
   const typName = SPALTEN.length > 1 && lec.typ !== SPALTEN[0][0] ? (SPALTEN.find(([t]) => t === lec.typ) || [])[1] : "";
   return `<div class="kachel${v === state.here ? " now" : v > state.here ? " future" : ""}${lec.file ? "" : " ohne"}" data-vl="${v}">
-    ${typName ? `<span class="typ">${typName}</span>` : ""}<div class="vlhead"><b>${lec.label}</b><span class="s">${lec.short}</span><span class="d">${lec.date}</span>${tag}
+    ${typName ? `<span class="typ">${typName}</span>` : ""}<div class="vlhead"><b>${lec.label}</b><span class="s">${lec.short}</span><span class="d">${lec.when}</span>${tag}
       ${lec.file ? `<a href="${BASE + lec.file}" target="_blank" rel="noopener">Folien</a>` : ""}${lec.pdf ? `<a class="pdf" href="${lec.pdf}" target="_blank" rel="noopener" title="Lehrbuchfassung zum Ausdrucken; Quizze und Code laufen nur in den Folien">PDF</a>` : ""}</div>
     ${lec.frage ? `<div class="frage">${lec.frage}</div>` : ""}
     ${begriffe}
@@ -1015,11 +1018,12 @@ function drawListe() {
   box.innerHTML = PHASES.map(p => {
     const idx = LECTURES.map((_, i) => i).filter(i => i >= p.from && i <= p.to);
     const wochen = [...new Set(idx.map(i => LECTURES[i].iso))];
-    const kopf = mehr ? `<span class="rh">${KURS.woche || "Woche ab"}</span>${SPALTEN.map(([, name]) => `<span class="rh">${name}</span>`).join("")}` : "";
+    const kopf = mehr ? `<span class="rh">${KURS.woche}</span>${SPALTEN.map(([, name]) => `<span class="rh">${name}</span>`).join("")}` : "";
     const zeilen = wochen.map(w => {
       const now = LECTURES[state.here].iso === w;
       const zellen = SPALTEN.map(([t]) => `<div class="zelle">${idx.filter(i => LECTURES[i].iso === w && LECTURES[i].typ === t).map(i => kachel(LECTURES[i], i)).join("")}</div>`).join("");
-      return mehr ? `<span class="wk${now ? " now" : ""}"><span class="wk-pre">${KURS.woche || "Woche ab"} </span>${LECTURES.find(l => l.iso === w).date}</span>${zellen}` : zellen;
+      const l = LECTURES.find(l => l.iso === w);
+      return mehr ? `<span class="wk${now ? " now" : ""}"><span class="wk-kw">${l.kw}</span><span class="wk-tage">${l.wkTage}</span></span>${zellen}` : zellen;
     }).join("");
     return `<section class="block"><h2 style="--blk:var(${p.v})">${p.name}</h2><div class="raster">${kopf}${zeilen}</div></section>`;
   }).join("");
@@ -1096,7 +1100,7 @@ function renderPanel() {
     const lec = LECTURES[app.vl];
     p.innerHTML = `
       <h2>${app.name}</h2>
-      <div class="meta"><span class="chip">Anwendung</span><span class="chip">${app.fach}</span><span>${lec.label} am ${lec.date}</span></div>
+      <div class="meta"><span class="chip">Anwendung</span><span class="chip">${app.fach}</span><span>${lec.label}, ${lec.when}</span></div>
       <p><strong>${KURS.anwendung_daten}:</strong> ${app.data}</p>
       <h3>Nutzt die Begriffe</h3>
       <ul class="rels">${app.uses.map(k => `<li><button data-id="${k}"><span class="t">${byId[k].name}</span> <span class="v">${LECTURES[byId[k].vl].label}</span></button></li>`).join("")}</ul>
@@ -1125,7 +1129,7 @@ function renderPanel() {
     <div class="meta">
       <span class="chip" title="Themengebiet">${l.name}</span>
       <span class="chip" title="${n.level === 1 ? "Sollten Sie in einem Satz erklären können" : "Ergänzt einen Kernbegriff"}">${n.level === 1 ? "Kernbegriff" : "Detailbegriff"}</span>
-      <span>${lec.label} am ${lec.date}, ${status}</span>
+      <span>${lec.label}, ${lec.when} – ${status}</span>
     </div>
     <p>${n.text}</p>
     ${n.mis ? `<div class="misc"><strong>Typische Fehlvorstellung</strong>${n.mis}</div>` : ""}
@@ -1213,7 +1217,7 @@ function renderWoche() {
   const neu = ALL.filter(n => n.vl === state.here && sichtbar(n) && n.level === 1).sort((a, b) => a.sec - b.sec);
   $("#wocheInfo").innerHTML = `
     <div class="w-zeile"><span class="w-kicker">${kicker}</span></div>
-    <p class="w-titel">${lec.label} ${lec.short}<span class="d">${lec.date}</span></p>
+    <p class="w-titel">${lec.label} ${lec.short}<span class="d">${lec.when}</span></p>
     ${lec.frage ? `<p class="w-frage">${lec.frage}</p>` : ""}
     ${lec.file || lec.pdf ? `<div class="w-links">${lec.file ? `<a href="${BASE + lec.file}" target="_blank" rel="noopener">Folien öffnen</a>` : ""}${lec.pdf ? `<a href="${lec.pdf}" target="_blank" rel="noopener">PDF öffnen</a>` : ""}</div>` : `<p class="hint">${KURS.folgen}</p>`}
     ${neu.length ? `<div class="w-neu"><span class="w-kicker">Neue Kernbegriffe</span><div class="chips">${neu.map(chip).join("")}</div></div>` : ""}`;

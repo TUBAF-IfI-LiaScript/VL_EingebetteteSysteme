@@ -9,7 +9,10 @@ Datenformate (Tupel, damit die Kursdateien kompakt bleiben):
 
   termine      (key, label, datum, kurz, datei|None, status, block)
                label: "VL 00", "VL 1", "Ü 1", "P 1" … – der Typ ist das erste Wort
-               datum: ISO-Datum (bei Wochenplänen der Montag der Woche)
+               datum: Standard: ISO-Datum eines Tags der Woche – angezeigt wird die Kalenderwoche.
+                      Mit KURS["tagesgenau"]: der echte Tag "2026-10-28", mehrere Tage
+                      ["2026-11-25", "2026-11-26"] oder nur die Woche "2027-W21" (Tag noch offen);
+                      KURS["uhrzeiten"] {"Mi": "11:30–13:00", …} ergänzt die Uhrzeit
   bloecke      {block: (name, farbe)}          farbe: "ph1".."ph4"
   linien       [(id, name, farbe)]             Themengebiete; farbe ("c1".."c7") wird seit 0.3.0 nicht mehr
                                                dargestellt – Farbe steht in der Karte nur für Fäden
@@ -39,7 +42,7 @@ STANDARD = {
     "anwendung_daten": "Beispiel", "start_ansicht": "metro",
     "freigabe_satz": "Nach jeder Vorlesung kommen ihre Begriffe dazu, ergänzt um Ihre Vorschläge.",
     "spalten": [["VL", "Vorlesung"], ["Ü", "Übung"], ["P", "Praktikum"]],
-    "woche": "Woche ab",
+    "woche": "Woche", "tagesgenau": False, "uhrzeiten": {},
     "status": {},
     "lernziele": [], "organisation": [], "kontakt": "", "lizenz": "",
 }
@@ -53,9 +56,42 @@ def abschnitte(pfad):
     return [m.group(2).strip().replace("`", "") for m in re.finditer(r"^(#{1,6}) +(.+)$", s, re.M)]
 
 
-def datum(iso):
-    y, m, d = iso.split("-")
-    return f"{int(d)}.{int(m)}.{y}"
+TAGE = ("Mo", "Di", "Mi", "Do", "Fr", "Sa", "So")
+
+
+def _tag(d):
+    return f"{d.day}.{d.month}."
+
+
+def wann(feld, K):
+    """Datum eines Termins → Woche (Montag, KW, Mo–Fr) und Anzeige („Mi 28.10. · 11:30–13:00“ bzw. „KW 44 · 26.–30.10.“)."""
+    felder = [feld] if isinstance(feld, str) else list(feld)
+    if len(felder) == 1 and re.fullmatch(r"\d{4}-W\d{2}", felder[0]):
+        assert K["tagesgenau"], ("Wochenangabe nur mit tagesgenau", feld)
+        y, w = felder[0].split("-W")
+        tage, montag = [], datetime.date.fromisocalendar(int(y), int(w), 1)
+    else:
+        tage = [datetime.date.fromisoformat(x) for x in felder]
+        assert tage == sorted(tage), ("Tage eines Termins nicht chronologisch", feld)
+        montag = tage[0] - datetime.timedelta(days=tage[0].weekday())
+        if not K["tagesgenau"]:
+            tage = []
+    kw, freitag = montag.isocalendar()[1], montag + datetime.timedelta(days=4)
+    spanne = (f"{montag.day}.–" if montag.month == freitag.month else f"{_tag(montag)}–") + _tag(freitag)
+    if tage:
+        alle = " + ".join(f"{TAGE[d.weekday()]} {_tag(d)}" for d in tage)
+        zeit = lambda d: K["uhrzeiten"].get(TAGE[d.weekday()])
+        if len(tage) == 1:
+            lang = alle + (f" · {zeit(tage[0])}" if zeit(tage[0]) else "")
+        else:   # mehrere Tage: Uhrzeit je Tag, die Zeitfenster können verschieden sein
+            lang = " + ".join(f"{TAGE[d.weekday()]} {_tag(d)}" + (f" {zeit(d)}" if zeit(d) else "") for d in tage)
+        kurz = f"{TAGE[tage[0].weekday()]} {_tag(tage[0])}"
+    else:
+        lang, kurz = f"KW {kw} · " + ("Tag folgt" if K["tagesgenau"] else spanne), f"KW {kw}"
+        alle = kurz
+    ende = tage[-1] if tage else montag + datetime.timedelta(days=6)
+    return {"montag": montag.isoformat(), "ende": ende.isoformat(), "tage": [d.isoformat() for d in tage], "kw": kw,
+            "woche_tage": spanne, "wann": lang, "wann_kurz": kurz, "alle_tage": alle}
 
 
 def typ(label):
@@ -86,12 +122,16 @@ def erzeuge(repo, kurs, termine, bloecke, linien, begriffe, beziehungen, faeden,
     K = {**STANDARD, **kurs}
     leitfragen, anwendet, brauchen = leitfragen or {}, anwendet or {}, brauchen or {}
     stand = datetime.date.today().strftime("%d.%m.%Y")
-    T = list(termine)
+    # Ab hier steht im Datumsfeld der Montag der Woche (Raster, „Sie sind hier“); die Anzeige kommt aus W
+    W = {t[0]: wann(t[2], K) for t in termine}
+    T = [(t[0], t[1], W[t[0]]["montag"]) + tuple(t[3:]) for t in termine]
     IDX = {t[0]: i for i, t in enumerate(T)}
 
     # ---- Prüfen
-    assert len(IDX) == len(T), "doppelter Termin-key"
-    assert [t[2] for t in T] == sorted(t[2] for t in T), "Termine nicht chronologisch"
+    assert len(IDX) == len(T) == len(W), "doppelter Termin-key"
+    assert [t[2] for t in T] == sorted(t[2] for t in T), "Termine nicht chronologisch (Wochen)"
+    tage = [W[t[0]]["tage"][0] for t in T if W[t[0]]["tage"]]
+    assert tage == sorted(tage), "Termine nicht chronologisch (Tage)"
     for t in T:
         assert t[6] in bloecke, ("unbekannter Block", t)
         assert t[4] is None or os.path.exists(os.path.join(repo, t[4])), ("Datei fehlt", t)
@@ -136,7 +176,7 @@ def erzeuge(repo, kurs, termine, bloecke, linien, begriffe, beziehungen, faeden,
 
     # ---- Orientierungsfolien in den Materialien (optional)
     if folien:
-        _folien(repo, K, T, IDX, bloecke, begriffe, beziehungen, faeden, leitfragen, anwendet, brauchen, term_of, karte_url)
+        _folien(repo, K, T, W, IDX, bloecke, begriffe, beziehungen, faeden, leitfragen, anwendet, brauchen, term_of, karte_url)
 
     sections = lese_abschnitte()   # nach dem Einbetten: Folien können sich verschoben haben
     for b in begriffe:
@@ -160,6 +200,7 @@ def erzeuge(repo, kurs, termine, bloecke, linien, begriffe, beziehungen, faeden,
         "phasen": phasen,
         "vorlesungen": [
             {"vl": i, "key": str(t[0]), "label": t[1], "typ": typ(t[1]), "datei": t[4], "datum": t[2], "kurz": t[3],
+             **{k: W[t[0]][k] for k in ("ende", "tage", "kw", "woche_tage", "wann", "wann_kurz")},
              "leitfrage": leitfragen.get(t[0]), "freigegeben": t[0] in freigegeben, "status": t[5], "block": t[6],
              "pdf": pdf.get(t[0]), "anwendet": [x for x in anwendet.get(t[0], []) if x in b_frei],
              "abschnitte": sections[t[0]] if frei(t[0]) else []}
@@ -232,7 +273,7 @@ def baue_pdfs(repo, dateien, ordner):
 # ---------------------------------------------------------------- Startseite
 def _startseite(K, T, out, karte, startseite, stand):
     karte_rel = os.path.relpath(karte, os.path.dirname(startseite) or ".") + "/"
-    termine = [{"key": v["key"], "label": v["label"], "kurz": v["kurz"], "datum": v["datum"],
+    termine = [{"key": v["key"], "label": v["label"], "kurz": v["kurz"], "datum": v["datum"], "wann": v["wann"],
                 "url": (K["basis"] + v["datei"]) if v["datei"] else None, "frage": v["leitfrage"],
                 "pdf": os.path.relpath(os.path.join(karte, v["pdf"]), os.path.dirname(startseite) or ".") if v["pdf"] else None}
                for v in out["vorlesungen"]]
@@ -261,7 +302,7 @@ MARKE = {"wo": ("<!-- kurslandkarte:wo-start -->", "<!-- kurslandkarte:wo-ende -
 HEUTE = '<!-- style="background-color: rgba(255, 166, 0, 0.35); padding: 2px 6px; border-radius: 4px;" -->'
 
 
-def _folien(repo, K, T, IDX, bloecke, begriffe, beziehungen, faeden, leitfragen, anwendet, brauchen, term_of, karte_url):
+def _folien(repo, K, T, W, IDX, bloecke, begriffe, beziehungen, faeden, leitfragen, anwendet, brauchen, term_of, karte_url):
     name_of = {b[0]: b[1] for b in begriffe}
     spalten = [s for s in K["spalten"] if any(typ(t[1]) == s[0] for t in T)]
 
@@ -276,12 +317,15 @@ def _folien(repo, K, T, IDX, bloecke, begriffe, beziehungen, faeden, leitfragen,
             text = f"{t[1]} {t[3]}"
             if t[4]:
                 text = f"[{text}]({K['basis']}{t[4]})"
-            return f"**{text}**{HEUTE}" if t[0] == key else text
+            tag = f" · {W[t[0]]['alle_tage']}" if W[t[0]]["tage"] else ""
+            return (f"**{text}**{HEUTE}" if t[0] == key else text) + tag
         z = ['<!-- data-type="none" -->', f"| {K['woche']} | " + " | ".join(s[1] for s in spalten) + " |",
              "| :-- " * (len(spalten) + 1) + "|"]
         for w in wochen:
             cells = [[zelle(t) for t in T if t[2] == w and t[6] == blk and typ(t[1]) == s[0]] for s in spalten]
-            tag = f"**{datum(w)}**{HEUTE}" if w == T[IDX[key]][2] else datum(w)
+            erster = W[next(t[0] for t in T if t[2] == w)]
+            woche = f"KW {erster['kw']} · {erster['woche_tage']}"
+            tag = f"**{woche}**{HEUTE}" if w == T[IDX[key]][2] else woche
             z.append(f"| {tag} | " + " | ".join("<br>".join(c) for c in cells) + " |")
         return z
 
@@ -341,12 +385,12 @@ def _folien(repo, K, T, IDX, bloecke, begriffe, beziehungen, faeden, leitfragen,
         if j < len(T):
             n = T[j]
             ziel = leitfragen.get(n[0], "")
-            z.append(f"**🗺️ Nächster Halt:** {n[1]} · {n[3]} (Woche ab {datum(n[2])})" + (f" – {ziel}" if ziel else "")
+            z.append(f"**🗺️ Nächster Halt:** {n[1]} · {n[3]} ({W[n[0]]['wann']})" + (f" – {ziel}" if ziel else "")
                      + f" [Auf der Kurslandkarte ansehen]({karte_url}#termin={n[0]})")
         dazwischen = T[i + 1:j]
         if dazwischen:
             z += ["", "**Außerdem bis dahin:** " + " · ".join(
-                f"[{d[1]} · {d[3]}]({karte_url}#termin={d[0]}) (Woche ab {datum(d[2])})" for d in dazwischen)]
+                f"[{d[1]} · {d[3]}]({karte_url}#termin={d[0]}) ({W[d[0]]['wann']})" for d in dazwischen)]
         z += ["", MARKE["aus"][1]]
         return "\n".join(z)
 

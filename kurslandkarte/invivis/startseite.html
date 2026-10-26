@@ -149,9 +149,8 @@ const heute = new Date(); heute.setHours(12, 0, 0, 0);
 const iso = (d) => d.toISOString().slice(0, 10);
 const montag = new Date(heute); montag.setDate(heute.getDate() - ((heute.getDay() + 6) % 7));
 const sonntag = new Date(montag); sonntag.setDate(montag.getDate() + 6);
-const datum = (s) => { const [y, m, d] = s.split("-"); return `${d}.${m}.`; };
 const termin = (t, klein) => `<div class="termin${klein ? " klein" : ""}">
-  <p class="w-titel">${t.label} ${t.kurz}<span class="d">${datum(t.datum)}</span></p>
+  <p class="w-titel">${t.label} ${t.kurz}<span class="d">${t.wann}</span></p>
   ${t.frage ? `<p class="w-frage">${t.frage}</p>` : ""}
   <div class="w-links">${t.url ? `<a href="${t.url}">Folien öffnen</a>` : `<span>Material folgt</span>`}${t.pdf ? `<a href="${t.pdf}" title="Druckfassung; Quizze und Code laufen nur in den Folien">PDF öffnen</a>` : ""}</div>
 </div>`;
