@@ -2,7 +2,7 @@
 
 author:   Sebastian Zug, André Dietrich, Fabian Bär & GitHub Copilot Teaching-Agent & Claude Code (Opus 5.5)
 email:    sebastian.zug@informatik.tu-freiberg.de & andre.dietrich@informatik.tu-freiberg.de & fabian.baer@student.tu-freiberg.de
-version:  0.7.1
+version:  0.7.2
 language: de
 narrator: Deutsch Female
 
@@ -49,21 +49,10 @@ Heute geht es um die Frage, wie aus Zahnrädern, Relais und Röhren der Mikrocon
 
 ---------------------------------------------------------------------
 
-**Weiterführende Literaturhinweise**
-
-+ Dirk W. Hoffmann, Grundlagen der Technischen Informatik, Hanser-Verlag, 2007
-+ Raúl Rojas, Konrad Zuse's Legacy: The Architecture of the Z1 and Z3, IEEE Annals of the History of Computing 19(2), 1997
-+ Webseiten zur Rechnergeschichte
-
-   + http://www.horst-zuse.homepage.t-online.de/z1.html
-   + http://www.computerhistory.org/babbage/adalovelace
-
----------------------------------------------------------------------
-
 ## Rückblick, Fragen und Diskussionen
 
     --{{0}}--
-In der letzten Vorlesung sind wir mit einer einzigen Zeile Code für das Arduino-Framework durch die Abstraktionsebenen gestiegen. Bevor wir in die Geschichte gehen, eine kurze Kontrolle, ob das noch sitzt. Danach lösen wir die Hausaufgabe auf: Sie zeigt, dass sich die Blinkfrequenz zwar über die Schleifenzähler einstellen lässt, aber nie ganz exakt, weil auch die Befehle rund um die Schleifen Zeit kosten.
+In der letzten Vorlesung sind wir mit einer einzigen Zeile Code für das Arduino-Framework durch die Abstraktionsebenen gestiegen. Bevor wir in die Geschichte gehen, eine kurze Kontrolle, ob das noch sitzt. Danach schauen wir auf die Hausaufgabe: Der Compiler Explorer hat gezeigt, dass derselbe C-Code auf verschiedenen Prozessoren unterschiedlich viele Befehle braucht – je nachdem, wie breit ihre Register sind. Genau diese Breite ordnen wir heute historisch ein.
 
 **Erinnern Sie sich?** Die Kernzeile von `pinMode(13, OUTPUT)`, nämlich `DDRB |= (1 << 5);`, wird zu einem einzigen Maschinenbefehl. Welche Aussage stimmt?
 
@@ -76,7 +65,7 @@ Der Assembler übersetzt `sbi 0x04, 5` in das 16-Bit-Wort `0x9A25`; im Speicher 
 
 ***************************************************************
 
-**Auflösung der Hausaufgabe:** Die Wartezeit hängt an drei Schleifen. Setzen Sie den mittleren Zähler `r19` statt auf 0 (= 256 Durchläufe) auf 128, halbiert sich die Wartezeit fast genau; `r20` von 41 auf 20 oder 21 trifft die Hälfte nur ungefähr, denn 41 ist ungerade – 20,5 Durchläufe gibt es nicht. Exakt verdoppelt keiner der Wege die Frequenz, denn die Befehle außerhalb der innersten Schleife – `ldi`, `rcall`, `ret` und der Sprung zurück – kosten feste Takte, die sich nicht mithalbieren.
+**Auflösung der Hausaufgabe:** Für `addiere8` braucht der AVR einen Befehl (`add`), für `addiere32` vier – `add` und dreimal `adc`. Seine Register sind 8 Bit breit, eine 32-Bit-Zahl belegt vier davon, und `adc` („add with carry“) reicht den Übertrag von Byte zu Byte weiter. Ihr Laptop (x86-64) erledigt beides mit einem Befehl, weil seine Register 64 Bit breit sind. Diese Breite heißt **Wortbreite** – heute sehen Sie, wie sie gewachsen ist: vom 4-Bit-Prozessor Intel 4004 über den 8-Bit-ATmega328P bis zu den 64 Bit Ihres Laptops. Wie ein Addierer mit Übertrag aufgebaut ist, bauen wir in Vorlesung 09 nach.
 
 
 ## Von Rechenmaschinen zum µC: 400 Jahre Rechentechnik

@@ -56,12 +56,12 @@ TERMINE = [
     ("2026-12-02", "Standardschaltwerke"), ("2026-12-09", "Rechnerarithmetik"),
     ("2026-12-10", "CPU-Grundlagen"), ("2026-12-16", "Modell-CPU"),
     ("2027-01-06", "AVR-CPU"), ("2027-01-14", "ADC"),
-    ("2027-01-20", "Interrupts & Timer"), ("2027-02-03", "Aktoren & Ausblick"),
+    ("2027-01-20", "Interrupts & Timer"), ("2027-01-28", "Aktoren & Ausblick"),
 ]
 assert len(TERMINE) == ANZAHL
 
 # ---- Freigabe: Begriffe einer Vorlesung erscheinen erst nach ihr in der Karte.
-FREIGEGEBEN = set()
+FREIGEGEBEN = {0}
 
 # ---- Leitfragen
 LEITFRAGE = {

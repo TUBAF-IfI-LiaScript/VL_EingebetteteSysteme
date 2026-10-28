@@ -2,6 +2,12 @@
 
 Alle wesentlichen Änderungen an diesem Kurs werden in dieser Datei dokumentiert.
 
+## [0.7.4] - 2026-10-28
+
+### Changed
+- **01_HistorischerUeberblick (0.7.2):** Rückblick löst die tatsächliche Hausaufgabe aus VL 00 auf (Compiler Explorer, Wortbreite) statt der entfallenen Assembler-Aufgabe; weiterführende Literaturhinweise entfernt (Z3-Angaben bleiben per Fußnote belegt)
+- **Kurslandkarte:** VL 0 freigegeben (Begriffsabfrage vom 21.10. ohne Rückmeldungen, vorbereitete Begriffe unverändert); erster Termin von VL 15 ist der 28.01. (Aktoren), nicht der 03.02.
+
 ## [0.7.5] - 2026-10-21
 
 ### Changed
