@@ -2,11 +2,12 @@
 
 author:   Sebastian Zug, André Dietrich, Fabian Bär & GitHub Copilot Teaching-Agent & Claude Code (Opus 5.5)
 email:    sebastian.zug@informatik.tu-freiberg.de & andre.dietrich@informatik.tu-freiberg.de & fabian.baer@student.tu-freiberg.de
-version:  0.7.3
+version:  0.7.4
 language: de
 narrator: Deutsch Female
 
 import:   https://raw.githubusercontent.com/liaScript/mermaid_template/master/README.md
+          https://raw.githubusercontent.com/LiaTemplates/Wikimedia/refs/tags/0.0.2/README.md
           https://raw.githubusercontent.com/TUBAF-IfI-LiaScript/VL_EingebetteteSysteme/master/config.md
 
 -->
@@ -166,6 +167,7 @@ timeline
               : 1623 Schickard (Rechenuhr)
               : 1642 Pascal (Pascaline)
               : 1673 Leibniz (Staffelwalze)
+              : 1703 Leibniz (Binärarithmetik veröffentlicht)
 
     1800-1900 : PROGRAMMIERUNG UND LOCHKARTEN
               : um 1805 Jacquard-Webstuhl (Lochkarten-Steuerung)
@@ -174,6 +176,8 @@ timeline
               : 1890 US-Volkszählung mit Hollerith-Lochkarten
 
     1900-1950 : ELEKTRISCHE REVOLUTION
+              : 1936 Turing (universelle Maschine, Grenzen der Berechenbarkeit)
+              : 1937 Shannon (Boolesche Algebra für Relaisschaltungen)
               : 1941 Konrad Zuse Z3 (erster funktionsfähiger programmgesteuerter Digitalrechner)
               : 1945/46 ENIAC (rund 17.500 Elektronenröhren)
               : 1945 von Neumann-Architektur (Grundstruktur heutiger Rechner)
@@ -209,14 +213,35 @@ Der Zeitstrahl zeigt, wie sich die Rechentechnik entwickelt hat: von mechanische
 
 ## Rechenmaschinen
 
-{{0-1}}
+                {{0-1}}
+****************************************************************
+
 Ausgangspunkt für die Vereinfachung des Rechnens ist das Konzept des Stellenwertsystems. In einer positionsunabhängigen Darstellung bedarf es immer neuer Symbole, um größere Zahlen auszudrücken. Im römischen Zahlensystem, das überwiegend additiv arbeitet, sind dies die bekannten Formate `MDCCLXV`. Können Sie den Zahlenwert rekonstruieren? Es ist das Gründungsjahr der Bergakademie.
 
-    --{{0}}--
-Gehen wir die Zeichen von links nach rechts durch: M, D, zweimal C, L, X und V – das sind 1000 plus 500 plus 200 plus 50 plus 10 plus 5, also 1765, das Gründungsjahr der Bergakademie Freiberg. Solche Zahlensysteme sind für maschinelle Verarbeitung ungeeignet: Meist wird addiert, in Ausnahmen wie IV aber abgezogen, und für große Zahlen braucht es immer neue Symbole.
+@Wikimedia.embed(File:Year 1575 in Arabic and Roman numbers.jpg)
 
-{{1-2}}
-> Die Idee, den Wert einer Ziffer von ihrer Position abhängig zu machen, kannten schon die Babylonier (zur Basis 60). Das dezimale Stellenwertsystem mit der Ziffer Null, das wir heute nutzen, stammt aus dem indischen Kulturkreis und kam über arabische Gelehrte nach Europa. Die Null ist dabei der Platzhalter für eine leere Stelle: Ohne sie ließe sich 105 nicht von 15 unterscheiden.
+****************************************************************
+
+    --{{0}}--
+Die Hausinschrift im Bild trägt dieselbe Jahreszahl zweimal: oben 1575 im Stellenwertsystem, darunter M D L X X V. Gehen wir bei unserer Zahl die Zeichen von links nach rechts durch: M, D, zweimal C, L, X und V – das sind 1000 plus 500 plus 200 plus 50 plus 10 plus 5, also 1765, das Gründungsjahr der Bergakademie Freiberg. Solche Zahlensysteme sind für maschinelle Verarbeitung ungeeignet: Meist wird addiert, in Ausnahmen wie IV aber abgezogen, und für große Zahlen braucht es immer neue Symbole.
+
+                {{1-2}}
+****************************************************************
+
+Im **Stellenwertsystem** hängt der Wert einer Ziffer von ihrer Position ab: Jede Stelle steht für eine Potenz der Basis. Ein fester Vorrat an Ziffern genügt für beliebig große Zahlen.
+
+| Darstellung | Basis | So wird gerechnet                                                 | Wert |
+| ----------- | ----- | ----------------------------------------------------------------- | ---- |
+| `MDCCLXV`   | –     | $1000 + 500 + 100 + 100 + 50 + 10 + 5$                            | 1765 |
+| `1765`      | 10    | $1 \cdot 10^3 + 7 \cdot 10^2 + 6 \cdot 10^1 + 5 \cdot 10^0$       | 1765 |
+| `00100000`  | 2     | $1 \cdot 2^5$ (alle anderen Stellen 0)                            | 32   |
+
+Weil jede Stelle gleich behandelt wird, lässt sich Stelle für Stelle mit Übertrag rechnen – genau das macht später ein Addierer in Hardware.
+
+> [!NOTE] Mehr dazu
+> Die Idee kannten schon die Babylonier (zur Basis 60). Das dezimale Stellenwertsystem mit der Ziffer Null, das wir heute nutzen, stammt aus dem indischen Kulturkreis und kam über arabische Gelehrte nach Europa. Die Null ist dabei der Platzhalter für eine leere Stelle: Ohne sie ließe sich 105 nicht von 15 unterscheiden.
+
+****************************************************************
 
     --{{1}}--
 Das Stellenwertsystem ist die Grundlage aller Rechner. Der ATmega328P arbeitet intern mit Binärzahlen, also zur Basis zwei. Wenn Sie Pin dreizehn als Ausgang einstellen, wird im Register D D R B das Bit an der Stelle fünf gesetzt; das zugehörige Byte hat genau an dieser Stelle eine Eins und sonst nur Nullen und hat den Wert zweiunddreißig. Das Prinzip ist dasselbe wie im Dezimalsystem, nur mit zwei statt zehn Ziffern; auch hier braucht man die Null als Ziffer.
@@ -225,8 +250,11 @@ Das Stellenwertsystem ist die Grundlage aller Rechner. Der ATmega328P arbeitet i
 {{2-3}}
 Der Abakus greift diesen Ansatz auf und strukturiert den Rechenprozess. Dabei unterscheidet man verschiedene Systeme. Es existieren Vorgehensmuster für die Umsetzung der Grundrechenarten und des Wurzelziehens.
 
+{{2-3}}
+Warum hat jede Zeile im Bild zehn Kugeln, obwohl neun für die Ziffern 0 bis 9 genügen würden?
+
     --{{2}}--
-Der Abakus ist eines der ältesten Rechenhilfsmittel, seine Wurzeln reichen Jahrtausende zurück. Er nutzt das Stellenwertsystem: Perlen auf Stäben stellen die Ziffern dar. Ein Vergleich mit Ihrem Controller: Die Perlen halten Zwischenergebnisse wie Register, die Rechenregeln entsprechen dem Programm – und die Person am Abakus übernimmt die Rolle des Steuerwerks.
+Der Abakus ist eines der ältesten Rechenhilfsmittel, seine Wurzeln reichen Jahrtausende zurück. Er nutzt das Stellenwertsystem: Perlen auf Stäben stellen die Ziffern dar. Ein Vergleich mit Ihrem Controller: Die Perlen halten Zwischenergebnisse wie Register, die Rechenregeln entsprechen dem Programm – und die Person am Abakus übernimmt die Rolle des Steuerwerks. Neun Kugeln würden für die Ziffern 0 bis 9 genügen. Die zehnte erlaubt, den Übertrag aufzuschieben: Eine volle Zeile mit zehn Kugeln ist ein Zwischenzustand, erst danach tauscht man sie gegen eine Kugel in der nächsten Zeile. Damit gibt es für dieselbe Zahl zwei Darstellungen. Der japanische Soroban kommt mit genau den Werten 0 bis 9 aus, der chinesische Suanpan erlaubt bis 15 pro Stelle, um Zwischenergebnisse abzulegen. Dasselbe Problem begegnet uns in Vorlesung 09 wieder: Der Übertrag durch alle Stellen macht einen Addierer langsam.
 
 {{2-3}}
 ![Abakus](./images/01_Historie/Abakus_Luebeck.jpg "Abakus im Stadtzentrum von Lübeck Dietmar Rabich, Abakus des Wissenschaftspfads, Lübeck, Schleswig-Holstein, Deutschland, https://commons.wikimedia.org/wiki/File:L%C3%BCbeck,_Wissenschaftspfad,_Abakus_--_2017_--_0373.jpg")<!-- width="60%" -->
@@ -261,29 +289,25 @@ Schickards Rechenuhr von 1623 löste das schwierigste Teilproblem der Addition m
 
 ## Abstraktere Konzepte
 
-Bisher stand die Berechnung von einzelnen Ergebnissen auf der Basis einer Sequenz von Eingaben im Vordergrund. Im 19. Jahrhundert entwarfen Visionäre neue Konzepte, die allgemeingültige Lösungen integrierten.
+Die Maschinen von Schickard, Pascal und Leibniz führen jeweils eine Rechenoperation aus, die ein Mensch anstößt – im heutigen Prozessor ist das die Aufgabe des Rechenwerks, der **ALU**. Zwischen dem späten 17. Jahrhundert und den 1930er Jahren kamen zwei Schritte hinzu:
 
-Diesen Aspekt kann man auf technischer und theoretischer Ebene betrachten.
-
-Die Grundlagen moderner Rechner legten die Arbeiten von George Boole (1815 - 1864). Er beschrieb das logische Schließen mit einer Algebra: Aussagen sind wahr oder falsch, verknüpft werden sie mit UND, ODER und NICHT – und für diese Verknüpfungen gelten Rechenregeln wie für Zahlen. Die heutige axiomatische Form dieser „booleschen Algebra“ entstand erst Anfang des 20. Jahrhunderts.
+1. **Architektur:** Ein Programm steuert die Maschine, Zwischenergebnisse liegen in einem Speicher (Jacquard, Babbage).
+2. **Theorie:** Zahlen lassen sich mit zwei Ziffern darstellen (Leibniz), logisches Schließen wird zur Rechnung mit zwei Werten (Boole), und es lässt sich genau sagen, was überhaupt berechenbar ist (Turing).
 
     --{{0}}--
-Booles Algebra der Logik erschien 1854. Den Schritt zur Technik machte 1937 Claude Shannon: Er zeigte, dass sich Relaisschaltungen mit Boolescher Algebra beschreiben und vereinfachen lassen. Seitdem ist sie das Handwerkszeug für jede digitale Schaltung – auch für die Register des ATmega328P, die mit Oder und Und bitweise verändert werden. Die Formel auf der Folie liest man so: f ist wahr, wenn a und b wahr sind oder wenn c falsch ist; die beiden Zeilen zeigen dieselbe Funktion in zwei üblichen Schreibweisen.
+Bisher haben wir Maschinen gesehen, die genau eine Rechnung ausführen; welche, entscheidet der Mensch an der Kurbel. Das entspricht dem Rechenwerk, also der ALU in Ihrem ATmega328P. Ein Rechner wird daraus erst, wenn etwas anderes die Abfolge der Rechnungen steuert und Zwischenergebnisse aufbewahrt. Genau daran arbeiteten Jacquard und Babbage. Auf der theoretischen Seite zeigte Leibniz, dass zwei Ziffern zum Rechnen genügen, George Boole schuf die Mathematik, mit der wir später die Schaltungen selbst beschreiben, und Alan Turing klärte, was eine Maschine überhaupt berechnen kann. Beginnen wir mit Leibniz.
 
-![Boole](./images/01_Historie/George_Boole_color.jpg "George Boole Autor unbekannt, https://commons.wikimedia.org/wiki/File:George_Boole_color.jpg")<!-- width="30%" -->
+                {{1}}
+****************************************************************
 
-$$
-f(a,b,c) = (a \land b) \lor (\neg c) \\
-f(a,b,c) = (a \cdot b) + (\overline{c})
-$$
+Leibniz baute nicht nur dezimale Rechenmaschinen, er arbeitete auch die **Binärarithmetik** vollständig aus – Zählen und Rechnen mit nur zwei Ziffern, 0 und 1. Veröffentlicht hat er sie 1703.
 
-      {{1-2}}
-**Praktisches Beispiel:** In einem C-Programm für den ATmega328P entspricht diese Formel der Bedingung `if ((sensor_A && sensor_B) || !sensor_C)`. Logisch ist das dieselbe Funktion; wie der Compiler sie in Befehle übersetzt, sehen wir später.
+@Wikimedia.embed(`File:Leibniz binary system 1697 (cropped).jpg`)
 
-Im Rahmen dieser Vorlesung werden wir die boolesche Algebra als Grundlage für die digitale Logik verwenden.
+****************************************************************
 
     --{{1}}--
-Warum ist das so wichtig? Boole schuf die mathematische Grundlage, mit der wir heute jede digitale Schaltung beschreiben, vereinfachen und prüfen – genau das machen wir in den nächsten Vorlesungen.
+Das Blatt stammt aus Leibniz' Manuskript „De Dyadicis“, aufbewahrt in der Leibniz-Bibliothek in Hannover. Leibniz notiert hier die Zweierpotenzen: links in Binärschreibweise eins, eins-null, eins-null-null und so weiter, in der Mitte dieselben Werte dezimal, 1, 2, 4 bis 1024, und rechts als Potenzen 2 hoch 0 bis 2 hoch 10. Jede weitere Null verdoppelt den Wert, so wie im Dezimalsystem jede Null den Wert verzehnfacht. Die Zeile eins mit fünf Nullen ist die 32 – genau das Byte aus unserer Tabelle, mit dem Pin dreizehn zum Ausgang wird. Leibniz hat das Binärsystem nicht als Erster benutzt, aber als Erster vollständig beschrieben, mit Regeln für Addition und Multiplikation. Schon 1679 skizzierte er dazu eine Rechenmaschine, in der Kugeln durch geöffnete Löcher fallen: offen steht für eins, geschlossen für null. Gebaut hat er sie nicht. Eine Maschine, die tatsächlich binär rechnet, entstand erst 1941 mit der Z3.
 
 ### Joseph-Marie Jacquard (1752 - 1834) - Automatischer Webstuhl
 
@@ -302,7 +326,7 @@ Ausgangspunkt war die Konstruktion einer Rechenmaschine für die Lösung polynom
 
 + Energiebereitstellung über eine Dampfmaschine
 + Eingabe der Daten und Befehle über Lochkarten
-+ getrennte Einheiten für das Rechnen („Mill“) und das Speichern („Store“)
++ getrennte Einheiten für das Rechnen („Mill“, heute: Rechenwerk/ALU) und das Speichern („Store“, heute: Speicher)
 + Nutzerinterface: Drucker, ein Kurvenplotter und eine Glocke
 + Zahlendarstellung: dezimale Festkommazahlen, pro Stelle ein Zahnrad
 + Speicher für 1000 Zahlen mit je 40 Dezimalstellen (geplant)
@@ -329,6 +353,119 @@ Ada Lovelace übersetzte 1843 einen Artikel von Luigi Menabrea über die Analyti
 
     --{{2}}--
 Ada Lovelace sah weiter als Babbage selbst: Die Maschine verarbeitet Symbole nach Regeln, und Zahlen sind nur ein möglicher Fall – ebenso könnten es Buchstaben oder Töne sein. Genau das tut jeder heutige Rechner; auch für den ATmega328P ist ein Byte nur ein Bitmuster, das erst das Programm als Zahl, Zeichen oder Pinzustand deutet. Ihr Plan für die Bernoulli-Zahlen enthielt bereits eine Schleife, also die wiederholte Ausführung derselben Befehlsfolge.
+
+### George Boole (1815 - 1864) - Algebra der Logik
+
+Ada Lovelace sah, dass eine Maschine Symbole verarbeiten kann, nicht nur Zahlen. George Boole lieferte dazu die Regeln für die einfachsten Symbole überhaupt: wahr und falsch.
+
+George Boole beschrieb das logische Schließen mit einer Algebra: Aussagen sind wahr oder falsch, verknüpft werden sie mit UND, ODER und NICHT – und für diese Verknüpfungen gelten Rechenregeln wie für Zahlen. Die heutige axiomatische Form dieser „booleschen Algebra“ entstand erst Anfang des 20. Jahrhunderts.
+
+    --{{0}}--
+Booles Algebra der Logik erschien 1854. Den Schritt zur Technik machte 1937 Claude Shannon: Er zeigte, dass sich Relaisschaltungen mit Boolescher Algebra beschreiben und vereinfachen lassen. Seitdem ist sie das Handwerkszeug für jede digitale Schaltung – auch für die Register des ATmega328P, die mit Oder und Und bitweise verändert werden. Die Formel auf der Folie liest man so: f ist wahr, wenn a und b wahr sind oder wenn c falsch ist; die beiden Zeilen zeigen dieselbe Funktion in zwei üblichen Schreibweisen.
+
+![Boole](./images/01_Historie/George_Boole_color.jpg "George Boole Autor unbekannt, https://commons.wikimedia.org/wiki/File:George_Boole_color.jpg")<!-- width="30%" -->
+
+$$
+f(a,b,c) = (a \land b) \lor (\neg c) \\
+f(a,b,c) = (a \cdot b) + (\overline{c})
+$$
+
+      {{1-2}}
+**Praktisches Beispiel:** In einem C-Programm für den ATmega328P entspricht diese Formel der Bedingung `if ((sensor_A && sensor_B) || !sensor_C)`. Logisch ist das dieselbe Funktion; wie der Compiler sie in Befehle übersetzt, sehen wir später.
+
+Im Rahmen dieser Vorlesung werden wir die boolesche Algebra als Grundlage für die digitale Logik verwenden.
+
+    --{{1}}--
+Warum ist das so wichtig? Boole schuf die mathematische Grundlage, mit der wir heute jede digitale Schaltung beschreiben, vereinfachen und prüfen – genau das machen wir in den nächsten Vorlesungen.
+
+### Alan Turing (1912 - 1954) - Universelle Maschine
+
+1936 beantwortete Alan Turing eine Frage, die keine der bisherigen Maschinen stellen konnte: **Was lässt sich überhaupt berechnen?** Dazu entwarf er eine gedachte Maschine, so einfach wie möglich:
+
+<!--
+style="width: 70%; min-width: 360px; max-width: 640px;"
+-->
+```ascii
+  ... | 1 | 1 | 0 | B | + | 0 | 1 | 1 | x | ...   Band (unbegrenzt lang)
+                                      ^
+                                      |  Kopf: lesen, schreiben, bewegen
+                              +--------------+      +-----------------------+
+                              | Zustand:     |      | Regeltabelle          |
+                              | „rechts      | ---> | (Zustand, Zeichen) -> |
+                              |  holen, Ü 0“ |      | schreiben, bewegen,   |
+                              +--------------+      | neuer Zustand         |
+                                                    +-----------------------+
+```
+
++ Ein Band mit Feldern, auf denen Zeichen stehen – der Speicher.
++ Ein Kopf liest ein Feld, schreibt ein Zeichen, rückt ein Feld nach links oder rechts.
++ Der Zustand ist alles, was sich die Maschine merkt, ohne es aufzuschreiben – etwa, was sie gerade tut, und den Übertrag.
++ Eine Regeltabelle legt abhängig vom Zustand und vom gelesenen Zeichen fest, was als Nächstes passiert – das Programm.
+
+    --{{0}}--
+Die Maschine kann fast nichts: ein Zeichen lesen, ein Zeichen schreiben, einen Schritt nach links oder rechts gehen. Welcher dieser Schritte als Nächstes kommt, hängt nur vom aktuellen Zustand und vom gelesenen Zeichen ab. Wie man damit trotzdem rechnet, sehen wir gleich an einer Addition.
+
+                {{1-2}}
+****************************************************************
+
+**Beispiel: Addition** $1101_2 + 0110_2$ (13 + 6). Auf dem Band stehen zwei Arten von Zeichen. Turing nennt die Ziffern des eigentlichen Ergebnisses _symbols of the first kind_ (figures). Alles andere sind _symbols of the second kind_ – Markierungen und Notizen, die sich die Maschine während der Rechnung macht. Hier sind das `x` (Ziffer der zweiten Zahl schon verbraucht) sowie `A` und `B` (fertige Ergebnisstelle 0 bzw. 1, als erledigt markiert).
+
+```text
+Start:       1 1 0 1 + 0 1 1 0
+
+Spalte 1:    rechts letzte Ziffer: 0  → durch x ersetzen, „trage 0“ merken
+             links letzte Ziffer: 1  → 1 + 0 + Übertrag 0 = 1, schreibe B
+             1 1 0 B + 0 1 1 x
+
+Spalte 2:    ans Ende, über x nach links → nächste Ziffer: 1 → x
+             links über B hinweg → nächste Ziffer: 0 → 0 + 1 + 0 = 1, schreibe B
+             1 1 B B + 0 1 x x
+
+Spalte 3:    rechts nächste Ziffer: 1 → x
+             links nächste Ziffer: 1 → 1 + 1 + 0 = 10, schreibe A, Übertrag 1
+             1 A B B + 0 x x x
+
+Spalte 4:    rechts nächste Ziffer: 0 → x
+             links nächste Ziffer: 1 → 1 + 0 + 1 = 10, schreibe A, Übertrag 1
+             A A B B + x x x x
+
+Ende:        rechts nur noch x bis zum + → zweite Zahl ist verbraucht
+             Übertrag 1 noch offen → links neben A steht ␣, schreibe B
+             B A A B B + x x x x
+
+Aufräumen:   A → 0, B → 1, alles ab + löschen
+             1 0 0 1 1     = 19 ✓
+```
+
+Ein Ausschnitt der Regeltabelle – die Regeln, die tatsächlich rechnen (Ü = Übertrag):
+
+<!-- data-type="none" -->
+| Zustand            | liest | schreibt | Kopf | neuer Zustand      |
+| ------------------ | ----- | -------- | ---- | ------------------ |
+| rechts holen, Ü 0  | `0`   | `x`      | ←    | links +0, Ü 0      |
+| rechts holen, Ü 0  | `1`   | `x`      | ←    | links +1, Ü 0      |
+| links +1, Ü 0      | `0`   | `B`      | →    | rechts holen, Ü 0  |
+| links +1, Ü 0      | `1`   | `A`      | →    | rechts holen, Ü 1  |
+
+Weitere Zustände lassen den Kopf über `x`, `+`, `A` und `B` hinweglaufen, bis er die richtige Ziffer erreicht.
+
+****************************************************************
+
+    --{{1}}--
+Die Maschine addiert Spalte für Spalte, genau wie Sie schriftlich addieren – nur dass sie zwischen den beiden Zahlen hin- und herlaufen muss, weil sie immer nur ein Feld sieht. Damit sie nicht durcheinanderkommt, macht sie sich Notizen auf dem Band: Ein x heißt „diese Ziffer der zweiten Zahl habe ich schon verarbeitet“, ein A oder B heißt „diese Stelle des Ergebnisses ist fertig, und sie ist 0 beziehungsweise 1“. Das sind Turings Symbole der zweiten Art. Erst beim Aufräumen werden aus A und B wieder echte Ziffern, die Symbole der ersten Art. Und wo steht der Übertrag? Nicht auf dem Band, sondern im Zustand der Maschine: „trage 0“ und „trage 1“ sind zwei verschiedene Zustände der Regeltabelle. Genau so merkt sich auch der ATmega328P den Übertrag – nicht im Speicher, sondern im Carry-Flag seines Statusregisters.
+
+                {{2}}
+****************************************************************
+
+Turing zeigte zweierlei: Es gibt eine **universelle Maschine**, die jede andere nachahmt, wenn man ihr deren Regeltabelle auf das Band schreibt – das Programm wird zu Daten. Und es gibt Fragen, die **keine** Maschine entscheiden kann, etwa ob ein beliebiges Programm irgendwann anhält.
+
+> [!WARNING] Typische Fehlvorstellung
+> „Turing hat mit seinem Computer die Enigma geknackt.“ – Die **Bombe** (Turing, Welchman, 1940) war eine elektromechanische Spezialmaschine ohne Programm, die Schlüsselstellungen durchprobierte. Der elektronische **Colossus** (Tommy Flowers, 1944) richtete sich gegen eine andere Maschine, die Lorenz-Schlüsselmaschine. Turings universelle Maschine blieb ein Gedankenmodell.
+
+****************************************************************
+
+    --{{2}}--
+Turings Maschine wurde nie gebaut, sie ist ein Gedankenmodell. Aber sie zieht die Grenze dessen, was Rechner können – bis heute. Ihr ATmega328P ist im Prinzip universell: Mit genug Speicher und Zeit könnte er alles berechnen, was Ihr Laptop berechnet. Systeme, die jede Turingmaschine nachahmen können, nennt man Turing-vollständig – der Befehlssatz des ATmega328P gehört dazu, nur sein Speicher ist endlich. Die beiden unterscheiden sich also nicht darin, was sie berechnen können, sondern wie schnell. Genauer behandelt das die Theoretische Informatik. Babbage hatte die universelle Maschine mit Zahnrädern geplant, Turing hat bewiesen, dass es sie gibt und wo ihre Grenzen liegen. Und die Idee, das Programm wie Daten auf demselben Band abzulegen, taucht 1945 bei von Neumann wieder auf. Turing selbst arbeitete im Zweiten Weltkrieg in Bletchley Park an der Entschlüsselung der deutschen Enigma. Die Maschine, die er dafür mitentwickelte, die Bombe, war aber kein Computer im Sinne seines eigenen Modells: Sie konnte nur eines, nämlich Schlüsselstellungen durchprobieren, gebaut aus rotierenden Walzen und Relais – dieselben Relais, aus denen Zuse zur gleichen Zeit die Z3 baute. Wie man solche Maschinen tatsächlich aus Schaltern baut, zeigte 1937 Claude Shannon – damit beginnt der nächste Abschnitt und morgen die Boolesche Algebra.
 
 ## Es werde Licht ... elektrische Systeme
 
@@ -384,7 +521,7 @@ Ein Analogrechner stellt eine Größe direkt als Spannung dar: Eine Geschwindigk
 Die Z3 war der erste funktionsfähige programmgesteuerte Digitalrechner weltweit und wurde 1941 von Konrad Zuse in Zusammenarbeit mit Helmut Schreyer in Berlin gebaut. Die Z3 wurde in elektromagnetischer Relaistechnik mit rund 600 Relais für das Rechenwerk und 1400 Relais für das Speicherwerk ausgeführt.
 
     --{{0}}--
-Zuse führte die Z3 im Mai 1941 in Berlin vor; das Original wurde 1943 bei einem Bombenangriff zerstört, im Deutschen Museum steht ein Nachbau. Der Takt von gut fünf Hertz bedeutet: Eine Addition dauert etwa sechs Zehntelsekunden, eine Multiplikation etwa drei Sekunden. Zum Vergleich: Der ATmega328P auf dem Arduino UNO R3 taktet mit sechzehn Megahertz, also rund drei Millionen Mal schneller. Bemerkenswert ist das Fehlen bedingter Sprünge: Die Z3 konnte nicht abhängig von einem Zwischenergebnis verzweigen, jedes Programm lief stur von vorn nach hinten.
+Zuse führte die Z3 im Mai 1941 in Berlin vor; das Original wurde 1943 bei einem Bombenangriff zerstört, im Deutschen Museum steht ein Nachbau. Der Takt von gut fünf Hertz bedeutet: Eine Addition dauert etwa sechs Zehntelsekunden, eine Multiplikation etwa drei Sekunden. Zum Vergleich: Der ATmega328P auf dem Arduino UNO R3 taktet mit sechzehn Megahertz, also rund drei Millionen Mal schneller. Bemerkenswert ist das Fehlen bedingter Sprünge: Die Z3 konnte nicht abhängig von einem Zwischenergebnis verzweigen, jedes Programm lief stur von vorn nach hinten. Entscheidungen traf deshalb der Bediener, und Schleifen entstanden, indem man den Filmstreifen zu einem Ring klebte – wie bei Jacquards Karten. Raúl Rojas hat 1998 gezeigt, dass die Z3 im Sinne Turings trotzdem universell ist, wenn man beide Wege einer Verzweigung ausrechnet und das passende Ergebnis arithmetisch auswählt – praktisch wäre das hoffnungslos langsam gewesen.
 
 + Taktfrequenz etwa 5,3 Hertz[^Z3Rojas]
 + rund 2000 Relais
@@ -394,9 +531,11 @@ Zuse führte die Z3 im Mai 1941 in Berlin vor; das Original wurde 1943 bei einem
 + Programm auf gelochtem Filmstreifen
 + Steuereinheit mit Sequenzer
 + Addition in 3 Takten (etwa 0,6 s), Multiplikation in 16 Takten (etwa 3 s)
-+ keine bedingten Sprünge!
++ keine bedingten Sprünge![^Z3Universal]
 
 [^Z3Rojas]: Raúl Rojas, Sixty Years of Computation – The Machines of Konrad Zuse, ZIB-Report SC-96-09, 1996, Abschnitt „Number of cycles“: Addition 3 Takte, Multiplikation 16 Takte; Zuse nannte 3 s je Multiplikation, daraus folgt ein Takt von 16/3 ≈ 5,3 Hz. https://opus4.kobv.de/opus4-zib/files/220/SC-96-09.pdf
+
+[^Z3Universal]: Raúl Rojas, How to Make Zuse's Z3 a Universal Computer, IEEE Annals of the History of Computing 20(3), 1998.
 
 !?[ZuseZ3 Deutsches Museum](https://www.youtube.com/watch?v=aUXnhVrT4CI)
 
@@ -460,7 +599,10 @@ Heutige Lehrbücher ergänzen dieses Modell um ein **Bussystem** (Steuer-, Adres
 
 ![Neumann](./images/01_Historie/von_Neumann_Architektur.png "Von-Neumann Architektur (Medvedev, Schaltbild einer Von-Neumann-Architektur auf deutsch.: https://commons.wikimedia.org/wiki/File:%22von_Neumann%22_Architektur_de.svg)")<!-- width="60%" -->
 
-Programm und Daten im selben Speicher – das ist der Kern der von-Neumann-Architektur. Die Alternative heißt **Harvard-Architektur**, benannt nach dem Rechner Harvard Mark I (1944), der seine Befehle von einem Lochstreifen getrennt von den Daten las. Ihr ATmega328P ist ein Harvard-Rechner: Das Programm liegt im Flash-Speicher, die Daten im Arbeitsspeicher (SRAM), und beide haben eigene Busse.
+Programm und Daten im selben Speicher – das ist der Kern der von-Neumann-Architektur. Die Alternative heißt **Harvard-Architektur**, benannt nach dem Rechner Harvard Mark I (1944), der seine Befehle von einem Lochstreifen getrennt von den Daten las.
+
+> [!NOTE] Und im ATmega328P?
+> Ihr ATmega328P ist ein Harvard-Rechner: Das Programm liegt im Flash-Speicher, die Daten im Arbeitsspeicher (SRAM), und beide haben eigene Busse.
 
     --{{0}}--
 Von Neumanns Entwurf von 1945 legt die vier Bausteine fest, die Sie in jedem Rechner wiederfinden: Rechenwerk, Steuerwerk, Speicher sowie Ein- und Ausgabe. Neu war vor allem die Idee, das Programm wie Daten im Speicher abzulegen – so lässt es sich ohne Umstecken austauschen, anders als beim ENIAC. Der Preis: Befehle und Daten teilen sich einen Weg zum Speicher und müssen nacheinander geholt werden. Die Harvard-Architektur des ATmega328P umgeht diesen Engpass mit getrennten Speichern und Bussen; deshalb kann er den nächsten Befehl holen, während der aktuelle noch auf Daten zugreift.
@@ -502,7 +644,8 @@ Beispiel: Intel 4004-Architektur (1971)
 + Anzahl Befehle: 46
 + Bauform: 16 Pin (DIP)
 
-**Was bedeutet 4 Bit, 8 Bit, 16 Bit?** Die Angabe nennt die Wortbreite: wie viele Bits der Prozessor in einem Schritt verarbeitet. Der 4004 rechnet mit 4-Bit-Zahlen (0 bis 15) – genug für eine Dezimalziffer, denn er war für einen Tischrechner gebaut. Der ATmega328P ist ein 8-Bit-Prozessor; größere Zahlen setzt er aus mehreren Bytes zusammen.
+> [!IMPORTANT] Merke
+> **Was bedeutet 4 Bit, 8 Bit, 16 Bit?** Die Angabe nennt die **Wortbreite**: wie viele Bits der Prozessor in einem Schritt verarbeitet. Der 4004 rechnet mit 4-Bit-Zahlen (0 bis 15) – genug für eine Dezimalziffer, denn er war für einen Tischrechner gebaut. Der ATmega328P ist ein 8-Bit-Prozessor; größere Zahlen setzt er aus mehreren Bytes zusammen.
 
     --{{0}}--
 Der Intel 4004 entstand 1971 im Auftrag der japanischen Firma Busicom für einen Tischrechner. Der große Wurf: Erstmals saß der komplette Prozessor mit Rechenwerk, Steuerwerk und Registern auf einem einzigen Chip – statt auf vielen Bausteinen verteilt. Vergleichen wir das mit dem ATmega328P auf dem Board Arduino UNO R3: Der Takt ist gut zwanzigmal so hoch. Weil der ATmega328P die meisten Befehle in einem einzigen Takt ausführt, der 4004 aber acht Takte braucht, schafft der ATmega328P rund 170-mal so viele Befehle pro Sekunde – und jeder Befehl verarbeitet acht statt vier Bit.
@@ -511,13 +654,15 @@ Der Intel 4004 entstand 1971 im Auftrag der japanischen Firma Busicom für einen
 
 | Eigenschaft  | Intel 4004        | ATmega328P            | Faktor |
 | ------------ | ----------------- | --------------------- | ------ |
-| Transistoren | 2.300             | vom Hersteller nicht veröffentlicht | –      |
+| Transistoren | 2.300             | nicht veröffentlicht, geschätzt rund 0,5 Mio., überwiegend Speicher[^AVRTransistoren] | ~200x  |
 | Taktfrequenz | 740 kHz           | 16 MHz (Arduino UNO R3) | 22x    |
 | Takte pro Befehl | 8             | meist 1               | –      |
 | Befehle pro Sekunde | rund 92.500 | bis 16 Millionen      | ~170x  |
 | Befehle      | 46                | 131                   | 3x     |
 | Wortbreite   | 4 Bit             | 8 Bit                 | 2x     |
 | Datenspeicher | bis 640 Byte (extern) | 2048 Byte SRAM (auf dem Chip) | 3x     |
+
+[^AVRTransistoren]: Eigene Abschätzung, Microchip nennt keine Zahl. Flash 32 KB ≈ 262.000 Bit mit etwa einem Transistor je Bit, SRAM 2 KB ≈ 16.400 Bit mit sechs Transistoren je Bit (≈ 100.000), EEPROM 1 KB ≈ 8.200 Bit mit etwa zwei Transistoren je Bit; dazu jeweils einige 10.000 für Speicheransteuerung, CPU-Kern und Peripherie. Ergebnis: grob 400.000 bis 700.000 Transistoren – mehr als die Hälfte davon im Speicher.
 
 > Was sagt die Befehlsanzahl aus?
 
@@ -530,60 +675,86 @@ Unterstützung für die Interpretation liefert das Nutzerhandbuch, das den Befeh
 
 ### Weitere Entwicklung
 
-Parallel zu den Mikrocontrollern (siehe Zeitstrahl) entwickelten sich die Prozessoren für PCs und Grafikkarten. Die Tabelle zeigt einige Meilensteine – zum Einordnen, nicht zum Auswendiglernen:
+Parallel zu den Mikrocontrollern (siehe Zeitstrahl) entwickelten sich die Prozessoren für PCs und Grafikkarten – zum Einordnen, nicht zum Auswendiglernen:
 
-| Jahr | Entwicklung                                     | Beschreibung                                                                                     |
-| ---- | ----------------------------------------------- | ------------------------------------------------------------------------------------------------ |
-| 1971 | Intel 4004                                      | Erste kommerzielle CPU auf einem einzigen Chip (4-Bit).                                          |
-| 1978 | Intel 8086                                      | 16-Bit-Architektur und Grundlage für die x86-Architektur.                                        |
-| 1979 | Motorola 68000                                  | 32-Bit interne Architektur.                                                                      |
-| 1985 | ARM1                                            | Einer der ersten kommerziellen RISC-Prozessoren (Reduced Instruction Set Computer).              |
-| 1993 | Intel Pentium                                   | Superskalare Ausführung: mehrere Befehle pro Takt bei x86-Prozessoren.                           |
-| 1999 | Nvidia GeForce 256                              | Erste „GPU“ zur Hardware-Beschleunigung von 3D-Grafikberechnungen.                               |
-| 2003 | AMD Athlon 64                                   | Erste 64-Bit-Desktop-CPU der x86-Familie.                                                        |
-| 2005/06 | Mehrkernprozessoren (AMD Athlon 64 X2, Intel Core) | Mehrere Prozessorkerne auf einem Chip für parallele Verarbeitung.                         |
-| 2010 | Nvidia Fermi-Architektur                        | GPUs für allgemeine Parallelberechnungen (GPGPU) mit CUDA.                                       |
-| 2011 | Intel Sandy Bridge                              | Einführung der integrierten Grafik mit CPU und GPU auf demselben Chip für höhere Effizienz.      |
-| 2015 | AMD HBM (High Bandwidth Memory)                 | Einführung von HBM für schnelle und effiziente Speichernutzung bei GPUs.                         |
-| 2016 | Nvidia Pascal-Architektur und Deep Learning     | GPUs mit optimierter Leistung für KI und Deep Learning (Tesla P100).                             |
-| 2020 | Apple M1 SoC                                    | Erster ARM-basierter Desktop-Prozessor von Apple                                                 |
-| 2022 | Nvidia Ada Lovelace-Architektur                 | Fortschrittliche Architektur für Raytracing und KI-Beschleunigung mit DLSS 3-Technologie.        |
+| Jahr    | Entwicklung                 | Was kam hinzu?                                                              |
+| ------- | --------------------------- | --------------------------------------------------------------------------- |
+| 1978    | Intel 8086                  | 16 Bit; Grundlage der x86-Familie in Ihrem Laptop                           |
+| 1985    | ARM1                        | einer der ersten kommerziellen RISC-Prozessoren                             |
+| 1993    | Intel Pentium               | mehrere Befehle pro Takt (superskalar)                                      |
+| 2003    | AMD Athlon 64               | 64 Bit in der x86-Familie                                                   |
+| 2005/06 | Athlon 64 X2, Intel Core    | mehrere Prozessorkerne auf einem Chip                                       |
+| 2010    | Nvidia Fermi (CUDA)         | Grafikprozessoren für allgemeine Berechnungen                               |
+| 2020    | Apple M1                    | ARM-Prozessor im Desktop, CPU, GPU und KI-Einheit auf einem Chip            |
+| 2024    | Nvidia Blackwell B200       | 208 Milliarden Transistoren auf zwei Chips in einem Gehäuse, gebaut für KI |
 
-
-![Moore](./images/01_Historie/Moores_Law_Transistor_Count_1971-2018.png "Moore's Law (Autor: https://commons.wikimedia.org/wiki/File:Moore%27s_Law_Transistor_Count_1971-2018.png, Max Roser)")<!--
+![Moore](./images/01_Historie/Moores_Law_Transistor_Count_1970-2020.png "Moore's Law: Transistoranzahl 1970–2020 (Max Roser, Hannah Ritchie, Our World in Data, CC BY 4.0, https://commons.wikimedia.org/wiki/File:Moore%27s_Law_Transistor_Count_1970-2020.png)")<!--
 style="width: 80%; display: block; margin-left: auto; margin-right: auto;"-->
 
+**Und heute?** Die Transistorzahl pro Produkt wächst weiter – Blackwell B200 (2024) hat 208 Milliarden, der Wafer-große Chip Cerebras WSE-3 (2024) rund 4 Billionen. Die Dichte pro Fläche wächst aber langsamer als früher, der Takt stagniert seit etwa 2005, und neue Fertigungsprozesse machen den einzelnen Transistor kaum noch billiger. Zuwachs kommt heute aus mehreren Chips in einem Gehäuse (Chiplets), aus gestapelten Chips und aus spezialisierten Rechenwerken für Grafik und KI.
+
+> [!NOTE] Und im ATmega328P?
+> Mikrocontroller brauchen die neuesten Fertigungsprozesse nicht. Sie werden in älteren, billigen Prozessen gefertigt – Flash-Speicher, analoge Bausteine wie der Analog-Digital-Wandler und ein niedriger Preis zählen hier mehr als die Transistordichte.
+
     --{{0}}--
-Die Tabelle zeigt, wohin sich die großen Prozessoren entwickelt haben: breitere Wortbreiten, mehrere Befehle pro Takt, mehrere Kerne und schließlich Grafikprozessoren mit Tausenden einfacher Rechenwerke. Möglich wurde das durch die Entwicklung, die Gordon Moore 1965 beschrieb: Die Zahl der Transistoren pro Chip verdoppelt sich etwa alle zwei Jahre. Beachten Sie die logarithmische Achse im Diagramm – eine Gerade bedeutet dort exponentielles Wachstum, von gut zweitausend Transistoren beim 4004 bis zu vielen Milliarden heute. Mikrocontroller wie der ATmega328P nutzen diesen Fortschritt anders: nicht für mehr Rechenleistung, sondern für einen kompletten Rechner auf einem billigen, sparsamen Chip.
+Die Tabelle zeigt, wohin sich die großen Prozessoren entwickelt haben: breitere Wortbreiten, mehrere Befehle pro Takt, mehrere Kerne und schließlich Grafikprozessoren mit Tausenden einfacher Rechenwerke. Möglich wurde das durch die Entwicklung, die Gordon Moore 1965 beschrieb: Die Zahl der Transistoren pro Chip verdoppelt sich etwa alle zwei Jahre. Beachten Sie die logarithmische Achse im Diagramm – eine Gerade bedeutet dort exponentielles Wachstum, von gut zweitausend Transistoren beim 4004 bis zu vielen Milliarden heute. Seit einigen Jahren wächst die Dichte auf dem einzelnen Chip langsamer; Hersteller wie Intel und TSMC peilen trotzdem rund eine Billion Transistoren pro Gehäuse um 2030 an – durch mehrere gestapelte und nebeneinander verbundene Chips. Mikrocontroller wie der ATmega328P nutzen diesen Fortschritt anders: nicht für mehr Rechenleistung, sondern für einen kompletten Rechner auf einem billigen, sparsamen Chip.
 
 ## Warum ist das alles für Ihr Verständnis wichtig?
 
     --{{0}}--
-Weil ein solides Hardwarewissen Ihnen hilft, Software besser zu verstehen und falsche Aussagen zu erkennen. Die Zitate zeigen, wie oft selbst Fachleute die Entwicklung unterschätzt haben – meist, weil sie die damalige Technik einfach hochgerechnet haben, wie die Zeitschrift, die für die Zukunft leichtere Röhrenrechner vorhersagte. Zwei der bekanntesten Sätze sind übrigens gar nicht belegt. Prüfen Sie Aussagen über Technik daher immer an der Quelle, ob in einem Forum, einem Datenblatt oder in der Antwort eines Sprachmodells.
+Weil ein solides Hardwarewissen Ihnen hilft, Software besser zu verstehen und falsche Aussagen zu erkennen. Die Zitate zeigen, wie oft selbst Fachleute die Entwicklung falsch eingeschätzt haben – meist, weil sie die Technik ihrer Zeit einfach hochgerechnet haben, wie die Zeitschrift, die für die Zukunft leichtere Röhrenrechner vorhersagte. Auch ein Turing- und Nobelpreisträger wie Geoffrey Hinton ist davor nicht sicher: Radiologen werden heute mehr gesucht als 2016. Und Vorsicht mit Zitaten selbst: Viele berühmte Sätze aus der Computergeschichte sind gar nicht belegt, und Ken Olsen meinte nach eigener Aussage Computer, die das ganze Haus steuern, nicht den PC. Deshalb stehen hier zu jedem Zitat die Quellen. Prüfen Sie Aussagen über Technik immer an der Quelle, ob in einem Forum, einem Datenblatt oder in der Antwort eines Sprachmodells.
 
-> Die historische Entwicklung zeigt Muster auf, die sich wiederholen – auch bei den Fehlprognosen:
+Die historische Entwicklung zeigt Muster, die sich wiederholen – auch bei den Fehlprognosen:
 
-> _I think there is a world market for about five computers._ (Thomas J. Watson, IBM, 1943 – zugeschrieben, nicht belegt)
->
-> _Where a calculator like the ENIAC today is equipped with 18,000 vacuum tubes and weighs 30 tons, computers in the future may have only 1,000 vacuum tubes and perhaps weigh only 1 1/2 tons._ (Popular Mechanics, 1949)
->
-> _There is no reason anyone would want a computer in their home._ (Ken Olsen, Gründer der Digital Equipment Corporation, 1977)
->
-> _The Internet will catastrophically collapse in 1996._ (Robert Metcalfe, Erfinder des Ethernet, 1995)
->
-> _Two years from now, spam will be solved._ (Bill Gates, Microsoft, 2004)
->
-> _There's no chance that the iPhone is going to get any significant market share._ (Steve Ballmer, Microsoft, 2007)
->
-> _No one will ever need more than 640 kB of memory for a personal computer._ (Bill Gates, 1981 – zugeschrieben, von ihm bestritten)
+<!-- data-type="none" -->
+| Jahr | Wer                                | Prognose                                                                                                                                                              | Was wurde daraus?                                                                     |
+| ---- | ---------------------------------- | --------------------------------------------------------------------------------------------------------------------------------------------------------------------- | ------------------------------------------------------------------------------------- |
+| 1949 | Popular Mechanics[^PopMech]        | _Where a calculator like the ENIAC today is equipped with 18,000 vacuum tubes and weighs 30 tons, computers in the future may have only 1,000 vacuum tubes and perhaps weigh only 1 1/2 tons._ | Ihr ATmega328P wiegt wenige Gramm – die Röhrentechnik wurde einfach hochgerechnet. |
+| 1977 | Ken Olsen, DEC[^Olsen]             | _There is no reason for any individual to have a computer in his home._                                                                                               | PCs in fast jedem Haushalt; Olsen meinte nach eigener Aussage Computer, die das Haus steuern. |
+| 1995 | Robert Metcalfe, Ethernet[^Metcalfe] | _I predict the Internet will soon go spectacularly supernova and in 1996 catastrophically collapse._                                                                 | Kein Zusammenbruch; Metcalfe aß 1997 seine Kolumne.                                   |
+| 2007 | Steve Ballmer, Microsoft[^Ballmer] | _There's no chance that the iPhone is going to get any significant market share._                                                                                     | iPhone und Android beherrschen heute den Smartphone-Markt.                            |
+| 2016 | Geoffrey Hinton[^Hinton]           | _People should stop training radiologists now. It's just completely obvious that within five years deep learning is going to do better than radiologists._          | Radiologen werden heute mehr gesucht als 2016.                                        |
 
+[^PopMech]: Popular Mechanics, März 1949, Artikel „Brains That Click“; der Wortlaut variiert in den Wiedergaben leicht. https://www.computinghistory.org.uk/pages/3974/Computers-in-the-future-may-weigh-no-more-than-1-5-tons-/
+
+[^Olsen]: Angeblich 1977 auf einem Treffen der World Future Society in Boston; ein zeitgenössischer Beleg fehlt. Olsen erklärte später, er habe Computer gemeint, die den Haushalt steuern. https://www.snopes.com/quotes/kenolsen.asp
+
+[^Metcalfe]: InfoWorld, Kolumne „From the Ether“, 4.12.1995. Metcalfe aß 1997 auf einer Konferenz einen im Mixer zerkleinerten Ausdruck der Kolumne. https://quoteinvestigator.com/2020/03/09/collapse/
+
+[^Ballmer]: Interview mit USA Today, 29.4.2007. https://macrumors.com/2007/04/30/ballmer-on-iphone-marketshare
+
+[^Hinton]: Konferenz „Machine Learning and the Market for Intelligence“, Toronto, 24.11.2016. https://joshuagans.substack.com/p/radiologists-are-the-canaries-in
+
+                {{1}}
+****************************************************************
+
+**Noch offen – prüfen Sie selbst:** Auch heute gibt es kühne Prognosen, gerade zu Ihrem Fach.
+
+<!-- data-type="none" -->
+| Jahr | Wer                        | Prognose                                                                                                                       | Ihre Einschätzung? |
+| ---- | -------------------------- | ------------------------------------------------------------------------------------------------------------------------------ | ------------------ |
+| 2024 | Jensen Huang, Nvidia[^Huang] | _It is our job to create computing technology such that nobody has to program._                                              |                    |
+| 2025 | Dario Amodei, Anthropic[^Amodei] | In three to six months AI writes 90 % of the code – and: _In 12 months, we may be in a world where AI is writing essentially all of the code._ |                    |
+
+Was davon ist eingetreten, wenn Sie Ihr Studium abschließen?
+
+[[___]]
+
+****************************************************************
+
+[^Huang]: World Government Summit, Dubai, Februar 2024. Einen Monat später auf der Nvidia GTC: „if somebody wants to learn to do so, please do – because we're hiring programmers“. https://www.tomshardware.com/tech-industry/artificial-intelligence/jensen-huang-advises-against-learning-to-code-leave-it-up-to-ai
+
+[^Amodei]: Council on Foreign Relations, März 2025. https://fortune.com/2025/03/13/ai-transforming-software-development-jobs-meta-ibm-anthropic/ – Im Oktober 2025 sagte Amodei, für Anthropic treffe das zu, aber „nicht einheitlich“; ob es allgemein eingetreten ist, ist umstritten.
+
+    --{{1}}--
+Zum Schluss zwei Prognosen, die noch nicht entschieden sind und Sie direkt betreffen. Jensen Huang hat 2024 gesagt, es sei die Aufgabe seiner Branche, dass niemand mehr programmieren muss – einen Monat später hat er ergänzt, dass Nvidia Programmierer einstellt. Dario Amodei hat 2025 vorhergesagt, dass KI binnen Monaten fast allen Code schreibt. Notieren Sie Ihre Einschätzung – spätestens bei Ihrem Abschluss wissen Sie, wer recht hatte. Die Muster von eben helfen beim Einordnen: Wer rechnet hier eine Technik einfach hoch, und was fehlt in der Rechnung?
 
 ## Was Sie heute mitnehmen
 
     --{{0}}--
 Diese vier Punkte fassen die Vorlesung zusammen. Wenn Sie sie mit eigenen Worten erklären können, sind Sie gut auf die nächsten Wochen vorbereitet. Gehen Sie dazu noch einmal die Fragen vom Anfang der Vorlesung durch, etwa: Worin unterschieden sich Z3 und ENIAC, und warum ist der ATmega328P ein Harvard-Rechner?
 
-+ Die Grundideen des Rechners sind älter als die Elektronik: das **Stellenwertsystem**, die Steuerung durch ein Programm auf Lochkarten (Jacquard, Babbage) und **Booles Algebra der Logik** (1854).
++ Die Grundideen des Rechners sind älter als die Elektronik: das **Stellenwertsystem** und die **Binärdarstellung** (Leibniz, 1703), die Steuerung durch ein Programm auf Lochkarten (Jacquard, Babbage), **Booles Algebra der Logik** (1854) und Turings Antwort auf die Frage, was überhaupt **berechenbar** ist (1936).
 + Die Bauelemente wechselten – Zahnrad, Relais, Röhre, Transistor –, die Struktur aus Rechenwerk, Steuerwerk, Speicher und Ein-/Ausgabe blieb (**von Neumann**, 1945). Der ATmega328P trennt Programm- und Datenspeicher (**Harvard-Architektur**).
 + Die **Z3** (1941) rechnete bereits binär mit Gleitkommazahlen, der ENIAC noch dezimal. Durchgesetzt hat sich die binäre Darstellung, weil Relais und Transistoren als Schalter genau zwei Zustände sicher unterscheiden.
 + Vom **Intel 4004** (1971: 4 Bit, 740 kHz, 8 Takte pro Befehl, Speicher in externen Bausteinen) zum **ATmega328P** (8 Bit, 16 MHz, meist 1 Takt pro Befehl, Flash und SRAM auf dem Chip): rund 170-mal so viele Befehle pro Sekunde – möglich durch die Miniaturisierung, die Moore's Law beschreibt.
