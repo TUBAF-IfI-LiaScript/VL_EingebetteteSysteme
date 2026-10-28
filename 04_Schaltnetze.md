@@ -1,6 +1,6 @@
 <!--
 
-author:   Sebastian Zug & André Dietrich & Fabian Bär & Copilot
+author:   Sebastian Zug & André Dietrich & Fabian Bär & Copilot & Claude Code (Opus 5.5)
 email:    sebastian.zug@informatik.tu-freiberg.de & andre.dietrich@informatik.tu-freiberg.de & fabian.baer@student.tu-freiberg.de
 version:  0.0.11
 language: de
@@ -49,6 +49,12 @@ gray: @mark(gray,@0)
 + Was ist ein Glitch?
 + Wie können Sie Hazards in kombinatorischen Schaltungen vermeiden?
 + Welche Rolle spielt die Laufzeitverzögerung bei der Schaltnetzsynthese?
+
+<!-- kurslandkarte:knopf-start -->
+
+<a href="https://tubaf-ifi-liascript.github.io/VL_EingebetteteSysteme/kurslandkarte/#termin=4" style="display: inline-block; padding: 0.5em 1.1em; background-color: #00718A; color: #ffffff; text-decoration: none; font-family: 'IBM Plex Sans', 'Segoe UI', system-ui, sans-serif; font-weight: 600;">🗺️ Diese Vorlesung in der Kurslandkarte →</a>
+
+<!-- kurslandkarte:knopf-ende -->
 
 ---------------------------------------------------------------------
 

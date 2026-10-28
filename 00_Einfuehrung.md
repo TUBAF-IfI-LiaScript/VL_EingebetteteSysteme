@@ -1,6 +1,6 @@
 <!--
 
-author:   Sebastian Zug, André Dietrich & `fjangfaragesh`, `FnHm`, `gjaeger`, `ShyFlyGuy`, `Lalelele`
+author:   Sebastian Zug, André Dietrich & `fjangfaragesh`, `FnHm`, `gjaeger`, `ShyFlyGuy`, `Lalelele` & Claude Code (Opus 5.5)
 email:    sebastian.zug@informatik.tu-freiberg.de & andre.dietrich@informatik.tu-freiberg.de & fabian.baer@student.tu-freiberg.de
 version:  0.6.7
 language: de
@@ -80,6 +80,12 @@ Herzlich willkommen zu Digitale Systeme und Eingebettete Systeme! Heute geht es 
 + Was ist ein eingebettetes System, und worin unterscheidet es sich von einem herkömmlichen Computer?
 + Welche Rolle spielen Mikrocontroller wie der ATmega328P in den Geräten Ihres Alltags?
 + Warum lohnt sich dieses Wissen für Informatik, Robotik, Mathematik und Ingenieurwesen – auch im Zeitalter von KI?
+
+<!-- kurslandkarte:knopf-start -->
+
+<a href="https://tubaf-ifi-liascript.github.io/VL_EingebetteteSysteme/kurslandkarte/#termin=0" style="display: inline-block; padding: 0.5em 1.1em; background-color: #00718A; color: #ffffff; text-decoration: none; font-family: 'IBM Plex Sans', 'Segoe UI', system-ui, sans-serif; font-weight: 600;">🗺️ Diese Vorlesung in der Kurslandkarte →</a>
+
+<!-- kurslandkarte:knopf-ende -->
 
 ---------------------------------------------------------------------
 

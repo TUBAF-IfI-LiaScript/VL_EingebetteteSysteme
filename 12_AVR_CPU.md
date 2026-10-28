@@ -1,6 +1,6 @@
 <!--
 
-author:   Sebastian Zug & André Dietrich & Fabian Bär
+author:   Sebastian Zug & André Dietrich & Fabian Bär & Claude Code (Opus 5.5)
 email:    sebastian.zug@informatik.tu-freiberg.de & andre.dietrich@informatik.tu-freiberg.de & fabian.baer@student.tu-freiberg.de
 version:  0.1.2
 language: de
@@ -48,6 +48,12 @@ gray: @mark(gray,@0)
 + Welche Aufgabe haben die Pull-Up-Widerstände für Pins?
 + Welche Grundbestandteile hat ein disassembliertes AVR Mikrocontrollerprogramm?
 + Was passiert nachdem der Reset-Pin eines AVR Mikrocontrollers auf GND gezogen wurde?
+
+<!-- kurslandkarte:knopf-start -->
+
+<a href="https://tubaf-ifi-liascript.github.io/VL_EingebetteteSysteme/kurslandkarte/#termin=12" style="display: inline-block; padding: 0.5em 1.1em; background-color: #00718A; color: #ffffff; text-decoration: none; font-family: 'IBM Plex Sans', 'Segoe UI', system-ui, sans-serif; font-weight: 600;">🗺️ Diese Vorlesung in der Kurslandkarte →</a>
+
+<!-- kurslandkarte:knopf-ende -->
 
 <!--
 style="width: 80%; min-width: 420px; max-width: 720px;"

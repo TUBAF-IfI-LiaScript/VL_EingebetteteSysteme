@@ -1,6 +1,6 @@
 <!--
 
-author:   Sebastian Zug & André Dietrich & Fabian Bär
+author:   Sebastian Zug & André Dietrich & Fabian Bär & Claude Code (Opus 5.5)
 email:    sebastian.zug@informatik.tu-freiberg.de & andre.dietrich@informatik.tu-freiberg.de & fabian.baer@student.tu-freiberg.de
 version:  0.0.10
 language: de
@@ -49,6 +49,12 @@ gray: @mark(gray,@0)
 + Was verstehen Sie unter einem deterministischen endlichen Automaten?
 + Welche Rolle spielt die Zustandskodierung bei der Schaltwerksynthese?
 + Wie können Sie die Anzahl der benötigten Flip-Flops für ein Schaltwerk bestimmen?
+
+<!-- kurslandkarte:knopf-start -->
+
+<a href="https://tubaf-ifi-liascript.github.io/VL_EingebetteteSysteme/kurslandkarte/#termin=7" style="display: inline-block; padding: 0.5em 1.1em; background-color: #00718A; color: #ffffff; text-decoration: none; font-family: 'IBM Plex Sans', 'Segoe UI', system-ui, sans-serif; font-weight: 600;">🗺️ Diese Vorlesung in der Kurslandkarte →</a>
+
+<!-- kurslandkarte:knopf-ende -->
 
 --------------------------------------------------------------------
 

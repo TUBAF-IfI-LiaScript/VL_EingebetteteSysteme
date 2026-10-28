@@ -177,6 +177,8 @@ def erzeuge(repo, kurs, termine, bloecke, linien, begriffe, beziehungen, faeden,
     # ---- Orientierungsfolien in den Materialien (optional)
     if folien:
         _folien(repo, K, T, W, IDX, bloecke, begriffe, beziehungen, faeden, leitfragen, anwendet, brauchen, term_of, karte_url)
+    # ---- Button zur Kurslandkarte unter der Zielstellung (nur wo die Markierung steht)
+    _knopf(repo, K, T, karte_url)
 
     sections = lese_abschnitte()   # nach dem Einbetten: Folien können sich verschoben haben
     for b in begriffe:
@@ -293,6 +295,34 @@ def _startseite(K, T, out, karte, startseite, stand):
         "LIZENZ": K["lizenz"], "REPO": K["repo"],
     }
     return re.sub(r"%%([A-Z_]+)%%", lambda m: ersetzen[m.group(1)], seite)
+
+
+# ---------------------------------------------------------------- Button zur Kurslandkarte
+KNOPF = ("<!-- kurslandkarte:knopf-start -->", "<!-- kurslandkarte:knopf-ende -->")
+# Gestaltung nach der Kurslandkarte: Linkfarbe, IBM Plex, Radius 0, keine Schatten; GitHub zeigt nur den Link
+KNOPF_STIL = ("display: inline-block; padding: 0.5em 1.1em; background-color: #00718A; color: #ffffff; "
+              "text-decoration: none; font-family: 'IBM Plex Sans', 'Segoe UI', system-ui, sans-serif; font-weight: 600;")
+
+
+def _knopf(repo, K, T, karte_url):
+    """Erneuert in jeder Vorlesung mit Material den Block zwischen den knopf-Markierungen.
+    Die Markierung setzt der Kurs selbst (üblich: direkt unter der Zielstellung); ohne Markierung bleibt die Datei unberührt."""
+    text = K.get("knopf_text", "🗺️ Diese Vorlesung in der Kurslandkarte →")
+    for t in T:
+        if typ(t[1]) != "VL" or not t[4]:
+            continue
+        pfad = os.path.join(repo, t[4])
+        if not os.path.exists(pfad):
+            continue
+        s = open(pfad, encoding="utf-8").read()
+        a, e = KNOPF
+        if a not in s or e not in s:
+            continue
+        # Leerzeilen um den Link: LiaScript liest einen Kommentar direkt hinter einem Element als dessen Attribut
+        block = f'{a}\n\n<a href="{karte_url}#termin={t[0]}" style="{KNOPF_STIL}">{text}</a>\n\n{e}'
+        neu = s[:s.index(a)] + block + s[s.index(e) + len(e):]
+        if neu != s:
+            open(pfad, "w", encoding="utf-8").write(neu)
 
 
 # ---------------------------------------------------------------- Orientierungsfolien

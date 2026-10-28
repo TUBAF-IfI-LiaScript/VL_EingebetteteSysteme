@@ -1,6 +1,6 @@
 <!--
 
-author:   Sebastian Zug, André Dietrich, Fabian Bär & GitHub Copilot Teaching-Agent
+author:   Sebastian Zug, André Dietrich, Fabian Bär & GitHub Copilot Teaching-Agent & Claude Code (Opus 5.5)
 email:    sebastian.zug@informatik.tu-freiberg.de & andre.dietrich@informatik.tu-freiberg.de & fabian.baer@student.tu-freiberg.de
 version:  0.7.1
 language: de
@@ -40,6 +40,12 @@ Heute geht es um die Frage, wie aus Zahnrädern, Relais und Röhren der Mikrocon
 + Welche technologischen Durchbrüche ermöglichten die Miniaturisierung von Computern?
 + Worin unterscheiden sich von-Neumann- und Harvard-Architektur – und welche nutzt der Mikrocontroller ATmega328P (Microchip, 8-Bit-AVR)?
 + Welche Rolle spielte die Erfindung des Transistors für die Computerentwicklung?
+
+<!-- kurslandkarte:knopf-start -->
+
+<a href="https://tubaf-ifi-liascript.github.io/VL_EingebetteteSysteme/kurslandkarte/#termin=1" style="display: inline-block; padding: 0.5em 1.1em; background-color: #00718A; color: #ffffff; text-decoration: none; font-family: 'IBM Plex Sans', 'Segoe UI', system-ui, sans-serif; font-weight: 600;">🗺️ Diese Vorlesung in der Kurslandkarte →</a>
+
+<!-- kurslandkarte:knopf-ende -->
 
 ---------------------------------------------------------------------
 
