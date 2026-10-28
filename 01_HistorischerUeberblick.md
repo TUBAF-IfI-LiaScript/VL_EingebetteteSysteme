@@ -2,7 +2,7 @@
 
 author:   Sebastian Zug, André Dietrich, Fabian Bär & GitHub Copilot Teaching-Agent & Claude Code (Opus 5.5)
 email:    sebastian.zug@informatik.tu-freiberg.de & andre.dietrich@informatik.tu-freiberg.de & fabian.baer@student.tu-freiberg.de
-version:  0.7.2
+version:  0.7.3
 language: de
 narrator: Deutsch Female
 
@@ -52,18 +52,13 @@ Heute geht es um die Frage, wie aus Zahnrädern, Relais und Röhren der Mikrocon
 ## Rückblick, Fragen und Diskussionen
 
     --{{0}}--
-In der letzten Vorlesung sind wir mit einer einzigen Zeile Code für das Arduino-Framework durch die Abstraktionsebenen gestiegen. Bevor wir in die Geschichte gehen, eine kurze Kontrolle, ob das noch sitzt. Danach schauen wir auf die Hausaufgabe: Der Compiler Explorer hat gezeigt, dass derselbe C-Code auf verschiedenen Prozessoren unterschiedlich viele Befehle braucht – je nachdem, wie breit ihre Register sind. Genau diese Breite ordnen wir heute historisch ein.
+In der letzten Vorlesung sind wir mit einer einzigen Zeile Code für das Arduino-Framework durch die Abstraktionsebenen gestiegen. Bevor wir in die Geschichte gehen, schauen wir auf die Hausaufgabe: Der Compiler Explorer hat gezeigt, dass derselbe C-Code auf verschiedenen Prozessoren unterschiedlich viele Befehle braucht – je nachdem, wie breit ihre Register sind. Genau diese Breite ordnen wir heute historisch ein.
 
-**Erinnern Sie sich?** Die Kernzeile von `pinMode(13, OUTPUT)`, nämlich `DDRB |= (1 << 5);`, wird zu einem einzigen Maschinenbefehl. Welche Aussage stimmt?
+**Hausaufgabe aus Vorlesung 00:** Was macht der Compiler aus `return a + b;` – einmal mit 8 Bit, einmal mit 32 Bit, für den ATmega328P (Mitte) und für Ihren Laptop (rechts)?
 
-[( )] Der Befehl `sbi 0x04, 5` steht als Text in der Hex-Datei.
-[(X)] Der Befehl `sbi 0x04, 5` steht als zwei Bytes `25 9A` im Programmspeicher.
-[( )] Auch die ganze Funktion `pinMode` wird zu genau diesem einen Befehl.
-***************************************************************
+![Compiler Explorer: links der C-Code, in der Mitte der Assemblercode für AVR, rechts für x86-64](./images/00_Einfuehrung/CompilerExplorer_AVR_x86.png "Compiler Explorer (godbolt.org) mit AVR gcc 14.3 und x86-64 gcc 14.2, Optimierung -O2")<!-- style="width: 100%" -->
 
-Der Assembler übersetzt `sbi 0x04, 5` in das 16-Bit-Wort `0x9A25`; im Speicher steht das niederwertige Byte zuerst: `25 9A`. Übersetzt wird einmal vorher, auf Ihrem Rechner – der Controller führt nur noch die Bytes aus. Die ganze Funktion `pinMode` wird dagegen zu deutlich mehr Befehlen: Sie schlägt Port und Bit in Tabellen nach und sperrt kurz die Interrupts.
-
-***************************************************************
+[Beispiel im Compiler Explorer öffnen](https://godbolt.org/clientstate/eyJzZXNzaW9ucyI6IFt7ImlkIjogMSwgImxhbmd1YWdlIjogImMiLCAic291cmNlIjogIiNpbmNsdWRlIDxzdGRpbnQuaD5cblxudWludDhfdCBhZGRpZXJlOCh1aW50OF90IGEsIHVpbnQ4X3QgYikge1xuICAgIHJldHVybiBhICsgYjtcbn1cblxudWludDMyX3QgYWRkaWVyZTMyKHVpbnQzMl90IGEsIHVpbnQzMl90IGIpIHtcbiAgICByZXR1cm4gYSArIGI7XG59XG4iLCAiY29tcGlsZXJzIjogW3siaWQiOiAiY2F2cmcxNDMwIiwgIm9wdGlvbnMiOiAiLU8yIn0sIHsiaWQiOiAiY2cxNDIiLCAib3B0aW9ucyI6ICItTzIifV19XX0%3D)
 
 **Auflösung der Hausaufgabe:** Für `addiere8` braucht der AVR einen Befehl (`add`), für `addiere32` vier – `add` und dreimal `adc`. Seine Register sind 8 Bit breit, eine 32-Bit-Zahl belegt vier davon, und `adc` („add with carry“) reicht den Übertrag von Byte zu Byte weiter. Ihr Laptop (x86-64) erledigt beides mit einem Befehl, weil seine Register 64 Bit breit sind. Diese Breite heißt **Wortbreite** – heute sehen Sie, wie sie gewachsen ist: vom 4-Bit-Prozessor Intel 4004 über den 8-Bit-ATmega328P bis zu den 64 Bit Ihres Laptops. Wie ein Addierer mit Übertrag aufgebaut ist, bauen wir in Vorlesung 09 nach.
 
