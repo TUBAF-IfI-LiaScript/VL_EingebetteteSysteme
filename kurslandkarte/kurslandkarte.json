@@ -1,5 +1,5 @@
 {
- "stand": "28.10.2026",
+ "stand": "29.10.2026",
  "version": "0.5.0",
  "kurs": {
   "basis": "https://liascript.github.io/course/?https://raw.githubusercontent.com/TUBAF-IfI-LiaScript/VL_EingebetteteSysteme/master/",
@@ -153,7 +153,7 @@
    "freigegeben": false,
    "status": "ausgearbeitet",
    "block": 1,
-   "pdf": null,
+   "pdf": "../pdf/01_HistorischerUeberblick.pdf",
    "anwendet": [],
    "abschnitte": [
     "Historischer Überblick",
