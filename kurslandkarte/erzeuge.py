@@ -442,5 +442,5 @@ for v in range(ANZAHL):
 kern.erzeuge(
     repo=REPO, kurs=KURS, termine=T, bloecke=BLOECKE, linien=LINIEN,
     begriffe=B, beziehungen=R, faeden=F, anwendungen=A, leitfragen=LEITFRAGE, freigegeben=FREIGEGEBEN,
-    karte="kurslandkarte", startseite="index.html", pdf_ordner="pdf", pdf_termine={0, 1},
+    karte="kurslandkarte", startseite="index.html", pdf_ordner="pdf", pdf_termine={0, 1, 2},
 )

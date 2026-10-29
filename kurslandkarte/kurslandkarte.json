@@ -199,7 +199,7 @@
    "freigegeben": false,
    "status": "ausgearbeitet",
    "block": 2,
-   "pdf": null,
+   "pdf": "../pdf/02_BoolscheAlgebra.pdf",
    "anwendet": [],
    "abschnitte": [
     "Boolesche Algebra",
