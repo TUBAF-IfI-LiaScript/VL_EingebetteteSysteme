@@ -2,7 +2,7 @@
 
 author:   Sebastian Zug & André Dietrich & Fabian Bär & Claude Code (Opus 5.5)
 email:    sebastian.zug@informatik.tu-freiberg.de & andre.dietrich@informatik.tu-freiberg.de & fabian.baer@student.tu-freiberg.de
-version:  0.0.7
+version:  0.0.8
 language: de
 narrator: Deutsch Female
 
@@ -45,16 +45,13 @@ gray: @mark(gray,@0)
 
 ---------------------------------------------------------------------
 
-**Fragen an die Veranstaltung**
+**Lernziele:** Nach dieser Vorlesung können Sie
 
-+ Charakterisieren Sie die Merkmale eines eingebetteten Systems!
-+ Beschreiben Sie aktuelle Entwicklungstendenzen eingebetteter Systeme.
-+ Erklären Sie an einem Beispiel die Notwendigkeit für die interdisziplinäre Arbeit bei der Entwicklung von Sensor-Aktor-Systemen!
-+ Welche Arten von Aktoren kennen Sie und wie werden sie angesteuert?
-+ Was müssen Sie bei der PWM-Ansteuerung von Motoren beachten?
-+ Wie funktioniert die Ansteuerung von Servo-Motoren?
-+ Welche Schutzmaßnahmen sind beim Schalten induktiver Lasten erforderlich?
-+ Wie können Sie die Leistung von Aktoren über Mikrocontroller-Pins steuern?
++ Aktoren nach zugeführter und abgegebener Energieform einordnen und Beispiele nennen,
++ erklären, wodurch Strom und Pinzahl die Beschaltung externer Geräte am ATmega328P begrenzen, und Dekoder, Multiplexing und Schieberegister als Auswege vergleichen,
++ die Ansteuerung eines Gleichstrommotors über H-Brücke (Drehrichtung) und PWM (Geschwindigkeit) beschreiben,
++ das Wirkprinzip eines Schrittmotors erklären und begründen, warum er unter Überlast Schritte verliert,
++ ein Servosignal mit Timer 1 im CTC-Modus erzeugen und die nötigen Zählerwerte berechnen.
 
 <!-- kurslandkarte:knopf-start -->
 
@@ -404,6 +401,26 @@ Welche Themenfelder sind wir in den vergangenen Monaten durchlaufen?
 + Standardschaltwerke
 + Basiselemente des Modellrechners
 + Hardwarenahe Programmierung
+
+## Was Sie heute mitnehmen
+
+    --{{0}}--
+Diese fünf Punkte fassen die Vorlesung zusammen: wie der Controller über seine Pins hinaus Lasten schaltet und Motoren bewegt. Die Fragen darunter gehören zu den Lernzielen vom Anfang; rechnen Sie die Zählerwerte für das Servosignal einmal selbst nach.
+
++ **Aktoren** setzen elektrische Signale in Bewegung oder andere physikalische Größen um. Sie unterscheiden sich nach zugeführter und abgegebener Energieform, nach Freiheitsgraden und danach, ob sie diskret oder wertkontinuierlich arbeiten.
++ **Zwei Grenzen der Pins:** Strom und Spannung eines Pins reichen für größere Lasten nicht – die Leistung stellt eine elektronische oder elektromechanische Stufe bereit. Fehlen Pins, helfen **Dekoder**, **Multiplexing** und **Schieberegister**.
++ **Gleichstrommotor:** Die **H-Brücke** legt mit vier Schaltern die Drehrichtung fest, ein **PWM-Signal** die Geschwindigkeit; ein Motortreiber wie der L293D enthält beides.
++ **Schrittmotor:** Die Statorspulen werden in einem festen Muster nacheinander bestromt, der Rotor folgt Schritt für Schritt. Ist das Lastmoment größer als das Motormoment, überspringt er Schritte, und die Position geht verloren.
++ **Servo:** Ein Puls zwischen 1 und 2 ms alle 20 ms gibt die Sollposition vor. Timer 1 im CTC-Modus erzeugt dieses Signal, indem die ISR den Vergleichswert abwechselnd auf Puls- und Pausendauer setzt.
+
+**Prüfen Sie sich:**
+
++ Welche Arten von Aktoren kennen Sie, und wie werden sie angesteuert?
++ Welche zwei Faktoren begrenzen die Beschaltung externer Geräte an den Pins eines Mikrocontrollers, und wie begegnen Sie jedem davon?
++ Wie viele Pins spart ein BCD-zu-7-Segment-Dekoder, und was ändert sich, wenn Sie mehrere Anzeigen per Multiplexing oder über ein Schieberegister ansteuern?
++ Wie steuern Sie Drehrichtung und Geschwindigkeit eines Gleichstrommotors?
++ Wie funktioniert ein Schrittmotor, und warum kann er Schritte verlieren?
++ Wie funktioniert die Ansteuerung eines Servomotors? Wie viele Timer-Ticks entsprechen bei 1 MHz und Prescaler 8 einem Puls von 1,5 ms und einer Periode von 20 ms?
 
 ## Ihre Begriffe für die Kurslandkarte
 

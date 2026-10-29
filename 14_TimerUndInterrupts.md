@@ -2,7 +2,7 @@
 
 author:   Sebastian Zug & André Dietrich & Fabian Bär & Claude Code (Opus 5.5)
 email:    sebastian.zug@informatik.tu-freiberg.de & andre.dietrich@informatik.tu-freiberg.de & fabian.baer@student.tu-freiberg.de
-version:  0.0.10
+version:  0.0.11
 language: de
 narrator: Deutsch Female
 
@@ -45,16 +45,13 @@ gray: @mark(gray,@0)
 
 ---------------------------------------------------------------------
 
-**Fragen an die Veranstaltung**
+**Lernziele:** Nach dieser Vorlesung können Sie
 
-+ Für welche Aufgaben werden die Timerfunktionen des Mikrocontrollers herangezogen?
-+ Wie ist ein Timer grundlegend aufgebaut (Capture&Compare)?
-+ Was ist PWM? Welche Arten der PWM Generierung gibt es?
-+ Welche Schritte werden bei der Abarbeitung von Interrupts durchlaufen?
-+ Welche Folgen können verpasste Interrupts haben? Beziehen Sie sich dabei insbesondere auf verschiedene Sensortypen, mit denen Sie in der Übung gearbeitet haben.
-+ Woraus ergibt sich die Prioritätenfolge der Interrupts beim AVR?
-+ Nennen Sie Interruptquellen beim AVR?
-+ Wie viele Interrupts können sich beim Atmega stauen, ohne dass einer verloren geht?
++ Polling und Interrupts vergleichen und den Ablauf einer Unterbrechung von der Auslösung bis zum Rücksprung beschreiben,
++ beim ATmega328P einen Interrupt über globale und lokale Freigabe aktivieren, eine ISR schreiben und Interruptquellen nennen,
++ erklären, warum Variablen, die Hauptprogramm und ISR teilen, als volatile gekennzeichnet und atomar verändert werden müssen,
++ den Aufbau eines Timers mit Capture- und Compare-Einheit erklären und die Betriebsarten Normal, CTC und PWM unterscheiden,
++ mit Timer 1 ein periodisches Signal oder eine PWM erzeugen und die Frequenz aus Takt, Prescaler und Vergleichswert berechnen.
 
 <!-- kurslandkarte:knopf-start -->
 
@@ -1003,6 +1000,30 @@ int main(void){
 ********************************************************************************
 
 [^megaAVR]: Firma Microchip, megaAVR® Data Sheet, [Link](http://ww1.microchip.com/downloads/en/DeviceDoc/ATmega48A-PA-88A-PA-168A-PA-328-P-DS-DS40002061A.pdf)
+
+## Was Sie heute mitnehmen
+
+    --{{0}}--
+Diese fünf Punkte fassen die Vorlesung zusammen: Interrupts lassen den Controller auf Ereignisse reagieren, Timer erledigen Zeitaufgaben in der Hardware. Die Fragen darunter gehören zu den Lernzielen vom Anfang; rechnen Sie die Frequenz eines Timer-Signals mindestens einmal selbst nach.
+
++ **Polling oder Interrupt:** Beim Polling fragt das Programm ständig ab und belastet den Prozessor; ein **Interrupt** unterbricht das Hauptprogramm nur, wenn das Ereignis eintritt. Der laufende Befehl wird beendet, der Zustand auf dem Stack gesichert, über die **Vektortabelle** in die **ISR** gesprungen und danach zurückgekehrt.
++ **Zweistufige Freigabe beim ATmega328P:** Eine ISR läuft nur, wenn das I-Bit im SREG gesetzt ist, das Maskenbit der Quelle gesetzt ist und das Ereignis eintritt. Pro Quelle merkt sich der Controller nur **ein** ausstehendes Ereignis – ISRs müssen deshalb kurz bleiben.
++ **Gemeinsame Daten:** Variablen, die Hauptprogramm und ISR teilen, sind `volatile`; Lese-Ändere-Schreib-Zugriffe darauf sichern Sie mit `ATOMIC_BLOCK` oder `cli()`/`sei()`.
++ **Ein Timer** ist ein Zähler mit Prescaler. Die **Compare-Einheit** vergleicht den Zählerstand mit einem Register und schaltet einen Ausgang oder löst einen Interrupt aus, die **Capture-Einheit** speichert den Zählerstand bei einem externen Ereignis – beides ohne Rechenzeit der CPU.
++ **PWM:** Im CTC-, Fast-PWM- oder Phase-Correct-Modus erzeugt der Timer Pulsfolgen am Ausgangspin; das **Tastverhältnis** bestimmt die mittlere Spannung, die Frequenz folgt aus Takt, Prescaler und Vergleichs- bzw. TOP-Wert.
+
+**Prüfen Sie sich:**
+
++ Nennen Sie je einen Vor- und Nachteil von Polling und Interrupts.
++ Welche Schritte werden bei der Abarbeitung eines Interrupts durchlaufen?
++ Welche drei Bedingungen müssen erfüllt sein, damit der ATmega328P eine ISR ausführt?
++ Nennen Sie vier Interruptquellen des ATmega328P.
++ Wie oft kann sich der ATmega328P dasselbe Interruptereignis vormerken, während eine ISR läuft, und was folgt daraus für die Dauer einer ISR?
++ Warum ist eine Anweisung wie `port |= 0x03` gefährlich, wenn auch eine ISR auf `port` zugreift, und wie sichern Sie sie ab? Wozu dient `volatile`?
++ Für welche Aufgaben werden Timer in einem Mikrocontroller eingesetzt?
++ Wie ist ein Timer grundlegend aufgebaut, und was leisten Capture- und Compare-Einheit?
++ Was ist PWM, und mit welchen Timer-Modi erzeugt der ATmega328P sie?
++ Timer 1 läuft im CTC-Modus mit 16 MHz, Prescaler 1024 und OCR1A = 15624 und schaltet den Ausgang bei jedem Vergleich um. Welche Frequenz hat das Signal an OC1A?
 
 ## Ihre Begriffe für die Kurslandkarte
 

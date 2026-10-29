@@ -2,7 +2,7 @@
 
 author:   Sebastian Zug, André Dietrich, Fabian Bär & GitHub Copilot Teaching-Agent & Claude Code (Opus 5.5)
 email:    sebastian.zug@informatik.tu-freiberg.de & andre.dietrich@informatik.tu-freiberg.de & fabian.baer@student.tu-freiberg.de
-version:  0.7.4
+version:  0.7.5
 language: de
 narrator: Deutsch Female
 
@@ -32,15 +32,12 @@ Heute geht es um die Frage, wie aus Zahnrädern, Relais und Röhren der Mikrocon
 
 ---------------------------------------------------------------------
 
-**Fragen an die Veranstaltung**
+**Lernziele:** Nach dieser Vorlesung können Sie
 
-+ Worin lag der „große Wurf“ des Intel 4004?
-+ Was bedeutet die Angabe 8 Bit, 16 Bit usw.?
-+ Erklären Sie die Schichten der Rechnerstruktur.
-+ Worin unterschieden sich ENIAC und die Z3?
-+ Welche technologischen Durchbrüche ermöglichten die Miniaturisierung von Computern?
-+ Worin unterscheiden sich von-Neumann- und Harvard-Architektur – und welche nutzt der Mikrocontroller ATmega328P (Microchip, 8-Bit-AVR)?
-+ Welche Rolle spielte die Erfindung des Transistors für die Computerentwicklung?
++ die Grundideen der Rechentechnik – Stellenwertsystem und Binärdarstellung, Programmsteuerung, Boolesche Algebra, Berechenbarkeit – erklären und ihren Urhebern zuordnen,
++ Meilensteine wie Z3, ENIAC, Transistor und Intel 4004 einordnen, vergleichen und den Abstraktionsebenen zuordnen,
++ Von-Neumann- und Harvard-Architektur unterscheiden und dem ATmega328P zuordnen,
++ erklären, was die Wortbreite eines Prozessors (4, 8, 16, 64 Bit) angibt.
 
 <!-- kurslandkarte:knopf-start -->
 
@@ -752,12 +749,22 @@ Zum Schluss zwei Prognosen, die noch nicht entschieden sind und Sie direkt betre
 ## Was Sie heute mitnehmen
 
     --{{0}}--
-Diese vier Punkte fassen die Vorlesung zusammen. Wenn Sie sie mit eigenen Worten erklären können, sind Sie gut auf die nächsten Wochen vorbereitet. Gehen Sie dazu noch einmal die Fragen vom Anfang der Vorlesung durch, etwa: Worin unterschieden sich Z3 und ENIAC, und warum ist der ATmega328P ein Harvard-Rechner?
+Diese vier Punkte fassen die Vorlesung zusammen. Wenn Sie sie mit eigenen Worten erklären können, sind Sie gut auf die nächsten Wochen vorbereitet. Die Fragen darunter gehören zu den Lernzielen vom Anfang, etwa: Worin unterschieden sich Z3 und ENIAC, und warum ist der ATmega328P ein Harvard-Rechner?
 
 + Die Grundideen des Rechners sind älter als die Elektronik: das **Stellenwertsystem** und die **Binärdarstellung** (Leibniz, 1703), die Steuerung durch ein Programm auf Lochkarten (Jacquard, Babbage), **Booles Algebra der Logik** (1854) und Turings Antwort auf die Frage, was überhaupt **berechenbar** ist (1936).
 + Die Bauelemente wechselten – Zahnrad, Relais, Röhre, Transistor –, die Struktur aus Rechenwerk, Steuerwerk, Speicher und Ein-/Ausgabe blieb (**von Neumann**, 1945). Der ATmega328P trennt Programm- und Datenspeicher (**Harvard-Architektur**).
 + Die **Z3** (1941) rechnete bereits binär mit Gleitkommazahlen, der ENIAC noch dezimal. Durchgesetzt hat sich die binäre Darstellung, weil Relais und Transistoren als Schalter genau zwei Zustände sicher unterscheiden.
 + Vom **Intel 4004** (1971: 4 Bit, 740 kHz, 8 Takte pro Befehl, Speicher in externen Bausteinen) zum **ATmega328P** (8 Bit, 16 MHz, meist 1 Takt pro Befehl, Flash und SRAM auf dem Chip): rund 170-mal so viele Befehle pro Sekunde – möglich durch die Miniaturisierung, die Moore's Law beschreibt.
+
+**Prüfen Sie sich:**
+
++ Was hat Leibniz zur Binärdarstellung beigetragen, was Boole zur Logik und was Turing zur Frage, was berechenbar ist?
++ Erklären Sie die Schichten der Rechnerstruktur, und ordnen Sie Relais, Boolesche Algebra und den Befehlssatz des Intel 4004 einer Ebene zu.
++ Worin unterschieden sich ENIAC und die Z3?
++ Welche Rolle spielte die Erfindung des Transistors, und welche technologischen Durchbrüche ermöglichten die Miniaturisierung?
++ Worin lag der „große Wurf“ des Intel 4004?
++ Was bedeutet die Angabe 8 Bit, 16 Bit usw.?
++ Worin unterscheiden sich Von-Neumann- und Harvard-Architektur, und welche nutzt der ATmega328P?
 
 ## Ihre Begriffe für die Kurslandkarte
 

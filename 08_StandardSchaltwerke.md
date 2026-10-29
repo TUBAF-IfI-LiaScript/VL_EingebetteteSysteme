@@ -2,7 +2,7 @@
 
 author:   Sebastian Zug & André Dietrich & Fabian Bär & Claude Code (Opus 5.5)
 email:    sebastian.zug@informatik.tu-freiberg.de & andre.dietrich@informatik.tu-freiberg.de & fabian.baer@student.tu-freiberg.de
-version:  0.0.9
+version:  0.0.10
 language: de
 narrator: Deutsch Female
 
@@ -40,16 +40,12 @@ gray: @mark(gray,@0)
 
 ---------------------------------------------------------------------
 
-**Fragen an die Veranstaltung**
+**Lernziele:** Nach dieser Vorlesung können Sie
 
-+ Welche Funktionalität bieten Standard-Schaltwerke wie Zähler und Register?
-+ Wie unterscheiden sich synchrone und asynchrone Zähler?
-+ Welche Vorteile bietet ein Gray-Code-Zähler gegenüber einem Binärzähler?
-+ Was ist ein Schieberegister und welche Betriebsarten kennen Sie?
-+ Wie funktioniert ein FIFO-Speicher (First-In-First-Out)?
-+ Welche Arten von Speicherbausteinen kennen Sie (SRAM, DRAM, ROM)?
-+ Was verstehen Sie unter einer Pipeline in der Datenverarbeitung?
-+ Wie werden Multiplexer zur Datenweiterleitung in komplexen Systemen eingesetzt?
++ den Entwurfsweg für Schaltwerke an einem Moore-Automaten mit JK-Flip-Flops anwenden (Ampelsteuerung),
++ erklären, wie ein Register aus D-Flip-Flops aufgebaut ist und wie eine Adresse aus mehreren Registern eines auswählt,
++ die Ein- und Ausgabevarianten von Registern (SISO, SIPO, PISO, PIPO) unterscheiden,
++ Zähler nach Taktung, Zahlenformat und Zählrichtung einordnen und einen synchronen Binärzähler mit D-Flip-Flops herleiten.
 
 <!-- kurslandkarte:knopf-start -->
 
@@ -799,6 +795,26 @@ Aus technischen Gründen hat die folgende Simulation noch eine Reset Schaltung (
 Nachteil dieser Schaltung: höhere Laufzeiten
 
 *******************************************************************************
+
+## Was Sie heute mitnehmen
+
+    --{{0}}--
+Diese fünf Punkte fassen die Vorlesung zusammen. Register und Zähler kehren in jeder Rechnerarchitektur wieder; prüfen Sie mit den Fragen darunter, ob Sie ihren Aufbau erklären und einen Zähler selbst herleiten können.
+
++ **Der Entwurfsweg trägt auch größere Aufgaben:** Die Ampelsteuerung entsteht als Moore-Automat mit vier Zuständen, zwei JK-Flip-Flops und einer Ausgabelogik, die aus dem Zustand die drei Lampen ansteuert.
++ **Register** fassen mehrere D-Flip-Flops zusammen, die gemeinsam ein Datenwort speichern. Daten können seriell oder parallel ein- und ausgegeben werden (SISO, SIPO, PISO, PIPO); ein **Schieberegister** kann seinen Inhalt zusätzlich verschieben.
++ **Adressierung:** Bei vielen Registern wählt eine Adresse aus, welches Register beschrieben oder gelesen wird. Dabei werden **Adressbusbreite** und **Datenbusbreite** als zentrale Größen einer Rechnerarchitektur sichtbar.
++ **Zähler** bilden Eingangsimpulse auf Zustände ab. Man unterscheidet sie nach Taktung (synchron oder asynchron), Zahlenformat (binär, BCD, Gray-Code) und Zählrichtung; asynchrone Zähler sind einfacher, ihr Ergebnis hängt aber von den Laufzeiten der Bauteile ab.
++ **Synchroner Binärzähler:** Ein Zählerbit wechselt, wenn das nächst niedrigere Bit von 1 auf 0 springt. Mit D-Flip-Flops ergibt das eine Schaltung aus XOR- und AND-Gattern.
+
+**Prüfen Sie sich:**
+
++ Welche Funktionalität bieten Standard-Schaltwerke wie Zähler und Register?
++ Wie leiten Sie für die Ampelsteuerung aus der Zustandstabelle die Beschaltung der JK-Flip-Flops und die Ausgabelogik ab?
++ Wie ist ein 4-Bit-Register aus D-Flip-Flops aufgebaut, und warum führt man bei vielen Registern eine Adresse ein?
++ Was ist ein Schieberegister, und welche Ein- und Ausgabevarianten (SISO, SIPO, PISO, PIPO) gibt es?
++ Wie unterscheiden sich synchrone und asynchrone Zähler, und welchen Nachteil erkauft man sich mit der einfacheren asynchronen Umsetzung?
++ Wie viele Flip-Flops braucht ein synchroner 4-Bit-Binärzähler, und warum lässt sich jedes Zählerbit mit einem XOR-Gatter umschalten?
 
 ## Ihre Begriffe für die Kurslandkarte
 

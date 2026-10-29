@@ -2,7 +2,7 @@
 
 author:   Sebastian Zug & André Dietrich & Fabian Bär & Claude Code (Opus 5.5)
 email:    sebastian.zug@informatik.tu-freiberg.de & andre.dietrich@informatik.tu-freiberg.de & fabian.baer@student.tu-freiberg.de
-version:  0.0.8
+version:  0.0.9
 language: de
 narrator: Deutsch Female
 
@@ -41,16 +41,13 @@ gray: @mark(gray,@0)
 
 ---------------------------------------------------------------------
 
-**Fragen an die Veranstaltung**
+**Lernziele:** Nach dieser Vorlesung können Sie
 
-+ Was bedeutet der Begriff Auflösung im Zusammenhang mit einem Analog-Digital-Wandler?
-+ Welche Wandlungsmethoden kennen Sie, worin unterscheiden sich diese?
-+ Welches Wandlungskonzept ist im AVR-Core implementiert?
-+ Welche Störungen entstehen ggf. bei der Analog-Digital-Wandlung?
-+ Wovon hängt die Wandlungsdauer beim AVR ab? Durch welche Parameter können Sie diese beeinflussen?
-+ Was ist das Nyquist-Shannon-Abtasttheorem und wie beeinflusst es die ADC-Anwendung?
-+ Wie können Sie das Signal-Rausch-Verhältnis bei der AD-Wandlung verbessern?
-+ Welche Rolle spielt die Referenzspannung bei der Genauigkeit der Wandlung?
++ beschreiben, wie ein Analog-Digital-Wandler ein Signal zeitlich und wertmäßig diskretisiert, und mit dem Abtasttheorem eine ausreichende Abtastrate bestimmen,
++ aus Auflösung und Referenzspannung einen Wandlerwert in eine Spannung umrechnen und den Quantisierungsfehler angeben,
++ Flashwandler, Zählverfahren und sukzessive Approximation erklären und nach Geschwindigkeit und Hardwareaufwand vergleichen,
++ Quantisierungs-, Offset-, Verstärkungs- und Linearitätsfehler unterscheiden,
++ den Analog-Digital-Wandler des ATmega328P konfigurieren – Referenz, Kanal, Vorteiler, Start der Wandlung – und das 10-Bit-Ergebnis auslesen.
 
 <!-- kurslandkarte:knopf-start -->
 
@@ -628,6 +625,28 @@ int main(void)
 ```
 
 [^megaAVR]: Firma Microchip, megaAVR® Data Sheet, [Link](http://ww1.microchip.com/downloads/en/DeviceDoc/ATmega48A-PA-88A-PA-168A-PA-328-P-DS-DS40002061A.pdf)
+
+## Was Sie heute mitnehmen
+
+    --{{0}}--
+Diese fünf Punkte fassen die Vorlesung zusammen: wie aus einer Spannung eine Zahl wird und wie der ATmega328P das umsetzt. Die Fragen darunter gehören zu den Lernzielen vom Anfang; rechnen Sie mindestens ein Beispiel mit Referenzspannung und Auflösung selbst durch.
+
++ **Ein Analog-Digital-Wandler** überführt ein zeit- und wertkontinuierliches Signal in eine zeit- und wertdiskrete Darstellung: Erst wird abgetastet, dann quantisiert. Der Wert ergibt sich aus $ADC = \frac{V_{in}}{V_{ref}} \cdot ADC_{res}$; die **Auflösung** bestimmt den Quantisierungsfehler.
++ **Abtasttheorem:** Ein Signal ohne Anteile oberhalb von $f_c$ lässt sich nur dann aus den Abtastwerten rekonstruieren, wenn häufiger als mit $2 f_c$ abgetastet wird – sonst entstehen **Alias-Effekte**.
++ **Wandlungsverfahren:** Der **Flashwandler** vergleicht mit vielen Komparatoren gleichzeitig – schnell, aber aufwendig. **Zählverfahren** und **sukzessive Approximation** kommen mit einem Komparator und einem Digital-Analog-Wandler aus, sind aber langsamer. Ein einzelner Komparator ist bereits ein 1-Bit-Wandler.
++ **Fehlerquellen:** Neben dem Quantisierungsfehler treten Offset-, Verstärkungs- und Linearitätsfehler auf; eine stabile **Referenzspannung** ist Voraussetzung für genaue Werte.
++ **Der Wandler des ATmega328P** arbeitet mit 10 Bit. Referenz und Kanal wählen Sie in ADMUX, Einschalten, Vorteiler und Start (ADSC) liegen in ADCSRA. Das Ergebnis lesen Sie aus ADCW – bei getrenntem Zugriff zuerst ADCL, dann ADCH.
+
+**Prüfen Sie sich:**
+
++ Was bedeutet die Auflösung eines Analog-Digital-Wandlers, und wie groß ist der Quantisierungsfehler eines 3-Bit-Wandlers mit 8 V Referenzspannung?
++ Ein 10-Bit-Wandler mit 5 V Referenzspannung liefert den Wert 512. Welche Eingangsspannung liegt an?
++ Was besagt das Abtasttheorem, und was passiert, wenn es verletzt wird?
++ Welche Wandlungsverfahren kennen Sie, und worin unterscheiden sie sich in Geschwindigkeit und Hardwareaufwand?
++ Welche Fehlertypen treten bei der Analog-Digital-Wandlung auf, und welcher davon lässt sich nicht abgleichen?
++ Welche Rolle spielt die Referenzspannung für die Genauigkeit der Wandlung?
++ Wovon hängt die Wandlungsdauer beim ATmega328P ab, und mit welchem Parameter beeinflussen Sie sie?
++ Welche Register konfigurieren Sie, um mit dem ATmega328P einen Kanal zu wandeln, und warum lesen Sie ADCL vor ADCH?
 
 ## Ihre Begriffe für die Kurslandkarte
 

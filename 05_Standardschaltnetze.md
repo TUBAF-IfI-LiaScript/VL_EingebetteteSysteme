@@ -2,7 +2,7 @@
 
 author:   Sebastian Zug & André Dietrich & Fabian Bär & Copilot & Claude Code (Opus 5.5)
 email:    sebastian.zug@informatik.tu-freiberg.de & andre.dietrich@informatik.tu-freiberg.de & fabian.baer@student.tu-freiberg.de
-version:  0.0.12
+version:  0.0.13
 language: de
 narrator: Deutsch Female
 
@@ -39,16 +39,12 @@ gray: @mark(gray,@0)
 
 ---------------------------------------------------------------------
 
-**Fragen an die Veranstaltung**
+**Lernziele:** Nach dieser Vorlesung können Sie
 
-+ Unterscheiden Sie Multiplexer und Demultiplexer.
-+ Wie lassen sich mit einem Multiplexer beliebige Wahrheitstafeln abbilden? Welche Grenzen hat dieser Ansatz?
-+ Welche Aufgaben realisieren Dekoder?
-+ Nennen Sie Anwendungsbeispiele für einen Multiplexer.
-+ Was ist der Unterschied zwischen einem Kodierer und einem Prioritätskodierer?
-+ Wie funktioniert die Adressierung bei einem Speicherbaustein mittels Dekoder?
-+ Welche Rolle spielen Tri-State-Buffer in Bus-Systemen?
-+ Erklären Sie die Funktionsweise eines 7-Segment-Displays mit vorgeschaltetem Dekoder.
++ die Aufgaben von Dekodierer, Kodierer und Prioritätskodierer erklären und ihre Schaltfunktionen aus der Wahrheitstafel aufstellen,
++ einen Dekodierer als Adressdekoder einsetzen und aus kleineren Dekodern einen größeren zusammensetzen,
++ Multiplexer und Demultiplexer unterscheiden und ihre Schaltfunktionen angeben,
++ eine beliebige Wahrheitstafel mit einem Multiplexer umsetzen.
 
 <!-- kurslandkarte:knopf-start -->
 
@@ -474,6 +470,27 @@ $y_3 = x \cdot a_1 \cdot a_0$
 ## Ausblick
 
 Nunmehr können boolesche Funktionen als Schaltnetze abbilden? Was fehlt für den Rechner? Zwei Dinge ... Speicher und arithmetische Operationen.
+
+## Was Sie heute mitnehmen
+
+    --{{0}}--
+Diese Punkte fassen die Vorlesung zusammen. Die Fragen darunter gehören zu den Lernzielen vom Anfang: Wenn Sie sie beantworten und die Schaltfunktionen eines Dekodierers oder Multiplexers selbst aufstellen können, sind Sie gut auf die Rechenschaltungen der nächsten Vorlesungen vorbereitet.
+
++ **Ein Dekodierer** wandelt einen $n$-Bit-Binärcode in bis zu $2^n$ Ausgänge um, von denen genau einer aktiv ist – jeder Ausgang ist ein Minterm der Eingänge. Als **Adressdekoder** wählt er per Chip Select einen Speicherbaustein aus, als BCD-Dekoder steuert er eine Siebensegmentanzeige.
++ **Über den Enable-Eingang** lassen sich Dekoder kaskadieren: Zwei 3-zu-8-Dekoder ergeben einen 4-zu-16-Dekoder.
++ **Ein Kodierer** arbeitet umgekehrt und gibt die Binärdarstellung der einen aktiven Eingangsleitung aus. Seine Wahrheitstafel ist unvollständig; der **Prioritätskodierer** legt fest, welcher Eingang bei mehreren aktiven Leitungen gewinnt.
++ **Ein Multiplexer** schaltet über $n$ Steuerleitungen einen von $2^n$ Eingängen auf den Ausgang, ein **Demultiplexer** verteilt einen Eingang auf einen von $2^n$ Ausgängen. Im ATmega328P wählt ein Multiplexer den Kanal für den Analog-Digital-Wandler.
++ **Multiplexer als Wahrheitstafel:** Legt man die Eingangsvariablen an die Steuerleitungen und die Funktionswerte als Konstanten an die Dateneingänge, setzt ein Multiplexer jede Schaltfunktion um.
+
+**Prüfen Sie sich:**
+
++ Welche Aufgaben realisieren Dekodierer? Nennen Sie zwei Anwendungen.
++ Wie funktioniert die Adressierung von Speicherbausteinen mittels Dekoder?
++ Wie bauen Sie aus zwei 3-zu-8-Dekodern einen 4-zu-16-Dekoder auf?
++ Was ist der Unterschied zwischen einem Kodierer und einem Prioritätskodierer, und welches Problem löst Letzterer?
++ Unterscheiden Sie Multiplexer und Demultiplexer, und geben Sie die Schaltfunktion eines 4-zu-1-Multiplexers an.
++ Nennen Sie ein Anwendungsbeispiel für einen Multiplexer im Mikrocontroller.
++ Wie lässt sich mit einem Multiplexer eine beliebige Wahrheitstafel abbilden?
 
 ## Ihre Begriffe für die Kurslandkarte
 

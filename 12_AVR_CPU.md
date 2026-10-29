@@ -2,7 +2,7 @@
 
 author:   Sebastian Zug & André Dietrich & Fabian Bär & Claude Code (Opus 5.5)
 email:    sebastian.zug@informatik.tu-freiberg.de & andre.dietrich@informatik.tu-freiberg.de & fabian.baer@student.tu-freiberg.de
-version:  0.1.2
+version:  0.1.3
 language: de
 narrator: Deutsch Female
 
@@ -39,15 +39,12 @@ gray: @mark(gray,@0)
 
 ---------------------------------------------------------------------
 
-**Fragen an die Veranstaltung**
+**Lernziele:** Nach dieser Vorlesung können Sie
 
-+ Erläutern Sie den Unterschied zwischen Mikroprozessor und Mikrocontroller!
-+ Welche Speichertypen werden bei Mikrocontrollern eingesetzt?
-+ Welcher Idee steht hinter dem „Memory-Mapped-IO“?
-+ Warum haben unterschiedliche Komponenten des Mikrocontrollers verschiedene Taktraten?
-+ Welche Aufgabe haben die Pull-Up-Widerstände für Pins?
-+ Welche Grundbestandteile hat ein disassembliertes AVR Mikrocontrollerprogramm?
-+ Was passiert nachdem der Reset-Pin eines AVR Mikrocontrollers auf GND gezogen wurde?
++ den Unterschied zwischen Mikroprozessor und Mikrocontroller erklären und Kenngrößen für die Auswahl eines Controllers nennen,
++ beschreiben, was der ATmega328P für den Betrieb braucht – Energieversorgung, Taktquelle, Speicher und Reset-System – und die Speicherarten Flash, EEPROM und SRAM unterscheiden,
++ einen Pin des ATmega328P über die Register DDRx und PORTx als Eingang (mit oder ohne Pull-up) oder als Ausgang konfigurieren und einzelne Bits mit Masken setzen, löschen und prüfen,
++ den Weg vom C- oder Assemblerprogramm über die Toolchain bis zur Hex-Datei nachvollziehen und den ersten Befehl im Programmspeicher dekodieren.
 
 <!-- kurslandkarte:knopf-start -->
 
@@ -811,6 +808,28 @@ Nun greift aber eine Besonderheit des AVR Controllers. Dieser adressiert seine S
 ```
 
 Im Programmspeicher steht auf den ersten 8 Byte `jmp 0xe4`
+
+## Was Sie heute mitnehmen
+
+    --{{0}}--
+Diese fünf Punkte fassen die Vorlesung zusammen, vom Mikrocontroller als Rechenkern mit eigener Peripherie bis zum Programm, das als Hex-Datei im Flash landet. Die Fragen darunter gehören zu den Lernzielen vom Anfang: Wenn Sie sie beantworten können, sind Sie für die praktischen Übungen am Arduino UNO R3 gut vorbereitet.
+
++ **Mikrocontroller = Mikroprozessor + Peripherie.** Um den Rechenkern sitzen Timer, Analog-Digital-Wandler, Interrupt-Controller, Schnittstellen, Takterzeugung und Speicher auf einem Chip; der Übergang zum Mikroprozessor ist fließend.
++ **Für den Betrieb** braucht der ATmega328P eine Energieversorgung, einen **Takt** (interner RC-Oszillator, Quarz oder externes Signal), Speicher und ein **Reset-System**. In **Sleep-Modi** schaltet er ungenutzte Takte und Module ab und senkt so die Stromaufnahme.
++ **Drei Speicherarten:** Der **Flash** (32 KByte) hält das Programm, das **EEPROM** (1 KByte) nichtflüchtige Parameter, das **SRAM** (2 KByte) die flüchtigen Daten. Arbeitsregister, I/O-Register und SRAM liegen in einem gemeinsamen Adressraum (**Memory-Mapped-IO**), das EEPROM nicht.
++ **Digitale Ein- und Ausgänge** konfigurieren Sie über **DDRx** (Richtung) und **PORTx** (Ausgangspegel bzw. Pull-up). Mit Masken setzen Sie Bits per `|=`, löschen sie per `&= ~` und prüfen sie per `&`.
++ **Toolchain:** Compiler, Assembler und Linker erzeugen aus dem Quelltext eine ELF-Datei, daraus entsteht die **Hex-Datei** für den Flash. Am Anfang des Programmspeichers steht die Vektortabelle mit Sprungbefehlen.
+
+**Prüfen Sie sich:**
+
++ Erläutern Sie den Unterschied zwischen Mikroprozessor und Mikrocontroller.
++ Welche Speicherarten hat der ATmega328P, wie groß sind sie, und wofür wird jede genutzt?
++ Welche Idee steht hinter Memory-Mapped-IO, und welcher Speicher des ATmega328P gehört nicht dazu?
++ Welche Taktquellen kann der ATmega328P nutzen, und worin unterscheiden sie sich in Genauigkeit und Aufwand?
++ Welche Reset-Quellen hat der ATmega328P, und von welcher Adresse startet die Programmausführung nach einem Reset?
++ Wie konfigurieren Sie mit DDRx und PORTx einen Pin als Eingang mit Pull-up-Widerstand, und wozu dient der Pull-up?
++ Wie setzen, löschen und prüfen Sie ein einzelnes Bit eines Registers in C?
++ Welche Schritte durchläuft ein C-Programm von der Quelldatei bis zur Hex-Datei, und welcher Befehl steht am Anfang des Programmspeichers?
 
 ## Ihre Begriffe für die Kurslandkarte
 

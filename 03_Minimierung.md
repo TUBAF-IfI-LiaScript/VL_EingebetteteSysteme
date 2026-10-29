@@ -2,7 +2,7 @@
 
 author:   Sebastian Zug & André Dietrich & Fabian Bär & Claude Code (Opus 5.5)
 email:    sebastian.zug@informatik.tu-freiberg.de & andre.dietrich@informatik.tu-freiberg.de & fabian.baer@student.tu-freiberg.de
-version:  0.0.6
+version:  0.0.7
 language: de
 narrator: Deutsch Female
 
@@ -27,15 +27,12 @@ import:   https://github.com/liascript/CodeRunner
 
 ---------------------------------------------------------------------
 
-**Fragen an die Veranstaltung**
+**Lernziele:** Nach dieser Vorlesung können Sie
 
-+ Nennen Sie 3 Beispiele, wie eine Schaltfunktion technisch umgesetzt werden kann.
-+ Welcher Unterschied besteht zwischen der DNF und der KDNF?
-+ Welcher Unterschied besteht zwischen der DNF und der KNF?
-+ Geben Sie das De-Morgansche Gesetz wieder.
-+ Welchem Grundkonzept folgt das Diagramm von Karnaugh-Veitch?
-+ Welche Areale können im Diagramm zusammengefasst werden?
-+ Worin unterscheidet sich das Vorgehen mit dem Karnaugh-Veitch-Diagramm für Min- und Maxterme?
++ die Normalformen DNF und KNF sowie ihre kanonischen Formen KDNF und KKNF unterscheiden,
++ aus einer Wahrheitstafel die KDNF und die KKNF einer Schaltfunktion aufstellen,
++ Schaltfunktionen mit bis zu vier Variablen im Karnaugh-Veitch-Diagramm minimieren – über die Einsen zur DNF und über die Nullen zur KNF,
++ Don't-Care-Einträge nutzen, um größere Schleifen und damit einfachere Ausdrücke zu bilden.
 
 <!-- kurslandkarte:knopf-start -->
 
@@ -980,6 +977,27 @@ print(result)
 
 Die Dokumentation zum Sympy Paket von Python finden Sie unter https://docs.sympy.org/latest/modules/logic.html 
 Sympy verwendet intern verschiedene Solver, darunter z.B. z3, dpll2 oder minisat22.
+
+## Was Sie heute mitnehmen
+
+    --{{0}}--
+Diese Punkte fassen die Vorlesung zusammen. Die Fragen darunter gehören zu den Lernzielen vom Anfang: Wenn Sie sie beantworten und ein Karnaugh-Veitch-Diagramm selbst ausfüllen und auswerten können, sind Sie gut auf das Verfahren von Quine-McCluskey in der nächsten Woche vorbereitet.
+
++ **Normalformen:** Eine DNF ist eine Disjunktion von Produkttermen, eine KNF eine Konjunktion von Summentermen. In der **KDNF** enthält jeder Term als **Minterm** alle Variablen, in der **KKNF** jeder Term als **Maxterm** – beide sind bis auf die Reihenfolge eindeutig.
++ **Aus der Wahrheitstafel:** Jede Zeile mit $f = 1$ liefert einen Minterm der KDNF, jede Zeile mit $f = 0$ einen Maxterm der KKNF. Die KDNF lohnt sich, wenn nur wenige Einsen vorkommen, die KKNF bei wenigen Nullen.
++ **Das Karnaugh-Veitch-Diagramm** ordnet die Zeilen der Wahrheitstafel so an, dass sich benachbarte Felder – auch über den Rand hinweg – nur in einer Variablen unterscheiden (Gray-Code). Zusammengefasste Felder fallen nach $x + \overline{x} = 1$ zu einem kürzeren Term zusammen.
++ **Schleifen** umfassen $2^k$ benachbarte Felder; gesucht sind möglichst wenige, möglichst große Schleifen, die alle Einsen überdecken. Fasst man stattdessen die Nullen zusammen, erhält man die KNF.
++ **Don't-Care-Einträge** markieren Eingangskombinationen, deren Ausgabe egal ist – etwa die sechs ungenutzten Codes bei der Ansteuerung einer Siebensegmentanzeige. Sie dürfen in Schleifen einbezogen werden, wo sie diese vergrößern.
+
+**Prüfen Sie sich:**
+
++ Welcher Unterschied besteht zwischen der DNF und der KDNF?
++ Welcher Unterschied besteht zwischen der DNF und der KNF?
++ Wie stellen Sie aus einer Wahrheitstafel die KDNF und die KKNF auf, und wann ist welche Form günstiger?
++ Welchem Grundkonzept folgt die Anordnung der Felder im Karnaugh-Veitch-Diagramm?
++ Welche Bereiche dürfen im Diagramm zu einer Schleife zusammengefasst werden?
++ Worin unterscheidet sich das Vorgehen im Karnaugh-Veitch-Diagramm für Minterme und für Maxterme?
++ Was sind Don't-Care-Einträge, und wie nutzen Sie diese bei der Minimierung?
 
 ## Ihre Begriffe für die Kurslandkarte
 

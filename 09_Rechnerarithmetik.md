@@ -2,7 +2,7 @@
 
 author:   Sebastian Zug & André Dietrich & Fabian Bär & Claude Code (Opus 5.5)
 email:    sebastian.zug@informatik.tu-freiberg.de & andre.dietrich@informatik.tu-freiberg.de & fabian.baer@student.tu-freiberg.de
-version:  0.0.10
+version:  0.0.11
 language: de
 narrator: Deutsch Female
 
@@ -40,17 +40,12 @@ gray: @mark(gray,@0)
 
 ---------------------------------------------------------------------
 
-**Fragen an die Veranstaltung**
+**Lernziele:** Nach dieser Vorlesung können Sie
 
-+ Was ist der Unterschied zwischen einem Stellenwertsystem und einem additiv-wirkenden Zahlensystem?
-+ Zu welcher Basis werden duale, oktale, hexadezimale Zahlen gebildet?
-+ Wie lassen sich Zahlen zwischen diesen Systemen umrechnen?
-+ Wie resultiert daraus der Zahlenraum für 2 Stellen?
-+ Welchen Vorteil bringt die komplementäre Zahlendarstellung mit sich?
-+ Warum arbeiten heutige Rechner ausschließlich mit der 2er-Komplementdarstellung?
-+ Wie sehen die Basis Addier-/Subtrahier Schaltungen aus? Was ist ein Volladdierer / Halbaddierer?
-+ Welchen Vorteil bringt der Carry-Look-Ahead Addierer gegenüber dem Carry-Ripple-Addierer mit?
-+ Warum werden beide Ansätze kombiniert?
++ Zahlen zwischen Dual-, Oktal-, Dezimal- und Hexadezimalsystem umrechnen – auch mit Nachkommastellen,
++ erklären, warum Rechner negative Zahlen im Zweierkomplement darstellen, und einen Überlauf bei der Addition erkennen,
++ Halb- und Volladdierer aus ihrer Wahrheitstafel aufstellen und daraus ein Addier-/Subtrahierwerk aufbauen,
++ Ripple-Carry- und Carry-Look-Ahead-Addierer hinsichtlich Laufzeit und Schaltungsaufwand vergleichen.
 
 <!-- kurslandkarte:knopf-start -->
 
@@ -883,6 +878,27 @@ Ergebnis:  1010100111001010 (43466)
 + Schritt 1: Partielle Produkte
 + Schritt 2: Aggregation der Partiellen Produkte
 + Schritt 3: Finale Addition
+
+## Was Sie heute mitnehmen
+
+    --{{0}}--
+Diese fünf Punkte fassen die Vorlesung zusammen, von der Darstellung einer Zahl im Rechner bis zu den Schaltnetzen, die zwei Zahlen addieren. Wenn Sie die Fragen darunter beantworten und an einem eigenen Zahlenbeispiel vorrechnen können, haben Sie die Grundlage für das Rechenwerk der nächsten Vorlesung.
+
++ **Stellenwertsysteme:** Der Wert einer Ziffer hängt von ihrer Position ab; mit $n$ Stellen zur Basis $b$ stellen Sie die Zahlen $0$ bis $b^n-1$ dar. Zwischen Systemen mit der Basis $2^n$ – dual, oktal, hexadezimal – rechnen Sie blockweise um. Nicht jede Dezimalzahl hat eine endliche Dualdarstellung, $0{,}1_{10}$ zum Beispiel nicht.
++ **Zweierkomplement:** Es kennt nur eine Null, und Addition wie Subtraktion laufen über dasselbe Rechenwerk; dafür ist der Zahlenbereich asymmetrisch. Aktuelle Rechner verwenden ausschließlich das Zweierkomplement.
++ **Feste Wortbreite heißt Überlauf:** Die Summe zweier positiver Zahlen kann negativ erscheinen und umgekehrt. Erkannt wird das an den höchstwertigen Bits der Operanden und des Ergebnisses.
++ **Halb- und Volladdierer:** Der Halbaddierer liefert $S = A \oplus B$ und $C = A \cdot B$, der Volladdierer berücksichtigt zusätzlich den Übertrag der vorigen Stelle. $n$ verkettete Volladdierer bilden den **Ripple-Carry-Addierer**, dessen Laufzeit mit $n$ wächst.
++ **Carry-Look-Ahead:** Aus Generate $G_i$ und Propagate $P_i$ werden alle Überträge parallel in einem zweistufigen Schaltnetz berechnet. Wegen des hohen Fan-in und Fan-out setzt man ihn in Blöcken von $m$ Bit um; für viele Summanden – etwa die Partialprodukte einer Multiplikation – hilft der **Carry-Save-Addierer**.
+
+**Prüfen Sie sich:**
+
++ Was unterscheidet ein Stellenwertsystem von einer additiven Zahlschrift wie den römischen Zahlen?
++ Zu welcher Basis werden Dual-, Oktal- und Hexadezimalzahlen gebildet, und warum lassen sie sich blockweise ineinander umrechnen?
++ Welchen Zahlenbereich können Sie mit $n$ Stellen zur Basis $b$ darstellen? Wandeln Sie $0{,}1_{10}$ in eine Dualzahl um – was fällt auf?
++ Welche Nachteile haben die Darstellung mit Betrag und Vorzeichen und das Einerkomplement, und warum arbeiten heutige Rechner mit dem Zweierkomplement?
++ Woran erkennen Sie, dass die Addition zweier Zahlen im Zweierkomplement übergelaufen ist?
++ Stellen Sie Wahrheitstafel und Gleichungen eines Halb- und eines Volladdierers auf. Wie erweitern Sie ein 4-Bit-Addierwerk zu einem Addier-/Subtrahierwerk?
++ Welchen Vorteil bringt der Carry-Look-Ahead-Addierer gegenüber dem Ripple-Carry-Addierer, und warum setzt man ihn in der Praxis in Blöcken um?
 
 ## Ihre Begriffe für die Kurslandkarte
 

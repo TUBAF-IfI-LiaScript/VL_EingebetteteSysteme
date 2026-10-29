@@ -2,7 +2,7 @@
 
 author:   Sebastian Zug & André Dietrich & Fabian Bär & Claude Code (Opus 5.5)
 email:    sebastian.zug@informatik.tu-freiberg.de & andre.dietrich@informatik.tu-freiberg.de & fabian.baer@student.tu-freiberg.de
-version:  0.0.10
+version:  0.0.11
 language: de
 narrator: Deutsch Female
 
@@ -39,16 +39,12 @@ gray: @mark(gray,@0)
 
 ---------------------------------------------------------------------
 
-**Fragen an die Veranstaltung**
+**Lernziele:** Nach dieser Vorlesung können Sie
 
-+ Welche Kernelemente hat ein Schaltwerk?
-+ Worin unterscheiden sich die Varianten von Mealy und Moore?
-+ Welches Vorgehen ist für die Umsetzung eines Schaltwerkes notwendig?
-+ An welcher Stelle ist die invertierte Wahrheitstabelle eines Flip-Flops wichtig?
-+ Wie erstellen Sie ein Zustandsdiagramm für ein gegebenes Problem?
-+ Was verstehen Sie unter einem deterministischen endlichen Automaten?
-+ Welche Rolle spielt die Zustandskodierung bei der Schaltwerksynthese?
-+ Wie können Sie die Anzahl der benötigten Flip-Flops für ein Schaltwerk bestimmen?
++ den Aufbau eines Schaltwerks aus Schaltnetz und Zustandsspeicher erklären und Moore-, Mealy- und Medwedew-Automaten unterscheiden,
++ für ein gegebenes Problem ein Zustandsdiagramm und eine Zustandstabelle aufstellen,
++ aus der Zustandstabelle über Zustandskodierung, invertierte Wahrheitstafel und Minimierung eine Schaltung mit D- oder JK-Flip-Flops entwerfen,
++ erklären, wie Race Conditions in Schaltwerken entstehen und wie synchrones Design sie vermeidet.
 
 <!-- kurslandkarte:knopf-start -->
 
@@ -1175,6 +1171,28 @@ SYNC -> CDB: Synchrones Signal
 - Simulation mit realistischen Delays
 - Hardware-in-the-Loop-Tests
 - Stress-Tests bei verschiedenen Betriebsbedingungen
+
+## Was Sie heute mitnehmen
+
+    --{{0}}--
+Diese fünf Punkte fassen die Vorlesung zusammen. Wenn Sie die Fragen darunter beantworten und den Entwurfsweg an einem eigenen kleinen Automaten durchspielen können, sind Sie gut auf die Standardschaltwerke in der nächsten Vorlesung vorbereitet.
+
++ **Schaltwerk gleich Schaltnetz plus Zustandsspeicher:** Durch die Rückkopplung über Flip-Flops hängt die Ausgabe nicht nur von der aktuellen Eingabe, sondern auch von der Vorgeschichte ab. Mathematisch beschreibt man das als **deterministischen endlichen Automaten**.
++ **Moore, Mealy, Medwedew:** Beim **Moore-Automaten** hängt die Ausgabe nur vom Zustand ab, beim **Mealy-Automaten** zusätzlich von der Eingabe; beim Medwedew-Automaten ist der Zustand selbst die Ausgabe. Der Mealy-Automat ist die allgemeinere Form – der Sequenzdetektor kommt mit ihm mit einem Zustand weniger aus.
++ **Entwurf in festen Schritten:** Zustandsdiagramm, Zustandstabelle, Zustandskodierung ($\lceil \log_2 n \rceil$ Flip-Flops für $n$ Zustände), Wahrheitstafel für Folgezustände und Ausgaben, DNF oder KNF, Minimierung.
++ **Die invertierte Wahrheitstafel** gibt an, wie die Flip-Flop-Eingänge beschaltet werden müssen, um einen Zustandsübergang zu erreichen. Jeder getaktete Flip-Flop-Typ ist verwendbar; mit JK-Flip-Flops entstehen andere Gleichungen als mit D-Flip-Flops, und die Don't-care-Einträge beeinflussen den Aufwand.
++ **Race Conditions** entstehen, wenn das Ergebnis vom relativen Timing der Signale abhängt. Synchrones Design, Timing-Analyse und Synchronizer zwischen Taktdomänen vermeiden sie.
+
+**Prüfen Sie sich:**
+
++ Welche Kernelemente hat ein Schaltwerk?
++ Was verstehen Sie unter einem deterministischen endlichen Automaten?
++ Worin unterscheiden sich Moore- und Mealy-Automat, und warum kommt der Sequenzdetektor für drei aufeinanderfolgende Einsen als Mealy-Automat mit einem Zustand weniger aus?
++ Wie erstellen Sie ein Zustandsdiagramm für ein gegebenes Problem? Skizzieren Sie es für einen Detektor, der die Folge `101` erkennt.
++ Welche Schritte führen von der Problembeschreibung zur Schaltung eines Schaltwerks, und wie viele Flip-Flops brauchen Sie für $n$ Zustände?
++ Was gibt die invertierte Wahrheitstafel eines Flip-Flops an, und in welchem Entwurfsschritt brauchen Sie sie?
++ Warum ergibt dieselbe Zustandstabelle mit JK-Flip-Flops eine andere Beschaltung als mit D-Flip-Flops?
++ Was ist eine Race Condition in einem Schaltwerk, und wie lässt sie sich vermeiden?
 
 ## Ihre Begriffe für die Kurslandkarte
 

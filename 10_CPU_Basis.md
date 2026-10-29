@@ -2,7 +2,7 @@
 
 author:   Sebastian Zug & André Dietrich & Fabian Bär & Copilot & Claude Code (Opus 5.5)
 email:    sebastian.zug@informatik.tu-freiberg.de & andre.dietrich@informatik.tu-freiberg.de & fabian.baer@student.tu-freiberg.de
-version:  0.0.7
+version:  0.0.8
 language: de
 narrator: Deutsch Female
 
@@ -37,16 +37,12 @@ gray: @mark(gray,@0)
 
 ---------------------------------------------------------------------
 
-**Fragen an die Veranstaltung**
+**Lernziele:** Nach dieser Vorlesung können Sie
 
-+ Welche Funktionalität sollte eine ALU bereitstellen?
-+ Wie werden Programmierbefehle umgesetzt und im Speicher abgebildet?
-+ Welche Aufgaben hat das Steuerwerk?
-+ Wie entwickelt sich ein einfacher Addierer zu einer vollständigen CPU?
-+ Was ist der Unterschied zwischen Harvard- und von-Neumann-Architektur?
-+ Welche Komponenten sind für die Ausführung von Befehlen mindestens erforderlich?
-+ Wie funktioniert die Adressierung von Speicher und I/O-Geräten?
-+ Welche Rolle spielt der Programmzähler (Program Counter) bei der Befehlsausführung?
++ beschreiben, welche Operationen eine ALU bereitstellt und wie Steuerleitungen Operation und Zielregister auswählen,
++ erklären, wie aus einer ALU mit Speicher und Steuerwerk Schritt für Schritt ein programmierbarer Rechner entsteht,
++ die Aufgaben des Steuerwerks und die Rolle des Programmzählers im Befehlszyklus aus Holen, Dekodieren und Ausführen erläutern,
++ die Bausteine der Von-Neumann-Architektur benennen und erklären, wie Ein- und Ausgabe als Memory-Mapped I/O angebunden werden kann.
 
 <!-- kurslandkarte:knopf-start -->
 
@@ -463,6 +459,26 @@ Einige der Ideen des Konzepts wurden bereits von Konrad Zuse erkannt und teilwei
 +------+    +----------+    +------------+
 @endditaa
 ```
+
+## Was Sie heute mitnehmen
+
+    --{{0}}--
+Diese fünf Punkte fassen zusammen, wie aus einem Addierer Schritt für Schritt ein programmierbarer Rechner wird. Wenn Sie die Fragen darunter beantworten und die Schritte an der Tafel nachzeichnen können, sind Sie gut auf den Modellrechner der nächsten Vorlesung vorbereitet.
+
++ **Die ALU** bündelt logische und arithmetische Operationen sowie Schiebeoperationen. Steuerleitungen wählen Operation und Ergebnisregister aus, Statusbits wie Carry oder Overflow melden Besonderheiten des Ergebnisses.
++ **Befehle statt Steuerbits:** Jede Kombination der Steuerleitungen erhält einen Namen wie `ADD_B` und eine Codierung. Eine Folge solcher Befehle im Speicher ist ein Programm.
++ **Das Steuerwerk** berechnet Adressen, interpretiert Befehle, konfiguriert die ALU und wertet ihren Status aus. Der **Programmzähler** zeigt dabei auf den nächsten Befehl – so entsteht der Zyklus aus Holen, Dekodieren und Ausführen.
++ **Daten liegen im selben Speicher wie das Programm.** Befehle wie `LDA` oder `STA` brauchen dafür einen zusätzlichen Speicherzugriff und mehr Schritte als eine reine ALU-Operation. Ein- und Ausgabe koordiniert ebenfalls das Steuerwerk; erscheinen die Geräte wie Speicheradressen, spricht man von **Memory-Mapped I/O**.
++ **Von-Neumann-Architektur (1945):** Rechenwerk, Steuerwerk, ein gemeinsames Speicherwerk für Programm und Daten sowie ein Ein-/Ausgabewerk.
+
+**Prüfen Sie sich:**
+
++ Welche Funktionalität sollte eine ALU bereitstellen, und welche Statusinformationen liefert sie?
++ Wie werden Befehle wie `ADD_B` aus den Steuerleitungen der ALU gebildet, codiert und im Speicher abgelegt?
++ Wie entwickelt sich ein einfacher Addierer schrittweise zu einer vollständigen CPU? Nennen Sie die Zwischenstufen.
++ Welche Aufgaben hat das Steuerwerk, und welche Rolle spielt der Programmzähler bei der Befehlsausführung?
++ Warum braucht ein `LDA` mehr Schritte als ein `ADD_A`?
++ Aus welchen Bausteinen besteht ein Rechner nach von Neumann, und was versteht man unter Memory-Mapped I/O?
 
 ## Ihre Begriffe für die Kurslandkarte
 

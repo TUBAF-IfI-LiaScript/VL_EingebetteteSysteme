@@ -2,7 +2,7 @@
 
 author:   Sebastian Zug & André Dietrich & Fabian Bär & Copilot & Claude Code (Opus 5.5)
 email:    sebastian.zug@informatik.tu-freiberg.de & andre.dietrich@informatik.tu-freiberg.de & fabian.baer@student.tu-freiberg.de
-version:  0.1.0
+version:  0.1.2
 language: de
 narrator: Deutsch Female
 
@@ -29,15 +29,12 @@ import:   https://raw.githubusercontent.com/LiaTemplates/DigiSim/master/README.m
 
 ---------------------------------------------------------------------
 
-**Fragen an die Veranstaltung**
+**Lernziele:** Nach dieser Vorlesung können Sie
 
-+ Nennen Sie die Axiome der Booleschen Algebra.
-+ Erläutern Sie das Dualitätsprinzip der Booleschen Algebra.
-+ Wie viele Schaltfunktionen existieren für 2 Eingangsvariablen?
-+ Nennen Sie 3 Beispiele, wie eine Schaltfunktion technisch umgesetzt werden kann.
-+ Wie viele Zeilen hat die Wahrheitstafel einer Schaltfunktion mit $n$ Eingängen?
-+ Geben Sie das de Morgansche Gesetz wieder.
-+ Wie schreiben Sie eine Boolesche Funktion als Bedingung in C, und wie hilft die De Morgan'sche Regel beim Umformen?
++ erklären, wie aus einer Spannung ein Logikpegel wird und warum Digitaltechnik robust ist,
++ Boolesche Ausdrücke mit den Axiomen und Gesetzen – insbesondere De Morgan – umformen und vereinfachen,
++ eine Schaltfunktion als Wahrheitstafel darstellen und aus der Tafel einen Ausdruck ablesen,
++ Boolesche Funktionen als Bedingungen in C formulieren.
 
 <!-- kurslandkarte:knopf-start -->
 
@@ -146,7 +143,7 @@ option='{
     "name": "abgetastet und quantisiert",
     "data": [2, 4, 5, 6, 6, 6, 4, 2, 1, 1, 2],
     "type": "line",
-    "step": "start",
+    "step": "end",
     "lineStyle": {"width": "2", "type": "dashed"}
   }]
 }'></lia-chart>
@@ -157,25 +154,14 @@ Die Abtastung und Bildung des Digitalsignals erfolgt üblicherweise in konstante
 
 ### Exkurs: Kontrastprogramm - Analoge Rechner
 
-    --{{0}}--
-Als Kontrast ein Rechner, der gar nicht digitalisiert. Im Analogrechner stellt eine Spannung die Rechengröße direkt dar; Addieren und Integrieren übernehmen Verstärkerschaltungen mit Widerständen und Kondensatoren. Programmiert wird durch Stecken von Verbindungen, abgelesen am Oszilloskop oder am Schreiber.
-
-![Meda42](./images/02_BoolscheAlgebra/Analogrechner_MEDA_42TA.jpg "Analogrechner MEDA 42TA Aritma Prag Wuselig, Deutsch: Analogrechner MEDA 42TA Aritma Prag, Tschechoslowakei, um 1970, https://commons.wikimedia.org/wiki/File:Analogrechner_MEDA_42TA-DSC4445.jpg")<!-- width="50%" -->
-
-Die Eingabe erfolgte durch Verbinden der Komponenten mittels Programmierschnüren, Steckern und Rechenimpedanzen (Widerstände für die Summatoren und Integratoren) auf der Programmiertafel.
-
-> [!WARNING] Typische Fehlvorstellung
-> „Der ENIAC wurde mit Steckern programmiert, also war er ein Analogrechner.“ Das Stecken erinnert an den Analogrechner, aber der ENIAC rechnete digital – mit Ziffern, nicht mit Spannungen als Rechengröße.
-
-Zur Auswertung stand zur Verfügung:
-
-+ 6-Strahl-Oszilloskop OPD 280 U
-+ X-Y-Schreiber BAK 5 T
-+ Digitalvoltmeter
+> *Zum Selbststudium – in der Vorlesung nur kurz.*
 
     --{{0}}--
-Die Tabelle zeigt den Preis der analogen Technik: Jede Temperaturänderung und jede Bauteiltoleranz verfälscht das Ergebnis unmittelbar. Ein Digitalsignal verträgt dagegen kleine Abweichungen, solange eindeutig bleibt, ob null oder eins gemeint ist. Wie groß diese Abweichungen sein dürfen, klären wir auf der nächsten Folie.
+Als Kontrast der Rechner aus Vorlesung 01, der gar nicht digitalisiert: Im Analogrechner ist eine Spannung selbst die Rechengröße, Verstärkerschaltungen addieren und integrieren sie. Die Tabelle zeigt den Preis dafür: Jede Temperaturänderung und jede Bauteiltoleranz verfälscht das Ergebnis unmittelbar. Ein Digitalsignal verträgt dagegen kleine Abweichungen, solange eindeutig bleibt, ob null oder eins gemeint ist. Ganz verschwunden ist das analoge Rechnen trotzdem nicht: Für KI-Beschleuniger wird es gerade wiederentdeckt, weil es so wenig Energie braucht. Wie groß diese Abweichungen sein dürfen, klären wir auf der nächsten Folie.
 
+Im Analogrechner (Vorlesung 01) ist eine Spannung selbst die Rechengröße; Verstärkerschaltungen addieren, multiplizieren und integrieren sie ohne den Umweg über Ziffern.
+
+<!-- data-type="none" -->
 |           | Analoge Hardware                                 | Digitale Hardware                        |
 | --------- | ------------------------------------------------ | ---------------------------------------- |
 | Vorteile  | Multiplikation und Addition einfach realisierbar | unempfindlich gegen Störungen (Rauschen) |
@@ -188,17 +174,24 @@ Die Tabelle zeigt den Preis der analogen Technik: Jede Temperaturänderung und j
 
 > Digitaltechnik ermöglicht eine einfache Realisierung robuster Hardware.
 
+**Und heute?** Als Universalrechner sind Analogrechner Geschichte, das analoge Rechnen kommt aber gerade zurück: KI-Beschleuniger berechnen die Multiplikation von Matrix und Vektor als Ströme in Speicherzellen – sehr sparsam, aber mit genau den Nachteilen aus der Tabelle (Rauschen, Drift, begrenzte Präzision). Für Lehre und Simulation von Differentialgleichungen gibt es wieder kleine Analogrechner, etwa den quelloffenen [THE ANALOG THING](https://the-analog-thing.org/) der Firma anabrid.
+
+> [!WARNING] Typische Fehlvorstellung
+> „Der ENIAC wurde mit Steckern programmiert, also war er ein Analogrechner.“ Das Stecken erinnert an den Analogrechner, aber der ENIAC rechnete digital – mit Ziffern, nicht mit Spannungen als Rechengröße.
+
 ### Pegel
 
     --{{0}}--
-Ein digitaler Baustein muss jede Spannung eindeutig als null oder eins deuten. Deshalb legt jeder Standard zwei erlaubte Bereiche fest, Low unten und High oben, und dazwischen einen verbotenen Bereich, für den nichts garantiert wird. Lesen Sie das Diagramm spaltenweise: Für jeden Baustein steht links, was ein Eingang akzeptiert, und rechts, was ein Ausgang liefert. Vergleichen Sie beide Spalten, bevor Sie die Frage beantworten.
+Ein Logikpegel ist die Quantisierung von eben, nur mit zwei Stufen statt acht, also mit einem Bit. Ein digitaler Baustein muss jede Spannung eindeutig als null oder eins deuten. Deshalb legt jeder Standard zwei erlaubte Bereiche fest, Low unten und High oben, und dazwischen einen verbotenen Bereich, für den nichts garantiert wird. Lesen Sie das Diagramm spaltenweise: Für jeden Baustein steht links, was ein Eingang akzeptiert, und rechts, was ein Ausgang liefert. Vergleichen Sie beide Spalten, bevor Sie die Frage beantworten.
 
 {{0}}
 <section>
 
 > Digitalisierung: Aufteilung des kontinuierlichen Spektrums in erlaubte und verbotene Bereiche
 
-Verschiedene Standards definieren unterschiedliche Spannungsbereiche für einen High- und einen Low-Pegel. Dazwischen befindet sich der verbotene Bereich. Links sehen Sie klassische TTL-Gatter, rechts die Werte des ATmega328P bei 5 V Versorgung aus dessen Datenblatt[^ATmega].
+Ein Logikpegel ist der einfachste Fall der Quantisierung von eben: zwei Stufen statt acht, also **1 Bit** – mit einer Lücke dazwischen, damit kleine Abweichungen nicht schaden. Abgetastet wird dabei zunächst nicht; ein Gatter wertet die Spannung ständig aus. Wann ein Wert gilt, legt erst ein Takt fest, den wir mit den Flip-Flops einführen (Vorlesung 06 und 07).
+
+Verschiedene Standards definieren unterschiedliche Spannungsbereiche für einen High- und einen Low-Pegel. Dazwischen befindet sich der verbotene Bereich. Links sehen Sie den klassischen TTL-Standard (was davon heute noch gilt, steht im Exkurs „Schaltertechnik und Pegel in der Praxis“), rechts die Werte des ATmega328P bei 5 V Versorgung aus dessen Datenblatt[^ATmega].
 
 <!--
 style="width: 80%; min-width: 420px; max-width: 720px;"
@@ -229,12 +222,12 @@ V        |   |   |    |   |           |   |   |    |4.2|
 </section>
 
     --{{1}}--
-Entscheidend ist die Asymmetrie: Ein Ausgang verspricht mehr, als ein Eingang verlangt. Beim ATmega328P liefert ein Ausgang im High-Zustand mindestens vier Komma zwei Volt, ein Eingang erkennt aber schon ab drei Volt sicher High. Die Lücke von eins Komma zwei Volt ist die Reserve für Spannungsabfälle auf Leitungen und für Störungen. Für Low gilt dasselbe: Der Ausgang liefert höchstens null Komma neun Volt, der Eingang akzeptiert bis eins Komma fünf Volt.
+Entscheidend ist die Asymmetrie: Ein Ausgang verspricht mehr, als ein Eingang verlangt. Beim ATmega328P liefert ein Ausgang im High-Zustand selbst unter Last, bei zwanzig Milliampere, noch mindestens vier Komma zwei Volt, ein Eingang erkennt aber schon ab drei Volt sicher High. Die Lücke von eins Komma zwei Volt ist die Reserve für Spannungsabfälle auf Leitungen und für Störungen. Für Low gilt dasselbe: Der Ausgang liefert höchstens null Komma neun Volt, der Eingang akzeptiert bis eins Komma fünf Volt.
 
 {{1}}
 <section>
 
-Ein Ausgang garantiert engere Grenzen, als ein Eingang verlangt. Bei TTL liefert ein Ausgang im High-Zustand mindestens 2,4 V, ein Eingang erkennt aber schon ab 2,0 V sicher High. Die Differenz von 0,4 V heißt **Störabstand**: So viel darf das Signal auf dem Weg durch Leitungen und Störungen verlieren, ohne falsch erkannt zu werden. Beim ATmega328P sind es im High-Bereich 4,2 V − 3,0 V = 1,2 V, im Low-Bereich 1,5 V − 0,9 V = 0,6 V.
+Ein Ausgang garantiert engere Grenzen, als ein Eingang verlangt. Bei TTL liefert ein Ausgang im High-Zustand mindestens 2,4 V, ein Eingang erkennt aber schon ab 2,0 V sicher High. Die Differenz von 0,4 V heißt **Störabstand**: So viel darf das Signal auf dem Weg durch Leitungen und Störungen verlieren, ohne falsch erkannt zu werden. Beim ATmega328P sind es im High-Bereich 4,2 V − 3,0 V = 1,2 V, im Low-Bereich 1,5 V − 0,9 V = 0,6 V. Die Ausgangswerte garantiert das Datenblatt bei 20 mA Laststrom (bis 85 °C); ohne Last liegt ein Ausgang fast bei 5 V bzw. 0 V.
 
 **Ein Sensor liefert 2,0 V an einen digitalen Eingang des ATmega328P (5 V). Was liest `digitalRead()`?**
 
@@ -243,39 +236,11 @@ Ein Ausgang garantiert engere Grenzen, als ein Eingang verlangt. Bei TTL liefert
 [(X)] nicht vorhersagbar – die Spannung liegt im verbotenen Bereich
 ***************************************************************
 
-2,0 V liegt zwischen 1,5 V und 3,0 V. Das Datenblatt garantiert dort weder Low noch High; das Ergebnis kann sich sogar von Messung zu Messung ändern.
+2,0 V liegt zwischen 1,5 V und 3,0 V. Das Datenblatt garantiert dort weder Low noch High. Wo die Schaltschwelle tatsächlich liegt, hängt vom einzelnen Exemplar, von der Temperatur und von der Versorgungsspannung ab – darauf darf man sich nicht verlassen.
 
 ***************************************************************
 
 </section>
-
-    --{{2}}--
-Die Tabelle vergleicht drei Techniken, mit denen man Schalter baut: das Relais wie in der Z3, die bipolare TTL-Technik und die CMOS-Technik heutiger Mikrocontroller. Von links nach rechts werden die Schalter schneller, kleiner und sparsamer; galvanisch getrennt ist nur das Relais. Für Ihre Praxis wichtig ist die Zeile zur Störempfindlichkeit: Ein offener CMOS-Eingang hat keinen definierten Pegel, deshalb braucht ein Taster einen Pull-up-Widerstand.
-
-     {{2}}
-***************************************************************
-
-<!-- data-type="none" -->
-| Kriterium / Technologie | **Mechanisches Relais** | **TTL (Transistor-Transistor-Logik)** | **CMOS, z. B. Eingang des ATmega328P** |
-|--------------------------|-------------------------|---------------------------------------|------------------------------------|
-| **Funktionsprinzip** | Mechanischer Schalter mit elektromagnetischer Betätigung | Bipolare Transistorstufen (meist NPN) | MOSFET-Gatter mit hochohmigem Gateeingang |
-| **Schaltzeit** | 5–20 ms | 10–50 ns | < 10 ns (intern) |
-| **Stromverbrauch (aktiv)** | 100–500 mW | einige mW pro Gatter | < 1 µW (Eingang), wenige mW aktiv gesamt |
-| **Eingangswiderstand** | < 1 kΩ (Spule) | ca. 1 kΩ | sehr hoch, Leckstrom ≤ 1 µA |
-| **Schaltspannung (High)** | Abhängig von Spulenspannung (5–24 V üblich) | ≥ 2,0 V (bei 5 V Versorgung) | ≥ 0,6 × V<sub>CC</sub> (3,0 V bei 5 V) |
-| **Schaltspannung (Low)** | 0 V | ≤ 0,8 V | ≤ 0,3 × V<sub>CC</sub> (1,5 V bei 5 V) |
-| **Lebensdauer (Schaltzyklen)** | 10⁵ – 10⁷ | theoretisch unbegrenzt (keine Mechanik) | unbegrenzt (Halbleiter) |
-| **Größe** | cm-Bereich | mm-Bereich (IC) | µm-Bereich (integriert) |
-| **Isolation** | Galvanisch getrennt | Keine galvanische Trennung | Keine galvanische Trennung |
-| **Empfindlichkeit gegenüber Störungen** | Gering | Mittel | Hoch, wenn der Eingang offen ist |
-| **Kosten** | Hoch (0,5 – 2 €) | Mittel (Cent-Bereich pro Gatter) | Niedrig (Millionen Gatter pro Chip) |
-| **Typische Anwendung** | Schaltsignale in Industrie oder Leistungselektronik | Klassische Logikschaltungen | Eingänge von Mikrocontrollern, integrierte Logiksysteme |
-
-> **Hochohmig** heißt: Der Eingang nimmt praktisch keinen Strom auf. Ist er mit nichts verbunden, „schwebt“ seine Spannung und fängt jede Störung ein. Deshalb braucht ein Taster am ATmega328P einen Pull-up-Widerstand (Vorlesung 00): Er legt den offenen Eingang definiert auf High.
-
-> Galvanische Trennung bedeutet, dass **kein direkter elektrischer Leiter** zwischen zwei Schaltungsteilen besteht. Die Information wird über andere physikalische Effekte übertragen, z. B.: Licht, Magnetfelder oder kapazitive Kopplung.
-
-***************************************************************
 
 ## Motivation
 
@@ -295,7 +260,7 @@ Wir betrachten den Schalter mit seinen 2 Zuständen als Input und die Glühlampe
 
 
     --{{1}}--
-Mit zwei Schaltern entstehen die beiden Grundmuster, die Sie sprachlich schon kennen. In Reihe muss der Strom durch beide Schalter, die Lampe leuchtet also nur, wenn der erste und der zweite geschlossen sind. Parallel genügt ein geschlossener Weg, also der erste oder der zweite. Damit werden Und und Oder physikalisch greifbar.
+Mit zwei Schaltern entstehen die beiden Grundmuster, die Sie sprachlich schon kennen. In Reihe muss der Strom durch beide Schalter, die Lampe leuchtet also nur, wenn der erste und der zweite geschlossen sind. Parallel genügt ein geschlossener Weg, also der erste oder der zweite. Damit werden Und und Oder physikalisch greifbar. Dieselben Muster haben Sie gestern bei den Relais gesehen; ersetzt man die Handschalter durch Relaiskontakte, hat man die Bausteine der Z3.
 
                       {{1}}
 ****************************************************************
@@ -350,7 +315,7 @@ Dazu beschreiben wir die Wirkung des elektrischen Stromes
 + wahr / falsch
 + 1 / 0
 
-Welcher Spannung man die 1 zuordnet, ist eine Festlegung. Üblich ist **positive Logik**: hohe Spannung = 1. Bei **negativer Logik** (*active low*) steht die niedrige Spannung für „aktiv“. Ein Beispiel kennen Sie: Ein Taster mit Pull-up-Widerstand liefert gedrückt LOW.
+Welcher Spannung man die 1 zuordnet, ist eine Festlegung. Üblich ist **positive Logik**: hohe Spannung = 1. Bei **negativer Logik** steht die niedrige Spannung für die 1. Häufig ist auch nur ein einzelnes Signal bei Low aktiv, man nennt es dann *active low*. Ein Beispiel kennen Sie aus Vorlesung 00: Ein **Pull-up-Widerstand** verbindet den Eingang mit der Versorgungsspannung und hält ihn auf High, solange der Taster offen ist. Der gedrückte Taster verbindet den Eingang mit GND, der Pin liest LOW. Der ATmega328P hat diesen Widerstand eingebaut, `pinMode(pin, INPUT_PULLUP)` schaltet ihn ein.
 
 > Wie aber können logische Grundverknüpfungen identifiziert werden? Auf welchem Wege lassen diese sich praktisch realisieren?
 
@@ -359,14 +324,13 @@ Welcher Spannung man die 1 zuordnet, ist eine Festlegung. Üblich ist **positive
 ## Axiome und Gesetze
 
     --{{0}}--
-Die Idee, Schlussfolgern in feste Regeln zu fassen, ist sehr alt; George Boole hat sie 1854 als Algebra formuliert. Den Schritt zur Technik machte Claude Shannon, als er zeigte, dass Relaisschaltungen genau diesen Regeln gehorchen. Seitdem kann man Schaltungen auf dem Papier vergleichen, umformen und vereinfachen, bevor man ein einziges Bauteil verdrahtet.
+Gestern haben Sie George Boole kennengelernt, der 1854 das logische Schließen als Algebra formulierte, und am Ende den Ausblick auf Claude Shannon. Shannon machte 1937 den Schritt zur Technik: Er zeigte, dass Schaltungen aus Relaiskontakten genau diesen Regeln gehorchen – Reihen- und Parallelschaltung, wie eben bei den Schaltern, entsprechen den Verknüpfungen der Algebra. Seitdem kann man Schaltungen auf dem Papier vergleichen, umformen und vereinfachen, bevor man ein einziges Bauteil verdrahtet.
 
 Historische Entwicklung:
 
-+ Aristoteles (384-322 v.Chr.) begründet „Syllogistik“ Lehre von den logischen Schlussformen
-+ Die Stoiker entwickeln daneben eine eigenständige Aussagenlogik; im Mittelalter führt die Scholastik beide Traditionen weiter.
-+ George Boole (1815-1864) 1854 mathematische Formalisierung in _„An Investigation of the Laws of Thought on which are founded the Mathematical Theories of Logic and Probabilities"_.
-+ Claude Shannon (1916-2001) zeigt in seiner Masterarbeit _„A Symbolic Analysis of Relay and Switching Circuits“_ (MIT 1937, veröffentlicht 1938), dass man Relaisschaltungen mit der Booleschen Algebra beschreiben und vereinfachen kann.
++ Aristoteles (384-322 v.Chr.) begründet die „Syllogistik“, die Lehre von den logischen Schlussformen; die Stoiker entwickeln daneben eine Aussagenlogik.
++ George Boole (1815-1864) formalisiert 1854 das Schließen als Algebra in _„An Investigation of the Laws of Thought“_ (Vorlesung 01).
++ Claude Shannon (1916-2001) zeigt in seiner Masterarbeit _„A Symbolic Analysis of Relay and Switching Circuits“_ (MIT 1937, veröffentlicht 1938), dass man Relaisschaltungen mit der Booleschen Algebra beschreiben und vereinfachen kann. Damit wird aus Logik Schaltungstechnik.
 
 ![Shannon](./images/02_BoolscheAlgebra/ClaudeShannon_MFO3807.jpg "Claude Shannon Jacobs, Konrad, Shannon, Claude, https://commons.wikimedia.org/wiki/File:ClaudeShannon_MFO3807.jpg")<!-- width="25%" -->
 
@@ -386,13 +350,13 @@ __Lösung:__ Boolesche Algebra basierend auf den Vorarbeiten von G. Boole aus de
 Für dieselben drei Operationen gibt es mehrere Schreibweisen. In dieser Vorlesung steht das Pluszeichen für Oder, der Malpunkt für Und und ein Strich über der Variablen für Nicht. Das Plus ist dabei kein Rechenplus, denn eins oder eins ergibt eins. In C haben dieselben Verknüpfungen eigene Operatoren, dazu mehr am Ende der Vorlesung.
 
 <!-- data-type="none" -->
-| Bedeutung | Schreibweise hier | Aussagenlogik | C          |
-| --------- | ----------------- | ------------- | ---------- |
-| ODER      | $a + b$           | $a \vee b$    | `a \|\| b` |
-| UND       | $a \cdot b$ oder $ab$ | $a \wedge b$ | `a && b` |
-| NICHT     | $\overline{a}$    | $\neg a$      | `!a`       |
+| Bedeutung | Schreibweise hier | Aussagenlogik | C          | Python    |
+| --------- | ----------------- | ------------- | ---------- | --------- |
+| ODER      | $a + b$           | $a \vee b$    | `a \|\| b` | `a or b`  |
+| UND       | $a \cdot b$ oder $ab$ | $a \wedge b$ | `a && b` | `a and b` |
+| NICHT     | $\overline{a}$    | $\neg a$      | `!a`       | `not a`   |
 
-> **Achtung:** $+$ ist hier kein Rechenplus. Es gilt $1 + 1 = 1$. Wie in der Schulmathematik bindet $\cdot$ stärker als $+$, und der Punkt darf entfallen: $ab + c = (a \cdot b) + c$.
+> **Achtung:** $+$ ist hier kein Rechenplus. Es gilt $1 + 1 = 1$. Wie in der Schulmathematik bindet $\cdot$ stärker als $+$, und der Punkt darf entfallen: $ab + c = (a \cdot b) + c$. Ein Negationsstrich gilt für alles, was unter ihm steht: $\overline{a + b}$ negiert die ganze Summe, $\overline{a} + b$ nur $a$.
 
 
 Nach [Huntington](https://de.wikipedia.org/wiki/Edward_Vermilye_Huntington) ist eine Boolesche Algebra eine Menge $B$ mit zwei Verknüpfungen $+$ und $\cdot$, die für alle $a, b, c \in B$ die folgenden vier Axiome erfüllt. Ein Axiom ist eine Grundregel, die man nicht beweist; alles Weitere folgt daraus. Für Schaltungen genügt $B = \{0,1\}$, dort lassen sich alle Axiome an der Wertetabelle nachprüfen.
@@ -424,21 +388,59 @@ Aus dieser Definition lassen sich die zugehörigen Gesetze der booleschen Algebr
 | Doppelnegation       | $\begin{aligned} a = \overline{\overline{a}}\end{aligned}$                                                                                 |
 | De Morgan'sche Regel | $\begin{aligned} \overline{a + b} &= \overline{a} \cdot \overline{b} \\ \overline{a \cdot b} &= \overline{a} + \overline{b} \end{aligned}$ |
 
+> **De Morgan in Worten:** Ein Strich über dem ganzen Ausdruck wandert auf jede einzelne Variable; dabei wird aus $+$ ein $\cdot$ und aus $\cdot$ ein $+$.
+
+**Kurz geprüft:** Welcher Ausdruck ist gleichwertig zu $\overline{a \cdot b}$ – in C `!(a && b)`?
+
+[( )] $\overline{a} \cdot \overline{b}$, in C `!a && !b`
+[(X)] $\overline{a} + \overline{b}$, in C `!a || !b`
+[( )] $a + b$, in C `a || b`
+***************************************************************
+
+De Morgan: Der Strich wandert auf $a$ und $b$, aus UND wird ODER. Probe: Für $a = 1, b = 0$ ist $\overline{a \cdot b} = 1$, aber $\overline{a} \cdot \overline{b} = 0$.
+
+***************************************************************
+
     --{{1}}--
-Lesen Sie die Herleitung von links nach rechts; hinter jedem Gleichheitszeichen steht genau ein Axiom. Zuerst wird a oder a mit eins verknüpft, das erlaubt das neutrale Element, und dann wird diese Eins durch a oder nicht a ersetzt, das Komplement-Axiom rückwärts gelesen. Das Distributivgesetz fasst den Ausdruck zu a oder, in Klammern, a und nicht a zusammen. Die Klammer ist nach dem Komplement null, und a oder null ergibt a.
+Lesen Sie die Herleitung Zeile für Zeile; rechts steht jeweils das Axiom, das den Schritt erlaubt. Zuerst wird a oder a mit eins verknüpft, das erlaubt das neutrale Element, und dann wird diese Eins durch a oder nicht a ersetzt, das Komplement-Axiom rückwärts gelesen. Das Distributivgesetz fasst den Ausdruck zu a oder, in Klammern, a und nicht a zusammen. Die Klammer ist nach dem Komplement null, und a oder null ergibt a.
 
-Wie so eine Ableitung aussieht, zeigt das Idempotenzgesetz – jeder Schritt verwendet genau ein Axiom:
+Wie so eine Ableitung aussieht, zeigt das Idempotenzgesetz – jeder Schritt stützt sich auf ein Axiom:
 
 $$
-a + a = (a + a) \cdot 1 = (a + a)(a + \overline{a}) = a + a\overline{a} = a + 0 = a
+\begin{aligned}
+a + a &= (a + a) \cdot 1 & \text{(neutrales Element: } 1 \cdot x = x\text{)} \\
+      &= (a + a)(a + \overline{a}) & \text{(Komplement: } x + \overline{x} = 1\text{)} \\
+      &= a + a\overline{a} & \text{(Distributivität: } (x + y)(x + z) = x + yz\text{)} \\
+      &= a + 0 & \text{(Komplement: } x\overline{x} = 0\text{)} \\
+      &= a & \text{(neutrales Element: } 0 + x = x\text{)}
+\end{aligned}
 $$
+
+Die Axiome für das neutrale Element sind mit der 1 bzw. 0 links notiert; dass sie auch rechts stehen darf, liefert die Kommutativität.
 
 > **Für Vorerfahrene:** Leiten Sie ebenso $1 + a = 1$ und die De Morgan'sche Regel aus den vier Axiomen her. Hinweis für De Morgan: Zeigen Sie, dass $\overline{a}\,\overline{b}$ die beiden Komplement-Axiome für $a + b$ erfüllt, und begründen Sie, warum das Komplement eindeutig ist.
+
+<details>
+<summary>Lösungsskizze</summary>
+
+$$
+\begin{aligned}
+a + 1 &= (a + 1) \cdot 1 & \text{(neutrales Element)} \\
+      &= (a + 1)(a + \overline{a}) & \text{(Komplement)} \\
+      &= a + 1 \cdot \overline{a} & \text{(Distributivität)} \\
+      &= a + \overline{a} & \text{(neutrales Element)} \\
+      &= 1 & \text{(Komplement)}
+\end{aligned}
+$$
+
+Mit der Kommutativität folgt $1 + a = 1$. **Eindeutigkeit des Komplements:** Erfüllen $x$ und $y$ beide $a + x = 1$, $ax = 0$ und $a + y = 1$, $ay = 0$, dann gilt $x = x \cdot 1 = x(a + y) = xa + xy = 0 + xy = ay + xy = (a + x)y = 1 \cdot y = y$. **De Morgan:** Mit Assoziativität und Distributivität rechnet man $(a + b) + \overline{a}\,\overline{b} = 1$ und $(a + b) \cdot \overline{a}\,\overline{b} = 0$ nach. Also ist $\overline{a}\,\overline{b}$ ein Komplement von $a + b$ und wegen der Eindeutigkeit gleich $\overline{a + b}$.
+
+</details>
 
 ****************************************************************
 
     --{{2}}--
-Das Dualitätsprinzip halbiert die Arbeit, denn die Gesetze kommen paarweise. Vertauschen Sie in einer gültigen Gleichung Und mit Oder sowie Null mit Eins, so erhalten Sie wieder eine gültige Gleichung. Die Tabelle zeigt solche Paare zeilenweise, etwa a oder nicht a ergibt eins und dual dazu a und nicht a ergibt null. Das funktioniert, weil schon die vier Axiome paarweise dual sind; jeder Beweis lässt sich deshalb Schritt für Schritt spiegeln.
+Das Dualitätsprinzip halbiert die Arbeit, denn die Gesetze kommen paarweise. Vertauschen Sie in einer gültigen Gleichung Und mit Oder sowie Null mit Eins, so erhalten Sie wieder eine gültige Gleichung. Die Tabelle zeigt solche Paare zeilenweise, etwa a oder nicht a ergibt eins und dual dazu a und nicht a ergibt null. Das funktioniert, weil schon die vier Axiome paarweise dual sind; jeder Beweis lässt sich deshalb Schritt für Schritt spiegeln. Shannon selbst hat 1938 übrigens genau dual gerechnet: Er gab einem geschlossenen Kontakt den Wert null, weil er die Hemmung des Stromflusses zählte. Bei ihm war die Reihenschaltung deshalb ein Plus und die Parallelschaltung ein Mal – und alle Gesetze galten trotzdem.
 
                                      {{2}}
 ****************************************************************
@@ -446,24 +448,18 @@ Das Dualitätsprinzip halbiert die Arbeit, denn die Gesetze kommen paarweise. Ve
 > [!IMPORTANT] Merke
 > **Dualitätsprinzip:** Zu jeder gültigen Gleichung der Booleschen Algebra gehört eine duale Gleichung, die ebenfalls gilt.
 
-_Ersetzt man gleichzeitig in einem Axiom UND durch ODER und ODER durch UND sowie 1 durch 0 und 0 durch 1, so erhält man das zu diesem Axiom gehörige duale Axiom. Führt man diese Ersetzung in einem Theorem aus, so erhält man das zu diesem Theorem gehörige duale Theorem._
+_Ersetzt man gleichzeitig in einem Axiom UND durch ODER und ODER durch UND sowie 1 durch 0 und 0 durch 1, so erhält man das zu diesem Axiom gehörige duale Axiom. Führt man diese Ersetzung in einem Theorem aus, so erhält man das zu diesem Theorem gehörige duale Theorem. Variablen und Negationsstriche bleiben dabei unverändert._
 
 <!-- data-type="none" -->
-| Form 1                 | Form 2                     |
-| ---------------------- | -------------------------- |
-| $0 + a = a$            | $1 \cdot a = a$            |
-| $1 + a = 1$            | $ 0 \cdot a = 0        $   |
-| $a + a = a$            | $ a \cdot a = a         $  |
-| $a + \overline{a} = 1$ | $a \cdot \overline{a} = 0$ |
+| Gesetz                 | Form 1                 | Form 2                     |
+| ---------------------- | ---------------------- | -------------------------- |
+| neutrales Element      | $0 + a = a$            | $1 \cdot a = a$            |
+| Dominanz               | $1 + a = 1$            | $0 \cdot a = 0$            |
+| Idempotenz             | $a + a = a$            | $a \cdot a = a$            |
+| Komplement             | $a + \overline{a} = 1$ | $a \cdot \overline{a} = 0$ |
+| Distributivität        | $a + (b \cdot c) = (a + b) \cdot (a + c)$ | $a \cdot (b + c) = (a \cdot b) + (a \cdot c)$ |
+| De Morgan              | $\overline{a + b} = \overline{a} \cdot \overline{b}$ | $\overline{a \cdot b} = \overline{a} + \overline{b}$ |
 
-Am Beispiel des Distributivgesetzes
-
-$$
-\begin{aligned}
-a \cdot (b+c) &= (a \cdot b)+(a \cdot c) \\
-a+(b \cdot c) &= (a+b) \cdot (a+c)
-\end{aligned}
-$$
 
 
 ****************************************************************
@@ -502,7 +498,7 @@ $$
 \begin{aligned}
 f(x_1, x_2, x_3) &= x_1 \cdot x_2 \cdot \overline{x_3} + x_1 \cdot x_2 \cdot x_3 + x_1 \cdot \overline{x_2} \cdot x_3 \\
 &= x_1 \cdot x_2 \cdot \overline{x_3} +\textcolor{red}{x_1 \cdot x_2 \cdot x_3}  + x_1 \cdot x_2 \cdot x_3 + x_1 \cdot \overline{x_2} \cdot x_3 & \text{(Idempotenz)} \\
-&= \textcolor{red}{x_1 \cdot x_2 \cdot ( \overline{x_3} + x_3)}  + x_1 \cdot x_2 \cdot x_3 + x_1 \cdot \overline{x_2} \cdot x_3 & \text{(Distributivität)} \\
+&= \textcolor{red}{x_1 \cdot x_2 \cdot ( \overline{x_3} + x_3)}  + x_1 \cdot x_2 \cdot x_3 + x_1 \cdot \overline{x_2} \cdot x_3 & \text{(Assoziativität, Distributivität)} \\
 &= x_1 \cdot x_2 \cdot ( \overline{x_3} + x_3)  + \textcolor{red}{x_1 \cdot x_3 \cdot x_2  + x_1  \cdot x_3 \cdot \overline{x_2}} & \text{(Kommutativität)} \\
 &= x_1 \cdot x_2 \cdot ( \overline{x_3} + x_3)  + \textcolor{red}{x_1 \cdot x_3 \cdot (x_2  + \overline{x_2})} & \text{(Distributivität)} \\
 &= x_1 \cdot x_2 \cdot \textcolor{red}{(1)}  + x_1 \cdot x_3 \cdot \textcolor{red}{(1)}  & \text{(Komplement)} \\
@@ -510,7 +506,7 @@ f(x_1, x_2, x_3) &= x_1 \cdot x_2 \cdot \overline{x_3} + x_1 \cdot x_2 \cdot x_3
 \end{aligned}
 $$
 
-> **Bilanz:** Vorher drei UND-Gatter mit je drei Eingängen und ein ODER-Gatter mit drei Eingängen. Nachher zwei UND-Gatter und ein ODER-Gatter mit je zwei Eingängen. Ausgeklammert, $x_1(x_2 + x_3)$, genügen ein ODER- und ein UND-Gatter.
+> **Bilanz:** Vorher drei UND-Gatter mit je drei Eingängen und ein ODER-Gatter mit drei Eingängen. Dazu kommen zwei Inverter für $\overline{x_2}$ und $\overline{x_3}$. Nachher zwei UND-Gatter und ein ODER-Gatter mit je zwei Eingängen und kein Inverter. Ausgeklammert, $x_1(x_2 + x_3)$, genügen ein ODER- und ein UND-Gatter.
 
 ****************************************************************
 
@@ -568,7 +564,7 @@ $$
 <section>
 
 [( )] $f = x_2$
-[( )] $f = \overline{x}_1 x_2 + x_1 x_2$
+[( )] $f = x_1 x_2 + \overline{x}_1\overline{x}_2$
 [(X)] $f = \overline{x}_1 x_2 + x_1\overline{x}_2$, das exklusive ODER (XOR)
 [( )] $f = 1$
 ***************************************************************
@@ -590,7 +586,7 @@ f(x_1, x_2) &=\overline{\overline{\overline{x}_1 x_2(x_1 +\overline{x}_1)}}  + x
 &=\overline{\overline{\overline{x}_1 x_2}}  + x_1\overline{x_2x_1} & \text{(Neutrales Element: } a \cdot 1 = a\text{)} \\
 &=\overline{x}_1 x_2 + x_1\overline{x_2x_1} & \text{(Doppelnegation: } \overline{\overline{a}} = a\text{)} \\
 &=\overline{x}_1 x_2 + x_1(\overline{x}_2 + \overline{x}_1) & \text{(De Morgan: } \overline{a \cdot b} = \overline{a} + \overline{b}\text{)} \\
-&=\overline{x}_1 x_2 + x_1\overline{x}_2 + x_1\overline{x}_1 & \text{(Distributiv)} \\
+&=\overline{x}_1 x_2 + x_1\overline{x}_2 + x_1\overline{x}_1 & \text{(Distributivität)} \\
 &=\overline{x}_1 x_2 + x_1\overline{x}_2 + 0 & \text{(Komplement: } x_1\overline{x}_1 = 0\text{)} \\
 &=\overline{x}_1 x_2 + x_1\overline{x}_2 & \text{(Neutrales Element: } a + 0 = a\text{)} \\
 &=x_1 \oplus x_2 & \text{(Definition XOR: } a \oplus b = \overline{a}b + a\overline{b}\text{)} \\
@@ -620,7 +616,7 @@ Jetzt wechseln wir den Blickwinkel: Statt einzelner Ausdrücke betrachten wir Fu
 + Es gibt $2^{2^n}$ verschiedene $n$-stellige Boolesche Funktionen (also 16 zweistellige, 256 dreistellige, 65536 vierstellige, ...): Die Wahrheitstafel hat $2^n$ Zeilen, und in jeder Zeile kann $f$ den Wert 0 oder 1 haben.
 
 > [!IMPORTANT] Merke
-> Nur die Wahrheitstafel beschreibt eine Boolesche Funktion eindeutig. Zu jeder Funktion gibt es viele gleichwertige Ausdrücke und Schaltnetze.
+> Die Wahrheitstafel (bei fester Reihenfolge der Variablen) beschreibt eine Boolesche Funktion eindeutig. Zu jeder Funktion gibt es dagegen viele gleichwertige Ausdrücke und Schaltnetze; eindeutig ist unter ihnen nur eine Normalform wie die KDNF (Vorlesung 03).
 
     --{{1}}--
 Ein Und-Term ist nur dann eins, wenn jeder seiner Faktoren eins ist. Eine Zeile der Tafel erhält also den Wert eins, sobald mindestens einer der fünf Terme für diese Belegung eins ergibt. Zählen Sie die Belegungen binär von null null null bis eins eins eins hoch, dann vergessen Sie keine.
@@ -700,7 +696,7 @@ Die möglichen 4 Kombinationen einer Schaltfunktion mit einem Eingang lassen sic
     --{{0}}--
 Mit zwei Eingängen hat die Tafel vier Zeilen, also gibt es zwei hoch vier, gleich sechzehn Funktionen. Ihre Nummer ergibt sich aus der Ausgabespalte, gelesen von oben nach unten als Binärzahl. Beim Und steht dort null null null eins, das ist die Zahl eins, also f eins; beim Oder null eins eins eins, also f sieben.
 
-Die möglichen 16 Kombinationen einer Schaltfunktion mit zwei Eingängen lassen sich wie folgt gliedern. Liest man die Ausgabespalte von oben nach unten als Binärzahl, erhält man ihre Nummer $f_0$ bis $f_{15}$.
+Die möglichen 16 Kombinationen einer Schaltfunktion mit zwei Eingängen lassen sich wie folgt gliedern. Liest man die Ausgabespalte von oben nach unten als Binärzahl, erhält man ihre Nummer $f_0$ bis $f_{15}$. Die vier Tabellen sind zum Nachschlagen gedacht – merken sollten Sie sich die Nummerierung und die Namen UND, ODER, XOR, NAND und NOR.
 
 <!-- data-type="none" -->
 | Eingang x | Eingang y | $f_0$: Nullfunktion | $f_1$: Konjunktion (UND, AND) | $f_2$: Inhibition | $f_3$: Identität $x$ |
@@ -763,7 +759,7 @@ Das exklusive Oder entsteht nicht einfach durch Reihe oder Parallelschaltung. De
 
 {{1}}
 <!-- data-type="none" -->
-| $S_1$ | $S_0$ | y   |
+| $a$   | $b$   | $y$ |
 | ----- | ----- | --- |
 | 0     | 0     | 0   |
 | 0     | 1     | 1   |
@@ -771,7 +767,7 @@ Das exklusive Oder entsteht nicht einfach durch Reihe oder Parallelschaltung. De
 | 1     | 1     | 0   |
 
     --{{2}}--
-Jedes Relais betätigt hier zwei Kontakte gleichzeitig: einen Schließer, der bei Ansteuerung schließt, und einen Öffner, der dabei öffnet. Ein Strompfad führt über den Schließer von A und den Öffner von B, er leitet also bei A und nicht B. Der andere Pfad leitet entsprechend bei nicht A und B. Beide Pfade führen parallel zum Ausgang, und genau das ist die Formel des exklusiven Oder.
+Jedes Relais betätigt hier zwei Kontakte gleichzeitig: einen Schließer, der bei Ansteuerung schließt, und einen Öffner, der dabei öffnet. Ein Strompfad führt über den Schließer von a und den Öffner von b, er leitet also bei a und nicht b. Der andere Pfad leitet entsprechend bei nicht a und b. Beide Pfade führen parallel zum Ausgang, und genau das ist die Formel des exklusiven Oder.
 
 {{2}}
 ![XOR aus Relais](./images/02_BoolscheAlgebra/SchaltwerkXORLoesung.png "Realisierung einer XOR Funktion mit Relais Autor: 'Rk sTEk',  XOR in Relais-Logik - berichtigte Version, https://de.m.wikipedia.org/wiki/Datei:Relay_xor.svg")<!-- width="45%" -->
@@ -790,6 +786,51 @@ Dieselbe Funktion aus Gattern, $y = \overline{a}b + a\overline{b}$. Probieren Si
 
 </section>
 
+### Exkurs: Schaltertechnik und Pegel in der Praxis
+
+> *Zum Selbststudium – in der Vorlesung nur kurz.*
+
+    --{{0}}--
+Die Tabelle vergleicht zwei Techniken, mit denen man Schalter baut: das Relais wie in der Z3 und die CMOS-Technik, in der heute praktisch alle Prozessoren und Mikrocontroller gebaut sind. Dazwischen lagen Röhre und bipolarer Transistor. CMOS-Schalter sind schneller, kleiner und sparsamer; galvanisch getrennt ist nur das Relais. Für Ihre Praxis wichtig ist die Zeile zur Störempfindlichkeit: Ein offener CMOS-Eingang hat keinen definierten Pegel, deshalb braucht ein Taster einen Pull-up-Widerstand.
+
+<!-- data-type="none" -->
+| Kriterium / Technologie | **Mechanisches Relais** | **CMOS (alle heutigen Prozessoren und Mikrocontroller, z. B. ATmega328P)** |
+|--------------------------|-------------------------|------------------------------------|
+| **Funktionsprinzip** | Mechanischer Schalter mit elektromagnetischer Betätigung | MOSFET-Gatter mit hochohmigem Gateeingang |
+| **Schaltzeit** | 5–20 ms | < 10 ns (intern) |
+| **Stromverbrauch (aktiv)** | 100–500 mW | pro Gatter nur beim Umschalten; ATmega328P bei 16 MHz und 5 V gesamt ca. 50 mW |
+| **Eingangswiderstand** | < 1 kΩ (Spule) | sehr hoch, Leckstrom ≤ 1 µA |
+| **Lebensdauer (Schaltzyklen)** | 10⁵ – 10⁷ | unbegrenzt (Halbleiter) |
+| **Größe** | cm-Bereich | µm-Bereich (integriert) |
+| **Isolation** | Galvanisch getrennt | Keine galvanische Trennung |
+| **Empfindlichkeit gegenüber Störungen** | Gering | Hoch, wenn der Eingang offen ist |
+| **Kosten** | Hoch (0,5 – 2 €) | Niedrig (Millionen Gatter pro Chip) |
+| **Typische Anwendung** | Schaltsignale in Industrie oder Leistungselektronik | Prozessoren, Mikrocontroller, Logikbausteine |
+
+> **Hochohmig** heißt: Der Eingang nimmt praktisch keinen Strom auf. Ist er mit nichts verbunden, „schwebt“ seine Spannung und fängt jede Störung ein. Deshalb braucht ein Taster am ATmega328P einen Pull-up-Widerstand (Vorlesung 00): Er legt den offenen Eingang definiert auf High.
+
+> Galvanische Trennung bedeutet, dass **kein direkter elektrischer Leiter** zwischen zwei Schaltungsteilen besteht. Die Information wird über andere physikalische Effekte übertragen, z. B.: Licht, Magnetfelder oder kapazitive Kopplung.
+
+> Ein Relais schaltet man nie direkt an einen Pin des Mikrocontrollers: Die Spule braucht mehr Strom, als ein Pin liefert, und erzeugt beim Abschalten eine Spannungsspitze. Dazwischen gehören ein Transistor und eine Freilaufdiode. Außerdem prellen die Kontakte beim Schließen.
+
+TTL-Bausteine (74LS…) werden kaum noch neu eingesetzt; ein NAND- oder NOR-Baustein von heute ist CMOS (74HC…, 74LVC…). Die TTL-Pegel leben aber als Schnittstellenstandard weiter: 74HCT-Bausteine haben TTL-Eingangsschwellen und passen so 3,3-V-Signale an 5-V-Logik an, und „TTL-seriell“ heißt die serielle Schnittstelle mit Logikpegeln, über die der ATmega328P auf dem Arduino UNO R3 mit dessen USB-Wandler-Chip spricht.
+
+    --{{1}}--
+Und wenn ein Signal trotzdem im verbotenen Bereich landet? Dann hilft keine Logik, sondern nur die Schaltung davor: ein Pegelwandler oder Pull-up-Widerstand, der Schmitt-Trigger im Eingang, der mit zwei Schwellen ein Hin- und Herspringen verhindert, oder der Analog-Digital-Wandler, wenn das Signal ohnehin analog ist.
+
+{{1}}
+<section>
+
+**Und wenn der Pegel nicht passt?** Digitale Schaltungen lösen das nicht mit Logik, sondern davor:
+
++ **Pegel sicherstellen:** Passt ein Ausgang nicht zum Eingang, gleicht ein **Pegelwandler** an. Ein 3,3-V-Sensor am ATmega328P mit 5 V liegt mit seinem High-Pegel nur knapp über $V_{IH}$ = 3,0 V – der Störabstand schrumpft auf wenige Zehntel Volt. Kritischer ist die Gegenrichtung: 5 V vom ATmega328P an einem 3,3-V-Eingang können diesen beschädigen. Ein offener Eingang bekommt einen Pull-up- oder Pull-down-Widerstand; eingebaut hat der ATmega328P nur Pull-ups (`INPUT_PULLUP`), einen Pull-down schaltet man extern. Spannungen über $V_{CC}$ + 0,5 V oder unter −0,5 V beschädigen den Eingang; dagegen helfen Spannungsteiler oder Vorwiderstand.
++ **Schmitt-Trigger:** Jeder digitale Eingang des ATmega328P hat zwei Schwellen, eine zum Einschalten und eine etwas tiefere zum Ausschalten (Hysterese; typische Werte zeigt das Datenblatt im Abschnitt „Pin Threshold and Hysteresis“). Ein langsames oder verrauschtes Signal kippt dadurch einmal, statt an einer einzigen Schwelle hin- und herzuspringen.
++ **Analog einlesen:** Ein analoges Sensorsignal liest man mit dem Analog-Digital-Wandler ein (Vorlesung 13) und legt die Schwelle selbst in Software fest – am besten ebenfalls mit Hysterese.
+
+Auch jede Flanke durchläuft den verbotenen Bereich. Tastet ein Speicherglied genau in diesem Moment ab, kann es kurz zwischen 0 und 1 hängen bleiben (**Metastabilität**, Vorlesung 07).
+
+</section>
+
 ## Und im ATmega328P?
 
     --{{0}}--
@@ -801,22 +842,28 @@ $$
 f = \textit{links} \cdot \textit{rechts} \cdot \overline{\textit{notAus}}
 $$
 
-Starten Sie das Programm. Weil sich mit der Maus nicht zwei Taster gleichzeitig drücken lassen, stehen hier Schiebeschalter für die Taster: von links nach rechts der linke Taster (Pin 2), der rechte Taster (Pin 3) und der Not-Aus (Pin 4); die LED an Pin 13 zeigt, ob die Presse auslöst. Im Diagramm sehen Sie die Pegel aller vier Pins.
+Das Beispiel ist bewusst vereinfacht. Eine echte Zweihandschaltung verlangt zusätzlich, dass beide Taster innerhalb von 0,5 s gedrückt werden – dafür muss sich die Schaltung etwas merken und die Zeit messen; sie ist dann keine reine Schaltfunktion mehr, sondern ein Schaltwerk (Vorlesung 06 und 07). Ein echter Not-Aus ist außerdem ein **Öffner**: Gedrückt oder bei Kabelbruch fällt das Signal weg, und die Maschine steht. Er wirkt nie über ungeprüfte Software, sondern über eine fest verdrahtete oder zertifizierte Sicherheitsschaltung. Im Simulator liefern die Schiebeschalter dagegen direkt High oder Low; am echten Board würden Sie die Taster gegen GND mit `INPUT_PULLUP` anschließen, dann bedeutet LOW „gedrückt“.
+
+Starten Sie das Programm. Weil sich mit der Maus nicht zwei Taster gleichzeitig drücken lassen, stehen hier Schiebeschalter für die Taster: von links nach rechts der linke Taster (Pin 2), der rechte Taster (Pin 3), der Not-Aus (Pin 4) und der Schalter „Gitter offen“ (Pin 5) für die Aufgabe unten; die LED an Pin 13 zeigt, ob die Presse auslöst. Im Diagramm sehen Sie die Pegel der Pins.
 
 <div id="zweihand">
 <wokwi-slide-switch pin="2"></wokwi-slide-switch>
 <wokwi-slide-switch pin="3"></wokwi-slide-switch>
 <wokwi-slide-switch pin="4"></wokwi-slide-switch>
+<wokwi-slide-switch pin="5"></wokwi-slide-switch>
 <wokwi-led color="red" pin="13" label="Presse"></wokwi-led>
-<avr-chart signals="D2, D3, D4, D13" window="4s" title="links, rechts, Not-Aus und Presse"></avr-chart>
+<avr-chart signals="D2, D3, D4, D5, D13" window="4s" title="links, rechts, Not-Aus, Gitter und Presse"></avr-chart>
 </div>
 
 ```cpp Zweihandbedienung.ino
 void setup() {
   Serial.begin(115200);
+  // Simulator: Schiebeschalter liefern direkt HIGH/LOW.
+  // Am echten Board: INPUT_PULLUP, dann bedeutet LOW "gedrückt".
   pinMode(2, INPUT);    // Schalter links
   pinMode(3, INPUT);    // Schalter rechts
   pinMode(4, INPUT);    // Not-Aus
+  pinMode(5, INPUT);    // Gitter offen (für die Aufgabe)
   pinMode(13, OUTPUT);  // LED: Presse löst aus
 
   // Wahrheitstafel und Probe der De Morgan'schen Regel
@@ -836,7 +883,9 @@ void loop() {
   bool links  = digitalRead(2);
   bool rechts = digitalRead(3);
   bool notAus = digitalRead(4);
+  bool gitter = digitalRead(5);   // noch nicht verwendet
 
+  // Heute wichtig ist nur diese Bedingung:
   digitalWrite(13, links && rechts && !notAus);
   delay(20);
 }
@@ -852,9 +901,18 @@ Die letzten beiden Spalten der Ausgabe sind gleich – das ist die De Morgan'sch
 Ein häufiger Fehler ist die Verwechslung der logischen Operatoren mit den bitweisen, die nur ein Zeichen haben. Die logischen fragen lediglich, ob ein Wert null ist oder nicht; die bitweisen verknüpfen jede Bitstelle einzeln. Für Bedingungen verwenden Sie die logischen Operatoren, die bitweisen brauchen wir erst, wenn wir einzelne Bits in Registern setzen.
 
 > [!WARNING] Typische Fehlvorstellung
-> **`&&` ist nicht `&`.** In C gibt es zu jedem logischen Operator einen bitweisen Zwilling: `&` statt `&&`, `|` statt `||`, `~` statt `!`. Die bitweisen Operatoren verknüpfen jedes Bit zweier Zahlen einzeln. Solange nur 0 und 1 vorkommen, liefern beide dasselbe – sonst nicht: `2 && 1` ist wahr (1), denn beide Werte sind ungleich 0, aber `2 & 1` ergibt 0, denn `0b10` und `0b01` haben kein gemeinsames gesetztes Bit. Außerdem wertet `&&` die rechte Seite gar nicht erst aus, wenn die linke schon falsch ist. Für Bedingungen verwenden Sie deshalb immer `&&`, `||` und `!`. Die bitweisen Operatoren brauchen wir in Vorlesung 12, um einzelne Bits in den Registern des ATmega328P zu setzen.
+> **`&&` ist nicht `&`.** In C gibt es zu jedem logischen Operator einen bitweisen Zwilling: `&` statt `&&`, `|` statt `||`, `~` statt `!`. Die bitweisen Operatoren verknüpfen jedes Bit zweier Zahlen einzeln. Solange nur 0 und 1 vorkommen, liefern `&` und `&&` sowie `|` und `||` dasselbe – sonst nicht: `2 && 1` ist wahr (1), denn beide Werte sind ungleich 0, aber `2 & 1` ergibt 0, denn `0b10` und `0b01` haben kein gemeinsames gesetztes Bit. Für `~` gilt das nie: `~` kippt alle Bits, `~1` ergibt −2 und ist damit wahr, `!1` dagegen 0. Außerdem wertet `&&` die rechte Seite gar nicht erst aus, wenn die linke schon falsch ist. Für Bedingungen verwenden Sie deshalb immer `&&`, `||` und `!`. Die bitweisen Operatoren brauchen wir in Vorlesung 12, um einzelne Bits in den Registern des ATmega328P zu setzen.
 
-> Probieren Sie es aus: Ändern Sie die Bedingung so, dass die Presse auch dann nicht auslöst, wenn ein zusätzlicher Schalter „Gitter offen“ betätigt ist. Wie lautet die Funktion $f$ dann?
+> Probieren Sie es aus: Ändern Sie die Bedingung so, dass die Presse auch dann nicht auslöst, wenn der Schalter „Gitter offen“ (Pin 5) betätigt ist. Wie lautet die Funktion $f$ dann?
+
+[( )] `links && rechts && !notAus || !gitter`
+[(X)] `links && rechts && !notAus && !gitter`
+[( )] `links && rechts && !(notAus && gitter)`
+***************************************************************
+
+$f = \textit{links} \cdot \textit{rechts} \cdot \overline{\textit{notAus}} \cdot \overline{\textit{gitter}}$: Jede weitere Sperrbedingung kommt als negierter Faktor hinzu. Die erste Variante löst bei geschlossenem Gitter immer aus, die dritte sperrt nur, wenn Not-Aus und Gitter gleichzeitig betätigt sind.
+
+***************************************************************
 
     --{{0}}--
 Die beiden Fragen üben De Morgan in C. Ein Nicht vor einer Klammer wandert hinein; dabei wird jede Variable negiert, und aus Oder wird Und und umgekehrt. Prüfen Sie Ihre Antwort im Zweifel mit einer kleinen Wahrheitstafel.
@@ -882,6 +940,27 @@ De Morgan: $\overline{a + b} = \overline{a} \cdot \overline{b}$. Die Bedingung i
 $\overline{\overline{\textit{links}} + \overline{\textit{rechts}}} = \overline{\overline{\textit{links}}} \cdot \overline{\overline{\textit{rechts}}} = \textit{links} \cdot \textit{rechts}$ – De Morgan und Doppelnegation.
 
 ***************************************************************
+
+## Was Sie heute mitnehmen
+
+    --{{0}}--
+Diese fünf Punkte fassen die Vorlesung zusammen. Die Fragen darunter gehören zu den Lernzielen vom Anfang: Wenn Sie sie beantworten und an einem Beispiel vorrechnen können, sind Sie gut auf die Minimierung in der nächsten Woche vorbereitet.
+
++ **Digital heißt: Bereiche statt Werte.** Ein Eingang deutet jede Spannung als 0 oder 1; dazwischen liegt ein verbotener Bereich. Der **Störabstand** zwischen dem, was ein Ausgang liefert, und dem, was ein Eingang verlangt, macht Digitaltechnik robust.
++ **Zwei Werte, drei Operationen, vier Axiome:** Mit $+$, $\cdot$ und $\overline{a}$ sowie Kommutativität, Distributivität, neutralen Elementen und Komplement lassen sich alle weiteren Gesetze herleiten – Idempotenz, Absorption, **De Morgan**.
++ **Dualitätsprinzip:** Vertauscht man UND mit ODER und 0 mit 1, wird aus jedem Gesetz wieder ein gültiges Gesetz.
++ **Die Wahrheitstafel** beschreibt eine Boolesche Funktion eindeutig; Ausdrücke und Schaltnetze gibt es für dieselbe Funktion viele. Mit $n$ Eingängen hat sie $2^n$ Zeilen, und es gibt $2^{2^n}$ verschiedene Funktionen.
++ **In C** schreiben Sie Boolesche Funktionen als Bedingungen mit `&&`, `||` und `!` – nicht mit den bitweisen Operatoren `&`, `|` und `~`.
+
+**Prüfen Sie sich:**
+
++ Was unterscheidet ein Digitalsignal von einem Analogsignal, und was gibt der Störabstand an?
++ Nennen Sie die Axiome der Booleschen Algebra.
++ Erläutern Sie das Dualitätsprinzip der Booleschen Algebra.
++ Geben Sie die De Morgan'schen Regeln wieder.
++ Wie viele Zeilen hat die Wahrheitstafel einer Schaltfunktion mit $n$ Eingängen, und wie viele Schaltfunktionen mit zwei Eingängen gibt es?
++ Nennen Sie zwei Beispiele, wie eine Schaltfunktion technisch umgesetzt werden kann.
++ Wie schreiben Sie eine Boolesche Funktion als Bedingung in C, und wie hilft die De Morgan'sche Regel beim Umformen?
 
 ## Ihre Begriffe für die Kurslandkarte
 

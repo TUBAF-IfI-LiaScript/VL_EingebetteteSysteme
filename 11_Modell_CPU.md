@@ -2,7 +2,7 @@
 
 author:   Sebastian Zug & André Dietrich & Fabian Bär & Claude Code (Opus 5.5)
 email:    sebastian.zug@informatik.tu-freiberg.de & andre.dietrich@informatik.tu-freiberg.de & fabian.baer@student.tu-freiberg.de
-version:  0.0.10
+version:  0.0.11
 language: de
 narrator: Deutsch Female
 
@@ -37,16 +37,12 @@ gray: @mark(gray,@0)
 
 ---------------------------------------------------------------------
 
-**Fragen an die Veranstaltung**
+**Lernziele:** Nach dieser Vorlesung können Sie
 
-+ Welche Funktionalität sollte eine ALU bereitstellen?
-+ Welcher Trade-Off ist mit der Entscheidung über die Wortbreite einer CPU und der Breite des möglichen OP-Codes verbunden?
-+ Welche Register gehören zum Programmiermodell eines Rechners?
-+ Welche Register sind für das Laden der Programmbefehle erforderlich und wie arbeiten sie zusammen?
-+ Erklären Sie die Vorgänge in der Fetch- und Execute-Phase der Befehlsabarbeitung.
-+ Wie funktioniert die Interrupt-Behandlung in einer CPU?
-+ Was versteht man unter dem Begriff "Instruktionsset-Architektur" (ISA)?
-+ Welche Adressierungsarten kennen Sie und wofür werden sie verwendet?
++ Befehls- und Datenformat des Modellrechners erklären und ein kurzes Assemblerprogramm für ihn schreiben,
++ die Register des Modellrechners benennen und den Befehlszyklus aus Holen, Dekodieren und Ausführen Takt für Takt in Register-Transfer-Sprache beschreiben,
++ erklären, wie das Steuerwerk als Schaltwerk aus Taktgenerator, Befehlsdekoder, Status-Flip-Flops und Schaltnetz aufgebaut ist,
++ ein festverdrahtetes mit einem mikroprogrammierten Steuerwerk sowie horizontale mit vertikaler Mikroprogrammierung vergleichen.
 
 <!-- kurslandkarte:knopf-start -->
 
@@ -950,6 +946,26 @@ Ausgangspunkt der Mikroprogrammierung:
 3. Mikroprogramme können leichter entworfen werden als Logik.
 4. Mikroprogramme können komplexe Operationen effizienter bereitstellen als eine Sequenz von Maschineninstruktionen, da sie die Parallelität der Hardware ausnutzen können.
 5. Mikroprogramme können komplexe Operationen effizienter bereitstellen als eine Sequenz von Maschineninstruktionen, da Mikroprogrammspeicher schneller ist als Speicher für Maschinenprogramme.
+
+## Was Sie heute mitnehmen
+
+    --{{0}}--
+Diese fünf Punkte fassen zusammen, wie der Modellrechner einen Befehl nach dem anderen holt und ausführt und wie sein Steuerwerk gebaut werden kann. Wenn Sie die Fragen darunter beantworten und einen Befehl Takt für Takt verfolgen können, haben Sie das Handwerkszeug, um ab Januar den Befehlssatz eines echten Controllers zu lesen.
+
++ **Das Wortformat bestimmt den Befehlssatz:** Der Modellrechner arbeitet mit 16-Bit-Worten für Befehle und Daten. Vier Bit codieren den Opcode, zwölf Bit die Adresse – jedes zusätzliche Opcode-Bit halbiert den adressierbaren Speicher.
++ **Ein Register, viel Speicher:** Der **Akkumulator** A ist das einzige allgemeine Register. Konstanten und Variablen liegen im Speicher, und was nicht als Befehl existiert – etwa ein Rechtsshift um mehrere Stellen –, muss als Programm nachgebildet werden.
++ **Der Befehlszyklus** läuft über **Programmzähler**, **MAR**, **MBR** und **Instruktionsregister**: Befehl holen, Programmzähler erhöhen, dekodieren und – falls ein Operand gebraucht wird – in einer Ausführungsphase fortsetzen. Die **Register-Transfer-Sprache** beschreibt jeden Takt dieses Ablaufs.
++ **Das Steuerwerk als Schaltwerk** besteht aus einem 8-Phasen-Taktgenerator, dem Befehlsdekoder, Status-Flip-Flops und einem Schaltnetz, das die Steuersignale erzeugt.
++ **Mikroprogrammierung** ersetzt dieses Schaltnetz durch einen Speicher: Jedes Mikroprogrammwort enthält die Steuersignale und die Folgeadresse. **Horizontal** steuert jedes Bit direkt eine Leitung, **vertikal** sind die Steuerinformationen in Feldern codiert.
+
+**Prüfen Sie sich:**
+
++ Welcher Trade-off besteht zwischen der Wortbreite einer CPU und der Breite des Opcodes?
++ Was legt der Befehlssatz des Modellrechners fest, und wie übersetzen Sie eine einfache Verzweigung aus C in seine Befehle?
++ Welche Register gehören zum Programmiermodell des Modellrechners, und welche Register braucht er zusätzlich, um Befehle aus dem Speicher zu laden?
++ Beschreiben Sie die Vorgänge in der Fetch- und der Execute-Phase für den Befehl `ADD addr` in Register-Transfer-Sprache.
++ Aus welchen Komponenten besteht das Steuerwerk, wenn es als Schaltwerk umgesetzt wird, und wozu dient das State-Flip-Flop?
++ Worin unterscheiden sich festverdrahtete und mikroprogrammierte Steuerwerke, und welche Vor- und Nachteile haben horizontale und vertikale Mikroprogrammierung?
 
 ## Ihre Begriffe für die Kurslandkarte
 

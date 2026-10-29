@@ -2,7 +2,7 @@
 
 author:   Sebastian Zug & André Dietrich & Fabian Bär & Claude Code (Opus 5.5)
 email:    sebastian.zug@informatik.tu-freiberg.de & andre.dietrich@informatik.tu-freiberg.de & fabian.baer@student.tu-freiberg.de
-version:  0.0.12
+version:  0.0.13
 language: de
 narrator: Deutsch Female
 
@@ -40,16 +40,12 @@ gray: @mark(gray,@0)
 
 ---------------------------------------------------------------------
 
-**Fragen an die Veranstaltung**
+**Lernziele:** Nach dieser Vorlesung können Sie
 
-+ Erläutern Sie die Notwendigkeit von Speicherelementen für die Umsetzung eines Rechners.
-+ Worin besteht der Unterschied zwischen Schaltfunktionen/Schaltnetzen und Schaltwerken?
-+ Beschreiben Sie die Eingangsbelegungen und korrespondierenden Zustandsänderungen am RS-Flip-Flop.
-+ Welche anderen Flip-Flop-Typen kennen sie, wo liegen die Vorteile gegenüber dem RS-Flip-Flop?
-+ Erläutern Sie die Begriffe „zustandsgesteuert“ und „flankengesteuert“.
-+ Welche Kernelemente hat ein Schaltwerk? Worin unterscheiden sich die Varianten von Mealy und Moore?
-+ Welches Vorgehen ist für die Umsetzung eines Schaltwerkes notwendig?
-+ An welcher Stelle ist die invertierte Wahrheitstabelle eines Flip-Flops wichtig?
++ erklären, warum ein Rechner Speicherelemente braucht und wie durch Rückkopplung aus Gattern ein Speicher entsteht,
++ SR-Latch, D-Latch, JK- und T-Flip-Flop anhand ihrer Eingangsbelegungen und Zustandsänderungen beschreiben und voneinander unterscheiden,
++ zustandsgesteuerte, Main-Subsidiary- und flankengesteuerte Flip-Flops unterscheiden und ihr Verhalten in einem Zeitdiagramm verfolgen,
++ Anwendungen von Flip-Flops wie das Entprellen eines Tasters und den asynchronen Zähler als Frequenzteiler erklären.
 
 <!-- kurslandkarte:knopf-start -->
 
@@ -637,6 +633,26 @@ Schaltung planen:
 Aufbauen:
 
 ![Schaltung gebaut](./images/05_FlipFlops/dlatch_board.jpg)<!-- style="width: 40%; max-width: 800px;" -->
+
+## Was Sie heute mitnehmen
+
+    --{{0}}--
+Diese fünf Punkte fassen die Vorlesung zusammen. Wenn Sie die Fragen darunter beantworten können, haben Sie das Handwerkszeug, um in der nächsten Vorlesung aus Flip-Flops und Schaltnetzen eigene Schaltwerke zu entwerfen.
+
++ **Rückkopplung macht Speicher:** Schaltnetze sind zustandslos; erst ein rückgekoppelter Gatterausgang hält einen Wert. Die gesteuerte Rückkopplung ergibt das **SR-Latch** mit den Eingängen Set und Reset, aufgebaut aus zwei NOR- oder zwei NAND-Gattern.
++ **Der D-Latch** erzeugt aus einem Dateneingang $D$ die beiden Signale $S$ und $R$ als Komplement voneinander; die unbestimmte Belegung $S = R = 1$ kann so nicht mehr auftreten.
++ **Zustandsgesteuert oder flankengesteuert:** Ein zustandsgesteuertes Flip-Flop (Latch) übernimmt die Eingänge, solange der Takt aktiv ist, und kann sich in einer Taktphase mehrfach ändern. **Main-Subsidiary-** und **flankengesteuerte** Flip-Flops übernehmen Änderungen nur zu einem definierten Zeitpunkt.
++ **JK- und T-Flip-Flop:** Beim JK-Flip-Flop ist $J = K = 1$ erlaubt und lässt den Ausgang mit jeder wirksamen Flanke wechseln. Verbindet man $J$ und $K$, entsteht das **T-Flip-Flop**, das bei $T = 1$ mit jeder Flanke umschaltet.
++ **Anwendungen:** Flip-Flops halten Ereignisse fest (Temperaturüberwachung), entprellen Taster, teilen im asynchronen Zähler die Taktfrequenz und speichern die Konfiguration der IO-Pins eines AVR-Mikrocontrollers.
+
+**Prüfen Sie sich:**
+
++ Warum braucht ein Rechner Speicherelemente, und worin unterscheidet sich ein Schaltwerk von einem Schaltnetz?
++ Beschreiben Sie die Eingangsbelegungen und die zugehörigen Zustandsänderungen am SR-Latch. Was geschieht, wenn $S$ und $R$ gleichzeitig 1 sind und danach gleichzeitig auf 0 gehen?
++ Wie erzeugt der D-Latch aus einem Dateneingang die Signale $S$ und $R$, und welches Problem des SR-Latches ist damit gelöst?
++ Welche anderen Flip-Flop-Typen kennen Sie, und wo liegen ihre Vorteile gegenüber dem SR-Flip-Flop?
++ Erläutern Sie die Begriffe „zustandsgesteuert“ und „flankengesteuert“. Warum ist ein zustandsgesteuertes Flip-Flop für viele Anwendungen ungeeignet, und wie löst das Main-Subsidiary-Prinzip das Problem?
++ Wie teilt ein asynchroner Zähler aus JK-Flip-Flops die Taktfrequenz, und was begrenzt seine maximale Taktfrequenz?
 
 ## Ihre Begriffe für die Kurslandkarte
 

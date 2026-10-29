@@ -214,7 +214,9 @@
     "Schaltfunktionen mit einem Eingang",
     "Schaltfunktionen mit zwei Eingängen",
     "Exkurs: Technische Realisierung",
+    "Exkurs: Schaltertechnik und Pegel in der Praxis",
     "Und im ATmega328P?",
+    "Was Sie heute mitnehmen",
     "Ihre Begriffe für die Kurslandkarte",
     "Hausaufgaben",
     "Nächste Vorlesung"
@@ -253,6 +255,7 @@
     "Karnaugh-Veitch für Maxterme",
     "Dont-Care-Einträge in der Wahrheitstafel",
     "Zusammenfassung",
+    "Was Sie heute mitnehmen",
     "Ihre Begriffe für die Kurslandkarte",
     "Hausaufgaben"
    ]
@@ -294,6 +297,7 @@
     "Zurück zum Beispiel - Schritt 3 Umsetzung",
     "Umsetzung",
     "Herausforderungen",
+    "Was Sie heute mitnehmen",
     "Ihre Begriffe für die Kurslandkarte"
    ]
   },
@@ -328,6 +332,7 @@
     "Demultiplexer",
     "Komparatoren",
     "Ausblick",
+    "Was Sie heute mitnehmen",
     "Ihre Begriffe für die Kurslandkarte",
     "Hausaufgaben"
    ]
@@ -370,6 +375,7 @@
     "Zusammenfassung",
     "Einsatzbeispiel",
     "Realisierungsbeispiel",
+    "Was Sie heute mitnehmen",
     "Ihre Begriffe für die Kurslandkarte",
     "Übungsaufgaben"
    ]
@@ -408,6 +414,7 @@
     "Race Conditions in Schaltwerken",
     "Vermeidungsstrategien",
     "Debugging von Timing-Problemen",
+    "Was Sie heute mitnehmen",
     "Ihre Begriffe für die Kurslandkarte",
     "Übungsaufgaben"
    ]
@@ -438,6 +445,7 @@
     "Übungsbeispiel",
     "Register",
     "Zähler",
+    "Was Sie heute mitnehmen",
     "Ihre Begriffe für die Kurslandkarte",
     "Übungsaufgaben"
    ]
@@ -476,6 +484,7 @@
     "Carry Look Ahead Addierer",
     "Carry Save Addierer",
     "Exkurs: Multiplikation",
+    "Was Sie heute mitnehmen",
     "Ihre Begriffe für die Kurslandkarte",
     "Übungsaufgaben"
    ]
@@ -508,6 +517,7 @@
     "Schritt 3 - Handhabung der Daten",
     "Schritt 4 - Ein- und Ausgaben",
     "1945: Von-Neumann-Architektur",
+    "Was Sie heute mitnehmen",
     "Ihre Begriffe für die Kurslandkarte"
    ]
   },
@@ -554,6 +564,7 @@
     "Layout eines Programmes im Mikroprogammspeicher",
     "Horizontale vs. vertikale Mikroprogrammierung",
     "Diskussion",
+    "Was Sie heute mitnehmen",
     "Ihre Begriffe für die Kurslandkarte",
     "Hausaufgaben"
    ]
@@ -598,6 +609,7 @@
     "Simulink",
     "Vergleich",
     "Resultat",
+    "Was Sie heute mitnehmen",
     "Ihre Begriffe für die Kurslandkarte",
     "Vorbereitung der praktischen Aufgaben",
     "Setzen eines Bits",
@@ -639,6 +651,7 @@
     "Beispiel 1 - Heißleiter",
     "Beispiel 2 - Lesen eines Analogen Distanzsensors",
     "Beispiel 3 - Temperaturüberwachung des Controllers",
+    "Was Sie heute mitnehmen",
     "Ihre Begriffe für die Kurslandkarte"
    ]
   },
@@ -679,6 +692,7 @@
     "Compare Mode",
     "Capture Mode",
     "Anwendungen",
+    "Was Sie heute mitnehmen",
     "Ihre Begriffe für die Kurslandkarte"
    ]
   },
@@ -711,6 +725,7 @@
     "Servomotoren",
     "Finales Anwendungsbeispiel",
     "Blick zurück",
+    "Was Sie heute mitnehmen",
     "Ihre Begriffe für die Kurslandkarte"
    ]
   }
@@ -878,7 +893,7 @@
    "abschnitt": 5,
    "ebene": 1,
    "code": false,
-   "erklaerung": "Spannungsbereiche, die als High (1) bzw. Low (0) gelten, dazwischen liegt ein verbotener Bereich. Bei TTL-Eingängen gilt z. B. über 2,0 V als High und unter 0,8 V als Low.",
+   "erklaerung": "Spannungsbereiche, die als High (1) bzw. Low (0) gelten, dazwischen liegt ein verbotener Bereich. Beim ATmega328P (5 V) gilt z. B. über 3,0 V als High und unter 1,5 V als Low.",
    "fehlvorstellung": "„Eine 1 ist genau 5 V, eine 0 genau 0 V.“"
   },
   {
@@ -2173,7 +2188,7 @@
    "name": "Bitmaske",
    "linie": "controller",
    "vl": 12,
-   "abschnitt": 21,
+   "abschnitt": 22,
    "ebene": 1,
    "code": false,
    "erklaerung": "Mit Schiebe- und Bitoperatoren gebaute Zahl, die gezielt einzelne Bits eines Registers trifft: setzen mit |=, löschen mit &= ~, prüfen mit &.",

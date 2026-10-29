@@ -2,7 +2,7 @@
 
 author:   Sebastian Zug & André Dietrich & Fabian Bär & Copilot & Claude Code (Opus 5.5)
 email:    sebastian.zug@informatik.tu-freiberg.de & andre.dietrich@informatik.tu-freiberg.de & fabian.baer@student.tu-freiberg.de
-version:  0.0.11
+version:  0.0.12
 language: de
 narrator: Deutsch Female
 
@@ -39,16 +39,12 @@ gray: @mark(gray,@0)
 
 ---------------------------------------------------------------------
 
-**Fragen an die Veranstaltung**
+**Lernziele:** Nach dieser Vorlesung können Sie
 
-+ Erläutern Sie das Verfahren von Quine-McCluskey.
-+ Grenzen Sie die Begriffe Schaltnetz und Schaltfunktion voneinander ab.
-+ Erklären Sie die Idee von Multiplexern und Kodierern.
-+ Welche Besonderheit besteht bei der Ableitung der Schaltfunktionen für einen Dekodierer? Was ist ein SLPD und welche Ausprägungen kennen Sie davon?
-+ Welche Gatterkombinationen sind geeignet, um beliebige Schaltfunktionen damit umzusetzen?
-+ Was ist ein Glitch?
-+ Wie können Sie Hazards in kombinatorischen Schaltungen vermeiden?
-+ Welche Rolle spielt die Laufzeitverzögerung bei der Schaltnetzsynthese?
++ das Verfahren nach Quine-McCluskey anwenden: Primimplikanten bestimmen und mit der Primimplikantentafel eine minimale Überdeckung auswählen,
++ eine minimierte Schaltfunktion als zweistufiges Schaltnetz umsetzen – mit UND, ODER und NICHT oder nur mit NAND-Gattern,
++ erklären, wann PROM und PAL zur Umsetzung von Schaltnetzen eingesetzt werden,
++ Glitches als Folge unterschiedlicher Signallaufzeiten erkennen und mit einem zusätzlichen Term aus dem Karnaugh-Veitch-Diagramm vermeiden.
 
 <!-- kurslandkarte:knopf-start -->
 
@@ -996,6 +992,26 @@ $y=x_0x_1 + \overline{x}_1x_2 + x_0x_2$
 
 ![Bild](./images/04_Schaltnetze/GAL.png) <!--style="width: 50%;"
 -->
+
+## Was Sie heute mitnehmen
+
+    --{{0}}--
+Diese Punkte fassen die Vorlesung zusammen. Die Fragen darunter gehören zu den Lernzielen vom Anfang: Wenn Sie sie beantworten und das Verfahren von Quine-McCluskey an einem eigenen Beispiel durchrechnen können, sind Sie gut auf die Standardschaltnetze in der nächsten Vorlesung vorbereitet.
+
++ **Quine-McCluskey** minimiert eine KDNF algorithmisch: Minterme nach der Zahl ihrer Einsen sortieren, Terme, die sich in genau einer Variablen unterscheiden, stufenweise zusammenfassen – übrig bleiben die **Primimplikanten**.
++ **Die Primimplikantentafel** zeigt, welcher Primimplikant welche Minterme abdeckt. **Essentielle Primimplikanten** decken einen Minterm als einzige ab und gehören immer zur Lösung; den Rest reduzieren Spalten- und Zeilendominanz.
++ **Ein Schaltnetz** setzt eine Schaltfunktion als Schaltung ohne Rückkopplung um. Jede Schaltfunktion lässt sich zweistufig realisieren – und jedes Schaltnetz allein aus NAND- oder allein aus NOR-Gattern aufbauen.
++ **PROM und PAL:** Ein PROM bildet die Wahrheitstafel unmittelbar ab und braucht keine Minimierung; ein PAL realisiert eine (minimierte) DNF über eine programmierbare UND-Matrix.
++ **Glitches** entstehen, weil Gatter unterschiedliche **Signallaufzeiten** haben. Im Karnaugh-Veitch-Diagramm erkennt man sie an benachbarten Schleifen ohne Überlappung; ein zusätzlicher, überlappender Term oder die Synchronisation gültiger Zustände beseitigt sie.
+
+**Prüfen Sie sich:**
+
++ Erläutern Sie das Verfahren von Quine-McCluskey. Was ist ein Primimplikant, und wann ist er essentiell?
++ Grenzen Sie die Begriffe Schaltnetz und Schaltfunktion voneinander ab.
++ Welche Gatterkombinationen sind geeignet, um beliebige Schaltfunktionen damit umzusetzen? Bilden Sie ein ODER nur aus NAND-Gattern.
++ Wann setzen Sie ein PROM, wann ein PAL ein?
++ Was ist ein Glitch, und welche Rolle spielt die Laufzeitverzögerung der Gatter dabei?
++ Wie können Sie Glitches in Schaltnetzen vermeiden?
 
 ## Ihre Begriffe für die Kurslandkarte
 

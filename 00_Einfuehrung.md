@@ -2,7 +2,7 @@
 
 author:   Sebastian Zug, André Dietrich & `fjangfaragesh`, `FnHm`, `gjaeger`, `ShyFlyGuy`, `Lalelele` & Claude Code (Opus 5.5)
 email:    sebastian.zug@informatik.tu-freiberg.de & andre.dietrich@informatik.tu-freiberg.de & fabian.baer@student.tu-freiberg.de
-version:  0.6.7
+version:  0.6.8
 language: de
 narrator: Deutsch Female
 
@@ -74,12 +74,12 @@ Herzlich willkommen zu Digitale Systeme und Eingebettete Systeme! Heute geht es 
 
 ---------------------------------------------------------------------
 
-**Fragen an die Veranstaltung** – heute geht es um Einordnung und Motivation:
+**Lernziele:** Nach dieser Vorlesung können Sie
 
-+ Welche Abstraktionsebenen liegen zwischen einem Programm im Arduino-Framework und der Hardware?
-+ Was ist ein eingebettetes System, und worin unterscheidet es sich von einem herkömmlichen Computer?
-+ Welche Rolle spielen Mikrocontroller wie der ATmega328P in den Geräten Ihres Alltags?
-+ Warum lohnt sich dieses Wissen für Informatik, Robotik, Mathematik und Ingenieurwesen – auch im Zeitalter von KI?
++ erklären, was ein eingebettetes System ist und worin es sich von einem herkömmlichen Computer unterscheidet,
++ die Abstraktionsebenen zwischen einem Programm im Arduino-Framework und der Hardware benennen und Beispiele einer Ebene zuordnen,
++ an Geräten Ihres Alltags und an Ihrem Studiengang begründen, wozu Sie dieses Wissen brauchen – auch im Zeitalter von KI,
++ den Ablauf der Veranstaltung mit Vorlesung, Übung und Prüfung wiedergeben.
 
 <!-- kurslandkarte:knopf-start -->
 
@@ -806,6 +806,14 @@ Fassen wir zusammen: Wir haben den Begriff des eingebetteten Systems geklärt un
 + Wir gehen **von unten nach oben**: Nächste Woche beginnen wir mit der Geschichte und der Logik, im Januar sind wir beim Controller angekommen.
 
 > **Zurück zur Tür:** Die Live-Anzeige zeigt, wann Sie heute gekommen sind. Wo hat der Roboter „unklar“ notiert oder sich verzählt – und an welchem der vier Schritte (Takt, Schwelle, Automat, Zähler) liegt das?
+
+**Prüfen Sie sich:**
+
++ Was ist ein eingebettetes System, und worin unterscheidet es sich von einem herkömmlichen Computer?
++ Welche Abstraktionsebenen liegen zwischen einem Programm im Arduino-Framework und der Hardware? Auf welcher Ebene steht `pinMode(13, OUTPUT)`, auf welcher `sbi 0x04, 5`?
++ Welche Rolle spielen Mikrocontroller wie der ATmega328P in den Geräten Ihres Alltags?
++ Warum lohnt sich dieses Wissen für Informatik, Robotik, Mathematik und Ingenieurwesen – auch im Zeitalter von KI?
++ Wie ist die Veranstaltung aufgebaut, und wie wird geprüft?
 
 ## Ihre Begriffe für die Kurslandkarte
 
