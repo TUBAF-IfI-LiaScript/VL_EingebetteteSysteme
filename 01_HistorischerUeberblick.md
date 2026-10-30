@@ -2,13 +2,197 @@
 
 author:   Sebastian Zug, André Dietrich, Fabian Bär & GitHub Copilot Teaching-Agent & Claude Code (Opus 5.5)
 email:    sebastian.zug@informatik.tu-freiberg.de & andre.dietrich@informatik.tu-freiberg.de & fabian.baer@student.tu-freiberg.de
-version:  0.7.5
+version:  0.7.6
 language: de
 narrator: Deutsch Female
 
 import:   https://raw.githubusercontent.com/liaScript/mermaid_template/master/README.md
           https://raw.githubusercontent.com/LiaTemplates/Wikimedia/refs/tags/0.0.2/README.md
           https://raw.githubusercontent.com/TUBAF-IfI-LiaScript/VL_EingebetteteSysteme/master/config.md
+
+@Turing.sim
+<lia-keep>
+<turing-machine tape="@0">@1</turing-machine>
+</lia-keep>
+@end
+
+@onload
+if (!customElements.get('turing-machine')) {
+  const BLANK = '␣'
+  const CSS = `
+    :host { display: block; margin: 1em 0; }
+    .tape { display: flex; gap: 2px; overflow-x: auto; padding: 1.6em 2px 4px; }
+    .cell { position: relative; flex: 0 0 2.2em; height: 2.2em; line-height: 2.2em; text-align: center;
+            border: 1px solid currentColor; font-family: monospace; font-size: 1.1em; }
+    .cell.blank { opacity: .4; }
+    .cell.note { font-weight: bold; font-style: italic; background: rgba(128, 128, 128, .2); }
+    .cell.head { outline: 3px solid rgb(var(--color-highlight, 0, 106, 163)); outline-offset: -1px; opacity: 1; }
+    .cell.head::before { content: '▼'; position: absolute; left: 0; right: 0; top: -1.7em; line-height: 1.6em;
+                         font-style: normal; color: rgb(var(--color-highlight, 0, 106, 163)); }
+    .info { margin: .5em 0; min-height: 4.5em; }
+    .info b { display: inline-block; min-width: 7em; }
+    button { font: inherit; color: inherit; background: transparent; cursor: pointer;
+             border: 1px solid currentColor; border-radius: 4px; padding: .25em .7em; margin: 0 .3em .3em 0; }
+    button:disabled { opacity: .4; cursor: default; }
+  `
+
+  customElements.define('turing-machine', class extends HTMLElement {
+    connectedCallback() {
+      if (this.shadowRoot) return
+      this.rules = this.parse(this.textContent)
+      this.input = this.getAttribute('tape')
+      this.attachShadow({ mode: 'open' }).innerHTML = `
+        <style>${CSS}</style>
+        <div class="tape" role="img"></div>
+        <div class="info" aria-live="polite"></div>
+        <div role="group" aria-label="Steuerung der Turingmaschine">
+          <button data-do="back">Zurück</button>
+          <button data-do="step">Schritt</button>
+          <button data-do="change">Bis zur nächsten Änderung</button>
+          <button data-do="play">Abspielen</button>
+          <button data-do="reset">Neustart</button>
+        </div>`
+      const $ = selector => this.shadowRoot.querySelector(selector)
+      this.$tape = $('.tape')
+      this.$info = $('.info')
+      this.$play = $('[data-do=play]')
+      $('[data-do=back]').onclick = () => { this.pause(); this.back() }
+      $('[data-do=step]').onclick = () => { this.pause(); this.step(); this.render() }
+      $('[data-do=change]').onclick = () => { this.pause(); this.toNextChange() }
+      $('[data-do=reset]').onclick = () => { this.pause(); this.reset() }
+      this.$play.onclick = () => this.timer ? this.pause() : this.play()
+      this.reset()
+    }
+
+    disconnectedCallback() {
+      this.pause()
+    }
+
+    // Zeilenformat: Zustand | gelesene Zeichen | schreibt | Kopf | neuer Zustand ("=" heißt: unverändert)
+    parse(text) {
+      const rules = new Map()
+      this.start = null
+      for (const line of text.split('\n')) {
+        const fields = line.split('|').map(field => field.trim())
+        if (fields.length !== 5) continue
+        const [state, reads, write, move, next] = fields
+        this.start = this.start || state
+        for (const symbol of reads.split(/\s+/)) {
+          rules.set(state + '|' + symbol, {
+            write: write === '=' ? symbol : write,
+            move: move === '→' ? 1 : -1,
+            arrow: move,
+            next: next === '=' ? state : next
+          })
+        }
+      }
+      return rules
+    }
+
+    reset() {
+      this.tape = new Map([...this.input].map((symbol, position) => [position, symbol]))
+      this.head = 0
+      this.state = this.start
+      this.history = []
+      this.render()
+    }
+
+    read() {
+      return this.tape.get(this.head) || BLANK
+    }
+
+    rule() {
+      return this.rules.get(this.state + '|' + this.read())
+    }
+
+    step() {
+      const rule = this.rule()
+      if (!rule) return false
+      const old = this.read()
+      this.history.push({ head: this.head, state: this.state, old })
+      this.tape.set(this.head, rule.write)
+      this.head += rule.move
+      this.state = rule.next
+      return rule.write !== old
+    }
+
+    back() {
+      const last = this.history.pop()
+      if (!last) return
+      this.tape.set(last.head, last.old)
+      this.head = last.head
+      this.state = last.state
+      this.render()
+    }
+
+    toNextChange() {
+      while (this.rule() && !this.step());
+      this.render()
+    }
+
+    play() {
+      this.$play.textContent = 'Pause'
+      this.$info.setAttribute('aria-live', 'off')
+      this.timer = setInterval(() => {
+        this.step()
+        this.render()
+        if (!this.rule()) this.pause()
+      }, 250)
+    }
+
+    pause() {
+      clearInterval(this.timer)
+      this.timer = null
+      if (!this.$play) return
+      this.$play.textContent = 'Abspielen'
+      this.$info.setAttribute('aria-live', 'polite')
+    }
+
+    content() {
+      const positions = [...this.tape.keys()].filter(position => this.tape.get(position) !== BLANK)
+      const from = Math.min(...positions), to = Math.max(...positions)
+      let text = ''
+      for (let position = from; position <= to; position++) text += this.tape.get(position) || BLANK
+      return text
+    }
+
+    render() {
+      const positions = [...this.tape.keys()]
+      const from = Math.min(-2, this.head - 1, ...positions)
+      const to = Math.max(this.input.length + 1, this.head + 1, ...positions)
+      this.$tape.textContent = ''
+      for (let position = from; position <= to; position++) {
+        const symbol = this.tape.get(position) || BLANK
+        const cell = document.createElement('span')
+        cell.className = 'cell'
+          + (position === this.head ? ' head' : '')
+          + (symbol === BLANK ? ' blank' : '')
+          + ('01'.includes(symbol) || symbol === BLANK ? '' : ' note')
+        cell.textContent = symbol
+        this.$tape.append(cell)
+      }
+      this.$tape.setAttribute('aria-label', 'Band: ' + this.content() + ', Kopf liest ' + this.read())
+
+      const rule = this.rule()
+      const steps = 'Schritt: ' + this.history.length
+      if (rule) {
+        const write = rule.write === this.read() ? 'lässt ' + rule.write + ' stehen' : 'schreibt ' + rule.write
+        const next = rule.next === this.state ? 'bleibt im Zustand' : 'neuer Zustand ' + rule.next
+        this.$info.innerHTML = `<b>Zustand:</b> ${this.state}<br><b>Liest:</b> ${this.read()}<br>`
+          + `<b>Nächste Regel:</b> ${write}, Kopf ${rule.arrow}, ${next}<br>${steps}`
+      } else {
+        const result = this.content()
+        const value = /^[01]+$/.test(result) ? ' (dezimal ' + parseInt(result, 2) + ')' : ''
+        this.$info.innerHTML = `<b>Zustand:</b> ${this.state}<br><b>Ergebnis:</b> ${result}${value}<br>${steps}`
+      }
+      for (const button of this.shadowRoot.querySelectorAll('[data-do=step], [data-do=change], [data-do=play]')) {
+        button.disabled = !rule
+      }
+      this.shadowRoot.querySelector('[data-do=back]').disabled = !this.history.length
+    }
+  })
+}
+@end
 
 -->
 
@@ -384,8 +568,8 @@ style="width: 70%; min-width: 360px; max-width: 640px;"
 -->
 ```ascii
   ... | 1 | 1 | 0 | B | + | 0 | 1 | 1 | x | ...   Band (unbegrenzt lang)
-                                      ^
-                                      |  Kopf: lesen, schreiben, bewegen
+                                        ^
+                                        |  Kopf: lesen, schreiben, bewegen
                               +--------------+      +-----------------------+
                               | Zustand:     |      | Regeltabelle          |
                               | „rechts      | ---> | (Zustand, Zeichen) -> |
@@ -407,51 +591,80 @@ Die Maschine kann fast nichts: ein Zeichen lesen, ein Zeichen schreiben, einen S
 
 **Beispiel: Addition** $1101_2 + 0110_2$ (13 + 6). Auf dem Band stehen zwei Arten von Zeichen. Turing nennt die Ziffern des eigentlichen Ergebnisses _symbols of the first kind_ (figures). Alles andere sind _symbols of the second kind_ – Markierungen und Notizen, die sich die Maschine während der Rechnung macht. Hier sind das `x` (Ziffer der zweiten Zahl schon verbraucht) sowie `A` und `B` (fertige Ergebnisstelle 0 bzw. 1, als erledigt markiert).
 
-```text
-Start:       1 1 0 1 + 0 1 1 0
-
-Spalte 1:    rechts letzte Ziffer: 0  → durch x ersetzen, „trage 0“ merken
-             links letzte Ziffer: 1  → 1 + 0 + Übertrag 0 = 1, schreibe B
-             1 1 0 B + 0 1 1 x
-
-Spalte 2:    ans Ende, über x nach links → nächste Ziffer: 1 → x
-             links über B hinweg → nächste Ziffer: 0 → 0 + 1 + 0 = 1, schreibe B
-             1 1 B B + 0 1 x x
-
-Spalte 3:    rechts nächste Ziffer: 1 → x
-             links nächste Ziffer: 1 → 1 + 1 + 0 = 10, schreibe A, Übertrag 1
-             1 A B B + 0 x x x
-
-Spalte 4:    rechts nächste Ziffer: 0 → x
-             links nächste Ziffer: 1 → 1 + 0 + 1 = 10, schreibe A, Übertrag 1
-             A A B B + x x x x
-
-Ende:        rechts nur noch x bis zum + → zweite Zahl ist verbraucht
-             Übertrag 1 noch offen → links neben A steht ␣, schreibe B
-             B A A B B + x x x x
-
-Aufräumen:   A → 0, B → 1, alles ab + löschen
-             1 0 0 1 1     = 19 ✓
-```
-
 Ein Ausschnitt der Regeltabelle – die Regeln, die tatsächlich rechnen (Ü = Übertrag):
 
 <!-- data-type="none" -->
 | Zustand            | liest | schreibt | Kopf | neuer Zustand      |
 | ------------------ | ----- | -------- | ---- | ------------------ |
-| rechts holen, Ü 0  | `0`   | `x`      | ←    | links +0, Ü 0      |
-| rechts holen, Ü 0  | `1`   | `x`      | ←    | links +1, Ü 0      |
-| links +1, Ü 0      | `0`   | `B`      | →    | rechts holen, Ü 0  |
-| links +1, Ü 0      | `1`   | `A`      | →    | rechts holen, Ü 1  |
+| rechts holen, Ü 0  | `0`   | `x`      | ←    | zum +, +0, Ü 0     |
+| rechts holen, Ü 0  | `1`   | `x`      | ←    | zum +, +1, Ü 0     |
+| links +1, Ü 0      | `0`   | `B`      | →    | zum Ende, Ü 0      |
+| links +1, Ü 0      | `1`   | `A`      | →    | zum Ende, Ü 1      |
 
-Weitere Zustände lassen den Kopf über `x`, `+`, `A` und `B` hinweglaufen, bis er die richtige Ziffer erreicht.
+Weitere Zustände lassen den Kopf hinweglaufen, bis er die richtige Ziffer erreicht: „zum +“ läuft über die Ziffern der zweiten Zahl nach links, „links“ über `A` und `B`, „zum Ende“ an das rechte Ende, „rechts holen“ von dort über `x` zurück.
 
 ****************************************************************
 
     --{{1}}--
 Die Maschine addiert Spalte für Spalte, genau wie Sie schriftlich addieren – nur dass sie zwischen den beiden Zahlen hin- und herlaufen muss, weil sie immer nur ein Feld sieht. Damit sie nicht durcheinanderkommt, macht sie sich Notizen auf dem Band: Ein x heißt „diese Ziffer der zweiten Zahl habe ich schon verarbeitet“, ein A oder B heißt „diese Stelle des Ergebnisses ist fertig, und sie ist 0 beziehungsweise 1“. Das sind Turings Symbole der zweiten Art. Erst beim Aufräumen werden aus A und B wieder echte Ziffern, die Symbole der ersten Art. Und wo steht der Übertrag? Nicht auf dem Band, sondern im Zustand der Maschine: „trage 0“ und „trage 1“ sind zwei verschiedene Zustände der Regeltabelle. Genau so merkt sich auch der ATmega328P den Übertrag – nicht im Speicher, sondern im Carry-Flag seines Statusregisters.
 
-                {{2}}
+                {{2-3}}
+****************************************************************
+
+**Simulation:** $1101_2 + 0110_2$ Schritt für Schritt. Der Pfeil zeigt die Kopfposition, die Notizen `x`, `A`, `B` und `+` sind fett und kursiv.
+
+``` text @Turing.sim(1101+0110)
+zum Ende, Ü 0     | 0 1 + A B x | = | → | =
+zum Ende, Ü 0     | ␣           | = | ← | rechts holen, Ü 0
+zum Ende, Ü 1     | 0 1 + A B x | = | → | =
+zum Ende, Ü 1     | ␣           | = | ← | rechts holen, Ü 1
+rechts holen, Ü 0 | x           | = | ← | =
+rechts holen, Ü 0 | 0           | x | ← | zum +, +0, Ü 0
+rechts holen, Ü 0 | 1           | x | ← | zum +, +1, Ü 0
+rechts holen, Ü 0 | +           | = | ← | zum Anfang
+rechts holen, Ü 1 | x           | = | ← | =
+rechts holen, Ü 1 | 0           | x | ← | zum +, +0, Ü 1
+rechts holen, Ü 1 | 1           | x | ← | zum +, +1, Ü 1
+rechts holen, Ü 1 | +           | = | ← | Rest, Ü 1
+zum +, +0, Ü 0    | 0 1         | = | ← | =
+zum +, +0, Ü 0    | +           | = | ← | links +0, Ü 0
+zum +, +1, Ü 0    | 0 1         | = | ← | =
+zum +, +1, Ü 0    | +           | = | ← | links +1, Ü 0
+zum +, +0, Ü 1    | 0 1         | = | ← | =
+zum +, +0, Ü 1    | +           | = | ← | links +0, Ü 1
+zum +, +1, Ü 1    | 0 1         | = | ← | =
+zum +, +1, Ü 1    | +           | = | ← | links +1, Ü 1
+links +0, Ü 0     | A B         | = | ← | =
+links +0, Ü 0     | 0 ␣         | A | → | zum Ende, Ü 0
+links +0, Ü 0     | 1           | B | → | zum Ende, Ü 0
+links +1, Ü 0     | A B         | = | ← | =
+links +1, Ü 0     | 0 ␣         | B | → | zum Ende, Ü 0
+links +1, Ü 0     | 1           | A | → | zum Ende, Ü 1
+links +0, Ü 1     | A B         | = | ← | =
+links +0, Ü 1     | 0 ␣         | B | → | zum Ende, Ü 0
+links +0, Ü 1     | 1           | A | → | zum Ende, Ü 1
+links +1, Ü 1     | A B         | = | ← | =
+links +1, Ü 1     | 0 ␣         | A | → | zum Ende, Ü 1
+links +1, Ü 1     | 1           | B | → | zum Ende, Ü 1
+Rest, Ü 1         | A B         | = | ← | =
+Rest, Ü 1         | 1           | A | ← | =
+Rest, Ü 1         | 0 ␣         | B | ← | zum Anfang
+zum Anfang        | 0 1 A B     | = | ← | =
+zum Anfang        | ␣           | = | → | aufräumen
+aufräumen         | 0 1         | = | → | =
+aufräumen         | A           | 0 | → | =
+aufräumen         | B           | 1 | → | =
+aufräumen         | +           | ␣ | → | löschen
+löschen           | x           | ␣ | → | =
+löschen           | ␣           | = | ← | Halt
+```
+
+****************************************************************
+
+    --{{2}}--
+Hier können Sie der Maschine zusehen. Jeder Klick auf Schritt führt genau eine Regel aus, darüber steht, welche Regel als Nächstes greift. Sie werden sehen, dass die meisten Schritte reines Hin- und Herlaufen sind; mit „Bis zur nächsten Änderung“ springen Sie direkt zur nächsten Stelle, an der die Maschine etwas auf das Band schreibt. Achten Sie auf den Zustand: Dort steht der Übertrag, nicht auf dem Band.
+
+                {{3}}
 ****************************************************************
 
 Turing zeigte zweierlei: Es gibt eine **universelle Maschine**, die jede andere nachahmt, wenn man ihr deren Regeltabelle auf das Band schreibt – das Programm wird zu Daten. Und es gibt Fragen, die **keine** Maschine entscheiden kann, etwa ob ein beliebiges Programm irgendwann anhält.
@@ -461,7 +674,7 @@ Turing zeigte zweierlei: Es gibt eine **universelle Maschine**, die jede andere 
 
 ****************************************************************
 
-    --{{2}}--
+    --{{3}}--
 Turings Maschine wurde nie gebaut, sie ist ein Gedankenmodell. Aber sie zieht die Grenze dessen, was Rechner können – bis heute. Ihr ATmega328P ist im Prinzip universell: Mit genug Speicher und Zeit könnte er alles berechnen, was Ihr Laptop berechnet. Systeme, die jede Turingmaschine nachahmen können, nennt man Turing-vollständig – der Befehlssatz des ATmega328P gehört dazu, nur sein Speicher ist endlich. Die beiden unterscheiden sich also nicht darin, was sie berechnen können, sondern wie schnell. Genauer behandelt das die Theoretische Informatik. Babbage hatte die universelle Maschine mit Zahnrädern geplant, Turing hat bewiesen, dass es sie gibt und wo ihre Grenzen liegen. Und die Idee, das Programm wie Daten auf demselben Band abzulegen, taucht 1945 bei von Neumann wieder auf. Turing selbst arbeitete im Zweiten Weltkrieg in Bletchley Park an der Entschlüsselung der deutschen Enigma. Die Maschine, die er dafür mitentwickelte, die Bombe, war aber kein Computer im Sinne seines eigenen Modells: Sie konnte nur eines, nämlich Schlüsselstellungen durchprobieren, gebaut aus rotierenden Walzen und Relais – dieselben Relais, aus denen Zuse zur gleichen Zeit die Z3 baute. Wie man solche Maschinen tatsächlich aus Schaltern baut, zeigte 1937 Claude Shannon – damit beginnt der nächste Abschnitt und morgen die Boolesche Algebra.
 
 ## Es werde Licht ... elektrische Systeme

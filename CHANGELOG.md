@@ -2,6 +2,11 @@
 
 Alle wesentlichen Änderungen an diesem Kurs werden in dieser Datei dokumentiert.
 
+## [0.7.7] - 2026-10-30
+
+### Changed
+- **01_HistorischerUeberblick (0.7.6):** Turing: Simulation der Addition 1101 + 0110 als neuer Schritt (Makro `@Turing.sim`, Web-Komponente im Kopf der Vorlesung; Regeltabelle im Codeblock) ersetzt den Textablauf der Rechnung; Regeltabellen-Ausschnitt um die Zwischenzustände „zum +“ und „zum Ende“ korrigiert; Kopf-Pfeil im Bild auf das Feld `x` gesetzt
+
 ## [0.7.6] - 2026-10-29
 
 ### Changed
