@@ -2,6 +2,12 @@
 
 Alle wesentlichen Änderungen an diesem Kurs werden in dieser Datei dokumentiert.
 
+## [0.7.9] - 2026-10-31
+
+### Changed
+- **03_Minimierung (0.1.0):** Überarbeitet für den Termin am 04.11.: Rückblick löst Teil B der Hausaufgabe aus VL 02 auf (statt alter Rückmeldezahlen). Interaktive KV-Diagramme über das neue Template [LiaTemplates/KarnaughMap](https://github.com/LiaTemplates/KarnaughMap) (0.1.0, fest eingebunden). Selbstkontrolle: Quizfragen und Hausaufgabe nach Schema Teil A/Teil B. Sprechertexte in allen Abschnitten. Neuer Abschnitt „Und im ATmega328P?“ mit Segment `d` in C (Byte-Vergleich mit `avr-gcc`). Fachliche Korrekturen: eindeutig sind nur KDNF/KKNF, DNF besteht aus Produkttermen, Formeln der Beispiele standen eine Tabelle zu spät, $A_{KNF}$ statt $A_{DNF}$, widersprüchliche Schleifenregel, 4 Leitungen für BCD. Gatterzahl der Einstiegsaufgabe klargestellt, „Sackgasse“ und „garantiert minimal“ entfernt, doppelte Übersicht der Verfahren gestrichen, Link zu SANE aktualisiert. Nach Persona-Reviews: Schleife als Rechteck definiert, „minimal“ und „Literal“ sichtbar festgelegt, Ableseregel auf der Folie, Resolutionsregel benannt, Spalte $g$ im Nachweis, Regeln zur Schleifenwahl vor die Übungen gezogen, Don't-Care-Diagramm vor die Lösung, KNF-Vorteil bei Segment `d`, fairer Byte-Vergleich (60/48/22), Decoder und sieben Ausgänge geklärt, Aufgabe 4 auf Segment `d` festgelegt, Abschnitt „Zusammenfassung“ heißt nun „Minimierung mit Software“. BEAST: Link in der Vorlesung durch Einordnung des Bildes ersetzt, neue Aufgabe 5 (Segment `d` selbst aufbauen), Screenshot ohne Browserleiste.
+- **Kurslandkarte:** Abschnittstitel „Don't-Care-Einträge in der Wahrheitstafel“ angepasst
+
 ## [0.7.8] - 2026-10-31
 
 ### Changed

@@ -243,8 +243,8 @@
    "pdf": null,
    "anwendet": [],
    "abschnitte": [
-    "Minimierung von Boolesche Funktionen",
-    "Reflexion Ihrer Fragen / Rückmeldungen",
+    "Minimierung Boolescher Funktionen",
+    "Rückblick: Hausaufgabe aus Vorlesung 02",
     "Ausgangspunkt",
     "Herausforderung",
     "Aufstellen der Normalform",
@@ -253,11 +253,13 @@
     "Beispiele",
     "Optimierungskriterien",
     "Karnaugh-Veitch für Maxterme",
-    "Dont-Care-Einträge in der Wahrheitstafel",
-    "Zusammenfassung",
+    "Don't-Care-Einträge in der Wahrheitstafel",
+    "Minimierung mit Software",
+    "Und im ATmega328P?",
     "Was Sie heute mitnehmen",
     "Ihre Begriffe für die Kurslandkarte",
-    "Hausaufgaben"
+    "Hausaufgaben",
+    "Nächste Vorlesung"
    ]
   },
   {
