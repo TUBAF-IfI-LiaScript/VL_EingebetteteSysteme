@@ -240,7 +240,7 @@
    "freigegeben": false,
    "status": "ausgearbeitet",
    "block": 2,
-   "pdf": null,
+   "pdf": "../pdf/03_Minimierung.pdf",
    "anwendet": [],
    "abschnitte": [
     "Minimierung Boolescher Funktionen",
