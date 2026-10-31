@@ -817,7 +817,7 @@ Fassen wir zusammen: Wir haben den Begriff des eingebetteten Systems geklärt un
 
 ## Ihre Begriffe für die Kurslandkarte
 
-Die [Kurslandkarte](https://tubaf-ifi-liascript.github.io/VL_EingebetteteSysteme/kurslandkarte/) wächst mit dem Semester, und Sie bestimmen mit, was hineinkommt. Ihre Antworten sammeln wir im Hörsaal gemeinsam über das LiaScript-Klassenzimmer; nach der Vorlesung werden die Begriffe dieser Woche in der Karte freigeschaltet. Den Link zum Klassenzimmer zeigen wir Ihnen im Hörsaal.
+Die [Kurslandkarte](https://tubaf-ifi-liascript.github.io/VL_EingebetteteSysteme/kurslandkarte/) wächst mit dem Semester, und Sie bestimmen mit, was hineinkommt. Ihre Antworten sammeln wir im Hörsaal gemeinsam über das LiaScript-Klassenzimmer; die Begriffe dieser Woche sind seit Beginn der Vorlesung in der Karte freigeschaltet, und Ihre Vorschläge ergänzen sie. Den Link zum Klassenzimmer zeigen wir Ihnen im Hörsaal.
 
 **Welche Begriffe aus der heutigen Vorlesung gehören für Sie in die Kurslandkarte?**
 

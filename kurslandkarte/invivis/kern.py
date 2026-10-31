@@ -37,10 +37,10 @@ STANDARD = {
     "einheit": "Vorlesung", "einheiten": "Vorlesungen", "einheiten_dat": "Vorlesungen", "gleich": "In derselben Vorlesung",
     "welche_einheit": "welcher Vorlesung", "der_einheit": "der Vorlesung",
     "liste": "Vorlesungen", "frage_label": "Leitfrage", "vor_pruefung": "vor Übung und Klausur",
-    "freigabe": "erscheinen nach der Vorlesung, mit Ihren Vorschlägen",
-    "folgen": "Die Begriffe dieser Vorlesung entstehen nach der Vorlesung – mit Ihren Vorschlägen.",
+    "freigabe": "erscheinen zu Beginn der Vorlesung, ergänzt um Ihre Vorschläge",
+    "folgen": "Die Begriffe dieser Vorlesung erscheinen zu Beginn der Vorlesung – ergänzt um Ihre Vorschläge.",
     "anwendung_daten": "Beispiel", "start_ansicht": "metro",
-    "freigabe_satz": "Nach jeder Vorlesung kommen ihre Begriffe dazu, ergänzt um Ihre Vorschläge.",
+    "freigabe_satz": "Zu Beginn jeder Vorlesung kommen ihre Begriffe dazu, ergänzt um Ihre Vorschläge.",
     "spalten": [["VL", "Vorlesung"], ["Ü", "Übung"], ["P", "Praktikum"]],
     "woche": "Woche", "tagesgenau": False, "uhrzeiten": {},
     "status": {},
@@ -143,6 +143,7 @@ def erzeuge(repo, kurs, termine, bloecke, linien, begriffe, beziehungen, faeden,
     linie_ids = {l[0] for l in linien}
     for b in begriffe:
         assert b[2] in linie_ids, ("unbekannte Linie", b[0], b[2])
+    assert len(faeden) <= 7, ("Höchstens 7 Fäden: vorlage.html hat 7 Fadenfarben (--t1 … --t7)", len(faeden))
     for fid, _, _, st in faeden:
         for x in st:
             assert x in term_of, (fid, x)

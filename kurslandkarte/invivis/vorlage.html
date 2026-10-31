@@ -55,6 +55,7 @@ img { max-width: 100%; }
   --t4: #2E9CC0; --t4-on: #0F2A30;  /* F4 Himmel dunkel */
   --t5: #B03A48; --t5-on: #FFFFFF;  /* F5 Beere */
   --t6: #0F2A30; --t6-on: #FFFFFF;  /* F6 Tinte */
+  --t7: #4E7A2E; --t7-on: #FFFFFF;  /* F7 Moos */
   --sans: "IBM Plex Sans", "Segoe UI", system-ui, sans-serif;
   --cond: var(--sans);
   --mono: "IBM Plex Mono", ui-monospace, monospace;
@@ -74,6 +75,7 @@ img { max-width: 100%; }
     --t4: #8FDAF0; --t4-on: #0F2A30;
     --t5: #F08A98; --t5-on: #0F2A30;
     --t6: #EEF2F1; --t6-on: #0F2A30;
+    --t7: #9CD67A; --t7-on: #0F2A30;
     color-scheme: dark;
   }
 }
@@ -89,6 +91,7 @@ img { max-width: 100%; }
   --t4: #8FDAF0; --t4-on: #0F2A30;
   --t5: #F08A98; --t5-on: #0F2A30;
   --t6: #EEF2F1; --t6-on: #0F2A30;
+  --t7: #9CD67A; --t7-on: #0F2A30;
   color-scheme: dark;
 }
 
@@ -688,7 +691,7 @@ const PHASES = DATA.phasen.map(p => ({ from: p.von, to: p.bis, name: p.name, v: 
 const LINES = DATA.linien.map(l => ({ id: l.id, name: l.name }));
 // Spalten des Rasters: nur Termintypen, die im Kurs vorkommen
 const SPALTEN = (KURS.spalten || [["VL", "Vorlesung"]]).filter(([t]) => LECTURES.some(l => l.typ === t));
-const THREADV = ["--t1", "--t2", "--t3", "--t4", "--t5", "--t6"];
+const THREADV = ["--t1", "--t2", "--t3", "--t4", "--t5", "--t6", "--t7"];
 const THREADS = DATA.faeden.map((f, i) => ({ id: f.id, name: f.name, text: f.beschreibung, st: f.stationen, weiter: f.weiter, v: THREADV[i], nr: `F${i + 1}` }));
 const ALL = DATA.begriffe.map(b => ({ id: b.id, name: b.name, line: b.linie, vl: b.vl, sec: b.abschnitt, level: b.ebene, code: b.code, text: b.erklaerung, mis: b.fehlvorstellung }));
 const EDGES = DATA.beziehungen.map(r => [r.von, r.nach, r.text]);

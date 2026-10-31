@@ -1,6 +1,6 @@
 {
  "stand": "31.10.2026",
- "version": "0.5.0",
+ "version": "0.5.2",
  "kurs": {
   "basis": "https://liascript.github.io/course/?https://raw.githubusercontent.com/TUBAF-IfI-LiaScript/VL_EingebetteteSysteme/master/",
   "speicher": "eavd-map",
@@ -8,8 +8,8 @@
   "einheiten": "Vorlesungen",
   "einheiten_dat": "Vorlesungen",
   "gleich": "In derselben Vorlesung",
-  "freigabe": "erscheinen nach der Vorlesung, mit Ihren Vorschlägen",
-  "folgen": "Die Begriffe dieser Vorlesung entstehen nach der Vorlesung – mit Ihren Vorschlägen.",
+  "freigabe": "erscheinen zu Beginn der Vorlesung, ergänzt um Ihre Vorschläge",
+  "folgen": "Die Begriffe dieser Vorlesung erscheinen zu Beginn der Vorlesung – ergänzt um Ihre Vorschläge.",
   "spalten": [
    [
     "VL",
@@ -150,7 +150,7 @@
    "wann": "KW 44 · 26.–30.10.",
    "wann_kurz": "KW 44",
    "leitfrage": "Wie kam es vom Rechenbrett zum Mikrocontroller?",
-   "freigegeben": false,
+   "freigegeben": true,
    "status": "ausgearbeitet",
    "block": 1,
    "pdf": "../pdf/01_HistorischerUeberblick.pdf",
@@ -196,7 +196,7 @@
    "wann": "KW 44 · 26.–30.10.",
    "wann_kurz": "KW 44",
    "leitfrage": "Wie rechnet man mit wahr und falsch?",
-   "freigegeben": false,
+   "freigegeben": true,
    "status": "ausgearbeitet",
    "block": 2,
    "pdf": "../pdf/02_BoolscheAlgebra.pdf",

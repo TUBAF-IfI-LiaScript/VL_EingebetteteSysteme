@@ -61,7 +61,7 @@ TERMINE = [
 assert len(TERMINE) == ANZAHL
 
 # ---- Freigabe: Begriffe einer Vorlesung erscheinen erst nach ihr in der Karte.
-FREIGEGEBEN = {0}
+FREIGEGEBEN = {0, 1, 2}
 
 # ---- Leitfragen
 LEITFRAGE = {
