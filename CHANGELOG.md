@@ -2,6 +2,11 @@
 
 Alle wesentlichen Änderungen an diesem Kurs werden in dieser Datei dokumentiert.
 
+## [0.7.8] - 2026-10-31
+
+### Changed
+- **01_HistorischerUeberblick (0.7.7):** Turing: Aufräumen und Ergebnis der Addition als Satz unter der Simulation (fehlte seit Wegfall des Textablaufs im PDF)
+
 ## [0.7.7] - 2026-10-30
 
 ### Changed

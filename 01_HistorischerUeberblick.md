@@ -2,7 +2,7 @@
 
 author:   Sebastian Zug, André Dietrich, Fabian Bär & GitHub Copilot Teaching-Agent & Claude Code (Opus 5.5)
 email:    sebastian.zug@informatik.tu-freiberg.de & andre.dietrich@informatik.tu-freiberg.de & fabian.baer@student.tu-freiberg.de
-version:  0.7.6
+version:  0.7.7
 language: de
 narrator: Deutsch Female
 
@@ -658,6 +658,8 @@ aufräumen         | +           | ␣ | → | löschen
 löschen           | x           | ␣ | → | =
 löschen           | ␣           | = | ← | Halt
 ```
+
+Am Ende räumt die Maschine auf: Aus `A` wird 0, aus `B` wird 1, alles ab `+` wird gelöscht. Auf dem Band steht dann $10011_2 = 19$.
 
 ****************************************************************
 
