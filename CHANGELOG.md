@@ -5,7 +5,7 @@ Alle wesentlichen Änderungen an diesem Kurs werden in dieser Datei dokumentiert
 ## [0.7.10] - 2026-10-31
 
 ### Fixed
-- **PDFs, alle Vorlesungen:** Formeln erschienen doppelt, einmal als Rohtext ohne Überstriche. Beim Export über `file://` kann die Formel-Komponente das KaTeX-CSS nicht lesen; `config.md` (0.0.3) blendet den ungestylten Teil nur im PDF-Pfad aus. PDFs neu gebaut.
+- **PDFs, alle Vorlesungen:** Formeln erschienen doppelt, einmal als Rohtext ohne Überstriche. Das PDF-Paket des Exporters enthält kein KaTeX-CSS; `config.md` (0.0.3) blendet den ungestylten Teil nur im PDF-Pfad aus. PDFs neu gebaut.
 
 ## [0.7.9] - 2026-10-31
 

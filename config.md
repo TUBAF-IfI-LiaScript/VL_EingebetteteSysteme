@@ -11,7 +11,7 @@ comment:  This file provides commonly used meta information for all LiaScript co
 @config.lecture:    `Digitale Systeme / Eingebettete Systeme`
 
 @onload
-// PDF-Export: Unter file:// kann lia-formula das KaTeX-CSS nicht lesen, die Formel erscheint sonst doppelt
+// PDF-Export: Das PDF-Paket des Exporters enthält kein KaTeX-CSS, jede Formel erscheint sonst doppelt
 if (/\/assets\/pdf\//.test(window.location.href)) {
   const attach = Element.prototype.attachShadow
   Element.prototype.attachShadow = function (options) {
