@@ -2,6 +2,11 @@
 
 Alle wesentlichen Änderungen an diesem Kurs werden in dieser Datei dokumentiert.
 
+## [0.7.11] - 2026-11-04
+
+### Changed
+- **03_Minimierung (0.1.1):** Maxterm-Abschnitt: Lösung des KV-Diagramms als KNF mit Tabelle der drei Schleifen, danach die Äquivalenz zur DNF Schritt für Schritt ausmultipliziert (statt nur als Aufgabe). „Und im ATmega328P?“: Hinweis, dass die Ziffer nur die unteren vier Bits von `uint8_t` belegt und was mit den oberen geschieht. Tabellenkonstante als 16 Bit ausgeschrieben und als Spalte `d` der Wahrheitstafel erklärt. Wahrheitstafel von `d` mit der Bitspalte der Konstanten über dem Code. Rückblick: Aufgabe 3 aus VL 02 im Wortlaut eingeblendet, die Antworten folgen Schritt für Schritt.
+
 ## [0.7.10] - 2026-10-31
 
 ### Fixed

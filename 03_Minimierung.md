@@ -2,7 +2,7 @@
 
 author:   Sebastian Zug & André Dietrich & Fabian Bär & Claude Code (Opus 5.5)
 email:    sebastian.zug@informatik.tu-freiberg.de & andre.dietrich@informatik.tu-freiberg.de & fabian.baer@student.tu-freiberg.de
-version:  0.1.0
+version:  0.1.1
 language: de
 narrator: Deutsch Female
 
@@ -88,11 +88,34 @@ style="width: 80%; min-width: 420px; max-width: 720px;"
     --{{0}}--
 Beginnen wir mit Teil B der Hausaufgabe, dem Datenblatt des UND-Gatters. Die zweite Frage führt direkt zum heutigen Thema, denn die Kreuze in der Function Table meinen das, was wir heute Don't Care nennen.
 
-Aufgabe 3 fragte nach dem [Datenblatt des UND-Gatters SN74LVC2G08](https://www.ti.com/lit/ds/symlink/sn74lvc2g08-ep.pdf):
+> **Aufgabe 3 aus Vorlesung 02:** Lesen Sie das [Datenblatt des UND-Gatters SN74LVC2G08](https://www.ti.com/lit/ds/symlink/sn74lvc2g08-ep.pdf) von Texas Instruments.
 
-+ **Maximale Verzögerung bei 3,3 V:** Bei $V_{CC} = 3{,}3\,\text{V} \pm 0{,}3\,\text{V}$ ist $t_{pd}$ höchstens 5,7 ns. Das klingt wenig, summiert sich aber: Zehn solcher Gatter hintereinander können bis zu 57 ns brauchen. Kürzere Wege durch eine Schaltung machen sie also auch schneller.
-+ **Kreuze in der Function Table:** `X` steht für einen beliebigen Pegel. Liegt ein Eingang auf L, ist der andere egal, der Ausgang bleibt L. Dort sagt das `X`: Der **Eingang** spielt keine Rolle. Heute nutzen wir denselben Gedanken am **Ausgang**: Für manche Eingaben ist egal, was herauskommt.
-+ **Negation mit dem UND-Gatter:** Nicht möglich. Laut Tabelle ist der Ausgang nur bei A = B = H auf H. Verbinden Sie beide Eingänge oder legen Sie einen fest auf H, folgt der Ausgang dem Eingang: $Y = A$. Der Ausgang geht also nie auf H, weil ein Eingang auf L geht. Dafür braucht es ein NICHT oder ein NAND.
+**a) Wie groß ist die maximale Verzögerung (_propagation delay_ $t_{pd}$), mit der der Ausgang dem Eingang folgt, bei einer Versorgungsspannung von 3,3 V?**
+
+       {{1}}
+********************************************************************************
+
+Bei $V_{CC} = 3{,}3\,\text{V} \pm 0{,}3\,\text{V}$ ist $t_{pd}$ höchstens 5,7 ns. Das klingt wenig, summiert sich aber: Zehn solcher Gatter hintereinander können bis zu 57 ns brauchen. Kürzere Wege durch eine Schaltung machen sie also auch schneller.
+
+********************************************************************************
+
+**b) Was bedeuten die Kreuze in der Wahrheitstafel (_Function table_)?**
+
+       {{2}}
+********************************************************************************
+
+`X` steht für einen beliebigen Pegel. Liegt ein Eingang auf L, ist der andere egal, der Ausgang bleibt L. Dort sagt das `X`: Der **Eingang** spielt keine Rolle. Heute nutzen wir denselben Gedanken am **Ausgang**: Für manche Eingaben ist egal, was herauskommt.
+
+********************************************************************************
+
+**c) Können Sie mit dem Gatter auch eine Negation des Eingangssignals realisieren? Begründen Sie mit der Wahrheitstafel.**
+
+       {{3}}
+********************************************************************************
+
+Nicht möglich. Laut Tabelle ist der Ausgang nur bei A = B = H auf H. Verbinden Sie beide Eingänge oder legen Sie einen fest auf H, folgt der Ausgang dem Eingang: $Y = A$. Der Ausgang geht also nie auf H, weil ein Eingang auf L geht. Dafür braucht es ein NICHT oder ein NAND.
+
+********************************************************************************
 
 ## Ausgangspunkt
 
@@ -895,7 +918,61 @@ Prüfen Sie das hier: Mit „KNF (Nullen)“ bilden Sie die Schleifen um die Nul
 
 @Karnaugh.map(w x y z,0 2 5 7 8 9 13 15,-)
 
-> **Aufgabe:** Weisen Sie die Äquivalenz der Gleichungen für die KNF $A_{KNF} = (w+x+\overline{z})(\overline{x} + z)(\overline{w}+x+\overline{y})$  und die DNF $A_{DNF} = \overline{w}\,\overline{x}\,\overline{z}+xz+w\overline{x}\overline{y}$ nach.
+    --{{1}}--
+Hier die Lösung als KNF. Jede der drei Schleifen um die Nullen liefert einen Summenterm. Die Variablen, die in der Schleife konstant bleiben, erscheinen darin umgekehrt: eine 1 negiert, eine 0 einfach.
+
+       {{1}}
+********************************************************************************
+
+**Lösung als KNF:** Die drei Schleifen um die Nullen in der Tabelle oben liefern je einen Summenterm.
+
+<!-- data-type="none" style="table-layout: fixed; max-width:700px;"-->
+| Schleife | Felder                                                      | konstant in der Schleife | Summenterm                       |
+| -------- | ----------------------------------------------------------- | ------------------------ | -------------------------------- |
+| rot      | Spalte $\overline{w}\,\overline{x}$, Zeilen $\overline{y}z$ und $yz$ | $w = 0$, $x = 0$, $z = 1$ | $w + x + \overline{z}$           |
+| grün     | Spalten $\overline{w}x$ und $wx$, Zeilen $\overline{y}\,\overline{z}$ und $y\overline{z}$ (über den Rand) | $x = 1$, $z = 0$ | $\overline{x} + z$ |
+| blau     | Spalte $w\overline{x}$, Zeilen $yz$ und $y\overline{z}$      | $w = 1$, $x = 0$, $y = 1$ | $\overline{w} + x + \overline{y}$ |
+
+$$
+A_{KNF} = (w+x+\overline{z})(\overline{x} + z)(\overline{w}+x+\overline{y})
+$$
+
+********************************************************************************
+
+    --{{2}}--
+Liest man dasselbe Diagramm über die Einsen, entsteht eine DNF. Dass beide dieselbe Funktion beschreiben, zeigen wir durch Ausmultiplizieren. Dafür reichen die Gesetze aus der letzten Vorlesung.
+
+       {{2}}
+********************************************************************************
+
+**Äquivalenz zur DNF:** Über die Einsen liefert dasselbe Diagramm die DNF
+
+$$
+A_{DNF} = \overline{w}\,\overline{x}\,\overline{z} + xz + w\overline{x}\,\overline{y}
+$$
+
+Ausmultiplizieren der KNF führt genau auf diese DNF:
+
+$$
+\begin{aligned}
+A_{KNF} &= (w+x+\overline{z})(\overline{x} + z)(\overline{w}+x+\overline{y}) \\
+        &= (w\overline{x} + wz + xz + \overline{x}\,\overline{z})(\overline{w}+x+\overline{y}) & \text{(1)} \\
+        &= (w\overline{x} + xz + \overline{x}\,\overline{z})(\overline{w}+x+\overline{y}) & \text{(2)} \\
+        &= w\overline{x}\,\overline{y} + \overline{w}xz + xz + xz\overline{y} + \overline{w}\,\overline{x}\,\overline{z} + \overline{x}\,\overline{y}\,\overline{z} & \text{(3)} \\
+        &= w\overline{x}\,\overline{y} + xz + \overline{w}\,\overline{x}\,\overline{z} + \overline{x}\,\overline{y}\,\overline{z} & \text{(4)} \\
+        &= \overline{w}\,\overline{x}\,\overline{z} + xz + w\overline{x}\,\overline{y} = A_{DNF} & \text{(5)}
+\end{aligned}
+$$
+
+1. Die ersten beiden Klammern ausmultiplizieren, $x\overline{x} = 0$ und $z\overline{z} = 0$ fallen weg.
+2. $wz = wz(x + \overline{x}) = wxz + w\overline{x}z$. Den ersten Teil absorbiert $xz$, den zweiten $w\overline{x}$, also fällt $wz$ weg.
+3. Mit der dritten Klammer ausmultiplizieren, $w\overline{w} = 0$, $x\overline{x} = 0$ und $xz \cdot x = xz$.
+4. Absorption: $xz$ enthält $\overline{w}xz$ und $xz\overline{y}$.
+5. Wie in Schritt 2: $\overline{x}\,\overline{y}\,\overline{z} = w\overline{x}\,\overline{y}\,\overline{z} + \overline{w}\,\overline{x}\,\overline{y}\,\overline{z}$ steckt schon in $w\overline{x}\,\overline{y}$ und $\overline{w}\,\overline{x}\,\overline{z}$.
+
+> Beide Formen brauchen hier 3 Terme mit zusammen 8 Literalen. Welche günstiger ist, hängt von der Funktion ab: Bei Segment `d` im nächsten Abschnitt gewinnt die KNF.
+
+********************************************************************************
 
 ## Don't-Care-Einträge in der Wahrheitstafel
 
@@ -1042,7 +1119,29 @@ Die Dokumentation zum Sympy Paket von Python finden Sie unter https://docs.sympy
     --{{0}}--
 Hier zählen keine Gatter, sondern Bytes Programmspeicher. Lohnt sich das Minimieren trotzdem? Dieselbe Funktion für Segment d steht unten dreimal in C. Nachgemessen wurde mit dem Compiler avr-gcc, der auch hinter der Arduino-Umgebung steckt.
 
-Auf dem ATmega328P wird eine Schaltfunktion zu einer C-Bedingung. Hier steht Segment `d` einmal als KDNF, einmal in der minimierten Form aus dem KV-Diagramm und einmal als Tabelle in einer Konstanten: Bit $n$ von `0b1101101101` ist der Wert für die Ziffer $n$, `>>` schiebt es nach ganz rechts, `& 1` schneidet es heraus. Alle drei bekommen die Ziffer als Zahl `n`.
+Auf dem ATmega328P wird eine Schaltfunktion zu einer C-Bedingung. Hier steht Segment `d` einmal als KDNF, einmal in der minimierten Form aus dem KV-Diagramm und einmal als Tabelle in einer Konstanten: Bit $n$ ist der Wert von `d` für die Ziffer $n$, `>>` schiebt es nach ganz rechts, `& 1` schneidet es heraus. Alle drei bekommen die Ziffer als Zahl `n`.
+
+Die Wahrheitstafel für Segment `d` kennen Sie aus dem Abschnitt zu den Don't-Cares. Die Spalte „Bit“ zeigt, was davon in der Konstanten von `d_tab` steht: Bit $n$ gehört zu Zeile $n$, und aus jedem D wird eine 0. Von unten nach oben gelesen ergibt die Spalte die Konstante `0b0000001101101101`.
+
+<!-- data-type="none" style="table-layout: fixed; max-width:560px;"-->
+| $n$ | $w$ | $x$ | $y$ | $z$ | $d$ | Bit |
+| --- | --- | --- | --- | --- | --- | --- |
+| 0 | 0 | 0 | 0 | 0 | 1 | 1 |
+| 1 | 0 | 0 | 0 | 1 | 0 | 0 |
+| 2 | 0 | 0 | 1 | 0 | 1 | 1 |
+| 3 | 0 | 0 | 1 | 1 | 1 | 1 |
+| 4 | 0 | 1 | 0 | 0 | 0 | 0 |
+| 5 | 0 | 1 | 0 | 1 | 1 | 1 |
+| 6 | 0 | 1 | 1 | 0 | 1 | 1 |
+| 7 | 0 | 1 | 1 | 1 | 0 | 0 |
+| 8 | 1 | 0 | 0 | 0 | 1 | 1 |
+| 9 | 1 | 0 | 0 | 1 | 1 | 1 |
+| 10 | 1 | 0 | 1 | 0 | <span style="color: #ff0000">D</span> | 0 |
+| 11 | 1 | 0 | 1 | 1 | <span style="color: #ff0000">D</span> | 0 |
+| 12 | 1 | 1 | 0 | 0 | <span style="color: #ff0000">D</span> | 0 |
+| 13 | 1 | 1 | 0 | 1 | <span style="color: #ff0000">D</span> | 0 |
+| 14 | 1 | 1 | 1 | 0 | <span style="color: #ff0000">D</span> | 0 |
+| 15 | 1 | 1 | 1 | 1 | <span style="color: #ff0000">D</span> | 0 |
 
 ```c Segment_d.c
 bool d_kdnf(uint8_t n) {
@@ -1058,9 +1157,12 @@ bool d_min(uint8_t n) {
 }
 
 bool d_tab(uint8_t n) {
-  return (0b1101101101 >> n) & 1;
+  // Spalte d der Wahrheitstafel: Bit n = Zeile n
+  return (0b0000001101101101 >> n) & 1;
 }
 ```
+
+**Vier Bit Eingabe, sechzehn Bit Tabelle:** Der kleinste Ganzzahltyp ist ein Byte, `uint8_t`. Die Ziffer belegt davon nur die unteren vier Bits: `n & 8` liest Bit 3 als $w$, `n & 4` Bit 2 als $x$, `n & 2` Bit 1 als $y$ und `n & 1` Bit 0 als $z$. Die oberen vier Bits werten `d_kdnf` und `d_min` gar nicht aus, für sie sind 2, 18 und 130 dieselbe Eingabe. Die Konstante in `d_tab` ist etwas anderes: Sie ist die Spalte `d` der Wahrheitstafel als Zahl, ein Bit je Zeile. Vier Eingangsbits unterscheiden 16 Zeilen, also hat sie 16 Bit. Für die Don't-Cares 10 bis 15 stehen dort Nullen, kürzer geschrieben ist das `0b1101101101`. Weil die Konstante nicht in ein Byte passt, ist sie ein `int` mit 16 Bit. Ein Schieben um 16 oder mehr Stellen ist in C undefiniert, `d_tab` verträgt also nur Eingaben bis 15.
 
 <!-- data-type="none" style="table-layout: fixed; max-width:500px;"-->
 | Variante                  | Programmspeicher (`avr-gcc -Os`, optimiert auf Größe) |
