@@ -1,5 +1,5 @@
 {
- "stand": "04.11.2026",
+ "stand": "05.11.2026",
  "version": "0.5.2",
  "kurs": {
   "basis": "https://liascript.github.io/course/?https://raw.githubusercontent.com/TUBAF-IfI-LiaScript/VL_EingebetteteSysteme/master/",
@@ -237,7 +237,7 @@
    "wann": "KW 45 · 2.–6.11.",
    "wann_kurz": "KW 45",
    "leitfrage": "Wie wird eine Schaltfunktion möglichst klein?",
-   "freigegeben": false,
+   "freigegeben": true,
    "status": "ausgearbeitet",
    "block": 2,
    "pdf": "../pdf/03_Minimierung.pdf",
