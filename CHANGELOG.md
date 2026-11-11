@@ -5,6 +5,8 @@ Alle wesentlichen Änderungen an diesem Kurs werden in dieser Datei dokumentiert
 ## [0.7.13] - 2026-11-11
 
 ### Changed
+- **04_Schaltnetze (0.1.1):** Zusammengefasste Terme wie $m_6, m_{7}$ in den grauen Tabellenzeilen über ein eigenes Makro `@grayterm` statt `@gray`: Das Komma wurde beim Weiterreichen an `@mark` als Argumenttrenner gelesen (Anzeige nur „$m_6“, PDF-Export hing).
+- **PDF VL 04** für die Kurslandkarte (`pdf_termine` um 4 erweitert).
 - **Terminänderung:** Die Vorlesung am Do 12.11. entfällt, Ersatztermin Do 19.11., 11:30. VL 05 Standardschaltnetze damit am 19.11.: Terminliste und Hinweis in 00_Einfuehrung (0.6.9), „Nächste Vorlesung“ in 04_Schaltnetze, `TERMINE` der Kurslandkarte.
 
 ## [0.7.12] - 2026-11-10

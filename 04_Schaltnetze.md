@@ -2,7 +2,7 @@
 
 author:   Sebastian Zug & André Dietrich & Fabian Bär & Copilot & Claude Code (Opus 5.5)
 email:    sebastian.zug@informatik.tu-freiberg.de & andre.dietrich@informatik.tu-freiberg.de & fabian.baer@student.tu-freiberg.de
-version:  0.1.0
+version:  0.1.1
 language: de
 narrator: Deutsch Female
 
@@ -21,6 +21,7 @@ mark: <span style="background-color: @0;
 red:  @mark(#FF888888,@0)
 blue: @mark(lightblue,@0)
 gray: @mark(gray,@0)
+grayterm: <span style="background-color: gray; display: flex; width: calc(100% + 32px); margin: -16px; padding: 6px 16px 6px 16px;">@0</span>
 -->
 
 [![LiaScript](https://raw.githubusercontent.com/LiaScript/LiaScript/master/badges/course.svg)](https://liascript.github.io/course/?https://raw.githubusercontent.com/TUBAF-IfI-LiaScript/VL_EingebetteteSysteme/master/04_Schaltnetze.md#1)
@@ -486,14 +487,14 @@ In einem zweiten Schritt werden die sortierten Minterme evaluiert. Dabei können
 | $m_8, m_9$               | 1          | 0          | 0          | -          | .   |
 | $m_8, m_{10}$            | 1          | 0          | -          | 0          | .   |
 | $m_8, m_{12}$            | 1          | -          | 0          | 0          | .   |
-| @gray($m_6, m_{7}$)     | @gray($0$) | @gray($1$) | @gray($1$) | @gray($-$) | .   |
-| @gray($m_6, m_{14}$)    | @gray($-$) | @gray($1$) | @gray($1$) | @gray($0$) | .   |
-| @gray($m_9, m_{11}$)    | @gray($1$) | @gray($0$) | @gray($-$) | @gray($1$) | .   |
-| @gray($m_9, m_{13}$)    | @gray($1$) | @gray($-$) | @gray($0$) | @gray($1$) | .   |
-| @gray($m_{10}, m_{11}$) | @gray($1$) | @gray($0$) | @gray($1$) | @gray($-$) | .   |
-| @gray($m_{10}, m_{14}$) | @gray($1$) | @gray($-$) | @gray($1$) | @gray($0$) | .   |
-| @gray($m_{12}, m_{13}$) | @gray($1$) | @gray($1$) | @gray($0$) | @gray($-$) | .   |
-| @gray($m_{12}, m_{14}$) | @gray($1$) | @gray($1$) | @gray($-$) | @gray($0$) | .   |
+| @grayterm(`$m_6, m_{7}$`)     | @gray($0$) | @gray($1$) | @gray($1$) | @gray($-$) | .   |
+| @grayterm(`$m_6, m_{14}$`)    | @gray($-$) | @gray($1$) | @gray($1$) | @gray($0$) | .   |
+| @grayterm(`$m_9, m_{11}$`)    | @gray($1$) | @gray($0$) | @gray($-$) | @gray($1$) | .   |
+| @grayterm(`$m_9, m_{13}$`)    | @gray($1$) | @gray($-$) | @gray($0$) | @gray($1$) | .   |
+| @grayterm(`$m_{10}, m_{11}$`) | @gray($1$) | @gray($0$) | @gray($1$) | @gray($-$) | .   |
+| @grayterm(`$m_{10}, m_{14}$`) | @gray($1$) | @gray($-$) | @gray($1$) | @gray($0$) | .   |
+| @grayterm(`$m_{12}, m_{13}$`) | @gray($1$) | @gray($1$) | @gray($0$) | @gray($-$) | .   |
+| @grayterm(`$m_{12}, m_{14}$`) | @gray($1$) | @gray($1$) | @gray($-$) | @gray($0$) | .   |
 
 ```python Kombinations.py
 import numpy as np
@@ -530,14 +531,14 @@ Die zweite Stufe wiederholt die Vorgänge - Sortierung und Evaluation erneut.
 | $m_8, m_9$           | 1          | 0          | 0          | -          | $*$ |
 | $m_8, m_{10}$        | 1          | 0          | -          | 0          | $*$ |
 | $m_8, m_{12}$        | 1          | -          | 0          | 0          | $*$ |
-| @gray($m_6, m_{7}$)     | @gray($0$) | @gray($1$) | @gray($1$) | @gray($-$) | P4  |
-| @gray($m_6, m_{14}$)    | @gray($-$) | @gray($1$) | @gray($1$) | @gray($0$) | P5  |
-| @gray($m_9, m_{11}$)    | @gray($1$) | @gray($0$) | @gray($-$) | @gray($1$) | $*$ |
-| @gray($m_9, m_{13}$)    | @gray($1$) | @gray($-$) | @gray($0$) | @gray($1$) | $*$ |
-| @gray($m_{10}, m_{11}$) | @gray($1$) | @gray($0$) | @gray($1$) | @gray($-$) | $*$ |
-| @gray($m_{10}, m_{14}$) | @gray($1$) | @gray($-$) | @gray($1$) | @gray($0$) | $*$ |
-| @gray($m_{12}, m_{13}$) | @gray($1$) | @gray($1$) | @gray($0$) | @gray($-$) | $*$ |
-| @gray($m_{12}, m_{14}$) | @gray($1$) | @gray($1$) | @gray($-$) | @gray($0$) | $*$ |
+| @grayterm(`$m_6, m_{7}$`)     | @gray($0$) | @gray($1$) | @gray($1$) | @gray($-$) | P4  |
+| @grayterm(`$m_6, m_{14}$`)    | @gray($-$) | @gray($1$) | @gray($1$) | @gray($0$) | P5  |
+| @grayterm(`$m_9, m_{11}$`)    | @gray($1$) | @gray($0$) | @gray($-$) | @gray($1$) | $*$ |
+| @grayterm(`$m_9, m_{13}$`)    | @gray($1$) | @gray($-$) | @gray($0$) | @gray($1$) | $*$ |
+| @grayterm(`$m_{10}, m_{11}$`) | @gray($1$) | @gray($0$) | @gray($1$) | @gray($-$) | $*$ |
+| @grayterm(`$m_{10}, m_{14}$`) | @gray($1$) | @gray($-$) | @gray($1$) | @gray($0$) | $*$ |
+| @grayterm(`$m_{12}, m_{13}$`) | @gray($1$) | @gray($1$) | @gray($0$) | @gray($-$) | $*$ |
+| @grayterm(`$m_{12}, m_{14}$`) | @gray($1$) | @gray($1$) | @gray($-$) | @gray($0$) | $*$ |
 
 Es dürfen nur Zeilen zusammengefasst werden, die die "-" an den gleichen Positionen haben (!). Außerdem tauchen ab der zweiten Zusammenfassung Terme doppelt auf, welche aber nur einmal notiert werden.
 

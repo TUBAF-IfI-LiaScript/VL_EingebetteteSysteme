@@ -280,7 +280,7 @@
    "freigegeben": false,
    "status": "ausgearbeitet",
    "block": 2,
-   "pdf": null,
+   "pdf": "../pdf/04_Schaltnetze.pdf",
    "anwendet": [],
    "abschnitte": [
     "Schaltnetze",
