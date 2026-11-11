@@ -2,7 +2,7 @@
 
 author:   Sebastian Zug & André Dietrich & Fabian Bär & Copilot & Claude Code (Opus 5.5)
 email:    sebastian.zug@informatik.tu-freiberg.de & andre.dietrich@informatik.tu-freiberg.de & fabian.baer@student.tu-freiberg.de
-version:  0.1.1
+version:  0.1.2
 language: de
 narrator: Deutsch Female
 
@@ -716,9 +716,15 @@ Bei großen Tafeln hilft ein festes Vorgehen. Die Spaltendominanz streicht Minte
 
 **Spaltendominanzprüfung**
 
-Jede Spalte steht für einen Minterm, ihre Kreuze zeigen, welche Primimplikanten ihn abdecken. Wir lesen die Spalte deshalb als Menge von Primimplikanten. Eine Spalte $A$ **dominiert** eine Spalte $B$, wenn $A \supseteq B$ gilt, wenn also jeder Primimplikant aus $B$ auch in $A$ vorkommt.
+Bei der Spaltendominanzprüfung werden die Spalten der Primimplikantentafel paarweise miteinander verglichen. Jede Spalte repräsentiert einen **Minterm** und enthält Markierungen („x“), die angeben, **welche Primimplikanten** diesen Minterm abdecken.
 
-> **Regel:** Die dominierende Spalte wird gestrichen. Jede Auswahl, die $B$ abdeckt, deckt automatisch auch $A$ ab.
+Eine Spalte $m_i$ **dominiert** eine andere Spalte $m_j$, wenn alle „x“ in $m_i$ auch in $m_j$ vorkommen, also:
+
+$$
+m_i \subseteq m_j
+$$
+
+In diesem Fall kann die **größere** (also die von $m_i$ dominierte) Spalte $m_j$ gestrichen werden, denn sobald $m_i$ abgedeckt ist, ist $m_j$ automatisch ebenfalls abgedeckt. Die dominierte Spalte liefert keine zusätzliche Bedingung für die Auswahl der Primimplikanten.
 
 |           | $m_1$     | $m_2$ | $m_3$ |
 | --------- | --------- | ----- | ----- |
@@ -726,9 +732,9 @@ Jede Spalte steht für einen Minterm, ihre Kreuze zeigen, welche Primimplikanten
 | $P_B$     | x         |       | x     |
 | Prüfung   | streichen |       |       |
 
-Hier ist $m_1 = \{P_A, P_B\}$, $m_2 = \{P_A\}$ und $m_3 = \{P_B\}$. Weil $m_1 \supseteq m_2$ gilt, dominiert $m_1$ und wird gestrichen: Wer $m_2$ abdeckt, wählt $P_A$ und deckt damit auch $m_1$ ab.
+Wir lesen die Spalten als Mengen der abdeckenden Primimplikanten: $m_1 = \{P_A, P_B\}$, $m_2 = \{P_A\}$ und $m_3 = \{P_B\}$. Da $m_2 \subset m_1$ gilt, wird $m_1$ gestrichen. Jede Abdeckung, die $m_2$ erfüllt, deckt automatisch auch $m_1$ ab.
 
-**An der Kaffeemaschine:** $m_{13} = \{P_2\}$ ist in $m_8$, $m_9$ und $m_{12}$ enthalten, $m_{11} = \{P_1\}$ in $m_{10}$ und $m_7 = \{P_4\}$ in $m_6$. Die Spalten $m_6$, $m_8$, $m_9$, $m_{10}$ und $m_{12}$ entfallen. Übrig bleiben $m_7$, $m_{11}$, $m_{13}$ und $m_{14}$.
+**An der Kaffeemaschine:** $m_{13} = \{P_2\}$ ist Teilmenge von $m_8$, $m_9$ und $m_{12}$, außerdem gilt $m_{11} = \{P_1\} \subseteq m_{10}$ und $m_7 = \{P_4\} \subseteq m_6$. Die dominierten Spalten $m_6$, $m_8$, $m_9$, $m_{10}$ und $m_{12}$ entfallen. Übrig bleiben $m_7$, $m_{11}$, $m_{13}$ und $m_{14}$.
 
 *******************************************************************
 
@@ -740,18 +746,24 @@ Die Zeilendominanz streicht Primimplikanten, die ein anderer vollständig ersetz
 
 **Zeilendominanzprüfung**
 
-Jede Zeile steht für einen Primimplikanten, ihre Kreuze zeigen, welche Minterme er abdeckt. Eine Zeile $A$ **dominiert** eine Zeile $B$, wenn $A \supseteq B$ gilt, wenn also $A$ alle Minterme von $B$ abdeckt.
+Bei der Zeilendominanzprüfung werden die **Zeilen** der Primimplikantentafel paarweise miteinander verglichen. Jede Zeile repräsentiert einen **Primimplikanten** und enthält Markierungen („x“), die angeben, **welche Minterme** dieser Primimplikant abdeckt.
 
-> **Regel:** Die dominierte Zeile wird gestrichen, sofern die dominierende nicht mehr Literale hat. Sonst wäre die Zeile mit der Obermenge zwar vollständiger, aber teurer.
+Eine Zeile $P_i$ **dominiert** eine andere Zeile $P_j$, wenn alle „x“ in $P_j$ auch in $P_i$ vorkommen, also:
+
+$$
+P_j \subseteq P_i
+$$
+
+In diesem Fall kann die **kleinere** (also die von $P_i$ dominierte) Zeile $P_j$ gestrichen werden, denn $P_i$ deckt **alle** Minterme ab, die $P_j$ abdeckt – und eventuell noch mehr. Das gilt, sofern $P_i$ nicht mehr Literale hat als $P_j$; sonst wäre $P_i$ zwar vollständiger, aber teurer.
 
 |         | $m_1$ | $m_2$ | $m_3$ | Prüfung   |
 | ------- | ----- | ----- | ----- | --------- |
 | $P_A$   | x     | x     |       | streichen |
 | $P_B$   | x     | x     | x     |           |
 
-Hier ist $P_A = \{m_1, m_2\}$ und $P_B = \{m_1, m_2, m_3\}$. Weil $P_B \supseteq P_A$ gilt, dominiert $P_B$, und $P_A$ wird gestrichen.
+Wir lesen die Zeilen als Mengen der abgedeckten Minterme: $P_A = \{m_1, m_2\}$ und $P_B = \{m_1, m_2, m_3\}$. Da $P_A \subset P_B$ gilt, wird $P_A$ gestrichen. $P_B$ deckt alle Minterme ab, die auch $P_A$ abdeckt, und zusätzlich noch $m_3$.
 
-> **Achtung:** Bei Spalten fällt die **dominierende** weg, bei Zeilen die **dominierte**.
+> **Merke:** Gestrichen wird immer das Dominierte. Bei Spalten dominiert die Teilmenge, gestrichen wird die größere Spalte. Bei Zeilen dominiert die Obermenge, gestrichen wird die kleinere Zeile.
 
 **An der Kaffeemaschine:** In der Resttafel decken $P_3$ und $P_5$ beide nur noch $m_{14}$ ab, sie dominieren sich also gegenseitig. $P_3$ hat zwei Literale, $P_5$ drei, deshalb fällt $P_5$ weg. Jetzt ist jede Spalte genau einmal abgedeckt, und es bleiben $P_1$ bis $P_4$.
 
