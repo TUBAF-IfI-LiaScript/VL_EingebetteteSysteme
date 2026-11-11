@@ -1,5 +1,5 @@
 {
- "stand": "05.11.2026",
+ "stand": "11.11.2026",
  "version": "0.5.2",
  "kurs": {
   "basis": "https://liascript.github.io/course/?https://raw.githubusercontent.com/TUBAF-IfI-LiaScript/VL_EingebetteteSysteme/master/",
@@ -283,13 +283,13 @@
    "pdf": null,
    "anwendet": [],
    "abschnitte": [
-    "Minimierung von Boolesche Funktionen / Schaltnetze",
-    "Feedbacks/Ergänzungen",
+    "Schaltnetze",
+    "Rückblick: Hausaufgabe aus Vorlesung 03",
     "Beispielanwendung",
     "Schritt 1: Aufstellen der Gleichungen",
     "Schritt 2: Vereinfachen der Minterme - Analytische Lösung",
     "Verfahren nach Quine-McCluskey",
-    "Ermittlung der Primterme",
+    "Ermittlung der Primimplikanten",
     "Darstellung der Minterme im Karnaugh-Diagramm",
     "Lösung der minimalen Überdeckung - intuitiv",
     "Lösung der minimalen Überdeckung - algorithmisch",
@@ -299,8 +299,11 @@
     "Zurück zum Beispiel - Schritt 3 Umsetzung",
     "Umsetzung",
     "Herausforderungen",
+    "Und im ATmega328P?",
     "Was Sie heute mitnehmen",
-    "Ihre Begriffe für die Kurslandkarte"
+    "Ihre Begriffe für die Kurslandkarte",
+    "Hausaufgaben",
+    "Nächste Vorlesung"
    ]
   },
   {
@@ -309,14 +312,14 @@
    "label": "VL 05",
    "typ": "VL",
    "datei": "05_Standardschaltnetze.md",
-   "datum": "2026-11-09",
+   "datum": "2026-11-16",
    "kurz": "Standardschaltnetze",
-   "ende": "2026-11-15",
+   "ende": "2026-11-22",
    "tage": [],
-   "kw": 46,
-   "woche_tage": "9.–13.11.",
-   "wann": "KW 46 · 9.–13.11.",
-   "wann_kurz": "KW 46",
+   "kw": 47,
+   "woche_tage": "16.–20.11.",
+   "wann": "KW 47 · 16.–20.11.",
+   "wann_kurz": "KW 47",
    "leitfrage": "Welche Bausteine braucht man immer wieder?",
    "freigegeben": false,
    "status": "ausgearbeitet",

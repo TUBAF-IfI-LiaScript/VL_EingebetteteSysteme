@@ -51,7 +51,7 @@ KURS = {
 TERMINE = [
     ("2026-10-21", "Einführung"), ("2026-10-28", "Historie"),
     ("2026-10-29", "Boolesche Algebra"), ("2026-11-04", "Minimierung"),
-    ("2026-11-11", "Schaltnetze"), ("2026-11-12", "Standardschaltnetze"),
+    ("2026-11-11", "Schaltnetze"), ("2026-11-19", "Standardschaltnetze"),
     ("2026-11-25", "Flip-Flops"), ("2026-11-26", "Schaltwerke"),
     ("2026-12-02", "Standardschaltwerke"), ("2026-12-09", "Rechnerarithmetik"),
     ("2026-12-10", "CPU-Grundlagen"), ("2026-12-16", "Modell-CPU"),
@@ -125,7 +125,7 @@ B = [
     ('dontcare', "Don't Care", 'logik', 3, "Don't-Care-Einträge in der Wahrheitstafel", 1, 0, 'Eingangskombinationen, deren Ausgabe egal ist, weil sie nicht vorkommen (bei der Sieben-Segment-Anzeige die 6 Codes oberhalb von 9); im KV-Diagramm dürfen sie als 0 oder 1 gelten, je nachdem, was größere Schleifen ergibt.', None),
     ('sopform', 'SOPform', 'logik', 3, 'Minimierung mit Software', 2, 1, 'Funktion der Python-Bibliothek SymPy, die aus einer Liste von Mintermen automatisch eine minimale disjunktive Form berechnet.', None),
     ('qmc', 'Quine-McCluskey', 'logik', 4, 'Verfahren nach Quine-McCluskey', 1, 0, 'Systematisches Tabellenverfahren: Minterme nach der Zahl ihrer Einsen sortieren und Paare, die sich in genau einer Variable unterscheiden, so lange zusammenfassen, bis nichts mehr geht.', '„Wer von Hand zusammenfasst, landet automatisch bei der kürzesten Form.“'),
-    ('primimplikant', 'Primimplikant', 'logik', 4, 'Ermittlung der Primterme', 1, 0, 'Zusammengefasster Term, der sich nicht weiter vereinfachen lässt – im Kaffeemaschinen-Beispiel bleiben fünf solche Terme P1 bis P5 übrig.', None),
+    ('primimplikant', 'Primimplikant', 'logik', 4, 'Ermittlung der Primimplikanten', 1, 0, 'Zusammengefasster Term, der sich nicht weiter vereinfachen lässt – im Kaffeemaschinen-Beispiel bleiben fünf solche Terme P1 bis P5 übrig.', None),
     ('primtafel', 'Primimplikantentafel', 'logik', 4, 'Darstellung der Minterme im Karnaugh-Diagramm', 2, 0, "Tabelle („zweite Quine'sche Tabelle“), die zeigt, welcher Primimplikant welche Minterme abdeckt – Grundlage für die Auswahl der nötigen Terme.", None),
     ('essentiell', 'essentieller Primimplikant', 'logik', 4, 'Lösung der minimalen Überdeckung - intuitiv', 2, 0, 'Primimplikant, der als einziger einen bestimmten Minterm abdeckt und deshalb in jeder Lösung vorkommen muss.', None),
     ('dominanz', 'Dominanzregeln', 'logik', 4, 'Lösung der minimalen Überdeckung - algorithmisch', 2, 0, 'Regeln zum Streichen überflüssiger Zeilen und Spalten der Primimplikantentafel: Wer von einem anderen Eintrag vollständig mit abgedeckt wird, fällt weg.', None),

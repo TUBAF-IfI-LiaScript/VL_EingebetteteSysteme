@@ -2,7 +2,7 @@
 
 author:   Sebastian Zug, André Dietrich & `fjangfaragesh`, `FnHm`, `gjaeger`, `ShyFlyGuy`, `Lalelele` & Claude Code (Opus 5.5)
 email:    sebastian.zug@informatik.tu-freiberg.de & andre.dietrich@informatik.tu-freiberg.de & fabian.baer@student.tu-freiberg.de
-version:  0.6.8
+version:  0.6.9
 language: de
 narrator: Deutsch Female
 
@@ -177,7 +177,7 @@ Die Tabelle zeigt den Weg durch das Semester von oben nach unten: von der Booles
 | [02 Boolesche Algebra](02_BoolscheAlgebra.md)       | Do 29.10. | 0 und 1 verstehen             | `if (a && b)`, Bitmasken                           |
 | [03 Minimierung](03_Minimierung.md)                 | Mi 04.11. | Effizienz in Logik            | weniger Gatter für dieselbe Funktion               |
 | [04 Schaltnetze](04_Schaltnetze.md)                 | Mi 11.11. | Logik wird Hardware           | die Logik im Chip, inklusive ihrer Laufzeiten      |
-| [05 Standardschaltnetze](05_Standardschaltnetze.md) | Do 12.11. | Decoder & Multiplexer         | Registerauswahl, Kanalwahl beim `analogRead`       |
+| [05 Standardschaltnetze](05_Standardschaltnetze.md) | Do 19.11. | Decoder & Multiplexer         | Registerauswahl, Kanalwahl beim `analogRead`       |
 | [06 FlipFlops](06_FlipFlops.md)                     | Mi 25.11. | Speicher entsteht             | das Bit in `DDRB`, das sich „Ausgang“ merkt        |
 | [07 Schaltwerke](07_Schaltwerke.md)                 | Do 26.11. | Zustandsmaschinen             | Steuerungen mit Zuständen, z. B. eine Ampel        |
 | [08 Standardschaltwerke](08_StandardSchaltwerke.md) | Mi 02.12. | Counter & Register            | der Zähler hinter `millis()`                       |
@@ -189,7 +189,7 @@ Die Tabelle zeigt den Weg durch das Semester von oben nach unten: von der Booles
 | [14 Timer & Interrupts](14_TimerUndInterrupts.md)   | Mi 20.01. + Mi 27.01. | Unterprogramme, Stack, Timing | `attachInterrupt`, `delay`, `analogWrite`, Echtzeit |
 | [15 Aktoren](15_Aktoren.md)                         | Do 28.01. + Mi 03.02. | Hardware bewegen, Ausblick    | Servo, Schrittmotor, Echtzeit, Energiesparen – und die Hex-Datei vom Anfang komplett lesen |
 
-> Für 16 Vorlesungen haben wir 21 Termine: Die Vorlesungen 12, 14 und 15 erstrecken sich über zwei Termine (Teil I und Teil II). Am Mi 10.02. wiederholen wir den Stoff und besprechen die Probeklausur, Do 11.02. ist ein Puffer. Am Mi 18.11. (Buß- und Bettag) ist keine Vorlesung.
+> Für 16 Vorlesungen haben wir 21 Termine: Die Vorlesungen 12, 14 und 15 erstrecken sich über zwei Termine (Teil I und Teil II). Am Mi 10.02. wiederholen wir den Stoff und besprechen die Probeklausur, Do 11.02. ist ein Puffer. Am Mi 18.11. (Buß- und Bettag) ist keine Vorlesung. Die Vorlesung vom Do 12.11. entfällt und wird am Do 19.11. zur gleichen Zeit (11:30) nachgeholt.
 
 ### Was steht am Ende?
 

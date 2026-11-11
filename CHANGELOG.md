@@ -2,6 +2,18 @@
 
 Alle wesentlichen Änderungen an diesem Kurs werden in dieser Datei dokumentiert.
 
+## [0.7.13] - 2026-11-11
+
+### Changed
+- **Terminänderung:** Die Vorlesung am Do 12.11. entfällt, Ersatztermin Do 19.11., 11:30. VL 05 Standardschaltnetze damit am 19.11.: Terminliste und Hinweis in 00_Einfuehrung (0.6.9), „Nächste Vorlesung“ in 04_Schaltnetze, `TERMINE` der Kurslandkarte.
+
+## [0.7.12] - 2026-11-10
+
+### Changed
+- **04_Schaltnetze (0.1.0):** Überarbeitet für den Termin am 11.11.: Überschrift „Schaltnetze“. Rückblick löst Teil B der Hausaufgabe aus VL 03 im Wortlaut auf (SymPy mit und ohne Don't-Cares, BEAST) statt alter Rückmeldezahlen. Einstieg: Kaffeemaschine selbst im KV-Diagramm minimieren (`LiaTemplates/KarnaughMap` 0.1.0). Sprechertexte in allen Abschnitten. PROM, PAL und GAL am Beispiel erklärt (welche Matrix programmierbar ist, warum ein PAL die Minimierung braucht), Vergleichstabelle und Quiz. Glitch-Abschnitt mit Begründung des Zusatzterms und der Synchronisation über das D-Flipflop im GAL. Neu: „Und im ATmega328P?“ (Segmenttabelle im Flash mit `PROGMEM` als PROM), Quizfragen, Hausaufgabe Teil A/B, „Nächste Vorlesung“.
+- **04_Schaltnetze, Fehler behoben:** eingefügtes Formelbruchstück am Anfang von „Schaltungssynthese“, verlorene Überstriche in den Beispielen für KDNF/KKNF, $\overline{\overline{a\cdot b}}$ statt $\overline{\overline{a\cdot a}}$, NOT-Symbol, PROM mit $2^n$ Worten zu $m$ Bit (war vertauscht), Zahl der nur einfach abgedeckten Minterme (drei statt zwei), nicht weiter zusammenfassbare Terme (zwei statt drei), Wahl zwischen $P_3$ und $P_5$ begründet, Beschriftungen in der DigiSim-Schaltung, Kostenbedingung der Zeilendominanz, SANE-Link, Tippfehler.
+- **04_Schaltnetze, nach Persona-Reviews (2026-11-10):** Glitch-Erklärung korrigiert (Inverterausgang steigt von 0 auf 1), Begriff Hazard (statischer 1-Hazard) eingeführt, Grenzen des Konsensterms und Glitch bei Mehrbit-Wechsel (Zustand 7 → 8), wo Glitches schaden. Dominanz einheitlich definiert (Obermenge dominiert; Spalten: dominierende streichen, Zeilen: dominierte streichen) und an der Kaffeemaschine vorgeführt, Ablauf der Überdeckung mit zyklischem Fall. Implikant und Primimplikant definiert, Schreibweise $\{m_8, m_9, \dots\}$ statt $m_8\cdot m_9$, Bedeutung von `*` und Strich erklärt, Terme zu $P_1$–$P_5$ angegeben. Weitere Korrekturen: „deckt ab“/„wird abgedeckt“, Spalten statt Zeilen in der Aufwärmlösung, Eindeutigkeit der Minimalform im Rückblick, Kaffeemaschine meldet eine Zustandsnummer, Bildlegende für PROM/PAL, FUP nach IEC 61131-3, CPLD/FPGA, PROGMEM-Satz präzisiert. Hausaufgabe 4 ersetzt (war das Glitch-Beispiel der Vorlesung). Interaktive KV-Diagramme an sieben Stellen. „Und im ATmega328P?“ neu: Zustand der Kaffeemaschine bitweise oder mit einem Lesebefehl lesen (Mehrbit-Glitch in Software), Synchronisierer und Schmitt-Trigger an jedem Pin, Mindestpulsdauer an INT0/INT1, belegt mit dem Datenblatt (Abschnitt 14.2.4, S. 86, und S. 80); die Segmenttabelle mit `PROGMEM` entfällt, im PROM-Teil steht stattdessen ein Verweis auf `d_tab` aus VL 03.
+
 ## [0.7.11] - 2026-11-04
 
 ### Changed
