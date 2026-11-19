@@ -2,7 +2,7 @@
 
 author:   Sebastian Zug & André Dietrich & Fabian Bär & Claude Code (Opus 5.5)
 email:    sebastian.zug@informatik.tu-freiberg.de & andre.dietrich@informatik.tu-freiberg.de & fabian.baer@student.tu-freiberg.de
-version:  0.1.3
+version:  0.1.4
 language: de
 narrator: Deutsch Female
 
@@ -830,18 +830,6 @@ Diese fünf Punkte fassen die Vorlesung zusammen, vom Mikrocontroller als Rechen
 + Wie konfigurieren Sie mit DDRx und PORTx einen Pin als Eingang mit Pull-up-Widerstand, und wozu dient der Pull-up?
 + Wie setzen, löschen und prüfen Sie ein einzelnes Bit eines Registers in C?
 + Welche Schritte durchläuft ein C-Programm von der Quelldatei bis zur Hex-Datei, und welcher Befehl steht am Anfang des Programmspeichers?
-
-## Ihre Begriffe für die Kurslandkarte
-
-Die [Kurslandkarte](https://tubaf-ifi-liascript.github.io/VL_EingebetteteSysteme/kurslandkarte/) wächst mit dem Semester, und Sie bestimmen mit, was hineinkommt. Ihre Antworten sammeln wir im Hörsaal gemeinsam über das LiaScript-Klassenzimmer; die Begriffe dieser Woche sind seit Beginn der Vorlesung in der Karte freigeschaltet, und Ihre Vorschläge ergänzen sie.
-
-**Welche Begriffe aus der heutigen Vorlesung gehören für Sie in die Kurslandkarte?**
-
-[[___ ___ ___]]
-
-**Wo begegnet Ihnen das, was heute dran war – in Ihrem Studiengang oder in Geräten Ihres Alltags?**
-
-[[___ ___ ___]]
 
 ## Vorbereitung der praktischen Aufgaben
 

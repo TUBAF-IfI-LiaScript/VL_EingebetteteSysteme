@@ -2,7 +2,7 @@
 
 author:   Sebastian Zug & André Dietrich & Fabian Bär & Claude Code (Opus 5.5)
 email:    sebastian.zug@informatik.tu-freiberg.de & andre.dietrich@informatik.tu-freiberg.de & fabian.baer@student.tu-freiberg.de
-version:  0.0.11
+version:  0.0.12
 language: de
 narrator: Deutsch Female
 
@@ -1024,15 +1024,3 @@ Diese fünf Punkte fassen die Vorlesung zusammen: Interrupts lassen den Controll
 + Wie ist ein Timer grundlegend aufgebaut, und was leisten Capture- und Compare-Einheit?
 + Was ist PWM, und mit welchen Timer-Modi erzeugt der ATmega328P sie?
 + Timer 1 läuft im CTC-Modus mit 16 MHz, Prescaler 1024 und OCR1A = 15624 und schaltet den Ausgang bei jedem Vergleich um. Welche Frequenz hat das Signal an OC1A?
-
-## Ihre Begriffe für die Kurslandkarte
-
-Die [Kurslandkarte](https://tubaf-ifi-liascript.github.io/VL_EingebetteteSysteme/kurslandkarte/) wächst mit dem Semester, und Sie bestimmen mit, was hineinkommt. Ihre Antworten sammeln wir im Hörsaal gemeinsam über das LiaScript-Klassenzimmer; die Begriffe dieser Woche sind seit Beginn der Vorlesung in der Karte freigeschaltet, und Ihre Vorschläge ergänzen sie.
-
-**Welche Begriffe aus der heutigen Vorlesung gehören für Sie in die Kurslandkarte?**
-
-[[___ ___ ___]]
-
-**Wo begegnet Ihnen das, was heute dran war – in Ihrem Studiengang oder in Geräten Ihres Alltags?**
-
-[[___ ___ ___]]

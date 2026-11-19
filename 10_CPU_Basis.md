@@ -2,7 +2,7 @@
 
 author:   Sebastian Zug & André Dietrich & Fabian Bär & Copilot & Claude Code (Opus 5.5)
 email:    sebastian.zug@informatik.tu-freiberg.de & andre.dietrich@informatik.tu-freiberg.de & fabian.baer@student.tu-freiberg.de
-version:  0.0.8
+version:  0.0.9
 language: de
 narrator: Deutsch Female
 
@@ -479,15 +479,3 @@ Diese fünf Punkte fassen zusammen, wie aus einem Addierer Schritt für Schritt 
 + Welche Aufgaben hat das Steuerwerk, und welche Rolle spielt der Programmzähler bei der Befehlsausführung?
 + Warum braucht ein `LDA` mehr Schritte als ein `ADD_A`?
 + Aus welchen Bausteinen besteht ein Rechner nach von Neumann, und was versteht man unter Memory-Mapped I/O?
-
-## Ihre Begriffe für die Kurslandkarte
-
-Die [Kurslandkarte](https://tubaf-ifi-liascript.github.io/VL_EingebetteteSysteme/kurslandkarte/) wächst mit dem Semester, und Sie bestimmen mit, was hineinkommt. Ihre Antworten sammeln wir im Hörsaal gemeinsam über das LiaScript-Klassenzimmer; die Begriffe dieser Woche sind seit Beginn der Vorlesung in der Karte freigeschaltet, und Ihre Vorschläge ergänzen sie.
-
-**Welche Begriffe aus der heutigen Vorlesung gehören für Sie in die Kurslandkarte?**
-
-[[___ ___ ___]]
-
-**Wo begegnet Ihnen das, was heute dran war – in Ihrem Studiengang oder in Geräten Ihres Alltags?**
-
-[[___ ___ ___]]

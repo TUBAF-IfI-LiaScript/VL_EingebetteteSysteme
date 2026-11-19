@@ -2,7 +2,7 @@
 
 author:   Sebastian Zug, André Dietrich & `fjangfaragesh`, `FnHm`, `gjaeger`, `ShyFlyGuy`, `Lalelele` & Claude Code (Opus 5.5)
 email:    sebastian.zug@informatik.tu-freiberg.de & andre.dietrich@informatik.tu-freiberg.de & fabian.baer@student.tu-freiberg.de
-version:  0.6.9
+version:  0.6.10
 language: de
 narrator: Deutsch Female
 
@@ -706,7 +706,7 @@ Die Folien sind in [LiaScript](https://liascript.github.io/course/?https://raw.g
 ### Die Kurslandkarte
 
     --{{0}}--
-Dieser Kurs baut Schicht für Schicht auf: Jeder neue Begriff stützt sich auf frühere, vom Gatter bis zum Prozessor. Die Kurslandkarte hält diesen Zusammenhang fest. Für kommende Vorlesungen stehen nur Termin und Leitfrage; ihre Begriffe kommen erst nach der Vorlesung dazu, mit Ihren Vorschlägen. Das Bild zeigt, wie die Karte nach Vorlesung 08 aussehen könnte: Beim Begriff endlicher Automat steht unter „Kommt vor in“ der Personenzähler von der Hörsaaltür. Neben der Liste gibt es eine Metrokarte, deren Linien rote Fäden durch das Semester sind, zum Beispiel „Vom Gatter zum Prozessor“, und eine Zeitleiste mit allen Begriffen nach Themengebiet.
+Dieser Kurs baut Schicht für Schicht auf: Jeder neue Begriff stützt sich auf frühere, vom Gatter bis zum Prozessor. Die Kurslandkarte hält diesen Zusammenhang fest. Für kommende Vorlesungen stehen nur Termin und Leitfrage; ihre Begriffe kommen zu Beginn der jeweiligen Vorlesung dazu. Das Bild zeigt, wie die Karte nach Vorlesung 08 aussehen könnte: Beim Begriff endlicher Automat steht unter „Kommt vor in“ der Personenzähler von der Hörsaaltür. Neben der Liste gibt es eine Metrokarte, deren Linien rote Fäden durch das Semester sind, zum Beispiel „Vom Gatter zum Prozessor“, und eine Zeitleiste mit allen Begriffen nach Themengebiet.
 
 > **Wo stehen wir – und worauf baut auf, was heute dazukommt?**
 
@@ -720,7 +720,7 @@ Die [Kurslandkarte](https://tubaf-ifi-liascript.github.io/VL_EingebetteteSysteme
 
 ![Die Kurslandkarte in der Ansicht „Vorlesungen“, so wie sie nach Vorlesung 08 aussehen könnte, mit dem Begriff „endlicher Automat“ und der Anwendung „Personenzähler an der Hörsaaltür“](images/00_Einfuehrung/kurslandkarte.png)<!-- style="max-height: 45vh;" -->
 
-> Am Ende jeder Vorlesung fragen wir Sie nach den Begriffen des Tages. Nach der Vorlesung werden sie in der Karte freigeschaltet.
+> Die Begriffe einer Vorlesung werden zu Beginn der Vorlesung in der Karte freigeschaltet. Fehlt Ihnen ein Begriff oder ist eine Erklärung unklar, sagen Sie es in der Vorlesung oder im OPAL-Forum.
 
 ### Zwei Simulatoren begleiten Sie durchs Semester
 
@@ -814,18 +814,6 @@ Fassen wir zusammen: Wir haben den Begriff des eingebetteten Systems geklärt un
 + Welche Rolle spielen Mikrocontroller wie der ATmega328P in den Geräten Ihres Alltags?
 + Warum lohnt sich dieses Wissen für Informatik, Robotik, Mathematik und Ingenieurwesen – auch im Zeitalter von KI?
 + Wie ist die Veranstaltung aufgebaut, und wie wird geprüft?
-
-## Ihre Begriffe für die Kurslandkarte
-
-Die [Kurslandkarte](https://tubaf-ifi-liascript.github.io/VL_EingebetteteSysteme/kurslandkarte/) wächst mit dem Semester, und Sie bestimmen mit, was hineinkommt. Ihre Antworten sammeln wir im Hörsaal gemeinsam über das LiaScript-Klassenzimmer; die Begriffe dieser Woche sind seit Beginn der Vorlesung in der Karte freigeschaltet, und Ihre Vorschläge ergänzen sie. Den Link zum Klassenzimmer zeigen wir Ihnen im Hörsaal.
-
-**Welche Begriffe aus der heutigen Vorlesung gehören für Sie in die Kurslandkarte?**
-
-[[___ ___ ___]]
-
-**Wo begegnet Ihnen das, was heute dran war – in Ihrem Studiengang oder in Geräten Ihres Alltags?**
-
-[[___ ___ ___]]
 
 ## Hausaufgabe
 

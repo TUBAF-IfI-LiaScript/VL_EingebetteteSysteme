@@ -2,7 +2,7 @@
 
 author:   Sebastian Zug & André Dietrich & Fabian Bär & Claude Code (Opus 5.5)
 email:    sebastian.zug@informatik.tu-freiberg.de & andre.dietrich@informatik.tu-freiberg.de & fabian.baer@student.tu-freiberg.de
-version:  0.0.9
+version:  0.0.10
 language: de
 narrator: Deutsch Female
 
@@ -647,15 +647,3 @@ Diese fünf Punkte fassen die Vorlesung zusammen: wie aus einer Spannung eine Za
 + Welche Rolle spielt die Referenzspannung für die Genauigkeit der Wandlung?
 + Wovon hängt die Wandlungsdauer beim ATmega328P ab, und mit welchem Parameter beeinflussen Sie sie?
 + Welche Register konfigurieren Sie, um mit dem ATmega328P einen Kanal zu wandeln, und warum lesen Sie ADCL vor ADCH?
-
-## Ihre Begriffe für die Kurslandkarte
-
-Die [Kurslandkarte](https://tubaf-ifi-liascript.github.io/VL_EingebetteteSysteme/kurslandkarte/) wächst mit dem Semester, und Sie bestimmen mit, was hineinkommt. Ihre Antworten sammeln wir im Hörsaal gemeinsam über das LiaScript-Klassenzimmer; die Begriffe dieser Woche sind seit Beginn der Vorlesung in der Karte freigeschaltet, und Ihre Vorschläge ergänzen sie.
-
-**Welche Begriffe aus der heutigen Vorlesung gehören für Sie in die Kurslandkarte?**
-
-[[___ ___ ___]]
-
-**Wo begegnet Ihnen das, was heute dran war – in Ihrem Studiengang oder in Geräten Ihres Alltags?**
-
-[[___ ___ ___]]

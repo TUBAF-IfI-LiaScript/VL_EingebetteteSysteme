@@ -2,7 +2,7 @@
 
 author:   Sebastian Zug & André Dietrich & Fabian Bär & Claude Code (Opus 5.5)
 email:    sebastian.zug@informatik.tu-freiberg.de & andre.dietrich@informatik.tu-freiberg.de & fabian.baer@student.tu-freiberg.de
-version:  0.0.13
+version:  0.0.14
 language: de
 narrator: Deutsch Female
 
@@ -653,18 +653,6 @@ Diese fünf Punkte fassen die Vorlesung zusammen. Wenn Sie die Fragen darunter b
 + Welche anderen Flip-Flop-Typen kennen Sie, und wo liegen ihre Vorteile gegenüber dem SR-Flip-Flop?
 + Erläutern Sie die Begriffe „zustandsgesteuert“ und „flankengesteuert“. Warum ist ein zustandsgesteuertes Flip-Flop für viele Anwendungen ungeeignet, und wie löst das Main-Subsidiary-Prinzip das Problem?
 + Wie teilt ein asynchroner Zähler aus JK-Flip-Flops die Taktfrequenz, und was begrenzt seine maximale Taktfrequenz?
-
-## Ihre Begriffe für die Kurslandkarte
-
-Die [Kurslandkarte](https://tubaf-ifi-liascript.github.io/VL_EingebetteteSysteme/kurslandkarte/) wächst mit dem Semester, und Sie bestimmen mit, was hineinkommt. Ihre Antworten sammeln wir im Hörsaal gemeinsam über das LiaScript-Klassenzimmer; die Begriffe dieser Woche sind seit Beginn der Vorlesung in der Karte freigeschaltet, und Ihre Vorschläge ergänzen sie.
-
-**Welche Begriffe aus der heutigen Vorlesung gehören für Sie in die Kurslandkarte?**
-
-[[___ ___ ___]]
-
-**Wo begegnet Ihnen das, was heute dran war – in Ihrem Studiengang oder in Geräten Ihres Alltags?**
-
-[[___ ___ ___]]
 
 ## Übungsaufgaben
 

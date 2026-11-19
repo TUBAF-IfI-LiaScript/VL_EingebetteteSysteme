@@ -2,6 +2,11 @@
 
 Alle wesentlichen Änderungen an diesem Kurs werden in dieser Datei dokumentiert.
 
+## [0.7.15] - 2026-11-19
+
+### Removed
+- **Folie „Ihre Begriffe für die Kurslandkarte“** aus allen Vorlesungen 00–15 entfernt (Versionen jeweils um eins hochgezählt): Die Sammlung von Begriffen durch die Studierenden über das LiaScript-Klassenzimmer hat nicht funktioniert. VL 00 sagt jetzt, dass die Begriffe zu Beginn jeder Vorlesung freigeschaltet werden und fehlende Begriffe in der Vorlesung oder im OPAL-Forum gemeldet werden können. Kurslandkarte ohne „ergänzt um Ihre Vorschläge“. PDFs VL 00–05 neu gebaut.
+
 ## [0.7.14] - 2026-11-19
 
 ### Changed

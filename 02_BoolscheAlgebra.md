@@ -2,7 +2,7 @@
 
 author:   Sebastian Zug & André Dietrich & Fabian Bär & Copilot & Claude Code (Opus 5.5)
 email:    sebastian.zug@informatik.tu-freiberg.de & andre.dietrich@informatik.tu-freiberg.de & fabian.baer@student.tu-freiberg.de
-version:  0.1.2
+version:  0.1.3
 language: de
 narrator: Deutsch Female
 
@@ -961,18 +961,6 @@ Diese fünf Punkte fassen die Vorlesung zusammen. Die Fragen darunter gehören z
 + Wie viele Zeilen hat die Wahrheitstafel einer Schaltfunktion mit $n$ Eingängen, und wie viele Schaltfunktionen mit zwei Eingängen gibt es?
 + Nennen Sie zwei Beispiele, wie eine Schaltfunktion technisch umgesetzt werden kann.
 + Wie schreiben Sie eine Boolesche Funktion als Bedingung in C, und wie hilft die De Morgan'sche Regel beim Umformen?
-
-## Ihre Begriffe für die Kurslandkarte
-
-Die [Kurslandkarte](https://tubaf-ifi-liascript.github.io/VL_EingebetteteSysteme/kurslandkarte/) wächst mit dem Semester, und Sie bestimmen mit, was hineinkommt. Ihre Antworten sammeln wir im Hörsaal gemeinsam über das LiaScript-Klassenzimmer; die Begriffe dieser Woche sind seit Beginn der Vorlesung in der Karte freigeschaltet, und Ihre Vorschläge ergänzen sie.
-
-**Welche Begriffe aus der heutigen Vorlesung gehören für Sie in die Kurslandkarte?**
-
-[[___ ___ ___]]
-
-**Wo begegnet Ihnen das, was heute dran war – in Ihrem Studiengang oder in Geräten Ihres Alltags?**
-
-[[___ ___ ___]]
 
 ## Hausaufgaben
 

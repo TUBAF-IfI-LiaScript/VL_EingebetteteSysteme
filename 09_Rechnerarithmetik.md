@@ -2,7 +2,7 @@
 
 author:   Sebastian Zug & André Dietrich & Fabian Bär & Claude Code (Opus 5.5)
 email:    sebastian.zug@informatik.tu-freiberg.de & andre.dietrich@informatik.tu-freiberg.de & fabian.baer@student.tu-freiberg.de
-version:  0.0.11
+version:  0.0.12
 language: de
 narrator: Deutsch Female
 
@@ -899,18 +899,6 @@ Diese fünf Punkte fassen die Vorlesung zusammen, von der Darstellung einer Zahl
 + Woran erkennen Sie, dass die Addition zweier Zahlen im Zweierkomplement übergelaufen ist?
 + Stellen Sie Wahrheitstafel und Gleichungen eines Halb- und eines Volladdierers auf. Wie erweitern Sie ein 4-Bit-Addierwerk zu einem Addier-/Subtrahierwerk?
 + Welchen Vorteil bringt der Carry-Look-Ahead-Addierer gegenüber dem Ripple-Carry-Addierer, und warum setzt man ihn in der Praxis in Blöcken um?
-
-## Ihre Begriffe für die Kurslandkarte
-
-Die [Kurslandkarte](https://tubaf-ifi-liascript.github.io/VL_EingebetteteSysteme/kurslandkarte/) wächst mit dem Semester, und Sie bestimmen mit, was hineinkommt. Ihre Antworten sammeln wir im Hörsaal gemeinsam über das LiaScript-Klassenzimmer; die Begriffe dieser Woche sind seit Beginn der Vorlesung in der Karte freigeschaltet, und Ihre Vorschläge ergänzen sie.
-
-**Welche Begriffe aus der heutigen Vorlesung gehören für Sie in die Kurslandkarte?**
-
-[[___ ___ ___]]
-
-**Wo begegnet Ihnen das, was heute dran war – in Ihrem Studiengang oder in Geräten Ihres Alltags?**
-
-[[___ ___ ___]]
 
 ## Übungsaufgaben
 

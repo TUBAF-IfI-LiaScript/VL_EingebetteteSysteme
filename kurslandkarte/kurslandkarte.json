@@ -8,8 +8,8 @@
   "einheiten": "Vorlesungen",
   "einheiten_dat": "Vorlesungen",
   "gleich": "In derselben Vorlesung",
-  "freigabe": "erscheinen zu Beginn der Vorlesung, ergänzt um Ihre Vorschläge",
-  "folgen": "Die Begriffe dieser Vorlesung erscheinen zu Beginn der Vorlesung – ergänzt um Ihre Vorschläge.",
+  "freigabe": "erscheinen zu Beginn der Vorlesung",
+  "folgen": "Die Begriffe dieser Vorlesung erscheinen zu Beginn der Vorlesung.",
   "spalten": [
    [
     "VL",
@@ -130,7 +130,6 @@
     "Und wenn Sie dann immer noch programmieren wollen ...",
     "Schauen Sie im RoboLab vorbei!",
     "Was Sie heute mitnehmen",
-    "Ihre Begriffe für die Kurslandkarte",
     "Hausaufgabe",
     "Nächste Woche"
    ]
@@ -176,7 +175,6 @@
     "Weitere Entwicklung",
     "Warum ist das alles für Ihr Verständnis wichtig?",
     "Was Sie heute mitnehmen",
-    "Ihre Begriffe für die Kurslandkarte",
     "Hausaufgabe",
     "Nächste Vorlesung"
    ]
@@ -217,7 +215,6 @@
     "Exkurs: Schaltertechnik und Pegel in der Praxis",
     "Und im ATmega328P?",
     "Was Sie heute mitnehmen",
-    "Ihre Begriffe für die Kurslandkarte",
     "Hausaufgaben",
     "Nächste Vorlesung"
    ]
@@ -257,7 +254,6 @@
     "Minimierung mit Software",
     "Und im ATmega328P?",
     "Was Sie heute mitnehmen",
-    "Ihre Begriffe für die Kurslandkarte",
     "Hausaufgaben",
     "Nächste Vorlesung"
    ]
@@ -301,7 +297,6 @@
     "Herausforderungen",
     "Und im ATmega328P?",
     "Was Sie heute mitnehmen",
-    "Ihre Begriffe für die Kurslandkarte",
     "Hausaufgaben",
     "Nächste Vorlesung"
    ]
@@ -338,7 +333,6 @@
     "Komparatoren",
     "Und im ATmega328P?",
     "Was Sie heute mitnehmen",
-    "Ihre Begriffe für die Kurslandkarte",
     "Hausaufgaben",
     "Nächste Vorlesung"
    ]
@@ -382,7 +376,6 @@
     "Einsatzbeispiel",
     "Realisierungsbeispiel",
     "Was Sie heute mitnehmen",
-    "Ihre Begriffe für die Kurslandkarte",
     "Übungsaufgaben"
    ]
   },
@@ -421,7 +414,6 @@
     "Vermeidungsstrategien",
     "Debugging von Timing-Problemen",
     "Was Sie heute mitnehmen",
-    "Ihre Begriffe für die Kurslandkarte",
     "Übungsaufgaben"
    ]
   },
@@ -452,7 +444,6 @@
     "Register",
     "Zähler",
     "Was Sie heute mitnehmen",
-    "Ihre Begriffe für die Kurslandkarte",
     "Übungsaufgaben"
    ]
   },
@@ -491,7 +482,6 @@
     "Carry Save Addierer",
     "Exkurs: Multiplikation",
     "Was Sie heute mitnehmen",
-    "Ihre Begriffe für die Kurslandkarte",
     "Übungsaufgaben"
    ]
   },
@@ -523,8 +513,7 @@
     "Schritt 3 - Handhabung der Daten",
     "Schritt 4 - Ein- und Ausgaben",
     "1945: Von-Neumann-Architektur",
-    "Was Sie heute mitnehmen",
-    "Ihre Begriffe für die Kurslandkarte"
+    "Was Sie heute mitnehmen"
    ]
   },
   {
@@ -571,7 +560,6 @@
     "Horizontale vs. vertikale Mikroprogrammierung",
     "Diskussion",
     "Was Sie heute mitnehmen",
-    "Ihre Begriffe für die Kurslandkarte",
     "Hausaufgaben"
    ]
   },
@@ -616,7 +604,6 @@
     "Vergleich",
     "Resultat",
     "Was Sie heute mitnehmen",
-    "Ihre Begriffe für die Kurslandkarte",
     "Vorbereitung der praktischen Aufgaben",
     "Setzen eines Bits",
     "Löschen eines Bits",
@@ -657,8 +644,7 @@
     "Beispiel 1 - Heißleiter",
     "Beispiel 2 - Lesen eines Analogen Distanzsensors",
     "Beispiel 3 - Temperaturüberwachung des Controllers",
-    "Was Sie heute mitnehmen",
-    "Ihre Begriffe für die Kurslandkarte"
+    "Was Sie heute mitnehmen"
    ]
   },
   {
@@ -698,8 +684,7 @@
     "Compare Mode",
     "Capture Mode",
     "Anwendungen",
-    "Was Sie heute mitnehmen",
-    "Ihre Begriffe für die Kurslandkarte"
+    "Was Sie heute mitnehmen"
    ]
   },
   {
@@ -731,8 +716,7 @@
     "Servomotoren",
     "Finales Anwendungsbeispiel",
     "Blick zurück",
-    "Was Sie heute mitnehmen",
-    "Ihre Begriffe für die Kurslandkarte"
+    "Was Sie heute mitnehmen"
    ]
   }
  ],
@@ -2194,7 +2178,7 @@
    "name": "Bitmaske",
    "linie": "controller",
    "vl": 12,
-   "abschnitt": 22,
+   "abschnitt": 21,
    "ebene": 1,
    "code": false,
    "erklaerung": "Mit Schiebe- und Bitoperatoren gebaute Zahl, die gezielt einzelne Bits eines Registers trifft: setzen mit |=, löschen mit &= ~, prüfen mit &.",

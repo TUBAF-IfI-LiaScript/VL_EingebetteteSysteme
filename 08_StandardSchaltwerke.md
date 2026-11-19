@@ -2,7 +2,7 @@
 
 author:   Sebastian Zug & André Dietrich & Fabian Bär & Claude Code (Opus 5.5)
 email:    sebastian.zug@informatik.tu-freiberg.de & andre.dietrich@informatik.tu-freiberg.de & fabian.baer@student.tu-freiberg.de
-version:  0.0.10
+version:  0.0.11
 language: de
 narrator: Deutsch Female
 
@@ -815,18 +815,6 @@ Diese fünf Punkte fassen die Vorlesung zusammen. Register und Zähler kehren in
 + Was ist ein Schieberegister, und welche Ein- und Ausgabevarianten (SISO, SIPO, PISO, PIPO) gibt es?
 + Wie unterscheiden sich synchrone und asynchrone Zähler, und welchen Nachteil erkauft man sich mit der einfacheren asynchronen Umsetzung?
 + Wie viele Flip-Flops braucht ein synchroner 4-Bit-Binärzähler, und warum lässt sich jedes Zählerbit mit einem XOR-Gatter umschalten?
-
-## Ihre Begriffe für die Kurslandkarte
-
-Die [Kurslandkarte](https://tubaf-ifi-liascript.github.io/VL_EingebetteteSysteme/kurslandkarte/) wächst mit dem Semester, und Sie bestimmen mit, was hineinkommt. Ihre Antworten sammeln wir im Hörsaal gemeinsam über das LiaScript-Klassenzimmer; die Begriffe dieser Woche sind seit Beginn der Vorlesung in der Karte freigeschaltet, und Ihre Vorschläge ergänzen sie.
-
-**Welche Begriffe aus der heutigen Vorlesung gehören für Sie in die Kurslandkarte?**
-
-[[___ ___ ___]]
-
-**Wo begegnet Ihnen das, was heute dran war – in Ihrem Studiengang oder in Geräten Ihres Alltags?**
-
-[[___ ___ ___]]
 
 ## Übungsaufgaben
 

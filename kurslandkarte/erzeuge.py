@@ -45,6 +45,9 @@ KURS = {
     ],
     "kontakt": 'Prof. Dr.-Ing. Sebastian Zug<br>Lehrstuhl für Softwaretechnologie und Robotik, TU Bergakademie Freiberg<br><a href="mailto:sebastian.zug@informatik.tu-freiberg.de">sebastian.zug@informatik.tu-freiberg.de</a>',
     "lizenz": "",
+    "freigabe": "erscheinen zu Beginn der Vorlesung",
+    "folgen": "Die Begriffe dieser Vorlesung erscheinen zu Beginn der Vorlesung.",
+    "freigabe_satz": "Zu Beginn jeder Vorlesung kommen ihre Begriffe dazu.",
 }
 
 # ---- Erster Termin jeder Vorlesung (Agenda in journal.md) und Kurztitel
