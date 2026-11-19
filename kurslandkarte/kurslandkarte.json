@@ -331,6 +331,9 @@
     "Multiplexer",
     "Demultiplexer",
     "Komparatoren",
+    "Schieber",
+    "Barrel-Shifter",
+    "Schieben im ATmega328P",
     "Und im ATmega328P?",
     "Was Sie heute mitnehmen",
     "Hausaufgaben",
@@ -1325,6 +1328,17 @@
    "code": false,
    "erklaerung": "Schaltnetz, das zwei Binärzahlen vergleicht und meldet, ob A > B, A = B oder A < B gilt; mehrstellige Komparatoren entstehen aus Ein-Bit-Komparatoren, das höherwertige Bit hat Vorrang.",
    "fehlvorstellung": null
+  },
+  {
+   "id": "barrelshifter",
+   "name": "Barrel-Shifter",
+   "linie": "logik",
+   "vl": 5,
+   "abschnitt": 11,
+   "ebene": 2,
+   "code": false,
+   "erklaerung": "Schiebt ein Wort um eine variable Zahl von Stellen: Stufe k schiebt um 2^k Stellen, wenn das Steuerbit s_k gesetzt ist; jede Stufe besteht aus 2-zu-1-Multiplexern. Der ATmega328P hat keinen und braucht für x << n eine Schleife.",
+   "fehlvorstellung": "„x << n kostet immer gleich viel Zeit.“"
   },
   {
    "id": "sequentiell",
@@ -2687,6 +2701,11 @@
    "von": "demux",
    "nach": "mux",
    "text": "ist das Gegenstück zum"
+  },
+  {
+   "von": "barrelshifter",
+   "nach": "mux",
+   "text": "besteht aus Stufen von"
   },
   {
    "von": "sequentiell",

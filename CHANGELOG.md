@@ -2,6 +2,12 @@
 
 Alle wesentlichen Änderungen an diesem Kurs werden in dieser Datei dokumentiert.
 
+## [0.7.16] - 2026-11-19
+
+### Added
+- **05_Standardschaltnetze (0.1.2):** Neuer Abschnitt „Schieber“ (die Vorlesung am 19.11. war rund 30 Minuten zu kurz). Linksschieber für 4 Bit als Tabelle, jede Spalte ein 4-zu-1-Multiplexer; „Barrel-Shifter“ schrittweise: erst eine Stufe (um 1 oder gar nicht, ASCII-Bild und Tabelle), dann zwei Stufen hintereinander (Tabelle mit Beispiel 1011) und die Schaltung aus zwei Stufen 2-zu-1-Multiplexern in DigiSim (Typ `Mux`, Konstante 0), Aufwand $n(n-1)$ gegen $n\log_2 n$, zwei Quizfragen. „Schieben im ATmega328P“: `x << 3` und `x << n` im Compiler Explorer für avr-gcc 14.3 und arm-gcc 14.3 (Cortex-M4); der AVR schiebt mit `lsl` nur um eine Stelle und braucht für variable Weiten eine Schleife (etwa 4 Takte pro Stelle), der Cortex-M4 schiebt in einem Befehl. Lernziel, „Was Sie heute mitnehmen“ und „Prüfen Sie sich“ ergänzt.
+- **Kurslandkarte:** Begriff „Barrel-Shifter“ (VL 05) mit Beziehung zum Multiplexer.
+
 ## [0.7.15] - 2026-11-19
 
 ### Removed

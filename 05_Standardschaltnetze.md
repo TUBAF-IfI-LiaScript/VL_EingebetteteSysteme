@@ -2,7 +2,7 @@
 
 author:   Sebastian Zug & André Dietrich & Fabian Bär & Copilot & Claude Code (Opus 5.5)
 email:    sebastian.zug@informatik.tu-freiberg.de & andre.dietrich@informatik.tu-freiberg.de & fabian.baer@student.tu-freiberg.de
-version:  0.1.1
+version:  0.1.2
 language: de
 narrator: Deutsch Female
 
@@ -32,7 +32,7 @@ gray: @mark(gray,@0)
 | **Veranstaltung:**       | @config.lecture                                                                                          |
 | **Semester:**            | @config.semester                                                                                         |
 | **Hochschule:**          | `Technische Universität Freiberg`                                                                        |
-| **Inhalte:**             | `Dekodierer, Kodierer, Multiplexer, Demultiplexer, Komparatoren`                                         |
+| **Inhalte:**             | `Dekodierer, Kodierer, Multiplexer, Demultiplexer, Komparatoren, Schieber`                                |
 | **Link auf GitHub:**     | https://github.com/TUBAF-IfI-LiaScript/VL_EingebetteteSysteme/blob/master/05_Standardschaltnetze.md      |
 | **Autoren:**             | @author                                                                                                  |
 
@@ -47,6 +47,7 @@ gray: @mark(gray,@0)
 + Multiplexer und Demultiplexer unterscheiden und ihre Schaltfunktionen angeben,
 + eine beliebige Wahrheitstafel mit einem Multiplexer umsetzen,
 + einen Komparator für mehrstellige Binärzahlen aus Ein-Bit-Komparatoren aufbauen,
++ einen Barrel-Shifter aus 2-zu-1-Multiplexern aufbauen und am Maschinencode erklären, warum der ATmega328P für variable Schiebeweiten eine Schleife braucht,
 + im Blockschaltbild des Analog-Digital-Wandlers im ATmega328P Multiplexer und Dekodierer wiederfinden.
 
 <!-- kurslandkarte:knopf-start -->
@@ -607,6 +608,193 @@ Die höherwertigen Bits sind gleich ($E_1 = 1$), also entscheidet das niederwert
 
 > **Nicht verwechseln:** Im Flash-Wandler oben und im Analog-Digital-Wandler des ATmega328P vergleichen **analoge** Komparatoren zwei Spannungen. Der digitale Komparator hier vergleicht zwei Binärzahlen.
 
+## Schieber
+
+    --{{0}}--
+In C schreiben Sie x << n, und der Prozessor verschiebt die Bits. Um eine feste Stelle zu schieben, braucht man gar kein Gatter, nur Drähte. Ist die Schiebeweite aber variabel, muss für jedes Ausgangsbit ausgewählt werden, welches Eingangsbit dort ankommt. Genau das kann ein Multiplexer.
+
+Ein **Schieber** (engl. shifter) verschiebt die Bits eines Wortes um $s$ Stellen, in C `x << s`. Die frei werdenden Stellen werden mit 0 aufgefüllt.
+
++ **Feste Schiebeweite:** reine Verdrahtung, kein Gatter nötig. Für `x << 1` wird $y_i$ mit $x_{i-1}$ verbunden.
++ **Variable Schiebeweite:** Für jedes Ausgangsbit muss ausgewählt werden, welches Eingangsbit ankommt. Das ist die Aufgabe eines Multiplexers.
+
+Linksschieber für 4 Bit, Schiebeweite $s = s_1 s_0$ von 0 bis 3:
+
+<!-- data-type="none" style="table-layout: fixed; max-width:500px;"-->
+| $s_1$ | $s_0$ | $y_3$ | $y_2$ | $y_1$ | $y_0$ |
+| ----- | ----- | ----- | ----- | ----- | ----- |
+| 0     | 0     | $x_3$ | $x_2$ | $x_1$ | $x_0$ |
+| 0     | 1     | $x_2$ | $x_1$ | $x_0$ | 0     |
+| 1     | 0     | $x_1$ | $x_0$ | 0     | 0     |
+| 1     | 1     | $x_0$ | 0     | 0     | 0     |
+
+    --{{0}}--
+Lesen Sie die Tabelle spaltenweise. Die Spalte y2 enthält von oben nach unten x2, x1, x0 und 0. Das sind die vier Dateneingänge eines 4-zu-1-Multiplexers, dessen Steuerleitungen s1 und s0 sind. Für vier Ausgänge brauchen wir also vier solche Multiplexer.
+
+Jede Spalte ist ein 4-zu-1-Multiplexer mit $s_1 s_0$ an den Steuerleitungen. $y_2$ wählt zum Beispiel aus $x_2$, $x_1$, $x_0$ und $0$.
+
+### Barrel-Shifter
+
+    --{{0}}--
+Bei 32 Bit wären das 32 Multiplexer mit je 32 Eingängen. Es geht einfacher. Wir bauen zuerst einen Schieber, der nur zwei Dinge kann: gar nicht schieben oder um genau eine Stelle schieben. Dafür reicht ein Multiplexer mit zwei Eingängen pro Bit. Sein Eingang 0 bekommt das eigene Bit, sein Eingang 1 das Bit rechts daneben. Ganz rechts rückt eine Null nach.
+
+**Schritt 1: Eine Stufe schiebt um eine Stelle – oder gar nicht**
+
+Jedes Ausgangsbit bekommt einen 2-zu-1-Multiplexer. Alle vier hängen an derselben Steuerleitung $s_0$.
+
++ Eingang 0: das eigene Bit, $y_i = x_i$
++ Eingang 1: das Bit rechts daneben, $y_i = x_{i-1}$; ganz rechts rückt eine 0 nach
+
+<!-- style="max-width: 500px" -->
+```ascii
+   x3         x2         x1         x0         0
+   |          |          |          |          |
+   |    +-----+    +-----+    +-----+    +-----+
+   |    |     |    |     |    |     |    |
+   v    v     v    v     v    v     v    v
+ +--------+ +--------+ +--------+ +--------+
+ | 0    1 | | 0    1 | | 0    1 | | 0    1 |
+ |  MUX   | |  MUX   | |  MUX   | |  MUX   |
+ +---+----+ +---+----+ +---+----+ +---+----+
+     |          |          |          |
+     v          v          v          v
+     y3         y2         y1         y0
+```
+
+<!-- data-type="none" style="max-width:600px;"-->
+| $s_0$ | $y_3$ | $y_2$ | $y_1$ | $y_0$ | für $x = 1011$      |
+| ----- | ----- | ----- | ----- | ----- | ------------------- |
+| 0     | $x_3$ | $x_2$ | $x_1$ | $x_0$ | $1011$              |
+| 1     | $x_2$ | $x_1$ | $x_0$ | 0     | $0110$              |
+
+**Schritt 2: Zwei Stufen hintereinander**
+
+    --{{0}}--
+Jetzt der Trick: Wir schalten eine zweite Stufe dahinter, die nach demselben Muster gebaut ist, aber das Bit zwei Stellen weiter rechts holt. Sie schiebt also um zwei Stellen oder gar nicht und hängt an s1. Weil jede Zahl von 0 bis 3 eine Summe aus 1 und 2 ist, erreichen wir mit den beiden Stufen jede Schiebeweite. Für s gleich 3 schieben beide Stufen: erst um eins, dann um zwei.
+
+Die zweite Stufe ist genauso gebaut, holt aber das Bit **zwei** Stellen weiter rechts. Sie schiebt um 2 oder gar nicht und hängt an $s_1$. Die Schiebeweite $s = s_1 s_0$ setzt sich aus beiden Stufen zusammen:
+
+<!-- data-type="none" style="max-width:800px;"-->
+| $s_1 s_0$ | Stufe 1 ($s_0$) | Stufe 2 ($s_1$) | gesamt | für $x = 1011$                               |
+| --------- | --------------- | --------------- | ------ | -------------------------------------------- |
+| 00        | –               | –               | 0      | $1011$                                       |
+| 01        | um 1            | –               | 1      | $1011 \rightarrow 0110$                      |
+| 10        | –               | um 2            | 2      | $1011 \rightarrow 1100$                      |
+| 11        | um 1            | um 2            | 3      | $1011 \rightarrow 0110 \rightarrow 1000$     |
+
+Diese Anordnung heißt **Barrel-Shifter**. Stufe $k$ schiebt um $2^k$ Stellen, wenn $s_k = 1$. Jede Stufe besteht aus einem 2-zu-1-Multiplexer je Bit.
+
+In der Simulation ist links Stufe 1, rechts Stufe 2. Probieren Sie $x = 1011$ mit $s = 01$, $10$ und $11$ aus:
+
+```json @DigiSim.evalJson
+{"devices":{"x0":{"label":"x0","type":"Button","propagation":0,"position":{"x":0,"y":270}},"m0":{"label":"s0 ? 0 : x0","type":"Mux","propagation":0,"bits":{"in":1,"sel":1},"position":{"x":200,"y":270}},"n0":{"label":"s1 ? 0 : m0","type":"Mux","propagation":0,"bits":{"in":1,"sel":1},"position":{"x":420,"y":270}},"y0":{"label":"y0","type":"Lamp","propagation":0,"position":{"x":620,"y":280}},"x1":{"label":"x1","type":"Button","propagation":0,"position":{"x":0,"y":180}},"m1":{"label":"s0 ? x0 : x1","type":"Mux","propagation":0,"bits":{"in":1,"sel":1},"position":{"x":200,"y":180}},"n1":{"label":"s1 ? 0 : m1","type":"Mux","propagation":0,"bits":{"in":1,"sel":1},"position":{"x":420,"y":180}},"y1":{"label":"y1","type":"Lamp","propagation":0,"position":{"x":620,"y":190}},"x2":{"label":"x2","type":"Button","propagation":0,"position":{"x":0,"y":90}},"m2":{"label":"s0 ? x1 : x2","type":"Mux","propagation":0,"bits":{"in":1,"sel":1},"position":{"x":200,"y":90}},"n2":{"label":"s1 ? m0 : m2","type":"Mux","propagation":0,"bits":{"in":1,"sel":1},"position":{"x":420,"y":90}},"y2":{"label":"y2","type":"Lamp","propagation":0,"position":{"x":620,"y":100}},"x3":{"label":"x3","type":"Button","propagation":0,"position":{"x":0,"y":0}},"m3":{"label":"s0 ? x2 : x3","type":"Mux","propagation":0,"bits":{"in":1,"sel":1},"position":{"x":200,"y":0}},"n3":{"label":"s1 ? m1 : m3","type":"Mux","propagation":0,"bits":{"in":1,"sel":1},"position":{"x":420,"y":0}},"y3":{"label":"y3","type":"Lamp","propagation":0,"position":{"x":620,"y":10}},"s0":{"label":"s0","type":"Button","propagation":0,"position":{"x":120,"y":380}},"s1":{"label":"s1","type":"Button","propagation":0,"position":{"x":340,"y":380}},"null1":{"label":"0","type":"Constant","propagation":0,"constant":"0","position":{"x":100,"y":330}},"null2":{"label":"0","type":"Constant","propagation":0,"constant":"0","position":{"x":320,"y":330}}},"connectors":[{"from":{"id":"x0","port":"out"},"to":{"id":"m0","port":"in0"}},{"from":{"id":"null1","port":"out"},"to":{"id":"m0","port":"in1"}},{"from":{"id":"s0","port":"out"},"to":{"id":"m0","port":"sel"}},{"from":{"id":"m0","port":"out"},"to":{"id":"n0","port":"in0"}},{"from":{"id":"null2","port":"out"},"to":{"id":"n0","port":"in1"}},{"from":{"id":"s1","port":"out"},"to":{"id":"n0","port":"sel"}},{"from":{"id":"n0","port":"out"},"to":{"id":"y0","port":"in"}},{"from":{"id":"x1","port":"out"},"to":{"id":"m1","port":"in0"}},{"from":{"id":"x0","port":"out"},"to":{"id":"m1","port":"in1"}},{"from":{"id":"s0","port":"out"},"to":{"id":"m1","port":"sel"}},{"from":{"id":"m1","port":"out"},"to":{"id":"n1","port":"in0"}},{"from":{"id":"null2","port":"out"},"to":{"id":"n1","port":"in1"}},{"from":{"id":"s1","port":"out"},"to":{"id":"n1","port":"sel"}},{"from":{"id":"n1","port":"out"},"to":{"id":"y1","port":"in"}},{"from":{"id":"x2","port":"out"},"to":{"id":"m2","port":"in0"}},{"from":{"id":"x1","port":"out"},"to":{"id":"m2","port":"in1"}},{"from":{"id":"s0","port":"out"},"to":{"id":"m2","port":"sel"}},{"from":{"id":"m2","port":"out"},"to":{"id":"n2","port":"in0"}},{"from":{"id":"m0","port":"out"},"to":{"id":"n2","port":"in1"}},{"from":{"id":"s1","port":"out"},"to":{"id":"n2","port":"sel"}},{"from":{"id":"n2","port":"out"},"to":{"id":"y2","port":"in"}},{"from":{"id":"x3","port":"out"},"to":{"id":"m3","port":"in0"}},{"from":{"id":"x2","port":"out"},"to":{"id":"m3","port":"in1"}},{"from":{"id":"s0","port":"out"},"to":{"id":"m3","port":"sel"}},{"from":{"id":"m3","port":"out"},"to":{"id":"n3","port":"in0"}},{"from":{"id":"m1","port":"out"},"to":{"id":"n3","port":"in1"}},{"from":{"id":"s1","port":"out"},"to":{"id":"n3","port":"sel"}},{"from":{"id":"n3","port":"out"},"to":{"id":"y3","port":"in"}}],"subcircuits":{}}
+```
+
+    --{{0}}--
+Ein n-zu-1-Multiplexer lässt sich aus n minus 1 Multiplexern mit zwei Eingängen bauen. Mit einem großen Multiplexer je Ausgang braucht man also etwa n mal n Bausteine, in Stufen nur n mal log n. Bei 32 Bit ist das ein Unterschied von 992 zu 160. Der Name wird meist über die Variante erklärt, die rotiert statt Nullen nachzuschieben: Die links herausfallenden Bits kommen rechts wieder hinein. Das Wort liegt dann wie ein Band um ein Fass, englisch barrel, und das Fass wird um einige Stellen gedreht. Eine sicher belegte Herkunft des Namens gibt es nicht.
+
+<!-- data-type="none" style="table-layout: fixed; max-width:600px;"-->
+| Wortbreite $n$ | ein $n$-zu-1-MUX je Ausgang | Barrel-Shifter                  |
+| -------------- | --------------------------- | ------------------------------- |
+| 4              | 12 MUX 2-zu-1               | 2 Stufen, 8 MUX 2-zu-1          |
+| 32             | 992 MUX 2-zu-1              | 5 Stufen, 160 MUX 2-zu-1        |
+| allgemein      | $n\,(n-1)$                  | $\log_2 n$ Stufen, $n \log_2 n$ |
+
+**Was liefert der 4-Bit-Barrel-Shifter für $x = 1011$ und $s = 10$?**
+
+[[1100]]
+***************************************************************
+
+$s_0 = 0$: Die erste Stufe reicht $1011$ unverändert durch. $s_1 = 1$: Die zweite Stufe schiebt um zwei Stellen, $1011 \rightarrow 1100$. Die beiden oberen Bits fallen heraus, von rechts kommen zwei Nullen.
+
+***************************************************************
+
+**Wie viele Stufen braucht ein Barrel-Shifter für 8 Bit?**
+
+[[3]]
+***************************************************************
+
+Die Schiebeweite 0 bis 7 hat drei Bits $s_2 s_1 s_0$; die Stufen schieben um 1, 2 und 4 Stellen. Das sind $3 \cdot 8 = 24$ Multiplexer mit zwei Eingängen.
+
+***************************************************************
+
+### Schieben im ATmega328P
+
+    --{{0}}--
+Hat der ATmega328P so einen Barrel-Shifter? Das sieht man am Maschinencode. Im Compiler Explorer übersetzen wir zwei kleine Funktionen einmal für den AVR und einmal für einen ARM Cortex-M4, wie er in vielen größeren Mikrocontrollern steckt.
+
+Was macht der Compiler aus `x << 3` und aus `x << n` mit variablem `n`?
+
+```c
+#include <stdint.h>
+
+uint8_t schiebe3(uint8_t x) {
+    return x << 3;
+}
+
+uint8_t schiebe(uint8_t x, uint8_t n) {
+    return x << n;
+}
+```
+
+[Beispiel im Compiler Explorer öffnen](https://godbolt.org/clientstate/eyJzZXNzaW9ucyI6IFt7ImlkIjogMSwgImxhbmd1YWdlIjogImMiLCAic291cmNlIjogIiNpbmNsdWRlIDxzdGRpbnQuaD5cblxudWludDhfdCBzY2hpZWJlMyh1aW50OF90IHgpIHtcbiAgICByZXR1cm4geCA8PCAzO1xufVxuXG51aW50OF90IHNjaGllYmUodWludDhfdCB4LCB1aW50OF90IG4pIHtcbiAgICByZXR1cm4geCA8PCBuO1xufVxuIiwgImNvbXBpbGVycyI6IFt7ImlkIjogImNhdnJnMTQzMCIsICJvcHRpb25zIjogIi1PMiJ9LCB7ImlkIjogImNhcm1nMTQzMCIsICJvcHRpb25zIjogIi1PMiAtbWNwdT1jb3J0ZXgtbTQgLW10aHVtYiJ9XX1dfQ==)
+
+<section style="display: flex; flex-wrap: wrap; justify-content: space-between;">
+
+<div style="width: 48%; min-width: 280px;">
+
+**AVR** (avr-gcc 14.3, `-O2`)
+
+```asm
+schiebe3:
+        lsl  r24
+        lsl  r24
+        lsl  r24
+        ret
+schiebe:
+        rjmp 2f
+1:      lsl  r24
+2:      dec  r22
+        brpl 1b
+        ret
+```
+
+</div>
+
+<div style="width: 48%; min-width: 280px;">
+
+**ARM Cortex-M4** (arm-gcc 14.3, `-O2`)
+
+```asm
+schiebe3:
+        lsls r0, r0, #3
+        and  r0, r0, #248
+        bx   lr
+schiebe:
+        lsls r0, r0, r1
+        uxtb r0, r0
+        bx   lr
+```
+
+</div>
+
+</section>
+
+    --{{0}}--
+Der AVR kennt nur den Befehl lsl, der um genau eine Stelle schiebt. Für drei Stellen steht er dreimal da. Bei variablem n bleibt nur eine Schleife: lsl, dec und brpl kosten zusammen vier Takte pro Stelle, die Laufzeit hängt also von n ab. Der Cortex-M4 hat einen Barrel-Shifter und schiebt in einem Befehl und einem Takt um beliebig viele Stellen. Die Befehle and und uxtb behalten nur die unteren acht Bit, weil seine Register 32 Bit breit sind und das Ergebnis ein uint8_t ist. Für x << 4 greift avr-gcc übrigens zu einem Trick: swap vertauscht die beiden Hälften des Bytes, ein andi mit 0xF0 löscht die untere.
+
++ **AVR:** `lsl` schiebt um genau eine Stelle. Für variables `n` erzeugt der Compiler eine Schleife (`lsl`, `dec`, `brpl`), etwa 4 Takte pro Stelle. Die Laufzeit hängt von `n` ab.
++ **Cortex-M4:** Ein Barrel-Shifter schiebt in einem Befehl `lsls r0, r0, r1` um 0 bis 31 Stellen, unabhängig von `n`.
+
+**Wie oft führt der AVR `lsl` für `schiebe(x, 5)` aus?**
+
+[[5]]
+***************************************************************
+
+Die Schleife läuft einmal pro Stelle: $n = 5$ Durchläufe mit je `lsl`, `dec` und `brpl`. Der Cortex-M4 braucht unabhängig von $n$ einen einzigen Schiebebefehl.
+
+***************************************************************
+
 ## Und im ATmega328P?
 
     --{{0}}--
@@ -664,6 +852,7 @@ Diese Punkte fassen die Vorlesung zusammen. Die Fragen darunter gehören zu den 
 + **Ein Multiplexer** schaltet über $n$ Steuerleitungen einen von $2^n$ Eingängen auf den Ausgang, ein **Demultiplexer** verteilt einen Eingang auf einen von $2^n$ Ausgängen. Im ATmega328P wählt ein Multiplexer den Kanal für den Analog-Digital-Wandler, gesteuert über MUX3..0 in `ADMUX`.
 + **Multiplexer als Wahrheitstafel:** Legt man die Eingangsvariablen an die Steuerleitungen und die Funktionswerte als Konstanten an die Dateneingänge, setzt ein Multiplexer jede Schaltfunktion um.
 + **Ein Komparator** vergleicht zwei Binärzahlen; mehrstellige Komparatoren entstehen aus Ein-Bit-Komparatoren, wobei das höherwertige Bit Vorrang hat.
++ **Ein Barrel-Shifter** schiebt um eine variable Weite, Stufe für Stufe um 1, 2, 4, … Stellen, jede Stufe aus 2-zu-1-Multiplexern. Der Cortex-M4 hat einen und schiebt in einem Befehl; der ATmega328P schiebt mit `lsl` nur um eine Stelle und braucht für `x << n` eine Schleife.
 
 **Prüfen Sie sich:**
 
@@ -674,6 +863,7 @@ Diese Punkte fassen die Vorlesung zusammen. Die Fragen darunter gehören zu den 
 + Unterscheiden Sie Multiplexer und Demultiplexer, und geben Sie die Schaltfunktion eines 4-zu-1-Multiplexers an.
 + Wie lässt sich mit einem Multiplexer eine beliebige Wahrheitstafel abbilden?
 + Wie setzen Sie einen Zwei-Bit-Komparator aus Ein-Bit-Komparatoren zusammen?
++ Wie ist ein Barrel-Shifter aufgebaut, und warum hängt die Laufzeit von `x << n` auf dem ATmega328P von `n` ab?
 + Welche Standardschaltnetze finden Sie im Analog-Digital-Wandler des ATmega328P?
 
 ## Hausaufgaben
