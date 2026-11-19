@@ -61,7 +61,7 @@ TERMINE = [
 assert len(TERMINE) == ANZAHL
 
 # ---- Freigabe: Begriffe einer Vorlesung erscheinen erst nach ihr in der Karte.
-FREIGEGEBEN = {0, 1, 2, 3}
+FREIGEGEBEN = {0, 1, 2, 3, 4, 5}
 
 # ---- Leitfragen
 LEITFRAGE = {
@@ -135,15 +135,15 @@ B = [
     ('zweistufig', 'zweistufige Schaltungssynthese', 'logik', 4, 'Zweistufige Schaltungssynthese', 2, 0, 'Eine Normalform direkt als Schaltung: je Minterm ein UND-Gatter, dahinter ein ODER-Gatter, das alle Minterme verknüpft.', None),
     ('pal_prom', 'PROM und PAL', 'logik', 4, 'Umsetzung', 2, 0, 'Programmierbare Bausteine aus UND- und ODER-Matrix: Ein PROM speichert die ganze Wahrheitstabelle, ein PAL setzt eine (minimierte) DNF mit begrenzter Zahl an Produkttermen um.', None),
     ('glitch', 'Glitch / Hazard', 'logik', 4, 'Herausforderungen', 1, 0, 'Kurzzeitig falscher Ausgangswert, weil Signale unterschiedlich lange durch die Gatter laufen; im KV-Diagramm erkennbar an benachbarten Schleifen ohne Überlappung.', '„Ein Gatter liefert sein Ergebnis sofort.“'),
-    ('dekoder', 'Dekodierer', 'logik', 5, 'n-zu-k Dekodierer', 1, 0, 'Schaltnetz mit n Eingängen und bis zu 2^n Ausgängen: Für jede Eingangskombination wird genau ein Ausgang aktiviert.', None),
-    ('adressdekoder', 'Adressdekoder', 'logik', 5, 'n-zu-k Dekodierer', 2, 0, 'Dekodierer, der aus einem Teil der Adresse auswählt, welcher Speicherbaustein über seinen Chip-Select-Eingang angesprochen wird.', None),
-    ('bcd7seg', 'BCD-7-Segment-Dekoder', 'logik', 5, 'n-zu-k Dekodierer', 2, 0, 'Übersetzt eine binär kodierte Ziffer in die Segmente, die für ihre Darstellung leuchten müssen.', None),
-    ('kodierer', 'Kodierer', 'logik', 5, 'n-zu-k Kodierer', 1, 0, 'Umkehrung des Dekodierers: Aus der einen aktiven von 2^n Eingangsleitungen wird deren Binärnummer an n Ausgängen.', '„Ein Kodierer kommt mit jeder Eingangsbelegung zurecht.“'),
-    ('prioenc', 'Prioritätskodierer', 'logik', 5, 'n-zu-k Kodierer', 2, 0, 'Kodierer, der bei mehreren aktiven Eingängen festlegt, welcher Vorrang hat, und so die Lücken der Wahrheitstafel des einfachen Kodierers schließt.', None),
+    ('dekoder', 'Dekodierer', 'logik', 5, 'Dekodierer', 1, 0, 'Schaltnetz mit n Eingängen und bis zu 2^n Ausgängen: Für jede Eingangskombination wird genau ein Ausgang aktiviert.', None),
+    ('adressdekoder', 'Adressdekoder', 'logik', 5, 'Dekodierer', 2, 0, 'Dekodierer, der aus einem Teil der Adresse auswählt, welcher Speicherbaustein über seinen Chip-Select-Eingang angesprochen wird.', None),
+    ('bcd7seg', 'BCD-7-Segment-Dekoder', 'logik', 5, 'Dekodierer', 2, 0, 'Übersetzt eine binär kodierte Ziffer in die Segmente, die für ihre Darstellung leuchten müssen.', None),
+    ('kodierer', 'Kodierer', 'logik', 5, 'Kodierer', 1, 0, 'Umkehrung des Dekodierers: Aus der einen aktiven von 2^n Eingangsleitungen wird deren Binärnummer an n Ausgängen.', '„Ein Kodierer kommt mit jeder Eingangsbelegung zurecht.“'),
+    ('prioenc', 'Prioritätskodierer', 'logik', 5, 'Kodierer', 2, 0, 'Kodierer, der bei mehreren aktiven Eingängen festlegt, welcher Vorrang hat, und so die Lücken der Wahrheitstafel des einfachen Kodierers schließt.', None),
     ('mux', 'Multiplexer', 'logik', 5, 'Multiplexer', 1, 0, 'Wählt über n Steuerleitungen einen von 2^n Eingängen aus und leitet dessen Pegel an den einzigen Ausgang weiter.', '„Multiplexer und Dekodierer sind dasselbe.“'),
     ('mux_funktion', 'Mux als Funktion', 'logik', 5, 'Multiplexer', 2, 0, 'Legt man an die Dateneingänge eines Multiplexers die Spalte einer Wahrheitstafel an und an die Steuerleitungen die Variablen, bildet er jede beliebige boolesche Funktion ab.', None),
     ('demux', 'Demultiplexer', 'logik', 5, 'Demultiplexer', 1, 0, 'Gegenstück zum Multiplexer: Ein Eingang wird abhängig von den Steuerleitungen auf einen von mehreren Ausgängen geschaltet.', None),
-    ('komparator', 'Komparator', 'logik', 5, 'Komparatoren', 2, 0, 'Schaltnetz, das zwei Binärzahlen vergleicht; in der Vorlesung als Hausaufgabe aus Ein-Bit-Komparatoren aufzubauen.', None),
+    ('komparator', 'Komparator', 'logik', 5, 'Komparatoren', 2, 0, 'Schaltnetz, das zwei Binärzahlen vergleicht und meldet, ob A > B, A = B oder A < B gilt; mehrstellige Komparatoren entstehen aus Ein-Bit-Komparatoren, das höherwertige Bit hat Vorrang.', None),
     ('sequentiell', 'sequenzielle Logik', 'zustand', 6, 'Einführung sequenzieller Logik', 1, 0, 'Schaltungen, deren Ausgabe nicht nur von der aktuellen Eingabe, sondern auch von einem gespeicherten Zustand abhängt – genau das fehlt Schaltnetzen: ein Speicher.', None),
     ('rueckkopplung', 'Rückkopplung', 'zustand', 6, 'Erster Ansatz', 2, 0, 'Der Ausgang eines Gatters wird auf seinen Eingang zurückgeführt; ein rückgekoppeltes UND oder ODER hält so einen Wert fest – kann ihn aber nur löschen bzw. nur setzen.', None),
     ('srlatch', 'SR-Latch', 'zustand', 6, 'Dritter Ansatz (SR-Latch)', 1, 0, 'Einfachster Speicher für ein Bit: S (Set) setzt den Ausgang auf 1, R (Reset) auf 0, bei S = R = 0 bleibt der Wert erhalten; S = R = 1 ist zu vermeiden.', '„Schon S = R = 1 macht den Speicher unbestimmt.“ – unbestimmt wird es erst, wenn beide danach gleichzeitig auf 0 gehen.'),
@@ -392,8 +392,8 @@ A = [
     ('a_sympy', 'Minimierung mit Python', 'Software', 3, 'Minimierung mit Software', 'SymPy-Skript Minimize.py: SOPform berechnet aus 9 Mintermen eine minimale DNF', ['sopform', 'kdnf'], 'lehrende'),
     ('a_kaffeemaschine', 'Fehleranzeige einer Kaffeemaschine', 'Haushalt', 4, 'Beispielanwendung', 'Vier digitale Sensorsignale, eine Fehler-LED für die Zustände 6 bis 14: Wahrheitstabelle, Minimierung mit Quine-McCluskey und Gatterschaltung in der Simulation', ['qmc', 'primimplikant', 'schaltnetz'], 'lehrende'),
     ('a_paritaet', 'Paritätsprüfung', 'Datenübertragung', 4, 'Schaltungssynthese', 'Schaltnetz, das bei einer ungeraden Zahl von Einsen an drei Eingängen eine 1 ausgibt', ['schaltnetz', 'gatter'], 'lehrende'),
-    ('a_7segment_dekoder', 'Ziffernanzeige mit 7-Segment-Anzeige', 'Anzeigen', 5, 'n-zu-k Dekodierer', 'Arduino-Sketch im Simulator, der die Ziffern 0 bis 9 auf einer 7-Segment-Anzeige ausgibt', ['dekoder', 'bcd7seg'], 'lehrende'),
-    ('a_flashadc', 'Flash-Analog-Digital-Wandler', 'Messtechnik', 5, 'n-zu-k Kodierer', 'Video: Ein Prioritätskodierer macht aus den Komparatorausgängen eines Flash-Wandlers eine Binärzahl', ['prioenc', 'kodierer'], 'lehrende'),
+    ('a_7segment_dekoder', 'Ziffernanzeige mit 7-Segment-Anzeige', 'Anzeigen', 5, 'Dekodierer', 'Arduino-Sketch im Simulator, der die Ziffern 0 bis 9 auf einer 7-Segment-Anzeige ausgibt', ['dekoder', 'bcd7seg'], 'lehrende'),
+    ('a_flashadc', 'Flash-Analog-Digital-Wandler', 'Messtechnik', 5, 'Kodierer', 'Video: Ein Prioritätskodierer macht aus den Komparatorausgängen eines Flash-Wandlers eine Binärzahl', ['prioenc', 'kodierer'], 'lehrende'),
     ('a_temperatur', 'Übertemperatur-Merker', 'Messtechnik', 6, 'Anwendungsbeispiele', 'Digitaler Temperatursensor setzt ein SR-Latch; die Meldung bleibt bestehen, bis sie über R quittiert wird', ['srlatch'], 'lehrende'),
     ('a_avrpin', 'IO-Pin eines AVR-Mikrocontrollers', 'Mikrocontroller', 6, 'Einsatzbeispiel', 'Schaltbild: Konfiguration eines einzelnen Pins mit Hilfe von vier Flip-Flops', ['dlatch', 'flanke'], 'lehrende'),
     ('a_sequenzdetektor', 'Detektor für drei aufeinanderfolgende Einsen', 'Signalverarbeitung', 7, 'Beispiel', 'Binärsequenzdetektor als Moore- und als Mealy-Automat, realisiert mit D- und JK-Flip-Flops in der Simulation', ['moore', 'mealy', 'zustandskodierung', 'zustandstabelle'], 'lehrende'),
@@ -442,5 +442,5 @@ for v in range(ANZAHL):
 kern.erzeuge(
     repo=REPO, kurs=KURS, termine=T, bloecke=BLOECKE, linien=LINIEN,
     begriffe=B, beziehungen=R, faeden=F, anwendungen=A, leitfragen=LEITFRAGE, freigegeben=FREIGEGEBEN,
-    karte="kurslandkarte", startseite="index.html", pdf_ordner="pdf", pdf_termine={0, 1, 2, 3, 4},
+    karte="kurslandkarte", startseite="index.html", pdf_ordner="pdf", pdf_termine={0, 1, 2, 3, 4, 5},
 )

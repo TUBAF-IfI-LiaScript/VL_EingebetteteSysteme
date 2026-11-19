@@ -1,5 +1,5 @@
 {
- "stand": "11.11.2026",
+ "stand": "19.11.2026",
  "version": "0.5.2",
  "kurs": {
   "basis": "https://liascript.github.io/course/?https://raw.githubusercontent.com/TUBAF-IfI-LiaScript/VL_EingebetteteSysteme/master/",
@@ -277,7 +277,7 @@
    "wann": "KW 46 · 9.–13.11.",
    "wann_kurz": "KW 46",
    "leitfrage": "Wie wird aus einer Funktion eine Schaltung – und was kann dabei schiefgehen?",
-   "freigegeben": false,
+   "freigegeben": true,
    "status": "ausgearbeitet",
    "block": 2,
    "pdf": "../pdf/04_Schaltnetze.pdf",
@@ -321,25 +321,26 @@
    "wann": "KW 47 · 16.–20.11.",
    "wann_kurz": "KW 47",
    "leitfrage": "Welche Bausteine braucht man immer wieder?",
-   "freigegeben": false,
+   "freigegeben": true,
    "status": "ausgearbeitet",
    "block": 2,
-   "pdf": null,
+   "pdf": "../pdf/05_Standardschaltnetze.pdf",
    "anwendet": [],
    "abschnitte": [
     "Standardschaltnetze",
-    "Feedbacks/Ergänzungen",
-    "Dekodierer / Kodierer",
-    "n-zu-k Dekodierer",
-    "n-zu-k Kodierer",
-    "Multiplexer / Demultiplexer",
+    "Aufwärmen",
+    "Dekodierer und Kodierer",
+    "Dekodierer",
+    "Kodierer",
+    "Multiplexer und Demultiplexer",
     "Multiplexer",
     "Demultiplexer",
     "Komparatoren",
-    "Ausblick",
+    "Und im ATmega328P?",
     "Was Sie heute mitnehmen",
     "Ihre Begriffe für die Kurslandkarte",
-    "Hausaufgaben"
+    "Hausaufgaben",
+    "Nächste Vorlesung"
    ]
   },
   {
@@ -1338,7 +1339,7 @@
    "abschnitt": 9,
    "ebene": 2,
    "code": false,
-   "erklaerung": "Schaltnetz, das zwei Binärzahlen vergleicht; in der Vorlesung als Hausaufgabe aus Ein-Bit-Komparatoren aufzubauen.",
+   "erklaerung": "Schaltnetz, das zwei Binärzahlen vergleicht und meldet, ob A > B, A = B oder A < B gilt; mehrstellige Komparatoren entstehen aus Ein-Bit-Komparatoren, das höherwertige Bit hat Vorrang.",
    "fehlvorstellung": null
   },
   {
