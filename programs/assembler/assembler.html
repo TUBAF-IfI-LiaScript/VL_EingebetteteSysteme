@@ -50,6 +50,10 @@ function ass() {
         }
         
         document.getElementById("hex").value = hexStr;
+        // Programm direkt im Simulator öffnen (Speicherinhalt über die URL)
+        document.getElementById("openComputer").href = "../computer/index.html#prg=" + hexStr;
+        document.getElementById("openComputerManuell").href = "../computermanuell/index.html#prg=" + hexStr;
+        document.getElementById("openLinks").style.display = "inline";
         
     } catch (e) {
        console.log(e);
@@ -71,6 +75,9 @@ y: 0
         <textarea id="binary" rows="16" cols="32" readonly spellcheck="false"></textarea><br/>
         <input type="button" onclick="ass()" value="Assemble"/><br>
         Hexadezimale Program Daten:<textarea id="hex" rows="4" cols="64" readonly spellcheck="false"></textarea><br/>
+        <span id="openLinks" style="display:none">Im Rechner öffnen:
+            <a id="openComputer" target="_blank">Steuersignale automatisch</a> |
+            <a id="openComputerManuell" target="_blank">Steuersignale manuell</a><br/></span>
         <a href="./beispiele.html">Beispiele</a>
     </body>
 </html>

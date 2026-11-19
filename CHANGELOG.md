@@ -2,6 +2,14 @@
 
 Alle wesentlichen Änderungen an diesem Kurs werden in dieser Datei dokumentiert.
 
+## [0.7.18] - 2026-11-19
+
+### Changed
+- **Simulatoren des Modellrechners (`programs/`):** Opcode `0101` heißt jetzt wie in VL 11 `RAL` und rotiert nach links (bisher `RAR`, rotierte nach rechts) – in den ALUs von Rechenwerk und beiden Rechnern, im Steuerwerk, in den Befehlslisten und im Assembler. Alle Simulatoren skalieren sich auf Fenster- bzw. iframe-Größe (`programs/stage.js`). Beide Rechner laden das Programm aus der URL (`#prg=…`, `?prg=…`) statt per `prompt()`-Dialog und haben einen einstellbaren Speicherausschnitt (`mem=…` bzw. Eingabefeld) sowie ein Feld zum Laden eines anderen Programms. Der Assembler verlinkt nach dem Übersetzen direkt auf beide Rechner. Beschriftung des Bildschirms korrigiert (ab `0x800`, nicht `0xf00`). Übersichtsseite um die Parameter ergänzt.
+
+### Fixed
+- **Simulatoren:** Schleifenzähler `o++` statt `i++` im `default`-Zweig der ALU (in der Praxis nicht erreichbar).
+
 ## [0.7.17] - 2026-11-19
 
 ### Added

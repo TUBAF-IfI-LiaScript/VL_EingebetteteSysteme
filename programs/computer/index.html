@@ -9,6 +9,7 @@
         <script type="text/javascript" src="modell.js"></script>
         <script type="text/javascript" src="controlsignals.js"></script>
         <script type="text/javascript" src="mmio.js"></script>
+        <script type="text/javascript" src="../stage.js"></script>
         <script type="text/javascript">
 const DEFAULT_PROGRAM = "9004b005a0060000000b001f0000";
         
@@ -18,7 +19,7 @@ const OPCODES = [
     "JMP",//0010
     "JSR",//0011
     "SWR",//0100
-    "RAR",//0101
+    "RAL",//0101
     "INP",//0110
     "OUT",//0111
     "NOT",//1000
@@ -42,9 +43,11 @@ onload = function() {
     let arc = 16;
     let bitsDatatype = new BitsDatatype(arc);
     
-    const program = [];
-    let prgStr = prompt("Speicherinhalt", DEFAULT_PROGRAM);
-    let prgLines = prgStr.match(/.{1,4}/g);
+    // Speicherinhalt und Speicherausschnitt aus der URL, z. B. #prg=9004b005&mem=80
+    const params = simParams();
+    let prgStr = (params.get("prg") || DEFAULT_PROGRAM).replace(/[^0-9a-fA-F]/g, "");
+    let prgLines = prgStr.match(/.{1,4}/g) || [];
+    let memStart = parseInt(params.get("mem") || "0", 16) || 0;
     
     //prepare memory
     let words = [];
@@ -315,8 +318,25 @@ onload = function() {
     // ----------------------- MMIO -------------------
     
     
-    let mmioMem = new MemOutput(words,arc,0,20);
+    const MEM_ROWS = 20;
+    memStart = Math.max(0, Math.min(N - MEM_ROWS, memStart));
+    let mmioMem = new MemOutput(words,arc,memStart,MEM_ROWS);
     document.getElementById("mmioMem").appendChild(mmioMem.getHtmlElement());
+
+    // Bedienfeld: Speicherausschnitt verschieben, anderes Programm laden
+    const memStartInput = document.getElementById("memStart");
+    const prgInput = document.getElementById("prgInput");
+    memStartInput.value = memStart.toString(16);
+    prgInput.value = prgStr;
+    memStartInput.onchange = function() {
+        const v = parseInt(memStartInput.value, 16);
+        if (!isNaN(v)) mmioMem.offset = Math.max(0, Math.min(N - MEM_ROWS, v));
+    };
+    document.getElementById("prgLoad").onclick = function() {
+        window.location.hash = "prg=" + prgInput.value.replace(/[^0-9a-fA-F]/g, "")
+                             + "&mem=" + mmioMem.offset.toString(16);
+        window.location.reload();
+    };
     let mmioScreen = new ImageOutRGBA16(words,0x800,64,32,SCREEN_ZOOM,true);
     document.getElementById("mmioScreen").appendChild(mmioScreen.getHtmlElement());
 
@@ -373,11 +393,27 @@ function intervl() {
 .fliege {
     position: absolute;
 }
+body {
+    margin: 0;
+    overflow: hidden;
+}
+#stage {
+    position: relative;
+    width: 1160px;
+    height: 925px;
+    transform-origin: 0 0;
+}
+.panel {
+    font-family: sans-serif;
+    font-size: 14px;
+    line-height: 1.8;
+}
 
         </style>
         
     </head>
     <body>
+      <div id="stage">
         <img src="img/computer.png" class="fliege" style=" left:0px; top:0px; width:768px; height:922px">
         <span class="fliege" style="left:250px; top:106px;">clock:<span id="clk"></span></span>
         <span class="fliege" style="left:250px; top:136px;">autoclock:<span id="autoClkEnable"></span></span>
@@ -420,12 +456,17 @@ function intervl() {
         <span id="valInfo" class="fliege" style="left:39px; top:107px;"></span>
 
         <span id="mmioMem" class="fliege" style="left:770px; top:0px;"></span>
-        <span id="mmioScreen" class="fliege" style="left:770px; top:500px;">Bildschirm (MMIO, Adresse 0xf00 bis 0xfff, 12 Bit Farben, xxxxbbbbggggrrrr)<br></span>
+        <span id="mmioScreen" class="fliege" style="left:770px; top:500px;">Bildschirm (MMIO, Adresse 0x800 bis 0xfff, 12 Bit Farben, xxxxbbbbggggrrrr)<br></span>
 
         <input type="range" class="fliege" id="ticksPerFrame" min="1" max="200" step="1" value="1" onchange="intervl()" style="left:0px; top:0px;" title="ticks per frame">
         <input type="range" class="fliege" id="deltaTime" min="1" max="1000" step="1" value="100" onchange="intervl()" style="left:0px; top:25px;" title="deltatime">
 
-        <!--textarea id="memValue" class="fliege" style="top:0px; left:770px;" rows="22" cols="20" readonly></textarea-->
-        
+        <div class="fliege panel" style="left:770px; top:345px;">
+            Speicherausschnitt ab Adresse 0x<input id="memStart" size="4"><br>
+            Programm (hex): <input id="prgInput" size="22"> <button id="prgLoad">Laden</button>
+        </div>
+        <span class="fliege panel" style="left:135px; top:0px;">Takte pro Bild</span>
+        <span class="fliege panel" style="left:135px; top:25px;">Pause (ms)</span>
+      </div>
     </body>
 </html>

@@ -239,20 +239,20 @@ class AluSimple extends FjangComponent {
                 out = [];
                 for (let i = 0; i < this.bitsLength; i++) out.push(xor(x[i],y[i]));
                 break;
-            case "rar(x)":
+            case "ral(x)":
                 out = [];
-                for (let i = 0; i < this.bitsLength; i++) out.push(x[(i+1)%this.bitsLength]);
+                for (let i = 0; i < this.bitsLength; i++) out.push(x[(i+this.bitsLength-1)%this.bitsLength]);
                 break;
             default:
                 out = [];
-                for (let i = 0; i < this.bitsLength; o++) out.push(false);
+                for (let i = 0; i < this.bitsLength; i++) out.push(false);
         }
         this.outNode.set(out);
         this.carryOutNode.set(carryOut);
         this.overflowNode.set(overflow);
     }
 }
-AluSimple.OPERATION_DATATYPE = new ElementOfSetDatatype(["x+y","~x","x and y","x or y","x xor y","rar(x)"],"AluOp");
+AluSimple.OPERATION_DATATYPE = new ElementOfSetDatatype(["x+y","~x","x and y","x or y","x xor y","ral(x)"],"AluOp");
 
 function xor(a,b) {
     return a && !b || !a && b;

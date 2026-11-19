@@ -38,7 +38,7 @@ CONSTROL_STATES[4+0b0001] = BUILD_STATE({"info":"jma1","next":ADR(26)});
 CONSTROL_STATES[4+0b0010] = BUILD_STATE({"info":"jmp","next":ADR(0),"irOut":true,"pcIn":true,"marIn":true});// ir -> pc, ir -> mar
 CONSTROL_STATES[4+0b0011] = BUILD_STATE({"info":"jsr","next":ADR(4+0b0010),"pcOut":true,"aIn":true});// pc -> a
 CONSTROL_STATES[4+0b0100] = BUILD_STATE({"info":"swr","next":ADR(0),"swrOut":true,"aIn":true});//swr -> a
-CONSTROL_STATES[4+0b0101] = BUILD_STATE({"info":"rar1","next":ADR(29),"aToZ":true});//a -> z
+CONSTROL_STATES[4+0b0101] = BUILD_STATE({"info":"ral1","next":ADR(29),"aToZ":true});//a -> z
 CONSTROL_STATES[4+0b0110] = BUILD_STATE({"info":"inp","next":ADR(255)});//TODO
 CONSTROL_STATES[4+0b0111] = BUILD_STATE({"info":"out","next":ADR(0),"aOut":true,"outIn":true});
 CONSTROL_STATES[4+0b1000] = BUILD_STATE({"info":"not1","next":ADR(30),"aToZ":true});//a -> z
@@ -63,7 +63,7 @@ CONSTROL_STATES[26] = BUILD_STATE({"info":"jma2 (eval)","next":ADR(27),"s":true}
 CONSTROL_STATES[27] = BUILD_STATE({"info":"jma3n (a negative)","next":ADR(0),"irOut":true,"pcIn":true,"marIn":true});// ir -> pc, ir -> mar
 CONSTROL_STATES[28] = BUILD_STATE({"info":"jma3p (a positive)","next":ADR(0)});//to nothing
 
-CONSTROL_STATES[29] = BUILD_STATE({"info":"rar2","next":ADR(0),"aluOp":"rar(x)","oToA":true});// ral(z) -> a
+CONSTROL_STATES[29] = BUILD_STATE({"info":"ral2","next":ADR(0),"aluOp":"ral(x)","oToA":true});// ral(z) -> a
 
 CONSTROL_STATES[30] = BUILD_STATE({"info":"not2","next":ADR(0),"aluOp":"~x","oToA":true});//~z -> a
 
