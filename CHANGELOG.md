@@ -2,6 +2,14 @@
 
 Alle wesentlichen Änderungen an diesem Kurs werden in dieser Datei dokumentiert.
 
+## [0.7.17] - 2026-11-19
+
+### Added
+- **05_Standardschaltnetze (0.1.3):** Symbol-Beispiele in DigiSim nach der jeweiligen Gatterschaltung („Gatter → Symbol → Baustein“, Decision vom 19.11.): „Vom Gatter zum Symbol“ – der 3-zu-8-Dekodierer als `Subcircuit`-Kasten mit Anzeige von $ABC$ als Zahl; 4-zu-1-Multiplexer als `Mux`-Symbol mit gebündelten Steuerleitungen; 4-Bit-Komparator aus den Bausteinen `Gt`/`Eq`/`Lt` mit Zahleneingabe; Barrel-Shifter als `ShiftLeft`-Baustein. Merkpunkt in „Was Sie heute mitnehmen“.
+
+### Fixed
+- **05_Standardschaltnetze:** Übersichtsbild Dekodierer/Kodierer zeigte neun Leitungen zwischen den Bausteinen (acht Pfeile und eine punktierte Linie); jetzt genau acht, Pfeile an den Kanten, beschriftet mit „Zahl mit 3 Bit“ und „8 Leitungen, genau eine aktiv“.
+
 ## [0.7.16] - 2026-11-19
 
 ### Added
