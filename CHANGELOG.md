@@ -2,6 +2,45 @@
 
 Alle wesentlichen Änderungen an diesem Kurs werden in dieser Datei dokumentiert.
 
+## [0.7.22] - 2026-11-21
+
+### Changed
+- **06_FlipFlops (0.1.0):** Überarbeitet im Format der Vorlesungen 02–05 und 08:
+  - **Rückblick auf Teil B der Hausaufgaben aus VL 04 und VL 05** (ersetzt die Rückmeldetabelle vom Vorjahr):
+    - VL 04: Quine-McCluskey mit Primimplikantentafel und KV-Diagramm; Segment $d$ im PAL über $\overline{d}$.
+    - VL 05: Zwei-Bit-Komparator als DigiSim-Schaltung aus zwei Ein-Bit-Komparatoren (`Subcircuit`); Teilbarkeit durch 3 mit KV-Diagramm und 8-zu-1-Multiplexer in DigiSim.
+  - **Aufwärmen:** Lampe mit Ein- und Aus-Taster – warum ein Schaltnetz das nicht kann.
+  - **16 Quizze** statt keinem; Erklärungen zum rückgekoppelten UND/ODER, zum Entprellen mit Umschalter, zum Flankendetektor, zur Latch-Kette (Schieberegister-Idee) und zur Verzögerung beim Main-Subsidiary-Flip-Flop.
+  - **Neu:** Setup- und Haltezeit, Metastabilität; DigiSim „D-Latch neben D-Flip-Flop“; T-Flip-Flop aus D-Flip-Flop und XOR ($D = T \oplus Q$) als Vorbereitung für den synchronen Zähler in VL 08.
+  - **„Und im ATmega328P?“** (ersetzt „Einsatzbeispiel“): Pin-Logik aus dem Datenblatt mit DDxn, PORTxn und Synchronizer; Sketch, der über `PINB` das Flip-Flop PORTB5 kippt.
+  - **Hausaufgaben** mit Teil A (Selbstkontrolle) und Teil B für die Übung T2; „Nächste Vorlesung“.
+- **05_Standardschaltnetze (0.1.4):** Teil B der Hausaufgabe wird in Vorlesung 06 (25.11.) besprochen statt in Vorlesung 07.
+
+### Fixed
+- **06_FlipFlops:** Zeitdiagramm „zustandsgesteuert“: $S = 1$, $R = 0$ bei aktivem Takt setzt $Q$ am Ende der dritten Taktphase wieder. Text zu $S = R = 1$: Beim NOR-Latch sind beide Ausgänge 0, nicht 1. Namensherkunft JK: Bericht über Eldred Nelson (Hughes Aircraft, fünftes Buchstabenpaar, Patentanmeldung 1953) statt der unbelegten Ableitung von Jack Kilby. Toter Datenblatt-Link (DM74LS194A) entfernt. Zusammenfassungstabelle Latch/Flip-Flop vervollständigt. Ungenutzter Pyodide-Import entfernt. Schreibweise „Flip-Flop“.
+
+## [0.7.21] - 2026-11-21
+
+### Changed
+- **08_StandardSchaltwerke (0.1.1):** Roter Faden nach einer didaktischen Durchsicht:
+  - **Neuer Abschnitt „Vom Automaten zum Standardbaustein“ nach der Ampel** (ersetzt „Aufwärmen“ vor der Ampel):
+    - Die Ampel ist ein 2-Bit-Zähler 00 → 01 → 10 → 11, der weiterzählt, wenn $E = F$.
+    - Aufwärmfrage (Flip-Flops für einen Zähler 0–15).
+    - Bild „Schaltnetz wählt den nächsten Wert, Flip-Flops speichern ihn“.
+    - Fahrplan-Tabelle: Register, Registerbank, Schieberegister und Zähler mit dem jeweiligen Schaltnetz davor.
+    - Merksatz.
+  - **Ampel in Software setzt jetzt denselben Automaten um:** Schiebeschalter als $E$, Folgezustandstabelle `FOLGE` und Ausgabetabellen statt einer zeitgesteuerten Ampel, die $E$ ignorierte. Dazu der Hinweis, dass bei einer echten Ampel ein Zähler die Rolle von $E$ übernimmt.
+  - **Synchroner Zähler:**
+    - Bits einheitlich $Q_3 … Q_0$ statt F–I und a–d, auch in der Simulation; Eingang heißt dort $E$ statt „Zählen“.
+    - Herleitung über das Muster in der Zustandstabelle (Quiz „Wann wechselt $Q_2$?“), Kippsignale $T_i$ mit Bezug zum T-Flip-Flop.
+    - Die minimierte DNF ist nur noch Gegenprobe; das Bild bekommt eine Zuordnung der alten Namen.
+    - Quiz zum Übergang 7 → 8.
+  - **Kleinere Ergänzungen:**
+    - „Schritt 3“ bei der Registerbank beschriftet.
+    - Quiz „Konstante 1111 → zählt rückwärts“ beim Zähler als Baustein (Vorgriff Zweierkomplement).
+    - Gray-Code-Bezug beim Johnson-Zähler.
+    - „Was Sie heute mitnehmen“ und „Prüfen Sie sich“ um das gemeinsame Muster ergänzt.
+
 ## [0.7.20] - 2026-11-21
 
 ### Fixed

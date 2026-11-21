@@ -2,7 +2,7 @@
 
 author:   Sebastian Zug & André Dietrich & Fabian Bär & Claude Code (Opus 5.5)
 email:    sebastian.zug@informatik.tu-freiberg.de & andre.dietrich@informatik.tu-freiberg.de & fabian.baer@student.tu-freiberg.de
-version:  0.1.0
+version:  0.1.1
 language: de
 narrator: Deutsch Female
 
@@ -94,26 +94,12 @@ style="width: 80%; min-width: 420px; max-width: 720px;"
 
 ---------------------------------------------------------------------
 
-## Aufwärmen
-
-    --{{0}}--
-In VL 06 haben wir Flipflops kennengelernt, in VL 07 daraus Schaltwerke entworfen. Heute geht es um Schaltwerke, die man so oft braucht, dass es sie als fertige Bausteine gibt, genau wie Dekodierer und Multiplexer bei den Schaltnetzen in VL 05.
-
-Ein Zähler soll die Zahlen von 0 bis 15 durchlaufen. Jedes Flip-Flop speichert ein Bit.
-
-**Wie viele Flip-Flops braucht der Zähler mindestens?**
-
-[[4]]
-***************************************************************
-
-Der Zähler muss sich 16 verschiedene Zustände merken. Mit $n$ Flip-Flops lassen sich $2^n$ Zustände unterscheiden, also reichen $n = 4$: $2^4 = 16$. Vier Flip-Flops mit gemeinsamem Takt, die zusammen eine Zahl speichern, sind ein **Register**. Ein Zähler ist ein Register, das bei jedem Takt seinen Inhalt um eins erhöht.
-
-***************************************************************
-
 ## Ampelsteuerung
 
     --{{0}}--
-Zum Wiedereinstieg wenden wir den Entwurfsweg aus VL 07 noch einmal vollständig an, diesmal mit JK-Flip-Flops. Danach verlassen wir die Einzelentwürfe und bauen die Standardschaltwerke Register, Schieberegister und Zähler.
+Zum Wiedereinstieg wenden wir den Entwurfsweg aus VL 07 noch einmal vollständig an, diesmal mit JK-Flip-Flops. Achten Sie dabei auf die Reihenfolge der Zustände, sie führt uns direkt zum Thema des Tages.
+
+Zum Wiedereinstieg wenden wir den Entwurfsweg aus VL 07 an einem vollständigen Beispiel an: vom Zustandsdiagramm über die Flip-Flop-Ansteuerung bis zur Ausgabelogik.
 
                           {{0-1}}
 *******************************************************************************
@@ -368,60 +354,57 @@ $$
                               {{8-9}}
 *******************************************************************************
 
-> Wie sehen alternative Umsetzungen aus?
+**Derselbe Automat als Programm**
 
-<div>
-  <wokwi-led color="red" pin="13" port="B" label="13"></wokwi-led>
-  <wokwi-led color="yellow" pin="12" port="B" label="12"></wokwi-led>
-  <wokwi-led color="green" pin="11" port="B" label="11"></wokwi-led>
-  <span id="simulation-time"></span>
+Der Entwurf lässt sich auch in Software umsetzen. Das Programm speichert den Zustand in einer Variablen und schlägt den Folgezustand in einer Tabelle nach, die genau der Zustandstabelle aus Schritt 2 entspricht. Jeder Durchlauf von `loop()` ist ein Takt. Der Schiebeschalter liefert den Eingang $E$: Schalten Sie ihn hin und her und verfolgen Sie die Ampelphasen.
+
+<div id="ampel">
+<wokwi-slide-switch pin="2"></wokwi-slide-switch>
+<wokwi-led color="red" pin="13" label="Rot"></wokwi-led>
+<wokwi-led color="yellow" pin="12" label="Gelb"></wokwi-led>
+<wokwi-led color="green" pin="11" label="Grün"></wokwi-led>
 </div>
 
-```cpp       statemachine.cpp
-typedef struct {
-    int state;
-    int next;
-    int A_red;
-    int A_yellow;
-    int A_green;
-    int timer;
-} tl_state_t;    // Traffic light state
-
-tl_state_t states[4] = {
-// state     A_red             timer
-//  |   next  |  A_yellow       |
-//  |    |    |   |    A_green  |
-//----------------------------------------------
-{   0,   1,   1,  0,    0,      3},
-{   1,   2,   1,  1,    0,      1 },
-{   2,   3,   0,  0,    1,      3},
-{   3,   0,   0,  1,    0,      1,}
+```cpp       ampel.ino
+// Zustände wie im Entwurf: Rot = 0, RotGelb = 1, Grün = 2, Gelb = 3
+// (binär GF: 00, 01, 10, 11)
+const int FOLGE[4][2] = {
+  // E = 0, E = 1
+  {  1,     0 },   // Rot
+  {  1,     2 },   // RotGelb
+  {  3,     2 },   // Grün
+  {  3,     0 }    // Gelb
 };
+// Ausgabelogik: welche Lampe in welchem Zustand leuchtet
+const bool ROT[4]  = { 1, 1, 0, 0 };   // R  = /G
+const bool GELB[4] = { 0, 1, 0, 1 };   // Ge = F
+const bool GRUEN[4] = { 0, 0, 1, 0 };  // Gr = G /F
 
-const int greenPin = 11;
-const int yellowPin = 12;
-const int redPin = 13;
-int state = 0;
+int zustand = 0;
 
 void setup() {
-  pinMode(greenPin, OUTPUT);
-  pinMode(yellowPin, OUTPUT);
-  pinMode(redPin, OUTPUT);
+  pinMode(2, INPUT);       // Eingang E (Schiebeschalter)
+  pinMode(13, OUTPUT);     // Rot
+  pinMode(12, OUTPUT);     // Gelb
+  pinMode(11, OUTPUT);     // Grün
 }
 
 void loop() {
-  if (states[state].A_red == 1) digitalWrite(redPin, HIGH);
-  else digitalWrite(redPin, LOW);
-  if (states[state].A_yellow == 1) digitalWrite(yellowPin, HIGH);
-  else digitalWrite(yellowPin, LOW);
-  if (states[state].A_green == 1) digitalWrite(greenPin, HIGH);
-  else digitalWrite(greenPin, LOW);
-  delay(states[state].timer*1000);
-  state =  states[state].next;
+  int e = digitalRead(2);
+  zustand = FOLGE[zustand][e];       // Übergangslogik
+  digitalWrite(13, ROT[zustand]);    // Ausgabelogik
+  digitalWrite(12, GELB[zustand]);
+  digitalWrite(11, GRUEN[zustand]);
+  delay(200);                        // ein "Takt"
 }
 ```
-@AVR8js.sketch
+@AVR8js.sketch(ampel)
 
+Die beiden Tabellen `FOLGE` und `ROT`/`GELB`/`GRUEN` sind die Übergangslogik und die Ausgabelogik des Moore-Automaten, die Variable `zustand` ersetzt die beiden Flip-Flops.
+
+Eine echte Ampel schaltet nicht auf einen Schalter hin, sondern nach Zeit. Dann übernimmt ein **Zähler** die Rolle von $E$: Er zählt Takte und meldet, wenn eine Phase abgelaufen ist. Zähler bauen wir in dieser Vorlesung noch.
+
+Welche Umsetzung man wählt, ist eine Abwägung:
 
 | Methode                         | Bauteilkosten | Entwurf      | Variabilität |
 | :------------------------------ | :------------ | :----------- | :----------- |
@@ -431,6 +414,56 @@ void loop() {
 | Software (PC)                   | hoch          | sehr einfach | hoch         |
 
 *******************************************************************************
+
+## Vom Automaten zum Standardbaustein
+
+    --{{0}}--
+Die Ampel hatte vier Zustände in der Reihenfolge 00, 01, 10, 11 und dann wieder 00. Das ist nichts anderes als ein Zähler. Damit sind wir beim Thema des Tages: Schaltwerke, die man so oft braucht, dass es sie als fertige Bausteine gibt.
+
+Schauen Sie noch einmal auf die Zustandskodierung der Ampel: Rot = 00, Rot-Gelb = 01, Grün = 10, Gelb = 11, danach wieder Rot = 00. Die Ampel **zählt** von 0 bis 3 und beginnt von vorn. Sie zählt weiter, wenn $E$ gleich dem niederwertigen Bit $F$ ist, sonst bleibt sie stehen. Die Ampel ist also ein 2-Bit-Zähler mit einer besonderen Weiterschaltbedingung.
+
+Ein Zähler soll die Zahlen von 0 bis 15 durchlaufen. Jedes Flip-Flop speichert ein Bit.
+
+**Wie viele Flip-Flops braucht der Zähler mindestens?**
+
+[[4]]
+***************************************************************
+
+Der Zähler muss sich 16 verschiedene Zustände merken. Mit $n$ Flip-Flops lassen sich $2^n$ Zustände unterscheiden, also reichen $n = 4$: $2^4 = 16$. Die Ampel kam mit 2 Flip-Flops für 4 Zustände aus.
+
+***************************************************************
+
+**Das gemeinsame Muster**
+
+Jedes Schaltwerk aus VL 07 besteht aus Flip-Flops, die den Zustand speichern, und einem Schaltnetz davor, das aus Zustand und Eingängen den **nächsten Wert** berechnet. Mit jeder Taktflanke übernehmen die Flip-Flops diesen Wert.
+
+<!--
+style="width: 80%; min-width: 420px; max-width: 640px;"
+-->
+```ascii
+            +----------------+        +------------+
+ Eingänge   | Schaltnetz:    |   D    | Flip-Flops |   Q
+ ---------->| nächster Wert  +------->| (Zustand)  +----+-----> Ausgänge
+        +-->|                |   +--->| ▷          |    |
+        |   +----------------+   |    +------------+    |
+        |                        |                      |
+        |                      Takt                     |
+        +-----------------------------------------------+                .
+```
+
+Bei der Ampel haben wir dieses Schaltnetz selbst entworfen. Manche Regeln für den nächsten Wert braucht man aber in jedem Rechner. Die zugehörigen Schaltwerke gibt es als fertige Bausteine, so wie Dekodierer und Multiplexer bei den Schaltnetzen in VL 05:
+
+<!-- data-type="none" -->
+| Standardschaltwerk | nächster Wert der Flip-Flops               | Schaltnetz davor                    |
+| ------------------ | ------------------------------------------ | ----------------------------------- |
+| Register           | alter Wert oder neues Datenwort            | Multiplexer (VL 05)                 |
+| Registerbank       | wie Register, aber nur im adressierten     | Dekodierer und Multiplexer (VL 05)  |
+| Schieberegister    | Wert des Nachbarn                          | nur Leitungen, zum Laden Multiplexer |
+| Zähler             | Zählerstand + 1                            | XOR- und UND-Gatter bzw. Addierer   |
+
+In dieser Reihenfolge bauen wir die Bausteine heute auf und finden sie am Ende im ATmega328P wieder.
+
+> **Merke:** Ein Standardschaltwerk besteht aus Flip-Flops und einem Schaltnetz, das den nächsten Wert auswählt: behalten, neu laden, vom Nachbarn übernehmen oder um eins erhöhen.
 
 ## Register
 
@@ -509,6 +542,8 @@ Ein Flip-Flop pro Bit, also acht. Alle acht teilen sich den Takt und das Signal 
 
     --{{0}}--
 Ein Rechner braucht mehr als ein Register. Würden wir jedes einzeln verdrahten, bräuchte jedes eigene Daten- und Steuerleitungen. Stattdessen nummerieren wir die Register und wählen über eine Adresse aus, welches beschrieben und welches gelesen wird. Dafür brauchen wir genau die beiden Bausteine aus VL 05.
+
+**Schritt 3: Mehrere Register mit Adresse**
 
 Vier Register teilen sich die Datenleitungen und den Takt. Eine **Adresse** legt fest, welches Register beschrieben und welches gelesen wird:
 
@@ -687,9 +722,9 @@ $Q_0$ fällt zuerst, der Zähler zeigt $0110_2 = 6$. Das kippt $Q_1$: $0100_2 = 
 ### Synchroner Zähler
 
     --{{0}}--
-Beim synchronen Zähler hängen alle Flip-Flops am selben Takt. Damit schalten alle gleichzeitig, und es gibt keine falschen Zwischenwerte. Dafür muss eine Logik vor den Flip-Flops ausrechnen, welche Bits beim nächsten Takt wechseln.
+Beim synchronen Zähler hängen alle Flip-Flops am selben Takt. Damit schalten alle gleichzeitig, und es gibt keine falschen Zwischenwerte. Dafür braucht es das Schaltnetz vor den Flip-Flops, das den nächsten Zählerstand berechnet. Wir suchen in der Zustandstabelle nach einem Muster und bauen daraus die Schaltung.
 
-Beim synchronen Zähler hängen alle Flip-Flops am selben Takt. Eine Logik vor den Flip-Flops berechnet den nächsten Zählerstand. Wir leiten sie mit dem Entwurfsweg aus VL 07 her. Der Zähler hat einen Eingang $E$: Bei $E = 1$ zählt er weiter, bei $E = 0$ bleibt er stehen.
+Beim synchronen Zähler hängen alle Flip-Flops am selben Takt. Ein Schaltnetz vor den Flip-Flops berechnet den nächsten Zählerstand, das gemeinsame Muster vom Anfang der Vorlesung. Der Zähler hat einen Eingang $E$: Bei $E = 1$ zählt er weiter, bei $E = 0$ bleibt er stehen.
 
 ```text @plantUML.png
 @startdot
@@ -716,10 +751,10 @@ digraph finite_state_machine {
 @enddot
 ```
 
-Für die Zahlen 0 bis 15 braucht der Zähler 16 Zustände, also 4 Flip-Flops $F$, $G$, $H$, $I$ ($F$ ist das höchstwertige Bit). Die Tabelle zeigt die Übergänge für $E = 1$. Den Fall $E = 0$ ergänzen wir unten.
+Für die Zahlen 0 bis 15 braucht der Zähler 16 Zustände, also 4 Flip-Flops $Q_3$ … $Q_0$ ($Q_3$ ist das höchstwertige Bit). Die Tabelle zeigt die Übergänge für $E = 1$:
 
 <!-- data-type="none" -->
-| F   | G   | H   | I   | F'  | G'  | H'  | I'  |
+| $Q_3$ | $Q_2$ | $Q_1$ | $Q_0$ | $Q_3'$ | $Q_2'$ | $Q_1'$ | $Q_0'$ |
 | --- | --- | --- | --- | --- | --- | --- | --- |
 | 0   | 0   | 0   | 0   | 0   | 0   | 0   | 1   |
 | 0   | 0   | 0   | 1   | 0   | 0   | 1   | 0   |
@@ -738,70 +773,89 @@ Für die Zahlen 0 bis 15 braucht der Zähler 16 Zustände, also 4 Flip-Flops $F$
 | 1   | 1   | 1   | 0   | 1   | 1   | 1   | 1   |
 | 1   | 1   | 1   | 1   | 0   | 0   | 0   | 0   |
 
-Mit D-Flip-Flops ist der nächste Zustand direkt der Wert an $D$: $D_F = F'$, $D_G = G'$ usw. Minimiert ergibt sich:
 
-$$
-\begin{aligned}
-D_F &= \overline{I}F + \overline{G}F + \overline{H}F + IHG\overline{F} \\
-D_G &= \overline{I}G + \overline{H}G + IH\overline{G}\\
-D_H &= I\overline{H}+\overline{I}H\\
-D_I &= \overline{I} \\
-\end{aligned}
-$$
+**Wann wechselt $Q_2$? Vergleichen Sie in der Tabelle die Spalten $Q_2$ und $Q_2'$.**
 
-Die Schaltung setzt diese Gleichungen mit XOR- und UND-Gattern um:
-
-![Synchroner 4-Bit-Zähler aus D-Flip-Flops, XOR- und UND-Gattern](./images/08_StandardSchaltwerke/Zaehler.svg.png)<!-- style="width: 80%; max-width: 800px;" -->
-
-**Aufgabe:** Leiten Sie die gezeigte Realisierung aus den Gleichungen her.
-
-    {{1}}
+[( )] immer
+[( )] wenn $Q_0 = 1$
+[(X)] wenn $Q_1 = 1$ und $Q_0 = 1$
+[( )] wenn $Q_3 = 1$
 ***************************************************************
 
-Für $D_I$ und $D_H$ ist die Lösung direkt abzulesen: $D_I = \overline{I}$ und $D_H = I \oplus H$. Für $D_G$ muss man den Term umstellen. Die Schaltung setzt $D_G = IH \oplus G$ um:
+$Q_2$ wechselt in den Zeilen 0011, 0111, 1011 und 1111, also genau dann, wenn $Q_1$ und $Q_0$ beide 1 sind. Dasselbe Muster gilt für alle Bits:
 
-$$
-\begin{aligned}
-D_G &= IH\oplus G \\
-   &=  \overline{IH}G + IH\overline{G}\\
-   &=  (\overline{I}+\overline{H})G + IH\overline{G}\\
-   &= \overline{I}G + \overline{H}G + IH\overline{G}\\
-\end{aligned}
-$$
++ $Q_0$ wechselt bei jedem Schritt,
++ $Q_1$ wechselt, wenn $Q_0 = 1$,
++ $Q_2$ wechselt, wenn $Q_1 = Q_0 = 1$,
++ $Q_3$ wechselt, wenn $Q_2 = Q_1 = Q_0 = 1$.
 
-Ebenso ist $D_F = IHG \oplus F$.
+Ein Zählerbit **wechselt**, wenn alle niederwertigeren Bits 1 sind. Genau dann springen sie alle auf 0, und es entsteht ein Übertrag, wie beim schriftlichen Addieren von 1.
 
 ***************************************************************
 
-**Das Muster dahinter: Bits kippen mit XOR**
+**Vom Muster zur Schaltung: Bits kippen mit XOR**
 
-Die Gleichungen folgen einem einfachen Muster: Ein Zählerbit **wechselt**, wenn alle niederwertigeren Bits 1 sind, denn dann springt das nächst niedrigere Bit von 1 auf 0. Das bedingte Wechseln erledigt ein XOR:
+Das bedingte Wechseln erledigt ein XOR:
 
 $$
 x \oplus 0 = x \qquad x \oplus 1 = \overline{x}
 $$
 
-Für einen Zähler mit den Bits $a$, $b$, $c$, $d$ ($a$ höchstwertig, $d$ niederwertigst) und dem Eingang *Zählen* gibt die Hilfsgröße $x_{flip}$ an, ob das Bit $x$ beim nächsten Takt wechselt:
+Das Signal $T_i$ gibt an, ob Bit $i$ beim nächsten Takt kippt, wie der Eingang $T$ des T-Flip-Flops aus VL 06. Ein Bit kippt, wenn das nächst niedrigere kippt und dabei 1 ist:
 
 $$
 \begin{aligned}
-d_{flip} &= \text{Zählen} & d' &= d \oplus d_{flip}\\
-c_{flip} &= d_{flip} \cdot d & c' &= c \oplus c_{flip}\\
-b_{flip} &= c_{flip} \cdot c & b' &= b \oplus b_{flip}\\
-a_{flip} &= b_{flip} \cdot b & a' &= a \oplus a_{flip}\\
-\text{Übertrag} &= a_{flip} \cdot a
+T_0 &= E & Q_0' &= Q_0 \oplus T_0\\
+T_1 &= T_0 \cdot Q_0 & Q_1' &= Q_1 \oplus T_1\\
+T_2 &= T_1 \cdot Q_1 & Q_2' &= Q_2 \oplus T_2\\
+T_3 &= T_2 \cdot Q_2 & Q_3' &= Q_3 \oplus T_3\\
+\text{Übertrag} &= T_3 \cdot Q_3
 \end{aligned}
 $$
 
-Damit ist auch der Fall $E = 0$ erledigt: Ist *Zählen* 0, sind alle $x_{flip}$ 0 und kein Bit wechselt. Der **Übertrag** wird 1, wenn der Zähler von 15 auf 0 überläuft. Er kann einen zweiten Zähler weiterschalten.
+Damit ist auch der Fall $E = 0$ erledigt: Alle $T_i$ sind 0, und kein Bit wechselt. Der **Übertrag** wird 1, wenn der Zähler von 15 auf 0 überläuft; er kann einen zweiten Zähler weiterschalten. Mit D-Flip-Flops legt man $Q_i'$ direkt an den Eingang $D$.
 
-In der Simulation braucht jedes Flip-Flop wieder 0,3 s. Schalten Sie **Zählen** ein, zählen Sie bis 7 und beobachten Sie den Schritt auf 8:
+Die Simulation setzt die Gleichungen um: links die UND-Kette für $T_1$ … $T_3$ und den Übertrag, in der Mitte die XOR-Gatter, rechts die Flip-Flops. Jedes Flip-Flop braucht wieder 0,3 s. Schalten Sie $E$ ein, zählen Sie bis 7 und beobachten Sie den Schritt auf 8:
 
 ``` json @DigiSim.evalJson
-{"router":"manhattan","devices":{"count":{"type":"Button","label":"Zählen","propagation":0,"position":{"x":0,"y":230}},"clk":{"type":"Button","label":"Takt","propagation":0,"position":{"x":0,"y":320}},"cand":{"type":"And","propagation":0,"position":{"x":160,"y":0}},"carry":{"type":"Lamp","label":"Übertrag","propagation":0,"position":{"x":640,"y":5}},"grp":{"type":"BusGroup","groups":[1,1,1,1],"propagation":0,"position":{"x":640,"y":150}},"num":{"type":"NumDisplay","label":"Zählerstand","bits":4,"numbase":"dec","propagation":0,"position":{"x":720,"y":130}},"bin":{"type":"NumDisplay","label":"binär","bits":4,"numbase":"bin","propagation":0,"position":{"x":720,"y":200}},"xa":{"type":"Xor","propagation":0,"position":{"x":310,"y":60}},"fa":{"type":"Dff","bits":1,"initial":"0","propagation":30,"polarity":{"clock":true},"position":{"x":450,"y":60},"label":"a"},"ga":{"type":"And","propagation":0,"position":{"x":160,"y":90}},"xb":{"type":"Xor","propagation":0,"position":{"x":310,"y":130}},"fb":{"type":"Dff","bits":1,"initial":"0","propagation":30,"polarity":{"clock":true},"position":{"x":450,"y":130},"label":"b"},"gb":{"type":"And","propagation":0,"position":{"x":160,"y":160}},"xc":{"type":"Xor","propagation":0,"position":{"x":310,"y":200}},"fc":{"type":"Dff","bits":1,"initial":"0","propagation":30,"polarity":{"clock":true},"position":{"x":450,"y":200},"label":"c"},"gc":{"type":"And","propagation":0,"position":{"x":160,"y":230}},"xd":{"type":"Xor","propagation":0,"position":{"x":310,"y":270}},"fd":{"type":"Dff","bits":1,"initial":"0","propagation":30,"polarity":{"clock":true},"position":{"x":450,"y":270},"label":"d"}},"connectors":[{"from":{"id":"grp","port":"out"},"to":{"id":"num","port":"in"}},{"from":{"id":"grp","port":"out"},"to":{"id":"bin","port":"in"}},{"from":{"id":"xa","port":"out"},"to":{"id":"fa","port":"in"}},{"from":{"id":"clk","port":"out"},"to":{"id":"fa","port":"clk"}},{"from":{"id":"fa","port":"out"},"to":{"id":"xa","port":"in1"}},{"from":{"id":"fa","port":"out"},"to":{"id":"grp","port":"in3"}},{"from":{"id":"gb","port":"out"},"to":{"id":"ga","port":"in1"}},{"from":{"id":"fb","port":"out"},"to":{"id":"ga","port":"in2"}},{"from":{"id":"ga","port":"out"},"to":{"id":"xa","port":"in2"}},{"from":{"id":"xb","port":"out"},"to":{"id":"fb","port":"in"}},{"from":{"id":"clk","port":"out"},"to":{"id":"fb","port":"clk"}},{"from":{"id":"fb","port":"out"},"to":{"id":"xb","port":"in1"}},{"from":{"id":"fb","port":"out"},"to":{"id":"grp","port":"in2"}},{"from":{"id":"gc","port":"out"},"to":{"id":"gb","port":"in1"}},{"from":{"id":"fc","port":"out"},"to":{"id":"gb","port":"in2"}},{"from":{"id":"gb","port":"out"},"to":{"id":"xb","port":"in2"}},{"from":{"id":"xc","port":"out"},"to":{"id":"fc","port":"in"}},{"from":{"id":"clk","port":"out"},"to":{"id":"fc","port":"clk"}},{"from":{"id":"fc","port":"out"},"to":{"id":"xc","port":"in1"}},{"from":{"id":"fc","port":"out"},"to":{"id":"grp","port":"in1"}},{"from":{"id":"count","port":"out"},"to":{"id":"gc","port":"in1"}},{"from":{"id":"fd","port":"out"},"to":{"id":"gc","port":"in2"}},{"from":{"id":"gc","port":"out"},"to":{"id":"xc","port":"in2"}},{"from":{"id":"xd","port":"out"},"to":{"id":"fd","port":"in"}},{"from":{"id":"clk","port":"out"},"to":{"id":"fd","port":"clk"}},{"from":{"id":"fd","port":"out"},"to":{"id":"xd","port":"in1"}},{"from":{"id":"fd","port":"out"},"to":{"id":"grp","port":"in0"}},{"from":{"id":"count","port":"out"},"to":{"id":"xd","port":"in2"}},{"from":{"id":"ga","port":"out"},"to":{"id":"cand","port":"in1"}},{"from":{"id":"fa","port":"out"},"to":{"id":"cand","port":"in2"}},{"from":{"id":"cand","port":"out"},"to":{"id":"carry","port":"in"}}]}
+{"router":"manhattan","devices":{"count":{"type":"Button","label":"E","propagation":0,"position":{"x":0,"y":230}},"clk":{"type":"Button","label":"Takt","propagation":0,"position":{"x":0,"y":320}},"cand":{"type":"And","propagation":0,"position":{"x":160,"y":0}},"carry":{"type":"Lamp","label":"Übertrag","propagation":0,"position":{"x":640,"y":5}},"grp":{"type":"BusGroup","groups":[1,1,1,1],"propagation":0,"position":{"x":640,"y":150}},"num":{"type":"NumDisplay","label":"Zählerstand","bits":4,"numbase":"dec","propagation":0,"position":{"x":720,"y":130}},"bin":{"type":"NumDisplay","label":"binär","bits":4,"numbase":"bin","propagation":0,"position":{"x":720,"y":200}},"xa":{"type":"Xor","propagation":0,"position":{"x":310,"y":60}},"fa":{"type":"Dff","bits":1,"initial":"0","propagation":30,"polarity":{"clock":true},"position":{"x":450,"y":60},"label":"Q3"},"ga":{"type":"And","propagation":0,"position":{"x":160,"y":90}},"xb":{"type":"Xor","propagation":0,"position":{"x":310,"y":130}},"fb":{"type":"Dff","bits":1,"initial":"0","propagation":30,"polarity":{"clock":true},"position":{"x":450,"y":130},"label":"Q2"},"gb":{"type":"And","propagation":0,"position":{"x":160,"y":160}},"xc":{"type":"Xor","propagation":0,"position":{"x":310,"y":200}},"fc":{"type":"Dff","bits":1,"initial":"0","propagation":30,"polarity":{"clock":true},"position":{"x":450,"y":200},"label":"Q1"},"gc":{"type":"And","propagation":0,"position":{"x":160,"y":230}},"xd":{"type":"Xor","propagation":0,"position":{"x":310,"y":270}},"fd":{"type":"Dff","bits":1,"initial":"0","propagation":30,"polarity":{"clock":true},"position":{"x":450,"y":270},"label":"Q0"}},"connectors":[{"from":{"id":"grp","port":"out"},"to":{"id":"num","port":"in"}},{"from":{"id":"grp","port":"out"},"to":{"id":"bin","port":"in"}},{"from":{"id":"xa","port":"out"},"to":{"id":"fa","port":"in"}},{"from":{"id":"clk","port":"out"},"to":{"id":"fa","port":"clk"}},{"from":{"id":"fa","port":"out"},"to":{"id":"xa","port":"in1"}},{"from":{"id":"fa","port":"out"},"to":{"id":"grp","port":"in3"}},{"from":{"id":"gb","port":"out"},"to":{"id":"ga","port":"in1"}},{"from":{"id":"fb","port":"out"},"to":{"id":"ga","port":"in2"}},{"from":{"id":"ga","port":"out"},"to":{"id":"xa","port":"in2"}},{"from":{"id":"xb","port":"out"},"to":{"id":"fb","port":"in"}},{"from":{"id":"clk","port":"out"},"to":{"id":"fb","port":"clk"}},{"from":{"id":"fb","port":"out"},"to":{"id":"xb","port":"in1"}},{"from":{"id":"fb","port":"out"},"to":{"id":"grp","port":"in2"}},{"from":{"id":"gc","port":"out"},"to":{"id":"gb","port":"in1"}},{"from":{"id":"fc","port":"out"},"to":{"id":"gb","port":"in2"}},{"from":{"id":"gb","port":"out"},"to":{"id":"xb","port":"in2"}},{"from":{"id":"xc","port":"out"},"to":{"id":"fc","port":"in"}},{"from":{"id":"clk","port":"out"},"to":{"id":"fc","port":"clk"}},{"from":{"id":"fc","port":"out"},"to":{"id":"xc","port":"in1"}},{"from":{"id":"fc","port":"out"},"to":{"id":"grp","port":"in1"}},{"from":{"id":"count","port":"out"},"to":{"id":"gc","port":"in1"}},{"from":{"id":"fd","port":"out"},"to":{"id":"gc","port":"in2"}},{"from":{"id":"gc","port":"out"},"to":{"id":"xc","port":"in2"}},{"from":{"id":"xd","port":"out"},"to":{"id":"fd","port":"in"}},{"from":{"id":"clk","port":"out"},"to":{"id":"fd","port":"clk"}},{"from":{"id":"fd","port":"out"},"to":{"id":"xd","port":"in1"}},{"from":{"id":"fd","port":"out"},"to":{"id":"grp","port":"in0"}},{"from":{"id":"count","port":"out"},"to":{"id":"xd","port":"in2"}},{"from":{"id":"ga","port":"out"},"to":{"id":"cand","port":"in1"}},{"from":{"id":"fa","port":"out"},"to":{"id":"cand","port":"in2"}},{"from":{"id":"cand","port":"out"},"to":{"id":"carry","port":"in"}}]}
 ```
 
-Alle vier Flip-Flops schalten gleichzeitig, der Zähler springt direkt von 7 auf 8. Dafür muss die UND-Kette vor dem nächsten Takt fertig gerechnet haben: Bei vielen Bits läuft $x_{flip}$ durch viele Gatter. Dieselbe Kette begegnet uns in VL 09 beim Übertrag des Addierers wieder.
+**Was zeigt der synchrone Zähler beim Übergang von 7 nach 8?**
+
+[( )] 7, 6, 4, 0, 8 wie der asynchrone Zähler
+[(X)] 7, dann direkt 8
+[( )] 7, 0, 8
+***************************************************************
+
+Alle vier Flip-Flops übernehmen ihren neuen Wert an derselben Taktflanke und wechseln nach derselben Laufzeit. Es gibt keine Zwischenwerte.
+
+***************************************************************
+
+Dafür muss die UND-Kette vor dem nächsten Takt fertig gerechnet haben: Bei vielen Bits läuft $T_i$ durch viele Gatter. Dieselbe Kette begegnet uns in VL 09 beim Übertrag des Addierers wieder.
+
+**Gegenprobe: der Weg über die minimierte DNF**
+
+Man kann die Tabelle auch wie in VL 07 Spalte für Spalte minimieren, für $E = 1$. Das ergibt dieselben Funktionen, nur ohne XOR geschrieben:
+
+$$
+\begin{aligned}
+D_3 &= \overline{Q_0}Q_3 + \overline{Q_1}Q_3 + \overline{Q_2}Q_3 + Q_0Q_1Q_2\overline{Q_3} &&= Q_3 \oplus Q_2Q_1Q_0\\
+D_2 &= \overline{Q_0}Q_2 + \overline{Q_1}Q_2 + Q_0Q_1\overline{Q_2} &&= Q_2 \oplus Q_1Q_0\\
+D_1 &= Q_0\overline{Q_1}+\overline{Q_0}Q_1 &&= Q_1 \oplus Q_0\\
+D_0 &= \overline{Q_0}
+\end{aligned}
+$$
+
+Für $D_2$ zum Beispiel:
+
+$$
+Q_2 \oplus Q_1Q_0 = \overline{Q_1Q_0}\,Q_2 + Q_1Q_0\overline{Q_2} = (\overline{Q_1}+\overline{Q_0})\,Q_2 + Q_1Q_0\overline{Q_2}
+$$
+
+Das Muster liefert die kompakte Form direkt, die DNF muss man erst wieder zusammenfassen. Das Bild zeigt die fertige Schaltung für $E = 1$. Dort heißen die Bits $I = Q_0$, $H = Q_1$, $G = Q_2$, $F = Q_3$:
+
+![Synchroner 4-Bit-Zähler aus D-Flip-Flops, XOR- und UND-Gattern](./images/08_StandardSchaltwerke/Zaehler.svg.png)<!-- style="width: 80%; max-width: 800px;" -->
 
 <!-- data-type="none" -->
 |                         | asynchron                     | synchron                                   |
@@ -814,11 +868,22 @@ Alle vier Flip-Flops schalten gleichzeitig, der Zähler springt direkt von 7 auf
 
 ### Zähler als Baustein
 
-Ein synchroner Zähler ist ein Register, das bei jedem Takt den Wert $Q + 1$ übernimmt. Als Bausteine gezeichnet sind das ein Addierer, der 1 addiert, und das Register aus dem ersten Abschnitt. Der Multiplexer wählt wieder zwischen „behalten“ (Zählen = 0) und „neuer Wert“ (Zählen = 1):
+Ein synchroner Zähler ist ein Register, das bei jedem Takt den Wert $Q + 1$ übernimmt. Als Bausteine gezeichnet sind das ein Addierer, der 1 addiert, und das Register aus dem ersten Abschnitt. Der Multiplexer wählt wieder zwischen „behalten“ ($E = 0$) und „neuer Wert“ ($E = 1$):
 
 ``` json @DigiSim.evalJson
-{"router":"manhattan","devices":{"en":{"type":"Button","label":"Zählen","propagation":0,"position":{"x":120,"y":0}},"clk":{"type":"Button","label":"Takt","propagation":0,"position":{"x":0,"y":190}},"one":{"type":"Constant","constant":"0001","propagation":0,"position":{"x":0,"y":110}},"add":{"type":"Addition","bits":{"in1":4,"in2":4,"out":4},"label":"+1","propagation":0,"position":{"x":100,"y":80}},"mux":{"type":"Mux","bits":{"in":4,"sel":1},"propagation":0,"position":{"x":260,"y":60}},"ff":{"type":"Dff","bits":4,"initial":"0000","propagation":30,"polarity":{"clock":true},"position":{"x":400,"y":70}},"num":{"type":"NumDisplay","label":"Zählerstand","bits":4,"numbase":"dec","propagation":0,"position":{"x":580,"y":40}},"bin":{"type":"NumDisplay","label":"binär","bits":4,"numbase":"bin","propagation":0,"position":{"x":580,"y":110}}},"connectors":[{"from":{"id":"ff","port":"out"},"to":{"id":"add","port":"in1"}},{"from":{"id":"one","port":"out"},"to":{"id":"add","port":"in2"}},{"from":{"id":"ff","port":"out"},"to":{"id":"mux","port":"in0"}},{"from":{"id":"add","port":"out"},"to":{"id":"mux","port":"in1"}},{"from":{"id":"en","port":"out"},"to":{"id":"mux","port":"sel"}},{"from":{"id":"mux","port":"out"},"to":{"id":"ff","port":"in"}},{"from":{"id":"clk","port":"out"},"to":{"id":"ff","port":"clk"}},{"from":{"id":"ff","port":"out"},"to":{"id":"num","port":"in"}},{"from":{"id":"ff","port":"out"},"to":{"id":"bin","port":"in"}}]}
+{"router":"manhattan","devices":{"en":{"type":"Button","label":"E","propagation":0,"position":{"x":120,"y":0}},"clk":{"type":"Button","label":"Takt","propagation":0,"position":{"x":0,"y":190}},"one":{"type":"Constant","constant":"0001","propagation":0,"position":{"x":0,"y":110}},"add":{"type":"Addition","bits":{"in1":4,"in2":4,"out":4},"label":"+1","propagation":0,"position":{"x":100,"y":80}},"mux":{"type":"Mux","bits":{"in":4,"sel":1},"propagation":0,"position":{"x":260,"y":60}},"ff":{"type":"Dff","bits":4,"initial":"0000","propagation":30,"polarity":{"clock":true},"position":{"x":400,"y":70}},"num":{"type":"NumDisplay","label":"Zählerstand","bits":4,"numbase":"dec","propagation":0,"position":{"x":580,"y":40}},"bin":{"type":"NumDisplay","label":"binär","bits":4,"numbase":"bin","propagation":0,"position":{"x":580,"y":110}}},"connectors":[{"from":{"id":"ff","port":"out"},"to":{"id":"add","port":"in1"}},{"from":{"id":"one","port":"out"},"to":{"id":"add","port":"in2"}},{"from":{"id":"ff","port":"out"},"to":{"id":"mux","port":"in0"}},{"from":{"id":"add","port":"out"},"to":{"id":"mux","port":"in1"}},{"from":{"id":"en","port":"out"},"to":{"id":"mux","port":"sel"}},{"from":{"id":"mux","port":"out"},"to":{"id":"ff","port":"in"}},{"from":{"id":"clk","port":"out"},"to":{"id":"ff","port":"clk"}},{"from":{"id":"ff","port":"out"},"to":{"id":"num","port":"in"}},{"from":{"id":"ff","port":"out"},"to":{"id":"bin","port":"in"}}]}
 ```
+
+**Was macht der Zähler, wenn man die Konstante 0001 am Addierer durch 1111 ersetzt?**
+
+[( )] Er zählt in Schritten von 15 vorwärts und bleibt dann bei 15 stehen.
+[(X)] Er zählt rückwärts: 0, 15, 14, 13, …
+[( )] Er bleibt immer bei 0 stehen.
+***************************************************************
+
+Der Addierer rechnet mit 4 Bit, das Ergebnis wird modulo 16 genommen: $Q + 15 = Q + 16 - 1 \equiv Q - 1$. Aus 0 wird 15, aus 15 wird 14 und so weiter. Dass man mit $1111_2$ eine $-1$ addiert, ist die Idee des Zweierkomplements in VL 09.
+
+***************************************************************
 
 > Genau so arbeitet der **Programmzähler** eines Prozessors: Ein Register hält die Adresse des nächsten Befehls und wird nach jedem Befehl um eins erhöht. Wie der Kasten „+1“ innen aussieht, ist Thema von VL 09; den Programmzähler sehen wir in VL 10 und VL 11 im Modellrechner wieder.
 
@@ -885,6 +950,7 @@ Die serielle Schnittstelle sendet wie unser Schieberegister das niederwertigste 
 Diese Punkte fassen die Vorlesung zusammen. Register, Schieberegister und Zähler kehren in jedem Rechner wieder, ab VL 10 im Modellrechner und ab VL 12 im ATmega328P. Prüfen Sie mit den Fragen darunter, ob Sie ihren Aufbau erklären können.
 
 + **Der Entwurfsweg trägt auch größere Aufgaben:** Die Ampelsteuerung entsteht als Moore-Automat mit vier Zuständen, zwei JK-Flip-Flops und einer Ausgabelogik, die aus dem Zustand die drei Lampen ansteuert.
++ **Das gemeinsame Muster:** Jedes Standardschaltwerk besteht aus Flip-Flops und einem Schaltnetz davor, das den nächsten Wert wählt: behalten, neu laden, vom Nachbarn übernehmen oder um eins erhöhen. Die Ampel ist ein 2-Bit-Zähler mit eigener Weiterschaltbedingung.
 + **Register** bestehen aus D-Flip-Flops mit gemeinsamem Takt. Ein Multiplexer vor jedem Flip-Flop entscheidet, ob es den neuen Wert übernimmt oder seinen alten behält.
 + **Registerbank:** Ein Dekodierer wählt über die Schreibadresse das Register, das beschrieben wird, ein Multiplexer über die Leseadresse das Register, das gelesen wird. Mit $n$ Adressbits lassen sich $2^n$ Register unterscheiden.
 + **Schieberegister** entstehen, wenn jedes Flip-Flop den Ausgang seines Nachbarn übernimmt. Sie wandeln seriell in parallel (SIPO) und umgekehrt (PISO); das braucht jede serielle Schnittstelle.
@@ -894,6 +960,7 @@ Diese Punkte fassen die Vorlesung zusammen. Register, Schieberegister und Zähle
 **Prüfen Sie sich:**
 
 + Wie leiten Sie für die Ampelsteuerung aus der Zustandstabelle die Beschaltung der JK-Flip-Flops und die Ausgabelogik ab?
++ Welches Schaltnetz steht beim Register, beim Schieberegister und beim Zähler vor den Flip-Flops, und welchen nächsten Wert wählt es jeweils?
 + Warum braucht eine Registerzelle einen Multiplexer vor dem D-Flip-Flop? Was passiert ohne ihn?
 + Wie viele Adressbits braucht eine Registerbank mit 16 Registern, und welche Bausteine aus VL 05 wählen das Register beim Schreiben und beim Lesen aus?
 + Wie ist ein Schieberegister aufgebaut, und welche Ein- und Ausgabevarianten (SISO, SIPO, PISO, PIPO) gibt es?
@@ -954,7 +1021,7 @@ Ein **Johnson-Zähler** ist ein Schieberegister, dessen Eingang der *invertierte
 [[8]]
 ***************************************************************
 
-0000 → 1000 → 1100 → 1110 → 1111 → 0111 → 0011 → 0001 → 0000: Erst laufen Einsen hinein, dann Nullen. Mit $n$ Flip-Flops sind es $2n$ Zustände statt $2^n$ beim Binärzähler, dafür ändert sich von Schritt zu Schritt immer nur ein Bit, und man braucht keine Logik zwischen den Flip-Flops.
+0000 → 1000 → 1100 → 1110 → 1111 → 0111 → 0011 → 0001 → 0000: Erst laufen Einsen hinein, dann Nullen. Mit $n$ Flip-Flops sind es $2n$ Zustände statt $2^n$ beim Binärzähler, dafür ändert sich von Schritt zu Schritt immer nur ein Bit, wie beim Gray-Code, und man braucht keine Logik zwischen den Flip-Flops. Wer den Zählerstand gerade in dem Moment liest, in dem er wechselt, liegt deshalb höchstens um einen Schritt daneben, anders als beim asynchronen Binärzähler.
 
 ***************************************************************
 

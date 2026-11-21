@@ -2,7 +2,7 @@
 
 author:   Sebastian Zug & André Dietrich & Fabian Bär & Copilot & Claude Code (Opus 5.5)
 email:    sebastian.zug@informatik.tu-freiberg.de & andre.dietrich@informatik.tu-freiberg.de & fabian.baer@student.tu-freiberg.de
-version:  0.1.3
+version:  0.1.4
 language: de
 narrator: Deutsch Female
 
@@ -919,7 +919,7 @@ Diese Punkte fassen die Vorlesung zusammen. Die Fragen darunter gehören zu den 
 
 ## Hausaufgaben
 
-Bis zum Beginn der Übungen Ende November ersetzt die Hausaufgabe die Übung. Planen Sie für Teil A etwa 45 Minuten ein, für Teil B etwa eine Stunde. Teil A prüfen Sie direkt hier, Teil B besprechen wir zu Beginn von Vorlesung 07 am Donnerstag, 26.11.
+Bis zum Beginn der Übungen Ende November ersetzt die Hausaufgabe die Übung. Planen Sie für Teil A etwa 45 Minuten ein, für Teil B etwa eine Stunde. Teil A prüfen Sie direkt hier, Teil B besprechen wir zu Beginn von Vorlesung 06 am Mittwoch, 25.11.
 
 **Teil A – mit Selbstkontrolle**
 
@@ -1046,7 +1046,7 @@ $\texttt{0x9000} = 1001\,0000\,0000\,0000_2$. Die obersten beiden Bits sind $A_{
 
 ***************************************************************
 
-**Teil B – Besprechung in Vorlesung 07**
+**Teil B – Besprechung in Vorlesung 06**
 
 **Aufgabe 4:** Entwerfen Sie einen Zwei-Bit-Komparator aus zwei Ein-Bit-Komparatoren. Skizzieren Sie die Schaltung auf Papier: zweimal die Schaltung aus dem Abschnitt „Komparatoren“ und dazu die Gatter für $G = G_1 + E_1 G_0$, $E = E_1 E_0$ und $L = L_1 + E_1 L_0$. Prüfen Sie mit einer Wertetabelle mindestens die Fälle $A = B$, $A > B$ nur im niederwertigen Bit und $A < B$ im höherwertigen Bit.
 
