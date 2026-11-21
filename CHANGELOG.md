@@ -2,6 +2,11 @@
 
 Alle wesentlichen Änderungen an diesem Kurs werden in dieser Datei dokumentiert.
 
+## [0.7.20] - 2026-11-21
+
+### Fixed
+- **07_Schaltwerke (0.0.13):** Alle acht Zustandsdiagramme (Graphviz) zeigten nur eine Fehlermeldung des PlantUML-Servers („Please use @startdot instead of @startuml“). Betroffen waren sechs `@plantUML.png`-Blöcke und zwei fest kodierte plantuml.com-Bilder auf der Folie „Grundkonzept“. Alle sind jetzt mit `@startdot` geschrieben, die beiden URLs neu kodiert. Das Sequenzdiagramm (Synchronizer) war nicht betroffen.
+
 ## [0.7.19] - 2026-11-21
 
 ### Changed

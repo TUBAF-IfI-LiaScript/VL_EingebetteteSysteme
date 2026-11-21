@@ -2,7 +2,7 @@
 
 author:   Sebastian Zug & André Dietrich & Fabian Bär & Claude Code (Opus 5.5)
 email:    sebastian.zug@informatik.tu-freiberg.de & andre.dietrich@informatik.tu-freiberg.de & fabian.baer@student.tu-freiberg.de
-version:  0.0.12
+version:  0.0.13
 language: de
 narrator: Deutsch Female
 
@@ -282,7 +282,7 @@ Mathematisch kann ein Deterministischer Endlicher Automat als Tupel $A = (Q, \Si
 
 Darstellung als Graph
 
-![StateMaschine](https://www.plantuml.com/plantuml/png/ZOqnJiGm44NxdEBBFITO6MrIKz565ZBs68zmPhEEtO0u2xVW0haOmH4eLD2CzDz_cdzUYisbJgdp_9Jj715OkD33nhSxMHTP2AyT06Ghpvwplhi_jImNJnYNQ6U2ndnXAJ0dNFcdtKljEBj4fk5-JFQHabOlLPdzp_2DR0rVhC4hu-OM_MxqQ04OqLHegCN5nBI-aoYOepRyqjQF4EJW3Fzn_fvxwyualaxf4m00)
+![StateMaschine](https://www.plantuml.com/plantuml/png/ZP0n3i8m34NtdiBApWcgeBOp4siLeP0un2Aa9KqN46VX5boW5oEa0fK5uS6Idv_y9LT3b27gBXQQ3a7s5WnvYhXBFFMJL9OymhM0L47wewR0DziopxxJ2ErWPO_0eU_8Hn0bdEcpdPTSKL0EHSPrw-GU7MUNaOdvJlD6SZGlbk6POBM6UZPgo0D02rbDSMnGrX5ET_GCn59hlhJfOOnVECtVpi-uMr6Xr-bnJm)
 
 Darstellung in einer Übergangstabelle
 
@@ -300,7 +300,7 @@ Darstellung in einer Übergangstabelle
 
 > Beispiel II:  __Codeschloss für die Erfassung der Sequenzfolge `7022`__
 
-![StateMaschine](https://www.plantuml.com/plantuml/png/XSqnReCm5CRnFQVuobwfwj8XSXN07di2X2eN7i6ICGGxKvfhzGAzMD6Bv4J4RHSatk_Fnyu7FOVZO3UjsSzwwj4PPmAzB_VbEUYcDuvmsW206rj2vNiz4GIcqRY0Uek3YNf1yJPJCyvjpVUyilg3hCXE-UUUVDFRqNjovwpUiXVHYwINqSkao-WowIgwMlpxg-iS1LRcWy7ZA_9BcuDVW0hy4GGoXGU1bmprRLAi4d6R5B-jFAsIydxbcfISoFlaUPKaVdHD92VghnNv_ufA98pdpOvSUnpi3m00)
+![StateMaschine](https://www.plantuml.com/plantuml/png/XT91Yi8m583XVK_nfdjXcCqi96BRP3adA4LYyse3DQbDTkgrl80NCpmXIire5u7c-_j28MldvUILzPdIkqcEFNJQQ8-Ri1_MlMnxRH2E6OJ7M8LGkrwE20n6gus7PWa77VMEx6_2rawgeVsY7kGM1vOVYzCENTiFrZaqvxnPafVHowHNqQkay-WywIAw27wzT9r1JqfyqB1OGN5l2w0NW1hee_2RkO0l1hyvDCz9EKlOSrB-D-LxbbIlKnv9HGb_JNvcIUAWHy8f4U-cyCzJH28XF6ThD2hSdni)
 
 Welche Beschränkungen sehen Sie in diesem Entwurf? 
 
@@ -336,7 +336,7 @@ Y     |                                                   | 1       1     | 0
 
 
 ```text @plantUML.png
-@startuml
+@startdot
 digraph finite_state_machine {
     rankdir=LR;
 
@@ -357,7 +357,7 @@ digraph finite_state_machine {
     D  -> D  [ label = "E=1", fontcolor=blue ];
     D  -> A  [ label = "E=0" ];
 }
-@enduml
+@enddot
 ```
 
 - Zustand `A`: die letzte Eingabe war keine `1` (`0` oder Start)
@@ -504,7 +504,7 @@ style="width: 80%; min-width: 420px; max-width: 720px;"
 ```
 
 ```text @plantUML.png
-@startuml
+@startdot
 digraph finite_state_machine {
     rankdir=LR;
 
@@ -525,7 +525,7 @@ digraph finite_state_machine {
     D  -> D  [ label = "E=1"];
     D  -> A  [ label = "E=0" ];
 }
-@enduml
+@enddot
 ```
 
 > **Die Ausgabelogik bestimmt Ausgabe Y hängt nur vom aktuellen Zustand ab.**
@@ -551,7 +551,7 @@ style="width: 80%; min-width: 420px; max-width: 720px;"
 ```
 
 ```text @plantUML.png
-@startuml
+@startdot
 digraph finite_state_machine {
     rankdir=LR;
 
@@ -573,7 +573,7 @@ digraph finite_state_machine {
     D  -> D  [ label = "E=1 \n A=1", fontcolor=blue ];
     D  -> A  [ label = "E=0 \n A=0", fontcolor=green];
 }
-@enduml
+@enddot
 ```
 
 >**Die Ausgabe Y der Ausgabelogik hängt sowohl vom aktuellen Zustand als auch vom Eingabesignal E ab**
@@ -589,7 +589,7 @@ Der Mealy-Automat ist die generellere Form. Der Moore-Automat unterbindet den Ei
 Noch mal zurück zum Beispiel des Binärsequenzdetektors. Welche Konsequenzen hätte die Umsetzung als Mealy-Automat?
 
 ```text @plantUML.png
-@startuml
+@startdot
 digraph finite_state_machine {
     rankdir=LR;
 
@@ -611,11 +611,11 @@ digraph finite_state_machine {
     D  -> D  [ label = "E=1 \n A=1", fontcolor=blue ];
     D  -> A  [ label = "E=0 \n A=0", fontcolor=green];
 }
-@enduml
+@enddot
 ```
 
 ```text @plantUML.png
-@startuml
+@startdot
 digraph finite_state_machine {
     rankdir=LR;
 
@@ -633,7 +633,7 @@ digraph finite_state_machine {
     C1  -> A1  [ label = "E=0 \n A=0", fontcolor=green ];
     C1  -> C1  [ label = "E=1 \n A=1", fontcolor=blue ];
 }
-@enduml
+@enddot
 ```
 
 Zustandstabelle
@@ -947,7 +947,7 @@ style="width: 80%; min-width: 420px; max-width: 720px;"
 Für die Aufgabe ergibt sich folgender Graph:
 
 ```text @plantUML.png
-@startuml
+@startdot
 digraph finite_state_machine {
     rankdir=LR;
 
@@ -965,7 +965,7 @@ digraph finite_state_machine {
     E  -> L  [ label = "AB=01" ];
     L  -> L  [ label = "AB={00, 01, \n10, 11}"];
 }
-@enduml
+@enddot
 ```
 
 Im Beispiel liegt ein Medwedew-Automat vor. Die Zustände werden direkt auf den Ausgang abgebildet.
