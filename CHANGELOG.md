@@ -2,6 +2,51 @@
 
 Alle wesentlichen Änderungen an diesem Kurs werden in dieser Datei dokumentiert.
 
+## [0.7.19] - 2026-11-21
+
+### Changed
+- **08_StandardSchaltwerke (0.1.0):** Überarbeitet für den Termin am 02.12. nach der DigiSim-Linie „Gatter → Symbol → Baustein“ (Decision vom 19.11.).
+  - *Aufwärmen* (Wie viele Flip-Flops braucht ein Zähler von 0 bis 15?) statt „Feedbacks/Ergänzungen“ mit den Zahlen und der Komparator-Lösung des Vorjahres.
+  - „Übungsbeispiel“ heißt jetzt „Ampelsteuerung“, mit Überleitung, inhaltlich unverändert.
+  - *Register* in drei Schritten:
+    - 1-Bit-Zelle aus Multiplexer und D-Flip-Flop (ASCII-Bild, DigiSim, Quiz);
+    - 4-Bit-Register als Baustein (DigiSim);
+    - der Logikplan des 74HC173 erklärt (Treiber G/Ḡ als Multiplexer, G1/G2, CLEAR, M/N).
+  - Neuer Abschnitt *Registerbank* ersetzt das große ASCII-Bild: Kästen „Register“ und „2-zu-4-Dekodierer“ (`Subcircuit`), Lese-Multiplexer, Anzeigen R0–R3, Wort- und Adressbreite, Quiz.
+  - Neuer Abschnitt *Schieberegister* mit Aufbau (fehlte bisher):
+    - SISO/SIPO aus vier D-Flip-Flops (DigiSim, Eingabe 1101 mit dem niederwertigsten Bit zuerst);
+    - PISO mit Multiplexern „Laden/Schieben“;
+    - Variantentabelle korrigiert (SISO als Verzögerung statt FIFO);
+    - Abgrenzung zum Schieber aus VL 05.
+  - *Zähler* in die Unterabschnitte „Asynchroner Zähler“, „Synchroner Zähler“ und „Zähler als Baustein“ gegliedert:
+    - asynchroner Zähler in DigiSim mit 0,3 s Flip-Flop-Laufzeit, sodass die falschen Zwischenwerte 6, 4, 0 beim Schritt 7 → 8 sichtbar werden (Quiz);
+    - synchroner Zähler aus XOR/UND ohne Reset-Hilfsschaltung (Flip-Flops starten mit 0);
+    - Zähler als Register plus Addierer (+1) mit Bezug zum Programmzähler;
+    - Vergleichstabelle asynchron/synchron.
+  - Neuer Abschnitt *Und im ATmega328P?*:
+    - Registerbank R0–R31 mit der Kodierung von `add r24, r22` (`0x0F86`, mit avr-as geprüft);
+    - `TCNT0` als Zähler mit AVR8js-Sketch (Werte im Abstand von etwa 25, Überlauf 250 → 20 sichtbar) und `millis()`;
+    - Schieberegister in SPI und USART.
+  - Lernziele, Inhalte, „Was Sie heute mitnehmen“ und „Prüfen Sie sich“ angepasst.
+  - Hausaufgaben:
+    - Teil A mit Selbstkontrolle: Johnson-Zähler durch Bearbeiten der Schaltung (`@DigiSim.runJson`), asynchronen Zähler ablesen;
+    - Teil B für die Übung T2: Vor-/Rückwärtszähler, Registerbank mit zwei Leseports.
+  - „Nächste Vorlesung“ ergänzt.
+- **Kurslandkarte:**
+  - VL-08-Begriffe auf die neuen Abschnittstitel umgestellt.
+  - Neue Begriffe „Aufbau eines Schieberegisters“ und „asynchroner Zähler“ mit Beziehungen.
+  - „Registerauswahl über Adressen“ heißt jetzt „Registerbank“.
+  - Anwendung „TCNT0 und millis()“.
+
+### Fixed
+- **08_StandardSchaltwerke:**
+  - „Offenbar sind 4 Zustände notwendig, um die Zahlen von 0–15 abzubilden“ korrigiert: 16 Zustände, also 4 Flip-Flops. Dass die Tabelle nur den Fall E = 1 zeigt, ist jetzt erklärt.
+  - Verweis auf die nicht mehr vorhandene „Veranstaltung L6“ entfernt.
+  - Das Bild `Zaehler.svg.png` erscheint nicht mehr doppelt.
+  - Der Johnson-Zähler wurde in den Übungsaufgaben verlangt, aber nicht behandelt. Er ist jetzt eine geführte Aufgabe.
+  - Das Taktsymbol `">"` erschien in ASCII-Bildern als leerer Zitatbalken und ist ersetzt durch `▷`.
+  - Die Zustandsdiagramme von Ampel und Zähler zeigten nur eine Fehlermeldung des PlantUML-Servers („Please use @startdot instead of @startuml“). Sie sind jetzt mit `@startdot` geschrieben und werden als PNG ausgegeben, denn die SVG-Ausgabe ist für DOT gesperrt.
+
 ## [0.7.18] - 2026-11-19
 
 ### Changed

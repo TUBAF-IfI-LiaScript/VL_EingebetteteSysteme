@@ -1,5 +1,5 @@
 {
- "stand": "19.11.2026",
+ "stand": "21.11.2026",
  "version": "0.5.2",
  "kurs": {
   "basis": "https://liascript.github.io/course/?https://raw.githubusercontent.com/TUBAF-IfI-LiaScript/VL_EingebetteteSysteme/master/",
@@ -442,12 +442,19 @@
    "anwendet": [],
    "abschnitte": [
     "Standardschaltwerke",
-    "Feedbacks/Ergänzungen",
-    "Übungsbeispiel",
+    "Aufwärmen",
+    "Ampelsteuerung",
     "Register",
+    "Registerbank",
+    "Schieberegister",
     "Zähler",
+    "Asynchroner Zähler",
+    "Synchroner Zähler",
+    "Zähler als Baustein",
+    "Und im ATmega328P?",
     "Was Sie heute mitnehmen",
-    "Übungsaufgaben"
+    "Hausaufgaben",
+    "Nächste Vorlesung"
    ]
   },
   {
@@ -1645,7 +1652,18 @@
    "abschnitt": 4,
    "ebene": 1,
    "code": false,
-   "erklaerung": "Mehrere D-Flip-Flops mit gemeinsamem Takt, die zusammen ein Datenwort (z. B. 4 Bit) speichern; Steuerleitungen legen fest, wann geschrieben und gelesen wird.",
+   "erklaerung": "Mehrere D-Flip-Flops mit gemeinsamem Takt, die zusammen ein Datenwort (z. B. 4 Bit) speichern; ein Multiplexer vor jedem Flip-Flop entscheidet, ob es beim Takt den neuen Wert übernimmt oder seinen alten behält.",
+   "fehlvorstellung": "„Ein D-Flip-Flop behält seinen Wert, solange man nichts Neues anlegt.“"
+  },
+  {
+   "id": "schieberegister_aufbau",
+   "name": "Aufbau eines Schieberegisters",
+   "linie": "zustand",
+   "vl": 8,
+   "abschnitt": 6,
+   "ebene": 1,
+   "code": false,
+   "erklaerung": "Der Ausgang jedes Flip-Flops hängt am Eingang des nächsten, alle teilen sich den Takt: Mit jeder Flanke wandert der Inhalt eine Stelle weiter.",
    "fehlvorstellung": null
   },
   {
@@ -1653,7 +1671,7 @@
    "name": "SISO, SIPO, PISO, PIPO",
    "linie": "zustand",
    "vl": 8,
-   "abschnitt": 4,
+   "abschnitt": 6,
    "ebene": 2,
    "code": false,
    "erklaerung": "Register unterscheiden sich darin, ob Daten bitweise nacheinander (seriell) oder alle zugleich (parallel) hinein- und herausgehen – SIPO wandelt z. B. seriell in parallel.",
@@ -1661,13 +1679,13 @@
   },
   {
    "id": "registerauswahl",
-   "name": "Registerauswahl über Adressen",
+   "name": "Registerbank",
    "linie": "zustand",
    "vl": 8,
-   "abschnitt": 4,
+   "abschnitt": 5,
    "ebene": 2,
    "code": false,
-   "erklaerung": "Statt jedes Register einzeln zu verdrahten, wählt eine Adresse über einen Dekoder aus, welches Register gelesen oder beschrieben wird; daraus ergeben sich Adressbus- und Datenbusbreite.",
+   "erklaerung": "Mehrere Register mit gemeinsamen Daten- und Taktleitungen: Ein Dekodierer wählt über die Schreibadresse das Register, das beschrieben wird, ein Multiplexer über die Leseadresse das, das gelesen wird. Mit n Adressbits lassen sich 2^n Register unterscheiden.",
    "fehlvorstellung": null
   },
   {
@@ -1675,29 +1693,40 @@
    "name": "Zähler",
    "linie": "zustand",
    "vl": 8,
-   "abschnitt": 5,
+   "abschnitt": 7,
    "ebene": 1,
    "code": false,
    "erklaerung": "Schaltwerk, das Eingangsimpulse auf aufeinanderfolgende Zustände abbildet – damit lassen sich Ereignisse zählen oder Folgen erzeugen.",
    "fehlvorstellung": null
   },
   {
+   "id": "zaehler_async",
+   "name": "asynchroner Zähler",
+   "linie": "zustand",
+   "vl": 8,
+   "abschnitt": 8,
+   "ebene": 1,
+   "code": false,
+   "erklaerung": "Kette von Kipp-Flip-Flops, bei der jedes Flip-Flop das nächste taktet. Die Laufzeiten addieren sich, beim Übergang von 7 nach 8 zeigt ein 4-Bit-Zähler kurz 6, 4 und 0.",
+   "fehlvorstellung": "„Ein asynchroner Zähler zeigt zu jedem Zeitpunkt einen gültigen Zählerstand.“"
+  },
+  {
    "id": "zaehler_sync",
    "name": "synchroner Zähler",
    "linie": "zustand",
    "vl": 8,
-   "abschnitt": 5,
+   "abschnitt": 9,
    "ebene": 1,
    "code": false,
-   "erklaerung": "Beim synchronen Zähler schalten alle Flip-Flops am selben Takt; beim asynchronen treibt ein Flip-Flop das nächste – einfacher, aber das Ergebnis hängt von den Laufzeiten ab.",
-   "fehlvorstellung": "„Ein asynchroner Zähler zeigt zu jedem Zeitpunkt einen gültigen Zählerstand.“"
+   "erklaerung": "Alle Flip-Flops hängen am selben Takt und schalten gleichzeitig; eine Logik vor den Flip-Flops berechnet den nächsten Zählerstand. Es gibt keine falschen Zwischenwerte.",
+   "fehlvorstellung": null
   },
   {
    "id": "zaehler_flip",
    "name": "Zählerbit kippen mit XOR",
    "linie": "zustand",
    "vl": 8,
-   "abschnitt": 5,
+   "abschnitt": 9,
    "ebene": 2,
    "code": false,
    "erklaerung": "Ein Zählerbit wechselt, wenn alle niederwertigeren Bits 1 sind; das Kippen erledigt ein XOR, die Bedingung wird über eine UND-Kette weitergereicht (Carry).",
@@ -2773,6 +2802,36 @@
    "text": "unterscheidet"
   },
   {
+   "von": "zaehler",
+   "nach": "zaehler_async",
+   "text": "unterscheidet"
+  },
+  {
+   "von": "zaehler_async",
+   "nach": "frequenzteiler",
+   "text": "ist eine Kette von"
+  },
+  {
+   "von": "register",
+   "nach": "mux",
+   "text": "wählt mit einem"
+  },
+  {
+   "von": "registerauswahl",
+   "nach": "mux",
+   "text": "liest über einen"
+  },
+  {
+   "von": "schieberegister_aufbau",
+   "nach": "register",
+   "text": "ist ein spezielles"
+  },
+  {
+   "von": "schieberegister_aufbau",
+   "nach": "schieberegister_modi",
+   "text": "gibt es als"
+  },
+  {
    "von": "zaehler_flip",
    "nach": "zaehler",
    "text": "realisiert alternativ"
@@ -3489,11 +3548,24 @@
    "titel": "Synchroner 4-Bit-Zähler",
    "fach": "Rechnerbau",
    "vl": 8,
-   "abschnitt": 5,
-   "datensatz": "Herleitung aus der Zustandstabelle mit D-Flip-Flops, Realisierung mit XOR/UND, DigiSim-Simulation mit count und Reset",
+   "abschnitt": 7,
+   "datensatz": "Herleitung aus der Zustandstabelle mit D-Flip-Flops, Realisierung mit XOR/UND, DigiSim-Simulationen: asynchroner Zähler mit sichtbaren Zwischenwerten, synchroner Zähler aus XOR/UND und als Register mit Addierer (+1)",
    "schlagworte": [
     "zaehler",
     "zaehler_flip"
+   ],
+   "herkunft": "lehrende"
+  },
+  {
+   "id": "a_tcnt0",
+   "titel": "TCNT0 und millis()",
+   "fach": "Rechnerbau",
+   "vl": 8,
+   "abschnitt": 11,
+   "datensatz": "Timer/Counter 0 zählt alle 4 µs weiter und läuft nach 1024 µs über; aus den Überläufen berechnet die Arduino-Bibliothek millis(). Ein Sketch im AVR8js liest TCNT0 im Abstand von 100 µs.",
+   "schlagworte": [
+    "zaehler",
+    "timer"
    ],
    "herkunft": "lehrende"
   },
