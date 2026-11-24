@@ -2,7 +2,7 @@
 
 author:   Sebastian Zug & André Dietrich & Fabian Bär & Claude Code (Opus 5.5)
 email:    sebastian.zug@informatik.tu-freiberg.de & andre.dietrich@informatik.tu-freiberg.de & fabian.baer@student.tu-freiberg.de
-version:  0.1.1
+version:  0.1.2
 language: de
 narrator: Deutsch Female
 
@@ -864,6 +864,21 @@ Drei JK-Flip-Flops mit $J = K = 1$ arbeiten als T-Flip-Flops. Sie reagieren auf 
 
 Liest man $Q_2 Q_1 Q_0$ als Binärzahl, zählt die Schaltung 0, 1, 2, … 7, 0. Weil jedes Flip-Flop erst schaltet, wenn das vorherige umgeschaltet hat, addieren sich die Verzögerungen.
 
+In der Simulation ist jede Stufe ein D-Flip-Flop, dessen Ausgang über ein NICHT auf $D$ zurückgeführt ist, also ein T-Flip-Flop mit $T = 1$. Alle drei reagieren auf die fallende Flanke. Den Takt liefert ein Taktgeber mit 1 Hz, die Schaltung läuft also von selbst. Beobachten Sie die vier Lampen: Jede blinkt halb so schnell wie die links daneben.
+
+``` json @DigiSim.evalJson
+{"router":"manhattan","devices":{"clk":{"type":"Clock","label":"Clk","propagation":50,"position":{"x":0,"y":40}},"lc":{"type":"Lamp","label":"Clk","propagation":0,"position":{"x":60,"y":-40}},"f0":{"type":"Dff","bits":1,"initial":"0","propagation":1,"polarity":{"clock":false},"position":{"x":130,"y":30},"label":"Q0"},"n0":{"type":"Not","propagation":0,"position":{"x":80,"y":110}},"l0":{"type":"Lamp","label":"Q0","propagation":0,"position":{"x":200,"y":-40}},"f1":{"type":"Dff","bits":1,"initial":"0","propagation":1,"polarity":{"clock":false},"position":{"x":280,"y":30},"label":"Q1"},"n1":{"type":"Not","propagation":0,"position":{"x":230,"y":110}},"l1":{"type":"Lamp","label":"Q1","propagation":0,"position":{"x":350,"y":-40}},"f2":{"type":"Dff","bits":1,"initial":"0","propagation":1,"polarity":{"clock":false},"position":{"x":430,"y":30},"label":"Q2"},"n2":{"type":"Not","propagation":0,"position":{"x":380,"y":110}},"l2":{"type":"Lamp","label":"Q2","propagation":0,"position":{"x":500,"y":-40}},"grp":{"type":"BusGroup","groups":[1,1,1],"propagation":0,"position":{"x":560,"y":200}},"num":{"type":"NumDisplay","label":"Zählerstand","bits":3,"numbase":"dec","propagation":0,"position":{"x":640,"y":190}}},"connectors":[{"from":{"id":"clk","port":"out"},"to":{"id":"lc","port":"in"}},{"from":{"id":"clk","port":"out"},"to":{"id":"f0","port":"clk"}},{"from":{"id":"f0","port":"out"},"to":{"id":"n0","port":"in"}},{"from":{"id":"n0","port":"out"},"to":{"id":"f0","port":"in"}},{"from":{"id":"f0","port":"out"},"to":{"id":"l0","port":"in"}},{"from":{"id":"f0","port":"out"},"to":{"id":"grp","port":"in0"}},{"from":{"id":"f0","port":"out"},"to":{"id":"f1","port":"clk"}},{"from":{"id":"f1","port":"out"},"to":{"id":"n1","port":"in"}},{"from":{"id":"n1","port":"out"},"to":{"id":"f1","port":"in"}},{"from":{"id":"f1","port":"out"},"to":{"id":"l1","port":"in"}},{"from":{"id":"f1","port":"out"},"to":{"id":"grp","port":"in1"}},{"from":{"id":"f1","port":"out"},"to":{"id":"f2","port":"clk"}},{"from":{"id":"f2","port":"out"},"to":{"id":"n2","port":"in"}},{"from":{"id":"n2","port":"out"},"to":{"id":"f2","port":"in"}},{"from":{"id":"f2","port":"out"},"to":{"id":"l2","port":"in"}},{"from":{"id":"f2","port":"out"},"to":{"id":"grp","port":"in2"}},{"from":{"id":"grp","port":"out"},"to":{"id":"num","port":"in"}}],"subcircuits":{}}
+```
+
+**Clk hat eine Periodendauer von 1 s. Wie viele Sekunden dauert eine Periode von $Q_2$?**
+
+[[8]]
+***************************************************************
+
+Jede Stufe halbiert die Frequenz: $Q_0$ hat 2 s Periodendauer, $Q_1$ 4 s, $Q_2$ 8 s. Mit $n$ Stufen teilt der Zähler die Taktfrequenz durch $2^n$. So erzeugt auch der Vorteiler (Prescaler) eines Timers im ATmega328P aus 16 MHz langsamere Takte (Vorlesung 14).
+
+***************************************************************
+
 > Beachten Sie die Verzögerung der flankengetriggerten JK-Flip-Flops: Sie bestimmt die maximale Taktfrequenz. Wie sich das auf die Zählerstände auswirkt und wie ein synchroner Zähler das Problem löst, sehen wir in Vorlesung 08.
 
 ### Zusammenfassung
@@ -1046,3 +1061,5 @@ Die Entprellschaltung aus dem Abschnitt „Anwendungsbeispiele“ braucht einen 
 ## Nächste Vorlesung
 
 Am **Donnerstag, 26.11.**, geht es um Schaltwerke: Flip-Flops speichern einen Zustand, ein Schaltnetz davor berechnet aus Zustand und Eingängen den nächsten. Damit entwerfen wir Automaten, zum Beispiel einen Detektor, der in einem Bitstrom drei aufeinanderfolgende Einsen erkennt.
+
+**Übungen:** Die erste Übung findet am **Montag, 30.11.**, bzw. **Donnerstag, 03.12.**, jeweils um 18:00 Uhr in KKB-2097 statt. Blatt 1 wiederholt und vertieft Vorlesung 02–05: Normalformen, KV-Diagramm, Quine-McCluskey mit Don't-Cares, Glitches und Standardschaltnetze. Sie brauchen nur eine der beiden Gruppen zu besuchen.

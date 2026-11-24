@@ -2,6 +2,12 @@
 
 Alle wesentlichen Änderungen an diesem Kurs werden in dieser Datei dokumentiert.
 
+## [0.7.24] - 2026-11-24
+
+### Added
+- **06_FlipFlops (0.1.2):** Asynchroner 3-Bit-Zähler als DigiSim-Schaltung im Abschnitt „Anwendungen“: drei D-Flip-Flops mit rückgeführtem NICHT, fallende Flanke, eigener Taktgeber (1 Hz), Lampen für Clk, $Q_0$–$Q_2$ und Zählerstand; Quiz zur Periodendauer von $Q_2$ (8 s) mit Hinweis auf den Vorteiler des Timers (VL 14). Anregung aus Petzolds „Code“ (codehiddenlanguage.com). Den Ripple-Effekt behandelt weiterhin VL 08.
+- **06_FlipFlops (0.1.2):** „Nächste Vorlesung“ kündigt die erste Übung an (Mo 30.11. bzw. Do 03.12., 18:00, KKB-2097, Blatt 1).
+
 ## [0.7.23] - 2026-11-21
 
 ### Fixed
