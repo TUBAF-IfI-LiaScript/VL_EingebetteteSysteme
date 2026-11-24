@@ -2,6 +2,18 @@
 
 Alle wesentlichen Änderungen an diesem Kurs werden in dieser Datei dokumentiert.
 
+## [0.7.23] - 2026-11-21
+
+### Fixed
+- **06_FlipFlops (0.1.1):** Befunde der Persona-Reviews:
+  - Zeitdiagramm „zustandsgesteuert/flankengesteuert“: $S$ und $R$ überlappten in der dritten Taktphase (verbotene Belegung $S = R = 1$); $S$ beginnt jetzt nach dem Ende von $R$.
+  - Rückblick: Gatterzahl beim Zwei-Bit-Komparator (ein UND und ein ODER für $G$, nicht zwei UND); Formulierung zur Überdeckung von $m_5$, $m_7$; Teilbarkeitsargument vervollständigt; Gatterzahl im Multiplexer ehrlich benannt.
+  - T-Flip-Flop-Quiz: Der DigiSim-Taster ist ein Schalter, „dreimal drücken“ ergab nur zwei steigende Flanken; jetzt „drei steigende Flanken“.
+  - NAND-Latch-Simulation startet mit $\overline{S} = \overline{R} = 0$ (verboten): Hinweis ergänzt.
+  - Begriffe: Merke-Kasten „Latch oder Flip-Flop?“, durchgängig „das Latch“ für zustandsgesteuerte Speicher; Satz „D-Latch als synchrones Flip-Flop“ ersetzt; Main-Subsidiary „ändert den Ausgang nur einmal pro Takt“.
+  - Ergänzt: Definition von Takt und Flanken, „Schaltwerk“ beim Einstieg, Beschriftung der Zwischensignale im Flankendetektor, „2t = 2Δt“, Pull-down und `INPUT_PULLUP`/RC-Glied beim Entprellen, Laufzeiten nach Familie und Spannung, Anschlüsse des 74HC00, `pinMode`/`digitalWrite` landen in DDxn/PORTxn, Register = Reihe von Flip-Flops, Synchronizer-Verzögerung bei 16 MHz (≤ 94 ns) und Schmitt-Trigger, Kommentare zu den Bitoperationen im Sketch.
+  - Notation vereinheitlicht: $Y$ und $Y(t+k\Delta t)$ nur in der Gatteranalyse der drei Ansätze; ab dem SR-Latch-Symbol $Q$, $\overline{Q}$ und Folgezustand $Q(t+1)$ wie in VL 07/08 (statt $Y'(t) = Y(t+2\Delta t)$ bzw. $Q'(t)$); D-Latch-Tabelle ohne die zu knappe Angabe $2\Delta t$; „2t“ im Zeitdiagramm als Näherung erklärt (Setzen drei, Rücksetzen zwei Gatterlaufzeiten); $S = R = 1$ einheitlich „verboten“; `~S` im Simulator als $\overline{S}$ erklärt.
+
 ## [0.7.22] - 2026-11-21
 
 ### Changed

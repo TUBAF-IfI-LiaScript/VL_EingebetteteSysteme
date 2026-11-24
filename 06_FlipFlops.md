@@ -2,7 +2,7 @@
 
 author:   Sebastian Zug & André Dietrich & Fabian Bär & Claude Code (Opus 5.5)
 email:    sebastian.zug@informatik.tu-freiberg.de & andre.dietrich@informatik.tu-freiberg.de & fabian.baer@student.tu-freiberg.de
-version:  0.1.0
+version:  0.1.1
 language: de
 narrator: Deutsch Female
 
@@ -125,7 +125,7 @@ Die Primimplikantentafel zeigt, welcher Primimplikant welchen Minterm abdeckt:
 | $P_6$        |       |       |       |       | x     | x     |       |          |          |          |
 
 + **Essentiell** sind $P_1$ (nur er deckt $m_{14}$) und $P_3$ (nur er deckt $m_9$). Zusammen decken sie 0, 1, 2, 6, 8, 9, 10 und 14.
-+ **Offen** bleiben $m_5$ und $m_7$. Beide deckt allein $P_5$; mit $P_4$ und $P_6$ bräuchte man zwei Terme.
++ **Offen** bleiben $m_5$ und $m_7$. Mit einem einzigen Term deckt beide nur $P_5$; $P_4$ (für $m_5$) und $P_6$ (für $m_7$) bräuchten zusammen zwei Terme.
 + $P_2$ wird nicht gebraucht, alle seine Minterme sind schon abgedeckt.
 
 $$f = c\overline{d} + \overline{b}\,\overline{c} + \overline{a}bd$$
@@ -164,7 +164,7 @@ Merke: Hat eine Funktion viel mehr Einsen als Nullen, lohnt sich ein Blick auf d
     --{{1}}--
 Hier ist die Schaltung im Simulator. Die beiden Kästen sind genau der Ein-Bit-Komparator aus der letzten Vorlesung, verpackt als Baustein. Rechts sitzen die fünf Gatter aus den drei Gleichungen.
 
-Die beiden Kästen enthalten je den Ein-Bit-Komparator aus Vorlesung 05 (zwei NICHT, zwei UND, ein NOR). Dahinter folgen zwei UND und ein ODER für $G$, ein UND für $E$ sowie ein UND und ein ODER für $L$:
+Die beiden Kästen enthalten je den Ein-Bit-Komparator aus Vorlesung 05 (zwei NICHT, zwei UND, ein NOR). Dahinter folgen ein UND und ein ODER für $G$, ein UND für $E$ sowie ein UND und ein ODER für $L$:
 
 ```json @DigiSim.evalJson
 {"router":"manhattan","devices":{"a1":{"type":"Button","label":"a1","propagation":0,"position":{"x":0,"y":0}},"b1":{"type":"Button","label":"b1","propagation":0,"position":{"x":0,"y":60}},"a0":{"type":"Button","label":"a0","propagation":0,"position":{"x":0,"y":170}},"b0":{"type":"Button","label":"b0","propagation":0,"position":{"x":0,"y":230}},"k1":{"type":"Subcircuit","celltype":"1-Bit-Komparator","label":"Bit 1","propagation":0,"position":{"x":130,"y":10}},"k0":{"type":"Subcircuit","celltype":"1-Bit-Komparator","label":"Bit 0","propagation":0,"position":{"x":130,"y":180}},"ag":{"type":"And","propagation":0,"position":{"x":310,"y":150}},"al":{"type":"And","propagation":0,"position":{"x":310,"y":290}},"og":{"type":"Or","propagation":0,"position":{"x":450,"y":40}},"ae":{"type":"And","propagation":0,"position":{"x":450,"y":170}},"ol":{"type":"Or","propagation":0,"position":{"x":450,"y":290}},"G":{"type":"Lamp","label":"G","propagation":0,"position":{"x":600,"y":45}},"E":{"type":"Lamp","label":"E","propagation":0,"position":{"x":600,"y":175}},"L":{"type":"Lamp","label":"L","propagation":0,"position":{"x":600,"y":295}}},"connectors":[{"from":{"id":"a1","port":"out"},"to":{"id":"k1","port":"a"}},{"from":{"id":"b1","port":"out"},"to":{"id":"k1","port":"b"}},{"from":{"id":"a0","port":"out"},"to":{"id":"k0","port":"a"}},{"from":{"id":"b0","port":"out"},"to":{"id":"k0","port":"b"}},{"from":{"id":"k1","port":"E"},"to":{"id":"ag","port":"in1"}},{"from":{"id":"k0","port":"G"},"to":{"id":"ag","port":"in2"}},{"from":{"id":"k1","port":"E"},"to":{"id":"al","port":"in1"}},{"from":{"id":"k0","port":"L"},"to":{"id":"al","port":"in2"}},{"from":{"id":"k1","port":"G"},"to":{"id":"og","port":"in1"}},{"from":{"id":"ag","port":"out"},"to":{"id":"og","port":"in2"}},{"from":{"id":"k1","port":"E"},"to":{"id":"ae","port":"in1"}},{"from":{"id":"k0","port":"E"},"to":{"id":"ae","port":"in2"}},{"from":{"id":"k1","port":"L"},"to":{"id":"ol","port":"in1"}},{"from":{"id":"al","port":"out"},"to":{"id":"ol","port":"in2"}},{"from":{"id":"og","port":"out"},"to":{"id":"G","port":"in"}},{"from":{"id":"ae","port":"out"},"to":{"id":"E","port":"in"}},{"from":{"id":"ol","port":"out"},"to":{"id":"L","port":"in"}}],"subcircuits":{"1-Bit-Komparator":{"devices":{"a":{"type":"Input","net":"a","bits":1,"label":"a","position":{"x":0,"y":20}},"b":{"type":"Input","net":"b","bits":1,"label":"b","position":{"x":0,"y":160}},"na":{"type":"Not","propagation":0,"position":{"x":110,"y":120}},"nb":{"type":"Not","propagation":0,"position":{"x":110,"y":60}},"g":{"type":"And","propagation":0,"position":{"x":230,"y":20}},"l":{"type":"And","propagation":0,"position":{"x":230,"y":160}},"e":{"type":"Nor","propagation":0,"position":{"x":370,"y":90}},"G":{"type":"Output","net":"G","bits":1,"label":"G","position":{"x":520,"y":20}},"E":{"type":"Output","net":"E","bits":1,"label":"E","position":{"x":520,"y":95}},"L":{"type":"Output","net":"L","bits":1,"label":"L","position":{"x":520,"y":170}}},"connectors":[{"from":{"id":"a","port":"out"},"to":{"id":"na","port":"in"}},{"from":{"id":"b","port":"out"},"to":{"id":"nb","port":"in"}},{"from":{"id":"a","port":"out"},"to":{"id":"g","port":"in1"}},{"from":{"id":"nb","port":"out"},"to":{"id":"g","port":"in2"}},{"from":{"id":"na","port":"out"},"to":{"id":"l","port":"in1"}},{"from":{"id":"b","port":"out"},"to":{"id":"l","port":"in2"}},{"from":{"id":"g","port":"out"},"to":{"id":"e","port":"in1"}},{"from":{"id":"l","port":"out"},"to":{"id":"e","port":"in2"}},{"from":{"id":"g","port":"out"},"to":{"id":"G","port":"in"}},{"from":{"id":"e","port":"out"},"to":{"id":"E","port":"in"}},{"from":{"id":"l","port":"out"},"to":{"id":"L","port":"in"}}]}}}
@@ -188,7 +188,7 @@ Im dritten Fall ist das niederwertige Bit von $A$ größer. Das zählt aber nich
 
 Durch drei teilbar sind 0, 3, 6, 9, 12 und 15, also $f = \sum m(0, 3, 6, 9, 12, 15)$.
 
-**Was auffällt:** Keine zwei Einsen liegen im KV-Diagramm nebeneinander. Benachbarte Felder unterscheiden sich in einem Bit, also um 1, 2, 4 oder 8, und keine dieser Zahlen ist durch drei teilbar. Es lässt sich nichts zusammenfassen, die Minimalform ist die KDNF mit sechs Termen zu je vier Literalen.
+**Was auffällt:** Keine zwei Einsen liegen im KV-Diagramm nebeneinander. Benachbarte Felder unterscheiden sich in einem Bit, also um 1, 2, 4 oder 8. Die Differenz zweier Vielfacher von 3 ist wieder durch 3 teilbar, keine dieser Zahlen ist es. Es lässt sich nichts zusammenfassen, die Minimalform ist die KDNF mit sechs Termen zu je vier Literalen.
 
 @Karnaugh.map(a b c d,0 3 6 9 12 15,-)
 
@@ -204,7 +204,7 @@ Durch drei teilbar sind 0, 3, 6, 9, 12 und 15, also $f = \sum m(0, 3, 6, 9, 12, 
 {"router":"manhattan","devices":{"a":{"type":"Button","label":"a","propagation":0,"position":{"x":0,"y":0}},"b":{"type":"Button","label":"b","propagation":0,"position":{"x":0,"y":60}},"c":{"type":"Button","label":"c","propagation":0,"position":{"x":0,"y":120}},"d":{"type":"Button","label":"d","propagation":0,"position":{"x":0,"y":250}},"bg":{"type":"BusGroup","groups":[1,1,1],"propagation":0,"position":{"x":140,"y":50}},"nd":{"type":"Not","propagation":0,"position":{"x":130,"y":300}},"z":{"type":"Constant","constant":"0","propagation":0,"position":{"x":140,"y":400}},"m":{"type":"Mux","bits":{"in":1,"sel":3},"propagation":0,"position":{"x":330,"y":150}},"f":{"type":"Lamp","label":"f","propagation":0,"position":{"x":480,"y":270}}},"connectors":[{"from":{"id":"c","port":"out"},"to":{"id":"bg","port":"in0"}},{"from":{"id":"b","port":"out"},"to":{"id":"bg","port":"in1"}},{"from":{"id":"a","port":"out"},"to":{"id":"bg","port":"in2"}},{"from":{"id":"bg","port":"out"},"to":{"id":"m","port":"sel"}},{"from":{"id":"d","port":"out"},"to":{"id":"nd","port":"in"}},{"from":{"id":"nd","port":"out"},"to":{"id":"m","port":"in0"}},{"from":{"id":"d","port":"out"},"to":{"id":"m","port":"in1"}},{"from":{"id":"z","port":"out"},"to":{"id":"m","port":"in2"}},{"from":{"id":"nd","port":"out"},"to":{"id":"m","port":"in3"}},{"from":{"id":"d","port":"out"},"to":{"id":"m","port":"in4"}},{"from":{"id":"z","port":"out"},"to":{"id":"m","port":"in5"}},{"from":{"id":"nd","port":"out"},"to":{"id":"m","port":"in6"}},{"from":{"id":"d","port":"out"},"to":{"id":"m","port":"in7"}},{"from":{"id":"m","port":"out"},"to":{"id":"f","port":"in"}}],"subcircuits":{}}
 ```
 
-**Vergleich:** Die Gatterlösung braucht sechs UND-Gatter mit vier Eingängen, ein ODER mit sechs Eingängen und vier Inverter. Mit dem Multiplexer genügen ein Baustein und ein Inverter.
+**Vergleich:** Die Gatterlösung braucht sechs UND-Gatter mit vier Eingängen, ein ODER mit sechs Eingängen und vier Inverter. Mit dem Multiplexer genügen ein Baustein und ein Inverter. Im Baustein stecken zwar selbst Gatter (acht UND, ein ODER), aber man muss sie weder entwerfen noch verdrahten, und für eine andere Funktion ändert man nur die Belegung der Dateneingänge.
 
 ********************************************************************************
 
@@ -240,7 +240,7 @@ Damit lassen sich wesentliche Teile eines Rechners nicht bauen:
 + Speicherelemente für Daten und Zwischenergebnisse,
 + Takterzeuger.
 
-> Merke: Es fehlt ein Speicher!
+> Merke: Es fehlt ein Speicher! Eine Schaltung aus Schaltnetz und Speicherelementen heißt **Schaltwerk**. Wie man Schaltwerke entwirft, ist Thema der nächsten Vorlesung.
 
 Was geschieht in einer digitalen Schaltung, wenn wir einen Gatterausgang auf einen Eingang zurückführen?
 
@@ -306,7 +306,7 @@ Das UND kann nur löschen, das ODER nur setzen. Ein brauchbarer Speicher braucht
 ### Dritter Ansatz (SR-Latch)
 __Gesteuerte Rückkopplung über OR-Baustein.__
 
-Wir fügen eine weitere Eingangsgröße hinzu, die den Speicher auf Basis des rückgekoppelten ODER vervollständigt. Ein UND-Gatter in der Rückkopplung lässt die gespeicherte 1 nur durch, solange der Eingang `R` nicht selbst 1 ist. Sobald an `S` eine 1 anliegt, erscheint sie an $Y$ und bleibt gespeichert.
+Wir fügen eine weitere Eingangsgröße hinzu, die den Speicher auf Basis des rückgekoppelten ODER vervollständigt. Ein UND-Gatter in der Rückkopplungsschleife lässt die gespeicherte 1 nur durch, solange der Eingang `R` nicht selbst 1 ist. Liegt an `S` eine 1 an (bei $R = 0$), erscheint sie an $Y$ und bleibt gespeichert.
 
 ![Bild](./images/05_FlipFlops/rs_latch.png)
 
@@ -319,10 +319,10 @@ Wir fügen eine weitere Eingangsgröße hinzu, die den Speicher auf Basis des r�
 | 0      | 1      | 1      | 1                | Setzen$^*$     |
 | 1      | 0      | 0      | 0                | Rücksetzen$^*$ |
 | 1      | 0      | 1      | 0                | Rücksetzen     |
-| 1      | 1      | 0      | 0                | Vermeiden$^*$  |
-| 1      | 1      | 1      | 0                | Vermeiden      |
+| 1      | 1      | 0      | 0                | verboten$^*$   |
+| 1      | 1      | 1      | 0                | verboten       |
 
-Bei den mit * markierten Zeilen ändert sich $Y$ nicht, der Zustand ist schon erreicht. Gehen wir zum Beispiel von $Y = 0$ aus und legen $S = 1$ an, liefert die Schaltung nach $2\Delta t$ eine 1 (dritte Zeile). Bleibt $S = 1$, gilt danach die vierte Zeile.
+Bei den mit * markierten Zeilen ist der Zielzustand von Setzen, Rücksetzen bzw. 0 schon erreicht, $Y$ ändert sich nicht. Gehen wir zum Beispiel von $Y = 0$ aus und legen $S = 1$ an, liefert die Schaltung nach $2\Delta t$ eine 1 (dritte Zeile). Bleibt $S = 1$, gilt danach die vierte Zeile.
 
 Der Zeitversatz von $2\Delta t$ ergibt sich aus den zwei Gattern, die das Signal durchläuft. Im Schaubild oben stecken noch drei Gattertypen (OR, AND und NOT). Weiter unten bauen wir dieselbe Schaltung nur aus NOR- oder nur aus NAND-Gattern, dann kann man mit einer einheitlichen Laufzeit $\Delta t$ rechnen.
 
@@ -332,7 +332,7 @@ Liegen $S = R = 1$ an, setzt $R$ den Ausgang auf 0. Beim NOR-Latch weiter unten 
 {"router":"manhattan","devices":{"s":{"label":"S","type":"Button","propagation":0,"position":{"x":0,"y":0}},"r":{"label":"R","type":"Button","propagation":0,"position":{"x":0,"y":55}},"y":{"label":"Y","type":"Lamp","propagation":0,"position":{"x":430,"y":25}},"or":{"label":"or","type":"Or","propagation":0,"bits":1,"position":{"x":135,"y":-45}},"and":{"label":"and","type":"And","propagation":0,"bits":1,"position":{"x":255,"y":-10}},"not":{"label":"not","type":"Not","propagation":0,"bits":1,"position":{"x":130,"y":50}}},"connectors":[{"from":{"id":"r","port":"out"},"to":{"id":"not","port":"in"}},{"from":{"id":"not","port":"out"},"to":{"id":"and","port":"in2"}},{"from":{"id":"s","port":"out"},"to":{"id":"or","port":"in2"}},{"from":{"id":"or","port":"out"},"to":{"id":"and","port":"in1"}},{"from":{"id":"and","port":"out"},"to":{"id":"or","port":"in1"},"vertices":[{"x":270,"y":-75}]},{"from":{"id":"and","port":"out"},"to":{"id":"y","port":"in"}}],"subcircuits":{}}
 ```
 
-**$Y$ ist 0. Sie drücken $S$ kurz und lassen wieder los. Welchen Wert hat $Y$ danach?**
+**$Y$ ist 0. Sie schalten $S$ ein und wieder aus. Welchen Wert hat $Y$ danach?**
 
 [[1]]
 ***************************************************************
@@ -341,7 +341,7 @@ $S = 1$ setzt $Y$ auf 1. Nach dem Loslassen gilt $S = R = 0$, die Schaltung spei
 
 ***************************************************************
 
-Daraus folgt die Wertetabelle eines SR-Flip-Flops. Anhand dieser Darstellung wird klar, dass die Eingangsgrößen $R$ und $S$ ihre Kürzel aus gutem Grund tragen: `Reset` und `Set`.
+Daraus folgt die Wertetabelle des SR-Latches. Anhand dieser Darstellung wird klar, dass die Eingangsgrößen $R$ und $S$ ihre Kürzel aus gutem Grund tragen: `Reset` und `Set`.
 
 <!-- data-type="none" -->
 | $R(t)$ | $S(t)$ | $Y'(t) = Y(t+2\Delta t)$ |
@@ -349,7 +349,7 @@ Daraus folgt die Wertetabelle eines SR-Flip-Flops. Anhand dieser Darstellung wir
 | 0      | 0      | $Y(t)$                   |
 | 0      | 1      | 1                        |
 | 1      | 0      | 0                        |
-| 1      | 1      | Vermeiden                |
+| 1      | 1      | verboten                 |
 
 Nun können wir mit dem Theorem von De Morgan einige Anpassungen vornehmen:
 
@@ -361,7 +361,7 @@ Damit sind wir in der Lage, unseren bistabilen Speicher mit zwei Gattern gleiche
 
 ![Bild](./images/05_FlipFlops/asynchronous_latch.png)
 
-Die Darstellung des Flip-Flops kann auch mit Hilfe von NAND-Bausteinen erfolgen. Beachten Sie dabei die entsprechende Anpassung der Eingangsgrößen: Beim NAND-Latch sind die Eingänge low-aktiv, gesetzt wird mit $\overline{S} = 0$.
+Das Latch lässt sich auch aus NAND-Gattern aufbauen. Beachten Sie dabei die Anpassung der Eingangsgrößen: Beim NAND-Latch sind die Eingänge low-aktiv, gesetzt wird mit $\overline{S} = 0$, gespeichert bei $\overline{S} = \overline{R} = 1$. In der Simulation stehen die Taster ~S und ~R (der Simulator schreibt ~ statt Querstrich, ~S steht für $\overline{S}$) anfangs auf 0, das ist die verbotene Belegung, und beide Lampen des NAND-Latches leuchten. Schalten Sie deshalb zuerst beide Taster ein.
 
 ![Bild](./images/05_FlipFlops/RS_with_NOR_and_NAND.png)
 
@@ -381,13 +381,15 @@ Ein NOR-Gatter liefert 0, sobald einer seiner Eingänge 1 ist. Beide NOR-Gatter 
 
 ***************************************************************
 
-SR-Flip-Flops werden in einem eigenen Symbol abstrahiert. Dabei wird unser Ausgang $Y$ nun mit $Q$ bezeichnet.
+Das SR-Latch hat ein eigenes Symbol. Ab hier heißt der Ausgang $Q$ statt $Y$, der zweite Ausgang $\overline{Q}$. Für den Folgezustand schreiben wir wie in den folgenden Vorlesungen $Q(t+1)$, für den aktuellen Zustand $Q(t)$ oder kurz $Q$. Beim Latch ist $Q(t+1)$ der Zustand, der sich nach Ablauf der Gatterlaufzeiten einstellt, beim Flip-Flop der Zustand nach der nächsten wirksamen Taktflanke.
 
 ![Bild](./images/05_FlipFlops/SR_Latch_Symbol.svg.png)<!-- style="width: 15%; max-width: 500px" -->
 
+> **Latch oder Flip-Flop?** In dieser Vorlesung heißt ein Speicherelement **Latch**, wenn es seine Eingänge übernimmt, solange ein Steuereingang aktiv ist (zustandsgesteuert). **Flip-Flop** heißt es, wenn es nur im Moment einer Taktflanke übernimmt (flankengesteuert). Viele Bücher nennen beides Flip-Flop, zum Beispiel „SR-Flip-Flop“ für das SR-Latch.
+
 ### D-Latch
 
-Der D-Latch nutzt aus, dass bei den beiden aktiven Eingangskombinationen eines SR-Latches (01 und 10) $R$ das Komplement von $S$ ist. Er hat nur einen Dateneingang $D$ und erzeugt daraus $S = D$ und $R = \overline{D}$. Ein zweiter Eingang $E$ (Enable) legt fest, wann $D$ übernommen wird.
+Das D-Latch nutzt aus, dass bei den beiden aktiven Eingangskombinationen eines SR-Latches (01 und 10) $R$ das Komplement von $S$ ist. Es hat nur einen Dateneingang $D$ und erzeugt daraus $S = D$ und $R = \overline{D}$. Ein zweiter Eingang $E$ (Enable) legt fest, wann $D$ übernommen wird.
 
 <table>
 <tr>
@@ -395,38 +397,38 @@ Der D-Latch nutzt aus, dass bei den beiden aktiven Eingangskombinationen eines S
 SR-Latch
 
 <!-- data-type="none" -->
-| $R(t)$ | $S(t)$ | $Y'(t) = Y(t+2\Delta t)$ |
-| ------ | ------ | ------------------------ |
-| 0      | 0      | $Y(t)$                   |
-| 0      | 1      | 1                        |
-| 1      | 0      | 0                        |
-| 1      | 1      | nicht erlaubt            |
+| $R(t)$ | $S(t)$ | $Q(t+1)$ |
+| ------ | ------ | -------- |
+| 0      | 0      | $Q$      |
+| 0      | 1      | 1        |
+| 1      | 0      | 0        |
+| 1      | 1      | verboten |
 </td>
 <td>
 D-Latch
 
 <!-- data-type="none" -->
-| $E(t)$ | $D(t)$ | $Y'(t) = Y(t+2\Delta t)$ |
-| ------ | ------ | ------------------------ |
-| 0      | 0      | $Y(t)$                   |
-| 0      | 1      | $Y(t)$                   |
-| 1      | 0      | 0                        |
-| 1      | 1      | 1                        |
+| $E(t)$ | $D(t)$ | $Q(t+1)$ |
+| ------ | ------ | -------- |
+| 0      | 0      | $Q$      |
+| 0      | 1      | $Q$      |
+| 1      | 0      | 0        |
+| 1      | 1      | 1        |
 </td>
 </tr>
 </table>
 
-Die Eingangs-NAND-Stufe wandelt die beiden D-Eingangszustände (0 und 1) durch Invertieren des Dateneingangssignals in diese beiden Eingangskombinationen für den nachfolgenden SR-Latch um. Bei $E = 0$ liefern beide Eingangs-NAND eine 1, das NAND-Latch dahinter speichert.
+Die Eingangs-NAND-Stufe wandelt die beiden D-Eingangszustände (0 und 1) durch Invertieren des Dateneingangssignals in diese beiden Eingangskombinationen für das nachfolgende SR-Latch um. Bei $E = 0$ liefern beide Eingangs-NAND eine 1, das NAND-Latch dahinter speichert.
 
 <table>
 <tr>
 <td>
-D-Latch auf der Basis eines NOR-RS-Gatters
+D-Latch auf der Basis eines NOR-Latches
 
 ![Bild](./images/05_FlipFlops/DLatch_NOR.png)<!-- style="max-width: 300px" -->
 </td>
 <td>
-D-Latch auf der Basis eines NAND-RS-Gatters
+D-Latch auf der Basis eines NAND-Latches
 
 ![Bild](./images/05_FlipFlops/DLatch_NAND.png)<!-- style="max-width: 300px" -->
 </td>
@@ -447,11 +449,11 @@ D-Latch auf der Basis eines NAND-RS-Gatters
 [( )] $Q$ und $\overline{Q}$ werden beide 1
 ***************************************************************
 
-Bei $E = 0$ liefern beide Eingangs-NAND eine 1, das Latch dahinter speichert. $D$ wird erst übernommen, wenn $E = 1$ wird. Solange $E = 1$ ist, folgt $Q$ dagegen jeder Änderung von $D$: Der Latch ist „transparent“.
+Bei $E = 0$ liefern beide Eingangs-NAND eine 1, das Latch dahinter speichert. $D$ wird erst übernommen, wenn $E = 1$ wird. Solange $E = 1$ ist, folgt $Q$ dagegen jeder Änderung von $D$: Das Latch ist „transparent“.
 
 ***************************************************************
 
-> Der D-Latch kann auch als synchrones Flip-Flop verstanden werden. In diesem Fall würde `E` als Takt betrachtet werden.
+> Legt man an $E$ einen Takt, übernimmt das D-Latch während der ganzen Phase $E = 1$ jede Änderung von $D$. Es ist also zustandsgesteuert und noch kein Flip-Flop. Wie man daraus ein flankengesteuertes Flip-Flop macht, zeigt der Abschnitt „Taktung von Schaltwerken“.
 
 ## Anwendungsbeispiele
 
@@ -462,7 +464,7 @@ style="width: 60%;"
 -->
 ![Bild](./images/05_FlipFlops/latch_temperature_monitoring.png)
 
-Der Temperatursensor hat einen digitalen Ausgang, der beim Überschreiten einer Grenztemperatur High-Pegel annimmt. Das SR-Flip-Flop hält dieses Ereignis in `Q` fest, auch wenn die Temperatur wieder sinkt, bis jemand den Alarm mit `R` quittiert.
+Der Temperatursensor hat einen digitalen Ausgang, der beim Überschreiten einer Grenztemperatur High-Pegel annimmt. Das SR-Latch hält dieses Ereignis in `Q` fest, auch wenn die Temperatur wieder sinkt, bis jemand den Alarm mit `R` quittiert.
 
 <!--
 style="width: 80%; min-width: 420px; max-width: 720px;"
@@ -491,7 +493,7 @@ Ein Taster schaltet bei der Betätigung nicht zu einem definierten Zeitpunkt. De
 
 ![Bild](./images/05_FlipFlops/EntprellterTaster.png)<!-- style="width: 35%; max-width: 500px" -->
 
-Die Schaltung nutzt einen **Umschalter** (Wechsler) und ein SR-Latch. Der Umschalter legt $+U_B$ entweder an $S$ oder an $R$, die beiden Widerstände ziehen den jeweils offenen Eingang auf 0.
+Die Schaltung nutzt einen **Umschalter** (Wechsler) und ein SR-Latch. Der Umschalter legt die Betriebsspannung $+U_B$ (zum Beispiel 5 V, also 1) entweder an $S$ oder an $R$. Die beiden Widerstände verbinden die Eingänge mit Masse und ziehen den jeweils offenen Eingang auf 0 („Pull-down“).
 
 1. Der Kontakt verlässt $R$: Beide Eingänge sind 0, das Latch speichert den alten Wert.
 2. Er berührt zum ersten Mal $S$: $Q$ wird 1.
@@ -508,7 +510,7 @@ Nur die erste Berührung von $S$ ändert $Q$. Bei jedem weiteren Prellen liegt e
 
 ***************************************************************
 
-Am Mikrocontroller entprellt man meist in Software: Man wartet nach dem ersten Pegelwechsel einige Millisekunden, bevor man den Taster erneut abfragt. Das kommt mit den Interrupts in Vorlesung 14.
+Am Mikrocontroller hängt meist ein einfacher Taster gegen Masse am Pin, mit dem internen Pull-up (`INPUT_PULLUP`), also low-aktiv. Entprellt wird dann in Software: Man wartet nach dem ersten Pegelwechsel einige Millisekunden, bevor man den Taster erneut abfragt. Das kommt mit den Interrupts in Vorlesung 14. In Hardware geht es auch mit einem RC-Glied, das die Sprünge glättet, und einem Schmitt-Trigger dahinter.
 
 ## Taktung von Schaltwerken
 
@@ -520,6 +522,8 @@ Aus Vorlesung 04 kennen Sie die Glitches: Ein Schaltnetz liefert nach einem Eing
 Zwei Schaltnetze berechnen $S$ und $R$ eines SR-Latches. Ihre Laufzeiten sind verschieden, und jedes kann kurz einen Glitch liefern (Vorlesung 04). Wann sind die Werte am Ausgang $Q$ gültig? Das Latch übernimmt jeden kurzen Fehler und hält ihn fest. Die Laufzeit der Schaltnetze bestimmt also das Verhalten des Speicherelements.
 
 > Zielstellung: Eingangswerte nur zu festgelegten Zeiten übernehmen, wenn alle Schaltnetze davor eingeschwungen sind.
+
+> **Takt:** ein periodisches Rechtecksignal `Clk` mit der Periodendauer $T$ und der Frequenz $f = 1/T$, beim ATmega328P auf dem Arduino Uno 16 MHz, also $T = 62{,}5\,\text{ns}$. Der Wechsel von 0 nach 1 heißt **steigende Flanke**, der von 1 nach 0 **fallende Flanke**.
 
 __asynchrone Schaltwerke__
 
@@ -540,18 +544,18 @@ __synchrone Schaltwerke__
 Für einen synchronisierten Zustandswechsel bekommt das Latch einen Takteingang `Clk`. Die Signale an $R$ und $S$ werden nur übernommen, wenn das Taktsignal aktiv ist:
 
 + bei Clk = 0 sind $R$ und $S$ irrelevant (d = „don't care“),
-+ bei Clk = 1 stellt sich der neue Folgezustand $Q'$ ein.
++ bei Clk = 1 stellt sich der neue Folgezustand $Q(t+1)$ ein.
 
 <!-- data-type="none" -->
-| $R(t)$                                | $S(t)$                                | $Clk(t)$ | $Q'(t)$       |
+| $R(t)$                                | $S(t)$                                | Clk      | $Q(t+1)$      |
 | ------------------------------------- | ------------------------------------- | -------- | ------------- |
 | <span style="color: #ff0000">d</span> | <span style="color: #ff0000">d</span> | 0        | $Q$           |
 | 0                                     | 0                                     | 1        | $Q$           |
 | 0                                     | 1                                     | 1        | 1             |
 | 1                                     | 0                                     | 1        | 0             |
-| 1                                     | 1                                     | 1        | nicht erlaubt |
+| 1                                     | 1                                     | 1        | verboten      |
 
-Beachten Sie, dass sich mit dem <span style="color: #ff0000">d</span>-Zustand die Wertetabelle deutlich verkürzt.
+Beachten Sie, dass sich mit dem <span style="color: #ff0000">d</span>-Zustand die Wertetabelle deutlich verkürzt. In den Zeitdiagrammen steht „2t“ vereinfacht für eine Verzögerung von etwa zwei Gatterlaufzeiten $2\Delta t$. Genau genommen hängt sie vom Signalweg ab: Beim Setzen durchläuft das Signal hier drei Gatter (UND und beide NOR), beim Rücksetzen zwei.
 
 <!--
 style="width: 80%; min-width: 420px; max-width: 720px;"
@@ -589,7 +593,7 @@ Q   |       :  |            :  |          :  |:  |
 </table>
 
 
-> Merke: Weil sich das zustandsgesteuerte SR-Flip-Flop in einer Taktphase mehrmals ändern kann, ist es für viele Anwendungen ungeeignet. Welche Idee hat die nachfolgende Schaltung, und warum wird sie nicht funktionieren?
+> Merke: Weil sich das getaktete SR-Latch in einer Taktphase mehrmals ändern kann, ist es für viele Anwendungen ungeeignet. Welche Idee hat die nachfolgende Schaltung, und warum wird sie nicht funktionieren?
 
 ![Bild](./images/05_FlipFlops/ZustandsgesteuertesShiftRegister.png)<!-- style="width: 95%; max-width: 800px" -->
 
@@ -608,7 +612,7 @@ Gewünscht: Flip-Flop-Variante, die Änderungen nur zu einem definierten Zeitpun
 
 ### Main-Subsidiary-Flip-Flops
 
-Ein Main-Subsidiary-SR-Flip-Flop besteht aus zwei hintereinandergeschalteten zustandsgesteuerten SR-Flip-Flops, „Main“ und „Subsidiary“ genannt. Ein zusätzlicher Inverter negiert das Taktsignal für „Subsidiary“. Früher hießen diese Flip-Flops Master-Slave-Flip-Flops.
+Ein Main-Subsidiary-SR-Flip-Flop besteht aus zwei hintereinandergeschalteten getakteten SR-Latches, „Main“ und „Subsidiary“ genannt. Ein zusätzlicher Inverter negiert das Taktsignal für „Subsidiary“. Früher hießen diese Flip-Flops Master-Slave-Flip-Flops.
 
 ![Bild](./images/05_FlipFlops/MasterSlave.png)
 
@@ -664,10 +668,10 @@ style="width: 95%; max-width: 1000px;"
 E   |     |
     | ----+               0
     | -----+
-    |      |
+I1  |      |
     |      +-------------
     |       +------------
-    |       |
+I2  |       |
     | ------+
     |   -----+
 B   |        |
@@ -684,9 +688,9 @@ A   |     |  |
 </tr>
 </table>
 
-Das UND-Gatter bekommt $E$ direkt und über drei Inverter, also invertiert und verzögert als $B$. Vor der Flanke ist $E = 0$ und $B = 1$. Springt $E$ auf 1, bleibt $B$ noch für drei Gatterlaufzeiten 1, und für diese kurze Zeit ist $A = E \cdot B = 1$. Danach ist $B = 0$ und $A = 0$. Aus jeder steigenden Flanke wird so ein kurzer Puls, der das Latch dahinter nur für einen Moment öffnet.
+Das UND-Gatter bekommt $E$ direkt und über drei Inverter, also invertiert und verzögert als $B$. Im Zeitdiagramm sind $I_1$ und $I_2$ die Ausgänge des ersten und zweiten Inverters; jeder Inverter dreht den Pegel um und verzögert ihn um eine Gatterlaufzeit. Vor der Flanke ist $E = 0$ und $B = 1$. Springt $E$ auf 1, bleibt $B$ noch für drei Gatterlaufzeiten 1, und für diese kurze Zeit ist $A = E \cdot B = 1$. Danach ist $B = 0$ und $A = 0$. Aus jeder steigenden Flanke wird so ein kurzer Puls, der das Latch dahinter nur für einen Moment öffnet.
 
-Die Signallaufzeiten sind für die ansteigende und fallende Signalflanke unterschiedlich und variieren mit den Schaltkreisfamilien (3 - 30ns).
+Die Signallaufzeiten sind für die ansteigende und fallende Signalflanke unterschiedlich und hängen von der Schaltkreisfamilie und der Versorgungsspannung ab: typisch 3–30 ns bei 5 V, beim 74HC00 etwa 7 ns.
 
 Welches Verhalten ergibt sich für ein (positiv) flankengetriggertes SR-Flip-Flop daraus?
 
@@ -703,17 +707,17 @@ style="width: 80%; min-width: 420px; max-width: 720px;"
     |       +------+      +------+      +------+      +-----
 Clk |       |      |      |      |      |      |      |
     | ------+      +------+      +------+      +------+
-    |     +------+                         +--+
-S   |     | :    |                         |  |
-    | ----+ :    +-------------------------+  +--------------
+    |     +------+                           +--+
+S   |     | :    |                           |  |
+    | ----+ :    +---------------------------+  +------------
     |       :        +--+   +---+      +----+
 R   |       :        |  |   |   |      |    |
     | ------:--------+  +---+   +------+    +----------------
-    |       :  +---------------+            :  +--------------    1
-Q   |       :  |            :  |            :  |
-    |-------:--+            :  +------------:--+                  0
-    +-------:--:------------:--:------------:--:---------------->          .
-             2t              2t              2t
+    |       :  +---------------+             :  +-------------    1
+Q   |       :  |            :  |             :  |
+    |-------:--+            :  +-------------:--+                  0
+    +-------:--:------------:--:-------------:--:--------------->          .
+             2t              2t               2t
 ```
 </td>
 <td>
@@ -727,9 +731,9 @@ style="width: 80%; min-width: 420px; max-width: 720px;"
     |       +------+      +------+      +------+      +-----
 Clk |       |      |      |      |      |      |      |
     | ------+      +------+      +------+      +------+
-    |     +------+                      :  +--+
-S   |     | :    |                      :  |  |
-    | ----+ :    +----------------------:--+  +--------------
+    |     +------+                      :    +--+
+S   |     | :    |                      :    |  |
+    | ----+ :    +----------------------:----+  +------------
     |       :        +--+   +---+      +----+
 R   |       :        |  |   |   |      |:   |
     | ------:--------+  +---+   +------+:   +----------------
@@ -747,27 +751,27 @@ Links folgt $Q$ den Eingängen, solange Clk = 1 ist; am Ende der dritten Taktpha
 
 **Setup- und Haltezeit**
 
-Auch ein flankengesteuertes Flip-Flop braucht den Eingang nicht nur genau im Moment der Flanke. Er muss eine kurze **Setup-Zeit** vor der Flanke und eine kurze **Haltezeit** danach stabil sein. Ändert er sich in diesem Fenster, kann das Flip-Flop **metastabil** werden: Sein Ausgang bleibt eine Weile zwischen 0 und 1 hängen, bevor er zufällig in einen der beiden Zustände kippt. Bei einem synchronen Entwurf sorgt der Takt dafür, dass sich die Eingänge nur außerhalb dieses Fensters ändern. Signale von außen, etwa ein Taster, kennen den Takt aber nicht. Wie der ATmega328P damit umgeht, sehen wir am Ende der Vorlesung.
+Auch ein flankengesteuertes Flip-Flop braucht den Eingang nicht nur genau im Moment der Flanke. Er muss eine kurze **Setup-Zeit** vor der Flanke und eine kurze **Haltezeit** danach stabil sein. Ändert er sich in diesem Fenster, kann das Flip-Flop **metastabil** werden: Sein Ausgang bleibt eine Weile zwischen 0 und 1 hängen, meist nur Nanosekunden, im ungünstigen Fall länger, bevor er zufällig in einen der beiden Zustände kippt. Bei einem synchronen Entwurf sorgt der Takt dafür, dass sich die Eingänge nur außerhalb dieses Fensters ändern. Signale von außen, etwa ein Taster, kennen den Takt aber nicht. Wie der ATmega328P damit umgeht, sehen wir am Ende der Vorlesung.
 
 **Latch und Flip-Flop im Vergleich**
 
     --{{0}}--
-In DigiSim gibt es das flankengesteuerte D-Flip-Flop als fertigen Baustein. Wir setzen es neben den D-Latch aus vier NAND-Gattern. Beide bekommen dieselben Signale D und C.
+In DigiSim gibt es das flankengesteuerte D-Flip-Flop als fertigen Baustein. Wir setzen es neben das D-Latch aus vier NAND-Gattern. Beide bekommen dieselben Signale D und C.
 
-Oben der D-Latch aus vier NAND-Gattern, unten das flankengesteuerte D-Flip-Flop als fertiger Baustein. Beide hängen an denselben Eingängen $D$ und $C$ (Enable bzw. Takt). Setzen Sie $C = 1$ und schalten Sie dann $D$ um. Danach schalten Sie $C$ aus und wieder ein. Zu Beginn ist „Q Latch“ grau: Nach dem Einschalten ist der Wert der Rückkopplung unbestimmt, erst $C = 1$ legt ihn fest.
+Oben das D-Latch aus vier NAND-Gattern, unten das flankengesteuerte D-Flip-Flop als fertiger Baustein. Beide hängen an denselben Eingängen $D$ und $C$ (Enable bzw. Takt). Setzen Sie $C = 1$ und schalten Sie dann $D$ um. Danach schalten Sie $C$ aus und wieder ein. Zu Beginn ist „Q Latch“ grau: Nach dem Einschalten ist der Wert der Rückkopplung unbestimmt, erst $C = 1$ legt ihn fest.
 
 ```json @DigiSim.evalJson
 {"router":"manhattan","devices":{"d":{"type":"Button","label":"D","propagation":0,"position":{"x":0,"y":40}},"c":{"type":"Button","label":"C","propagation":0,"position":{"x":0,"y":230}},"n3":{"type":"Nand","propagation":1,"position":{"x":150,"y":50}},"n4":{"type":"Nand","propagation":1,"position":{"x":170,"y":140}},"n2":{"type":"Nand","propagation":1,"position":{"x":330,"y":55}},"n1":{"type":"Nand","propagation":1,"position":{"x":330,"y":145}},"ql":{"type":"Lamp","label":"Q Latch","propagation":0,"position":{"x":500,"y":60}},"ff":{"type":"Dff","bits":1,"initial":"0","propagation":1,"polarity":{"clock":true},"position":{"x":300,"y":250}},"qf":{"type":"Lamp","label":"Q Flip-Flop","propagation":0,"position":{"x":500,"y":255}}},"connectors":[{"from":{"id":"d","port":"out"},"to":{"id":"n3","port":"in1"}},{"from":{"id":"c","port":"out"},"to":{"id":"n3","port":"in2"}},{"from":{"id":"n3","port":"out"},"to":{"id":"n4","port":"in1"}},{"from":{"id":"c","port":"out"},"to":{"id":"n4","port":"in2"}},{"from":{"id":"n3","port":"out"},"to":{"id":"n2","port":"in1"}},{"from":{"id":"n1","port":"out"},"to":{"id":"n2","port":"in2"}},{"from":{"id":"n2","port":"out"},"to":{"id":"n1","port":"in1"}},{"from":{"id":"n4","port":"out"},"to":{"id":"n1","port":"in2"}},{"from":{"id":"n2","port":"out"},"to":{"id":"ql","port":"in"}},{"from":{"id":"d","port":"out"},"to":{"id":"ff","port":"in"}},{"from":{"id":"c","port":"out"},"to":{"id":"ff","port":"clk"}},{"from":{"id":"ff","port":"out"},"to":{"id":"qf","port":"in"}}],"subcircuits":{}}
 ```
 
-**$C$ ist 1, beide Lampen sind aus. Sie schalten $D$ auf 1. Welche Lampe leuchtet?**
+**$C$ ist 1, $D$ ist 0, beide Lampen sind aus. Sie schalten $D$ auf 1. Welche Lampe leuchtet?**
 
 [(X)] nur „Q Latch“
 [( )] nur „Q Flip-Flop“
 [( )] beide
 ***************************************************************
 
-Der Latch ist bei $C = 1$ transparent und folgt $D$ sofort. Das Flip-Flop hat $D$ nur im Moment der steigenden Flanke von $C$ gelesen, da war $D$ noch 0. Es übernimmt die 1 erst bei der nächsten steigenden Flanke.
+Das Latch ist bei $C = 1$ transparent und folgt $D$ sofort. Das Flip-Flop hat $D$ nur im Moment der steigenden Flanke von $C$ gelesen, da war $D$ noch 0. Es übernimmt die 1 erst bei der nächsten steigenden Flanke.
 
 ***************************************************************
 
@@ -777,10 +781,10 @@ Der Latch ist bei $C = 1$ transparent und folgt $D$ sofort. Das Flip-Flop hat $D
 
 Der Name hat vermutlich keine tiefere Bedeutung. Nach einem Bericht von 1968 hat Eldred Nelson bei Hughes Aircraft die Eingänge seiner Flip-Flops paarweise durchbuchstabiert, A/B, C/D, E/F, G/H, und J/K war das fünfte Paar. In einer Patentanmeldung von 1953 spricht er bereits von „j-input“ und „k-input“. Die oft genannte Ableitung von Jack Kilby, dem Erfinder der integrierten Schaltung (1958), ist nicht belegt.
 
-JK-Flip-Flops basieren auf dem SR-Flip-Flop, sind aber flankengesteuert oder als Main-Subsidiary-Flip-Flop ausgeführt. Mit dem Taktsignal und der Eingangsbelegung $J = 1$, $K = 0$ wird am Ausgang eine 1 erzeugt und gespeichert, bei $K = 1$, $J = 0$ eine 0. Anders als beim SR-Flip-Flop ist $J = K = 1$ erlaubt: Dann wechselt der Ausgang mit jeder wirksamen Taktflanke („Toggle“).
+JK-Flip-Flops basieren auf dem SR-Latch, sind aber flankengesteuert oder als Main-Subsidiary-Flip-Flop ausgeführt. Mit dem Taktsignal und der Eingangsbelegung $J = 1$, $K = 0$ wird am Ausgang eine 1 erzeugt und gespeichert, bei $K = 1$, $J = 0$ eine 0. Anders als beim SR-Latch ist $J = K = 1$ erlaubt: Dann wechselt der Ausgang mit jeder wirksamen Taktflanke („Toggle“).
 
 <!-- data-type="none" -->
-| $J(t)$                                | $K(t)$                                | $Q'(t)$ bei Flankenwechsel       |
+| $J(t)$                                | $K(t)$                                | $Q(t+1)$                         |
 | ------------------------------------- | ------------------------------------- | ------------- |
 | 0                                     | 0                                     | $Q$           |
 | 0                                     | 1                                     | 0             |
@@ -828,18 +832,18 @@ Das T-Flip-Flop hat neben dem Takteingang Clk nur einen Eingang $T$ (toggle, hin
 ![Bild](./images/05_FlipFlops/T_Flip-flop.svg.png)<!-- style="width: 10%; max-width: 800px;" -->
 
 <!-- data-type="none" -->
-| $T(t)$ | $Q'(t)$ bei Flankenwechsel |
+| $T(t)$ | $Q(t+1)$                   |
 | ------ | -------------------------- |
 | 0      | $Q$                        |
 | 1      | $\overline{Q}$             |
 
-Die Tabelle ist genau die XOR-Verknüpfung: $Q' = T \oplus Q$. Ein T-Flip-Flop lässt sich deshalb auch aus einem D-Flip-Flop bauen, dessen Eingang $D = T \oplus Q$ bekommt:
+Die Tabelle ist genau die XOR-Verknüpfung: $Q(t+1) = T \oplus Q$. Ein T-Flip-Flop lässt sich deshalb auch aus einem D-Flip-Flop bauen, dessen Eingang $D = T \oplus Q$ bekommt:
 
 ```json @DigiSim.evalJson
 {"router":"manhattan","devices":{"t":{"type":"Button","label":"T","propagation":0,"position":{"x":0,"y":20}},"c":{"type":"Button","label":"C","propagation":0,"position":{"x":0,"y":140}},"x":{"type":"Xor","propagation":0,"position":{"x":140,"y":30}},"ff":{"type":"Dff","bits":1,"initial":"0","propagation":1,"polarity":{"clock":true},"position":{"x":280,"y":40}},"q":{"type":"Lamp","label":"Q","propagation":0,"position":{"x":450,"y":45}}},"connectors":[{"from":{"id":"t","port":"out"},"to":{"id":"x","port":"in1"}},{"from":{"id":"ff","port":"out"},"to":{"id":"x","port":"in2"}},{"from":{"id":"x","port":"out"},"to":{"id":"ff","port":"in"}},{"from":{"id":"c","port":"out"},"to":{"id":"ff","port":"clk"}},{"from":{"id":"ff","port":"out"},"to":{"id":"q","port":"in"}}],"subcircuits":{}}
 ```
 
-**$T = 1$, $Q = 0$. Sie drücken $C$ dreimal. Welchen Wert hat $Q$?**
+**$T = 1$, $Q = 0$. Sie erzeugen an $C$ drei steigende Flanken, schalten $C$ also dreimal ein und wieder aus. Welchen Wert hat $Q$?**
 
 [[1]]
 ***************************************************************
@@ -872,11 +876,11 @@ Liest man $Q_2 Q_1 Q_0$ als Binärzahl, zählt die Schaltung 0, 1, 2, … 7, 0. 
 | Änderungen pro Takt          | mehrere möglich                           | höchstens eine                                      |
 | Aufwand                      | gering (D-Latch: 4 NAND)                  | höher (zwei Latches oder Flankenerkennung)          |
 | Störungen am Eingang         | wirken, solange $E$ aktiv ist             | wirken nur im Fenster aus Setup- und Haltezeit      |
-| Anwendungen                  | Zwischenspeicher, Stufe im Synchronisierer | Register, Zähler, Schieberegister, Frequenzteiler  |
+| Anwendungen                  | Zwischenspeicher, Stufe im Synchronizer   | Register, Zähler, Schieberegister, Frequenzteiler  |
 
 ## Aufbau mit dem 74HC00
 
-Ein D-Latch braucht genau vier NAND-Gatter, so viele, wie im Baustein 74HC00 stecken.
+Ein D-Latch braucht genau vier NAND-Gatter, so viele, wie im Baustein 74HC00 stecken. Der Baustein wird an Pin 14 mit der Versorgungsspannung (2–6 V, meist 5 V) und an Pin 7 mit Masse verbunden. Die LEDs an $Q$ und $\overline{Q}$ brauchen je einen Vorwiderstand.
 
 ![74HC00](./images/05_FlipFlops/nand_ic2_small.jpg)<!-- style="width: 40%; max-width: 800px;" -->
 
@@ -893,16 +897,16 @@ Aufbauen:
     --{{0}}--
 Jeder einzelne Pin des ATmega328P enthält mehrere der Speicherelemente von heute. Das Bild stammt aus dem Datenblatt und zeigt die Logik hinter einem Pin.
 
-Das Datenblatt zeigt die Logik hinter jedem einzelnen Pin $P_{xn}$, zum Beispiel PB5 (Pin 13 auf dem Arduino Uno). Darin stecken vier Speicherelemente:
+Das Datenblatt zeigt die Logik hinter jedem einzelnen Pin $P_{xn}$, zum Beispiel PB5 (Pin 13 auf dem Arduino Uno). Darin stecken vier Speicherelemente: die D-Flip-Flops DDxn und PORTxn sowie ein Latch und ein Flip-Flop im Synchronizer. Ein **Register** wie `PORTB` ist einfach eine Reihe solcher Flip-Flops, eines je Bit (mehr dazu in Vorlesung 08).
 
 ![Logik eines IO-Pins im ATmega328P](./images/05_FlipFlops/DFlipFlopsImAVR.png "Logik eines IO-Pins im ATmega328P [^1]")<!-- style="width: 80%; max-width: 760px;" -->
 
 [^1]: Microchip Technology: ATmega328P 8-bit AVR Microcontroller Datasheet, Abschnitt „I/O-Ports“, Figure „General Digital I/O“, [Link](https://ww1.microchip.com/downloads/en/DeviceDoc/Atmel-7810-Automotive-Microcontrollers-ATmega328P_Datasheet.pdf)
 
-+ **DDxn** ist ein D-Flip-Flop. Es speichert, ob der Pin Eingang (0) oder Ausgang (1) ist, und wird beim Schreiben des Registers `DDRx` getaktet (WDx).
-+ **PORTxn** ist ebenfalls ein D-Flip-Flop. Es speichert den Ausgangswert und übernimmt beim Schreiben von `PORTx` ein Bit vom Datenbus.
-+ **Ein T-Flip-Flop im Datenblatt:** Vor dem Eingang von PORTxn sitzt ein Multiplexer. Schreibt das Programm eine 1 in das Register `PINx` (WPx), wählt er statt des Datenbusses den eigenen Ausgang des Flip-Flops, invertiert über einen Inverter. Das Flip-Flop übernimmt dann seinen eigenen invertierten Wert und kippt.
-+ **Synchronizer:** Das Signal von außen kennt den Takt des Controllers nicht. Ein Latch und ein Flip-Flop hintereinander übernehmen es mit dem Takt, bevor das Programm es aus `PINx` liest. Das schützt vor metastabilen Werten und kostet bis zu anderthalb Taktperioden Verzögerung.
++ **DDxn** ist ein D-Flip-Flop. Es speichert, ob der Pin Eingang (0) oder Ausgang (1) ist, und wird beim Schreiben des Registers `DDRx` getaktet (WDx). `pinMode(13, OUTPUT)` setzt genau dieses Flip-Flop für PB5.
++ **PORTxn** ist ebenfalls ein D-Flip-Flop. Es speichert den Ausgangswert und übernimmt beim Schreiben von `PORTx` ein Bit vom Datenbus, der Leitung, über die der Prozessor Daten zu den Registern schickt. `digitalWrite(13, HIGH)` landet am Ende in diesem Flip-Flop.
+  + **Ein T-Flip-Flop im Datenblatt:** Vor dem Eingang von PORTxn sitzt ein Multiplexer. Schreibt das Programm eine 1 in das Register `PINx` (WPx), wählt er statt des Datenbusses den eigenen Ausgang des Flip-Flops, invertiert über einen Inverter. Das Flip-Flop übernimmt dann seinen eigenen invertierten Wert und kippt.
++ **Synchronizer:** Das Signal von außen kennt den Takt des Controllers nicht. Ein Latch und ein Flip-Flop hintereinander übernehmen es mit dem Takt, bevor das Programm es aus `PINx` liest. Das macht es sehr unwahrscheinlich, dass ein metastabiler Wert das Programm erreicht, und kostet ½ bis 1½ Taktperioden Verzögerung, bei 16 MHz höchstens etwa 94 ns. Davor sitzt ein Schmitt-Trigger (das Symbol mit der Hysteresekurve), der langsame oder verrauschte Flanken säubert.
 
 Den Trick mit `PINx` kann man direkt ausprobieren. Der Sketch schreibt jede Sekunde eine 1 in Bit 5 von `PINB` und gibt danach den Inhalt von PORTB5 aus:
 
@@ -913,12 +917,14 @@ Den Trick mit `PINx` kann man direkt ausprobieren. Der Sketch schreibt jede Seku
 ```cpp       toggle.ino
 void setup() {
   Serial.begin(9600);
+  // (1 << 5) = 0b00100000: nur Bit 5 gesetzt
   DDRB = DDRB | (1 << 5);     // DDRB5 = 1: PB5 (Pin 13) ist Ausgang
 }
 
 void loop() {
   PINB = (1 << 5);            // 1 in PINB5 schreiben: PORTB5 kippt
   Serial.print("PORTB5 = ");
+  // (PORTB >> 5) & 1: Bit 5 nach rechts, Rest ausblenden
   Serial.println((PORTB >> 5) & 1);
   delay(1000);
 }
@@ -943,8 +949,8 @@ Jedes Schreiben einer 1 in PINB5 kippt das Flip-Flop PORTxn: 0 → 1 → 0 → 1
 Diese Punkte fassen die Vorlesung zusammen. Wenn Sie die Fragen darunter beantworten können, haben Sie das Handwerkszeug, um in der nächsten Vorlesung aus Flip-Flops und Schaltnetzen eigene Schaltwerke zu entwerfen.
 
 + **Rückkopplung macht Speicher:** Schaltnetze sind zustandslos; erst ein rückgekoppelter Gatterausgang hält einen Wert. Die gesteuerte Rückkopplung ergibt das **SR-Latch** mit den Eingängen Set und Reset, aufgebaut aus zwei NOR- oder zwei NAND-Gattern.
-+ **Der D-Latch** erzeugt aus einem Dateneingang $D$ die beiden Signale $S$ und $R$ als Komplement voneinander; die unbestimmte Belegung $S = R = 1$ kann so nicht mehr auftreten.
-+ **Zustandsgesteuert oder flankengesteuert:** Ein zustandsgesteuertes Flip-Flop (Latch) übernimmt die Eingänge, solange der Takt aktiv ist, und kann sich in einer Taktphase mehrfach ändern. **Main-Subsidiary-** und **flankengesteuerte** Flip-Flops übernehmen Änderungen nur zu einem definierten Zeitpunkt. Dafür muss der Eingang während der Setup- und Haltezeit stabil sein.
++ **Das D-Latch** erzeugt aus einem Dateneingang $D$ die beiden Signale $S$ und $R$ als Komplement voneinander; die verbotene Belegung $S = R = 1$ kann so nicht mehr auftreten.
++ **Zustandsgesteuert oder flankengesteuert:** Ein Latch (zustandsgesteuert) übernimmt die Eingänge, solange der Takt aktiv ist, und kann sich in einer Taktphase mehrfach ändern. **Main-Subsidiary-** und **flankengesteuerte** Flip-Flops ändern ihren Ausgang nur zu einem definierten Zeitpunkt, einmal pro Takt. Dafür muss der Eingang während der Setup- und Haltezeit stabil sein.
 + **JK- und T-Flip-Flop:** Beim JK-Flip-Flop ist $J = K = 1$ erlaubt und lässt den Ausgang mit jeder wirksamen Flanke wechseln. Das **T-Flip-Flop** schaltet bei $T = 1$ mit jeder Flanke um; es entsteht aus einem JK-Flip-Flop mit verbundenen Eingängen oder aus einem D-Flip-Flop mit $D = T \oplus Q$.
 + **Anwendungen:** Flip-Flops halten Ereignisse fest (Temperaturüberwachung), entprellen Taster und teilen im asynchronen Zähler die Taktfrequenz. Im ATmega328P speichern D-Flip-Flops Richtung und Ausgangswert jedes Pins, und ein Synchronizer aus Latch und Flip-Flop liest den Eingang.
 
@@ -952,8 +958,8 @@ Diese Punkte fassen die Vorlesung zusammen. Wenn Sie die Fragen darunter beantwo
 
 + Warum braucht ein Rechner Speicherelemente, und warum kann ein Schaltnetz die Lampe mit Ein- und Aus-Taster nicht steuern?
 + Beschreiben Sie die Eingangsbelegungen und die zugehörigen Zustandsänderungen am SR-Latch. Was geschieht, wenn $S$ und $R$ gleichzeitig 1 sind und danach gleichzeitig auf 0 gehen?
-+ Wie erzeugt der D-Latch aus einem Dateneingang die Signale $S$ und $R$, und welches Problem des SR-Latches ist damit gelöst?
-+ Welche anderen Flip-Flop-Typen kennen Sie, und wo liegen ihre Vorteile gegenüber dem SR-Flip-Flop?
++ Wie erzeugt das D-Latch aus einem Dateneingang die Signale $S$ und $R$, und welches Problem des SR-Latches ist damit gelöst?
++ Welche anderen Flip-Flop-Typen kennen Sie, und wo liegen ihre Vorteile gegenüber dem SR-Latch?
 + Erläutern Sie die Begriffe „zustandsgesteuert“ und „flankengesteuert“. Warum ist ein zustandsgesteuertes Flip-Flop für viele Anwendungen ungeeignet, und wie löst das Main-Subsidiary-Prinzip das Problem?
 + Was bedeuten Setup- und Haltezeit, und warum liest der ATmega328P einen Pin über einen Synchronizer?
 + Wie bauen Sie aus einem D-Flip-Flop ein T-Flip-Flop?
@@ -986,7 +992,7 @@ Setzen (1), Speichern (1), Rücksetzen (0), Speichern (0), Setzen (1), Speichern
 
 **Aufgabe 2: Latch oder Flip-Flop?**
 
-Beide Lampen in der Schaltung „Latch und Flip-Flop im Vergleich“ sind aus, $D = 0$ und $C = 0$. Sie schalten nacheinander (1) $C$ auf 1, (2) $D$ auf 1, (3) $C$ auf 0 und (4) $D$ auf 0.
+In der Schaltung „Latch und Flip-Flop im Vergleich“ stehen $D$ und $C$ auf 0, „Q Latch“ ist grau, „Q Flip-Flop“ aus. Sie schalten nacheinander (1) $C$ auf 1, (2) $D$ auf 1, (3) $C$ auf 0 und (4) $D$ auf 0.
 
 **Was zeigen die Lampen danach?**
 
@@ -996,7 +1002,7 @@ Beide Lampen in der Schaltung „Latch und Flip-Flop im Vergleich“ sind aus, $
 [( )] beide an
 ***************************************************************
 
-Bei (1) übernehmen beide $D = 0$. Bei (2) folgt nur der transparente Latch und zeigt 1, das Flip-Flop hat seine Flanke schon gehabt. Bei (3) schließt der Latch und hält die 1; die fallende Flanke ändert am Flip-Flop nichts. Bei (4) sind beide geschlossen. Probieren Sie es im Simulator aus.
+Bei (1) übernehmen beide $D = 0$. Bei (2) folgt nur das transparente Latch und zeigt 1, das Flip-Flop hat seine Flanke schon gehabt. Bei (3) schließt das Latch und hält die 1; die fallende Flanke ändert am Flip-Flop nichts. Bei (4) sind beide geschlossen. Probieren Sie es im Simulator aus.
 
 ***************************************************************
 
@@ -1031,7 +1037,7 @@ Im SR-Latch aus zwei NOR-Gattern gilt $Y' = \overline{\overline{Y+S} + R}$. Der 
 1. Weisen Sie nach, dass $P = \overline{Y}$ gilt, solange nicht $S = R = 1$ anliegt. Gehen Sie die Fälle Speichern, Setzen und Rücksetzen durch.
 2. Was geschieht bei $S = R = 1$, und was, wenn danach beide Eingänge gleichzeitig auf 0 gehen?
 
-Wer mag, probiert das SR-Flip-Flop zusätzlich in der Elektroniksimulation TinkerCAD aus: [Beispiel](https://www.tinkercad.com/things/2u00e0a3qoq-sr-flip-flop-using-nand-gate).
+Wer mag, probiert das SR-Latch zusätzlich in der Elektroniksimulation TinkerCAD aus (dort aus NAND-Gattern, also mit low-aktiven Eingängen): [Beispiel](https://www.tinkercad.com/things/2u00e0a3qoq-sr-flip-flop-using-nand-gate).
 
 **Aufgabe 5: Entprellen**
 
