@@ -1,5 +1,5 @@
 {
- "stand": "21.11.2026",
+ "stand": "24.11.2026",
  "version": "0.5.2",
  "kurs": {
   "basis": "https://liascript.github.io/course/?https://raw.githubusercontent.com/TUBAF-IfI-LiaScript/VL_EingebetteteSysteme/master/",
@@ -408,9 +408,11 @@
    "anwendet": [],
    "abschnitte": [
     "Schaltwerke",
+    "Aufwärmen",
     "Motivation",
     "Wiederholung: Beschreibung von Flip-Flops",
     "Grundkonzept",
+    "Codeschloss",
     "Beispiel",
     "Vorgehensweise",
     "Automaten Typen",
@@ -419,9 +421,10 @@
     "Beispielanwendung",
     "Race Conditions in Schaltwerken",
     "Vermeidungsstrategien",
-    "Debugging von Timing-Problemen",
+    "Und im ATmega328P?",
     "Was Sie heute mitnehmen",
-    "Übungsaufgaben"
+    "Hausaufgaben",
+    "Nächste Vorlesung"
    ]
   },
   {
@@ -1488,7 +1491,7 @@
    "name": "Schaltwerk",
    "linie": "zustand",
    "vl": 7,
-   "abschnitt": 2,
+   "abschnitt": 3,
    "ebene": 1,
    "code": false,
    "erklaerung": "Schaltnetz plus Zustandsspeicher mit Rückkopplung: Die Ausgabe hängt von Eingaben und gespeichertem Zustand ab – damit ist jeder Rechner ein Schaltwerk.",
@@ -1499,7 +1502,7 @@
    "name": "invertierte Wahrheitstafel",
    "linie": "zustand",
    "vl": 7,
-   "abschnitt": 3,
+   "abschnitt": 4,
    "ebene": 2,
    "code": false,
    "erklaerung": "Beantwortet für ein Flip-Flop die umgekehrte Frage: Wie müssen die Eingänge belegt sein, damit aus Q(t) der gewünschte Folgezustand Q(t+1) wird?",
@@ -1510,7 +1513,7 @@
    "name": "endlicher Automat",
    "linie": "zustand",
    "vl": 7,
-   "abschnitt": 4,
+   "abschnitt": 5,
    "ebene": 1,
    "code": false,
    "erklaerung": "Modell aus endlich vielen Zuständen, einem Startzustand und Übergängen, die je nach Eingabe in den nächsten Zustand führen.",
@@ -1521,7 +1524,7 @@
    "name": "Zustandsdiagramm",
    "linie": "zustand",
    "vl": 7,
-   "abschnitt": 4,
+   "abschnitt": 5,
    "ebene": 1,
    "code": false,
    "erklaerung": "Graph, in dem Kreise die Zustände und beschriftete Pfeile die Übergänge bei bestimmten Eingaben zeigen – etwa Tür offen/geschlossen oder ein Codeschloss.",
@@ -1532,7 +1535,7 @@
    "name": "Zustandstabelle",
    "linie": "zustand",
    "vl": 7,
-   "abschnitt": 5,
+   "abschnitt": 7,
    "ebene": 2,
    "code": false,
    "erklaerung": "Tabellarische Form des Zustandsdiagramms: Für jeden aktuellen Zustand und jede Eingabe steht dort der Folgezustand.",
@@ -1543,7 +1546,7 @@
    "name": "Zustandskodierung",
    "linie": "zustand",
    "vl": 7,
-   "abschnitt": 5,
+   "abschnitt": 7,
    "ebene": 2,
    "code": false,
    "erklaerung": "Jedem Zustand wird eine Bitfolge zugeordnet; für n Zustände braucht man aufgerundet log2(n) Flip-Flops, bei vier Zuständen also zwei.",
@@ -1554,7 +1557,7 @@
    "name": "Entwurfsschritte eines Schaltwerks",
    "linie": "zustand",
    "vl": 7,
-   "abschnitt": 6,
+   "abschnitt": 8,
    "ebene": 2,
    "code": false,
    "erklaerung": "Zustandsdiagramm → Zustandstabelle → Kodierung → Wahrheitstafel für Zustände und Ausgaben → DNF oder KNF → Minimierung.",
@@ -1565,7 +1568,7 @@
    "name": "Moore-Automat",
    "linie": "zustand",
    "vl": 7,
-   "abschnitt": 7,
+   "abschnitt": 9,
    "ebene": 1,
    "code": false,
    "erklaerung": "Automat, dessen Ausgabe nur vom aktuellen Zustand abhängt; die Ausgabe ändert sich deshalb nur taktsynchron.",
@@ -1576,7 +1579,7 @@
    "name": "Mealy-Automat",
    "linie": "zustand",
    "vl": 7,
-   "abschnitt": 7,
+   "abschnitt": 9,
    "ebene": 1,
    "code": false,
    "erklaerung": "Automat, dessen Ausgabe vom aktuellen Zustand und direkt von der Eingabe abhängt; reagiert schneller und kommt oft mit weniger Zuständen aus.",
@@ -1587,7 +1590,7 @@
    "name": "Medwedew-Automat",
    "linie": "zustand",
    "vl": 7,
-   "abschnitt": 7,
+   "abschnitt": 9,
    "ebene": 2,
    "code": false,
    "erklaerung": "Sonderfall des Moore-Automaten ohne eigene Ausgabelogik: Die gespeicherten Zustände sind direkt die Ausgabe.",
@@ -1598,7 +1601,7 @@
    "name": "Wahl des Flip-Flop-Typs",
    "linie": "zustand",
    "vl": 7,
-   "abschnitt": 8,
+   "abschnitt": 10,
    "ebene": 2,
    "code": false,
    "erklaerung": "Jeder getaktete Flip-Flop-Typ eignet sich für ein Schaltwerk; über die Don't-care-Einträge seiner invertierten Wahrheitstafel bestimmt er, wie aufwendig die Beschaltung wird.",
@@ -1609,10 +1612,32 @@
    "name": "Race Condition",
    "linie": "zustand",
    "vl": 7,
-   "abschnitt": 11,
+   "abschnitt": 13,
    "ebene": 2,
    "code": false,
-   "erklaerung": "Das Verhalten hängt davon ab, welches Signal zuerst ankommt – etwa wenn zwei Flip-Flops gleichzeitig umschalten sollen und kurz ein Zwischenzustand entsteht.",
+   "erklaerung": "Das Verhalten hängt davon ab, welches Signal zuerst ankommt – etwa wenn zwei Flip-Flops gleichzeitig umschalten sollen und kurz ein Zwischenzustand entsteht. Im synchronen Schaltwerk harmlos für den Zustand, nicht aber für dekodierte Ausgänge.",
+   "fehlvorstellung": null
+  },
+  {
+   "id": "fmax",
+   "name": "maximale Taktfrequenz",
+   "linie": "zustand",
+   "vl": 7,
+   "abschnitt": 14,
+   "ebene": 2,
+   "code": false,
+   "erklaerung": "Nach jeder Flanke muss das Signal durch Flip-Flop und Schaltnetz laufen und vor der nächsten Flanke die Setup-Zeit lang stabil sein: T ≥ t_FF + t_Schaltnetz + t_Setup.",
+   "fehlvorstellung": "„Die Taktfrequenz ist nur durch die Flip-Flops begrenzt.“"
+  },
+  {
+   "id": "automat_sw",
+   "name": "Automat als Tabelle im Programm",
+   "linie": "zustand",
+   "vl": 7,
+   "abschnitt": 15,
+   "ebene": 2,
+   "code": false,
+   "erklaerung": "Die Zustandstabelle wird zu einem Feld naechster[Zustand][Eingabe]; jeder Schleifendurchlauf ist ein Takt. Auch Peripheriemodule wie TWI arbeiten als Automat und melden ihren Zustand in einem Statusregister.",
    "fehlvorstellung": null
   },
   {
@@ -2797,6 +2822,21 @@
    "text": "ist Spezialfall vom"
   },
   {
+   "von": "race",
+   "nach": "fmax",
+   "text": "wird im synchronen Design vermieden durch Beachten der"
+  },
+  {
+   "von": "setuphold",
+   "nach": "fmax",
+   "text": "geht ein in die"
+  },
+  {
+   "von": "zustandstabelle",
+   "nach": "automat_sw",
+   "text": "wird im Programm zur"
+  },
+  {
    "von": "inv_wt",
    "nach": "fftyp",
    "text": "bestimmt den Aufwand bei der"
@@ -3526,7 +3566,7 @@
    "titel": "Detektor für drei aufeinanderfolgende Einsen",
    "fach": "Signalverarbeitung",
    "vl": 7,
-   "abschnitt": 5,
+   "abschnitt": 7,
    "datensatz": "Binärsequenzdetektor als Moore- und als Mealy-Automat, realisiert mit D- und JK-Flip-Flops in der Simulation",
    "schlagworte": [
     "moore",
@@ -3541,8 +3581,8 @@
    "titel": "Sequentieller Binärzahlenvergleicher",
    "fach": "Rechnerbau",
    "vl": 7,
-   "abschnitt": 10,
-   "datensatz": "Zwei Zahlen werden stellenweise durch Schieberegister geschoben; ein Medwedew-Automat merkt sich größer/kleiner/gleich, Umsetzung mit D-Flip-Flops und PAL",
+   "abschnitt": 12,
+   "datensatz": "Zwei Zahlen kommen bitweise nacheinander an, höchstwertige Stelle zuerst; ein Medwedew-Automat merkt sich gleich/größer/kleiner – Hardware gegen Zeit getauscht im Vergleich zum parallelen Komparator; Simulation und PAL",
    "schlagworte": [
     "medwedew",
     "entwurf",

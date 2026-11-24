@@ -2,6 +2,21 @@
 
 Alle wesentlichen Änderungen an diesem Kurs werden in dieser Datei dokumentiert.
 
+## [0.7.25] - 2026-11-24
+
+### Changed
+- **07_Schaltwerke (0.1.0):** Überarbeitet im Format der Vorlesungen 02–06 und 08:
+  - **Neu:** Aufwärmen (T-Flip-Flop als kleinstes Schaltwerk), eigene Folie „Codeschloss“ mit Quiz zur Folge `707022`, 13 Quizze statt keinem, KV-Diagramme über das KarnaughMap-Template, „Und im ATmega328P?“ (TWI-Statusregister als Hardware-Automat; Sketch mit Zustandstabelle `naechster[Zustand][E]` und LED), Hausaufgaben Teil A (5 Aufgaben mit Selbstkontrolle) und Teil B (Sequenzdetektor `011`, Blatt 2 Aufgabe 3), „Nächste Vorlesung“ mit Hinweis auf Übung 1.
+  - **Simulationen neu aufgebaut** (DigitalJS, headless geprüft): Moore- und Mealy-Detektor mit D-Flip-Flops, die mit 0 starten (Startanleitungen entfallen), Zustandslampen $F$, $G$; Moore-Detektor mit JK-Flip-Flops als `Subcircuit` aus D-Flip-Flop und $D = J\overline{Q} + \overline{K}Q$; serieller Vergleicher mit Tastern statt Schieberegister.
+  - **Grundkonzept:** Automat mit Ausgabe $(Q, \Sigma, \Omega, \delta, \lambda, q_0)$ statt Akzeptor mit Endzuständen; Moore $\lambda: Q \to \Omega$, Mealy $\lambda: Q \times \Sigma \to \Omega$.
+  - **Race Conditions:** Bezug auf den Übergang D → A des Detektors, unkritisch für den Zustand, kritisch für dekodierte Ausgänge; maximale Taktfrequenz $T \geq t_{FF} + t_{Schaltnetz} + t_{Setup}$ mit Rechenaufgabe; Synchronizer wie im Pin des ATmega328P. Allgemeine Listen (STA, Clock Domain Crossing, Debugging) entfallen.
+  - Der serielle Vergleicher wird mit dem parallelen Komparator aus VL 05 verglichen (Hardware gegen Zeit).
+
+### Fixed
+- **07_Schaltwerke:** Wahrheitstafel und invertierte Wahrheitstafel waren gleich definiert; Startzustand $q$ statt $q_0$; Ausgabe hieß abwechselnd $Y$, $X$ und $A$ (jetzt durchgehend $Y$); JK-Entwurf des Moore-Automaten mit Mealy-Ausgabe $A = EF$ (richtig $Y = FG$); Spalte $F'$ der zweiten JK-Tabelle durchgehend 0; abgebrochener Satz „In der Simulation sehen Sie …“ mit falschen Gleichungen; Codeschloss-Frage ohne Auflösung; $S = R = 1$ „verboten“; Backtick statt Strich in $F'$; Bild mit Ausgabe „A“ ersetzt.
+- **07_Schaltwerke (0.1.1):** Befunde der Persona-Reviews: Verweis Gray-Code auf VL 03 (nicht VL 08); `TWSR & 0xF8` (untere Bits sind der Vorteiler); Glitch eines dekodierten Ausgangs nicht mehr „kritisch“ genannt (Definition: Endzustand); Moore-Vorteil „Störungen am Eingang erreichen $Y$ nicht direkt“; Codeschloss-Zustand „geöffnet“ heißt O statt E, Erklärung trifft den Fehler (Rückfallziele, nicht fehlende Übergänge), korrigiertes Diagramm; Tupel als Einordnung markiert, Hinweis auf $Q$/$F$ als Mengen; SR-Tafeln mit gleicher Spaltenreihenfolge; „mindestens“ $\lceil \log_2 n \rceil$; Don't-Care-Wahl bei Mealy als $\rightarrow$ statt „=“; Regel $\lambda_{Mealy}(q,e) = \lambda_{Moore}(\delta(q,e))$; Rücksetzeingang und Hängenbleiben des Vergleichers in 11; Synchronizer entprellt nicht; Prellen und `ledState = !ledState` im Aufwärmen; JK-Abschnitt begründet; GAL/CPLD/FPGA als Nachfolger der PAL; ATmega328P 16/20/10 MHz; Kommentare im Sketch; Prüffrage ohne Theoretische Informatik; Hausaufgabe 6 mit Zeitbezug von $y$.
+- **Kurslandkarte:** Begriffe „maximale Taktfrequenz“ und „Automat als Tabelle im Programm“ ergänzt, Anwendung „Serieller Vergleicher“ ohne Schieberegister beschrieben.
+
 ## [0.7.24] - 2026-11-24
 
 ### Added
