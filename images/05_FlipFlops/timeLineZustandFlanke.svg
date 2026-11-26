@@ -1,0 +1,60 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="995" height="370" viewBox="0 0 995 370" font-family="DejaVu Sans, Arial, sans-serif">
+<rect width="995" height="370" fill="white"/>
+<defs><marker id="r" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse"><path d="M0,0 L10,5 L0,10 z" fill="#d0201b"/></marker><marker id="k" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="6" markerHeight="6" orient="auto-start-reverse"><path d="M0,0 L10,5 L0,10 z" fill="#000000"/></marker></defs>
+<line x1="275" y1="20" x2="275" y2="326" stroke="#9a9a9a" stroke-dasharray="3,4"/>
+<line x1="375" y1="20" x2="375" y2="326" stroke="#9a9a9a" stroke-dasharray="3,4"/>
+<line x1="475" y1="20" x2="475" y2="326" stroke="#9a9a9a" stroke-dasharray="3,4"/>
+<line x1="575" y1="20" x2="575" y2="326" stroke="#9a9a9a" stroke-dasharray="3,4"/>
+<line x1="675" y1="20" x2="675" y2="326" stroke="#9a9a9a" stroke-dasharray="3,4"/>
+<line x1="775" y1="20" x2="775" y2="326" stroke="#9a9a9a" stroke-dasharray="3,4"/>
+<line x1="875" y1="20" x2="875" y2="326" stroke="#9a9a9a" stroke-dasharray="3,4"/>
+<line x1="175" y1="68" x2="955.0" y2="68" stroke="#9a9a9a" stroke-dasharray="2,4"/>
+<text x="963.0" y="73" font-size="14">0</text>
+<line x1="175" y1="38" x2="955.0" y2="38" stroke="#9a9a9a" stroke-dasharray="2,4"/>
+<text x="963.0" y="43" font-size="14">1</text>
+<text x="10" y="59.0" font-size="19"><tspan font-style="italic">Clk</tspan></text>
+<polyline points="175.0,68.0 275.0,68.0 275.0,38.0 375.0,38.0 375.0,68.0 475.0,68.0 475.0,38.0 575.0,38.0 575.0,68.0 675.0,68.0 675.0,38.0 775.0,38.0 775.0,68.0 875.0,68.0 875.0,38.0 955.0,38.0" fill="none" stroke="#000000" stroke-width="2.5" stroke-linejoin="miter"/>
+<line x1="275" y1="64" x2="275" y2="46" stroke="#000000" stroke-width="1.5" marker-end="url(#k)"/>
+<line x1="475" y1="64" x2="475" y2="46" stroke="#000000" stroke-width="1.5" marker-end="url(#k)"/>
+<line x1="675" y1="64" x2="675" y2="46" stroke="#000000" stroke-width="1.5" marker-end="url(#k)"/>
+<line x1="875" y1="64" x2="875" y2="46" stroke="#000000" stroke-width="1.5" marker-end="url(#k)"/>
+<line x1="175" y1="130" x2="955.0" y2="130" stroke="#9a9a9a" stroke-dasharray="2,4"/>
+<text x="963.0" y="135" font-size="14">0</text>
+<line x1="175" y1="100" x2="955.0" y2="100" stroke="#9a9a9a" stroke-dasharray="2,4"/>
+<text x="963.0" y="105" font-size="14">1</text>
+<text x="10" y="121.0" font-size="19"><tspan font-style="italic">S</tspan></text>
+<polyline points="175.0,130.0 246.0,130.0 246.0,100.0 346.0,100.0 346.0,130.0 746.0,130.0 746.0,100.0 789.0,100.0 789.0,130.0 955.0,130.0" fill="none" stroke="#1f4fd1" stroke-width="2.5" stroke-linejoin="miter"/>
+<line x1="175" y1="192" x2="955.0" y2="192" stroke="#9a9a9a" stroke-dasharray="2,4"/>
+<text x="963.0" y="197" font-size="14">0</text>
+<line x1="175" y1="162" x2="955.0" y2="162" stroke="#9a9a9a" stroke-dasharray="2,4"/>
+<text x="963.0" y="167" font-size="14">1</text>
+<text x="10" y="183.0" font-size="19"><tspan font-style="italic">R</tspan></text>
+<polyline points="175.0,192.0 404.0,192.0 404.0,162.0 446.0,162.0 446.0,192.0 504.0,192.0 504.0,162.0 561.0,162.0 561.0,192.0 661.0,192.0 661.0,162.0 732.0,162.0 732.0,192.0 955.0,192.0" fill="none" stroke="#1f4fd1" stroke-width="2.5" stroke-linejoin="miter"/>
+<line x1="175" y1="254" x2="955.0" y2="254" stroke="#9a9a9a" stroke-dasharray="2,4"/>
+<text x="963.0" y="259" font-size="14">0</text>
+<line x1="175" y1="224" x2="955.0" y2="224" stroke="#9a9a9a" stroke-dasharray="2,4"/>
+<text x="963.0" y="229" font-size="14">1</text>
+<text x="10" y="245.0" font-size="19"><tspan font-style="italic">Q</tspan><tspan font-size="12" dy="5">zustandsgesteuert</tspan></text>
+<polyline points="175.0,254.0 289.0,254.0 289.0,224.0 518.0,224.0 518.0,254.0 760.0,254.0 760.0,224.0 955.0,224.0" fill="none" stroke="#d0201b" stroke-width="2.5" stroke-linejoin="miter"/>
+<line x1="175" y1="316" x2="955.0" y2="316" stroke="#9a9a9a" stroke-dasharray="2,4"/>
+<text x="963.0" y="321" font-size="14">0</text>
+<line x1="175" y1="286" x2="955.0" y2="286" stroke="#9a9a9a" stroke-dasharray="2,4"/>
+<text x="963.0" y="291" font-size="14">1</text>
+<text x="10" y="307.0" font-size="19"><tspan font-style="italic">Q</tspan><tspan font-size="12" dy="5">flankengesteuert</tspan></text>
+<polyline points="175.0,316.0 289.0,316.0 289.0,286.0 689.0,286.0 689.0,316.0 955.0,316.0" fill="none" stroke="#d0201b" stroke-width="2.5" stroke-linejoin="miter"/>
+<line x1="253" y1="270" x2="275" y2="270" stroke="#000000" stroke-width="1.2" marker-end="url(#k)"/>
+<line x1="311.0" y1="270" x2="289.0" y2="270" stroke="#000000" stroke-width="1.2" marker-end="url(#k)"/>
+<text x="317.0" y="275" font-size="14" fill="#000000">2Δt</text>
+<line x1="482.0" y1="270" x2="504.0" y2="270" stroke="#000000" stroke-width="1.2" marker-end="url(#k)"/>
+<line x1="540.0" y1="270" x2="518.0" y2="270" stroke="#000000" stroke-width="1.2" marker-end="url(#k)"/>
+<text x="546.0" y="275" font-size="14" fill="#000000">2Δt</text>
+<line x1="724.0" y1="270" x2="746.0" y2="270" stroke="#000000" stroke-width="1.2" marker-end="url(#k)"/>
+<line x1="782.0" y1="270" x2="760.0" y2="270" stroke="#000000" stroke-width="1.2" marker-end="url(#k)"/>
+<text x="788.0" y="275" font-size="14" fill="#000000">2Δt</text>
+<line x1="253" y1="332" x2="275" y2="332" stroke="#000000" stroke-width="1.2" marker-end="url(#k)"/>
+<line x1="311.0" y1="332" x2="289.0" y2="332" stroke="#000000" stroke-width="1.2" marker-end="url(#k)"/>
+<text x="317.0" y="337" font-size="14" fill="#000000">2Δt</text>
+<line x1="653" y1="332" x2="675" y2="332" stroke="#000000" stroke-width="1.2" marker-end="url(#k)"/>
+<line x1="711.0" y1="332" x2="689.0" y2="332" stroke="#000000" stroke-width="1.2" marker-end="url(#k)"/>
+<text x="717.0" y="337" font-size="14" fill="#000000">2Δt</text>
+</svg>

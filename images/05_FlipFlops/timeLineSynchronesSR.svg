@@ -1,0 +1,48 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="903" height="308" viewBox="0 0 903 308" font-family="DejaVu Sans, Arial, sans-serif">
+<rect width="903" height="308" fill="white"/>
+<defs><marker id="r" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse"><path d="M0,0 L10,5 L0,10 z" fill="#d0201b"/></marker><marker id="k" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="6" markerHeight="6" orient="auto-start-reverse"><path d="M0,0 L10,5 L0,10 z" fill="#000000"/></marker></defs>
+<line x1="204" y1="20" x2="204" y2="264" stroke="#9a9a9a" stroke-dasharray="3,4"/>
+<line x1="288" y1="20" x2="288" y2="264" stroke="#9a9a9a" stroke-dasharray="3,4"/>
+<line x1="372" y1="20" x2="372" y2="264" stroke="#9a9a9a" stroke-dasharray="3,4"/>
+<line x1="456" y1="20" x2="456" y2="264" stroke="#9a9a9a" stroke-dasharray="3,4"/>
+<line x1="540" y1="20" x2="540" y2="264" stroke="#9a9a9a" stroke-dasharray="3,4"/>
+<line x1="624" y1="20" x2="624" y2="264" stroke="#9a9a9a" stroke-dasharray="3,4"/>
+<line x1="708" y1="20" x2="708" y2="264" stroke="#9a9a9a" stroke-dasharray="3,4"/>
+<line x1="792" y1="20" x2="792" y2="264" stroke="#9a9a9a" stroke-dasharray="3,4"/>
+<line x1="120" y1="68" x2="863.4" y2="68" stroke="#9a9a9a" stroke-dasharray="2,4"/>
+<text x="871.4" y="73" font-size="14">0</text>
+<line x1="120" y1="38" x2="863.4" y2="38" stroke="#9a9a9a" stroke-dasharray="2,4"/>
+<text x="871.4" y="43" font-size="14">1</text>
+<text x="10" y="59.0" font-size="19"><tspan font-style="italic">Clk</tspan></text>
+<polyline points="120.0,68.0 204.0,68.0 204.0,38.0 288.0,38.0 288.0,68.0 372.0,68.0 372.0,38.0 456.0,38.0 456.0,68.0 540.0,68.0 540.0,38.0 624.0,38.0 624.0,68.0 708.0,68.0 708.0,38.0 792.0,38.0 792.0,68.0 863.4,68.0" fill="none" stroke="#000000" stroke-width="2.5" stroke-linejoin="miter"/>
+<line x1="120" y1="130" x2="863.4" y2="130" stroke="#9a9a9a" stroke-dasharray="2,4"/>
+<text x="871.4" y="135" font-size="14">0</text>
+<line x1="120" y1="100" x2="863.4" y2="100" stroke="#9a9a9a" stroke-dasharray="2,4"/>
+<text x="871.4" y="105" font-size="14">1</text>
+<text x="10" y="121.0" font-size="19"><tspan font-style="italic">S</tspan></text>
+<polyline points="120.0,130.0 179.6,130.0 179.6,100.0 324.1,100.0 324.1,130.0 564.4,130.0 564.4,100.0 599.6,100.0 599.6,130.0 660.1,130.0 660.1,100.0 696.2,100.0 696.2,130.0 863.4,130.0" fill="none" stroke="#1f4fd1" stroke-width="2.5" stroke-linejoin="miter"/>
+<line x1="120" y1="192" x2="863.4" y2="192" stroke="#9a9a9a" stroke-dasharray="2,4"/>
+<text x="871.4" y="197" font-size="14">0</text>
+<line x1="120" y1="162" x2="863.4" y2="162" stroke="#9a9a9a" stroke-dasharray="2,4"/>
+<text x="871.4" y="167" font-size="14">1</text>
+<text x="10" y="183.0" font-size="19"><tspan font-style="italic">R</tspan></text>
+<polyline points="120.0,192.0 312.4,192.0 312.4,162.0 347.6,162.0 347.6,192.0 396.4,192.0 396.4,162.0 444.2,162.0 444.2,192.0 612.2,192.0 612.2,162.0 671.9,162.0 671.9,192.0 863.4,192.0" fill="none" stroke="#1f4fd1" stroke-width="2.5" stroke-linejoin="miter"/>
+<line x1="120" y1="254" x2="863.4" y2="254" stroke="#9a9a9a" stroke-dasharray="2,4"/>
+<text x="871.4" y="259" font-size="14">0</text>
+<line x1="120" y1="224" x2="863.4" y2="224" stroke="#9a9a9a" stroke-dasharray="2,4"/>
+<text x="871.4" y="229" font-size="14">1</text>
+<text x="10" y="245.0" font-size="19"><tspan font-style="italic">Q</tspan></text>
+<polyline points="120.0,254.0 215.8,254.0 215.8,224.0 408.1,224.0 408.1,254.0 576.1,254.0 576.1,224.0 624.0,224.0 624.0,254.0 863.4,254.0" fill="none" stroke="#d0201b" stroke-width="2.5" stroke-linejoin="miter"/>
+<line x1="182" y1="270" x2="204" y2="270" stroke="#000000" stroke-width="1.2" marker-end="url(#k)"/>
+<line x1="237.76" y1="270" x2="215.76" y2="270" stroke="#000000" stroke-width="1.2" marker-end="url(#k)"/>
+<text x="243.76" y="275" font-size="14" fill="#000000">2Δt</text>
+<line x1="374.36" y1="270" x2="396.36" y2="270" stroke="#000000" stroke-width="1.2" marker-end="url(#k)"/>
+<line x1="430.12" y1="270" x2="408.12" y2="270" stroke="#000000" stroke-width="1.2" marker-end="url(#k)"/>
+<text x="436.12" y="275" font-size="14" fill="#000000">2Δt</text>
+<line x1="542.36" y1="270" x2="564.36" y2="270" stroke="#000000" stroke-width="1.2" marker-end="url(#k)"/>
+<line x1="598.12" y1="270" x2="576.12" y2="270" stroke="#000000" stroke-width="1.2" marker-end="url(#k)"/>
+<text x="604.12" y="275" font-size="14" fill="#000000">2Δt</text>
+<line x1="590.24" y1="288" x2="612.24" y2="288" stroke="#000000" stroke-width="1.2" marker-end="url(#k)"/>
+<line x1="646.0" y1="288" x2="624.0" y2="288" stroke="#000000" stroke-width="1.2" marker-end="url(#k)"/>
+<text x="652.0" y="293" font-size="14" fill="#000000">2Δt</text>
+</svg>

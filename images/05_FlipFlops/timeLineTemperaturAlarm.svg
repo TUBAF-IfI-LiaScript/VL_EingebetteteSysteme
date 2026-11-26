@@ -1,0 +1,30 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1013" height="306" viewBox="0 0 1013 306" font-family="DejaVu Sans, Arial, sans-serif">
+<rect width="1013" height="306" fill="white"/>
+<defs><marker id="r" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse"><path d="M0,0 L10,5 L0,10 z" fill="#d0201b"/></marker><marker id="k" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="6" markerHeight="6" orient="auto-start-reverse"><path d="M0,0 L10,5 L0,10 z" fill="#000000"/></marker></defs>
+<line x1="150" y1="68" x2="973.2" y2="68" stroke="#9a9a9a" stroke-dasharray="2,4"/>
+<text x="981.2" y="73" font-size="14">0</text>
+<line x1="150" y1="38" x2="973.2" y2="38" stroke="#9a9a9a" stroke-dasharray="2,4"/>
+<text x="981.2" y="43" font-size="14">1</text>
+<text x="10" y="59.0" font-size="19"><tspan font-style="italic">S</tspan><tspan font-size="12" dy="5">Temperatur</tspan></text>
+<polyline points="150.0,68.0 234.0,68.0 234.0,38.0 332.3,38.0 332.3,68.0 429.7,68.0 429.7,38.0 471.7,38.0 471.7,68.0 639.7,68.0 639.7,38.0 738.0,38.0 738.0,68.0 973.2,68.0" fill="none" stroke="#1f4fd1" stroke-width="2.5" stroke-linejoin="miter"/>
+<line x1="150" y1="130" x2="973.2" y2="130" stroke="#9a9a9a" stroke-dasharray="2,4"/>
+<text x="981.2" y="135" font-size="14">0</text>
+<line x1="150" y1="100" x2="973.2" y2="100" stroke="#9a9a9a" stroke-dasharray="2,4"/>
+<text x="981.2" y="105" font-size="14">1</text>
+<text x="10" y="121.0" font-size="19"><tspan font-style="italic">R</tspan><tspan font-size="12" dy="5">Quittung</tspan></text>
+<polyline points="150.0,130.0 794.3,130.0 794.3,100.0 891.7,100.0 891.7,130.0 973.2,130.0" fill="none" stroke="#1f4fd1" stroke-width="2.5" stroke-linejoin="miter"/>
+<line x1="150" y1="192" x2="973.2" y2="192" stroke="#9a9a9a" stroke-dasharray="2,4"/>
+<text x="981.2" y="197" font-size="14">0</text>
+<line x1="150" y1="162" x2="973.2" y2="162" stroke="#9a9a9a" stroke-dasharray="2,4"/>
+<text x="981.2" y="167" font-size="14">1</text>
+<text x="10" y="183.0" font-size="19"><tspan font-style="italic">Q</tspan><tspan font-size="12" dy="5">Alarm</tspan></text>
+<polyline points="150.0,192.0 250.8,192.0 250.8,162.0 811.1,162.0 811.1,192.0 973.2,192.0" fill="none" stroke="#d0201b" stroke-width="2.5" stroke-linejoin="miter"/>
+<line x1="150" y1="242" x2="983.2" y2="242" stroke="#000000" stroke-width="1.5" marker-end="url(#k)"/>
+<text x="983.2" y="264" font-size="15" text-anchor="end">Zeit</text>
+<line x1="212.0" y1="208" x2="234.0" y2="208" stroke="#000000" stroke-width="1.2" marker-end="url(#k)"/>
+<line x1="272.8" y1="208" x2="250.8" y2="208" stroke="#000000" stroke-width="1.2" marker-end="url(#k)"/>
+<text x="278.8" y="213" font-size="14" fill="#000000">2Δt</text>
+<line x1="772.28" y1="208" x2="794.28" y2="208" stroke="#000000" stroke-width="1.2" marker-end="url(#k)"/>
+<line x1="833.08" y1="208" x2="811.08" y2="208" stroke="#000000" stroke-width="1.2" marker-end="url(#k)"/>
+<text x="839.08" y="213" font-size="14" fill="#000000">2Δt</text>
+</svg>

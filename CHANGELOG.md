@@ -2,6 +2,12 @@
 
 Alle wesentlichen Änderungen an diesem Kurs werden in dieser Datei dokumentiert.
 
+## [0.7.27] - 2026-11-26
+
+### Changed
+- **06_FlipFlops (0.1.3):** Einheitliche Zeitdiagramme: alle sieben Zeitverläufe als SVG im gleichen Stil (Takt schwarz, Eingänge blau, Ausgänge rot, Verzögerungen als 2Δt bzw. Δt, τ), erzeugt von `images/05_FlipFlops/zeitdiagramme.py`, das die Ausgänge aus den Eingängen simuliert. Ersetzt die ASCII-Diagramme (Temperaturalarm, synchrones SR-Latch, Flankendetektor, zustands-/flankengesteuert, JK) und die PNGs `timeLineMasterSlave.png` (unklare Herkunft) und `AsynchronerBinaerZaehlerTiming.png` (in VL 08 noch verwendet). Zustands- und flankengesteuertes Flip-Flop stehen jetzt in einem Diagramm mit $Q_\text{zustandsgesteuert}$ und $Q_\text{flankengesteuert}$ statt nebeneinander; Text angepasst. Signalverläufe unverändert.
+- **06_FlipFlops (0.1.3):** Main-Subsidiary-Flip-Flop ohne „Master/Slave“ in den Abbildungen: Schaltung als ASCII-Skizze mit beschrifteten Latches „Main“ und „Subsidiary“ (ersetzt `MasterSlave.png`/`.circ`), Zeitdiagramm mit $Q_\text{Main}$, $S_\text{Subsidiary}$, $R_\text{Subsidiary}$.
+
 ## [0.7.25] - 2026-11-24
 
 ### Changed

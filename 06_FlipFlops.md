@@ -2,7 +2,7 @@
 
 author:   Sebastian Zug & André Dietrich & Fabian Bär & Claude Code (Opus 5.5)
 email:    sebastian.zug@informatik.tu-freiberg.de & andre.dietrich@informatik.tu-freiberg.de & fabian.baer@student.tu-freiberg.de
-version:  0.1.2
+version:  0.1.3
 language: de
 narrator: Deutsch Female
 
@@ -466,23 +466,7 @@ style="width: 60%;"
 
 Der Temperatursensor hat einen digitalen Ausgang, der beim Überschreiten einer Grenztemperatur High-Pegel annimmt. Das SR-Latch hält dieses Ereignis in `Q` fest, auch wenn die Temperatur wieder sinkt, bis jemand den Alarm mit `R` quittiert.
 
-<!--
-style="width: 80%; min-width: 420px; max-width: 720px;"
--->
-```ascii
-           ^
-Temperatur |       +------+      +--+           +------+
-S          |       |      |      |  |           |      |
-           | ------+      +------+  +-----------+      +-----------------
-           |                                               +------+
-R          |                                               |      |
-           | ----------------------------------------------+      +------
-           |         +---------------------------------------+
-Q          |         |                                       |
-           | --------+                                       +-----------
-           +-----------------------------------------------------------------> .
-                                                                        Zeit
-```
+![Zeitdiagramm: Das SR-Latch setzt Q beim ersten Temperaturpuls an S und hält den Alarm, bis R quittiert](./images/05_FlipFlops/timeLineTemperaturAlarm.svg)<!-- style="width: 80%; max-width: 900px;" -->
 
 __Anwendungsbeispiel 2: Taster entprellen__
 
@@ -555,28 +539,9 @@ Für einen synchronisierten Zustandswechsel bekommt das Latch einen Takteingang 
 | 1                                     | 0                                     | 1        | 0             |
 | 1                                     | 1                                     | 1        | verboten      |
 
-Beachten Sie, dass sich mit dem <span style="color: #ff0000">d</span>-Zustand die Wertetabelle deutlich verkürzt. In den Zeitdiagrammen steht „2t“ vereinfacht für eine Verzögerung von etwa zwei Gatterlaufzeiten $2\Delta t$. Genau genommen hängt sie vom Signalweg ab: Beim Setzen durchläuft das Signal hier drei Gatter (UND und beide NOR), beim Rücksetzen zwei.
+Beachten Sie, dass sich mit dem <span style="color: #ff0000">d</span>-Zustand die Wertetabelle deutlich verkürzt. In den Zeitdiagrammen markiert $2\Delta t$ vereinfacht eine Verzögerung von etwa zwei Gatterlaufzeiten. Genau genommen hängt sie vom Signalweg ab: Beim Setzen durchläuft das Signal hier drei Gatter (UND und beide NOR), beim Rücksetzen zwei.
 
-<!--
-style="width: 80%; min-width: 420px; max-width: 720px;"
--->
-```ascii
-
-    |       +------+      +------+      +------+      +------+
-Clk |       |      |      |      |      |      |      |      |
-    | ------+      +------+      +------+      +------+      +------
-    |     +------+                        +--+    +--+
-S   |     | :    |                        |  |    |  |
-    | ----+ :    +------------------------+  +----+  +--------------
-    |       :        +--+   +---+         :   +----+
-R   |       :        |  |   |   |         :   |    |
-    | ------:--------+  +---+   +---------:---+    +----------------
-    |       :  +---------------+          :  +---+                    1
-Q   |       :  |            :  |          :  |:  |
-    |-------:--+            :  +----------:--+:  +------------------- 0
-    +-------:--:------------:--:----------:--::--:-------------------->        .
-             2t              2t            2t  2t
-```
+![Zeitdiagramm eines synchronen SR-Latches: Q ändert sich nur, solange Clk = 1 ist](./images/05_FlipFlops/timeLineSynchronesSR.svg)<!-- style="width: 80%; max-width: 900px;" -->
 
 <table>
 <tr>
@@ -614,14 +579,30 @@ Gewünscht: Flip-Flop-Variante, die Änderungen nur zu einem definierten Zeitpun
 
 Ein Main-Subsidiary-SR-Flip-Flop besteht aus zwei hintereinandergeschalteten getakteten SR-Latches, „Main“ und „Subsidiary“ genannt. Ein zusätzlicher Inverter negiert das Taktsignal für „Subsidiary“. Früher hießen diese Flip-Flops Master-Slave-Flip-Flops.
 
-![Bild](./images/05_FlipFlops/MasterSlave.png)
+<!-- style="max-width: 600px; display: block; margin: auto" -->
+```ascii
+                                   +---+
+Clk --------+----------------------+ 1 |o--------+
+            |                      +---+         |
+            |                                    |
+      +-----+------------+               +-------+----------+
+      |     C            |               |       C          |
+      |                  |               |                  |
+S ----+ S              Q +---------------+ S              Q +--- Q
+      |                  |               |                  |
+      |                  |               |                  |
+R ----+ R    "$\bar{Q}$" +---------------+ R    "$\bar{Q}$" +--- "$\bar{Q}$"
+      |                  |               |                  |
+      +------------------+               +------------------+
+             Main                             Subsidiary
+```
 
 Ablauf einer Periode:
 
 1. „Main“ übernimmt Eingangswerte bei Clk = 1 („Subsidiary“ ändert sich nicht)
 2. „Subsidiary“ übernimmt Werte vom „Main“ bei Clk = 0 („Main“ ändert sich nicht)
 
-![Bild](./images/05_FlipFlops/timeLineMasterSlave.png)<!-- style="width: 75%; max-width: 800px;" -->
+![Zeitdiagramm eines Main-Subsidiary-SR-Flip-Flops: Main übernimmt S und R bei Clk = 1, Subsidiary gibt den Wert bei der fallenden Flanke an Q weiter](./images/05_FlipFlops/timeLineMainSubsidiary.svg)<!-- style="width: 75%; max-width: 800px;" -->
 
 **Welche maximale Verzögerung ergibt sich für ein eingehendes Signal?**
 
@@ -659,30 +640,7 @@ Wie lässt sich ein Flankendetektor umsetzen? Wir machen uns das Laufzeitverhalt
 
 <td>
 
-<!--
-style="width: 95%; max-width: 1000px;"
--->
-```ascii
-    ^
-    |     +-------------- 1
-E   |     |
-    | ----+               0
-    | -----+
-I1  |      |
-    |      +-------------
-    |       +------------
-I2  |       |
-    | ------+
-    |   -----+
-B   |        |
-    |        +-----------
-    |
-    |     +--+
-A   |     |  |
-    | ----+  +-------------
-    +----------------------->    Zeit
-
-```
+![Zeitdiagramm des Flankendetektors: E springt auf 1, B folgt invertiert nach drei Gatterlaufzeiten, A ist für 3Δt gleich 1](./images/05_FlipFlops/timeLineFlankendetektor.svg)<!-- style="width: 95%; max-width: 900px;" -->
 
 </td>
 </tr>
@@ -694,60 +652,9 @@ Die Signallaufzeiten sind für die ansteigende und fallende Signalflanke untersc
 
 Welches Verhalten ergibt sich für ein (positiv) flankengetriggertes SR-Flip-Flop daraus?
 
-<table>
-<tr>
-<td>
-Zustandsgesteuert
+![Zeitdiagramm: dieselben Eingänge S und R an einem zustandsgesteuerten und einem positiv flankengesteuerten SR-Flip-Flop](./images/05_FlipFlops/timeLineZustandFlanke.svg)<!-- style="width: 85%; max-width: 900px;" -->
 
-<!--
-style="width: 80%; min-width: 420px; max-width: 720px;"
--->
-```ascii
-
-    |       +------+      +------+      +------+      +-----
-Clk |       |      |      |      |      |      |      |
-    | ------+      +------+      +------+      +------+
-    |     +------+                           +--+
-S   |     | :    |                           |  |
-    | ----+ :    +---------------------------+  +------------
-    |       :        +--+   +---+      +----+
-R   |       :        |  |   |   |      |    |
-    | ------:--------+  +---+   +------+    +----------------
-    |       :  +---------------+             :  +-------------    1
-Q   |       :  |            :  |             :  |
-    |-------:--+            :  +-------------:--+                  0
-    +-------:--:------------:--:-------------:--:--------------->          .
-             2t              2t               2t
-```
-</td>
-<td>
-Positiv flankengesteuert
-
-<!--
-style="width: 80%; min-width: 420px; max-width: 720px;"
--->
-```ascii
-
-    |       +------+      +------+      +------+      +-----
-Clk |       |      |      |      |      |      |      |
-    | ------+      +------+      +------+      +------+
-    |     +------+                      :    +--+
-S   |     | :    |                      :    |  |
-    | ----+ :    +----------------------:----+  +------------
-    |       :        +--+   +---+      +----+
-R   |       :        |  |   |   |      |:   |
-    | ------:--------+  +---+   +------+:   +----------------
-    |       :  +---------------------------+                    1
-Q   |       :  |                        :  |
-    |-------:--+                        :  +------------------- 0
-    +-------:--:------------------------:--:-------------------->          .
-             2t                          2t
-```
-</td>
-</tr>
-</table>
-
-Links folgt $Q$ den Eingängen, solange Clk = 1 ist; am Ende der dritten Taktphase setzt $S$ den Ausgang noch einmal. Rechts zählen nur die Werte im Moment der steigenden Flanke: Bei der dritten Flanke ist $R = 1$, danach bleibt $Q = 0$. Dieselben Eingänge führen zu verschiedenen Endzuständen.
+Das zustandsgesteuerte Flip-Flop ($Q_\text{zustandsgesteuert}$) folgt den Eingängen, solange Clk = 1 ist; am Ende der dritten Taktphase setzt $S$ den Ausgang noch einmal. Beim flankengesteuerten ($Q_\text{flankengesteuert}$) zählen nur die Werte im Moment der steigenden Flanke: Bei der dritten Flanke ist $R = 1$, danach bleibt $Q = 0$. Dieselben Eingänge führen zu verschiedenen Endzuständen.
 
 **Setup- und Haltezeit**
 
@@ -793,26 +700,7 @@ JK-Flip-Flops basieren auf dem SR-Latch, sind aber flankengesteuert oder als Mai
 
 ![Bild](./images/05_FlipFlops/JK_FlipFlop.png)<!-- style="width: 55%; max-width: 800px;" -->
 
-<!--
-style="width: 100%; min-width: 420px; max-width: 720px;"
--->
-```ascii
-
-    |       +------+      +------+      +------+      +-----
-Clk |       |      |      |      |      |      |      |
-    | ------+      +------+      +------+      +------+
-    |     +------+        :            +----------------+
-J   |     | :    |        :            |:             : |
-    | ----+ :    +---------------------+:             : +---
-    |       :        +------+   +---------+         +-----+
-K   |       :        |    : |   |       : |         | :   |
-    | ------:--------+    : +---+       : +---------+ :   +--
-    |       :  +-------------+          :  +-------------+     1
-Q   |       :  |          :  |          :  |          :  |
-    |-------:--+          :  +-------------+          :  +---- 0
-    +-------:--:------------------------:--:----------:--:------>          .
-             2t                          2t
-```
+![Zeitdiagramm eines positiv flankengesteuerten JK-Flip-Flops](./images/05_FlipFlops/timeLineJK.svg)<!-- style="width: 80%; max-width: 900px;" -->
 
 **Bei der dritten und vierten Flanke im Zeitdiagramm sind $J$ und $K$ beide 1. Was macht $Q$?**
 
@@ -860,7 +748,7 @@ Drei JK-Flip-Flops mit $J = K = 1$ arbeiten als T-Flip-Flops. Sie reagieren auf 
 
 ![Bild](./images/05_FlipFlops/AsynchronerBinaerZaehler.png)<!-- style="width: 80%; max-width: 800px;" -->
 
-![Bild](./images/05_FlipFlops/AsynchronerBinaerZaehlerTiming.png)<!-- style="width: 80%; max-width: 1200px;" -->
+![Zeitdiagramm des asynchronen 3-Bit-Zählers: jede Stufe kippt bei der fallenden Flanke der vorherigen, die Verzögerungen τ addieren sich](./images/05_FlipFlops/timeLineAsynchronerZaehler.svg)<!-- style="width: 90%; max-width: 1000px;" -->
 
 Liest man $Q_2 Q_1 Q_0$ als Binärzahl, zählt die Schaltung 0, 1, 2, … 7, 0. Weil jedes Flip-Flop erst schaltet, wenn das vorherige umgeschaltet hat, addieren sich die Verzögerungen.
 
