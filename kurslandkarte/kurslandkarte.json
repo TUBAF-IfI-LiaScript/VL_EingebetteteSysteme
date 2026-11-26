@@ -358,7 +358,7 @@
    "freigegeben": false,
    "status": "ausgearbeitet",
    "block": 2,
-   "pdf": null,
+   "pdf": "../pdf/06_FlipFlops.pdf",
    "anwendet": [],
    "abschnitte": [
     "Flip-Flops",
